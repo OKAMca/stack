@@ -1,0 +1,52 @@
+{/* Date.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import Date from './index'
+
+<Meta title="BASE COMPONENTS/Date" component={Date} />
+
+export const Template = (args) => <Date {...args} />
+
+# Date
+
+Date component. Must pass a valid ISO `date`. You can also pass `dateFormat` to change the format, e.g. `MMM dd, yyyy` and `locale` to display the date in a different locale.
+
+<Canvas>
+  <Story
+    name="Short"
+    args={{
+      date: '2021-12-31T00:01:00-0500',
+      dateFormat: 'short',
+      tokens: {
+        variant: 'p',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Long"
+    args={{
+      date: '2021-12-31T00:01:00-0500',
+      dateFormat: 'long',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Time with h4 style"
+    args={{
+      date: '2021-12-31T00:01:00-0500',
+      dateFormat: 'long',
+      variant: 'h4',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

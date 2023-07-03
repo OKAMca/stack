@@ -1,0 +1,56 @@
+{/* TextArea.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import TextArea from './index'
+
+<Meta
+  title="Form/Fields/Textarea"
+  component={TextArea}
+  parameters={{
+    layout: 'fullscreen',
+  }}
+  args={{
+    id: '',
+    name: 'name',
+    errorMessage: '',
+    placeholder: 'Message',
+    required: true,
+    disabled: false,
+    isError: false,
+    ariaLabel: 'Message',
+  }}
+/>
+
+export const Template = (args) => {
+  const { backgroundColor, ...rest } = args
+  return <TextArea {...rest} />
+}
+
+# Text Input Field
+
+<Canvas>
+  <Story name="Default">{Template.bind({})}</Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Error"
+    args={{
+      errorMessage: 'This is an error message',
+      isError: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

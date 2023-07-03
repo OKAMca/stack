@@ -1,0 +1,77 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import { ArgTypes } from '@storybook/blocks'
+import ShareButton from './index'
+
+<Meta
+  title="Base Components/Share Button"
+  component={ShareButton}
+  onShare={() => console.log('shared')}
+  args={{
+    id: 'sharing-buttons',
+    icon: 'Share',
+    sharingLinksList: [
+      {
+        ariaLabel: 'Share on Facebook',
+        icon: 'Facebook',
+        key: 'facebook',
+      },
+      {
+        ariaLabel: 'Share on Twitter',
+        icon: 'Twitter',
+        key: 'twitter',
+      },
+      {
+        ariaLabel: 'Share on Instagram',
+        icon: 'Instagram',
+        key: 'instagram',
+      },
+      {
+        ariaLabel: 'Share on YouTube',
+        icon: 'YouTube',
+        key: 'youtube',
+      },
+    ],
+  }}
+/>
+
+export const Template = (args) => <ShareButton {...args} />
+
+# ShareButton
+
+#### Share button component. Can be used to display sharing links to other social media platforms or other medias (email, links, etc.)
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+## Row share button
+
+<Canvas>
+  <Story
+    name="Row Share Button"
+    args={{
+      tokens: {
+        listDirection: 'row',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Column share button
+
+<Canvas>
+  <Story
+    name="Column Share Button"
+    args={{
+      tokens: {
+        listDirection: 'column',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

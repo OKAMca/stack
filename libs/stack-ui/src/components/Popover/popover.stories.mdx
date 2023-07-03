@@ -1,0 +1,34 @@
+{/* typo.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import { OverlayProvider } from 'react-aria'
+import Popover from './index'
+
+<Meta
+  title="BASE COMPONENTS/Popover"
+  component={Popover}
+  args={{
+    as: 'span',
+  }}
+/>
+
+export const Template = (args) => (
+  <div>
+    <OverlayProvider>
+      <Popover {...args}>Hello world!</Popover>
+    </OverlayProvider>
+  </div>
+)
+
+# Popover
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      variant: 'p',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

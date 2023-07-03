@@ -1,0 +1,47 @@
+{/* Checkbox.stories.mdx */}
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import Checkbox from './index'
+
+<Meta
+  title="Form/Fields/Checkbox"
+  component={Checkbox}
+  args={{
+    id: 'checkbox',
+    label: 'This is a checkbox label',
+    name: 'checkbox',
+    ariaLabel: 'checkbox',
+  }}
+/>
+
+export const Template = (args) => <Checkbox {...args} />
+
+# Checkbox
+
+Checkbox component.
+
+<Canvas>
+  <Story name="Default">{Template.bind({})}</Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      isDisabled: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Error"
+    args={{
+      isError: true,
+      errorMessage: 'This is an error message',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

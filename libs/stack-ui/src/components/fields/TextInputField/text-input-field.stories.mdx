@@ -1,0 +1,60 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import TextInputField from './index'
+
+<Meta
+  title="Form/Fields/Text Input"
+  component={TextInputField}
+  parameters={{
+    layout: 'fullscreen',
+  }}
+  args={{
+    id: '',
+    label: 'First Name',
+    name: 'name',
+    errorMessage: '',
+    placeholder: 'First Name',
+    required: true,
+    disabled: false,
+    isError: false,
+    ariaLabel: 'First name',
+    icon: 'ArrowRight',
+  }}
+/>
+
+export const Template = (args) => {
+  const { backgroundColor, ...rest } = args
+  return (
+    <div className={`flex flex-col m-auto h-screen justify-center items-center`}>
+      <TextInputField {...rest} />
+    </div>
+  )
+}
+
+# Text Input Field
+
+<Canvas>
+  <Story name="Default">{Template.bind({})}</Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      disabled: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Error"
+    args={{
+      errorMessage: 'This is an error message',
+      isError: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

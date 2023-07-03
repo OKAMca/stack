@@ -1,0 +1,99 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import Button from './'
+import Icon from '../Icon'
+
+<Meta
+  title="BASE COMPONENTS/Button"
+  component={Button}
+  args={{
+    as: 'button',
+    disabled: false,
+  }}
+/>
+
+export const Template = (args) => <Button {...args}>Button</Button>
+
+export const IconButton = (args) => (
+  <Button {...args}>
+    <span>Button</span>
+    <Icon icon="ArrowRight" />
+  </Button>
+)
+
+# Button
+
+Button component. You can pass `shape`, `size` and `buttonStyle` into the `tokens` object to change the style.
+You can use property `as` to render the button with a different component, e.g. `button` to `a` if its a link.
+
+<Canvas>
+  <Story name="Primary" args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Large"
+    args={{
+      tokens: {
+        size: 'large',
+        shape: 'circular',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Rounded"
+    args={{
+      tokens: {
+        shape: 'rounded',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Outline"
+    args={{
+      tokens: {
+        buttonStyle: 'outline',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Hollow"
+    args={{
+      tokens: {
+        buttonStyle: 'hollow',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Icon"
+    args={{
+      tokens: {
+        buttonStyle: 'outline',
+        intent: 'error',
+      },
+    }}
+  >
+    {IconButton.bind({})}
+  </Story>
+</Canvas>
