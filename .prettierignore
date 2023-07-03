@@ -1,3 +1,9 @@
 # Add files here to ignore them from prettier formatting
 /dist
 /coverage
+.yarn
+**/.next/**
+**/dist/**
+**/build/**
+**/tmp/**
+**/node_modules/**
