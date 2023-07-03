@@ -1,3 +1,4 @@
+import { StackUi } from '@okam/stack-ui';
 import styles from './page.module.css';
 
 export default async function Index() {
@@ -11,10 +12,7 @@ export default async function Index() {
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            <h1>
-              <span> Hello there, </span>
-              Welcome demo 👋
-            </h1>
+            <StackUi />
           </div>
 
           <div id="hero" className="rounded">
