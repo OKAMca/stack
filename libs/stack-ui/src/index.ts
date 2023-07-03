@@ -1,1 +1,1 @@
-export * from './lib/stack-ui';
+export * from './lib/stack-ui'
