@@ -1,7 +1,7 @@
 import { FocusRing } from '@react-aria/focus'
-import { useTextField } from '@react-aria/textfield'
 import { isEmpty } from 'lodash'
 import { useRef } from 'react'
+import { useTextField } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import useThemeContext from '../../../providers/Theme/hooks'
@@ -27,7 +27,7 @@ const TextInputField = (props: TTextInputProps) => {
     customTheme,
   } = props
   const ref = useRef<HTMLInputElement | null>(null)
-  const { errorMessageProps, labelProps } = useTextField(props, ref)
+  const { errorMessageProps, inputProps, labelProps } = useTextField<'input'>(props, ref)
 
   const inputTokens = { ...tokens, isDisabled: disabled, isError: errorMessage != null }
 
@@ -49,6 +49,7 @@ const TextInputField = (props: TTextInputProps) => {
           {children}
           <FocusRing focusRingClass="focus-ring">
             <input
+              {...(inputProps as object)}
               className={input}
               disabled={disabled}
               required={required}
