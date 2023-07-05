@@ -3,7 +3,6 @@
   "npm": true,
   "github": true,
   "repositoryUrl": "https://github.com/OKAMca/stack.git",
-  "buildTarget": "https://npm.pkg.github.com",
   "branches": [
     "main"
   ]
