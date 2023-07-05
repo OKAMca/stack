@@ -52,12 +52,12 @@ jobs:
       - name: Semantic Release
         run: npx nx run-many --target=semantic-release --parallel=false
 
-      - name: Publishing Stack UI Package
+      - name: Publish Stack UI Package
         run: yarn publish-stack
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Core UI Semantic Release
+      - name: Publish Core UI Package
         run: yarn publish-core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
