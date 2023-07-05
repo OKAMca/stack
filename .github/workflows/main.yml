@@ -28,13 +28,17 @@ permissions:
   contents: write
 env:
   GITHUB_ACTOR: OKAMca
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: Configure Git
         run: |
@@ -47,8 +51,7 @@ jobs:
       - name: Semantic Release
         run: npx nx run stack-ui:semantic-release
 
-      - name: Log in to registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}"
-
       - name: Publishing Package
         run: yarn publish-stack
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
