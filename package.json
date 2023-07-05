@@ -5,7 +5,7 @@
   "scripts": {
     "g:lint": "nx run-many --all --target=lint",
     "storybook": "nx run stack-ui:storybook",
-    "publish-stack": "npm publish dist/libs/stack-ui",
+    "publish-stack": "yarn npm publish dist/libs/stack-ui",
     "dev": "nx serve demo",
     "build": "nx build demo",
     "postinstall": "is-ci || yarn husky install"
