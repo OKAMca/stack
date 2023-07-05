@@ -31,5 +31,15 @@
         }
       }
     }
+  },
+  "nxrelease": {
+    "changelog": true,
+    "npm": true,
+    "github": true,
+    "buildTarget": "core-lib:build:production",
+    "repositoryUrl": "https://github.com/OKAMca/stack.git",
+    "branches": [
+      "main"
+    ]
   }
 }
