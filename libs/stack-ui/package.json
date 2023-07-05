@@ -10,7 +10,7 @@
     }
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org"
   },
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
