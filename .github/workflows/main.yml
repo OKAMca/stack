@@ -23,6 +23,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'automatic-release'
 permissions:
   contents: write
 env:
@@ -45,6 +46,9 @@ jobs:
 
       - name: Semantic Release
         run: npx nx run stack-ui:semantic-release
+
+      - name: Log in to registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Publishing Package
         run: yarn publish-stack
