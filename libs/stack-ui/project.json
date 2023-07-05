@@ -6,7 +6,17 @@
   "tags": [],
   "targets": {
     "semantic-release": {
-      "executor": "@theunderscorer/nx-semantic-release:semantic-release"
+      "executor": "@theunderscorer/nx-semantic-release:semantic-release",
+      "options": {
+        "changelog": true,
+        "repositoryUrl": "https://github.com/OKAMca/stack.git",
+        "npm": true,
+        "github": true,
+        "buildTarget": "stack-ui:build:production",
+        "branches": [
+          "main"
+        ]
+      }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
@@ -56,15 +66,5 @@
         }
       }
     }
-  },
-  "nxrelease": {
-    "changelog": true,
-    "repositoryUrl": "https://github.com/OKAMca/stack.git",
-    "npm": true,
-    "github": true,
-    "buildTarget": "stack-ui:build:production",
-    "branches": [
-      "main"
-    ]
   }
 }

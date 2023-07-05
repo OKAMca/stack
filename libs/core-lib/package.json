@@ -8,5 +8,14 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
+  },
+  "nxrelease": {
+    "repositoryUrl": "https://github.com/OKAMca/stack.git"
   }
 }
