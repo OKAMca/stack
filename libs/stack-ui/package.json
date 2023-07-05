@@ -8,5 +8,11 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
   }
 }

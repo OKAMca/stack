@@ -27,7 +27,7 @@ const TextInputField = (props: TTextInputProps) => {
     customTheme,
   } = props
   const ref = useRef<HTMLInputElement | null>(null)
-  const { errorMessageProps, inputProps, labelProps } = useTextField(props, ref)
+  const { errorMessageProps, labelProps } = useTextField(props, ref)
 
   const inputTokens = { ...tokens, isDisabled: disabled, isError: errorMessage != null }
 
@@ -50,7 +50,6 @@ const TextInputField = (props: TTextInputProps) => {
           <FocusRing focusRingClass="focus-ring">
             <input
               className={input}
-              {...inputProps}
               disabled={disabled}
               required={required}
               ref={(e) => {

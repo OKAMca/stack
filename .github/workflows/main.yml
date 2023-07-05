@@ -1,0 +1,31 @@
+name: default
+
+on:
+  push:
+    branches:
+      - 'main'
+permissions:
+  contents: write
+env:
+  GITHUB_ACTOR: OKAMca
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: configure git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Semantic Release
+        run: npx nx run stack-ui:semantic-release
+
+      - name: Publishing Package
+        run: yarn publish-stack
