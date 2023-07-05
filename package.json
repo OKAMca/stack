@@ -5,7 +5,6 @@
   "scripts": {
     "g:lint": "nx run-many --all --target=lint",
     "storybook": "nx run stack-ui:storybook",
-    "prepublish-stack": "nx run stack-ui:build",
     "publish-stack": "npm publish dist/libs/stack-ui",
     "dev": "nx serve demo",
     "build": "nx build demo",

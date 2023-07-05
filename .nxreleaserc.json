@@ -2,6 +2,7 @@
   "changelog": true,
   "npm": true,
   "github": true,
+  "buildTarget": "stack-ui:build:production",
   "repositoryUrl": "https://github.com/OKAMca/stack.git",
   "branches": [
     "main"
