@@ -30,7 +30,8 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/core-lib"
+        "outputPath": "dist/libs/core-lib",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {
