@@ -1,0 +1,23 @@
+name: 'Setup repository'
+description: 'Setups repository for publishing'
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '18.x'
+        registry-url: 'https://registry.npmjs.org'
+        scope: '@okam'
+
+    - name: Configure Git
+      shell: bash
+      run: |
+        git config user.name "$GITHUB_ACTOR"
+        git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+    - name: Install dependencies
+      shell: bash
+      run: yarn install
