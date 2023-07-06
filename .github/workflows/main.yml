@@ -33,6 +33,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: ./publishing
       - name: Semantic Release
         run: npx nx run-many --target=semantic-release --parallel=false
@@ -41,6 +42,7 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: ./publishing
       - name: Publish Stack UI Package
         run: yarn publish-stack
@@ -51,6 +53,7 @@ jobs:
     needs: release
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - uses: ./publishing
       - name: Publish Core Lib Package
         run: yarn publish-core
