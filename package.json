@@ -1,7 +1,7 @@
 {
   "name": "@stack-ui/source",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "BUSL-1.1",
   "scripts": {
     "g:lint": "nx run-many --all --target=lint",
     "storybook": "nx run stack-ui:storybook",
