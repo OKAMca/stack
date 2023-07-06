@@ -1,0 +1,64 @@
+name: Semantic Release and Publishing
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+        type: choice
+        options:
+          - info
+          - warning
+          - debug
+      tags:
+        description: 'Test scenario tags'
+        required: false
+        type: boolean
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true
+  push:
+    branches:
+      - 'main'
+      - 'automatic-release'
+permissions:
+  contents: write
+env:
+  GITHUB_ACTOR: OKAMca
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@okam'
+
+      - name: Configure Git
+        shell: bash
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install dependencies
+        shell: bash
+        run: yarn install
+
+      - name: Semantic Release
+        run: npx nx run-many --target=semantic-release --parallel=false
+
+      - name: Publish Core Lib Package
+        run: yarn publish-core
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish Stack UI Package
+        run: yarn publish-stack
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

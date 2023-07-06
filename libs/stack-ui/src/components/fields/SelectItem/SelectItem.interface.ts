@@ -1,4 +1,4 @@
-import type { TDefaultComponent } from 'types/components'
+import type { TDefaultComponent } from '../../../types/components'
 
 export interface TSelectItemProps extends TDefaultComponent {
   label: string
