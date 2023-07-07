@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.0.1...stack-ui-v1.1.0) (2023-07-07)
+
+
+### Features
+
+* added useThemeContext to exports ([e4f7eda](https://github.com/OKAMca/stack/commit/e4f7eda1abf2f2729b6f4e421bd79f20d0dc53c8))
+
 ## [1.0.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.0.0...stack-ui-v1.0.1) (2023-07-07)
 
 
