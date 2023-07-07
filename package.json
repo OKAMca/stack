@@ -5,6 +5,8 @@
   "scripts": {
     "g:lint": "nx run-many --all --target=lint",
     "storybook": "nx run stack-ui:storybook",
+    "build-stack": "yarn nx run stack-ui:build:production",
+    "build-core": "yarn nx run core-lib:build:production",
     "publish-stack": "yarn npm publish --access public dist/libs/stack-ui",
     "publish-core": "yarn npm publish --access public dist/libs/core-lib",
     "dev": "nx serve demo",
