@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.0.0...stack-ui-v1.0.1) (2023-07-07)
+
+
+### Bug Fixes
+
+* changed building in publish instead of releas ([eee8f51](https://github.com/OKAMca/stack/commit/eee8f512987c444143bdfd73fe833840681d1c43))
+
 # 1.0.0 (2023-07-06)
 
 
