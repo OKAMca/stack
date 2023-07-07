@@ -12,7 +12,6 @@
         "repositoryUrl": "https://github.com/OKAMca/stack.git",
         "npm": true,
         "github": true,
-        "buildTarget": "stack-ui:build:production",
         "branches": [
           "main"
         ]
