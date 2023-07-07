@@ -5,7 +5,7 @@ import type { TIconProps } from './interface'
 
 const Icon = (props: TIconProps) => {
   const { icon, ...rest } = props
-  const ImportedIcon = useMemo(() => lazy(() => import(`../icons/${icon || 'ArrowRight'}`)), [icon])
+  const ImportedIcon = useMemo(() => lazy(() => import(`../icons/${icon || 'ArrowRight'}.tsx`)), [icon])
 
   return (
     <Suspense fallback={<Fallback className="overflow-visible pointer-events-none" />}>
