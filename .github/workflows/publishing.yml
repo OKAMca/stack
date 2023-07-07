@@ -50,10 +50,16 @@ jobs:
         shell: bash
         run: yarn install
 
+      - name: Build Core Lib
+        run: yarn build-core
+
       - name: Publish Core Lib Package
         run: yarn publish-core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Build Stack UI
+        run: yarn build-stack
 
       - name: Publish Stack UI Package
         run: yarn publish-stack
