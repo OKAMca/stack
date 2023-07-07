@@ -12,6 +12,7 @@ export { default as Icon } from './components/Icon'
 // providers
 export { useTheme, ThemeContextProvider } from './providers/Theme'
 export { makeTheme, createThemeProvider } from './providers/Theme'
+export { default as useThemeContext } from './providers/Theme/hooks'
 // types & interfaces
 
 export type { TButtonProps } from './components/Button/interface'
