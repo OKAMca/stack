@@ -9,6 +9,7 @@ import {
   accordionTitle,
 } from './Accordion'
 import button from './Button'
+import { carouselContainer, carouselNavigationButtons, carouselSlideContainer } from './Carousel'
 import { checkBox, checkMark, checkboxLabel } from './Checkbox'
 import { lightBoxCloseBtn, lightBoxContainer } from './LightBox'
 import {
@@ -31,6 +32,11 @@ const BaseTheme = makeTheme({
     icon: (props) => accordionIcon(props),
     region: (props) => accordionRegion(props),
     content: (props) => accordionContent(props),
+  },
+  carousel: {
+    container: (props) => carouselContainer(props),
+    slideContainer: (props) => carouselSlideContainer(props),
+    navigationButtons: (props) => carouselNavigationButtons(props),
   },
   typography: (props) => typography(props),
   button: (props) => button(props),
