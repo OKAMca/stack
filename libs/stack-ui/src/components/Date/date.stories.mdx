@@ -1,15 +1,40 @@
 {/* Date.stories.mdx */}
-
+import { I18nProvider } from 'react-aria'
 import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import Date from './index'
 
 <Meta title="BASE COMPONENTS/Date" component={Date} />
 
 export const Template = (args) => <Date {...args} />
+export const FrenchTemplate = (args) => (
+  <I18nProvider locale="fr-FR">
+    <Date {...args} />
+  </I18nProvider>
+)
 
 # Date
 
-Date component. Must pass a valid ISO `date`. You can also pass an object `dateFormatterOptions` to change the format, e.g. `MMM dd, yyyy` and `locale` to display the date in a different locale.
+Date component. Must pass a valid ISO `date`. You can also pass an object `dateFormatterOptions` to change the format, e.g. `MMM dd, yyyy` or `MM/DD/YY`.
+The language is handled by the `I18nProvider` of `react-aria`.
+
+<Canvas>
+  <Story
+    name="Different Language"
+    args={{
+      date: '2021-12-31T00:01:00-0500',
+      dateFormatterOptions: {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      },
+      tokens: {
+        variant: 'p',
+      },
+    }}
+  >
+    {FrenchTemplate.bind({})}
+  </Story>
+</Canvas>
 
 <Canvas>
   <Story
