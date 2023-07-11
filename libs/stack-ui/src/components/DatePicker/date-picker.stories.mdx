@@ -12,17 +12,9 @@ import { OverlayContainer } from '@react-aria/overlays'
   }}
 />
 
-export const DatePickerTemplate = (args) => (
-  <OverlayContainer style={{ width: '100%' }}>
-    <DatePicker {...args} />
-  </OverlayContainer>
-)
+export const DatePickerTemplate = (args) => <DatePicker {...args} />
 
-export const DateRangePickerTemplate = (args) => (
-  <OverlayContainer style={{ width: '100%' }}>
-    <DateRangePicker {...args} />
-  </OverlayContainer>
-)
+export const DateRangePickerTemplate = (args) => <DateRangePicker {...args} />
 
 # Date Picker
 
