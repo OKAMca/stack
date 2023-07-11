@@ -29,10 +29,6 @@ export const grid = tv({
   },
 })
 
-export const spacer = tv({
-  base: 'mb-6',
-})
-
 export const gridItem = tv({
   base: 'bg-slate-300 h-64 p-4 flex justify-start items-end',
   defaultVariants: {
