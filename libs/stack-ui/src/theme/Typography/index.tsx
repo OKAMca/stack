@@ -28,6 +28,11 @@ const typography = tv({
     isError: {
       true: 'text-sm text-error ml-8 py-3',
     },
+    align: {
+      center: 'text-center',
+      left: 'text-left',
+      right: 'text-right',
+    },
   },
   defaultVariants: {
     size: 'paragraph',

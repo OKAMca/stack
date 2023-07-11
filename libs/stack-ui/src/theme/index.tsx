@@ -8,6 +8,7 @@ import {
   accordionRegion,
   accordionTitle,
 } from './Accordion'
+import { container, grid, gridItem, main, spacer } from './Box'
 import button from './Button'
 import { checkBox, checkMark, checkboxLabel } from './Checkbox'
 import { lightBoxCloseBtn, lightBoxContainer } from './LightBox'
@@ -24,6 +25,11 @@ import { textArea } from './TextArea'
 import typography from './Typography'
 
 const BaseTheme = makeTheme({
+  main: (props) => main(props),
+  gridItem: (props) => gridItem(props),
+  grid: (props) => grid(props),
+  spacer: (props) => spacer(props),
+  container: (props) => container(props),
   accordion: {
     container: (props) => accordionContainer(props),
     button: (props) => accordionButton(props),

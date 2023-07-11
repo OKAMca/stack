@@ -1,0 +1,27 @@
+{/* box.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import Box from './index'
+
+<Meta title="BASE COMPONENTS/Box" component={Box} />
+
+export const Template = (args) => (
+  <div className="bg-slate-200 p-4">
+    <Box {...args}>Hello world!</Box>
+  </div>
+)
+
+# Box
+
+Box component. Generic wrapper for your website or app.
+
+<Canvas>
+  <Story
+    name="Box"
+    args={{
+      as: 'div',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
