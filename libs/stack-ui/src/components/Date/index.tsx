@@ -10,7 +10,7 @@ const DateComponent = (props: TDateProps) => {
     date,
     tokens,
     customTheme,
-    dateFormat = 'long',
+    dateFormatterOptions = { month: 'long', day: 'numeric', year: 'numeric' },
     themeName = 'typography',
     ...rest
   } = props
@@ -18,11 +18,7 @@ const DateComponent = (props: TDateProps) => {
 
   const parsedDate = new Date(date)
 
-  const formatter = useDateFormatter({
-    month: dateFormat,
-    day: 'numeric',
-    year: 'numeric',
-  })
+  const formatter = useDateFormatter(dateFormatterOptions)
 
   const formattedDate = formatter.format(parsedDate)
   const theme = useThemeContext(themeName, tokens, customTheme)

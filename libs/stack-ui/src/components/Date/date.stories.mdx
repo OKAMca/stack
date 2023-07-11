@@ -9,14 +9,18 @@ export const Template = (args) => <Date {...args} />
 
 # Date
 
-Date component. Must pass a valid ISO `date`. You can also pass `dateFormat` to change the format, e.g. `MMM dd, yyyy` and `locale` to display the date in a different locale.
+Date component. Must pass a valid ISO `date`. You can also pass an object `dateFormatterOptions` to change the format, e.g. `MMM dd, yyyy` and `locale` to display the date in a different locale.
 
 <Canvas>
   <Story
     name="Short"
     args={{
       date: '2021-12-31T00:01:00-0500',
-      dateFormat: 'short',
+      dateFormatterOptions: {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      },
       tokens: {
         variant: 'p',
       },
@@ -31,7 +35,11 @@ Date component. Must pass a valid ISO `date`. You can also pass `dateFormat` to 
     name="Long"
     args={{
       date: '2021-12-31T00:01:00-0500',
-      dateFormat: 'long',
+      dateFormatterOptions: {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      },
     }}
   >
     {Template.bind({})}
@@ -43,8 +51,45 @@ Date component. Must pass a valid ISO `date`. You can also pass `dateFormat` to 
     name="Time with h4 style"
     args={{
       date: '2021-12-31T00:01:00-0500',
-      dateFormat: 'long',
-      variant: 'h4',
+      dateFormatterOptions: {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      },
+      tokens: {
+        size: 'h4',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Month and Day only"
+    args={{
+      date: '2021-12-31T00:01:00-0500',
+      dateFormatterOptions: {
+        month: 'long',
+        day: 'numeric',
+      },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="2 digits"
+    args={{
+      date: '2021-12-31T00:01:00-0500',
+      dateFormatterOptions: {
+        month: '2-digit',
+        day: '2-digit',
+        year: '2-digit',
+      },
     }}
   >
     {Template.bind({})}
