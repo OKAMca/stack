@@ -1,6 +1,6 @@
 # stack-ui
 
-Common UI components shared accross multiple projects.
+Common UI components shared across multiple projects.
 This library was generated with [Nx](https://nx.dev).
 
 ## Running unit tests
