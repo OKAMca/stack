@@ -10,7 +10,27 @@ import {
 } from './Accordion'
 import { container, grid, gridItem, main } from './Box'
 import button from './Button'
+import {
+  calendarCell,
+  calendarCellContainer,
+  calendarCellFormattedDate,
+  calendarContainer,
+  calendarDayLabel,
+  calendarHeaderContainer,
+  calendarNavigationButtons,
+  calendarNavigationButtonsContainer,
+  calendarTable,
+} from './Calendar'
 import { checkBox, checkMark, checkboxLabel } from './Checkbox'
+import {
+  datePickerButton,
+  datePickerCalendarPopoverContainer,
+  datePickerCalendarPopoverUnderlay,
+  datePickerContainer,
+  datePickerDateField,
+  datePickerIcon,
+  datePickerLabel,
+} from './DatePicker'
 import { lightBoxCloseBtn, lightBoxContainer } from './LightBox'
 import {
   shareButton,
@@ -36,6 +56,26 @@ const BaseTheme = makeTheme({
     icon: (props) => accordionIcon(props),
     region: (props) => accordionRegion(props),
     content: (props) => accordionContent(props),
+  },
+  calendar: {
+    container: (props) => calendarContainer(props),
+    header: (props) => calendarHeaderContainer(props),
+    navigationButtonsContainer: (props) => calendarNavigationButtonsContainer(props),
+    navigationButtons: (props) => calendarNavigationButtons(props),
+    table: (props) => calendarTable(props),
+    dayLabel: (props) => calendarDayLabel(props),
+    cellContainer: (props) => calendarCellContainer(props),
+    cell: (props) => calendarCell(props),
+    cellDate: (props) => calendarCellFormattedDate(props),
+  },
+  datePicker: {
+    container: (props) => datePickerContainer(props),
+    button: (props) => datePickerButton(props),
+    icon: (props) => datePickerIcon(props),
+    dateField: (props) => datePickerDateField(props),
+    label: (props) => datePickerLabel(props),
+    calendarPopover: (props) => datePickerCalendarPopoverContainer(props),
+    calendarUnderlay: (props) => datePickerCalendarPopoverUnderlay(props),
   },
   typography: (props) => typography(props),
   button: (props) => button(props),
