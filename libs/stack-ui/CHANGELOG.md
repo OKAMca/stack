@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.1.0...stack-ui-v1.2.0) (2023-07-17)
+
+
+### Features
+
+* Calendar / Date Picker Components (With Ranged as well) ([#2](https://github.com/OKAMca/stack/issues/2)) ([1cea19d](https://github.com/OKAMca/stack/commit/1cea19db240f4090a60bd409c652f1103d29c814))
+* extended svgprops for icon component ([#15](https://github.com/OKAMca/stack/issues/15)) ([9ec73ef](https://github.com/OKAMca/stack/commit/9ec73ef1d07fce75f6e9509d200ccc947c6a3af9))
+* update version for date component ([#13](https://github.com/OKAMca/stack/issues/13)) ([43e74a9](https://github.com/OKAMca/stack/commit/43e74a977fd2afbfac8cb06d36de6a4520033757))
+
 # [1.1.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.0.1...stack-ui-v1.1.0) (2023-07-07)
 
 
