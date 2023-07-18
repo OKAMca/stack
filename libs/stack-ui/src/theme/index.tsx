@@ -33,11 +33,10 @@ import {
 import { lightBoxCloseBtn, lightBoxContainer } from './LightBox'
 import {
   shareButton,
-  shareButtonContainer,
-  shareButtonIcon,
   shareButtonLink,
-  shareButtonLinkIcons,
+  shareButtonLinkButton,
   shareButtonLinksList,
+  shareButtonListContainer,
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
 import { textArea } from './TextArea'
@@ -84,12 +83,11 @@ const BaseTheme = makeTheme({
     closeBtn: (props) => lightBoxCloseBtn(props),
   },
   shareButton: {
-    icon: (props) => shareButtonIcon(props),
-    button: (props) => shareButton(props),
-    container: (props) => shareButtonContainer(props),
-    linksList: (props) => shareButtonLinksList(props),
-    link: (props) => shareButtonLink(props),
-    linkIcons: (props) => shareButtonLinkIcons(props),
+    menuTrigger: (props) => shareButton(props),
+    menuListContainer: (props) => shareButtonListContainer(props),
+    menuList: (props) => shareButtonLinksList(props),
+    menuItem: (props) => shareButtonLink(props),
+    menuItemButton: (props) => shareButtonLinkButton(props),
   },
   checkbox: {
     label: (props) => checkboxLabel(props),

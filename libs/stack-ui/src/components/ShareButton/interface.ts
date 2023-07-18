@@ -1,12 +1,13 @@
+import type { Key } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 
 export interface TShareButtonProps extends TDefaultComponent<TShareButtonTokens> {
-  id: string
   icon?: string
   ariaLabel: string
   sharingLinksList: TShareButtonLink[]
-  onShare?: (sharingMedium: string) => void
+  placement?: 'right' | 'left' | 'top' | 'bottom'
+  onShare?: (key: Key) => void
 }
 
 interface TShareButtonTokens extends TToken {
@@ -21,6 +22,6 @@ export interface TShareButtonLink {
   ariaLabel: string
   icon: string
   key: string
-  onClick?: (linkKey: string) => void
+  as: 'button' | 'a'
   href?: string
 }

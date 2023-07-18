@@ -7,17 +7,19 @@ import {
   DismissButton,
   FocusScope,
   mergeProps,
+  Overlay,
   OverlayContainer,
   useDialog,
   useModal,
   useOverlay,
   useOverlayPosition,
   useOverlayTrigger,
+  usePopover,
 } from 'react-aria'
 import { useOverlayTriggerState } from 'react-stately'
 import { ButtonWithForwardRef } from '../Button'
 import type { TButtonProps } from '../Button/interface'
-import type { IPopoverProps } from './interface'
+import type { IBasePopoverProps, IPopoverProps } from './interface'
 
 const Popover = React.forwardRef((props: IPopoverProps, ref) => {
   const { isOpen, onClose, children, style } = props
@@ -57,6 +59,31 @@ const Popover = React.forwardRef((props: IPopoverProps, ref) => {
     </FocusScope>
   )
 })
+
+export const BasePopover = ({ children, state, offset = 8, ...props }: IBasePopoverProps) => {
+  const popoverRef = React.useRef(null)
+  const popover = usePopover(
+    {
+      ...props,
+      offset,
+      popoverRef,
+    },
+    state,
+  )
+
+  const { popoverProps, underlayProps } = popover
+
+  return (
+    <Overlay>
+      <div {...underlayProps} />
+      <div {...popoverProps} ref={popoverRef}>
+        <DismissButton onDismiss={state.close} />
+        {children}
+        <DismissButton onDismiss={state.close} />
+      </div>
+    </Overlay>
+  )
+}
 
 function PopoverButton({
   children,

@@ -1,88 +1,52 @@
 import { useState } from 'react'
-import useThemeContext from '../../providers/Theme/hooks'
+import { Item } from 'react-stately'
 import Button from '../Button'
 import Icon from '../Icon'
-import type { TIconsContainerProps, TShareButtonProps } from './interface'
-
-export const IconsContainer = (props: TIconsContainerProps) => {
-  const { sharingLinksList, id, isOpen, onShare, themeName = 'shareButton', tokens, customTheme } = props
-
-  const linksListTheme = useThemeContext(`${themeName}.linksList`, { ...tokens, isOpen }, customTheme)
-
-  return (
-    <div className={linksListTheme} id={id} role="listbox">
-      {sharingLinksList?.map((link) => {
-        const { ariaLabel, onClick, href, icon, key } = link
-
-        return (
-          <Button
-            themeName={`${themeName}.link`}
-            tokens={{ ...tokens, isOpen }}
-            key={key}
-            as="a"
-            handlePress={() => {
-              onShare?.(key)
-              onClick?.(key)
-            }}
-            aria-label={ariaLabel}
-            target="_blank"
-            rel="noopener noreferrer"
-            href={href}
-            role="option"
-          >
-            <Icon themeName={`${themeName}.linkIcons`} icon={icon} />
-          </Button>
-        )
-      })}
-    </div>
-  )
-}
+import MenuButton from '../Menu/components/MenuButton'
+import type { TShareButtonProps } from './interface'
 
 const ShareButton = (props: TShareButtonProps) => {
   const {
     ariaLabel,
     icon,
-    id,
     sharingLinksList,
     onShare,
     customTheme,
     themeName = 'shareButton',
     tokens,
-    ...rest
+    placement,
   } = props
 
   const [isOpen, setIsOpen] = useState(false)
 
-  const containerTheme = useThemeContext(`${themeName}.container`, tokens, customTheme)
-
-  const handleClick = () => {
-    setIsOpen(!isOpen)
-  }
-
   return (
-    <div className={containerTheme}>
-      <Button
-        themeName={`${themeName}.button`}
-        tokens={{ ...tokens, isOpen }}
-        aria-label={ariaLabel}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen ? 'true' : 'false'}
-        aria-controls="share-buttons"
-        handlePress={handleClick}
-        {...rest}
-      >
-        <Icon themeName={`${themeName}.icon`} icon={icon ?? 'Share'} />
-      </Button>
-      <IconsContainer
-        id={id}
-        sharingLinksList={sharingLinksList}
-        onShare={onShare}
-        isOpen={isOpen}
-        themeName={themeName}
-        customTheme={customTheme}
-        tokens={tokens}
-      />
-    </div>
+    <MenuButton
+      aria-label={ariaLabel}
+      placement={placement}
+      themeName={themeName}
+      tokens={{ ...tokens, isOpen }}
+      customTheme={customTheme}
+      dismissButton={{
+        buttonContent: <Icon themeName={`${themeName}.icon`} icon={icon ?? 'Share'} />,
+      }}
+      buttonOptions={{
+        buttonContent: <Icon themeName={`${themeName}.icon`} icon={icon ?? 'Share'} />,
+      }}
+      onAction={onShare}
+      onOpenChange={(openState) => setIsOpen(openState)}
+    >
+      {sharingLinksList?.map((sharingLink) => {
+        const { key, icon: linkIcon, ariaLabel: linkAriaLabel, as = 'a', href } = sharingLink
+
+        return (
+          <Item key={key} aria-label={linkAriaLabel}>
+            <Button themeName={`${themeName}.menuItemButton`} as={as} href={href}>
+              <Icon themeName={`${themeName}.linkIcons`} icon={linkIcon} />
+            </Button>
+          </Item>
+        )
+      })}
+    </MenuButton>
   )
 }
 export default ShareButton
