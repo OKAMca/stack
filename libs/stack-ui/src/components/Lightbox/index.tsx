@@ -30,7 +30,11 @@ const Lightbox = (props: LightboxProps) => {
   return (
     <div>
       <div ref={openButtonRef} {...openButtonProps} {...(isOpen ? { tabIndex: -1 } : {})}>
-        {label && <Typography tokens={{ size: 'footnotes' }}>{label}</Typography>}
+        {label && (
+          <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }}>
+            {label}
+          </Typography>
+        )}
         {thumbnailContent}
       </div>
       <Modal onCloseCallBack={onCloseCallBack} state={state}>
