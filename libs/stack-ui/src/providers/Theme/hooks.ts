@@ -8,7 +8,10 @@ const useThemeContext = (func?: string | null, props: TToken = {}, customTheme: 
     const { brandTheme } = theme
     const themeFunc = get(brandTheme, func)
     if (typeof themeFunc === 'function') {
-      return themeFunc?.(props)
+      const returnValue = themeFunc?.(props)
+      if (typeof returnValue === 'string') {
+        return returnValue
+      }
     }
   }
   return customTheme

@@ -8,6 +8,7 @@ import {
   accordionRegion,
   accordionTitle,
 } from './Accordion'
+import { container, grid, gridItem, main } from './Box'
 import button from './Button'
 import {
   calendarCell,
@@ -44,6 +45,10 @@ import { textArea } from './TextArea'
 import typography from './Typography'
 
 const BaseTheme = makeTheme({
+  main: (props) => main(props),
+  gridItem: (props) => gridItem(props),
+  grid: (props) => grid(props),
+  container: (props) => container(props),
   accordion: {
     container: (props) => accordionContainer(props),
     button: (props) => accordionButton(props),
