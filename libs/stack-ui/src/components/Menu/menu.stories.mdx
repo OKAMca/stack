@@ -1,0 +1,60 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import { ArgTypes } from '@storybook/blocks'
+import { Section, Item } from 'react-stately'
+import MenuButton from './components/MenuButton'
+
+<Meta
+  title="Base Components/Menu"
+  component={MenuButton}
+  parameters={{ layout: 'fullscreen' }}
+  args={{
+    placement: 'bottom start',
+    buttonOptions: {
+      buttonContent: 'Menu Trigger',
+    },
+  }}
+/>
+
+export const Template = (args) => (
+  <MenuButton label="Actions" onAction={alert} {...args}>
+    <Item key="left">Left</Item>
+    <Item key="middle">Middle</Item>
+    <Item key="right">Right</Item>
+  </MenuButton>
+)
+
+export const TemplateSections = (args) => (
+  <MenuButton label="Actions" onAction={alert} {...args}>
+    <Section title="Styles">
+      <Item key="bold">Bold</Item>
+      <Item key="underline">Underline</Item>
+    </Section>
+    <Section title="Align">
+      <Item key="left">Left</Item>
+      <Item key="middle">Middle</Item>
+      <Item key="right">Right</Item>
+    </Section>
+  </MenuButton>
+)
+
+# Menu
+
+#### Menu component. Dropdown for actions.
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+### Menu with sections
+
+<Canvas>
+  <Story name="Menu">{Template.bind({})}</Story>
+</Canvas>
+
+### Menu with sections
+
+<Canvas>
+  <Story name="Menu With Sections">{TemplateSections.bind({})}</Story>
+</Canvas>

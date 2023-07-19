@@ -15,7 +15,9 @@ const MenuButton = <T extends object>(props: IMenuButtonProps<T>) => {
   const ref = React.useRef(null)
   const { menuTriggerProps, menuProps } = useMenuTrigger<T>({}, state, ref)
 
-  const listDirection = placement === 'bottom' || placement === 'top' ? 'column' : 'row'
+  const placementAxis = placement.split(' ')[0]
+
+  const listDirection = placementAxis === 'bottom' || placementAxis === 'top' ? 'column' : 'row'
 
   return (
     <>

@@ -1,5 +1,4 @@
 import { tv } from 'tailwind-variants'
-import button from '../Button'
 
 export const shareButton = tv({
   base: 'relative z-20 !bg-color-1-500 hover:!bg-color-1-400 p-4 active:!bg-color-1-400 rounded-full text-white',
