@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/OKAMca/stack/compare/core-lib-v1.0.1...core-lib-v1.1.0) (2023-07-19)
+
+
+### Features
+
+* add Box component ([#10](https://github.com/OKAMca/stack/issues/10)) ([933a153](https://github.com/OKAMca/stack/commit/933a1531fd8badb6bcfa8f42b77e9ed4ee1b62d3))
+
 ## [1.0.1](https://github.com/OKAMca/stack/compare/core-lib-v1.0.0...core-lib-v1.0.1) (2023-07-07)
 
 
