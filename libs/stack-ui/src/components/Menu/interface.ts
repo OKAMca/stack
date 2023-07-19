@@ -26,7 +26,29 @@ export interface IMenuButtonProps<T extends object>
     buttonContent?: string | React.ReactNode
     buttonTokens?: TToken
   }
-  placement?: 'right' | 'left' | 'top' | 'bottom'
+  placement?:
+    | 'bottom'
+    | 'bottom left'
+    | 'bottom right'
+    | 'bottom start'
+    | 'bottom end'
+    | 'top'
+    | 'top left'
+    | 'top right'
+    | 'top start'
+    | 'top end'
+    | 'left'
+    | 'left top'
+    | 'left bottom'
+    | 'start'
+    | 'start top'
+    | 'start bottom'
+    | 'right'
+    | 'right top'
+    | 'right bottom'
+    | 'end'
+    | 'end top'
+    | 'end bottom'
 }
 
 export interface IMenuItemProps extends AriaMenuItemProps, TDefaultComponent {

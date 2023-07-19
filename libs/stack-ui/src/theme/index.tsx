@@ -31,6 +31,7 @@ import {
   datePickerLabel,
 } from './DatePicker'
 import { lightBoxCloseBtn, lightBoxContainer } from './LightBox'
+import { menuTheme } from './Menu'
 import {
   shareButton,
   shareButtonLink,
@@ -117,6 +118,7 @@ const BaseTheme = makeTheme({
     input: () => '',
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
   },
+  menu: menuTheme,
 })
 
 export default React.memo(createThemeProvider(BaseTheme))
