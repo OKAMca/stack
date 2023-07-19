@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.2.0...stack-ui-v1.3.0) (2023-07-19)
+
+
+### Features
+
+* add Box component ([#10](https://github.com/OKAMca/stack/issues/10)) ([933a153](https://github.com/OKAMca/stack/commit/933a1531fd8badb6bcfa8f42b77e9ed4ee1b62d3))
+* added date to exports ([#17](https://github.com/OKAMca/stack/issues/17)) ([72fb74b](https://github.com/OKAMca/stack/commit/72fb74b74bc52a85f7b0af93fe101c9f6aca6dd1))
+
 # [1.2.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.1.0...stack-ui-v1.2.0) (2023-07-17)
 
 
