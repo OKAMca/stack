@@ -8,6 +8,7 @@ export { default as Popover } from './components/Popover'
 export { default as WysiwygBlock } from './components/WysiwygBlock'
 export { default as ArrowRight } from './components/icons/ArrowRight'
 export { default as Icon } from './components/Icon'
+export { default as Date } from './components/Date'
 
 // providers
 export { useTheme, ThemeContextProvider } from './providers/Theme'
