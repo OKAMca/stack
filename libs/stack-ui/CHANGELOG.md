@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.3.1...stack-ui-v1.4.0) (2023-07-21)
+
+
+### Bug Fixes
+
+* changed hardcoded open dialog to prop ([#18](https://github.com/OKAMca/stack/issues/18)) ([8e580dc](https://github.com/OKAMca/stack/commit/8e580dc59a88315f29c2e9cfafb2fc56ffe85106))
+
+
+### Features
+
+* added missing component exports ([#20](https://github.com/OKAMca/stack/issues/20)) ([05c36c2](https://github.com/OKAMca/stack/commit/05c36c2c4f7a4aa1cbd969ef91c814e08cd45434))
+
 ## [1.3.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.3.0...stack-ui-v1.3.1) (2023-07-21)
 
 
