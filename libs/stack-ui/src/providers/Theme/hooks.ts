@@ -14,6 +14,9 @@ const useThemeContext = (func?: string | null, props: TToken = {}, customTheme: 
       }
     }
   }
+  if (!customTheme) {
+    return undefined
+  }
   return customTheme
 }
 
