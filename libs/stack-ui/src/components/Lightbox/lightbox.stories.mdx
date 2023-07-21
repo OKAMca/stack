@@ -4,10 +4,17 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import Lightbox from './'
 import Image from 'next/image'
 
-<Meta title="BASE COMPONENTS/Lightbox" component={Lightbox} />
+<Meta
+  title="BASE COMPONENTS/Lightbox"
+  component={Lightbox}
+  args={{
+    label: 'Open Dialog',
+    thumbnailContent: <Image src={''} width={570} height={378} />,
+  }}
+/>
 
 export const Template = (args) => (
-  <Lightbox thumbnailContent={<Image src={''} width={570} height={378} />} {...args}>
+  <Lightbox {...args}>
     <Image src={''} width={640} height={805} alt="Lightbox preview" />
   </Lightbox>
 )
