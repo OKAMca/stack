@@ -10,7 +10,7 @@ import type { RangeValue } from '@react-types/shared'
 import type React from 'react'
 import type { AriaPopoverProps } from 'react-aria'
 import type { OverlayTriggerState } from 'react-stately'
-import type { TDefaultComponent } from '../../types/components'
+import type { TDefaultComponent } from '../../../types/components'
 
 export interface TDateSegmentProps {
   segment: DateSegment
