@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.3.0...stack-ui-v1.3.1) (2023-07-21)
+
+
+### Bug Fixes
+
+* return value of useThemeContext can be either string of undefined ([#19](https://github.com/OKAMca/stack/issues/19)) ([22947a8](https://github.com/OKAMca/stack/commit/22947a831a0e2e086886be340330ff6c8796c429))
+
 # [1.3.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.2.0...stack-ui-v1.3.0) (2023-07-19)
 
 
