@@ -11,11 +11,13 @@ const SelectContent = ({ disabled = false, isError = false, errorMessage, ...pro
     disabled={disabled}
     isError={isError}
     errorMessage={errorMessage}
+    onSelectionChange={(key) => console.log('value changed : ', key)}
+    defaultValue="4"
   >
-    <Item>Item One</Item>
-    <Item>Item Two</Item>
-    <Item>Item Three</Item>
-    <Item>Item Four</Item>
+    <Item key={1}>Item One</Item>
+    <Item key={2}>Item Two</Item>
+    <Item key={3}>Item Three</Item>
+    <Item key={4}>Item Four</Item>
   </Select>
 )
 

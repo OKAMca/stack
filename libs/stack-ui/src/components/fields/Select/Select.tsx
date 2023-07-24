@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
 import { useSelectState } from 'react-stately'
@@ -23,10 +23,18 @@ const Select = (props: TSelectProps) => {
     tokens,
     customTheme,
     label,
+    onSelectionChange,
+    value,
+    defaultValue,
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
-  const state = useSelectState(props)
-  const { triggerProps, menuProps, labelProps } = useSelect(props, state, fieldRef)
+  const state = useSelectState({
+    ...props,
+    selectedKey: value,
+    defaultSelectedKey: defaultValue,
+  })
+
+  const { triggerProps, menuProps, labelProps } = useSelect({ ...props, onSelectionChange }, state, fieldRef)
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
@@ -45,7 +53,7 @@ const Select = (props: TSelectProps) => {
           ref={fieldRef}
           disabled={disabled}
           themeName={`${themeName}.button`}
-          tokens={{ intent: isError ? 'error' : 'default' }}
+          tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
         >
           {state.selectedItem ? state.selectedItem.rendered : placeholderLabel}
           <Icon icon="ArrowDown" />
