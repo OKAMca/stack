@@ -1,5 +1,3 @@
-'use client'
-
 export { default as Typography } from './components/Typography'
 export { default as Accordion } from './components/Accordion'
 export { default as Button } from './components/Button'
