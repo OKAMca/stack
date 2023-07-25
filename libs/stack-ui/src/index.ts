@@ -1,3 +1,5 @@
+'use client'
+
 export { default as Typography } from './components/Typography'
 export { default as Accordion } from './components/Accordion'
 export { default as Button } from './components/Button'
@@ -19,8 +21,7 @@ export { default as Calendar } from './components/Calendar'
 export { default as Modal } from './components/Modal'
 
 // providers
-export { useTheme, ThemeContextProvider } from './providers/Theme'
-export { makeTheme, createThemeProvider } from './providers/Theme'
+export { makeTheme, createThemeProvider, useTheme, ThemeContextProvider } from './providers/Theme'
 export { default as useThemeContext } from './providers/Theme/hooks'
 // types & interfaces
 

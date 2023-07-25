@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useMemo } from 'react'
 import type { TThemeProviderProps, TThemePanelContext, TDefaultTheme, TTheme } from './interface'
 

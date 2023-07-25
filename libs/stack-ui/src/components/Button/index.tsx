@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/display-name */
 import type { RefObject } from 'react'

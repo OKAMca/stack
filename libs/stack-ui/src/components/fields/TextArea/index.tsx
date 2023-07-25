@@ -1,3 +1,5 @@
+'use client'
+
 import { FocusRing } from '@react-aria/focus'
 import React, { useRef } from 'react'
 import useThemeContext from '../../../providers/Theme/hooks'

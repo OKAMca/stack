@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable react/display-name */
 import type { Placement } from '@react-types/overlays'
 import type { FocusableElement } from '@react-types/shared'
