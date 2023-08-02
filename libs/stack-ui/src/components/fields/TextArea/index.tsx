@@ -24,30 +24,35 @@ const TextArea = (props: TTextAreaProps) => {
   } = props
   const ref = useRef<HTMLTextAreaElement | null>(null)
 
+  const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
+  const input = useThemeContext(`${themeName}.input`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
-  const input = useThemeContext(`${themeName}.input`, { ...tokens, disabled, isError }, customTheme)
 
   return (
-    <div className={container}>
-      <FocusRing focusRingClass="focus-ring">
-        <textarea
-          ref={(e) => {
-            fieldRef?.(e)
-            ref.current = e
-          }}
-          className={input}
-          placeholder={placeholder}
-          disabled={disabled}
-          required={required}
-          id={id}
-          name={name}
-          aria-label={ariaLabel}
-          aria-labelledby={id}
-          value={value}
-          onBlur={onBlur}
-          onChange={onChange}
-        />
-      </FocusRing>
+    <div>
+      <div className={wrapper} aria-disabled={disabled}>
+        <div className={container}>
+          <FocusRing focusRingClass="focus-ring">
+            <textarea
+              ref={(e) => {
+                fieldRef?.(e)
+                ref.current = e
+              }}
+              className={input}
+              placeholder={placeholder}
+              disabled={disabled}
+              required={required}
+              id={id}
+              name={name}
+              aria-label={ariaLabel}
+              aria-labelledby={id}
+              value={value}
+              onBlur={onBlur}
+              onChange={onChange}
+            />
+          </FocusRing>
+        </div>
+      </div>
       {isError && errorMessage && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={{ ...tokens, disabled, isError }}>
           {errorMessage}
