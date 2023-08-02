@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.4.0...stack-ui-v1.4.1) (2023-08-02)
+
+
+### Bug Fixes
+
+* contained component input in both wrapper and container themes ([84dc9e9](https://github.com/OKAMca/stack/commit/84dc9e9e92382ed35907f5893091bcbf0d95ac9d))
+
 # [1.4.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.3.1...stack-ui-v1.4.0) (2023-07-21)
 
 
