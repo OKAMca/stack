@@ -1,56 +1,42 @@
-name: Semantic Release
-
+name: CI
 on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
-      tags:
-        description: 'Test scenario tags'
-        required: false
-        type: boolean
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true
   push:
     branches:
-      - 'main'
-      - 'automatic-release'
-permissions:
-  contents: write
-env:
-  GITHUB_ACTOR: OKAMca
+      - main
+      - release
+  pull_request:
 
 jobs:
-  release:
+  main:
     runs-on: ubuntu-latest
+    container: node:18
+    strategy:
+      matrix:
+        node-version: [18.x]
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@okam'
+          fetch-depth: 0
+      - run: git config --system --add safe.directory '/__w/stack-ui/stack-ui'
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-      - name: Configure Git
-        shell: bash
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+      - name: 📥 Monorepo install
+        uses: ./.github/actions/yarn-nm-install
 
-      - name: Install dependencies
-        shell: bash
-        run: yarn install
-
-      - name: Semantic Release
-        run: npx nx run-many --target=semantic-release --parallel=false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: NX Set SHA
+        uses: nrwl/nx-set-shas@v3
+      - run: |
+          yarn nx format:write
+      - name: Build
+        run: yarn nx run stack-ui:build-storybook --configuration=ci
+      - name: Publish Project to Chromatic
+        uses: chromaui/action@v1
+        # Chromatic GitHub Action options
+        with:
+          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
+          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+          storybookBuildDir: dist/storybook/stack-ui
