@@ -113,9 +113,11 @@ const BaseTheme = makeTheme({
     li: () => 'transition w-full',
   },
   textarea: {
-    container: () => 'flex flex-col',
+    wrapper: () => 'flex flex-col',
+    container: () => 'flex items-center gap-4',
     label: () => 'text-gray-3 px-6',
     input: (props) => textArea(props),
+    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
   },
   textInput: {
     wrapper: () =>
