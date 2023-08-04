@@ -1,5 +1,6 @@
 import { FocusRing } from '@react-aria/focus'
 import React, { useRef } from 'react'
+import { useTextField } from 'react-aria'
 import useThemeContext from '../../../providers/Theme/hooks'
 import Typography from '../../Typography'
 import type { TTextAreaProps } from './interface'
@@ -7,12 +8,12 @@ import type { TTextAreaProps } from './interface'
 const TextArea = (props: TTextAreaProps) => {
   const {
     id,
+    label,
     name,
     placeholder,
     required,
     disabled = false,
     errorMessage,
-    isError = false,
     ariaLabel,
     value,
     onBlur,
@@ -23,14 +24,24 @@ const TextArea = (props: TTextAreaProps) => {
     customTheme,
   } = props
   const ref = useRef<HTMLTextAreaElement | null>(null)
+  const { errorMessageProps, inputProps, labelProps } = useTextField<'input'>(props, ref)
 
-  const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
-  const input = useThemeContext(`${themeName}.input`, tokens, customTheme)
-  const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
+  const inputTokens = { ...tokens, isDisabled: disabled, isError: errorMessage != null }
+
+  const wrapper = useThemeContext(`${themeName}.wrapper`, inputTokens, customTheme)
+  const input = useThemeContext(`${themeName}.input`, inputTokens, customTheme)
+  const labelTheme = useThemeContext(`${themeName}.label`, inputTokens, customTheme)
+  const container = useThemeContext(`${themeName}.container`, inputTokens, customTheme)
 
   return (
     <div>
       <div className={wrapper} aria-disabled={disabled}>
+        {label && (
+          // eslint-disable-next-line jsx-a11y/label-has-associated-control
+          <label className={labelTheme} {...labelProps}>
+            {label}
+          </label>
+        )}
         <div className={container}>
           <FocusRing focusRingClass="focus-ring">
             <textarea
@@ -49,12 +60,13 @@ const TextArea = (props: TTextAreaProps) => {
               value={value}
               onBlur={onBlur}
               onChange={onChange}
+              {...(inputProps as object)}
             />
           </FocusRing>
         </div>
       </div>
-      {isError && errorMessage && (
-        <Typography themeName={`${themeName}.errorMessage`} tokens={{ ...tokens, disabled, isError }}>
+      {errorMessage && (
+        <Typography themeName={`${themeName}.errorMessage`} tokens={inputTokens} {...errorMessageProps}>
           {errorMessage}
         </Typography>
       )}
