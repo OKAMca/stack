@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.4.1...stack-ui-v1.5.0) (2023-08-04)
+
+
+### Features
+
+* text area label, text area isError variant on all styling levels ([c8c3f7a](https://github.com/OKAMca/stack/commit/c8c3f7aa1fdada3aa9012300bc11b55d44c84836))
+
 ## [1.4.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.4.0...stack-ui-v1.4.1) (2023-08-02)
 
 
