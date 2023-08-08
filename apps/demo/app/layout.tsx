@@ -1,4 +1,5 @@
 import './global.css'
+import Providers from './Providers'
 
 export const metadata = {
   title: 'Welcome to demo',
@@ -8,7 +9,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }
