@@ -1,8 +1,8 @@
-import { ThemeContextProvider } from '@okam/stack-ui'
+import { ThemeProvider } from '@okam/stack-ui'
 
 const Providers = (props: { children: React.ReactNode }) => {
   const { children } = props
-  return <ThemeContextProvider>{children}</ThemeContextProvider>
+  return <ThemeProvider>{children}</ThemeProvider>
 }
 
 export default Providers

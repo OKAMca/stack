@@ -1,3 +1,5 @@
+export { default as ThemeProvider } from './theme'
+
 export { default as Typography } from './components/Typography'
 export { default as Accordion } from './components/Accordion'
 export { default as Button } from './components/Button'
@@ -21,8 +23,8 @@ export { default as Modal } from './components/Modal'
 // providers
 export { makeTheme, createThemeProvider, useTheme, ThemeContextProvider } from './providers/Theme'
 export { default as useThemeContext } from './providers/Theme/hooks'
-// types & interfaces
 
+// types & interfaces
 export type { TButtonProps } from './components/Button/interface'
 export type { TTypographyProps } from './components/Typography/interface'
 export type {
@@ -36,7 +38,6 @@ export type {
 } from './providers/Theme/interface'
 
 // utils
-
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
 export { default as useWindow } from './components/ShareButton/utils/useWindow'
 export { default as useFacebookShareUrl } from './components/ShareButton/utils/useFacebookShareUrl'

@@ -1,7 +1,6 @@
-/* eslint-disable react/display-name */
-
 'use client'
 
+/* eslint-disable react/display-name */
 import React from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
 import type { TTypographyProps } from './interface'

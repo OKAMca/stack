@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { makeTheme, createThemeProvider } from '../providers/Theme'
 import {
