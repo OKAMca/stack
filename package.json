@@ -30,7 +30,7 @@
     "react-hook-form": "7.43.0",
     "react-i18next": "12.1.5",
     "react-spring": "9.6.1",
-    "react-stately": "3.20.0",
+    "react-stately": "^3.24.0",
     "react-use": "17.4.0",
     "tailwind-variants": "^0.1.8",
     "tslib": "^2.3.0",
