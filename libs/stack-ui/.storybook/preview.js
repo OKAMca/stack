@@ -5,6 +5,7 @@ import React, { Suspense } from 'react'
 import { I18nProvider, OverlayProvider } from 'react-aria'
 import { useGlobals } from '@storybook/client-api'
 import BaseThemeProvider from '../src/theme'
+import { IsClientContextProvider } from '../src/providers/Client'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -40,11 +41,13 @@ export const decorators = [
         </style>
           <BaseThemeProvider>
             <I18nProvider locale={locale}>
-              <OverlayProvider>
-                <Suspense fallback={<div>Loading... </div>}>
-                  <Story />
-                </Suspense>
-              </OverlayProvider>
+              <IsClientContextProvider>
+                <OverlayProvider>
+                  <Suspense fallback={<div>Loading... </div>}>
+                    <Story />
+                  </Suspense>
+                </OverlayProvider>
+              </IsClientContextProvider>
             </I18nProvider>
           </BaseThemeProvider>
       </>

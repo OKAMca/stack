@@ -2,7 +2,7 @@ export { default as ThemeProvider } from './theme'
 
 export { default as Typography } from './components/Typography'
 export { default as Accordion } from './components/Accordion'
-export { default as Button } from './components/Button'
+export { default as Button, ButtonWithForwardRef } from './components/Button'
 export { default as ShareButton } from './components/ShareButton'
 export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
@@ -23,6 +23,8 @@ export { default as Modal } from './components/Modal'
 // providers
 export { makeTheme, createThemeProvider, useTheme, ThemeContextProvider } from './providers/Theme'
 export { default as useThemeContext } from './providers/Theme/hooks'
+export { useIsClient, IsClientContextProvider } from './providers/Client'
+export { useSidePanel, SidePanelContextProvider } from './providers/SidePanel'
 
 // types & interfaces
 export type { TButtonProps } from './components/Button/interface'

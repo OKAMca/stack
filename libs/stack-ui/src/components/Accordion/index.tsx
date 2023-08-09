@@ -47,7 +47,7 @@ const Accordion = (props: TAccordionProps) => {
         id={`accordion-content-${id}`}
         aria-labelledby={`accordion-control-${id}`}
       >
-        <section className={contentTheme}>{children}</section>
+        <div className={contentTheme}>{children}</div>
       </div>
     </div>
   )

@@ -24,6 +24,7 @@ const typography = tv({
     },
     color: {
       gray: `text-gray-500`,
+      white: `text-white`,
     },
     isError: {
       true: 'text-sm text-error ml-8 py-3',

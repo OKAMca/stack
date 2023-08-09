@@ -1,3 +1,5 @@
+'use client'
+
 import React, { Suspense, lazy, useMemo } from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
 import Fallback from '../icons/IconFallback'
@@ -25,10 +27,6 @@ const IconDispatcher = (props: TIconProps) => {
         {icon}
       </Component>
     )
-  }
-
-  if (typeof window === 'undefined') {
-    return null
   }
 
   return (

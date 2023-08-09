@@ -5,6 +5,7 @@
 import type { RefObject } from 'react'
 import React, { useRef } from 'react'
 import { useButton, useLink } from 'react-aria'
+import { useIsClient } from '../../providers/Client'
 import useThemeContext from '../../providers/Theme/hooks'
 import type { TButtonProps } from './interface'
 
@@ -43,12 +44,16 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTML
     (forwardRef as RefObject<HTMLElement>) ?? ref,
   )
 
+  const isClient = useIsClient()
+
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
-    <Component ref={ref} {...buttonProps} {...rest} className={theme}>
-      {children}
-    </Component>
+    isClient && (
+      <Component ref={ref} {...buttonProps} {...rest} className={theme}>
+        {children}
+      </Component>
+    )
   )
 })
 
