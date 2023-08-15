@@ -34,18 +34,6 @@ const Select = (props: TSelectProps) => {
     defaultSelectedKey: defaultValue,
   })
 
-  const prevValue = useRef<string>()
-
-  useEffect(() => {
-    if (value && prevValue.current !== value) {
-      if (!state.isFocused) {
-        onSelectionChange?.(value)
-      }
-    }
-
-    prevValue.current = value
-  }, [value, onSelectionChange, state.isFocused])
-
   const { triggerProps, menuProps, labelProps } = useSelect({ ...props, onSelectionChange }, state, fieldRef)
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
