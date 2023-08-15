@@ -23,7 +23,6 @@ const Select = (props: TSelectProps) => {
     tokens,
     customTheme,
     label,
-    onSelectionChange,
     value,
     defaultValue,
   } = props
@@ -34,7 +33,7 @@ const Select = (props: TSelectProps) => {
     defaultSelectedKey: defaultValue,
   })
 
-  const { triggerProps, menuProps, labelProps } = useSelect({ ...props, onSelectionChange }, state, fieldRef)
+  const { triggerProps, menuProps, labelProps } = useSelect({ ...props }, state, fieldRef)
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
