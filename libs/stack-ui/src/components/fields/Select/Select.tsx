@@ -23,15 +23,29 @@ const Select = (props: TSelectProps) => {
     tokens,
     customTheme,
     label,
+    onSelectionChange,
     value,
     defaultValue,
+    ...rest
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
   const state = useSelectState({
-    ...props,
+    ...rest,
     selectedKey: value,
     defaultSelectedKey: defaultValue,
   })
+
+  const prevValue = useRef<string>()
+
+  useEffect(() => {
+    if (value && prevValue.current !== value) {
+      if (!state.isFocused) {
+        onSelectionChange?.(value)
+      }
+    }
+
+    prevValue.current = value
+  }, [value, onSelectionChange, state.isFocused])
 
   const { triggerProps, menuProps, labelProps } = useSelect({ ...props }, state, fieldRef)
 
