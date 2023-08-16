@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
 import { useSelectState } from 'react-stately'
@@ -24,30 +24,20 @@ const Select = (props: TSelectProps) => {
     customTheme,
     label,
     onSelectionChange,
-    value,
     defaultValue,
+    value,
     ...rest
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
+
   const state = useSelectState({
     ...rest,
     selectedKey: value,
     defaultSelectedKey: defaultValue,
+    onSelectionChange,
   })
 
-  const prevValue = useRef<string>()
-
-  useEffect(() => {
-    if (value && prevValue.current !== value) {
-      if (!state.isFocused) {
-        onSelectionChange?.(value)
-      }
-    }
-
-    prevValue.current = value
-  }, [value, onSelectionChange, state.isFocused])
-
-  const { triggerProps, menuProps, labelProps } = useSelect({ ...props }, state, fieldRef)
+  const { triggerProps, menuProps, labelProps } = useSelect({ ...rest }, state, fieldRef)
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
