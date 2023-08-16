@@ -23,10 +23,21 @@ const Select = (props: TSelectProps) => {
     tokens,
     customTheme,
     label,
+    onSelectionChange,
+    defaultValue,
+    value,
+    ...rest
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
-  const state = useSelectState(props)
-  const { triggerProps, menuProps, labelProps } = useSelect(props, state, fieldRef)
+
+  const state = useSelectState({
+    ...rest,
+    selectedKey: value,
+    defaultSelectedKey: defaultValue,
+    onSelectionChange,
+  })
+
+  const { triggerProps, menuProps, labelProps } = useSelect({ ...rest }, state, fieldRef)
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
@@ -45,7 +56,7 @@ const Select = (props: TSelectProps) => {
           ref={fieldRef}
           disabled={disabled}
           themeName={`${themeName}.button`}
-          tokens={{ intent: isError ? 'error' : 'default' }}
+          tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
         >
           {state.selectedItem ? state.selectedItem.rendered : placeholderLabel}
           <Icon icon="ArrowDown" />

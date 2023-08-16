@@ -1,4 +1,5 @@
 import type { CollectionChildren } from '@react-types/shared'
+import type { Key } from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
 
@@ -15,4 +16,7 @@ export interface TSelectProps extends TFieldReactHookForm {
   fieldRef?: RefCallBack
   placeholderLabel: string
   hookFormRef?: RefCallBack
+  onSelectionChange?: (value: Key) => void
+  defaultValue?: string
+  value?: string
 }
