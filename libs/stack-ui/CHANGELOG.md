@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.5.0...stack-ui-v1.5.1) (2023-08-16)
+
+
+### Bug Fixes
+
+* onChange, manual select value modifs, button tokens ([#21](https://github.com/OKAMca/stack/issues/21)) ([025464f](https://github.com/OKAMca/stack/commit/025464f6dd0f7e8b303f9137e08c16146f8b1970))
+
 # [1.5.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.4.1...stack-ui-v1.5.0) (2023-08-04)
 
 
