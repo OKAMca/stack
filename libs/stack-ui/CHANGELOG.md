@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.5.1...stack-ui-v1.5.2) (2023-08-17)
+
+
+### Bug Fixes
+
+* app router use-client components ([#26](https://github.com/OKAMca/stack/issues/26)) ([ebcd662](https://github.com/OKAMca/stack/commit/ebcd662ce7cd358e9beb23849925c124167670eb))
+
 ## [1.5.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.5.0...stack-ui-v1.5.1) (2023-08-16)
 
 
