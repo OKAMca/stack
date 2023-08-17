@@ -1,3 +1,5 @@
+'use client'
+
 import useThemeContext from '../../providers/Theme/hooks'
 import { ButtonWithForwardRef } from '../Button'
 import Icon from '../Icon'

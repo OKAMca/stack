@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable react/display-name */
 import React from 'react'
 import useThemeContext from '../../providers/Theme/hooks'

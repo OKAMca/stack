@@ -1,3 +1,5 @@
+'use client'
+
 import { createCtx } from '@okam/core-lib'
 import { useMemo } from 'react'
 import useOverlayHook from '../../components/Lightbox/hooks/overlay'

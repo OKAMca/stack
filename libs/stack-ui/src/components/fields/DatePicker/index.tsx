@@ -1,3 +1,5 @@
+'use client'
+
 import { useDatePicker } from '@react-aria/datepicker'
 import { useDatePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'
