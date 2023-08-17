@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
 import Button from '../Button'

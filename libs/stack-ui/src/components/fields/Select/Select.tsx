@@ -1,3 +1,5 @@
+'use client'
+
 import { isEmpty } from 'lodash'
 import { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'

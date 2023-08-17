@@ -1,3 +1,5 @@
+'use client'
+
 import { useOverlayTriggerState } from '@react-stately/overlays'
 import React, { useEffect } from 'react'
 import { useButton } from 'react-aria'

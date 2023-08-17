@@ -17,6 +17,7 @@
   "dependencies": {
     "@nx/next": "16.4.2",
     "@tsed/exceptions": "^6.100.3",
+    "add": "^2.0.6",
     "dequal": "^2.0.0",
     "isomorphic-dompurify": "0.26.0",
     "lodash.isequal": "4.5.0",
@@ -29,10 +30,11 @@
     "react-hook-form": "7.43.0",
     "react-i18next": "12.1.5",
     "react-spring": "9.6.1",
-    "react-stately": "3.20.0",
+    "react-stately": "^3.24.0",
     "react-use": "17.4.0",
     "tailwind-variants": "^0.1.8",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.14.5",

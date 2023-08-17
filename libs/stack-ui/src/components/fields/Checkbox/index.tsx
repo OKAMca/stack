@@ -1,3 +1,5 @@
+'use client'
+
 import { useCheckbox } from '@react-aria/checkbox'
 import { FocusRing, useFocusRing } from '@react-aria/focus'
 import { VisuallyHidden } from '@react-aria/visually-hidden'

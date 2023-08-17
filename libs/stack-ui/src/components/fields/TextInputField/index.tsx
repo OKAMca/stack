@@ -1,3 +1,5 @@
+'use client'
+
 import { FocusRing } from '@react-aria/focus'
 import { isEmpty } from 'lodash'
 import { useRef } from 'react'

@@ -1,3 +1,5 @@
+'use client'
+
 import { useDateFormatter } from '@react-aria/i18n'
 import { isEmpty } from 'lodash'
 import { useIsSSR } from 'react-aria'
