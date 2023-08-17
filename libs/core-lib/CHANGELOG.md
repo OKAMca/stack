@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/OKAMca/stack/compare/core-lib-v1.1.0...core-lib-v1.1.1) (2023-08-17)
+
+
+### Bug Fixes
+
+* app router use-client components ([#26](https://github.com/OKAMca/stack/issues/26)) ([ebcd662](https://github.com/OKAMca/stack/commit/ebcd662ce7cd358e9beb23849925c124167670eb))
+
 # [1.1.0](https://github.com/OKAMca/stack/compare/core-lib-v1.0.1...core-lib-v1.1.0) (2023-07-19)
 
 
