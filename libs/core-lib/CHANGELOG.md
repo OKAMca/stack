@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/OKAMca/stack/compare/core-lib-v1.1.1...core-lib-v1.1.2) (2023-08-18)
+
+
+### Bug Fixes
+
+* upgraded react-stately, react-types/shared ([61b109e](https://github.com/OKAMca/stack/commit/61b109e51cc5c841a920dd7e5ea34c94f4b02741))
+
 ## [1.1.1](https://github.com/OKAMca/stack/compare/core-lib-v1.1.0...core-lib-v1.1.1) (2023-08-17)
 
 
