@@ -16,6 +16,7 @@
   "private": true,
   "dependencies": {
     "@nx/next": "16.4.2",
+    "@react-types/shared": "3.19.0",
     "@tsed/exceptions": "^6.100.3",
     "add": "^2.0.6",
     "dequal": "^2.0.0",
