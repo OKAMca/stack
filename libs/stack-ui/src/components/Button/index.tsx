@@ -1,11 +1,11 @@
-'use client'
-
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/display-name */
+
+'use client'
+
 import type { RefObject } from 'react'
 import React, { useRef } from 'react'
 import { useButton, useLink } from 'react-aria'
-import { useIsClient } from '../../providers/Client'
 import useThemeContext from '../../providers/Theme/hooks'
 import type { TButtonProps } from './interface'
 
@@ -36,24 +36,21 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTML
     customTheme,
     tokens,
     themeName = 'button',
+    isDisabled = false,
     ...rest
   } = props
   const ref = forwardRef
   const { buttonProps } = useButton(
-    { ...props, elementType: as, onPress: handlePress },
+    { ...props, isDisabled, elementType: as, onPress: handlePress },
     (forwardRef as RefObject<HTMLElement>) ?? ref,
   )
-
-  const isClient = useIsClient()
 
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
-    isClient && (
-      <Component ref={ref} {...buttonProps} {...rest} className={theme}>
-        {children}
-      </Component>
-    )
+    <Component ref={ref} {...buttonProps} {...rest} className={theme}>
+      {children}
+    </Component>
   )
 })
 
