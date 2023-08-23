@@ -21,7 +21,7 @@ const defaultTheme: TDefaultTheme = {
   typography: () => '',
 }
 
-export const [useTheme, ThemeProvider] = createCtxNullable<TThemePanelContext<TTheme>>()
+const [useTheme, ThemeProvider] = createCtxNullable<TThemePanelContext<TTheme>>()
 
 export function ThemeContextProvider({ children, brandTheme = defaultTheme }: TThemeProviderProps) {
   const value = useMemo<TThemePanelContext>(() => ({ brandTheme }), [brandTheme])
@@ -34,5 +34,7 @@ export const createThemeProvider = (brandTheme: TTheme) => {
   )
   return ThemeProviderContext
 }
+
+export { useTheme }
 
 export { makeTheme } from './utils'

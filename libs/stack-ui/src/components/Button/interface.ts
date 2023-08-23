@@ -13,4 +13,5 @@ export interface TButtonProps extends TDefaultComponent {
   handlePress?: ((e: PressEvent) => void) | undefined
   tabIndex?: number
   role?: string
+  isDisabled?: boolean
 }
