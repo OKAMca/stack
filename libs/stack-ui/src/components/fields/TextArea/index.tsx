@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
 'use client'
 
 import { FocusRing } from '@react-aria/focus'
@@ -39,7 +41,6 @@ const TextArea = (props: TTextAreaProps) => {
     <div>
       <div className={wrapper} aria-disabled={disabled}>
         {label && (
-          // eslint-disable-next-line jsx-a11y/label-has-associated-control
           <label className={labelTheme} {...labelProps}>
             {label}
           </label>
