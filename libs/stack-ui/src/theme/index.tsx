@@ -107,12 +107,12 @@ const BaseTheme = makeTheme({
   },
   select: {
     button: (props) => button(props),
-    ul: (props) => typography({ ...props, className: 'my-4 rounded-md border w-full flex flex-col' }),
+    ul: (props) => typography({ ...props, className: 'my-4 rounded-md border w-full flex flex-col gap-6' }),
     popover: (props) => button(props),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
     wrapper: () => 'flex flex-col gap-4 relative',
     container: () => 'flex flex-col gap-4',
-    li: () => 'transition w-full',
+    li: () => 'transition w-full hover:text-gray-300',
   },
   textarea: {
     wrapper: () => 'flex flex-col',
