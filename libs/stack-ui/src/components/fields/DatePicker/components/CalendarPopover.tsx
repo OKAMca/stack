@@ -1,6 +1,6 @@
 import { usePopover, DismissButton, Overlay } from '@react-aria/overlays'
-import useThemeContext from 'libs/stack-ui/src/providers/Theme/hooks'
 import * as React from 'react'
+import useThemeContext from '../../../../providers/Theme/hooks'
 import type { TCalendarPopoverProps } from '../interface'
 
 export function CalendarPopover({ themeName = 'datePicker', tokens, ...rest }: TCalendarPopoverProps) {

@@ -3,7 +3,7 @@
 import { getWeeksInMonth } from '@internationalized/date'
 import { useCalendarGrid } from '@react-aria/calendar'
 import { useLocale } from '@react-aria/i18n'
-import useThemeContext from 'libs/stack-ui/src/providers/Theme/hooks'
+import useThemeContext from '../../../providers/Theme/hooks'
 import type { TCalendarGridProps } from '../interface'
 import CalendarCell from './CalendarCell'
 
