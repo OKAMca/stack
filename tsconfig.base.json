@@ -17,6 +17,8 @@
     "paths": {
       "@okam/core-lib": ["libs/core-lib/src/index.ts"],
       "@okam/stack-ui": ["libs/stack-ui/src/index.ts"],
+      "@okam/ui-components": ["libs/my-new-lib-test/src/index.ts"],
+      "@okam/ui-components/server": ["libs/my-new-lib-test/src/server.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
