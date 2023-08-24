@@ -25,32 +25,19 @@
       }
     },
     "build": {
-      "executor": "@nx/rollup:rollup",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "generatePackageJson": true,
         "outputPath": "dist/libs/stack-ui",
-        "tsConfig": "libs/stack-ui/tsconfig.lib.json",
-        "project": "libs/stack-ui/package.json",
-        "entryFile": "libs/stack-ui/src/index.ts",
-        "external": "all",
-        "rollupConfig": "@nx/react/plugins/bundle-rollup",
-        "compiler": "swc",
-        "defaultConfiguration": "production",
-        "assets": [
-          {
-            "glob": "libs/stack-ui/README.md",
-            "input": ".",
-            "output": "."
-          }
-        ],
-        "configurations": {
-          "development": {
-            "mode": "development"
-          },
-          "production": {
-            "mode": "production"
-          }
+        "generatePackageJson": true
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
         }
       }
     },
