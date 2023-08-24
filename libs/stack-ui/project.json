@@ -28,11 +28,12 @@
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "generatePackageJson": true,
         "outputPath": "dist/libs/stack-ui",
         "tsConfig": "libs/stack-ui/tsconfig.lib.json",
         "project": "libs/stack-ui/package.json",
         "entryFile": "libs/stack-ui/src/index.ts",
-        "external": ["react", "react-dom", "react/jsx-runtime", "react-aria", "react-stately"],
+        "external": "all",
         "rollupConfig": "@nx/react/plugins/bundle-rollup",
         "compiler": "swc",
         "defaultConfiguration": "production",
