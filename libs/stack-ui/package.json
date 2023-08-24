@@ -1,15 +1,7 @@
 {
   "name": "@okam/stack-ui",
   "version": "1.5.4",
-  "main": "./index.js",
   "types": "./index.d.ts",
-  "license": "MIT",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    }
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
