@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.6.0...stack-ui-v1.6.1) (2023-08-24)
+
+
+### Bug Fixes
+
+* console errors ([#30](https://github.com/OKAMca/stack/issues/30)) ([54af04b](https://github.com/OKAMca/stack/commit/54af04b08b22a318f11d97e268599cb479daad13))
+
 # [1.6.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.5.4...stack-ui-v1.6.0) (2023-08-24)
 
 
