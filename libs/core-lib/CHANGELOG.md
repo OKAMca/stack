@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/OKAMca/stack/compare/core-lib-v1.1.3...core-lib-v1.2.0) (2023-08-24)
+
+
+### Features
+
+* change compiler to rollup with swc ([3be08f4](https://github.com/OKAMca/stack/commit/3be08f4c323b1e8333ac670ca7b8ece3035ff18e))
+
 ## [1.1.3](https://github.com/OKAMca/stack/compare/core-lib-v1.1.2...core-lib-v1.1.3) (2023-08-23)
 
 
