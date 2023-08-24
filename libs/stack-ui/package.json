@@ -1,7 +1,14 @@
 {
   "name": "@okam/stack-ui",
+  "main": "./index.js",
   "version": "1.6.1",
   "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
