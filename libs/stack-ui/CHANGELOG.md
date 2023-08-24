@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.5.4...stack-ui-v1.6.0) (2023-08-24)
+
+
+### Features
+
+* change compiler to rollup with swc ([3be08f4](https://github.com/OKAMca/stack/commit/3be08f4c323b1e8333ac670ca7b8ece3035ff18e))
+
 ## [1.5.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.5.3...stack-ui-v1.5.4) (2023-08-23)
 
 
