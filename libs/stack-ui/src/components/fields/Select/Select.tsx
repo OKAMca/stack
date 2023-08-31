@@ -71,7 +71,7 @@ const Select = (props: TSelectProps) => {
             placement="bottom"
             themeName={`${themeName}.popover`}
           >
-            <ListBox {...menuProps} themeName={`${themeName}.ul`} state={state} />
+            <ListBox {...menuProps} themeName={themeName} state={state} />
           </Popover>
         )}
         {isError && (
