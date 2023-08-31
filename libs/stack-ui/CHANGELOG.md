@@ -1,3 +1,10 @@
+## [1.6.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.6.2...stack-ui-v1.6.3) (2023-08-31)
+
+
+### Bug Fixes
+
+* correctly pass down theme name for UL and LI ([68169bb](https://github.com/OKAMca/stack/commit/68169bbe4658f2bb971998f8e104bd28b34749b3))
+
 ## [1.6.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.6.1...stack-ui-v1.6.2) (2023-08-24)
 
 
