@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/OKAMca/stack/compare/core-lib-v1.2.0...core-lib-v1.3.0) (2023-09-05)
+
+
+### Features
+
+* upgraded react-aria + react-aria/i18n ([8519af3](https://github.com/OKAMca/stack/commit/8519af3242223daeeab3d028a5ce79455b6c4bf5))
+
 # [1.2.0](https://github.com/OKAMca/stack/compare/core-lib-v1.1.3...core-lib-v1.2.0) (2023-08-24)
 
 
