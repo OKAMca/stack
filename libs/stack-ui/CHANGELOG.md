@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.6.3...stack-ui-v1.7.0) (2023-09-05)
+
+
+### Features
+
+* upgraded react-aria + react-aria/i18n ([8519af3](https://github.com/OKAMca/stack/commit/8519af3242223daeeab3d028a5ce79455b6c4bf5))
+
 ## [1.6.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.6.2...stack-ui-v1.6.3) (2023-08-31)
 
 
