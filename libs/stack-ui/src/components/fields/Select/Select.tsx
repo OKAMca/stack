@@ -44,7 +44,6 @@ const Select = (props: TSelectProps) => {
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
-  console.log(icon)
   return (
     <div className={wrapper}>
       {label && (
