@@ -28,6 +28,7 @@ const Select = (props: TSelectProps) => {
     onSelectionChange,
     defaultValue,
     value,
+    icon,
     ...rest
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
@@ -43,7 +44,7 @@ const Select = (props: TSelectProps) => {
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
-
+  console.log(icon)
   return (
     <div className={wrapper}>
       {label && (
@@ -61,7 +62,7 @@ const Select = (props: TSelectProps) => {
           tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
         >
           {state.selectedItem ? state.selectedItem.rendered : placeholderLabel}
-          <Icon icon="ArrowDown" />
+          <Icon icon={icon ?? 'ArrowDown'} />
         </ButtonWithForwardRef>
         {state.isOpen && fieldRef.current && (
           <Popover
