@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.7.0...stack-ui-v1.8.0) (2023-09-08)
+
+
+### Features
+
+* select accepts icon prop ([8802f14](https://github.com/OKAMca/stack/commit/8802f14923bcec6c4961032cdffae80a10774cda))
+
 # [1.7.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.6.3...stack-ui-v1.7.0) (2023-09-05)
 
 
