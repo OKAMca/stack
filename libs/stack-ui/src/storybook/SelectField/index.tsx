@@ -3,7 +3,16 @@ import { Item } from 'react-stately'
 import Select from '../../components/fields/Select/Select'
 import type { TSelectProps } from '../../components/fields/Select/Select.interface'
 
-const SelectContent = ({ disabled = false, isError = false, errorMessage, ...props }: TSelectProps) => {
+const SelectContent = ({
+  disabled = false,
+  isError = false,
+  errorMessage,
+  id,
+  label,
+  name,
+  placeholderLabel,
+  ...rest
+}: TSelectProps) => {
   const [value, setValue] = useState<string>()
 
   return (
@@ -21,13 +30,14 @@ const SelectContent = ({ disabled = false, isError = false, errorMessage, ...pro
         4
       </button>
       <Select
-        id={props.id}
-        label={props.label}
-        name={props.name}
-        placeholderLabel={props.placeholderLabel}
+        id={id}
+        label={label}
+        name={name}
+        placeholderLabel={placeholderLabel}
         disabled={disabled}
         isError={isError}
         errorMessage={errorMessage}
+        {...rest}
         onSelectionChange={(key) => {
           setValue(key.toString())
           console.log('selection changed')
