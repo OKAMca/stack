@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.8.0...stack-ui-v1.8.1) (2023-09-12)
+
+
+### Bug Fixes
+
+* add all react-aria package as external to remove issues with con… ([#35](https://github.com/OKAMca/stack/issues/35)) ([70e0b5d](https://github.com/OKAMca/stack/commit/70e0b5d1312f89cae63ccc33ede8d6a1ade52c84))
+
 # [1.8.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.7.0...stack-ui-v1.8.0) (2023-09-08)
 
 
