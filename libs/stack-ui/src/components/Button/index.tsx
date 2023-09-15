@@ -5,7 +5,7 @@
 
 import type { RefObject } from 'react'
 import React, { useRef } from 'react'
-import { useButton, useLink } from 'react-aria'
+import { FocusRing, useButton, useLink } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
 import type { TButtonProps } from './interface'
 
@@ -48,9 +48,11 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTML
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
-    <Component ref={ref} {...buttonProps} {...rest} className={theme}>
-      {children}
-    </Component>
+    <FocusRing focusRingClass="focus-ring">
+      <Component ref={ref} {...buttonProps} {...rest} className={theme}>
+        {children}
+      </Component>
+    </FocusRing>
   )
 })
 
