@@ -33,7 +33,7 @@ import {
   datePickerIcon,
   datePickerLabel,
 } from './DatePicker'
-import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel } from './LightBox'
+import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
 import {
   shareButton,
   shareButtonContainer,
@@ -87,6 +87,7 @@ const BaseTheme = makeTheme({
     innerContainer: (props) => sidePanelInnerContainer(props),
   },
   lightBox: {
+    wrapper: (props) => lightBoxWrapper(props),
     container: (props) => lightBoxContainer(props),
     closeBtn: (props) => lightBoxCloseBtn(props),
     label: (props) => lightBoxLabel(props),

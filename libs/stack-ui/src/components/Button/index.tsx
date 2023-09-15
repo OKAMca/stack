@@ -21,9 +21,11 @@ const Anchor = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTML
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
-    <Component ref={ref} {...linkProps} {...rest} className={theme}>
-      {children}
-    </Component>
+    <FocusRing focusRingClass="has-focus-ring">
+      <Component ref={ref} {...linkProps} {...rest} className={theme}>
+        {children}
+      </Component>
+    </FocusRing>
   )
 })
 
@@ -48,7 +50,7 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTML
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
-    <FocusRing focusRingClass="focus-ring">
+    <FocusRing focusRingClass="has-focus-ring">
       <Component ref={ref} {...buttonProps} {...rest} className={theme}>
         {children}
       </Component>
