@@ -50,7 +50,7 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTML
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
-    <FocusRing focusRingClass="has-focus-ring">
+    <FocusRing within focusRingClass="has-focus-ring">
       <Component ref={ref} {...buttonProps} {...rest} className={theme}>
         {children}
       </Component>
