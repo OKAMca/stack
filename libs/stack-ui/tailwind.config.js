@@ -1,5 +1,6 @@
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind')
 const { join } = require('path')
+const plugin = require('tailwindcss/plugin')
 
 module.exports = {
   content: [
@@ -9,6 +10,10 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant('focus-ring', '&.focus-ring')
+    }),
+  ],
   presets: [require('../../tailwind.preset')],
 }
