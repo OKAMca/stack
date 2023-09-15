@@ -1,14 +1,21 @@
+import useThemeContext from 'libs/stack-ui/src/providers/Theme/hooks'
 import React from 'react'
-import { useListBox, useOption } from 'react-aria'
+import { FocusScope, useListBox, useOption } from 'react-aria'
 import { TypographyWithForwardRef } from '../../../Typography'
 import type { TListBoxProps, TOptionProps } from './Listbox.interface'
 
 const Option = ({ item, state, themeName = 'li' }: TOptionProps) => {
   const ref = React.useRef(null)
-  const { optionProps } = useOption({ key: item.key }, state, ref)
+  const { optionProps, isFocusVisible } = useOption({ key: item.key }, state, ref)
 
+  const theme = useThemeContext(themeName)
   return (
-    <TypographyWithForwardRef as="li" {...optionProps} themeName={themeName} ref={ref}>
+    <TypographyWithForwardRef
+      as="li"
+      {...optionProps}
+      tokens={{ className: `${theme} ${isFocusVisible ? 'has-focus-ring' : ''}` }}
+      ref={ref}
+    >
       {item.rendered}
     </TypographyWithForwardRef>
   )
@@ -20,11 +27,13 @@ const ListBox = (props: TListBoxProps) => {
   const { listBoxProps } = useListBox(props, state, listBoxRef)
 
   return (
-    <TypographyWithForwardRef {...listBoxProps} ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
-      {[...state.collection].map((item) => (
-        <Option themeName={`${themeName}.li`} key={item.key} item={item} state={state} />
-      ))}
-    </TypographyWithForwardRef>
+    <FocusScope autoFocus restoreFocus contain>
+      <TypographyWithForwardRef {...listBoxProps} ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
+        {[...state.collection].map((item) => (
+          <Option themeName={`${themeName}.li`} key={item.key} item={item} state={state} />
+        ))}
+      </TypographyWithForwardRef>
+    </FocusScope>
   )
 }
 

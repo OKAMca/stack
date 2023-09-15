@@ -5,29 +5,35 @@ import type { AriaDatePickerProps } from '@react-aria/datepicker'
 import { useDateField, useDateSegment } from '@react-aria/datepicker'
 import { useLocale } from '@react-aria/i18n'
 import { useDateFieldState } from '@react-stately/datepicker'
+import useThemeContext from 'libs/stack-ui/src/providers/Theme/hooks'
 import { useRef } from 'react'
+import { FocusRing } from 'react-aria'
 import type { TDateSegmentProps } from '../interface'
 
 function DateSegment({ segment, state }: TDateSegmentProps) {
   const ref = useRef(null)
   const { segmentProps } = useDateSegment(segment, state, ref)
 
+  const theme = useThemeContext('datePicker.dateSegment')
+
   return (
-    <div {...segmentProps} ref={ref}>
-      {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}
-      <span
-        aria-hidden="true"
-        style={{
-          visibility: segment.isPlaceholder ? 'visible' : 'hidden',
-          height: segment.isPlaceholder ? '' : 0,
-          pointerEvents: 'none',
-          display: segment.isPlaceholder ? 'block' : 'none',
-        }}
-      >
-        {segment.placeholder}
-      </span>
-      {segment.isPlaceholder ? '' : segment.text}
-    </div>
+    <FocusRing focusRingClass="has-focus-ring">
+      <div {...segmentProps} ref={ref} className={theme}>
+        {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}
+        <span
+          aria-hidden="true"
+          style={{
+            visibility: segment.isPlaceholder ? 'visible' : 'hidden',
+            height: segment.isPlaceholder ? '' : 0,
+            pointerEvents: 'none',
+            display: segment.isPlaceholder ? 'block' : 'none',
+          }}
+        >
+          {segment.placeholder}
+        </span>
+        {segment.isPlaceholder ? '' : segment.text}
+      </div>
+    </FocusRing>
   )
 }
 

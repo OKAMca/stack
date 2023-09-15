@@ -30,6 +30,7 @@ import {
   datePickerCalendarPopoverUnderlay,
   datePickerContainer,
   datePickerDateField,
+  datePickerDateSegment,
   datePickerIcon,
   datePickerLabel,
 } from './DatePicker'
@@ -75,6 +76,7 @@ const BaseTheme = makeTheme({
     button: (props) => datePickerButton(props),
     icon: (props) => datePickerIcon(props),
     dateField: (props) => datePickerDateField(props),
+    dateSegment: (props) => datePickerDateSegment(props),
     label: (props) => datePickerLabel(props),
     calendarPopover: (props) => datePickerCalendarPopoverContainer(props),
     calendarUnderlay: (props) => datePickerCalendarPopoverUnderlay(props),
@@ -108,12 +110,16 @@ const BaseTheme = makeTheme({
   },
   select: {
     button: (props) => button(props),
-    ul: (props) => typography({ ...props, className: 'my-4 rounded-md border w-full flex flex-col gap-6' }),
+    ul: (props) =>
+      typography({
+        ...props,
+        className: 'outline outline-2 outline-white outline-offset-2 p-2 my-4 rounded-md w-full flex flex-col gap-6',
+      }),
     popover: (props) => button(props),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
     wrapper: () => 'flex flex-col gap-4 relative',
     container: () => 'flex flex-col gap-4',
-    li: () => 'transition w-full hover:text-gray-300',
+    li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
   },
   textarea: {
     wrapper: () => 'flex flex-col',

@@ -150,6 +150,7 @@ module.exports = {
               outline: 'none',
             },
             '&.has-focus-ring': {
+              'outline-offset': '2px',
               outline: `2px solid ${color ?? theme('colors[black]')}`,
             },
           })
