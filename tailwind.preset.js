@@ -132,12 +132,30 @@ module.exports = {
         pointerEvents: [({ after }) => after(['disabled']), ({ after }) => after(['aria-disabled'])],
       },
     },
+    purge: {
+      options: {
+        whitelist: [
+          'focus-ring'
+        ]
+      }
+    },
     plugins: [
       require('@tailwindcss/line-clamp'),
       require('tailwindcss-logical'),
-      plugin(function ({ addVariant }) {
+      plugin(function ({ addVariant, matchUtilities, theme }) {
         addVariant('aria-disabled', `&[aria-disabled='true']`)
-        addVariant('focus-ring', '&.focus-ring')
+        matchUtilities({
+          'focus-ring': (color) => ({
+            '&:focus, &:focus-visible': {
+              outline: 'none',
+            },
+            '&.has-focus-ring': {
+              outline: `2px solid ${color ?? theme('colors[black]')}`,
+            },
+          })
+        }, { 
+          values: theme('colors')
+        })
       }),
     ],
   }

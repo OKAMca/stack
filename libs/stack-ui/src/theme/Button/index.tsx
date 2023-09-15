@@ -11,10 +11,7 @@ const button = tv({
     ease-in-out
     disabled:pointer-events-none
     disabled:opacity-30
-    focus-visible:outline-none
-    focus-ring:outline
-    focus-ring:outline-2
-    focus-ring:outline-black
+    focus-ring-black
   `,
   defaultVariants: {
     buttonStyle: 'default',

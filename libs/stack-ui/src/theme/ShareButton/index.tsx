@@ -14,7 +14,7 @@ export const shareButtonContainer = tv({
 })
 
 export const shareButton = tv({
-  base: 'relative z-20 !bg-color-1-500 hover:!bg-color-1-400 p-4 active:!bg-color-1-400 rounded-full text-white',
+  base: 'relative z-20 !bg-color-1-500 hover:!bg-color-1-400 p-4 active:!bg-color-1-400 rounded-full text-white focus-ring-black',
   variants: {
     isOpen: {
       true: '',
@@ -41,7 +41,19 @@ export const shareButtonLinksList = tv({
 })
 
 export const shareButtonLink = tv({
-  base: 'flex items-center justify-center cursor-pointer bg-color-1-200 hover:bg-color-1-300 w-full text-color-1-500 rounded-none p-2',
+  base: `
+    flex
+    items-center
+    justify-center
+    cursor-pointer
+    bg-color-1-200
+    hover:bg-color-1-300
+    w-full
+    text-color-1-500
+    rounded-none
+    p-2
+    focus-ring-black
+  `,
   defaultVariants: {
     listDirection: 'row',
   },

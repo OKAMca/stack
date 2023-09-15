@@ -13,7 +13,7 @@ export const calendarNavigationButtonsContainer = tv({
 })
 
 export const calendarNavigationButtons = tv({
-  base: 'active:bg-color-1-500 p-2 rounded-full active:text-color-1-100 hover:bg-color-1-200',
+  base: 'active:bg-color-1-500 p-2 rounded-full active:text-color-1-100 hover:bg-color-1-200 focus-ring-black',
 })
 
 export const calendarTable = tv({
