@@ -81,6 +81,10 @@ const BaseTheme = makeTheme({
     calendarPopover: (props) => datePickerCalendarPopoverContainer(props),
     calendarUnderlay: (props) => datePickerCalendarPopoverUnderlay(props),
   },
+  popover: {
+    button: (props) => button(props),
+    popover: () => 'border-2 text-black focus-ring-black p-4',
+  },
   typography: (props) => typography(props),
   button: (props) => button(props),
   sidePanel: {
