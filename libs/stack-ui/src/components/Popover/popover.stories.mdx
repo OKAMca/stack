@@ -15,7 +15,11 @@ import Popover from './index'
 export const Template = (args) => (
   <div>
     <OverlayProvider>
-      <Popover {...args}>Hello world!</Popover>
+      <Popover {...args}>
+        <a href="#" className={`focus-ring-black`}>Hello world!</a>
+        <a href="#" className={`focus-ring-black`}>Hello world! 2</a>
+        <a href="#" className={`focus-ring-black`}>Hello world! 3</a>
+      </Popover>
     </OverlayProvider>
   </div>
 )

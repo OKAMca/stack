@@ -44,18 +44,18 @@ const Popover = React.forwardRef((props: IPopoverProps, ref) => {
   // Add a hidden <DismissButton> component at the end of the popover
   // to allow screen reader users to dismiss the popup easily.
   return (
-    <FocusScope contain restoreFocus>
-      <FocusRing focusRingClass="has-focus-ring">
-        <div
-          className={theme}
-          {...mergeProps(overlayProps, modalProps, dialogProps)}
-          ref={ref as LegacyRef<HTMLDivElement>}
-          style={style}
-        >
-          {children}
-          <DismissButton onDismiss={onClose} />
-        </div>
-      </FocusRing>
+    <FocusScope autoFocus restoreFocus contain>
+      <div
+        className={theme}
+        {...mergeProps(overlayProps, modalProps, dialogProps)}
+        ref={ref as LegacyRef<HTMLDivElement>}
+        style={style}
+      >
+        {React.Children.map(children, (child) => (
+          <FocusRing focusRingClass="has-focus-ring">{child}</FocusRing>
+        ))}
+        <DismissButton onDismiss={onClose} />
+      </div>
     </FocusScope>
   )
 })

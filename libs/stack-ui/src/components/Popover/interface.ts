@@ -9,13 +9,13 @@ export interface TPopoverButtonProps extends TDefaultComponent {
   offset: number
   buttonProps: TButtonProps
   placement: Placement
-  children: React.ReactNode
+  children: React.ReactElement | React.ReactElement[]
 }
 
 export interface IPopoverProps extends TDefaultComponent {
   isOpen: boolean
   onClose: () => void
-  children: React.ReactNode
+  children: React.ReactElement | React.ReactElement[]
   style?: CSSProperties
 }
 
