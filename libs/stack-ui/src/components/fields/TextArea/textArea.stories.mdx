@@ -23,7 +23,7 @@ import TextArea from './index'
 
 export const Template = (args) => {
   const { backgroundColor, ...rest } = args
-  return <TextArea {...rest} />
+  return <div className={`flex flex-col m-auto h-screen justify-center items-center`}><TextArea {...rest} /></div>
 }
 
 # Text Input Field
