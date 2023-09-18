@@ -6,9 +6,9 @@ import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
 
 export interface TPopoverButtonProps extends TDefaultComponent {
-  offset: number
+  offset?: number
   buttonProps: TButtonProps
-  placement: Placement
+  placement?: Placement
   children: React.ReactElement | React.ReactElement[]
 }
 

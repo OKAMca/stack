@@ -144,6 +144,7 @@ module.exports = {
       require('tailwindcss-logical'),
       plugin(function ({ addVariant, matchUtilities, theme }) {
         addVariant('aria-disabled', `&[aria-disabled='true']`)
+        addVariant('has-focus-ring', `&.has-focus-ring`)
         matchUtilities({
           'focus-ring': (color) => ({
             '&, & *': {

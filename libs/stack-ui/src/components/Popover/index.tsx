@@ -91,9 +91,7 @@ function PopoverButton(props: TPopoverButtonProps) {
         {...buttonProps}
         {...triggerButtonProps}
         ref={triggerRef}
-      >
-        Open Popover
-      </ButtonWithForwardRef>
+      />
       {state.isOpen && (
         <OverlayContainer>
           <Popover
