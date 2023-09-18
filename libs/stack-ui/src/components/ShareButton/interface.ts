@@ -7,6 +7,7 @@ export interface TShareButtonProps extends TDefaultComponent<TShareButtonTokens>
   ariaLabel: string
   sharingLinksList: TShareButtonLink[]
   onShare?: (sharingMedium: string) => void
+  offset?: number
 }
 
 interface TShareButtonTokens extends TToken {
@@ -15,6 +16,7 @@ interface TShareButtonTokens extends TToken {
 
 export interface TIconsContainerProps extends Omit<TShareButtonProps, 'ariaLabel' | 'icon'> {
   isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
 }
 
 export interface TShareButtonLink {
