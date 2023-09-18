@@ -146,8 +146,10 @@ module.exports = {
         addVariant('aria-disabled', `&[aria-disabled='true']`)
         matchUtilities({
           'focus-ring': (color) => ({
-            '&:focus, &:focus-visible': {
-              outline: 'none',
+            '&, & *': {
+              '&:focus, &:focus-visible': {
+                outline: 'none',
+              },
             },
             '&.has-focus-ring': {
               'outline-offset': '2px',
