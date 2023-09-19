@@ -1,51 +1,14 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import { ArgTypes } from '@storybook/blocks'
-import ShareButton from './index'
-import LinkedIn from '../icons/LinkedIn'
+import ShareButtonExample from '../../storybook/ShareButtonExample'
 
 <Meta
   title="Base Components/Share Button"
-  component={ShareButton}
+  component={ShareButtonExample}
   onShare={() => console.log('shared')}
-  args={{
-    id: 'sharing-buttons',
-    icon: 'Share',
-    sharingLinksList: [
-      {
-        ariaLabel: 'Share on Facebook',
-        icon: 'FacebookRounded',
-        key: 'facebook',
-      },
-      {
-        ariaLabel: 'Share on Twitter',
-        icon: 'Twitter',
-        key: 'twitter',
-      },
-      {
-        ariaLabel: 'Share on Instagram',
-        icon: 'Instagram',
-        key: 'instagram',
-      },
-      {
-        ariaLabel: 'Share on YouTube',
-        icon: 'YouTube',
-        key: 'youtube',
-      },
-      {
-        ariaLabel: 'Share on X',
-        icon: 'X',
-        key: 'x',
-      },
-      {
-        ariaLabel: 'Share on LinkedIn',
-        icon: <LinkedIn />,
-        key: 'linkedin',
-      },
-    ],
-  }}
 />
 
-export const Template = (args) => <ShareButton {...args} />
+export const Template = (args) => <ShareButtonExample {...args} />
 
 # ShareButton
 

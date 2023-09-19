@@ -20,7 +20,7 @@ export interface TIconsContainerProps extends Omit<TShareButtonProps, 'ariaLabel
 
 export interface TShareButtonLink {
   ariaLabel: string
-  icon: string
+  icon?: React.ReactNode
   key: string
   onClick?: (linkKey: string) => void
   href?: string

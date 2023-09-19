@@ -21,15 +21,12 @@ export const IconsContainer = (props: TIconsContainerProps) => {
             themeName={`${themeName}.link`}
             tokens={{ ...tokens, isOpen }}
             key={key}
-            as="a"
             handlePress={() => {
               onShare?.(key)
               onClick?.(key)
             }}
             aria-label={ariaLabel}
-            target="_blank"
-            rel="noopener noreferrer"
-            href={href}
+            {...(href ? { href, rel: 'noopener noreferrer', target: '_blank', as: 'a' } : {})}
             role="option"
           >
             <Icon themeName={`${themeName}.linkIcons`} icon={icon} />
