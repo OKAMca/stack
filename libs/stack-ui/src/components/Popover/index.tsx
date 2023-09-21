@@ -2,7 +2,7 @@
 
 /* eslint-disable react/display-name */
 import type { FocusableElement } from '@react-types/shared'
-import type { LegacyRef, RefObject } from 'react'
+import type { RefObject } from 'react'
 import React from 'react'
 import {
   DismissButton,
@@ -18,11 +18,12 @@ import {
 } from 'react-aria'
 import { useOverlayTriggerState } from 'react-stately'
 import useThemeContext from '../../providers/Theme/hooks'
+import { BoxWithForwardRef } from '../Box'
 import { ButtonWithForwardRef } from '../Button'
 import type { IPopoverProps, TPopoverButtonProps } from './interface'
 
-const Popover = React.forwardRef((props: IPopoverProps, ref) => {
-  const { isOpen, onClose, children, style, themeName = 'popover', tokens, customTheme } = props
+const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLElement>) => {
+  const { isOpen, onClose, children, positionProps, themeName = 'popover', tokens, customTheme } = props
 
   // Handle events that should cause the popup to close,
   // e.g. blur, clicking outside, or pressing the escape key.
@@ -45,17 +46,17 @@ const Popover = React.forwardRef((props: IPopoverProps, ref) => {
   // to allow screen reader users to dismiss the popup easily.
   return (
     <FocusScope autoFocus restoreFocus contain>
-      <div
+      <BoxWithForwardRef
         className={theme}
         {...mergeProps(overlayProps, modalProps, dialogProps)}
-        ref={ref as LegacyRef<HTMLDivElement>}
-        style={style}
+        ref={ref}
+        {...positionProps}
       >
         {React.Children.map(children, (child) => (
           <FocusRing focusRingClass="has-focus-ring">{child}</FocusRing>
         ))}
         <DismissButton onDismiss={onClose} />
-      </div>
+      </BoxWithForwardRef>
     </FocusScope>
   )
 })
@@ -99,7 +100,7 @@ function PopoverButton(props: TPopoverButtonProps) {
             tokens={tokens}
             customTheme={customTheme}
             {...overlayProps}
-            {...positionProps}
+            positionProps={positionProps}
             ref={overlayRef}
             isOpen={state.isOpen}
             onClose={state.close}
