@@ -16,7 +16,7 @@ export interface IPopoverProps extends TDefaultComponent {
   isOpen: boolean
   onClose: () => void
   children: React.ReactElement | React.ReactElement[]
-  style?: CSSProperties
+  positionProps: DOMAttributes
 }
 
 export type TPopoverProps = DOMAttributes & IPopoverProps
