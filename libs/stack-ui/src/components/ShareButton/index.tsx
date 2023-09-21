@@ -42,8 +42,7 @@ export const IconsContainer = (props: TIconsContainerProps) => {
   }
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div className={linksListTheme} id={id} onKeyDown={handleKeyDown}>
+    <div className={linksListTheme} id={id} role="listbox" tabIndex={0} onKeyDown={handleKeyDown}>
       {sharingLinksList?.map((link) => {
         const { ariaLabel, onClick, href, icon, key } = link
 
