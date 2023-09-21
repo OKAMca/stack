@@ -2,7 +2,6 @@
 
 import { FocusRing } from '@react-aria/focus'
 import useThemeContext from '../../providers/Theme/hooks'
-import { BoxWithForwardRef } from '../Box'
 import { ButtonWithForwardRef } from '../Button'
 import Icon from '../Icon'
 import Modal from '../Modal'
