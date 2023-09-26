@@ -42,7 +42,7 @@ export const IconsContainer = (props: TIconsContainerProps) => {
   }
 
   return (
-    <div className={linksListTheme} id={id} role="listbox" tabIndex={0} onKeyDown={handleKeyDown}>
+    <div className={linksListTheme} id={id} role="listbox" tabIndex={-1} onKeyDown={handleKeyDown}>
       {sharingLinksList?.map((link) => {
         const { ariaLabel, onClick, href, icon, key } = link
 
