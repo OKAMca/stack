@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/OKAMca/stack/compare/core-lib-v1.3.0...core-lib-v1.4.0) (2023-09-26)
+
+
+### Features
+
+* focus on clickable elements ([d0c651a](https://github.com/OKAMca/stack/commit/d0c651a55ee65c97a87b266a218a19263d364781))
+
 # [1.3.0](https://github.com/OKAMca/stack/compare/core-lib-v1.2.0...core-lib-v1.3.0) (2023-09-05)
 
 

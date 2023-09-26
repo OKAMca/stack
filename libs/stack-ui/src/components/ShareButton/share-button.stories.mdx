@@ -20,21 +20,6 @@ export const Template = (args) => <ShareButtonExample {...args} />
 
 ## Showcase
 
-## Row share button
-
-<Canvas>
-  <Story
-    name="Row Share Button"
-    args={{
-      tokens: {
-        listDirection: 'row',
-      },
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
 ## Column share button
 
 <Canvas>
@@ -43,6 +28,22 @@ export const Template = (args) => <ShareButtonExample {...args} />
     args={{
       tokens: {
         listDirection: 'column',
+      },
+      offset: 20,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Row share button
+
+<Canvas>
+  <Story
+    name="Row Share Button"
+    args={{
+      tokens: {
+        listDirection: 'row',
       },
     }}
   >

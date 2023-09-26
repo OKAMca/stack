@@ -30,10 +30,11 @@ import {
   datePickerCalendarPopoverUnderlay,
   datePickerContainer,
   datePickerDateField,
+  datePickerDateSegment,
   datePickerIcon,
   datePickerLabel,
 } from './DatePicker'
-import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel } from './LightBox'
+import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
 import {
   shareButton,
   shareButtonContainer,
@@ -75,9 +76,14 @@ const BaseTheme = makeTheme({
     button: (props) => datePickerButton(props),
     icon: (props) => datePickerIcon(props),
     dateField: (props) => datePickerDateField(props),
+    dateSegment: (props) => datePickerDateSegment(props),
     label: (props) => datePickerLabel(props),
     calendarPopover: (props) => datePickerCalendarPopoverContainer(props),
     calendarUnderlay: (props) => datePickerCalendarPopoverUnderlay(props),
+  },
+  popover: {
+    button: (props) => button(props),
+    popover: () => 'border-2 text-black p-4',
   },
   typography: (props) => typography(props),
   button: (props) => button(props),
@@ -87,6 +93,7 @@ const BaseTheme = makeTheme({
     innerContainer: (props) => sidePanelInnerContainer(props),
   },
   lightBox: {
+    wrapper: (props) => lightBoxWrapper(props),
     container: (props) => lightBoxContainer(props),
     closeBtn: (props) => lightBoxCloseBtn(props),
     label: (props) => lightBoxLabel(props),
@@ -107,12 +114,16 @@ const BaseTheme = makeTheme({
   },
   select: {
     button: (props) => button(props),
-    ul: (props) => typography({ ...props, className: 'my-4 rounded-md border w-full flex flex-col gap-6' }),
+    ul: (props) =>
+      typography({
+        ...props,
+        className: 'outline outline-2 outline-white outline-offset-2 p-2 my-4 rounded-md w-full flex flex-col gap-6',
+      }),
     popover: (props) => button(props),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
     wrapper: () => 'flex flex-col gap-4 relative',
     container: () => 'flex flex-col gap-4',
-    li: () => 'transition w-full hover:text-gray-300',
+    li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
   },
   textarea: {
     wrapper: () => 'flex flex-col',
@@ -123,7 +134,7 @@ const BaseTheme = makeTheme({
   },
   textInput: {
     wrapper: () =>
-      `flex flex-col rounded-md px-4 py-1 mb-3 m-0.5 outline aria-disabled:pointer-events-none aria-disabled:opacity-30`,
+      `flex flex-col rounded-md px-4 py-1 mb-3 m-0.5 border-2 aria-disabled:pointer-events-none aria-disabled:opacity-30 focus-ring-black`,
     label: () => 'text-xs',
     container: () => 'flex items-center gap-4',
     input: () => '',

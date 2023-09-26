@@ -1,5 +1,6 @@
 'use client'
 
+import { FocusRing } from '@react-aria/focus'
 import useThemeContext from '../../providers/Theme/hooks'
 import { ButtonWithForwardRef } from '../Button'
 import Icon from '../Icon'
@@ -31,14 +32,21 @@ const Lightbox = (props: LightboxProps) => {
 
   return (
     <div>
-      <div ref={openButtonRef} {...openButtonProps} {...(isOpen ? { tabIndex: -1 } : {})}>
-        {label && (
-          <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }}>
-            {label}
-          </Typography>
-        )}
-        {thumbnailContent}
-      </div>
+      <FocusRing focusRingClass="has-focus-ring" within>
+        <ButtonWithForwardRef
+          ref={openButtonRef}
+          themeName={`${themeName}.wrapper`}
+          {...openButtonProps}
+          {...(isOpen ? { tabIndex: -1 } : {})}
+        >
+          {label && (
+            <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }}>
+              {label}
+            </Typography>
+          )}
+          {thumbnailContent}
+        </ButtonWithForwardRef>
+      </FocusRing>
       <Modal onCloseCallBack={onCloseCallBack} state={state}>
         <div>
           <ButtonWithForwardRef

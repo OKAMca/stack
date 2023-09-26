@@ -46,7 +46,7 @@ const TextArea = (props: TTextAreaProps) => {
           </label>
         )}
         <div className={container}>
-          <FocusRing focusRingClass="focus-ring">
+          <FocusRing focusRingClass="has-focus-ring">
             <textarea
               ref={(e) => {
                 fieldRef?.(e)

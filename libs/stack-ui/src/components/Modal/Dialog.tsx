@@ -1,5 +1,5 @@
 import React from 'react'
-import { FocusScope, useDialog, useModal, useOverlay } from 'react-aria'
+import { FocusRing, FocusScope, useDialog, useModal, useOverlay } from 'react-aria'
 import type { ModalDialogProps } from '../Lightbox/interface'
 
 const ModalDialog = (props: ModalDialogProps) => {
@@ -19,11 +19,13 @@ const ModalDialog = (props: ModalDialogProps) => {
 
   return (
     <div {...underlayProps}>
-      <FocusScope contain restoreFocus autoFocus>
-        <div {...overlayProps} {...dialogProps} {...modalProps} ref={ref}>
-          {children}
-        </div>
-      </FocusScope>
+      <FocusRing focusRingClass="has-focus-ring" within autoFocus>
+        <FocusScope contain restoreFocus autoFocus>
+          <div {...overlayProps} {...dialogProps} {...modalProps} ref={ref}>
+            {children}
+          </div>
+        </FocusScope>
+      </FocusRing>
     </div>
   )
 }
