@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.8.1...stack-ui-v1.9.0) (2023-09-26)
+
+
+### Features
+
+* focus on clickable elements ([d0c651a](https://github.com/OKAMca/stack/commit/d0c651a55ee65c97a87b266a218a19263d364781))
+
 ## [1.8.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.8.0...stack-ui-v1.8.1) (2023-09-12)
 
 
