@@ -5,7 +5,7 @@ export const datePickerContainer = tv({
 })
 
 export const datePickerButton = tv({
-  base: 'flex items-center border-2 border-color-1-500 rounded',
+  base: 'flex items-center border-2 border-color-1-500 rounded focus-ring-black',
 })
 
 export const datePickerCalendarPopoverUnderlay = tv({
@@ -27,6 +27,10 @@ export const datePickerDateField = tv({
       false: 'hidden',
     },
   },
+})
+
+export const datePickerDateSegment = tv({
+  base: 'focus-ring-black',
 })
 
 export const datePickerIcon = tv({

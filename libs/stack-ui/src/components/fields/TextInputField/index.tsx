@@ -40,16 +40,17 @@ const TextInputField = (props: TTextInputProps) => {
 
   return (
     <div>
-      <div aria-disabled={disabled} className={wrapper}>
-        {label && (
-          // eslint-disable-next-line jsx-a11y/label-has-associated-control
-          <label className={labelTheme} {...labelProps}>
-            {label}
-          </label>
-        )}
-        <div className={container}>
-          {children}
-          <FocusRing focusRingClass="focus-ring">
+      <FocusRing focusRingClass="has-focus-ring" within>
+        <div aria-disabled={disabled} className={wrapper}>
+          {label && (
+            // eslint-disable-next-line jsx-a11y/label-has-associated-control
+            <label className={labelTheme} {...labelProps}>
+              {label}
+            </label>
+          )}
+          <div className={container}>
+            {children}
+
             <input
               {...(inputProps as object)}
               className={input}
@@ -66,9 +67,9 @@ const TextInputField = (props: TTextInputProps) => {
               onChange={onChange}
               type={type}
             />
-          </FocusRing>
+          </div>
         </div>
-      </div>
+      </FocusRing>
       {errorMessage && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={inputTokens} {...errorMessageProps}>
           {errorMessage}

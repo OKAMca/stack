@@ -14,27 +14,31 @@ import ShareButton from './index'
         ariaLabel: 'Share on Facebook',
         icon: 'Facebook',
         key: 'facebook',
+        href: '#',
       },
       {
         ariaLabel: 'Share on Twitter',
         icon: 'Twitter',
         key: 'twitter',
+        href: '#',
       },
       {
         ariaLabel: 'Share on Instagram',
         icon: 'Instagram',
         key: 'instagram',
+        href: '#',
       },
       {
         ariaLabel: 'Share on YouTube',
         icon: 'YouTube',
         key: 'youtube',
+        href: '#',
       },
     ],
   }}
 />
 
-export const Template = (args) => <ShareButton {...args} />
+export const Template = (args) => <div className={`flex flex-col m-auto h-screen justify-center items-center`}><ShareButton {...args} /></div>
 
 # ShareButton
 
@@ -46,21 +50,6 @@ export const Template = (args) => <ShareButton {...args} />
 
 ## Showcase
 
-## Row share button
-
-<Canvas>
-  <Story
-    name="Row Share Button"
-    args={{
-      tokens: {
-        listDirection: 'row',
-      },
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
 ## Column share button
 
 <Canvas>
@@ -69,6 +58,22 @@ export const Template = (args) => <ShareButton {...args} />
     args={{
       tokens: {
         listDirection: 'column',
+      },
+      offset: 20,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Row share button
+
+<Canvas>
+  <Story
+    name="Row Share Button"
+    args={{
+      tokens: {
+        listDirection: 'row',
       },
     }}
   >
