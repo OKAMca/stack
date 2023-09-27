@@ -42,7 +42,7 @@ export const IconsContainer = (props: TIconsContainerProps) => {
   }
 
   return (
-    <div className={linksListTheme} id={id} role="listbox" tabIndex={0} onKeyDown={handleKeyDown}>
+    <div className={linksListTheme} id={id} role="listbox" tabIndex={-1} onKeyDown={handleKeyDown}>
       {sharingLinksList?.map((link) => {
         const { ariaLabel, onClick, href, icon, key } = link
 
@@ -51,15 +51,12 @@ export const IconsContainer = (props: TIconsContainerProps) => {
             key={key}
             themeName={`${themeName}.link`}
             tokens={{ ...tokens, isOpen }}
-            as="a"
             handlePress={() => {
               onShare?.(key)
               onClick?.(key)
             }}
             aria-label={ariaLabel}
-            target="_blank"
-            rel="noopener noreferrer"
-            href={href}
+            {...(href ? { href, rel: 'noopener noreferrer', target: '_blank', as: 'a' } : {})}
             role="option"
           >
             <Icon themeName={`${themeName}.linkIcons`} icon={icon} />
