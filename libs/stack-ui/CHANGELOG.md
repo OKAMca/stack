@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.9.0...stack-ui-v1.9.1) (2023-09-27)
+
+
+### Bug Fixes
+
+* add missing social media icons ([b45ecf0](https://github.com/OKAMca/stack/commit/b45ecf0618fbdbde7a7c2379121e6777ba8a07ec))
+
 # [1.9.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.8.1...stack-ui-v1.9.0) (2023-09-26)
 
 
