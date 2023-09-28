@@ -83,7 +83,7 @@ const BaseTheme = makeTheme({
   },
   popover: {
     button: (props) => button(props),
-    popover: () => 'border-2 text-black p-4',
+    popover: () => 'border-2 text-black p-4 bg-gray-300',
   },
   typography: (props) => typography(props),
   button: (props) => button(props),
