@@ -1,3 +1,4 @@
+import type React from 'react'
 import type { Noop, RefCallBack } from 'react-hook-form'
 import type { TDefaultComponent } from '../../../types/components'
 
@@ -14,6 +15,7 @@ export interface TCheckboxProps extends TDefaultComponent {
   onBlur?: Noop
   onChange?: () => void
   inputRef?: RefCallBack
+  icon?: React.ReactNode
 }
 
 export interface TCheckboxLabelStyles {

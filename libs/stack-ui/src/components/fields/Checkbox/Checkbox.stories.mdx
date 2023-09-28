@@ -1,6 +1,7 @@
 {/* Checkbox.stories.mdx */}
 import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import Checkbox from './index'
+import Check from '../../icons/Check'
 
 <Meta
   title="Form/Fields/Checkbox"
@@ -9,7 +10,7 @@ import Checkbox from './index'
     id: 'checkbox',
     label: 'This is a checkbox label',
     name: 'checkbox',
-    ariaLabel: 'checkbox',
+    ariaLabel: 'checkbox-label',
   }}
 />
 
@@ -21,6 +22,17 @@ Checkbox component.
 
 <Canvas>
   <Story name="Default">{Template.bind({})}</Story>
+</Canvas>
+
+<Canvas>
+  <Story 
+    name="With icon"
+    args={{
+      icon: <Check />
+    }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 <Canvas>
