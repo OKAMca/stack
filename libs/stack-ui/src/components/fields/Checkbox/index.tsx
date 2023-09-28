@@ -38,11 +38,11 @@ const Checkbox = (props: TCheckboxProps) => {
   return (
     <div>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <label htmlFor={id} className={labelTheme}>
+        <label htmlFor={id} className={labelTheme} aria-label={ariaLabel}>
           <VisuallyHidden>
-            <input type="checkbox" ref={ref} aria-label={ariaLabel} {...mergeProps(focusProps, inputProps)} />
+            <input type="checkbox" ref={ref} aria-labelledby={id} {...inputProps} {...focusProps} />
           </VisuallyHidden>
-          <div className={checkBoxTheme} aria-checked={isSelected} role="checkbox" aria-label={ariaLabel}>
+          <div className={checkBoxTheme} aria-checked={isSelected} role="checkbox" aria-labelledby={id}>
             <div className={checkMarkTheme}>
               {icon && <Icon icon={icon} themeName={`${themeName}.checkMarkIcon`} />}
             </div>
