@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.9.1...stack-ui-v1.9.2) (2023-09-28)
+
+
+### Bug Fixes
+
+* classname -> custom theme ([f10e418](https://github.com/OKAMca/stack/commit/f10e4180144eccab39a77f6e410646c8ff6d28f8))
+
 ## [1.9.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.9.0...stack-ui-v1.9.1) (2023-09-27)
 
 
