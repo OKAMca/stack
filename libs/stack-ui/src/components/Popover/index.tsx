@@ -47,7 +47,7 @@ const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLEleme
   return (
     <FocusScope autoFocus restoreFocus contain>
       <BoxWithForwardRef
-        className={theme}
+        customTheme={theme}
         {...mergeProps(overlayProps, modalProps, dialogProps)}
         ref={ref}
         {...positionProps}
