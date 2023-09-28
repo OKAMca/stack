@@ -7,7 +7,6 @@ import Check from '../../icons/Check'
   title="Form/Fields/Checkbox"
   component={Checkbox}
   args={{
-    id: 'checkbox',
     label: 'This is a checkbox label',
     name: 'checkbox',
     ariaLabel: 'checkbox-label',
@@ -21,13 +20,21 @@ export const Template = (args) => <Checkbox {...args} />
 Checkbox component.
 
 <Canvas>
-  <Story name="Default">{Template.bind({})}</Story>
+  <Story
+    name="Default"
+    args={{
+      id: 'checkbox-1'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 <Canvas>
   <Story 
     name="With icon"
     args={{
+      id: 'checkbox-2',
       icon: <Check />
     }}
   >
@@ -39,6 +46,7 @@ Checkbox component.
   <Story
     name="Disabled"
     args={{
+      id: 'checkbox-3',
       isDisabled: true,
     }}
   >
@@ -50,6 +58,7 @@ Checkbox component.
   <Story
     name="Error"
     args={{
+      id: 'checkbox-4',
       isError: true,
       errorMessage: 'This is an error message',
     }}

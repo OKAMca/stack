@@ -25,7 +25,7 @@ export const checkBox = tv({
 })
 
 export const checkMark = tv({
-  base: `hidden w-5 h-5 bg-gray-300 rounded-full`,
+  base: `hidden w-4 h-4 bg-gray-300 rounded-full`,
   variants: {
     selected: {
       true: 'block text-white',
@@ -34,5 +34,5 @@ export const checkMark = tv({
 })
 
 export const checkMarkIcon = tv({
-  base: 'text-white w-5 h-5 [&_svg]:w-5 [&_svg]:h-5',
+  base: 'text-white w-4 h-4 [&_svg]:w-4 [&_svg]:h-4',
 })
