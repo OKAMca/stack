@@ -45,7 +45,7 @@ const Checkbox = (props: TCheckboxProps) => {
           <div className={checkBoxTheme} aria-checked={isSelected} role="checkbox" aria-labelledby={id}>
             <div className={checkMarkTheme}>{icon && <Icon icon={icon} customTheme={checkMarkIconTheme} />}</div>
           </div>
-          <span>{label}</span>
+          <Typography themeName={`${themeName}.label`}>{label}</Typography>
         </label>
       </FocusRing>
       {isError && errorMessage && (
