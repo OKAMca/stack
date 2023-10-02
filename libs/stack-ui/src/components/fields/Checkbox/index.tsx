@@ -38,7 +38,7 @@ const Checkbox = (props: TCheckboxProps) => {
   return (
     <div>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <label htmlFor={id} className={labelTheme} aria-label={ariaLabel}>
+        <label htmlFor={id} className={labelTheme} aria-label={ariaLabel} aria-disabled={isDisabled}>
           <VisuallyHidden>
             <input type="checkbox" ref={ref} aria-labelledby={id} {...inputProps} {...focusProps} />
           </VisuallyHidden>
