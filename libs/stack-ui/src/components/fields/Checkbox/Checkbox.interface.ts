@@ -13,7 +13,7 @@ export interface TCheckboxProps extends TDefaultComponent {
   ariaLabel?: string
   value?: string
   onBlur?: Noop
-  onChange?: () => void
+  onChange?: (isSelected: boolean) => void
   inputRef?: RefCallBack
   icon?: React.ReactNode
 }
