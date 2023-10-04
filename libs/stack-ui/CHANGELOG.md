@@ -1,3 +1,10 @@
+## [1.9.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.9.2...stack-ui-v1.9.3) (2023-10-04)
+
+
+### Bug Fixes
+
+* bump version ([5a24119](https://github.com/OKAMca/stack/commit/5a24119815506b36e9ddbed06bba7e7570e543f2))
+
 ## [1.9.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.9.1...stack-ui-v1.9.2) (2023-09-28)
 
 
