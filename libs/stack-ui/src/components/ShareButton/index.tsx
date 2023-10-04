@@ -1,5 +1,6 @@
 'use client'
 
+import type { PressEvent } from '@react-types/shared'
 import React, { useState } from 'react'
 import { FocusScope, useFocusManager } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
@@ -85,13 +86,61 @@ const ShareButton = (props: TShareButtonProps) => {
 
   const containerTheme = useThemeContext(`${themeName}.container`, tokens, customTheme)
 
-  const handleClick = () => {
+  const handleClick = (e: PressEvent) => {
     setIsOpen(!isOpen)
+    if (isOpen) {
+      return
+    }
+    setTimeout(() => {
+      const firstOption = e.target.parentElement?.lastChild?.firstChild as HTMLElement
+      firstOption?.focus()
+    })
+  }
+
+  const handleKeyDown: React.KeyboardEventHandler = (e) => {
+    const openShareButton = e.currentTarget.firstChild as HTMLElement
+    const listBox = e.currentTarget.lastChild as HTMLElement
+    const firstOption = listBox.firstChild as HTMLElement
+
+    const lastOption = listBox.lastChild as HTMLElement
+
+    const { listDirection } = tokens ?? {}
+
+    if (listDirection === 'row') {
+      if (e.key === 'ArrowRight' && e.target === openShareButton) {
+        firstOption?.focus()
+        e.preventDefault()
+      }
+      if (e.key === 'ArrowLeft' && e.target === openShareButton) {
+        lastOption.focus()
+        e.preventDefault()
+      }
+    }
+
+    if (listDirection === 'column') {
+      if (e.key === 'ArrowDown' && e.target === openShareButton) {
+        firstOption?.focus()
+        e.preventDefault()
+      }
+      if (e.key === 'ArrowUp' && e.target === openShareButton) {
+        lastOption.focus()
+        e.preventDefault()
+      }
+    }
+
+    if (e.key === 'Escape') {
+      setIsOpen(false)
+      openShareButton?.focus()
+    }
+    if (document.activeElement === listBox) {
+      openShareButton?.focus()
+    }
   }
 
   return (
     <FocusScope autoFocus restoreFocus contain={isOpen}>
-      <div className={containerTheme}>
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+      <div className={containerTheme} onKeyDown={handleKeyDown}>
         <ButtonWithForwardRef
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, isOpen }}
