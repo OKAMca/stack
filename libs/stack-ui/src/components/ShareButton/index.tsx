@@ -19,6 +19,7 @@ export const IconsContainer = (props: TIconsContainerProps) => {
       setIsOpen(false)
     }
     const { listDirection } = tokens ?? {}
+
     if (listDirection === 'row') {
       if (e.key === 'ArrowRight') {
         focusManager.focusNext({ wrap: true })
@@ -89,21 +90,21 @@ const ShareButton = (props: TShareButtonProps) => {
   }
 
   return (
-    <div className={containerTheme}>
-      <ButtonWithForwardRef
-        themeName={`${themeName}.button`}
-        tokens={{ ...tokens, isOpen }}
-        aria-label={ariaLabel}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen ? 'true' : 'false'}
-        aria-controls="share-buttons"
-        handlePress={handleClick}
-        {...rest}
-      >
-        <Icon themeName={`${themeName}.icon`} icon={icon ?? 'Share'} />
-      </ButtonWithForwardRef>
-      {isOpen && (
-        <FocusScope autoFocus restoreFocus contain>
+    <FocusScope autoFocus restoreFocus contain={isOpen}>
+      <div className={containerTheme}>
+        <ButtonWithForwardRef
+          themeName={`${themeName}.button`}
+          tokens={{ ...tokens, isOpen }}
+          aria-label={ariaLabel}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen ? 'true' : 'false'}
+          aria-controls="share-buttons"
+          handlePress={handleClick}
+          {...rest}
+        >
+          <Icon themeName={`${themeName}.icon`} icon={icon ?? 'Share'} />
+        </ButtonWithForwardRef>
+        {isOpen && (
           <IconsContainer
             id={id}
             sharingLinksList={sharingLinksList}
@@ -114,9 +115,9 @@ const ShareButton = (props: TShareButtonProps) => {
             customTheme={customTheme}
             tokens={tokens}
           />
-        </FocusScope>
-      )}
-    </div>
+        )}
+      </div>
+    </FocusScope>
   )
 }
 export default ShareButton
