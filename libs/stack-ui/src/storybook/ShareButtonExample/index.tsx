@@ -1,15 +1,18 @@
 import { useCopyToClipboard } from 'usehooks-ts'
 import LinkedIn from '../../components/icons/LinkedIn'
 import ShareButton from '../../components/ShareButton'
+import type { TShareButtonProps } from '../../components/ShareButton/interface'
 import Typography from '../../components/Typography'
 
-const ShareButtonExample = () => {
+const ShareButtonExample = (props: TShareButtonProps) => {
+  const { tokens } = props
   const [value, copy] = useCopyToClipboard()
   return (
     <>
       <ShareButton
         id="share"
         ariaLabel="Share"
+        tokens={tokens}
         sharingLinksList={[
           {
             ariaLabel: 'Share on Facebook',
