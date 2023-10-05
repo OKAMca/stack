@@ -23,7 +23,7 @@ import { ButtonWithForwardRef } from '../Button'
 import type { IPopoverProps, TPopoverButtonProps } from './interface'
 
 const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLElement>) => {
-  const { isOpen, onClose, children, positionProps, themeName = 'popover', tokens, customTheme } = props
+  const { isOpen, onClose, children, positionProps, themeName = 'popover', tokens, customTheme, ...rest } = props
 
   // Handle events that should cause the popup to close,
   // e.g. blur, clicking outside, or pressing the escape key.
@@ -51,6 +51,7 @@ const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLEleme
         {...mergeProps(overlayProps, modalProps, dialogProps)}
         ref={ref}
         {...positionProps}
+        {...rest}
       >
         {React.Children.map(children, (child) => (
           <FocusRing focusRingClass="has-focus-ring">{child}</FocusRing>
