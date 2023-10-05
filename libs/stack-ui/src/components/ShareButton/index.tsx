@@ -1,5 +1,6 @@
 'use client'
 
+import type { PressEvent } from '@react-types/shared'
 import React, { useState } from 'react'
 import { FocusScope, useFocusManager } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
@@ -19,6 +20,7 @@ export const IconsContainer = (props: TIconsContainerProps) => {
       setIsOpen(false)
     }
     const { listDirection } = tokens ?? {}
+
     if (listDirection === 'row') {
       if (e.key === 'ArrowRight') {
         focusManager.focusNext({ wrap: true })
@@ -84,26 +86,74 @@ const ShareButton = (props: TShareButtonProps) => {
 
   const containerTheme = useThemeContext(`${themeName}.container`, tokens, customTheme)
 
-  const handleClick = () => {
+  const handleClick = (e: PressEvent) => {
     setIsOpen(!isOpen)
+    if (isOpen) {
+      return
+    }
+    setTimeout(() => {
+      const firstOption = e.target.parentElement?.lastChild?.firstChild as HTMLElement
+      firstOption?.focus()
+    })
+  }
+
+  const handleKeyDown: React.KeyboardEventHandler = (e) => {
+    const openShareButton = e.currentTarget.firstChild as HTMLElement
+    const listBox = e.currentTarget.lastChild as HTMLElement
+    const firstOption = listBox.firstChild as HTMLElement
+
+    const lastOption = listBox.lastChild as HTMLElement
+
+    const { listDirection } = tokens ?? {}
+
+    if (listDirection === 'row') {
+      if (e.key === 'ArrowRight' && e.target === openShareButton) {
+        firstOption?.focus()
+        e.preventDefault()
+      }
+      if (e.key === 'ArrowLeft' && e.target === openShareButton) {
+        lastOption.focus()
+        e.preventDefault()
+      }
+    }
+
+    if (listDirection === 'column') {
+      if (e.key === 'ArrowDown' && e.target === openShareButton) {
+        firstOption?.focus()
+        e.preventDefault()
+      }
+      if (e.key === 'ArrowUp' && e.target === openShareButton) {
+        lastOption.focus()
+        e.preventDefault()
+      }
+    }
+
+    if (e.key === 'Escape') {
+      setIsOpen(false)
+      openShareButton?.focus()
+    }
+    if (document.activeElement === listBox) {
+      openShareButton?.focus()
+    }
   }
 
   return (
-    <div className={containerTheme}>
-      <ButtonWithForwardRef
-        themeName={`${themeName}.button`}
-        tokens={{ ...tokens, isOpen }}
-        aria-label={ariaLabel}
-        aria-haspopup="listbox"
-        aria-expanded={isOpen ? 'true' : 'false'}
-        aria-controls="share-buttons"
-        handlePress={handleClick}
-        {...rest}
-      >
-        <Icon themeName={`${themeName}.icon`} icon={icon ?? 'Share'} />
-      </ButtonWithForwardRef>
-      {isOpen && (
-        <FocusScope autoFocus restoreFocus contain>
+    <FocusScope autoFocus restoreFocus contain={isOpen}>
+      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+      <div className={containerTheme} onKeyDown={handleKeyDown}>
+        <ButtonWithForwardRef
+          themeName={`${themeName}.button`}
+          tokens={{ ...tokens, isOpen }}
+          aria-label={ariaLabel}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen ? 'true' : 'false'}
+          aria-controls="share-buttons"
+          handlePress={handleClick}
+          {...rest}
+        >
+          <Icon themeName={`${themeName}.icon`} icon={icon ?? 'Share'} />
+        </ButtonWithForwardRef>
+        {isOpen && (
           <IconsContainer
             id={id}
             sharingLinksList={sharingLinksList}
@@ -114,9 +164,9 @@ const ShareButton = (props: TShareButtonProps) => {
             customTheme={customTheme}
             tokens={tokens}
           />
-        </FocusScope>
-      )}
-    </div>
+        )}
+      </div>
+    </FocusScope>
   )
 }
 export default ShareButton
