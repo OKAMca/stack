@@ -1,11 +1,18 @@
 import { tv } from 'tailwind-variants'
 
 export const checkboxLabel = tv({
-  base: `text-gray-2 flex flex-row items-start hover:cursor-pointer focus-ring-black`,
+  base: `flex flex-row items-start hover:cursor-pointer focus-ring-black`,
   variants: {
+    color: {
+      gray: 'text-gray-300',
+      black: 'text-black',
+    },
     isDisabled: {
       true: 'text-gray-6',
     },
+  },
+  defaultVariants: {
+    color: 'black',
   },
 })
 
