@@ -30,7 +30,7 @@ const Checkbox = (props: TCheckboxProps) => {
   const { focusProps, isFocusVisible } = useFocusRing()
 
   const checkBoxTokens = { ...tokens, selected: isSelected, isDisabled, isError, isFocusVisible }
-  const labelTheme = useThemeContext(`${themeName}.label`, checkBoxTokens, customTheme)
+  const checkBoxContainerTheme = useThemeContext(`${themeName}.container`, checkBoxTokens, customTheme)
   const checkBoxTheme = useThemeContext(`${themeName}.checkBox`, checkBoxTokens, customTheme)
   const checkMarkTheme = useThemeContext(`${themeName}.checkMark`, checkBoxTokens, customTheme)
   const checkMarkIconTheme = useThemeContext(`${themeName}.checkMarkIcon`, checkBoxTokens, customTheme)
@@ -38,14 +38,16 @@ const Checkbox = (props: TCheckboxProps) => {
   return (
     <div>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <label htmlFor={id} className={labelTheme} aria-label={ariaLabel} aria-disabled={isDisabled}>
+        <label className={checkBoxContainerTheme} htmlFor={id} aria-label={ariaLabel} aria-disabled={isDisabled}>
           <VisuallyHidden>
             <input type="checkbox" ref={ref} aria-labelledby={id} {...inputProps} {...focusProps} />
           </VisuallyHidden>
           <div className={checkBoxTheme} aria-checked={isSelected} role="checkbox" aria-labelledby={id}>
             <div className={checkMarkTheme}>{icon && <Icon icon={icon} customTheme={checkMarkIconTheme} />}</div>
           </div>
-          <Typography>{label}</Typography>
+          <Typography themeName={`${themeName}.label`} tokens={checkBoxTokens}>
+            {label}
+          </Typography>
         </label>
       </FocusRing>
       {isError && errorMessage && (

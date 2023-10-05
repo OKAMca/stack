@@ -1,7 +1,11 @@
 import { tv } from 'tailwind-variants'
 
+export const checkboxContainer = tv({
+  base: 'flex focus-ring-black',
+})
+
 export const checkboxLabel = tv({
-  base: `flex flex-row items-start hover:cursor-pointer focus-ring-black`,
+  base: `hover:cursor-pointer`,
   variants: {
     color: {
       gray: 'text-gray-300',
