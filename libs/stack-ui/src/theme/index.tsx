@@ -23,7 +23,7 @@ import {
   calendarNavigationButtonsContainer,
   calendarTable,
 } from './Calendar'
-import { checkBox, checkMark, checkMarkIcon, checkboxLabel } from './Checkbox'
+import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
 import {
   datePickerButton,
   datePickerCalendarPopoverContainer,
@@ -107,6 +107,7 @@ const BaseTheme = makeTheme({
     linkIcons: (props) => shareButtonLinkIcons(props),
   },
   checkbox: {
+    container: (props) => checkboxContainer(props),
     label: (props) => checkboxLabel(props),
     checkBox: (props) => checkBox(props),
     checkMark: (props) => checkMark(props),
