@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import RadioGroup from './index'
+import Radio from '../Radio/index'
+import { RadioGroupProvider } from '../../../providers/RadioGroup/RadioGroup'
+
+<Meta title="Form/Fields/RadioGroup" component={RadioGroup} />
+
+export const Template = (args) => (
+  <RadioGroupProvider>
+    <RadioGroup {...args}>
+      <Radio id="item1" label="Item 1" name="Item 1" value="1" />
+      <Radio id="item2" label="Item 2" name="Item 2" value="2" />
+      <Radio id="item3" label="Item 3" name="Item 3" value="3" />
+    </RadioGroup>
+  </RadioGroupProvider>
+)
+
+# RadioGroup
+
+RadioGroup component.
+
+<Canvas>
+  <Story name="Default">{Template.bind({})}</Story>
+</Canvas>

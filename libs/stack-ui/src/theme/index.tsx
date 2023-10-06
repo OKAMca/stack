@@ -35,6 +35,7 @@ import {
   datePickerLabel,
 } from './DatePicker'
 import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
+import { radio, radioLabel, selectedMark, selectedMarkIcon } from './Radio'
 import {
   shareButton,
   shareButtonContainer,
@@ -111,6 +112,13 @@ const BaseTheme = makeTheme({
     checkBox: (props) => checkBox(props),
     checkMark: (props) => checkMark(props),
     checkMarkIcon: (props) => checkMarkIcon(props),
+    errorMessage: (props) => typography(props),
+  },
+  radio: {
+    label: (props) => radioLabel(props),
+    radio: (props) => radio(props),
+    selectedMark: (props) => selectedMark(props),
+    selectedMarkIcon: (props) => selectedMarkIcon(props),
     errorMessage: (props) => typography(props),
   },
   select: {

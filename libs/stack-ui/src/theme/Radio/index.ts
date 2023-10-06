@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants'
 
-export const checkboxLabel = tv({
-  base: `text-gray-2 flex flex-row items-start hover:cursor-pointer focus-ring-black`,
+export const radioLabel = tv({
+  base: `text-black flex flex-row items-start hover:cursor-pointer focus-ring-black`,
   variants: {
     isDisabled: {
       true: 'text-gray-6',
@@ -9,7 +9,7 @@ export const checkboxLabel = tv({
   },
 })
 
-export const checkBox = tv({
+export const radio = tv({
   base: `w-6 h-6 mt-0.5 mr-2.5 rounded-full border-2 border-gray-2 shrink-0 hover:cursor-pointer flex items-center justify-center`,
   variants: {
     isDisabled: {
@@ -24,7 +24,7 @@ export const checkBox = tv({
   },
 })
 
-export const checkMark = tv({
+export const selectedMark = tv({
   base: `hidden w-4 h-4 bg-gray-300 rounded-full`,
   variants: {
     selected: {
@@ -33,6 +33,6 @@ export const checkMark = tv({
   },
 })
 
-export const checkMarkIcon = tv({
+export const selectedMarkIcon = tv({
   base: 'text-white w-4 h-4 [&_svg]:w-4 [&_svg]:h-4',
 })
