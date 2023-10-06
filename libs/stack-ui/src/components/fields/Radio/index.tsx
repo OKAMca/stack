@@ -33,7 +33,6 @@ const Radio = (props: TRadioProps) => {
   const labelTheme = useThemeContext(`${themeName}.label`, radioTokens, customTheme)
   const radioTheme = useThemeContext(`${themeName}.radio`, radioTokens, customTheme)
   const selectedMarkTheme = useThemeContext(`${themeName}.selectedMark`, radioTokens, customTheme)
-  const selectedMarkIconTheme = useThemeContext(`${themeName}.selectedMarkIcon`, radioTokens, customTheme)
 
   return (
     <div>
@@ -43,7 +42,7 @@ const Radio = (props: TRadioProps) => {
             <input type="radio" {...mergeProps(focusProps, inputProps)} ref={ref} />
           </VisuallyHidden>
           <div className={radioTheme} aria-checked={isSelected} role="radio" aria-labelledby={id}>
-            <div className={selectedMarkTheme}>{icon && <Icon icon={icon} customTheme={selectedMarkIconTheme} />}</div>
+            <div className={selectedMarkTheme} />
           </div>
           <Typography themeName={`${themeName}.label`}>{label}</Typography>
         </label>

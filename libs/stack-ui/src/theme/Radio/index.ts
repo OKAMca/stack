@@ -32,7 +32,3 @@ export const selectedMark = tv({
     },
   },
 })
-
-export const selectedMarkIcon = tv({
-  base: 'text-white w-4 h-4 [&_svg]:w-4 [&_svg]:h-4',
-})
