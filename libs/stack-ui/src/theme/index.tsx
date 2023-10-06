@@ -36,6 +36,7 @@ import {
 } from './DatePicker'
 import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
+import { radioGroup, radioGroupItemsGroup, radioGroupLabel } from './RadioGroup'
 import {
   shareButton,
   shareButtonContainer,
@@ -118,6 +119,12 @@ const BaseTheme = makeTheme({
     label: (props) => radioLabel(props),
     radio: (props) => radio(props),
     selectedMark: (props) => selectedMark(props),
+    errorMessage: (props) => typography(props),
+  },
+  radioGroup: {
+    label: (props) => radioGroupLabel(props),
+    radioGroup: (props) => radioGroup(props),
+    radioGroupItemsGroup: (props) => radioGroupItemsGroup(props),
     errorMessage: (props) => typography(props),
   },
   select: {

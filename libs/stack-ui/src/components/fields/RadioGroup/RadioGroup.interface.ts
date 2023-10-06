@@ -1,6 +1,10 @@
-import type { RadioGroupProps } from '@react-types/radio'
 import type { ReactNode } from 'react'
+import type { TDefaultComponent } from '../../../types/components'
 
-export interface TRadioGroupProps extends RadioGroupProps {
+export interface TRadioGroupProps extends TDefaultComponent {
   children: ReactNode
+  isError: boolean
+  isDisabled: boolean
+  errorMessage?: string
+  label?: string
 }

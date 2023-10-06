@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants'
 
 export const radioLabel = tv({
-  base: `text-black flex flex-row items-start hover:cursor-pointer focus-ring-black`,
+  base: `text-black flex flex-row items-center hover:cursor-pointer focus-ring-black`,
   variants: {
     isDisabled: {
       true: 'text-gray-6',
@@ -17,9 +17,6 @@ export const radio = tv({
     },
     isFocused: {
       true: `outline-black [outline-offset: 2px]`,
-    },
-    isError: {
-      true: 'border-red-500',
     },
   },
 })

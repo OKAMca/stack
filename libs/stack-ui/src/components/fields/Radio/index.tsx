@@ -4,24 +4,11 @@ import { useRef } from 'react'
 import { useRadio, VisuallyHidden, useFocusRing, FocusRing, mergeProps } from 'react-aria'
 import { useRadioGroupCtx } from '../../../providers/RadioGroup/RadioGroup'
 import useThemeContext from '../../../providers/Theme/hooks'
-import Icon from '../../Icon'
 import Typography from '../../Typography'
 import type { TRadioProps } from './Radio.interface'
 
 const Radio = (props: TRadioProps) => {
-  const {
-    id,
-    label,
-    isDisabled = false,
-    isError = false,
-    errorMessage,
-    ariaLabel,
-    icon,
-    themeName = 'radio',
-    tokens,
-    customTheme,
-    value,
-  } = props
+  const { id, label, isDisabled = false, ariaLabel, themeName = 'radio', tokens, customTheme, value } = props
   const state = useRadioGroupCtx()
   const ref = useRef<HTMLInputElement | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -29,7 +16,7 @@ const Radio = (props: TRadioProps) => {
   const isSelected = state?.selectedValue === value
   const { focusProps } = useFocusRing()
 
-  const radioTokens = { ...tokens, selected: isSelected, isDisabled, isError }
+  const radioTokens = { ...tokens, selected: isSelected, isDisabled }
   const labelTheme = useThemeContext(`${themeName}.label`, radioTokens, customTheme)
   const radioTheme = useThemeContext(`${themeName}.radio`, radioTokens, customTheme)
   const selectedMarkTheme = useThemeContext(`${themeName}.selectedMark`, radioTokens, customTheme)
@@ -47,11 +34,6 @@ const Radio = (props: TRadioProps) => {
           <Typography themeName={`${themeName}.label`}>{label}</Typography>
         </label>
       </FocusRing>
-      {isError && errorMessage && (
-        <Typography themeName={`${themeName}.errorMessage`} tokens={radioTokens}>
-          {errorMessage}
-        </Typography>
-      )}
     </div>
   )
 }
