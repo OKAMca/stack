@@ -1,3 +1,10 @@
+## [1.9.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.9.4...stack-ui-v1.9.5) (2023-10-10)
+
+
+### Bug Fixes
+
+* package.json ([082b33b](https://github.com/OKAMca/stack/commit/082b33b2da88d8ebbfb4f83f0a0e9cd621e28a93))
+
 ## [1.9.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.9.3...stack-ui-v1.9.4) (2023-10-05)
 
 
