@@ -1,9 +1,5 @@
 import { tv } from 'tailwind-variants'
 
-export const radioGroupLabel = tv({
-  base: `text-lg`,
-})
-
 export const radioGroup = tv({
   base: `block`,
   variants: {

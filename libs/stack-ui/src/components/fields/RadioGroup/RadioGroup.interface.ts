@@ -1,10 +1,16 @@
-import type { ReactNode } from 'react'
-import type { TDefaultComponent } from '../../../types/components'
+import type React from 'react'
+import type { RefCallBack } from 'react-hook-form'
+import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
 
-export interface TRadioGroupProps extends TDefaultComponent {
-  children: ReactNode
-  isError: boolean
-  isDisabled: boolean
+export type TFieldReactHookForm = TReactHookForm & TDefaultComponent
+
+export interface TRadioGroupProps extends TFieldReactHookForm {
+  children: React.ReactNode
+  isError?: boolean
+  isDisabled?: boolean
   errorMessage?: string
   label?: string
+  fieldRef?: RefCallBack
+  required?: boolean
+  name: string
 }
