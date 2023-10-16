@@ -6,6 +6,7 @@ import { useRadioGroup } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { RadioGroupProvider } from '../../../providers/RadioGroup/RadioGroup'
+import Box from '../../Box'
 import Typography from '../../Typography'
 import type { TRadioGroupProps } from './RadioGroup.interface'
 
@@ -15,17 +16,20 @@ const RadioGroup = (props: TRadioGroupProps) => {
   const { radioGroupProps } = useRadioGroup(props, state)
 
   const radioGroupTokens = { ...tokens, isDisabled }
-  const radioGroupTheme = useThemeContext(`${themeName}.radioGroup`, radioGroupTokens)
-  const radioGroupItemsGroupTheme = useThemeContext(`${themeName}.radioGroupItemsGroup`)
 
   return (
-    <div {...radioGroupProps} aria-disabled={isDisabled} className={radioGroupTheme}>
+    <Box
+      {...radioGroupProps}
+      aria-disabled={isDisabled}
+      themeName={`${themeName}.radioGroup`}
+      tokens={radioGroupTokens}
+    >
       {label && <Typography tokens={{ size: 'h6' }}>{label}</Typography>}
-      <div className={radioGroupItemsGroupTheme}>
+      <Box themeName={`${themeName}.radioGroupItemsGroup`}>
         <RadioGroupProvider>{children}</RadioGroupProvider>
-      </div>
+      </Box>
       {isError && errorMessage && <Typography tokens={{ isError: true }}>{errorMessage}</Typography>}
-    </div>
+    </Box>
   )
 }
 
