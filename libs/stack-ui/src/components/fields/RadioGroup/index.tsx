@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { useRadioGroupState } from '@react-stately/radio'
-import useThemeContext from 'libs/stack-ui/src/providers/Theme/hooks'
 import { isEmpty } from 'lodash'
 import { useRadioGroup } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
