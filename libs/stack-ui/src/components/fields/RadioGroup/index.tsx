@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useRadioGroupState } from '@react-stately/radio'
-import { isEmpty } from 'lodash'
 import { useRadioGroup } from 'react-aria'
-import { get, useFormContext } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { RadioGroupProvider } from '../../../providers/RadioGroup/RadioGroup'
 import Box from '../../Box'
 import Typography from '../../Typography'
@@ -30,19 +27,5 @@ const RadioGroup = (props: TRadioGroupProps) => {
       {isError && errorMessage && <Typography tokens={{ isError: true }}>{errorMessage}</Typography>}
     </Box>
   )
-}
-
-export const ReactHookFormRadioGroup = (props: TRadioGroupProps) => {
-  const { name, required, validation } = props
-  const { register, formState } = useFormContext()
-  const error: Error = get(formState.errors, name)
-  const errMsg = error?.message ?? undefined
-  const { t } = useTranslation('components')
-  const { ref: refCallback, ...rest } = register(name, {
-    required: required ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
-    ...validation,
-  })
-
-  return <RadioGroup fieldRef={refCallback} {...rest} {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} />
 }
 export default RadioGroup
