@@ -1,5 +1,5 @@
 import type React from 'react'
-import type { Noop, RefCallBack } from 'react-hook-form'
+import type { ChangeHandler, RefCallBack } from 'react-hook-form'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
 
 export type TFieldReactHookForm = TReactHookForm & TDefaultComponent
@@ -14,7 +14,7 @@ export interface TRadioProps extends TFieldReactHookForm {
   errorMessage?: string
   ariaLabel?: string
   value: string
-  onChange?: (isSelected: boolean) => void
+  onChange?: ((isSelected: boolean) => void) | ChangeHandler
   inputRef?: RefCallBack
   icon?: React.ReactNode
 }

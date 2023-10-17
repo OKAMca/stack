@@ -11,7 +11,7 @@ import Typography from '../../Typography'
 import type { TRadioProps } from './Radio.interface'
 
 const Radio = (props: TRadioProps) => {
-  const { id, label, themeName = 'radio', tokens, customTheme, value } = props
+  const { id, label, themeName = 'radio', tokens, customTheme, value, fieldRef } = props
   const state = useRadioGroupCtx()
   const ref = useRef<HTMLInputElement | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -29,7 +29,14 @@ const Radio = (props: TRadioProps) => {
       <FocusRing focusRingClass="has-focus-ring" within>
         <label htmlFor={id} className={labelTheme}>
           <VisuallyHidden>
-            <input type="radio" {...mergeProps(focusProps, inputProps)} ref={ref} />
+            <input
+              type="radio"
+              {...mergeProps(focusProps, inputProps)}
+              ref={(e) => {
+                fieldRef?.(e)
+                ref.current = e
+              }}
+            />
           </VisuallyHidden>
           <div className={radioTheme} aria-checked={isSelected} role="radio" aria-labelledby={id}>
             <div className={selectedMarkTheme} />
@@ -51,6 +58,6 @@ export const ReactHookFormRadio = (props: TRadioProps) => {
     required: required ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
   })
 
-  return <Radio inputRef={refCallback} {...rest} {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} />
+  return <Radio fieldRef={refCallback} {...rest} {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} />
 }
 export default Radio
