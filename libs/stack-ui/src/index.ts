@@ -19,12 +19,15 @@ export { default as DatePicker } from './components/fields/DatePicker'
 export { default as Box, BoxWithForwardRef } from './components/Box'
 export { default as Calendar } from './components/Calendar'
 export { default as Modal } from './components/Modal'
+export { default as Radio } from './components/fields/Radio'
+export { default as RadioGroup } from './components/fields/RadioGroup'
 
 // providers
 export { makeTheme, createThemeProvider, useTheme, ThemeContextProvider } from './providers/Theme'
 export { default as useThemeContext } from './providers/Theme/hooks'
 export { useIsClient, IsClientContextProvider } from './providers/Client'
 export { useSidePanel, SidePanelContextProvider } from './providers/SidePanel'
+export { RadioGroupProvider, useRadioGroupCtx } from './providers/RadioGroup/RadioGroup'
 
 // types & interfaces
 export type { TButtonProps } from './components/Button/interface'
