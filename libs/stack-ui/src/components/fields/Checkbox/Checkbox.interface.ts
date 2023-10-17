@@ -14,7 +14,6 @@ export interface TCheckboxProps extends TDefaultComponent {
   value?: string
   onBlur?: Noop
   onChange?: (isSelected: boolean) => void
-  inputRef?: RefCallBack
   icon?: React.ReactNode
 }
 
