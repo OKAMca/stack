@@ -63,7 +63,7 @@ export default async function Index() {
         </Box>
         <Box>
           <Popover placement="bottom start" offset={0} buttonProps={{}}>
-            This is a popover
+            <div>This is a popover</div>
           </Popover>
         </Box>
         <Box>
