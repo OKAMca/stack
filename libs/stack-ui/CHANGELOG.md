@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.0...stack-ui-v1.10.1) (2023-10-17)
+
+
+### Bug Fixes
+
+* radio group type ([ed2c691](https://github.com/OKAMca/stack/commit/ed2c691d10d4bed1a31d7355a04269b0ea7913f4))
+
 # [1.10.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.9.5...stack-ui-v1.10.0) (2023-10-17)
 
 
