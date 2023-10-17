@@ -1,5 +1,5 @@
 import type React from 'react'
-import type { Noop, RefCallBack } from 'react-hook-form'
+import type { Noop } from 'react-hook-form'
 import type { TDefaultComponent } from '../../../types/components'
 
 export interface TCheckboxProps extends TDefaultComponent {
