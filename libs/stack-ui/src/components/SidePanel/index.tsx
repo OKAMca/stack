@@ -10,7 +10,15 @@ import Modal from '../Modal'
 import type { TSidePanelProps } from './interface'
 
 const SidePanel = (props: TSidePanelProps) => {
-  const { children, closeBtnRender, themeName = 'sidePanel', tokens, customTheme } = props
+  const {
+    children,
+    closeBtnRender,
+    themeName = 'sidePanel',
+    tokens,
+    TransitionAnimation = RenderWithSlide,
+    customTheme,
+    onCloseCallBack,
+  } = props
 
   const wrapperTheme = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const containerTheme = useThemeContext(`${themeName}.container`, tokens, customTheme)
@@ -19,14 +27,14 @@ const SidePanel = (props: TSidePanelProps) => {
   const { overlayState } = useSidePanel()
 
   return (
-    <Modal state={overlayState} transitionComponent={SidePanelTransition}>
+    <Modal onCloseCallBack={onCloseCallBack} state={overlayState} transitionComponent={SidePanelTransition}>
       <Div100vh className={wrapperTheme}>
         {closeBtnRender && closeBtnRender()}
-        <RenderWithSlide isVisible={overlayState.isOpen}>
+        <TransitionAnimation isVisible={overlayState.isOpen}>
           <div className={containerTheme}>
             <div className={innerContainerTheme}>{children}</div>
           </div>
-        </RenderWithSlide>
+        </TransitionAnimation>
       </Div100vh>
     </Modal>
   )
