@@ -1,3 +1,10 @@
+## [1.10.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.2...stack-ui-v1.10.3) (2023-10-18)
+
+
+### Bug Fixes
+
+* export all icons directly from stack ([#49](https://github.com/OKAMca/stack/issues/49)) ([54dae8e](https://github.com/OKAMca/stack/commit/54dae8e7f2395fe5a549f2cd5cc161db438f4937))
+
 ## [1.10.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.1...stack-ui-v1.10.2) (2023-10-17)
 
 
