@@ -1,0 +1,14 @@
+<!-- SidePanel.stories.mdx -->
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import MenuContent from '../../storybook/Menu/Menu'
+
+<Meta title="Layout/Menu" component={MenuContent} />
+
+export const Template = (args) => <MenuContent />
+
+# Menu
+
+<Canvas>
+  <Story name="Menu">{Template.bind({})}</Story>
+</Canvas>
