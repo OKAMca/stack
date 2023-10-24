@@ -9,6 +9,7 @@ export interface TCheckboxProps extends TDefaultComponent {
   required?: boolean
   isDisabled?: boolean
   isError?: boolean
+  defaultSelected?: boolean
   errorMessage?: string
   ariaLabel?: string
   value?: string
