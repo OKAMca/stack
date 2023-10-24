@@ -1,3 +1,10 @@
+## [1.10.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.3...stack-ui-v1.10.4) (2023-10-24)
+
+
+### Bug Fixes
+
+* no console error on select ([#51](https://github.com/OKAMca/stack/issues/51)) ([6868ef0](https://github.com/OKAMca/stack/commit/6868ef0db26aa3f8d98bf320441f8166d8873d2a))
+
 ## [1.10.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.2...stack-ui-v1.10.3) (2023-10-18)
 
 
