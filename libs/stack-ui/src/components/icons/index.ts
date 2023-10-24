@@ -1,7 +1,6 @@
 export { default as ArrowDown } from './ArrowDown'
 export { default as ArrowLeft } from './ArrowLeft'
 export { default as ArrowRight } from './ArrowRight'
-export { default as BrandArrowRight } from './BrandArrowRight'
 export { default as Check } from './Check'
 export { default as ChevronLeft } from './ChevronLeft'
 export { default as ChevronRight } from './ChevronRight'

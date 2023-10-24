@@ -10,6 +10,7 @@ import Check from '../../icons/Check'
     label: 'This is a checkbox label',
     name: 'checkbox',
     ariaLabel: 'checkbox-label',
+    onChange: (isSelected) => console.log(`isSelected: ${isSelected}`),
   }}
 />
 
@@ -52,7 +53,8 @@ Checkbox component.
     name="With icon"
     args={{
       id: 'checkbox-2',
-      icon: <Check />
+      icon: <Check />,
+      defaultSelected: true,
     }}
   >
     {Template.bind({})}
