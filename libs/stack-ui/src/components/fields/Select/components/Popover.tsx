@@ -5,11 +5,12 @@ import type { TPopoverProps } from './Popover.interface'
 
 const Popover = (props: TPopoverProps) => {
   const ref = React.useRef(null)
-  const { popoverRef = ref, state, children, themeName = 'popover', ...rest } = props
+  const { popoverRef = ref, state, children, themeName = 'popover', triggerRef, ...rest } = props
   const { popoverProps, underlayProps } = usePopover(
     {
       ...props,
       popoverRef,
+      triggerRef,
     },
     state,
   )
