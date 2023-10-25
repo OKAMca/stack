@@ -43,7 +43,41 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'react-aria',
+        'react-stately',
+        'isomorphic-dompurify',
+        '@react-aria/calendar',
+        '@react-aria/checkbox',
+        '@react-aria/datepicker',
+        '@react-aria/focus',
+        '@react-aria/i18n',
+        '@react-aria/overlays',
+        '@react-aria/utils',
+        '@react-aria/visually-hidden',
+        '@react-stately/calendar',
+        '@react-stately/datepicker',
+        '@react-stately/overlays',
+        '@react-stately/toggle',
+        'react-i18next',
+        'react-use',
+        'react-spring',
+        'react-div-100vh',
+        'react-hook-form',
+        'lodash',
+        'radash',
+        'lodash.isequal',
+        'tailwind-variants',
+      ],
+      onwarn(warning, warn) {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+          return
+        }
+        warn(warning)
+      },
     },
   },
 })

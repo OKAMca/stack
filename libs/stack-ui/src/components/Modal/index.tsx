@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable react-hooks/exhaustive-deps */
 import { OverlayContainer } from '@react-aria/overlays'
 import { useCallback, useEffect, useState } from 'react'

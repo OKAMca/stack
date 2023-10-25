@@ -1,3 +1,5 @@
+'use client'
+
 import generateUtmTags from './generateUtmTags'
 import useWindow from './useWindow'
 

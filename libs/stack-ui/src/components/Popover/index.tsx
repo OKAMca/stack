@@ -1,10 +1,12 @@
+'use client'
+
 /* eslint-disable react/display-name */
-import type { Placement } from '@react-types/overlays'
 import type { FocusableElement } from '@react-types/shared'
-import type { LegacyRef, RefObject } from 'react'
+import type { RefObject } from 'react'
 import React from 'react'
 import {
   DismissButton,
+  FocusRing,
   FocusScope,
   mergeProps,
   OverlayContainer,
@@ -15,12 +17,13 @@ import {
   useOverlayTrigger,
 } from 'react-aria'
 import { useOverlayTriggerState } from 'react-stately'
+import useThemeContext from '../../providers/Theme/hooks'
+import { BoxWithForwardRef } from '../Box'
 import { ButtonWithForwardRef } from '../Button'
-import type { TButtonProps } from '../Button/interface'
-import type { IPopoverProps } from './interface'
+import type { IPopoverProps, TPopoverButtonProps } from './interface'
 
-const Popover = React.forwardRef((props: IPopoverProps, ref) => {
-  const { isOpen, onClose, children, style } = props
+const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLElement>) => {
+  const { isOpen, onClose, children, positionProps, themeName = 'popover', tokens, customTheme, ...rest } = props
 
   // Handle events that should cause the popup to close,
   // e.g. blur, clicking outside, or pressing the escape key.
@@ -37,38 +40,30 @@ const Popover = React.forwardRef((props: IPopoverProps, ref) => {
   const { modalProps } = useModal()
   const { dialogProps } = useDialog({}, ref as RefObject<FocusableElement>)
 
+  const theme = useThemeContext(`${themeName}.popover`, tokens, customTheme)
+
   // Add a hidden <DismissButton> component at the end of the popover
   // to allow screen reader users to dismiss the popup easily.
   return (
-    <FocusScope contain restoreFocus>
-      <div
+    <FocusScope autoFocus restoreFocus contain>
+      <BoxWithForwardRef
+        customTheme={theme}
         {...mergeProps(overlayProps, modalProps, dialogProps)}
-        ref={ref as LegacyRef<HTMLDivElement>}
-        style={{
-          background: 'white',
-          color: 'black',
-          padding: 30,
-          ...style,
-        }}
+        ref={ref}
+        {...positionProps}
+        {...rest}
       >
-        {children}
+        {React.Children.map(children, (child) => (
+          <FocusRing focusRingClass="has-focus-ring">{child}</FocusRing>
+        ))}
         <DismissButton onDismiss={onClose} />
-      </div>
+      </BoxWithForwardRef>
     </FocusScope>
   )
 })
 
-function PopoverButton({
-  children,
-  buttonProps,
-  placement = 'right',
-  offset = 5,
-}: {
-  children: React.ReactNode
-  buttonProps: TButtonProps
-  placement: Placement
-  offset: number
-}) {
+function PopoverButton(props: TPopoverButtonProps) {
+  const { children, buttonProps, placement = 'right', offset = 5, themeName = 'popover', tokens, customTheme } = props
   const state = useOverlayTriggerState({})
 
   const triggerRef = React.useRef(null)
@@ -92,12 +87,25 @@ function PopoverButton({
 
   return (
     <>
-      <ButtonWithForwardRef handlePress={handlePress} {...buttonProps} {...triggerButtonProps} ref={triggerRef}>
-        Open Popover
-      </ButtonWithForwardRef>
+      <ButtonWithForwardRef
+        themeName={`${themeName}.button`}
+        handlePress={handlePress}
+        {...buttonProps}
+        {...triggerButtonProps}
+        ref={triggerRef}
+      />
       {state.isOpen && (
         <OverlayContainer>
-          <Popover {...overlayProps} {...positionProps} ref={overlayRef} isOpen={state.isOpen} onClose={state.close}>
+          <Popover
+            themeName={themeName}
+            tokens={tokens}
+            customTheme={customTheme}
+            {...overlayProps}
+            positionProps={positionProps}
+            ref={overlayRef}
+            isOpen={state.isOpen}
+            onClose={state.close}
+          >
             {children}
           </Popover>
         </OverlayContainer>

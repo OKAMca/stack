@@ -9,13 +9,20 @@ import Popover from './index'
   component={Popover}
   args={{
     as: 'span',
+    buttonProps: {
+      children: 'Open popover'
+    }
   }}
 />
 
 export const Template = (args) => (
   <div>
     <OverlayProvider>
-      <Popover {...args}>Hello world!</Popover>
+      <Popover {...args}>
+        <a href="#" className={`focus-ring-black`}>Hello world!</a>
+        <a href="#" className={`focus-ring-black`}>Hello world! 2</a>
+        <a href="#" className={`focus-ring-black`}>Hello world! 3</a>
+      </Popover>
     </OverlayProvider>
   </div>
 )
@@ -27,6 +34,7 @@ export const Template = (args) => (
     name="Default"
     args={{
       variant: 'p',
+      offset: 20,
     }}
   >
     {Template.bind({})}
