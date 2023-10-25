@@ -1,3 +1,10 @@
+## [1.10.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.4...stack-ui-v1.10.5) (2023-10-25)
+
+
+### Bug Fixes
+
+* defaultSelected checkbox prop + removed brand arrow right ([#50](https://github.com/OKAMca/stack/issues/50)) ([b6ac5ed](https://github.com/OKAMca/stack/commit/b6ac5ed597608a3c0f80811ce54bfe88d07face6))
+
 ## [1.10.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.3...stack-ui-v1.10.4) (2023-10-24)
 
 
