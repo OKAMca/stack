@@ -11,6 +11,7 @@ export interface ModalProps {
 export interface ILightboxProps extends HTMLAttributes<HTMLElement> {
   id: string
   children?: React.ReactNode
+  label?: string
   thumbnailContent?: React.ReactNode
   lightboxContent?: React.ReactNode
   isOpen?: boolean

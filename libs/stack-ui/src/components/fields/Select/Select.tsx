@@ -1,3 +1,5 @@
+'use client'
+
 import { isEmpty } from 'lodash'
 import { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
@@ -23,14 +25,26 @@ const Select = (props: TSelectProps) => {
     tokens,
     customTheme,
     label,
+    onSelectionChange,
+    defaultValue,
+    value,
+    icon,
+    ...rest
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
-  const state = useSelectState(props)
-  const { triggerProps, menuProps, labelProps } = useSelect(props, state, fieldRef)
+
+  const state = useSelectState({
+    ...rest,
+    selectedKey: value,
+    defaultSelectedKey: defaultValue,
+    onSelectionChange,
+  })
+
+  const { triggerProps, menuProps, labelProps } = useSelect({ ...rest }, state, fieldRef)
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
-
+  const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
   return (
     <div className={wrapper}>
       {label && (
@@ -41,14 +55,15 @@ const Select = (props: TSelectProps) => {
       <HiddenSelect {...hookFormRef} state={state} triggerRef={fieldRef} name={name} isDisabled />
       <div className={container}>
         <ButtonWithForwardRef
-          {...triggerProps}
+          {...restofTriggerProps}
+          handlePress={onPressStart}
           ref={fieldRef}
           disabled={disabled}
           themeName={`${themeName}.button`}
-          tokens={{ intent: isError ? 'error' : 'default' }}
+          tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
         >
           {state.selectedItem ? state.selectedItem.rendered : placeholderLabel}
-          <Icon icon="ArrowDown" />
+          <Icon icon={icon ?? 'ArrowDown'} />
         </ButtonWithForwardRef>
         {state.isOpen && fieldRef.current && (
           <Popover
@@ -58,7 +73,7 @@ const Select = (props: TSelectProps) => {
             placement="bottom"
             themeName={`${themeName}.popover`}
           >
-            <ListBox {...menuProps} themeName={`${themeName}.ul`} state={state} />
+            <ListBox {...menuProps} themeName={themeName} state={state} />
           </Popover>
         )}
         {isError && (

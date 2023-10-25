@@ -1,5 +1,3 @@
-import type { TToken, ITheme, TTheme } from './interface'
-
-type ThemeFn = (props: TToken) => ITheme
+import type { TTheme } from './interface'
 
 export const makeTheme = (theme: TTheme) => theme

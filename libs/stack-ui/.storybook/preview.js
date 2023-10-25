@@ -2,9 +2,10 @@
 
 import '../src/tailwind.css'; // replace with the name of your tailwind css file
 import React, { Suspense } from 'react'
-import { OverlayProvider } from 'react-aria'
+import { I18nProvider, OverlayProvider } from 'react-aria'
 import { useGlobals } from '@storybook/client-api'
 import BaseThemeProvider from '../src/theme'
+import { IsClientContextProvider } from '../src/providers/Client'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -39,11 +40,15 @@ export const decorators = [
           `}
         </style>
           <BaseThemeProvider>
-            <OverlayProvider>
-              <Suspense fallback={<div>Loading... </div>}>
-                <Story />
-              </Suspense>
-            </OverlayProvider>
+            <I18nProvider locale={locale}>
+              <IsClientContextProvider>
+                <OverlayProvider>
+                  <Suspense fallback={<div>Loading... </div>}>
+                    <Story />
+                  </Suspense>
+                </OverlayProvider>
+              </IsClientContextProvider>
+            </I18nProvider>
           </BaseThemeProvider>
       </>
     )

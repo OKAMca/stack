@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": ["node", "vite/client"]
+    "types": ["node", "next"]
   },
   "paths": { "@workspace/*": ["dist/libs/*"] },
   "files": [

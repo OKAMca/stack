@@ -15,7 +15,7 @@ export const accordionContainer = tv({
 })
 
 export const accordionButton = tv({
-  base: 'grid overflow-hidden w-full items-center border-b-2 border-color-1-500',
+  base: 'grid overflow-hidden w-full items-center border-b-2 border-color-1-500 focus-ring-black',
   variants: {
     titleBold: {
       true: 'font-bold',

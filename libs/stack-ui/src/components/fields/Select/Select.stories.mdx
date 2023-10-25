@@ -4,6 +4,7 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import Select, { SelectStyled } from './Select'
 import SelectItem from '../SelectItem/SelectItem'
 import SelectContent from '../../../storybook/SelectField'
+import ChevronLeft from '../../icons/ChevronLeft'
 
 <Meta
   title="Form/Fields/Select"
@@ -13,6 +14,7 @@ import SelectContent from '../../../storybook/SelectField'
     name: 'season',
     label: 'Season',
     placeholderLabel: 'Select a season',
+    onSelectionChange: () => console.log('test'),
   }}
 />
 
@@ -31,6 +33,7 @@ Select Field component.
     name="Disabled"
     args={{
       disabled: true,
+      icon: 'ChevronLeft'
     }}
   >
     {Template.bind({})}

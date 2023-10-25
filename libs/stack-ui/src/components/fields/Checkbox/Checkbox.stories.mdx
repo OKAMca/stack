@@ -1,15 +1,16 @@
 {/* Checkbox.stories.mdx */}
 import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import Checkbox from './index'
+import Check from '../../icons/Check'
 
 <Meta
   title="Form/Fields/Checkbox"
   component={Checkbox}
   args={{
-    id: 'checkbox',
     label: 'This is a checkbox label',
     name: 'checkbox',
-    ariaLabel: 'checkbox',
+    ariaLabel: 'checkbox-label',
+    onChange: (isSelected) => console.log(`isSelected: ${isSelected}`),
   }}
 />
 
@@ -19,14 +20,53 @@ export const Template = (args) => <Checkbox {...args} />
 
 Checkbox component.
 
+## Default
 <Canvas>
-  <Story name="Default">{Template.bind({})}</Story>
+  <Story
+    name="Default"
+    args={{
+      id: 'checkbox-1'
+    }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
+## Color variant
+<Canvas>
+  <Story
+    name="Gray"
+    args={{
+      id: 'checkbox-8',
+      tokens: {
+        color: 'gray'
+      }
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## With icon
+<Canvas>
+  <Story 
+    name="With icon"
+    args={{
+      id: 'checkbox-2',
+      icon: <Check />,
+      defaultSelected: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
 <Canvas>
   <Story
     name="Disabled"
     args={{
+      id: 'checkbox-3',
       isDisabled: true,
     }}
   >
@@ -34,10 +74,12 @@ Checkbox component.
   </Story>
 </Canvas>
 
+## Error
 <Canvas>
   <Story
     name="Error"
     args={{
+      id: 'checkbox-4',
       isError: true,
       errorMessage: 'This is an error message',
     }}
