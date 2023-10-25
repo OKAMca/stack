@@ -3,8 +3,11 @@
 'use client'
 
 import { FocusRing } from '@react-aria/focus'
+import { isEmpty } from 'radash'
 import React, { useRef } from 'react'
 import { useTextField } from 'react-aria'
+import { useFormContext, get } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import useThemeContext from '../../../providers/Theme/hooks'
 import Typography from '../../Typography'
 import type { TTextAreaProps } from './interface'
@@ -75,6 +78,28 @@ const TextArea = (props: TTextAreaProps) => {
       )}
     </div>
   )
+}
+
+export const ReactHookFormTextArea = (props: TTextAreaProps) => {
+  const { name, required, minLength = 0, maxLength = 99999999, validation } = props
+  const { register, formState } = useFormContext()
+  const error: Error = get(formState.errors, name)
+  const errMsg = error?.message ?? undefined
+  const { t } = useTranslation('components')
+  const { ref: refCallback, ...rest } = register(name, {
+    required: required ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
+    minLength: {
+      value: minLength,
+      message: t('FORM.ERROR.MIN_LENGTH', { length: minLength }),
+    },
+    maxLength: {
+      value: maxLength,
+      message: t('FORM.ERROR.MAX_LENGTH', { length: minLength }),
+    },
+    ...validation,
+  })
+
+  return <TextArea fieldRef={refCallback} {...rest} {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} />
 }
 
 export default TextArea
