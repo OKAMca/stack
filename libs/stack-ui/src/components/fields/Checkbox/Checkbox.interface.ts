@@ -1,20 +1,14 @@
 import type React from 'react'
+import type { AriaCheckboxProps } from 'react-aria'
 import type { Noop } from 'react-hook-form'
 import type { TDefaultComponent } from '../../../types/components'
 
-export interface TCheckboxProps extends TDefaultComponent {
-  id: string
+export interface TCheckboxProps extends TDefaultComponent, AriaCheckboxProps {
   label: string
-  name: string
-  required?: boolean
-  isDisabled?: boolean
   isError?: boolean
-  defaultSelected?: boolean
   errorMessage?: string
   ariaLabel?: string
-  value?: string
   onBlur?: Noop
-  onChange?: (isSelected: boolean) => void
   icon?: React.ReactNode
 }
 
