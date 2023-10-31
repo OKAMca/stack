@@ -10,9 +10,9 @@ import { useFormContext, get } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import useThemeContext from '../../../providers/Theme/hooks'
 import Typography from '../../Typography'
-import type { TTextAreaProps } from './interface'
+import type { TTextInputProps } from '../TextInputField/interface'
 
-const TextArea = (props: TTextAreaProps) => {
+const TextArea = (props: TTextInputProps) => {
   const {
     id,
     label,
@@ -51,6 +51,7 @@ const TextArea = (props: TTextAreaProps) => {
         <div className={container}>
           <FocusRing focusRingClass="has-focus-ring">
             <textarea
+              {...(inputProps as object)}
               ref={(e) => {
                 fieldRef?.(e)
                 ref.current = e
@@ -66,7 +67,6 @@ const TextArea = (props: TTextAreaProps) => {
               value={value}
               onBlur={onBlur}
               onChange={onChange}
-              {...(inputProps as object)}
             />
           </FocusRing>
         </div>
@@ -80,7 +80,7 @@ const TextArea = (props: TTextAreaProps) => {
   )
 }
 
-export const ReactHookFormTextArea = (props: TTextAreaProps) => {
+export const ReactHookFormTextArea = (props: TTextInputProps) => {
   const { name, required, minLength = 0, maxLength = 99999999, validation } = props
   const { register, formState } = useFormContext()
   const error: Error = get(formState.errors, name)
