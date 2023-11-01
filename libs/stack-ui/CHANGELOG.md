@@ -1,3 +1,10 @@
+## [1.10.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.5...stack-ui-v1.10.6) (2023-11-01)
+
+
+### Bug Fixes
+
+* clean up interfaces + prioritize manual onchange assignment over react aria on change wrapper ([#56](https://github.com/OKAMca/stack/issues/56)) ([71aeade](https://github.com/OKAMca/stack/commit/71aeade290dd69503835266a10bcf233448432ac))
+
 ## [1.10.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.4...stack-ui-v1.10.5) (2023-10-25)
 
 
