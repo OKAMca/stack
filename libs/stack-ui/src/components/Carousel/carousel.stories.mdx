@@ -1,6 +1,7 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import { ArgTypes } from '@storybook/blocks'
 import Carousel from './index'
+import Button from '../Button'
 
 <Meta
   title="Base Components/Carousel"
@@ -146,6 +147,24 @@ export const Template = (args) => {
         clickable: true,
       },
       navigation: false,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Carousel with custom buttons
+
+<Canvas>
+  <Story
+    name="Carousel custom buttons"
+    args={{
+      id: 4,
+      navigation: true,
+      navigationButtons: {
+        leftButton: <Button>Previous slide</Button>,
+        rightButton: <Button>Next slide</Button>
+      }
     }}
   >
     {Template.bind({})}

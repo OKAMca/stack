@@ -12,7 +12,6 @@ import {
 } from './Accordion'
 import { container, grid, gridItem, main } from './Box'
 import button from './Button'
-import { carouselContainer, carouselNavigationButtons, carouselSlideContainer } from './Carousel'
 import {
   calendarCell,
   calendarCellContainer,
@@ -24,6 +23,12 @@ import {
   calendarNavigationButtonsContainer,
   calendarTable,
 } from './Calendar'
+import {
+  carouselContainer,
+  carouselNavigationButtons,
+  carouselNavigationButtonsWrapper,
+  carouselSlideContainer,
+} from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
 import {
   datePickerButton,
@@ -67,7 +72,8 @@ const BaseTheme = makeTheme({
     container: (props) => carouselContainer(props),
     slideContainer: (props) => carouselSlideContainer(props),
     navigationButtons: (props) => carouselNavigationButtons(props),
-   }
+    navigationButtonsWrapper: (props) => carouselNavigationButtonsWrapper(props),
+  },
   calendar: {
     container: (props) => calendarContainer(props),
     header: (props) => calendarHeaderContainer(props),
