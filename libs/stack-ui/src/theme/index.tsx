@@ -23,6 +23,12 @@ import {
   calendarNavigationButtonsContainer,
   calendarTable,
 } from './Calendar'
+import {
+  carouselContainer,
+  carouselNavigationButtons,
+  carouselNavigationButtonsWrapper,
+  carouselSlideContainer,
+} from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
 import {
   datePickerButton,
@@ -61,6 +67,12 @@ const BaseTheme = makeTheme({
     icon: (props) => accordionIcon(props),
     region: (props) => accordionRegion(props),
     content: (props) => accordionContent(props),
+  },
+  carousel: {
+    container: (props) => carouselContainer(props),
+    slideContainer: (props) => carouselSlideContainer(props),
+    navigationButtons: (props) => carouselNavigationButtons(props),
+    navigationButtonsWrapper: (props) => carouselNavigationButtonsWrapper(props),
   },
   calendar: {
     container: (props) => calendarContainer(props),
