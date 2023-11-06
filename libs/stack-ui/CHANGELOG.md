@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.7...stack-ui-v1.11.0) (2023-11-06)
+
+
+### Features
+
+* Carousel Component  ([#11](https://github.com/OKAMca/stack/issues/11)) ([cef5b80](https://github.com/OKAMca/stack/commit/cef5b805632683004513cf3950b2c88e01d2c3a7))
+
 ## [1.10.7](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.6...stack-ui-v1.10.7) (2023-11-02)
 
 
