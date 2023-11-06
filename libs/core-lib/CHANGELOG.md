@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/OKAMca/stack/compare/core-lib-v1.4.1...core-lib-v1.5.0) (2023-11-06)
+
+
+### Features
+
+* Carousel Component  ([#11](https://github.com/OKAMca/stack/issues/11)) ([cef5b80](https://github.com/OKAMca/stack/commit/cef5b805632683004513cf3950b2c88e01d2c3a7))
+
 ## [1.4.1](https://github.com/OKAMca/stack/compare/core-lib-v1.4.0...core-lib-v1.4.1) (2023-09-27)
 
 
