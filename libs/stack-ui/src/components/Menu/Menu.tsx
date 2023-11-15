@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react'
 import { useMenu } from '../../providers/Menu'
-import { useSidePanel } from '../../providers/SidePanel'
 import SidePanel from '../SidePanel'
 import TabContainer from '../TabList/components/TabContainer/TabContainer'
 import type TMenuProps from './Menu.interface'

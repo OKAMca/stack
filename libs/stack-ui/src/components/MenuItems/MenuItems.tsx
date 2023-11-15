@@ -1,14 +1,13 @@
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import tw from 'twin.macro'
-import { useSidePanel } from '../../providers/SidePanel'
+import { useMenu } from '../../providers/Menu'
+import Button from '../Button'
 import type { MenuItem, TMenuItemsProps } from './MenuItems.inteface'
-import { StyledMenuButton, StyledMenuItems, StyledMenuList, StyledMenuWrapper } from './MenuItems.styles'
 
 const ButtonElement = (menuItem: MenuItem) => {
-  const { tabState } = useSidePanel()
-  const { setSelectedKey, selectedKey } = tabState
+  const { tabState } = useMenu()
+  const { setSelectedKey } = tabState
   const { id, path, label } = menuItem
   const itemKey = path?.substring(1)
 
@@ -21,22 +20,15 @@ const ButtonElement = (menuItem: MenuItem) => {
   }
 
   return (
-    <StyledMenuButton
-      key={`button-${id}`}
-      handlePress={handlePress}
-      buttonStyle="hollow"
-      variant="white"
-      css={itemKey === selectedKey && tw`bg-black text-white`}
-    >
+    <Button key={`button-${id}`} handlePress={handlePress}>
       {label}
-    </StyledMenuButton>
+    </Button>
   )
 }
 
 const LinkElement = (menuItem: MenuItem) => {
-  const { id, target, path, label, active } = menuItem
-  const { tabState } = useSidePanel()
-  const { selectedKey } = tabState
+  const { id, target, path, label } = menuItem
+  const { tabState } = useMenu()
 
   if (path == null || label == null) {
     return null
@@ -44,16 +36,9 @@ const LinkElement = (menuItem: MenuItem) => {
 
   return (
     <NextLink href={path} passHref scroll={false}>
-      <StyledMenuButton
-        key={`link-${id}`}
-        as="a"
-        target={target ?? '_self'}
-        buttonStyle="hollow"
-        variant="white"
-        css={active && selectedKey === 'open' && tw`bg-black text-white`}
-      >
+      <Button key={`link-${id}`} as="a" target={target ?? '_self'}>
         {label}
-      </StyledMenuButton>
+      </Button>
     </NextLink>
   )
 }
@@ -63,8 +48,8 @@ const MenuItems = (props: TMenuItemsProps) => {
   const { asPath } = useRouter()
 
   return (
-    <StyledMenuWrapper>
-      <StyledMenuItems>
+    <div>
+      <div>
         {menuItems?.map((menuItem) => {
           if (menuItem?.path == null || menuItem.id == null) {
             return null
@@ -72,18 +57,18 @@ const MenuItems = (props: TMenuItemsProps) => {
 
           const elementType = menuItem.path?.charAt(0) === '#' ? 'button' : 'a'
           return (
-            <StyledMenuList key={`li-${menuItem.id}`}>
+            <div key={`li-${menuItem.id}`}>
               {elementType === 'button' ? (
                 <ButtonElement {...menuItem} active={menuItem.path === asPath} />
               ) : (
                 <LinkElement {...menuItem} active={menuItem.path === asPath} />
               )}
-            </StyledMenuList>
+            </div>
           )
         })}
-      </StyledMenuItems>
+      </div>
       {children}
-    </StyledMenuWrapper>
+    </div>
   )
 }
 

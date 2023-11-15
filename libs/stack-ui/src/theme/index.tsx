@@ -26,7 +26,7 @@ import {
 import {
   carouselContainer,
   carouselNavigationButtons,
-  carouselNavigationButtonsWrapper,
+  // carouselNavigationButtonsWrapper,
   carouselSlideContainer,
 } from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
@@ -72,7 +72,7 @@ const BaseTheme = makeTheme({
     container: (props) => carouselContainer(props),
     slideContainer: (props) => carouselSlideContainer(props),
     navigationButtons: (props) => carouselNavigationButtons(props),
-    navigationButtonsWrapper: (props) => carouselNavigationButtonsWrapper(props),
+    // navigationButtonsWrapper: (props) => carouselNavigationButtonsWrapper(props),
   },
   calendar: {
     container: (props) => calendarContainer(props),
