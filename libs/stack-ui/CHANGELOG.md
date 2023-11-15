@@ -1,3 +1,52 @@
+# [1.11.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.7...stack-ui-v1.11.0) (2023-11-06)
+
+
+### Features
+
+* Carousel Component  ([#11](https://github.com/OKAMca/stack/issues/11)) ([cef5b80](https://github.com/OKAMca/stack/commit/cef5b805632683004513cf3950b2c88e01d2c3a7))
+
+## [1.10.7](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.6...stack-ui-v1.10.7) (2023-11-02)
+
+
+### Bug Fixes
+
+* export react hook form radio ([#57](https://github.com/OKAMca/stack/issues/57)) ([c37c722](https://github.com/OKAMca/stack/commit/c37c722d7116f3956723abd8902e42cad2ae29d9))
+
+## [1.10.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.5...stack-ui-v1.10.6) (2023-11-01)
+
+
+### Bug Fixes
+
+* clean up interfaces + prioritize manual onchange assignment over react aria on change wrapper ([#56](https://github.com/OKAMca/stack/issues/56)) ([71aeade](https://github.com/OKAMca/stack/commit/71aeade290dd69503835266a10bcf233448432ac))
+
+## [1.10.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.4...stack-ui-v1.10.5) (2023-10-25)
+
+
+### Bug Fixes
+
+* defaultSelected checkbox prop + removed brand arrow right ([#50](https://github.com/OKAMca/stack/issues/50)) ([b6ac5ed](https://github.com/OKAMca/stack/commit/b6ac5ed597608a3c0f80811ce54bfe88d07face6))
+
+## [1.10.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.3...stack-ui-v1.10.4) (2023-10-24)
+
+
+### Bug Fixes
+
+* no console error on select ([#51](https://github.com/OKAMca/stack/issues/51)) ([6868ef0](https://github.com/OKAMca/stack/commit/6868ef0db26aa3f8d98bf320441f8166d8873d2a))
+
+## [1.10.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.2...stack-ui-v1.10.3) (2023-10-18)
+
+
+### Bug Fixes
+
+* export all icons directly from stack ([#49](https://github.com/OKAMca/stack/issues/49)) ([54dae8e](https://github.com/OKAMca/stack/commit/54dae8e7f2395fe5a549f2cd5cc161db438f4937))
+
+## [1.10.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.1...stack-ui-v1.10.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* add export for radio and radiogroup ([#47](https://github.com/OKAMca/stack/issues/47)) ([0c12c1c](https://github.com/OKAMca/stack/commit/0c12c1c71c7f72ab402263ce1452214520b541be))
+
 ## [1.10.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.0...stack-ui-v1.10.1) (2023-10-17)
 
 
