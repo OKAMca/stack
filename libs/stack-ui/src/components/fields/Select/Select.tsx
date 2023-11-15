@@ -44,6 +44,7 @@ const Select = (props: TSelectProps) => {
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
+  const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
   return (
     <div className={wrapper}>
       {label && (
@@ -54,7 +55,8 @@ const Select = (props: TSelectProps) => {
       <HiddenSelect {...hookFormRef} state={state} triggerRef={fieldRef} name={name} isDisabled />
       <div className={container}>
         <ButtonWithForwardRef
-          {...triggerProps}
+          {...restofTriggerProps}
+          handlePress={onPressStart}
           ref={fieldRef}
           disabled={disabled}
           themeName={`${themeName}.button`}
