@@ -1,6 +1,5 @@
 import type { DOMAttributes } from '@react-types/shared'
 import type React from 'react'
-import type { CSSProperties } from 'react'
 import type { Placement } from 'react-aria'
 import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
