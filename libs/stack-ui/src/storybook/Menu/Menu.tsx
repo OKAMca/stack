@@ -3,9 +3,9 @@ import { isEmpty } from 'radash'
 import React from 'react'
 import Button, { ButtonWithForwardRef } from '../../components/Button'
 import type { TButtonProps } from '../../components/Button/interface'
-import Menu from '../../components/Menu/Menu'
-import MenuItems from '../../components/MenuItems/MenuItems'
-import type { MenuItem } from '../../components/MenuItems/MenuItems.inteface'
+import Menu from '../../components/Menu'
+import MenuItems from '../../components/Menu/components/MenuItems'
+import type { MenuItem } from '../../components/Menu/interface'
 import Typography from '../../components/Typography'
 import { MenuContextProvider, useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
@@ -125,7 +125,7 @@ const menuTabs = (menu: MenuItem[], extras?: TSubMenuExtraData[]) => {
 
   menu.forEach(recursiveFilter)
 
-  return tabs.map(({ childItems, key, title, extra }) => {
+  return tabs.map(({ childItems, key, title }) => {
     const childTabs = isEmpty(childItems) ? undefined : menuTabs(childItems ?? [], extras)
     return (
       <Item key={key} title={title}>

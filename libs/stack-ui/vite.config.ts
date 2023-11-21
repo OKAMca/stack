@@ -71,6 +71,7 @@ export default defineConfig({
         'radash',
         'lodash.isequal',
         'tailwind-variants',
+        'swiper',
       ],
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {

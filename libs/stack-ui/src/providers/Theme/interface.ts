@@ -3,8 +3,7 @@ import type React from 'react'
 export type TStyleValue = false | string
 export type TToken = Record<string, string | boolean>
 export type TFunc = (props: TToken) => TStyleValue[] | string
-export type TThemeRecord = Record<string, TFunc>
-export type TTheme = Record<string, TFunc | TThemeRecord>
+export type TTheme = { [key: string]: TFunc | TTheme }
 
 export type TStyle = Record<string, TStyleValue>
 export type TCustomTheme = TStyleValue | null | undefined

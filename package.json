@@ -38,6 +38,7 @@
     "tailwind-variants": "^0.1.8",
     "tslib": "^2.3.0",
     "usehooks-ts": "^2.9.1",
+    "swiper": "9.4.1",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
@@ -110,7 +111,6 @@
     "postcss": "8.4.31",
     "prettier": "^2.6.2",
     "swc-loader": "0.1.15",
-    "swiper": "9.4.1",
     "tailwindcss": "3.2.7",
     "tailwindcss-logical": "^3.0.1",
     "ts-jest": "^29.1.0",
