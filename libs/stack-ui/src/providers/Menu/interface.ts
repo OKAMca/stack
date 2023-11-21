@@ -5,8 +5,11 @@ import type { TabListState } from 'react-stately'
 
 export type TMenuProviderProps = {
   children: React.ReactNode
-  tabs: CollectionChildren<object>
+  tabs?: CollectionChildren<object>
   defaultSelectedKey: string
+  defaultIsOpen?: boolean
+  onCloseCallback?: () => void
+  onOpenCallback?: () => void
   openBtn?: () => JSX.Element
   closeBtn?: () => JSX.Element
   secondaryOpenBtn?: () => JSX.Element

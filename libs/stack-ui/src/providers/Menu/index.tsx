@@ -1,14 +1,17 @@
-import { createCtx } from '@okam/core-lib'
+import { createCtxNullable } from '@okam/core-lib'
 import { useMemo } from 'react'
 import { useTabListState } from 'react-stately'
 import { SidePanelContextProvider } from '../SidePanel'
 import type { IMenuProviderProps, TMenuContext } from './interface'
 
-export const [useMenu, MenuProvider] = createCtx<TMenuContext>()
+export const [useMenu, MenuProvider] = createCtxNullable<TMenuContext>()
 
 export function MenuContextProvider({
   children,
   defaultSelectedKey,
+  defaultIsOpen,
+  onCloseCallback,
+  onOpenCallback,
   tabs,
   openBtn,
   closeBtn,
@@ -22,7 +25,17 @@ export function MenuContextProvider({
 
   return (
     <MenuProvider value={value}>
-      <SidePanelContextProvider defaultSelectedKey={defaultSelectedKey.toString()}>{children}</SidePanelContextProvider>
+      <SidePanelContextProvider
+        onCloseCallback={() => {
+          onCloseCallback?.()
+          tabState?.setSelectedKey?.(defaultSelectedKey)
+        }}
+        onOpenCallback={onOpenCallback}
+        defaultIsOpen={defaultIsOpen}
+        defaultSelectedKey={defaultSelectedKey.toString()}
+      >
+        {children}
+      </SidePanelContextProvider>
     </MenuProvider>
   )
 }

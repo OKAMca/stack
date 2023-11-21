@@ -1,6 +1,7 @@
 import { useTabPanel } from '@react-aria/tabs'
 import React from 'react'
 import RenderWithOpacity from '../../../../transitions/RenderWithOpacity'
+import { BoxWithForwardRef } from '../../../Box'
 import type { TTabPanel } from '../../interface'
 
 function TabPanel({ state, ...props }: TTabPanel) {
@@ -9,9 +10,9 @@ function TabPanel({ state, ...props }: TTabPanel) {
 
   return (
     <RenderWithOpacity isVisible>
-      <div {...tabPanelProps} ref={ref}>
+      <BoxWithForwardRef {...tabPanelProps} ref={ref}>
         {state.selectedItem?.props.children}
-      </div>
+      </BoxWithForwardRef>
     </RenderWithOpacity>
   )
 }

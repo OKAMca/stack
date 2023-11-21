@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-no-useless-fragment */
-import React from 'react'
 import { useMenu } from '../../providers/Menu'
+import Box from '../Box'
 import SidePanel from '../SidePanel'
-import TabContainer from '../TabList/components/TabContainer/TabContainer'
+import TabContainer from './components/TabContainer'
 import type TMenuProps from './Menu.interface'
 
 const Menu = ({ id = 'main-menu', children, beforeTabContent, TransitonAnimation }: TMenuProps) => {
@@ -17,13 +16,13 @@ const Menu = ({ id = 'main-menu', children, beforeTabContent, TransitonAnimation
         tabState?.setSelectedKey(defaultSelectedKey)
       }}
     >
-      <div>{children}</div>
+      <Box>{children}</Box>
 
       {tabState?.selectedKey?.toString() === defaultSelectedKey ? null : (
-        <div>
+        <Box>
           {beforeTabContent !== null && beforeTabContent}
           <TabContainer />
-        </div>
+        </Box>
       )}
     </SidePanel>
   )
