@@ -1,23 +1,28 @@
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useCallback, useRef } from 'react'
 import { useMenu } from '../../providers/Menu'
-import Button from '../Button'
+import Button, { Anchor } from '../Button'
 import type { MenuItem, TMenuItemsProps } from './MenuItems.inteface'
 
 const ButtonElement = (menuItem: MenuItem) => {
-  const { tabState } = useMenu()
+  const { tabState, defaultSelectedKey } = useMenu()
   const { setSelectedKey } = tabState
   const { id, path, label } = menuItem
   const itemKey = path?.substring(1)
 
-  const handlePress = () => {
+  const handlePress = useCallback(() => {
     if (itemKey == null) {
       return
     }
 
+    if (tabState.selectedKey === itemKey) {
+      setSelectedKey(defaultSelectedKey)
+      return
+    }
+
     setSelectedKey(itemKey)
-  }
+  }, [itemKey, tabState.selectedKey, setSelectedKey, defaultSelectedKey])
 
   return (
     <Button key={`button-${id}`} handlePress={handlePress}>
@@ -28,18 +33,25 @@ const ButtonElement = (menuItem: MenuItem) => {
 
 const LinkElement = (menuItem: MenuItem) => {
   const { id, target, path, label } = menuItem
-  const { tabState } = useMenu()
+  const ref = useRef(null)
 
   if (path == null || label == null) {
     return null
   }
 
   return (
-    <NextLink href={path} passHref scroll={false}>
-      <Button key={`link-${id}`} as="a" target={target ?? '_self'}>
-        {label}
-      </Button>
-    </NextLink>
+    <Anchor
+      nextLinkProps={{
+        scroll: false,
+        href: path,
+      }}
+      ref={ref}
+      key={`link-${id}`}
+      as={NextLink}
+      target={target ?? '_self'}
+    >
+      {label}
+    </Anchor>
   )
 }
 

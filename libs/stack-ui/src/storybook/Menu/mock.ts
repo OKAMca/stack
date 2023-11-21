@@ -3,24 +3,46 @@ export const items = [
     id: '1',
     target: null,
     path: '#shows',
-    label: 'Shows',
+    label: 'Open 2nd Level Menu',
     childItems: [
       {
-        id: '6',
+        id: 'abc',
         target: null,
         path: '/',
-        label: 'Sub Menu Example',
+        label: '2nd level link',
       },
       {
         id: '7',
         target: null,
-        path: '#subPanel',
-        label: 'Sub Panel Example',
+        path: '#subPanel1',
+        label: 'Open 3rd Level Menu',
+        childItems: [
+          {
+            id: '8',
+            target: null,
+            path: '/',
+            label: '3rd level link',
+          },
+          {
+            id: '9',
+            target: null,
+            path: '#subPanel2',
+            label: 'Open 4th Level Menu',
+            childItems: [
+              {
+                id: '10',
+                target: null,
+                path: '/',
+                label: '4th level link',
+              },
+            ],
+          },
+        ],
       },
     ],
   },
   {
-    id: '2',
+    id: '8',
     target: null,
     path: '#brands',
     label: 'Brands',

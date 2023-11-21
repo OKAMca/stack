@@ -7,17 +7,10 @@ function Tab({ item, state }: TTab) {
   const { key, rendered } = item
   const ref = React.useRef(null)
   const { tabProps } = useTab({ key }, state, ref)
-  const isSelected = state.selectedKey === key
   const isDisabled = state.disabledKeys.has(key)
 
   return (
-    <ButtonWithForwardRef
-      {...tabProps}
-      ref={ref}
-      buttonStyle={isSelected ? 'default' : 'outline'}
-      disabled={isDisabled}
-      tw="min-w-[4.25rem] lg:min-w-[6.875rem]"
-    >
+    <ButtonWithForwardRef {...tabProps} ref={ref} disabled={isDisabled}>
       {rendered}
     </ButtonWithForwardRef>
   )

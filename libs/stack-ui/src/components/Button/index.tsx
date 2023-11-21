@@ -7,27 +7,39 @@ import type { RefObject } from 'react'
 import React, { useRef } from 'react'
 import { FocusRing, useButton, useLink } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
-import type { TButtonProps } from './interface'
+import type { TAnchorPropsProps, TButtonProps } from './interface'
 
-const Anchor = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTMLButtonElement & HTMLAnchorElement>) => {
-  const { as: Component = 'a', handlePress, children, as, customTheme, tokens, themeName = 'button', ...rest } = props
+export const Anchor = React.forwardRef(
+  (props: TAnchorPropsProps, forwardRef: React.Ref<HTMLButtonElement & HTMLAnchorElement>) => {
+    const {
+      as: Component = 'a',
+      handlePress,
+      children,
+      as,
+      customTheme,
+      tokens,
+      themeName = 'button',
+      nextLinkProps,
+      ...rest
+    } = props
 
-  const ref = forwardRef
-  const { linkProps } = useLink(
-    { ...props, elementType: as?.toString(), onPress: handlePress },
-    (forwardRef as RefObject<HTMLElement>) ?? ref,
-  )
+    const ref = forwardRef
+    const { linkProps } = useLink(
+      { ...{ ...props, ...nextLinkProps }, elementType: as?.toString(), onPress: handlePress },
+      (forwardRef as RefObject<HTMLElement>) ?? ref,
+    )
 
-  const theme = useThemeContext(themeName, tokens, customTheme)
+    const theme = useThemeContext(themeName, tokens, customTheme)
 
-  return (
-    <FocusRing focusRingClass="has-focus-ring">
-      <Component ref={ref} {...linkProps} {...rest} className={theme}>
-        {children}
-      </Component>
-    </FocusRing>
-  )
-})
+    return (
+      <FocusRing focusRingClass="has-focus-ring">
+        <Component ref={ref} {...linkProps} {...nextLinkProps} {...rest} className={theme}>
+          {children}
+        </Component>
+      </FocusRing>
+    )
+  },
+)
 
 const Button = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTMLButtonElement & HTMLAnchorElement>) => {
   const {
