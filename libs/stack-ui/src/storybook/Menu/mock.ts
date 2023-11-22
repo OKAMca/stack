@@ -1,4 +1,6 @@
-export const items = [
+import type { MenuItemProps } from '../../components/Menu/interface'
+
+export const items: MenuItemProps[] = [
   {
     id: '1',
     target: null,

@@ -69,12 +69,14 @@ const LinkElement = (menuItem: MenuItemProps) => {
 }
 
 const MenuItems = (props: TMenuItemsProps) => {
-  const { menuItems, children, themeName = 'menuItem', tokens, customTheme, ...rest } = props
+  const { menuItems, children, themeName = 'menuItem', tokens, customTheme } = props
 
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={tokens} customTheme={customTheme}>
       <Box themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
         {menuItems?.map((menuItem) => {
+          const { id, path, label, ...rest } = menuItem ?? {}
+
           if (menuItem?.path == null || menuItem.id == null) {
             return null
           }
