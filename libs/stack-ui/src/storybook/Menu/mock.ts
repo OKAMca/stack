@@ -6,6 +6,7 @@ export const items: MenuItemProps[] = [
     target: null,
     path: '#shows',
     label: 'Open 2nd Level Menu',
+    ariaLabel: 'Open 2nd Level Menu',
     childItems: [
       {
         id: 'abc',
