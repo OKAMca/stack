@@ -14,7 +14,7 @@ export type MenuProps = {
 
 export type TMenuProps = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent
 
-export interface IMenuItemProp extends Omit<HTMLAnchorElement, 'id' | 'onClick' | 'target'> {
+export interface IMenuItemProp extends Omit<Partial<HTMLAnchorElement>, 'id' | 'onClick' | 'target'> {
   childItems?: Maybe<MenuItemProps[] | undefined>
   id?: Maybe<string | undefined>
   target?: Maybe<string | undefined> | null
