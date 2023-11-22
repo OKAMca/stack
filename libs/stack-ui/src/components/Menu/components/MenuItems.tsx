@@ -3,12 +3,12 @@ import React, { useCallback, useRef } from 'react'
 import { useMenu } from '../../../providers/Menu'
 import Box from '../../Box'
 import Button, { Anchor } from '../../Button'
-import type { MenuItemProps, TMenuItemsProps } from '../interface'
+import type { TMenuItemProps, TMenuItemsProps } from '../interface'
 
-const ButtonElement = (menuItem: MenuItemProps) => {
+const ButtonElement = (menuItem: TMenuItemProps) => {
   const { tabState, defaultSelectedKey } = useMenu()
   const { setSelectedKey } = tabState
-  const { id, path, label, themeName = 'button', tokens, customTheme, target, ...rest } = menuItem
+  const { id, path, label, themeName = 'button', tokens, customTheme, target, children, ...rest } = menuItem
   const itemKey = path?.substring(1)
 
   const handlePress = useCallback(() => {
@@ -33,13 +33,24 @@ const ButtonElement = (menuItem: MenuItemProps) => {
       key={`button-${id}`}
       handlePress={handlePress}
     >
-      {label}
+      {React.isValidElement(children) ? children : label}
     </Button>
   )
 }
 
-const LinkElement = (menuItem: MenuItemProps) => {
-  const { id, target, path, label, themeName = 'anchor', customTheme, tokens, nextLinkProps, ...rest } = menuItem
+const LinkElement = (menuItem: TMenuItemProps) => {
+  const {
+    id,
+    target,
+    path,
+    label,
+    themeName = 'anchor',
+    customTheme,
+    tokens,
+    nextLinkProps,
+    children,
+    ...rest
+  } = menuItem
   const ref = useRef(null)
 
   if (path == null || label == null) {
@@ -62,7 +73,7 @@ const LinkElement = (menuItem: MenuItemProps) => {
       as={NextLink}
       target={target ?? '_self'}
     >
-      {label}
+      {React.isValidElement(children) ? children : label}
     </Anchor>
   )
 }

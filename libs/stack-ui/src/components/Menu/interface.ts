@@ -13,8 +13,10 @@ export type MenuProps = {
 
 export type TMenuProps = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent
 
-export interface IMenuItemProp extends Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role'> {
-  childItems?: Maybe<MenuItemProps[] | null>
+export type PartialHtmlBaseElement = Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>
+
+export interface IMenuItemProp {
+  childItems?: Maybe<TMenuItemProps[] | null>
   id?: string
   target?: string | null
   path?: string
@@ -23,10 +25,10 @@ export interface IMenuItemProp extends Omit<Partial<HTMLBaseElement>, 'id' | 'on
   onClick?: () => void
 }
 
-export type MenuItemProps = IMenuItemProp & TDefaultComponent
+export type TMenuItemProps = IMenuItemProp & TDefaultComponent & PartialHtmlBaseElement
 
 export interface TMenuItemsProps extends TDefaultComponent {
-  menuItems?: MenuItemProps[] | null
+  menuItems?: TMenuItemProps[] | null
   children?: React.ReactNode
 }
 
