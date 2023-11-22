@@ -1,4 +1,3 @@
-import { type } from 'os'
 import type { AriaTabListProps } from '@react-types/tabs'
 import type { LinkProps } from 'next/link'
 import type React from 'react'
@@ -15,11 +14,11 @@ export type MenuProps = {
 export type TMenuProps = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent
 
 export interface IMenuItemProp extends Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role'> {
-  childItems?: Maybe<MenuItemProps[] | undefined>
-  id?: Maybe<string | undefined>
-  target?: Maybe<string | undefined> | null
-  path?: Maybe<string | undefined>
-  label?: Maybe<string | React.ReactNode | undefined>
+  childItems?: Maybe<MenuItemProps[] | null>
+  id?: string
+  target?: string | null
+  path?: string
+  label?: string
   nextLinkProps?: LinkProps
   onClick?: () => void
 }
@@ -27,7 +26,7 @@ export interface IMenuItemProp extends Omit<Partial<HTMLBaseElement>, 'id' | 'on
 export type MenuItemProps = IMenuItemProp & TDefaultComponent
 
 export interface TMenuItemsProps extends TDefaultComponent {
-  menuItems: Maybe<Maybe<MenuItemProps>[]> | undefined
+  menuItems?: MenuItemProps[] | null
   children?: React.ReactNode
 }
 
