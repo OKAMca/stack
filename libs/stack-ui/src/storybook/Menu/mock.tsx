@@ -1,12 +1,13 @@
-import type { MenuItemProps } from '../../components/Menu/interface'
+import type { TMenuItemProps } from '../../components/Menu/interface'
 
-export const items: MenuItemProps[] = [
+export const items: TMenuItemProps[] = [
   {
     id: '1',
     target: null,
     path: '#shows',
-    label: 'Open 2nd Level Menu',
-    ariaLabel: 'Open 2nd Level Menu',
+    label: 'Open 2nd Level Menu Label',
+    children: <div>Open 2nd Level Menu</div>,
+    ariaLabel: 'Open 2nd Level Menu Aria',
     childItems: [
       {
         id: 'abc',
