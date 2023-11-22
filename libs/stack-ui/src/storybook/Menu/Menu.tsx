@@ -10,13 +10,12 @@ import Typography from '../../components/Typography'
 import { MenuContextProvider, useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
 import RenderWithSlide from '../../transitions/RenderWithSlide'
-import type { Maybe } from '../../types/components'
 import { items } from './mock'
 
 type TSubMenuTab = {
   key: string
   title: string
-  childItems: Maybe<MenuItemProps[] | undefined>
+  childItems?: MenuItemProps[] | null
   extra: React.ReactNode | undefined
 }
 
@@ -82,7 +81,7 @@ const MenuFactory = ({
 }: {
   tabs: JSX.Element[]
   id: string
-  menuItems: Maybe<Maybe<MenuItemProps>[]> | undefined
+  menuItems?: MenuItemProps[] | null
   defaultIsOpen?: boolean
   openBtn?: React.ReactNode | null
 }) => {
