@@ -5,7 +5,7 @@ import Button, { ButtonWithForwardRef } from '../../components/Button'
 import type { TButtonProps } from '../../components/Button/interface'
 import Menu from '../../components/Menu'
 import MenuItems from '../../components/Menu/components/MenuItems'
-import type { MenuItem } from '../../components/Menu/interface'
+import type { MenuItemProps } from '../../components/Menu/interface'
 import Typography from '../../components/Typography'
 import { MenuContextProvider, useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
@@ -16,7 +16,7 @@ import { items } from './mock'
 type TSubMenuTab = {
   key: string
   title: string
-  childItems: Maybe<MenuItem[] | undefined>
+  childItems: Maybe<MenuItemProps[] | undefined>
   extra: React.ReactNode | undefined
 }
 
@@ -82,7 +82,7 @@ const MenuFactory = ({
 }: {
   tabs: JSX.Element[]
   id: string
-  menuItems: Maybe<Maybe<MenuItem>[]> | undefined
+  menuItems: Maybe<Maybe<MenuItemProps>[]> | undefined
   defaultIsOpen?: boolean
   openBtn?: React.ReactNode | null
 }) => {
@@ -113,10 +113,10 @@ const MenuFactory = ({
   )
 }
 
-const menuTabs = (menu: MenuItem[], extras?: TSubMenuExtraData[]) => {
+const menuTabs = (menu: MenuItemProps[], extras?: TSubMenuExtraData[]) => {
   const tabs: TSubMenuTab[] = [{ key: 'empty', title: 'empty', childItems: null, extra: null }]
 
-  const recursiveFilter = (x: MenuItem) => {
+  const recursiveFilter = (x: MenuItemProps) => {
     if (x.path?.startsWith('#')) {
       const extra = extras?.find((f) => x.path === f.path)
       tabs.push({ key: x.path.substring(1), title: x.label ?? x.path, childItems: x.childItems, extra: extra?.data })
