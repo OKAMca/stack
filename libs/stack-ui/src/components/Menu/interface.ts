@@ -1,4 +1,5 @@
 import type { AriaTabListProps } from '@react-types/tabs'
+import type { LinkProps } from 'next/link'
 import type React from 'react'
 import type { Maybe, TDefaultComponent } from '../../types/components'
 
@@ -12,20 +13,18 @@ export type MenuProps = {
 
 export type TMenuProps = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent
 
-export interface MenuItem extends TDefaultComponent {
+export interface MenuItemProps extends TDefaultComponent {
   id?: Maybe<string | undefined>
   target?: Maybe<string | undefined> | null
   path?: Maybe<string | undefined>
   label?: Maybe<string | undefined>
-  frLabel?: Maybe<string | undefined>
-  title?: Maybe<string | undefined>
-  active?: Maybe<boolean>
-  childItems?: Maybe<MenuItem[] | undefined>
+  childItems?: Maybe<MenuItemProps[] | undefined>
+  nextLinkProps?: LinkProps
   onClick?: () => void
 }
 
 export interface TMenuItemsProps extends TDefaultComponent {
-  menuItems: Maybe<Maybe<MenuItem>[]> | undefined
+  menuItems: Maybe<Maybe<MenuItemProps>[]> | undefined
   children?: React.ReactNode
 }
 

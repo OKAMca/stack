@@ -4,12 +4,12 @@ import React, { useCallback, useRef } from 'react'
 import { useMenu } from '../../../providers/Menu'
 import Box from '../../Box'
 import Button, { Anchor } from '../../Button'
-import type { MenuItem, TMenuItemsProps } from '../interface'
+import type { MenuItemProps, TMenuItemsProps } from '../interface'
 
-const ButtonElement = (menuItem: MenuItem) => {
+const ButtonElement = (menuItem: MenuItemProps) => {
   const { tabState, defaultSelectedKey } = useMenu()
   const { setSelectedKey } = tabState
-  const { id, path, label, themeName = 'button', tokens, customTheme } = menuItem
+  const { id, path, label, themeName = 'button', tokens, customTheme, target, ...rest } = menuItem
   const itemKey = path?.substring(1)
 
   const handlePress = useCallback(() => {
@@ -27,6 +27,7 @@ const ButtonElement = (menuItem: MenuItem) => {
 
   return (
     <Button
+      {...rest}
       themeName={`${themeName}`}
       tokens={tokens}
       customTheme={customTheme}
@@ -38,8 +39,8 @@ const ButtonElement = (menuItem: MenuItem) => {
   )
 }
 
-const LinkElement = (menuItem: MenuItem) => {
-  const { id, target, path, label, themeName = 'anchor', customTheme, tokens } = menuItem
+const LinkElement = (menuItem: MenuItemProps) => {
+  const { id, target, path, label, themeName = 'anchor', customTheme, tokens, nextLinkProps, ...rest } = menuItem
   const ref = useRef(null)
 
   if (path == null || label == null) {
@@ -48,12 +49,14 @@ const LinkElement = (menuItem: MenuItem) => {
 
   return (
     <Anchor
+      {...rest}
       themeName={`${themeName}`}
       tokens={tokens}
       customTheme={customTheme}
       nextLinkProps={{
         scroll: false,
         href: path,
+        ...nextLinkProps,
       }}
       ref={ref}
       key={`link-${id}`}
@@ -66,8 +69,7 @@ const LinkElement = (menuItem: MenuItem) => {
 }
 
 const MenuItems = (props: TMenuItemsProps) => {
-  const { menuItems, children, themeName = 'menuItem', tokens, customTheme } = props
-  const { asPath } = useRouter()
+  const { menuItems, children, themeName = 'menuItem', tokens, customTheme, ...rest } = props
 
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={tokens} customTheme={customTheme}>
@@ -77,7 +79,7 @@ const MenuItems = (props: TMenuItemsProps) => {
             return null
           }
 
-          const elementType = menuItem.path?.charAt(0) === '#' ? 'button' : 'a'
+          const elementType = menuItem.path?.startsWith('#') ? 'button' : 'a'
           return (
             <Box
               themeName={`${themeName}.innerContent`}
@@ -87,19 +89,19 @@ const MenuItems = (props: TMenuItemsProps) => {
             >
               {elementType === 'button' ? (
                 <ButtonElement
+                  {...rest}
                   {...menuItem}
                   themeName={`${themeName}.button`}
                   tokens={tokens}
                   customTheme={customTheme}
-                  active={menuItem.path === asPath}
                 />
               ) : (
                 <LinkElement
+                  {...rest}
                   {...menuItem}
                   themeName={`${themeName}.anchor`}
                   tokens={tokens}
                   customTheme={customTheme}
-                  active={menuItem.path === asPath}
                 />
               )}
             </Box>
