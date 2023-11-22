@@ -14,12 +14,12 @@ export type MenuProps = {
 
 export type TMenuProps = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent
 
-export interface IMenuItemProp extends Omit<Partial<HTMLAnchorElement>, 'id' | 'onClick' | 'target'> {
+export interface IMenuItemProp extends Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role'> {
   childItems?: Maybe<MenuItemProps[] | undefined>
   id?: Maybe<string | undefined>
   target?: Maybe<string | undefined> | null
   path?: Maybe<string | undefined>
-  label?: Maybe<string | undefined>
+  label?: Maybe<string | React.ReactNode | undefined>
   nextLinkProps?: LinkProps
   onClick?: () => void
 }
