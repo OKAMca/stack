@@ -56,7 +56,10 @@ const Select = (props: TSelectProps) => {
       <div className={container}>
         <ButtonWithForwardRef
           {...restofTriggerProps}
-          handlePress={onPressStart}
+          handlePress={(event) => {
+            onPress?.(event)
+            onPressStart?.(event)
+          }}
           ref={fieldRef}
           disabled={disabled}
           themeName={`${themeName}.button`}
