@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.1...stack-ui-v1.11.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* select opens on touch start (mobile) ([3aa8550](https://github.com/OKAMca/stack/commit/3aa855096077a419b60250d91cc06d1a5dcd2cdb))
+
 ## [1.11.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.0...stack-ui-v1.11.1) (2023-11-23)
 
 
