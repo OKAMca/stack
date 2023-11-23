@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.0...stack-ui-v1.11.1) (2023-11-23)
+
+
+### Bug Fixes
+
+* popover has the option to close when interacting outside ([#58](https://github.com/OKAMca/stack/issues/58)) ([7295bb5](https://github.com/OKAMca/stack/commit/7295bb53265367197fd415c3a70c44355059d024))
+
 # [1.11.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.7...stack-ui-v1.11.0) (2023-11-06)
 
 
