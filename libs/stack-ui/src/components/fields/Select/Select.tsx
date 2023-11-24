@@ -29,6 +29,7 @@ const Select = (props: TSelectProps) => {
     defaultValue,
     value,
     icon,
+    popoverMatchesWidth,
     ...rest
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
@@ -70,8 +71,8 @@ const Select = (props: TSelectProps) => {
         </ButtonWithForwardRef>
         {state.isOpen && fieldRef.current && (
           <Popover
+            matchWidth={popoverMatchesWidth}
             state={state}
-            tokens={{ width: `${fieldRef.current?.offsetWidth}` }}
             triggerRef={fieldRef}
             placement="bottom"
             themeName={`${themeName}.popover`}
