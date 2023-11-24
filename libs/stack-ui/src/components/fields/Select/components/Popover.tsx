@@ -1,21 +1,11 @@
-import useThemeContext from 'libs/stack-ui/src/providers/Theme/hooks'
 import React from 'react'
 import { DismissButton, Overlay, usePopover } from 'react-aria'
+import Box, { BoxWithForwardRef } from '../../../Box'
 import type { TPopoverProps } from './Popover.interface'
 
 const Popover = (props: TPopoverProps) => {
   const ref = React.useRef(null)
-  const {
-    popoverRef = ref,
-    state,
-    children,
-    themeName = 'popover',
-    tokens,
-    customTheme,
-    triggerRef,
-    matchWidth = true,
-    ...rest
-  } = props
+  const { popoverRef = ref, state, children, themeName = 'popover', tokens, customTheme, triggerRef, ...rest } = props
   const { popoverProps, underlayProps } = usePopover(
     {
       ...props,
@@ -25,17 +15,16 @@ const Popover = (props: TPopoverProps) => {
     state,
   )
 
-  const theme = useThemeContext(themeName, tokens, customTheme)
   return (
     <Overlay>
       <div {...underlayProps} style={{ position: 'fixed', inset: 0 }} />
-      <div {...rest} {...popoverProps} ref={popoverRef}>
-        <div className={theme} {...(matchWidth ? { style: { width: `${triggerRef.current?.offsetWidth}px` } } : {})}>
+      <Box {...rest}>
+        <BoxWithForwardRef {...popoverProps} ref={popoverRef} themeName={themeName} tokens={tokens}>
           <DismissButton onDismiss={state.close} />
           {children}
           <DismissButton onDismiss={state.close} />
-        </div>
-      </div>
+        </BoxWithForwardRef>
+      </Box>
     </Overlay>
   )
 }
