@@ -21,4 +21,5 @@ export interface TSelectProps extends TFieldReactHookForm {
   onSelectionChange?: (value: Key) => void
   defaultValue?: string
   value?: string
+  popoverMatchesWidth?: boolean
 }
