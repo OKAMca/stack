@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.2...stack-ui-v1.12.0) (2023-11-27)
+
+
+### Features
+
+* image with thumbhash  ([bbc7f90](https://github.com/OKAMca/stack/commit/bbc7f903f0a8b36f7776d7a595e613e0645a57c5))
+
 ## [1.11.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.1...stack-ui-v1.11.2) (2023-11-23)
 
 
