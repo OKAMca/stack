@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable no-unused-vars */
 import { useRadioGroupState } from '@react-stately/radio'
 import { useRadioGroup } from 'react-aria'

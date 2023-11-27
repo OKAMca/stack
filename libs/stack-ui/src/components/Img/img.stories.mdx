@@ -1,0 +1,28 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import { ArgTypes } from '@storybook/blocks'
+import Img from './'
+import image from '../../../static/images/image.png'
+
+<Meta title="BASE COMPONENTS/Img" component={Img} />
+
+export const Template = (args) => <Img {...args} />
+
+# Img
+
+#### Img component. This component wraps the Next Image component
+
+<Canvas>
+  <Story
+    name="Img"
+    args={{
+      src: image,
+      alt: 'Image',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgTypes />
