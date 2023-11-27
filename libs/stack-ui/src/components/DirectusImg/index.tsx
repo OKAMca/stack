@@ -9,8 +9,22 @@ const DirectusImg = (props: TDirectusImageProps) => {
 
   if (!id || !filenameDownload) return null
 
-  const directusImageUrl = new URL(`/assets/${id}/${filenameDownload}`, `https://${imgDomain}`)
-  directusImageUrl.searchParams.set('fit', fit ?? 'contain')
+  const getDirectusImage = () => {
+    try {
+      const img = new URL(`/assets/${id}/${filenameDownload}`, `https://${imgDomain}`)
+      img.searchParams.set('fit', fit ?? 'contain')
+      return img
+    } catch (error) {
+      console.warn(error)
+      return null
+    }
+  }
+
+  const directusImageUrl = getDirectusImage()
+
+  if (directusImageUrl == null) {
+    return null
+  }
 
   return (
     <Img
