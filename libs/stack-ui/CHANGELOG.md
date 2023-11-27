@@ -1,3 +1,10 @@
+## [1.12.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.12.0...stack-ui-v1.12.1) (2023-11-27)
+
+
+### Bug Fixes
+
+* add nextjs as optionnal dep ([#62](https://github.com/OKAMca/stack/issues/62)) ([b2ae17c](https://github.com/OKAMca/stack/commit/b2ae17c021962db72ad9c176a9531db64307bdeb))
+
 # [1.12.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.2...stack-ui-v1.12.0) (2023-11-27)
 
 
