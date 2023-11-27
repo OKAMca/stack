@@ -16,7 +16,7 @@ import {
   WysiwygBlock,
   TextArea,
   TextInputField,
-  DirectusImage,
+  DirectusImg,
 } from '@okam/stack-ui'
 import Image from 'next/image'
 import SidePanelControl from './components/SidePanelControl'
@@ -25,7 +25,7 @@ export default async function Index() {
   return (
     <div className="flex flex-col gap-16 p-8">
       <Box>
-        <DirectusImage
+        <DirectusImg
           filenameDownload="Mask group.jpg"
           width={882}
           height={496}
