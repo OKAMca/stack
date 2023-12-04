@@ -20,6 +20,8 @@ export { default as Calendar } from './components/Calendar'
 export { default as Modal } from './components/Modal'
 export { default as Radio, ReactHookFormRadio } from './components/fields/Radio'
 export { default as RadioGroup } from './components/fields/RadioGroup'
+export { default as DirectusImg } from './components/DirectusImg'
+export { default as Img } from './components/Img'
 export * from './components/icons'
 
 // providers
