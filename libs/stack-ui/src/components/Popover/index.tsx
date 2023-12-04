@@ -23,16 +23,27 @@ import { ButtonWithForwardRef } from '../Button'
 import type { IPopoverProps, TPopoverButtonProps } from './interface'
 
 const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLElement>) => {
-  const { isOpen, onClose, children, positionProps, themeName = 'popover', tokens, customTheme, ...rest } = props
+  const {
+    isOpen,
+    onClose,
+    children,
+    positionProps,
+    themeName = 'popover',
+    tokens,
+    customTheme,
+    isDismissable,
+    shouldCloseOnBlur,
+    ...rest
+  } = props
 
   // Handle events that should cause the popup to close,
   // e.g. blur, clicking outside, or pressing the escape key.
   const { overlayProps } = useOverlay(
     {
+      isDismissable,
+      shouldCloseOnBlur,
       isOpen,
       onClose,
-      shouldCloseOnBlur: false,
-      isDismissable: false,
     },
     ref as RefObject<Element>,
   )
@@ -63,7 +74,16 @@ const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLEleme
 })
 
 function PopoverButton(props: TPopoverButtonProps) {
-  const { children, buttonProps, placement = 'right', offset = 5, themeName = 'popover', tokens, customTheme } = props
+  const {
+    children,
+    buttonProps,
+    placement = 'right',
+    offset = 5,
+    themeName = 'popover',
+    tokens,
+    customTheme,
+    ...rest
+  } = props
   const state = useOverlayTriggerState({})
 
   const triggerRef = React.useRef(null)
@@ -101,6 +121,7 @@ function PopoverButton(props: TPopoverButtonProps) {
             tokens={tokens}
             customTheme={customTheme}
             {...overlayProps}
+            {...rest}
             positionProps={positionProps}
             ref={overlayRef}
             isOpen={state.isOpen}

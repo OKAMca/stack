@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/OKAMca/stack/compare/core-lib-v1.5.0...core-lib-v1.6.0) (2023-11-27)
+
+
+### Features
+
+* image with thumbhash  ([bbc7f90](https://github.com/OKAMca/stack/commit/bbc7f903f0a8b36f7776d7a595e613e0645a57c5))
+
 # [1.5.0](https://github.com/OKAMca/stack/compare/core-lib-v1.4.1...core-lib-v1.5.0) (2023-11-06)
 
 
