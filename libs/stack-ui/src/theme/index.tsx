@@ -25,6 +25,7 @@ import {
 } from './Calendar'
 import { carouselContainer, carouselNavigationButtons, carouselSlideContainer } from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
+import { checkboxGroup, checkboxGroupItemsGroup } from './CheckboxGroup'
 import {
   datePickerButton,
   datePickerCalendarPopoverContainer,
@@ -133,6 +134,11 @@ const BaseTheme = makeTheme({
     radioGroup: (props) => radioGroup(props),
     radioGroupItemsGroup: (props) => radioGroupItemsGroup(props),
     errorMessage: (props) => typography(props),
+  },
+  checkboxGroup: {
+    checkboxGroup: (props) => checkboxGroup(props),
+    checkboxGroupItemsGroup: (props) => checkboxGroupItemsGroup(props),
+    errormessage: (props) => typography(props),
   },
   select: {
     button: (props) => button(props),

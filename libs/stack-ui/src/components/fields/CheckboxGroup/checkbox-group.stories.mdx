@@ -1,0 +1,59 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import CheckboxGroup from './index'
+import Checkbox from '../Checkbox/index'
+
+<Meta title="Form/Fields/CheckboxGroup" component={CheckboxGroup} />
+
+export const Template = (args) => {
+  return (
+    <CheckboxGroup label="Question 1/12" {...args}>
+      <Checkbox id="item1" label="Item 1" name="item" value="1" />
+      <Checkbox id="item2" label="Item 2" name="item" value="2" />
+      <Checkbox id="item3" label="Item 3" name="item" value="3" />
+    </CheckboxGroup>
+  )
+}
+
+export const TemplateError = (args) => {
+  return (
+    <CheckboxGroup label="Question 2/12" {...args}>
+      <Checkbox id="item4" label="Item 1" name="item" value="1" />
+      <Checkbox id="item5" label="Item 2" name="item" value="2" />
+      <Checkbox id="item6" label="Item 3" name="item" value="3" />
+    </CheckboxGroup>
+  )
+}
+
+# CheckboxGroup
+
+CheckboxGroup component.
+
+<Canvas>
+  <Story name="Default">{Template.bind({})}</Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      isDisabled: true,
+    }}
+
+>
+
+    {Template.bind({})}
+
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Error"
+    args={{
+      isError: true,
+      errorMessage: 'This is an error message',
+    }}
+  >
+    {TemplateError.bind({})}
+  </Story>
+</Canvas>
