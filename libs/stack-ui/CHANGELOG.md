@@ -1,3 +1,10 @@
+## [1.12.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.12.1...stack-ui-v1.12.2) (2023-12-04)
+
+
+### Bug Fixes
+
+* make popover props optional ([9df9638](https://github.com/OKAMca/stack/commit/9df96384f955edd331f9310087dd8d9f750c247f))
+
 ## [1.12.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.12.0...stack-ui-v1.12.1) (2023-11-27)
 
 
