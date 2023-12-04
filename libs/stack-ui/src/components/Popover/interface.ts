@@ -5,10 +5,10 @@ import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
 
 export interface IPopoverProps extends TDefaultComponent {
-  isOpen: boolean
-  onClose: () => void
+  isOpen?: boolean
+  onClose?: () => void
   children: React.ReactElement | React.ReactElement[]
-  positionProps: DOMAttributes
+  positionProps?: DOMAttributes
   isDismissable?: boolean
   shouldCloseOnBlur?: boolean
 }
