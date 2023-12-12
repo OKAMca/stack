@@ -29,6 +29,7 @@ const Select = (props: TSelectProps) => {
     defaultValue,
     value,
     icon,
+    popoverMatchesWidth,
     ...rest
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
@@ -45,6 +46,7 @@ const Select = (props: TSelectProps) => {
   const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
   const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
+
   return (
     <div className={wrapper}>
       {label && (
@@ -70,11 +72,12 @@ const Select = (props: TSelectProps) => {
         </ButtonWithForwardRef>
         {state.isOpen && fieldRef.current && (
           <Popover
+            tokens={tokens}
             state={state}
-            tokens={{ width: `${fieldRef.current?.offsetWidth}` }}
             triggerRef={fieldRef}
             placement="bottom"
             themeName={`${themeName}.popover`}
+            style={{ [`--${themeName}-container-width`]: `${fieldRef.current?.offsetWidth}px` } as React.CSSProperties}
           >
             <ListBox {...menuProps} themeName={themeName} state={state} />
           </Popover>

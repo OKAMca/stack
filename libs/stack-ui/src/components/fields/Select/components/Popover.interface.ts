@@ -9,5 +9,6 @@ export interface TPopoverProps extends Omit<AriaPopoverProps, 'popoverRef'>, TDe
   state: OverlayTriggerState
   variant?: string
   popoverRef?: React.RefObject<HTMLDivElement>
-  tokens: TToken
+  tokens?: TToken
+  style?: React.CSSProperties
 }
