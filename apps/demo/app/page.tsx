@@ -16,6 +16,7 @@ import {
   WysiwygBlock,
   TextArea,
   TextInputField,
+  DirectusImg,
 } from '@okam/stack-ui'
 import Image from 'next/image'
 import SidePanelControl from './components/SidePanelControl'
@@ -23,6 +24,15 @@ import SidePanelControl from './components/SidePanelControl'
 export default async function Index() {
   return (
     <div className="flex flex-col gap-16 p-8">
+      <Box>
+        <DirectusImg
+          filenameDownload="Mask group.jpg"
+          width={882}
+          height={496}
+          id="0d4005d0-6472-4fb1-9340-b14387b264ef"
+          thumbhash="aRgODIKUQmq/WIdzh3klj1LgGA=="
+        />
+      </Box>
       <Box>
         <Typography tokens={{ size: 'h1' }}>This is a test of all available components</Typography>
       </Box>

@@ -25,6 +25,8 @@ export { default as Menu } from './components/Menu'
 export { default as MenuItems } from './components/Menu/components/MenuItems'
 export { default as TabContainer } from './components/Menu/components/TabContainer'
 
+export { default as DirectusImg } from './components/DirectusImg'
+export { default as Img } from './components/Img'
 export * from './components/icons'
 
 // providers

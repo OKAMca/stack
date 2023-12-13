@@ -6406,6 +6406,11 @@
     "@typescript-eslint/types" "5.61.0"
     eslint-visitor-keys "^3.3.0"
 
+"@unlazy/core@0.10.2":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@unlazy/core/-/core-0.10.2.tgz#f64e206fb5b76fb030a1263f602f756517b11b4a"
+  integrity sha512-fexU3OwQfbRhkfbKgimpJPQODuwlnY7g3qNQyZD2pAf87BdOR2a6MGWzX6dyCgRMawqE7NVipFN8J/Nc+LAQHA==
+
 "@verdaccio/commons-api@10.2.0":
   version "10.2.0"
   resolved "https://registry.npmjs.org/@verdaccio/commons-api/-/commons-api-10.2.0.tgz"
@@ -18606,6 +18611,13 @@ unixify@^1.0.0:
   integrity sha512-6bc58dPYhCMHHuwxldQxO3RRNZ4eCogZ/st++0+fcC1nr0jiGUtAdBJ2qzmLQWSxbtz42pWt4QQMiZ9HvZf5cg==
   dependencies:
     normalize-path "^2.1.1"
+
+unlazy@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/unlazy/-/unlazy-0.10.2.tgz#23837baa159b23345115ed98c0be4b26d8c9644e"
+  integrity sha512-gojvkppORi4ebvZ1Sq3+Tp7Lgh3+JWy5Wt9bcL3nafE92TQ3kVaf6+6RQMZA/bHm+iZ3UwQm6NngVb98pgAmyA==
+  dependencies:
+    "@unlazy/core" "0.10.2"
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
