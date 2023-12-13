@@ -71,7 +71,9 @@ export default defineConfig({
         'radash',
         'lodash.isequal',
         'tailwind-variants',
-        'swiper',
+        'unlazy',
+        'next',
+        'next/image',
       ],
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {

@@ -23,12 +23,7 @@ import {
   calendarNavigationButtonsContainer,
   calendarTable,
 } from './Calendar'
-import {
-  carouselContainer,
-  carouselNavigationButtons,
-  // carouselNavigationButtonsWrapper,
-  carouselSlideContainer,
-} from './Carousel'
+import { carouselContainer, carouselNavigationButtons, carouselSlideContainer } from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
 import {
   datePickerButton,
@@ -40,6 +35,7 @@ import {
   datePickerIcon,
   datePickerLabel,
 } from './DatePicker'
+import { imgTheme } from './Image'
 import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
@@ -72,7 +68,6 @@ const BaseTheme = makeTheme({
     container: (props) => carouselContainer(props),
     slideContainer: (props) => carouselSlideContainer(props),
     navigationButtons: (props) => carouselNavigationButtons(props),
-    // navigationButtonsWrapper: (props) => carouselNavigationButtonsWrapper(props),
   },
   calendar: {
     container: (props) => calendarContainer(props),
@@ -182,6 +177,7 @@ const BaseTheme = makeTheme({
     button: () => ``,
     anchor: () => ``,
   },
+  img: imgTheme,
 })
 
 export default React.memo(createThemeProvider(BaseTheme))

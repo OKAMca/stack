@@ -1,3 +1,38 @@
+## [1.12.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.12.1...stack-ui-v1.12.2) (2023-12-04)
+
+
+### Bug Fixes
+
+* make popover props optional ([9df9638](https://github.com/OKAMca/stack/commit/9df96384f955edd331f9310087dd8d9f750c247f))
+
+## [1.12.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.12.0...stack-ui-v1.12.1) (2023-11-27)
+
+
+### Bug Fixes
+
+* add nextjs as optionnal dep ([#62](https://github.com/OKAMca/stack/issues/62)) ([b2ae17c](https://github.com/OKAMca/stack/commit/b2ae17c021962db72ad9c176a9531db64307bdeb))
+
+# [1.12.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.2...stack-ui-v1.12.0) (2023-11-27)
+
+
+### Features
+
+* image with thumbhash  ([bbc7f90](https://github.com/OKAMca/stack/commit/bbc7f903f0a8b36f7776d7a595e613e0645a57c5))
+
+## [1.11.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.1...stack-ui-v1.11.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* select opens on touch start (mobile) ([3aa8550](https://github.com/OKAMca/stack/commit/3aa855096077a419b60250d91cc06d1a5dcd2cdb))
+
+## [1.11.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.11.0...stack-ui-v1.11.1) (2023-11-23)
+
+
+### Bug Fixes
+
+* popover has the option to close when interacting outside ([#58](https://github.com/OKAMca/stack/issues/58)) ([7295bb5](https://github.com/OKAMca/stack/commit/7295bb53265367197fd415c3a70c44355059d024))
+
 # [1.11.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.10.7...stack-ui-v1.11.0) (2023-11-06)
 
 
