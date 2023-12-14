@@ -1,3 +1,24 @@
+# [1.13.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.12.2...stack-ui-v1.13.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* cleanup ([cf6a534](https://github.com/OKAMca/stack/commit/cf6a5345e27a90c1baf392d5150acdff341af927))
+* conflicts ([3b8c3b0](https://github.com/OKAMca/stack/commit/3b8c3b09b3d12c55c1ee2a580503b7ffbf4f9b7f))
+* menu cleanup ([87e5268](https://github.com/OKAMca/stack/commit/87e52688371950912afba5a7fd0bbf33f4ebd898))
+* menu item typing ([6db5629](https://github.com/OKAMca/stack/commit/6db56299ff50205026f40c8292e8903ad9184df3))
+* type ([bcb5211](https://github.com/OKAMca/stack/commit/bcb5211703350135d55cd9c6714a3727a7210619))
+* type issue ([43c391f](https://github.com/OKAMca/stack/commit/43c391f233dca0ee4b7bcf35df1cde80b66ea004))
+* typing for menu items with base html attr ([10eb766](https://github.com/OKAMca/stack/commit/10eb766b6abebdb9d40ff49b575897a51b518179))
+
+
+### Features
+
+* basic themeD ([d5e3731](https://github.com/OKAMca/stack/commit/d5e37314a6af5123a76b42a9ce5f7d37cb792025))
+* cleanup ([b8597b3](https://github.com/OKAMca/stack/commit/b8597b32bfb1cfb4765d0e9e8a730adb8fa942d2))
+* multi level menu ([3fc9381](https://github.com/OKAMca/stack/commit/3fc9381ac206c1c329e888fe2dd94bf063dcd71b))
+* wip menu ([110820f](https://github.com/OKAMca/stack/commit/110820f5aade2aa5790516bbeab5ffb45a0206b2))
+
 ## [1.12.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.12.1...stack-ui-v1.12.2) (2023-12-04)
 
 
