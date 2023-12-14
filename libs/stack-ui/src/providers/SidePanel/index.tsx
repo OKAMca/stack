@@ -9,14 +9,20 @@ const [useSidePanel, SidePanelProvider] = createCtx<TSidePanelContext>()
 
 export { useSidePanel }
 
-export function SidePanelContextProvider({ children, defaultSelectedKey }: TSidePanelProviderProps) {
+export function SidePanelContextProvider({
+  children,
+  defaultSelectedKey,
+  onOpenCallback,
+  onCloseCallback,
+  defaultIsOpen = false,
+}: TSidePanelProviderProps) {
   const {
     state: overlayState,
     closeButtonProps,
     closeButtonRef,
     openButtonProps,
     openButtonRef,
-  } = useOverlayHook(false)
+  } = useOverlayHook(defaultIsOpen, onOpenCallback, onCloseCallback)
 
   const value = useMemo<TSidePanelContext>(
     () => ({
