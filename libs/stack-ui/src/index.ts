@@ -20,6 +20,11 @@ export { default as Calendar } from './components/Calendar'
 export { default as Modal } from './components/Modal'
 export { default as Radio, ReactHookFormRadio } from './components/fields/Radio'
 export { default as RadioGroup } from './components/fields/RadioGroup'
+export { default as RenderWithSlide } from './transitions/RenderWithSlide'
+export { default as Menu } from './components/Menu'
+export { default as MenuItems } from './components/Menu/components/MenuItems'
+export { default as TabContainer } from './components/Menu/components/TabContainer'
+
 export { default as DirectusImg } from './components/DirectusImg'
 export { default as Img } from './components/Img'
 export * from './components/icons'
@@ -29,6 +34,7 @@ export { makeTheme, createThemeProvider, useTheme, ThemeContextProvider } from '
 export { default as useThemeContext } from './providers/Theme/hooks'
 export { useIsClient, IsClientContextProvider } from './providers/Client'
 export { useSidePanel, SidePanelContextProvider } from './providers/SidePanel'
+export { MenuContextProvider, useMenu } from './providers/Menu'
 export { RadioGroupProvider, useRadioGroupCtx } from './providers/RadioGroup/RadioGroup'
 
 // types & interfaces
@@ -43,6 +49,7 @@ export type {
   TStyleCollection,
   TStyleValue,
 } from './providers/Theme/interface'
+export type { TMenuProps, TMenuItemProps } from './components/Menu/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'

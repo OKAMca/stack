@@ -4,6 +4,9 @@ import type React from 'react'
 export type TSidePanelProviderProps = {
   children: React.ReactNode
   defaultSelectedKey: string
+  defaultIsOpen?: boolean
+  onOpenCallback?: () => void
+  onCloseCallback?: () => void
 }
 
 export type TButtonProps = {

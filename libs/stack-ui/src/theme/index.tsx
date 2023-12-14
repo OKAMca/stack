@@ -162,6 +162,21 @@ const BaseTheme = makeTheme({
     input: () => '',
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
   },
+  menu: {
+    sidePanel: {
+      wrapper: () => ``,
+      container: () => '',
+      innerContainer: () => '',
+    },
+    wrapper: () => '',
+  },
+  menuItem: {
+    wrapper: () => ``,
+    container: () => ``,
+    innerContent: () => ``,
+    button: () => ``,
+    anchor: () => ``,
+  },
   img: imgTheme,
 })
 

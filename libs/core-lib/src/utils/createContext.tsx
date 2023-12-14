@@ -26,7 +26,7 @@ export function createCtxNullable<A extends Record<string, unknown> | null>() {
     const c = React.useContext(ctx)
 
     if (c === undefined) {
-      return null
+      return {} as A
     }
 
     return c
