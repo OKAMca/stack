@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/OKAMca/stack/compare/core-lib-v1.6.0...core-lib-v1.7.0) (2023-12-14)
+
+
+### Bug Fixes
+
+* conflicts ([3b8c3b0](https://github.com/OKAMca/stack/commit/3b8c3b09b3d12c55c1ee2a580503b7ffbf4f9b7f))
+
+
+### Features
+
+* cleanup ([b8597b3](https://github.com/OKAMca/stack/commit/b8597b32bfb1cfb4765d0e9e8a730adb8fa942d2))
+* multi level menu ([3fc9381](https://github.com/OKAMca/stack/commit/3fc9381ac206c1c329e888fe2dd94bf063dcd71b))
+
 # [1.6.0](https://github.com/OKAMca/stack/compare/core-lib-v1.5.0...core-lib-v1.6.0) (2023-11-27)
 
 
