@@ -1,3 +1,10 @@
+# [1.14.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.13.0...stack-ui-v1.14.0) (2023-12-19)
+
+
+### Features
+
+* add checkbox group component ([619202c](https://github.com/OKAMca/stack/commit/619202c47c171545cdac4d8d1771282746487e10))
+
 # [1.13.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.12.2...stack-ui-v1.13.0) (2023-12-14)
 
 
