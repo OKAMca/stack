@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@okam/core-lib": ["libs/core-lib/src/index.ts"],
+      "@okam/directus-lib": ["libs/directus/lib/src/index.ts"],
       "@okam/stack-ui": ["libs/stack-ui/src/index.ts"],
+      "@okam/directus/query": ["libs/directus/query/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

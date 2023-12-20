@@ -1,0 +1,21 @@
+[32minfo[0m[35m[0m => Starting manager..
+[0m[30;43mWARN[0m[35m[0m No story files found for the specified pattern: [34mlibs/stack-ui/src/**/*.stories.@(js|jsx|ts|tsx)[39m
+[0m[32minfo[0m[35m[0m => Starting preview..
+[0m[30;43mWARN[0m[35m[0m You (or an addon) are using the 'config' preset field. This has been replaced by 'previewAnnotations' and will be removed in 8.0
+[0m[32minfo[0m[35m[0m Addon-docs: using MDX2
+[0m[32minfo[0m[35m[0m => Using implicit CSS loaders
+[0m[31m=> Failed to build the preview[39m
+
+ [31m>[39m [0m[7m[1m[31m NX [39m[22m[27m[0m  [31mCannot find module 'next/dist/shared/lib/router-context'[39m
+
+   Require stack:
+   - /workspaces/stack/node_modules/@storybook/nextjs/dist/preset.js
+   - /workspaces/stack/node_modules/@storybook/core-server/node_modules/@storybook/core-common/dist/index.js
+   - /workspaces/stack/node_modules/@storybook/core-server/dist/index.js
+   - /workspaces/stack/node_modules/@nx/storybook/src/executors/storybook/storybook.impl.js
+   - /workspaces/stack/node_modules/nx/src/config/schema-utils.js
+   - /workspaces/stack/node_modules/nx/src/command-line/run/executor-utils.js
+   - /workspaces/stack/node_modules/nx/src/command-line/run/run.js
+   - /workspaces/stack/node_modules/nx/bin/run-executor.js
+   Pass --verbose to see the stacktrace.
+
