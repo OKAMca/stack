@@ -5,7 +5,7 @@ export interface DirectusLibProps {}
 
 export function DirectusLib(props: DirectusLibProps) {
   return (
-    <div className={styles['container']}>
+    <div className={styles.container}>
       <h1>Welcome to DirectusLib!</h1>
     </div>
   )

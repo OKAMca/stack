@@ -1,9 +1,11 @@
+/* eslint-disable import/no-relative-packages */
 /// <reference types="vitest" />
 import * as path from 'path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
+import externalDeps from '../../config/external-deps'
 
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/core-lib',
@@ -43,7 +45,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: externalDeps,
     },
   },
 })
