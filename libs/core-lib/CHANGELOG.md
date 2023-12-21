@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/OKAMca/stack/compare/core-lib-v1.7.0...core-lib-v1.7.1) (2023-12-21)
+
+
+### Bug Fixes
+
+* lint issue ([#70](https://github.com/OKAMca/stack/issues/70)) ([abd6026](https://github.com/OKAMca/stack/commit/abd6026f94bd78aee6131148195af16a9f9b0bb0))
+
 # [1.7.0](https://github.com/OKAMca/stack/compare/core-lib-v1.6.0...core-lib-v1.7.0) (2023-12-14)
 
 

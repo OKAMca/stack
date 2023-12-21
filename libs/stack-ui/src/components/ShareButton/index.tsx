@@ -23,21 +23,21 @@ export const IconsContainer = (props: TIconsContainerProps) => {
 
     if (listDirection === 'row') {
       if (e.key === 'ArrowRight') {
-        focusManager.focusNext({ wrap: true })
+        focusManager?.focusNext({ wrap: true })
         e.preventDefault()
       }
       if (e.key === 'ArrowLeft') {
-        focusManager.focusPrevious({ wrap: true })
+        focusManager?.focusPrevious({ wrap: true })
         e.preventDefault()
       }
     }
     if (listDirection === 'column') {
       if (e.key === 'ArrowDown') {
-        focusManager.focusNext({ wrap: true })
+        focusManager?.focusNext({ wrap: true })
         e.preventDefault()
       }
       if (e.key === 'ArrowUp') {
-        focusManager.focusPrevious({ wrap: true })
+        focusManager?.focusPrevious({ wrap: true })
         e.preventDefault()
       }
     }
