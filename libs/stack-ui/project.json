@@ -29,7 +29,6 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "generatePackageJson": true,
         "outputPath": "dist/libs/stack-ui"
       },
       "configurations": {

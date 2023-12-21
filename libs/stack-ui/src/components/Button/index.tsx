@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/display-name */
 
 'use client'
@@ -25,7 +24,12 @@ export const Anchor = React.forwardRef(
 
     const ref = forwardRef
     const { linkProps } = useLink(
-      { ...{ ...props, ...nextLinkProps }, elementType: as?.toString(), onPress: handlePress },
+      {
+        ...{ ...props, ...nextLinkProps },
+        href: props.href ?? nextLinkProps?.href?.toString(),
+        elementType: as?.toString(),
+        onPress: handlePress,
+      },
       (forwardRef as RefObject<HTMLElement>) ?? ref,
     )
 

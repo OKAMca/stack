@@ -10,9 +10,12 @@ module.exports = {
       parserOptions: {
         project: `${__dirname}/tsconfig.*?.json`,
       },
+      rules: {
+        "@nx/dependency-checks": "error"
+      }
     },
   ],
   rules: {
-    'react/react-in-jsx-scope': 'off',
+    'react/react-in-jsx-scope': 'off'
   },
 }
