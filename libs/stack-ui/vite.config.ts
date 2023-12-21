@@ -1,9 +1,12 @@
+/* eslint-disable import/no-relative-packages */
 /// <reference types="vitest" />
 import * as path from 'path'
+
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
+import externalDeps from '../../config/external-deps'
 
 export default defineConfig({
   cacheDir: '../../node_modules/.vite/stack-ui',
@@ -43,38 +46,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [
-        'react',
-        'react-dom',
-        'react/jsx-runtime',
-        'react-aria',
-        'react-stately',
-        'isomorphic-dompurify',
-        '@react-aria/calendar',
-        '@react-aria/checkbox',
-        '@react-aria/datepicker',
-        '@react-aria/focus',
-        '@react-aria/i18n',
-        '@react-aria/overlays',
-        '@react-aria/utils',
-        '@react-aria/visually-hidden',
-        '@react-stately/calendar',
-        '@react-stately/datepicker',
-        '@react-stately/overlays',
-        '@react-stately/toggle',
-        'react-i18next',
-        'react-use',
-        'react-spring',
-        'react-div-100vh',
-        'react-hook-form',
-        'lodash',
-        'radash',
-        'lodash.isequal',
-        'tailwind-variants',
-        'unlazy',
-        'next',
-        'next/image',
-      ],
+      external: externalDeps,
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
           return
