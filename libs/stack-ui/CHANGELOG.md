@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.14.0...stack-ui-v1.14.1) (2023-12-21)
+
+
+### Bug Fixes
+
+* lint issue ([#70](https://github.com/OKAMca/stack/issues/70)) ([abd6026](https://github.com/OKAMca/stack/commit/abd6026f94bd78aee6131148195af16a9f9b0bb0))
+
 # [1.14.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.13.0...stack-ui-v1.14.0) (2023-12-19)
 
 
