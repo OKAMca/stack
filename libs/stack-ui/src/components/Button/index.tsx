@@ -26,7 +26,7 @@ export const Anchor = React.forwardRef(
     const { linkProps } = useLink(
       {
         ...{ ...props, ...nextLinkProps },
-        href: nextLinkProps?.href?.toString(),
+        href: props.href ?? nextLinkProps?.href?.toString(),
         elementType: as?.toString(),
         onPress: handlePress,
       },
