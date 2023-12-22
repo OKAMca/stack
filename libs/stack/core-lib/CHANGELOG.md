@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/OKAMca/stack/compare/core-lib-v1.8.0...core-lib-v1.8.1) (2023-12-22)
+
+
+### Bug Fixes
+
+* publish command path ([4f17a81](https://github.com/OKAMca/stack/commit/4f17a81b99181e55e40050896ce92584cf2a7366))
+
 # [1.8.0](https://github.com/OKAMca/stack/compare/core-lib-v1.7.1...core-lib-v1.8.0) (2023-12-22)
 
 <<<<<<< HEAD
