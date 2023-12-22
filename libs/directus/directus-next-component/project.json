@@ -1,0 +1,33 @@
+{
+  "name": "directus-next-component",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/directus/directus-next-component/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/directus/directus-next-component",
+        "tsConfig": "libs/directus/directus-next-component/tsconfig.lib.json",
+        "project": "libs/directus/directus-next-component/package.json",
+        "entryFile": "libs/directus/directus-next-component/src/index.ts",
+        "external": "all",
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "assets": [
+          {
+            "glob": "libs/directus/directus-next-component/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    }
+  }
+}
