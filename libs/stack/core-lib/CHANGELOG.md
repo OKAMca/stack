@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/OKAMca/stack/compare/core-lib-v1.7.1...core-lib-v1.8.0) (2023-12-22)
+
+
+### Features
+
+* add new libs ([#71](https://github.com/OKAMca/stack/issues/71)) ([f75cf73](https://github.com/OKAMca/stack/commit/f75cf73414e97cdb3210b1371111029403a80c1a))
+
 ## [1.7.1](https://github.com/OKAMca/stack/compare/core-lib-v1.7.0...core-lib-v1.7.1) (2023-12-21)
 
 ### Bug Fixes
