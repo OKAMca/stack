@@ -1,3 +1,10 @@
+## [1.15.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.0...stack-ui-v1.15.1) (2023-12-22)
+
+
+### Bug Fixes
+
+* publish command path ([4f17a81](https://github.com/OKAMca/stack/commit/4f17a81b99181e55e40050896ce92584cf2a7366))
+
 # [1.15.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.14.1...stack-ui-v1.15.0) (2023-12-22)
 
 <<<<<<< HEAD
