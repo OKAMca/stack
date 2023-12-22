@@ -1,0 +1,66 @@
+{/* typo.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import { OverlayProvider } from 'react-aria'
+import Popover from './index'
+
+<Meta
+  title="BASE COMPONENTS/Popover"
+  component={Popover}
+  args={{
+    as: 'span',
+    buttonProps: {
+      children: 'Open popover',
+    },
+  }}
+/>
+
+export const Template = (args) => (
+  <div>
+    <OverlayProvider>
+      <Popover {...args}>
+        <a href="#" className={`focus-ring-black`}>
+          Hello world!
+        </a>
+        <a href="#" className={`focus-ring-black`}>
+          Hello world! 2
+        </a>
+        <a href="#" className={`focus-ring-black`}>
+          Hello world! 3
+        </a>
+      </Popover>
+    </OverlayProvider>
+  </div>
+)
+
+# Popover
+
+## Default
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      variant: 'p',
+      offset: 20,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Closes when interacting outside
+
+<Canvas>
+  <Story
+    name="Closes when inteacting outside"
+    args={{
+      variant: 'p',
+      offset: 20,
+      isDismissable: true,
+      shouldCloseOnBlur: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
