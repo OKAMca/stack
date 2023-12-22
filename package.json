@@ -7,8 +7,8 @@
     "storybook": "nx run stack-ui:storybook",
     "build-stack": "yarn nx run stack-ui:build:production",
     "build-core": "yarn nx run core-lib:build:production",
-    "publish-stack": "yarn npm publish --access public dist/libs/stack-ui",
-    "publish-core": "yarn npm publish --access public dist/libs/core-lib",
+    "publish-stack": "yarn npm publish --access public dist/libs/stack/stack-ui",
+    "publish-core": "yarn npm publish --access public dist/libs/stack/core-lib",
     "dev": "nx serve demo",
     "build": "nx build demo",
     "postinstall": "is-ci || yarn husky install"
