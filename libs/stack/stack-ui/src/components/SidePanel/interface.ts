@@ -8,6 +8,8 @@ export interface ISidePanelProps extends HTMLAttributes<HTMLElement> {
   closeBtnRender?: () => React.ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
   TransitionAnimation?: (props: unknown) => JSX.Element
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  PanelTransition?: (props: unknown) => JSX.Element
   onCloseCallBack?: () => void
 }
 
