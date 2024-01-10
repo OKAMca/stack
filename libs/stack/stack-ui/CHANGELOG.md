@@ -1,3 +1,10 @@
+## [1.15.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.1...stack-ui-v1.15.2) (2024-01-10)
+
+
+### Bug Fixes
+
+* **menu:** allow panel transition override ([#74](https://github.com/OKAMca/stack/issues/74)) ([ca19c73](https://github.com/OKAMca/stack/commit/ca19c73be6ad4a53f50c7f74d1f3bf7070169fd5))
+
 ## [1.15.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.0...stack-ui-v1.15.1) (2023-12-22)
 
 
