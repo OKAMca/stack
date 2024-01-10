@@ -9,6 +9,8 @@ export type MenuProps = {
   beforeTabContent?: React.ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
   TransitonAnimation: (props: never) => JSX.Element
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  PanelTransition: (props: never) => JSX.Element
 }
 
 export type TMenuProps = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent

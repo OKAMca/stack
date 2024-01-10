@@ -16,6 +16,7 @@ const SidePanel = (props: TSidePanelProps) => {
     themeName = 'sidePanel',
     tokens,
     TransitionAnimation = RenderWithSlide,
+    PanelTransition = SidePanelTransition,
     customTheme,
     onCloseCallBack,
   } = props
@@ -27,7 +28,7 @@ const SidePanel = (props: TSidePanelProps) => {
   const { overlayState } = useSidePanel()
 
   return (
-    <Modal onCloseCallBack={onCloseCallBack} state={overlayState} transitionComponent={SidePanelTransition}>
+    <Modal onCloseCallBack={onCloseCallBack} state={overlayState} transitionComponent={PanelTransition}>
       <Div100vh className={wrapperTheme}>
         {closeBtnRender && closeBtnRender()}
         <TransitionAnimation isVisible={overlayState.isOpen}>

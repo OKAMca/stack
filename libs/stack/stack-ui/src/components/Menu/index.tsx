@@ -11,6 +11,7 @@ const Menu = ({
   children,
   beforeTabContent,
   TransitonAnimation,
+  PanelTransition,
   themeName,
   tokens,
   customTheme,
@@ -25,6 +26,7 @@ const Menu = ({
       closeBtnRender={closeBtn}
       id={id}
       TransitionAnimation={TransitonAnimation as (props: unknown) => JSX.Element}
+      PanelTransition={PanelTransition as (props: unknown) => JSX.Element}
       onCloseCallBack={() => {
         tabState?.setSelectedKey(defaultSelectedKey)
       }}
