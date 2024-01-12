@@ -1,3 +1,10 @@
+## [1.15.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.2...stack-ui-v1.15.3) (2024-01-12)
+
+
+### Bug Fixes
+
+* individual menu items combine their and their parents tokens ([#76](https://github.com/OKAMca/stack/issues/76)) ([ff2dde9](https://github.com/OKAMca/stack/commit/ff2dde92ed8b78d4720925d46c2098ba4b6de375))
+
 ## [1.15.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.1...stack-ui-v1.15.2) (2024-01-10)
 
 
