@@ -89,6 +89,8 @@ const MenuItems = (props: TMenuItemsProps) => {
         {menuItems?.map((menuItem) => {
           const { id, path, label, ...rest } = menuItem ?? {}
 
+          const menuItemTokens = { ...tokens, ...menuItem.tokens }
+
           if (menuItem?.path == null || menuItem.id == null) {
             return null
           }
@@ -97,7 +99,7 @@ const MenuItems = (props: TMenuItemsProps) => {
           return (
             <Box
               themeName={`${themeName}.innerContent`}
-              tokens={tokens}
+              tokens={menuItemTokens}
               customTheme={customTheme}
               key={`li-${menuItem.id}`}
             >
@@ -106,7 +108,7 @@ const MenuItems = (props: TMenuItemsProps) => {
                   {...rest}
                   {...menuItem}
                   themeName={`${themeName}.button`}
-                  tokens={tokens}
+                  tokens={menuItemTokens}
                   customTheme={customTheme}
                 />
               ) : (
@@ -114,7 +116,7 @@ const MenuItems = (props: TMenuItemsProps) => {
                   {...rest}
                   {...menuItem}
                   themeName={`${themeName}.anchor`}
-                  tokens={tokens}
+                  tokens={menuItemTokens}
                   customTheme={customTheme}
                 />
               )}
