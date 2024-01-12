@@ -1,3 +1,10 @@
+## [1.15.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.3...stack-ui-v1.15.4) (2024-01-12)
+
+
+### Bug Fixes
+
+* menu typing error ([5168362](https://github.com/OKAMca/stack/commit/51683628268bc74a4e393f14574a673d49d0205d))
+
 ## [1.15.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.2...stack-ui-v1.15.3) (2024-01-12)
 
 
