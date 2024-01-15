@@ -10,6 +10,7 @@ const Menu = ({
   id = 'main-menu',
   children,
   beforeTabContent,
+  afterTabContent,
   TransitonAnimation,
   PanelTransition,
   themeName,
@@ -39,6 +40,7 @@ const Menu = ({
         <Box themeName={`${themeName}.tabWrapper`} tokens={tokens} customTheme={customTheme}>
           {beforeTabContent !== null && beforeTabContent}
           <TabContainer themeName={`${themeName}.tabPanel`} tokens={tokens} customTheme={customTheme} />
+          {afterTabContent !== null && afterTabContent}
         </Box>
       )}
     </SidePanel>
