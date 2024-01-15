@@ -1,3 +1,10 @@
+## [1.15.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.4...stack-ui-v1.15.5) (2024-01-15)
+
+
+### Bug Fixes
+
+* added after tab content ([6027c4b](https://github.com/OKAMca/stack/commit/6027c4b741d99461aa63d1652ad40ecec7458303))
+
 ## [1.15.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.3...stack-ui-v1.15.4) (2024-01-12)
 
 
