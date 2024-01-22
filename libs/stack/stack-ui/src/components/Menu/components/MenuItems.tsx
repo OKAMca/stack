@@ -10,7 +10,7 @@ import type { TMenuItemProps, TMenuItemsProps } from '../interface'
 const ButtonElement = (menuItem: TMenuItemProps) => {
   const { tabState, defaultSelectedKey } = useMenu()
   const { setSelectedKey } = tabState
-  const { id, path, label, themeName = 'button', tokens, customTheme, target, children, ...rest } = menuItem
+  const { id, path, label, themeName = 'button', tokens, customTheme, target, children, childItems, ...rest } = menuItem
   const itemKey = path?.substring(1)
 
   const handlePress = useCallback(() => {
@@ -51,6 +51,7 @@ const LinkElement = (menuItem: TMenuItemProps) => {
     tokens,
     nextLinkProps,
     children,
+    childItems,
     ...rest
   } = menuItem
   const ref = useRef(null)
