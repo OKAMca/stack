@@ -1,3 +1,10 @@
+## [1.15.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.5...stack-ui-v1.15.6) (2024-01-22)
+
+
+### Bug Fixes
+
+* child items dont get passed directly to button component ([5d1b316](https://github.com/OKAMca/stack/commit/5d1b316945a4a4423bee4b70a11ae68715a15a92))
+
 ## [1.15.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.4...stack-ui-v1.15.5) (2024-01-15)
 
 
