@@ -9,12 +9,15 @@ export type MenuProps = {
   beforeTabContent?: React.ReactNode
   afterTabContent?: React.ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  TransitionAnimation?: (props: unknown) => JSX.Element
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   PanelTransition?: (props: unknown) => JSX.Element
 }
 
 export type TMenuProps = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent
+
+export type TMenuSidePanelProps = TMenuProps & {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  TransitionAnimation?: (props: unknown) => JSX.Element
+}
 
 export type PartialHtmlBaseElement = Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>
 

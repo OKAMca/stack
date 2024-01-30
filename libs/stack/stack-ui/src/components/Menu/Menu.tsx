@@ -11,7 +11,6 @@ const Menu = (props: TMenuProps) => {
   const {
     id = 'main-menu',
     children,
-    TransitionAnimation = RenderWithOpacity,
     PanelTransition = RenderWithOpacity,
     themeName,
     tokens,
@@ -23,17 +22,19 @@ const Menu = (props: TMenuProps) => {
 
   return (
     <PanelTransition isVisible={overlayState?.isOpen}>
-      <Box themeName={`${themeName}.sidePanel.wrapper`}>
+      <Box themeName={`${themeName}.wrapper`}>
         {closeBtn && closeBtn()}
-        <TransitionAnimation isVisible={overlayState?.isOpen}>
-          <Box themeName={`${themeName}.sidePanel.container`}>
-            <Box themeName={`${themeName}.sidePanel.innerContent`}>
-              <InnerContent id={id} themeName={themeName} tokens={tokens} customTheme={customTheme} {...rest}>
-                {children}
-              </InnerContent>
-            </Box>
-          </Box>
-        </TransitionAnimation>
+        <Box themeName={`${themeName}.container`}>
+          <InnerContent
+            id={id}
+            themeName={`${themeName}.innerContent`}
+            tokens={tokens}
+            customTheme={customTheme}
+            {...rest}
+          >
+            {children}
+          </InnerContent>
+        </Box>
       </Box>
     </PanelTransition>
   )

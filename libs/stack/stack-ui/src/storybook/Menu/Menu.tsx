@@ -5,11 +5,12 @@ import React from 'react'
 import Button, { ButtonWithForwardRef } from '../../components/Button'
 import type { TButtonProps } from '../../components/Button/interface'
 import MenuItems from '../../components/Menu/components/MenuItems'
-import type { TMenuItemProps, TMenuProps } from '../../components/Menu/interface'
+import type { TMenuItemProps, TMenuProps, TMenuSidePanelProps } from '../../components/Menu/interface'
 import MenuSidePanel from '../../components/Menu/MenuSidePanel'
 import Typography from '../../components/Typography'
 import { MenuContextProvider, useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
+import RenderWithOpacity from '../../transitions/RenderWithOpacity'
 import RenderWithSlide from '../../transitions/RenderWithSlide'
 import { items } from './mock'
 
@@ -89,7 +90,7 @@ export const MenuFactory = ({
   menuItems?: TMenuItemProps[] | null
   defaultIsOpen?: boolean
   openBtn?: React.ReactNode | null
-  MenuComponent: ComponentType<TMenuProps>
+  MenuComponent: ComponentType<TMenuProps | TMenuSidePanelProps>
 }) => {
   const { tabState, defaultSelectedKey } = useMenu()
 
@@ -110,7 +111,11 @@ export const MenuFactory = ({
     >
       <>
         {openBtn}
-        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (props: unknown) => JSX.Element}>
+        <MenuComponent
+          id={id}
+          TransitionAnimation={RenderWithSlide as (props: unknown) => JSX.Element}
+          PanelTransition={RenderWithOpacity as (props: unknown) => JSX.Element}
+        >
           <MenuItems menuItems={menuItems} />
         </MenuComponent>
       </>
