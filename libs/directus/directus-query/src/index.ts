@@ -1,1 +1,1 @@
-export * from './lib/directus-query'
+export * from './lib/redirection'
