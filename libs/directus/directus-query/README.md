@@ -15,7 +15,7 @@ Run `nx test directus-query` to execute the unit tests via [Vitest](https://vite
  * In apps/contest-nextjs directory
  * npx env-cmd -f ../../.env.local node fetch-redirect.js
  */
-const { fetchRedirects, getDefaultConfig } = require('@okam/directus-query')
+const { fetchRedirects, getDefaultConfig } = require('@stack-ui/directus/directus-query')
 fetchRedirects(getDefaultConfig())
 ```
 
