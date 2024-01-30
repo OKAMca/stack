@@ -1,3 +1,38 @@
+## [1.15.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.5...stack-ui-v1.15.6) (2024-01-22)
+
+
+### Bug Fixes
+
+* child items dont get passed directly to button component ([5d1b316](https://github.com/OKAMca/stack/commit/5d1b316945a4a4423bee4b70a11ae68715a15a92))
+
+## [1.15.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.4...stack-ui-v1.15.5) (2024-01-15)
+
+
+### Bug Fixes
+
+* added after tab content ([6027c4b](https://github.com/OKAMca/stack/commit/6027c4b741d99461aa63d1652ad40ecec7458303))
+
+## [1.15.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.3...stack-ui-v1.15.4) (2024-01-12)
+
+
+### Bug Fixes
+
+* menu typing error ([5168362](https://github.com/OKAMca/stack/commit/51683628268bc74a4e393f14574a673d49d0205d))
+
+## [1.15.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.2...stack-ui-v1.15.3) (2024-01-12)
+
+
+### Bug Fixes
+
+* individual menu items combine their and their parents tokens ([#76](https://github.com/OKAMca/stack/issues/76)) ([ff2dde9](https://github.com/OKAMca/stack/commit/ff2dde92ed8b78d4720925d46c2098ba4b6de375))
+
+## [1.15.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.1...stack-ui-v1.15.2) (2024-01-10)
+
+
+### Bug Fixes
+
+* **menu:** allow panel transition override ([#74](https://github.com/OKAMca/stack/issues/74)) ([ca19c73](https://github.com/OKAMca/stack/commit/ca19c73be6ad4a53f50c7f74d1f3bf7070169fd5))
+
 ## [1.15.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.0...stack-ui-v1.15.1) (2023-12-22)
 
 
