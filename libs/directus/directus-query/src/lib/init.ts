@@ -17,7 +17,7 @@ const initDiretusQuery = (graphqlEndPoint = GRAPHQL_ENDPOINT, requestConfig: Req
 
   return {
     queryGql: internalQueryGql,
-    clientt: client,
+    client,
   }
 }
 

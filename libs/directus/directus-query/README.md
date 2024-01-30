@@ -2,6 +2,28 @@
 
 This library was generated with [Nx](https://nx.dev).
 
-## Running unit tests
+# Usage with NextJS AppRouter
 
-Run `nx test directus-query` to execute the unit tests via [Vitest](https://vitest.dev/).
+To create a new client, first create a new file with the following content:
+
+```ts
+import { initDiretusQuery } from '@okam/directus/directus-query'
+
+const queryClient = initDiretusQuery('https://example.com/api', {
+  credentials: 'include',
+  mode: 'cors',
+  fetch,ù
+  headers: {
+    Authorization: `Bearer ${process.env.AUTH_TOKEN}`,
+  },
+})
+
+export default queryClient
+```
+
+Then, you can use the client to query data from Directus:
+
+```ts
+const variables = {id: 1}
+const data = await queryClient.queryGql(DOCUMENT, variables)
+```
