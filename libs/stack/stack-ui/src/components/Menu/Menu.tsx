@@ -1,5 +1,6 @@
 'use client'
 
+import { useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'
 import Box from '../Box'
@@ -18,10 +19,12 @@ const Menu = (props: TMenuProps) => {
     ...rest
   } = props
   const { overlayState } = useSidePanel()
+  const { closeBtn } = useMenu()
 
   return (
     <PanelTransition isVisible={overlayState?.isOpen}>
       <Box themeName={`${themeName}.sidePanel.wrapper`}>
+        {closeBtn && closeBtn()}
         <TransitionAnimation isVisible={overlayState?.isOpen}>
           <Box themeName={`${themeName}.sidePanel.container`}>
             <Box themeName={`${themeName}.sidePanel.innerContent`}>
