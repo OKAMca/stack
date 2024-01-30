@@ -17,6 +17,6 @@ export function getQueryValues<TResult, TVariables extends Variables>(
   document: TypedDocumentNode<TResult, TVariables>,
   variables?: TVariables,
 ) {
-  const value = get(document, 'definitions.0.name.value') as string
+  const value = get<string>(document, 'definitions.0.name.value')
   return [value, variables] as const
 }
