@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.7...stack-ui-v1.16.0) (2024-01-31)
+
+
+### Features
+
+* overlay menu or regular nested menu ([ea7f77e](https://github.com/OKAMca/stack/commit/ea7f77ed7b1346e6da0fd0ce37b4c73f7d0d0f47))
+
 ## [1.15.7](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.6...stack-ui-v1.15.7) (2024-01-31)
 
 
