@@ -7,9 +7,20 @@ import Icon from '../Icon'
 import type { TAccordionProps } from './interface'
 
 const Accordion = (props: TAccordionProps) => {
-  const { customTheme, themeName = 'accordion', id, tokens, title, ariaLabel, onClick, icon, children } = props
+  const {
+    customTheme,
+    themeName = 'accordion',
+    id,
+    tokens,
+    title,
+    ariaLabel,
+    onClick,
+    icon,
+    children,
+    defaultIsOpen = false,
+  } = props
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(defaultIsOpen)
 
   const containerTheme = useThemeContext(`${themeName}.container`, { ...tokens, isOpen }, customTheme)
   const titleTheme = useThemeContext(`${themeName}.title`, { ...tokens, isOpen }, customTheme)

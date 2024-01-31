@@ -92,3 +92,18 @@ export const Template = (args) => (
     {Template.bind({})}
   </Story>
 </Canvas>
+### Default opened accordion
+<Canvas>
+  <Story
+    name="Default opened"
+    args={{
+      id: 'accordion',
+      tokens: {
+        textAlign: 'left',
+      },
+      defaultIsOpen: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
