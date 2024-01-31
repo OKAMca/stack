@@ -1,1 +1,1 @@
-export * from './lib/directus-node'
+export * from './lib/redirection'
