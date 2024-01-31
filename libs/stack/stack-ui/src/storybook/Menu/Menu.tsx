@@ -111,11 +111,7 @@ export const MenuFactory = ({
     >
       <>
         {openBtn}
-        <MenuComponent
-          id={id}
-          TransitionAnimation={RenderWithSlide as (props: unknown) => JSX.Element}
-          PanelTransition={RenderWithOpacity as (props: unknown) => JSX.Element}
-        >
+        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (props: unknown) => JSX.Element}>
           <MenuItems menuItems={menuItems} />
         </MenuComponent>
       </>
