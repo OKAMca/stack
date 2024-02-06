@@ -32,7 +32,7 @@ fetchRedirects(getDefaultConfig())
     "fetch-redirect": {
       "executor": "nx:run-commands",
       "options": {
-        "cwd": "apps/projectname-nextjs",
+        "cwd": "{projectRoot}",
         "command": "node fetch-redirect"
       }
     },
