@@ -25,7 +25,20 @@ const { fetchRedirects, getDefaultConfig } = require('@okam/directus-node')
 fetchRedirects(getDefaultConfig())
 ```
 
-2. In project.json targets.build, add "dependsOn": ["fetch-redirect"]
+2. In project.json,
+ 1. In targets.build, add `"dependsOn": ["fetch-redirect"],`
+ 2. In targets:
+```
+    "fetch-redirect": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/projectname-nextjs",
+        "command": "node fetch-redirect"
+      }
+    },
+```
+ 3. Don't forget to change the cwd path
+
 
 3. Create directory redirect
 
