@@ -1,6 +1,6 @@
-import useThemeContext from 'libs/stack-ui/src/providers/Theme/hooks'
 import React from 'react'
 import { DismissButton, Overlay, usePopover } from 'react-aria'
+import useThemeContext from '../../../../providers/Theme/hooks'
 import type { TPopoverProps } from './Popover.interface'
 
 const Popover = (props: TPopoverProps) => {
