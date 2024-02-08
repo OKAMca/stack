@@ -31,6 +31,10 @@ const externalDeps = [
   'unlazy',
   'next',
   'next/image',
+  'graphql-request',
+  '@tanstack/react-query',
+  'dequal',
+  'usehooks-ts',
 ]
 
 export default externalDeps

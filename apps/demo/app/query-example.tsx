@@ -1,4 +1,4 @@
-import { initDiretusQuery } from '@okam/directus/directus-query'
+import { initDiretusQuery } from '@okam/directus-query'
 
 const queryClient = initDiretusQuery(process.env.NEXT_PUBLIC_GRAPHQL_URL, {
   credentials: 'include',
