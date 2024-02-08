@@ -33,5 +33,3 @@ export function useSuspenseGqlQueryAdmin<TResult, TVariables extends Variables>(
     ...options,
   })
 }
-
-export default useSuspenseGqlQuery
