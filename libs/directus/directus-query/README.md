@@ -7,7 +7,7 @@ This library was generated with [Nx](https://nx.dev).
 To create a new client, first create a new file with the following content:
 
 ```ts
-import { initDiretusQuery } from '@okam/directus/directus-query'
+import { initDiretusQuery } from '@okam/directus-query'
 
 const queryClient = initDiretusQuery('https://example.com/api', {
   credentials: 'include',

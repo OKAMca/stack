@@ -8,9 +8,11 @@
     "build-stack": "yarn nx run stack-ui:build:production",
     "build-core": "yarn nx run core-lib:build:production",
     "build-directus-node": "yarn nx run directus-node:build:production",
+    "build-directus-query": "yarn nx run directus-query:build:production",
     "publish-stack": "yarn npm publish --access public dist/libs/stack/stack-ui",
     "publish-core": "yarn npm publish --access public dist/libs/stack/core-lib",
     "publish-directus-node": "yarn npm publish --access public dist/libs/directus/directus-node",
+    "publish-directus-query": "yarn npm publish --access public dist/libs/directus/directus-query",
     "dev": "nx serve demo",
     "build": "nx build demo",
     "postinstall": "is-ci || yarn husky install"
