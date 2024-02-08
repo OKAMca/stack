@@ -5,10 +5,11 @@ import type { TDefaultComponent } from '../../types/components'
 export interface TAccordionProps extends TDefaultComponent<TAccordionTokens> {
   id: string
   title: string
-  icon?: string
+  icon?: React.ReactNode
   ariaLabel: string
   children: React.ReactNode
   onClick?: (isOpen: boolean) => void
+  defaultIsOpen?: boolean
 }
 
 interface TAccordionTokens extends TToken {
