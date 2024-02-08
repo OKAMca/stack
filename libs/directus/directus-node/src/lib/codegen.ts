@@ -1,6 +1,6 @@
 import type { CodegenConfig } from '@graphql-codegen/cli'
 
-const graphqlCodengenConfig = (schemaUrl: string, generatePath: string, headers: Record<string, string>) => {
+const graphqlCodegenConfig = (schemaUrl: string, generatePath: string, headers: Record<string, string>) => {
   const config: CodegenConfig = {
     overwrite: true,
     schema: [
@@ -22,4 +22,4 @@ const graphqlCodengenConfig = (schemaUrl: string, generatePath: string, headers:
   return config
 }
 
-export default graphqlCodengenConfig
+export default graphqlCodegenConfig
