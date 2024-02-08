@@ -1,3 +1,17 @@
+# [1.16.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.7...stack-ui-v1.16.0) (2024-01-31)
+
+
+### Features
+
+* overlay menu or regular nested menu ([ea7f77e](https://github.com/OKAMca/stack/commit/ea7f77ed7b1346e6da0fd0ce37b4c73f7d0d0f47))
+
+## [1.15.7](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.6...stack-ui-v1.15.7) (2024-01-31)
+
+
+### Bug Fixes
+
+* default is open prop + icon prop react node type ([03f8539](https://github.com/OKAMca/stack/commit/03f85398ada31c8a4266e4b06958cd2d6f743ef4))
+
 ## [1.15.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.5...stack-ui-v1.15.6) (2024-01-22)
 
 

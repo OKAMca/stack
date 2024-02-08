@@ -1,6 +1,7 @@
 import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import { ArgTypes } from '@storybook/blocks'
 import Accordion from './'
+import CloseBtn from '../icons/CloseBtn'
 
 <Meta
   title="Base Components/Accordion"
@@ -17,7 +18,7 @@ import Accordion from './'
       description: 'Used for accessibility',
     },
     icon: {
-      description: 'Takes in the name of an Icon inside the available icons folder',
+      description: 'Takes in the name of an Icon inside the available icons folder or a component icon',
       defaultValue: {
         summary: 'ArrowRight',
       },
@@ -87,6 +88,22 @@ export const Template = (args) => (
       tokens: {
         textAlign: 'center',
       },
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+### Default opened accordion
+<Canvas>
+  <Story
+    name="Default opened"
+    args={{
+      id: 'accordion',
+      tokens: {
+        textAlign: 'left',
+      },
+      defaultIsOpen: true,
+      icon: <CloseBtn />,
     }}
   >
     {Template.bind({})}

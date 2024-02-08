@@ -1,14 +1,8 @@
 {
-  "name": "@okam/stack-ui",
+  "name": "@okam/directus-node",
   "main": "./index.js",
-  "version": "1.16.0",
+  "version": "0.0.1",
   "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    }
-  },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },

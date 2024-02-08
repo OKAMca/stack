@@ -84,3 +84,30 @@ jobs:
         run: yarn publish-stack
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-directus-node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@okam'
+
+      - name: Configure Git
+        shell: bash
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Install dependencies
+        shell: bash
+        run: yarn install
+
+      - name: Build Directus Node
+        run: yarn build-directus-node
+
+      - name: Publish Directus Node Package
+        run: yarn publish-directus-node
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
