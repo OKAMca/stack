@@ -4,13 +4,11 @@ module.exports = {
   extends: [
     'plugin:@nx/react',
     '../../../.eslintrc.js',
-    '../../../linter/bases/typescript',
     '../../../linter/bases/regexp',
     '../../../linter/bases/jest',
     '../../../linter/bases/rtl',
     '../../../linter/bases/storybook',
     '../../../linter/bases/react',
-    '../../../linter/bases/prettier',
     'plugin:storybook/recommended',
   ],
   ignorePatterns: ['!**/*', ...getDefaultIgnorePatterns()],
@@ -21,10 +19,25 @@ module.exports = {
       parserOptions: {
         project: `${__dirname}/tsconfig.*?.json`,
       },
-      rules: {
-        '@nx/dependency-checks': 'error',
-      },
     },
+    {
+      "files": ["{package,project}.json"],
+      "parser": "jsonc-eslint-parser",
+      "rules": {
+        "@nx/dependency-checks": [
+          "error",
+          {
+            "buildTargets": ["build"],
+            "checkMissingDependencies": true,
+            "checkObsoleteDependencies": true,
+            "checkVersionMismatches": true,
+            "ignoredDependencies": [
+              "vite", "vite-plugin-dts", "vite-tsconfig-paths", "@nx/react", "@vitejs/plugin-react"
+            ]
+          }
+        ]
+      }
+    }
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',

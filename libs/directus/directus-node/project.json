@@ -20,7 +20,15 @@
       "dependsOn": ["build"]
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/directus/directus-node/**/*.{ts,tsx,js,jsx}",
+          "libs/directus/directus-node/package.json",
+          "libs/directus/directus-node/project.json"
+        ]
+      }
     },
     "test": {
       "executor": "@nx/jest:jest",

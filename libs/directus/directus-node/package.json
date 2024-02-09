@@ -8,5 +8,9 @@
   },
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
+  },
+  "dependencies": {
+    "tslib": "^2.6.2",
+    "@graphql-codegen/cli": "^5.0.2"
   }
 }

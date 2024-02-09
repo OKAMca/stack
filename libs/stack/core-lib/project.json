@@ -19,7 +19,11 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/stack/core-lib/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/stack/core-lib/**/*.{ts,tsx,js,jsx}",
+          "libs/stack/core-lib/package.json",
+          "libs/stack/core-lib/project.json"
+        ]
       }
     },
     "build": {

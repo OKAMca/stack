@@ -8,5 +8,13 @@
       "import": "./index.mjs",
       "require": "./index.js"
     }
+  },
+  "dependencies": {
+    "@graphql-typed-document-node/core": "3.2.0",
+    "@okam/core-lib": "*",
+    "@tanstack/react-query": "^5.17.1",
+    "graphql-request": "^6.1.0",
+    "radash": "11.0.0",
+    "react": "^18.2.0"
   }
 }
