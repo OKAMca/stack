@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/OKAMca/stack/compare/core-lib-v1.8.1...core-lib-v1.9.0) (2024-02-09)
+
+
+### Features
+
+* add gql query ([#73](https://github.com/OKAMca/stack/issues/73)) ([27faaaa](https://github.com/OKAMca/stack/commit/27faaaa3b810412235a09d412acf7aa8a4b3221f))
+
 ## [1.8.1](https://github.com/OKAMca/stack/compare/core-lib-v1.8.0...core-lib-v1.8.1) (2023-12-22)
 
 
