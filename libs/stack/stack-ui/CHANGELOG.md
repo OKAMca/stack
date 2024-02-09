@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.16.0...stack-ui-v1.17.0) (2024-02-09)
+
+
+### Features
+
+* add gql query ([#73](https://github.com/OKAMca/stack/issues/73)) ([27faaaa](https://github.com/OKAMca/stack/commit/27faaaa3b810412235a09d412acf7aa8a4b3221f))
+
 # [1.16.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.15.7...stack-ui-v1.16.0) (2024-01-31)
 
 
