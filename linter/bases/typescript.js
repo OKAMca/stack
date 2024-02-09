@@ -182,5 +182,28 @@ module.exports = {
         'import/order': 'off',
       },
     },
+    {
+      files: ['*.json'],
+      parser: "jsonc-eslint-parser",
+      rules: {
+        'no-param-reassign': 'off',
+        'no-console': 'off',
+        'func-names': 'off',
+        'import/extensions': 'off',
+        'global-require': 'off',
+        '@typescript-eslint/return-await': 'off',
+        '@typescript-eslint/no-throw-literal': 'off',
+        '@typescript-eslint/dot-notation': 'off',
+        '@typescript-eslint/no-implied-eval': 'off',
+        '@typescript-eslint/naming-convention': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/consistent-type-exports': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off',
+        'import/order': 'off',
+      },
+    }
   ],
 }
