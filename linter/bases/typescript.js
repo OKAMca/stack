@@ -142,6 +142,10 @@ module.exports = {
         selector: ['typeParameter'],
         format: ['PascalCase'],
       },
+      {
+        selector: 'import',
+        format: ['camelCase', 'PascalCase'],
+      },
     ],
   },
   overrides: [
