@@ -1,3 +1,10 @@
+# [1.18.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.17.0...stack-ui-v1.18.0) (2024-02-12)
+
+
+### Features
+
+* component popover width ([#63](https://github.com/OKAMca/stack/issues/63)) ([f1d95f9](https://github.com/OKAMca/stack/commit/f1d95f9f93b562fdfc8aaf27f8637bdd304a0f5d))
+
 # [1.17.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.16.0...stack-ui-v1.17.0) (2024-02-09)
 
 
