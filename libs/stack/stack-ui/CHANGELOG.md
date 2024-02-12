@@ -63,8 +63,6 @@
 
 # [1.15.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.14.1...stack-ui-v1.15.0) (2023-12-22)
 
-<<<<<<< HEAD
-=======
 
 ### Features
 
@@ -72,7 +70,6 @@
 
 ## [1.14.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.14.0...stack-ui-v1.14.1) (2023-12-21)
 
->>>>>>> 865ed45dc09fdf3a6b151ed12612eeda6c97f306
 ### Bug Fixes
 
 - lint issue ([#70](https://github.com/OKAMca/stack/issues/70)) ([abd6026](https://github.com/OKAMca/stack/commit/abd6026f94bd78aee6131148195af16a9f9b0bb0))
