@@ -147,7 +147,7 @@ const BaseTheme = makeTheme({
         ...props,
         className: 'outline outline-2 outline-white outline-offset-2 p-2 my-4 rounded-md w-full flex flex-col gap-6',
       }),
-    popover: (props) => button(props),
+    popover: (props) => button({ ...props, className: 'w-[var(--select-container-width)]' }),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
     wrapper: () => 'flex flex-col gap-4 relative',
     container: () => 'flex flex-col gap-4',

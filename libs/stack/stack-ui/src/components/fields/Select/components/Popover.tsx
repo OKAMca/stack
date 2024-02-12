@@ -1,11 +1,11 @@
 import React from 'react'
 import { DismissButton, Overlay, usePopover } from 'react-aria'
-import { TypographyWithForwardRef } from '../../../Typography'
+import Box, { BoxWithForwardRef } from '../../../Box'
 import type { TPopoverProps } from './Popover.interface'
 
 const Popover = (props: TPopoverProps) => {
   const ref = React.useRef(null)
-  const { popoverRef = ref, state, children, themeName = 'popover', triggerRef, ...rest } = props
+  const { popoverRef = ref, state, children, themeName = 'popover', tokens, customTheme, triggerRef, ...rest } = props
   const { popoverProps, underlayProps } = usePopover(
     {
       ...props,
@@ -18,11 +18,13 @@ const Popover = (props: TPopoverProps) => {
   return (
     <Overlay>
       <div {...underlayProps} style={{ position: 'fixed', inset: 0 }} />
-      <TypographyWithForwardRef themeName={themeName} {...rest} {...popoverProps} as="div" ref={popoverRef}>
-        <DismissButton onDismiss={state.close} />
-        {children}
-        <DismissButton onDismiss={state.close} />
-      </TypographyWithForwardRef>
+      <Box {...rest}>
+        <BoxWithForwardRef {...popoverProps} ref={popoverRef} themeName={themeName} tokens={tokens}>
+          <DismissButton onDismiss={state.close} />
+          {children}
+          <DismissButton onDismiss={state.close} />
+        </BoxWithForwardRef>
+      </Box>
     </Overlay>
   )
 }
