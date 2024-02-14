@@ -1,3 +1,4 @@
+import type { InputHTMLAttributes } from 'react'
 import type { AriaTextFieldProps } from 'react-aria'
 import type { RefCallBack } from 'react-hook-form'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
@@ -18,3 +19,6 @@ export interface TTextInputStyle extends TDefaultComponent {
   isError?: boolean
   errorMessage?: string
 }
+
+// @see https://react-spectrum.adobe.com/react-aria/useTextField.html
+export type TUseTextFieldInputProps = InputHTMLAttributes<HTMLInputElement>
