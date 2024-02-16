@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.0...stack-ui-v1.18.1) (2024-02-16)
+
+
+### Bug Fixes
+
+* **textinputfield:** adding inputProps type casting ([#90](https://github.com/OKAMca/stack/issues/90)) ([a7d6ff2](https://github.com/OKAMca/stack/commit/a7d6ff2da4868c4d7b424b9cafb249f722b577ba))
+
 # [1.18.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.17.0...stack-ui-v1.18.0) (2024-02-12)
 
 
