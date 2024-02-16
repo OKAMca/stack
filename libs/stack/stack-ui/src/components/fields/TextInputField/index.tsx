@@ -8,7 +8,7 @@ import { get, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import useThemeContext from '../../../providers/Theme/hooks'
 import Typography from '../../Typography'
-import type { TTextInputProps } from './interface'
+import type { TTextInputProps, TUseTextFieldInputProps } from './interface'
 
 const TextInputField = (props: TTextInputProps) => {
   const {
@@ -29,6 +29,8 @@ const TextInputField = (props: TTextInputProps) => {
     customTheme,
   } = props
   const ref = useRef<HTMLInputElement | null>(null)
+  // inputProps will be cast to TUseTextFieldInputProps
+  // so you should only use useTextField<'input'>
   const { errorMessageProps, inputProps, labelProps } = useTextField<'input'>(props, ref)
 
   const inputTokens = { ...tokens, isDisabled: disabled, isError: errorMessage != null }
@@ -52,7 +54,7 @@ const TextInputField = (props: TTextInputProps) => {
             {children}
 
             <input
-              {...(inputProps as object)}
+              {...(inputProps as TUseTextFieldInputProps)}
               className={input}
               disabled={disabled}
               required={required}
