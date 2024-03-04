@@ -24,7 +24,7 @@ const RadioGroup = (props: TRadioGroupProps) => {
     >
       {label && <Typography tokens={{ size: 'h6' }}>{label}</Typography>}
       <Box themeName={`${themeName}.radioGroupItemsGroup`}>
-        <RadioGroupProvider>{children}</RadioGroupProvider>
+        <RadioGroupProvider state={state}>{children}</RadioGroupProvider>
       </Box>
       {isError && errorMessage && <Typography tokens={{ isError: true }}>{errorMessage}</Typography>}
     </Box>
