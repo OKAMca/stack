@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.1...stack-ui-v1.18.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* pass state to provider ([fe67cf9](https://github.com/OKAMca/stack/commit/fe67cf93a4495571abdadfb427d5a36475b13700))
+
 ## [1.18.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.0...stack-ui-v1.18.1) (2024-02-16)
 
 
