@@ -6,7 +6,7 @@ import { useRadioGroup } from 'react-aria'
 import { RadioGroupProvider } from '../../../providers/RadioGroup/RadioGroup'
 import Box from '../../Box'
 import Typography from '../../Typography'
-import type { TRadioGroupProps } from './RadioGroup.interface'
+import type { TRadioGroupProps } from './interface'
 
 const RadioGroup = (props: TRadioGroupProps) => {
   const { label, isError = false, errorMessage, isDisabled = false, children, themeName = 'radioGroup', tokens } = props
