@@ -1,3 +1,10 @@
+# [1.19.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.2...stack-ui-v1.19.0) (2024-03-05)
+
+
+### Features
+
+* add storybook a11y addon ([4287a66](https://github.com/OKAMca/stack/commit/4287a6614543527dae3b5ee2c87f7db8bcd8a725))
+
 ## [1.18.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.1...stack-ui-v1.18.2) (2024-03-05)
 
 
