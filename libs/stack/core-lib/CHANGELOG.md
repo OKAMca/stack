@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/OKAMca/stack/compare/core-lib-v1.9.0...core-lib-v1.9.1) (2024-03-05)
+
+
+### Bug Fixes
+
+* pass state to provider ([fe67cf9](https://github.com/OKAMca/stack/commit/fe67cf93a4495571abdadfb427d5a36475b13700))
+
 # [1.9.0](https://github.com/OKAMca/stack/compare/core-lib-v1.8.1...core-lib-v1.9.0) (2024-02-09)
 
 
