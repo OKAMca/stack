@@ -1,0 +1,31 @@
+{/* form */}
+
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import Form from './index'
+import { formConfig, fieldsTest, formSchemaTest } from './storybook/formConfig'
+ 
+<Meta 
+  title="Form/Form"
+  component={Form}
+  parameters={{
+    layout: 'fullscreen',
+  }} 
+  args={{
+    config: formConfig,
+    fields: fieldsTest,
+    submit: {
+      handleSubmit: (data) => console.log("submitted", data),
+      label: 'Submit'
+    }
+  }}
+/>
+
+export const Template = (args) => <Form { ...args } />
+
+
+# Form
+
+<Canvas>
+  <Story name="Form" >{ Template.bind({}) }</Story>
+</Canvas>
+
