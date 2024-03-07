@@ -55,11 +55,12 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTML
     tokens,
     themeName = 'button',
     isDisabled = false,
+    type = 'button',
     ...rest
   } = props
   const ref = forwardRef
   const { buttonProps } = useButton(
-    { ...props, isDisabled, elementType: as, onPress: handlePress },
+    { ...props, isDisabled, elementType: as, onPress: handlePress, type },
     (forwardRef as RefObject<HTMLElement>) ?? ref,
   )
 

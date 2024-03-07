@@ -36,10 +36,20 @@ import {
   datePickerIcon,
   datePickerLabel,
 } from './DatePicker'
+import { formContainer, formField, formSubmitButton } from './Form'
 import { imgTheme } from './Image'
 import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
+import {
+  selectButton,
+  selectContainer,
+  selectErrorMessage,
+  selectList,
+  selectListItem,
+  selectPopover,
+  selectWrapper,
+} from './Select'
 import {
   shareButton,
   shareButtonContainer,
@@ -49,7 +59,14 @@ import {
   shareButtonLinksList,
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
-import { textArea } from './TextArea'
+import { textAreaInput, textAreaContainer, textAreaErrorMessage, textAreaLabel, textAreaWrapper } from './TextArea'
+import {
+  textInput,
+  textInputContainer,
+  textInputErrorMessage,
+  textInputLabel,
+  textInputWrapper,
+} from './TextInputField'
 import typography from './Typography'
 
 const BaseTheme = makeTheme({
@@ -90,6 +107,11 @@ const BaseTheme = makeTheme({
     label: (props) => datePickerLabel(props),
     calendarPopover: (props) => datePickerCalendarPopoverContainer(props),
     calendarUnderlay: (props) => datePickerCalendarPopoverUnderlay(props),
+  },
+  form: {
+    container: (props) => formContainer(props),
+    submitButton: (props) => formSubmitButton(props),
+    field: (props) => formField(props),
   },
   popover: {
     button: (props) => button(props),
@@ -154,19 +176,18 @@ const BaseTheme = makeTheme({
     li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
   },
   textarea: {
-    wrapper: () => 'flex flex-col',
-    container: () => 'flex items-center gap-4',
-    label: () => 'text-gray-3 px-6',
-    input: (props) => textArea(props),
-    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
+    wrapper: (props) => textAreaWrapper(props),
+    container: (props) => textAreaContainer(props),
+    label: (props) => textAreaLabel(props),
+    input: (props) => textAreaInput(props),
+    errorMessage: (props) => textAreaErrorMessage(props),
   },
   textInput: {
-    wrapper: () =>
-      `flex flex-col rounded-md px-4 py-1 mb-3 m-0.5 border-2 aria-disabled:pointer-events-none aria-disabled:opacity-30 focus-ring-black`,
-    label: () => 'text-xs',
-    container: () => 'flex items-center gap-4',
-    input: () => '',
-    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
+    wrapper: (props) => textInputWrapper(props),
+    label: (props) => textInputLabel(props),
+    container: (props) => textInputContainer(props),
+    input: (props) => textInput(props),
+    errorMessage: (props) => textInputErrorMessage(props),
   },
   menu: {
     sidePanel: {

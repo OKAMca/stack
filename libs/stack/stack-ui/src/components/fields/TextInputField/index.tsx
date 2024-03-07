@@ -40,6 +40,8 @@ const TextInputField = (props: TTextInputProps) => {
   const input = useThemeContext(`${themeName}.input`, inputTokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, inputTokens, customTheme)
 
+  console.log(useThemeContext(`${themeName}.errorMessage`, inputTokens, customTheme))
+
   return (
     <div>
       <FocusRing focusRingClass="has-focus-ring" within>

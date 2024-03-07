@@ -1,6 +1,7 @@
 import { tv } from 'tailwind-variants'
+import typography from '../Typography'
 
-export const textArea = tv({
+export const textAreaInput = tv({
   base: `
     w-full
     min-h-32
@@ -21,5 +22,25 @@ export const textArea = tv({
     isError: {
       true: 'border-red-500',
     },
+  },
+})
+
+export const textAreaWrapper = tv({
+  base: 'flex flex-col',
+})
+
+export const textAreaContainer = tv({
+  base: 'flex items-center gap-4',
+})
+
+export const textAreaLabel = tv({
+  base: 'text-gray-3 px-6',
+})
+
+export const textAreaErrorMessage = tv({
+  extend: typography,
+  defaultVariants: {
+    size: 'footnotes',
+    isError: true,
   },
 })
