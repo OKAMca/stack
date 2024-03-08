@@ -7,9 +7,9 @@ import Radio from '../Radio/index'
 export const Template = (args) => {
   return (
     <RadioGroup label="Question 1/12" {...args}>
-      <Radio id="item1" label="Item 1" name="item" value="1" />
-      <Radio id="item2" label="Item 2" name="item" value="2" />
-      <Radio id="item3" label="Item 3" name="item" value="3" />
+      <Radio id="item1" label="Item 1" name="item" value="1" aria-label="Choose item 1" />
+      <Radio id="item2" label="Item 2" name="item" value="2" aria-label="Choose item 2" />
+      <Radio id="item3" label="Item 3" name="item" value="3" aria-label="Choose item 3" />
     </RadioGroup>
   )
 }
@@ -17,9 +17,9 @@ export const Template = (args) => {
 export const TemplateError = (args) => {
   return (
     <RadioGroup label="Question 2/12" {...args}>
-      <Radio id="item4" label="Item 1" name="item" value="1" />
-      <Radio id="item5" label="Item 2" name="item" value="2" />
-      <Radio id="item6" label="Item 3" name="item" value="3" />
+      <Radio id="item4" label="Item 1" name="item" value="1" aria-label="Choose item 1" />
+      <Radio id="item5" label="Item 2" name="item" value="2" aria-label="Choose item 2" />
+      <Radio id="item6" label="Item 3" name="item" value="3" aria-label="Choose item 3" />
     </RadioGroup>
   )
 }
@@ -38,11 +38,8 @@ RadioGroup component.
     args={{
       isDisabled: true,
     }}
-
 >
-
     {Template.bind({})}
-
   </Story>
 </Canvas>
 
