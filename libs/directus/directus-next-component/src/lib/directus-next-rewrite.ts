@@ -59,7 +59,7 @@ export async function fetchPageSettings(pathName: string, lang = 'fr=CA') {
   }
 }
 
-export async function middleware(request: NextRequest) {
+export async function directusRouteMiddleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
   // Fetch page settings based on the request path.
