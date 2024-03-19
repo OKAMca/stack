@@ -16,10 +16,8 @@ export async function fetchPageSettings(pathName: string, lang = 'fr=CA') {
         filter: { translations: { path: { _eq: $path } } },
         limit: 1
       ) {
-          route {
-            translations(filter: { languages_code: { code: { _ends_with: $lang } } }) {
-            route
-          }
+          belongs_to_key
+          belongs_to_collection
         }
       }
     }
@@ -46,15 +44,19 @@ export async function fetchPageSettings(pathName: string, lang = 'fr=CA') {
     })
 
     const { data } = await response.json()
-    return get<string>(data, 'page_settings.0.route.translations.0.route')
+
+    const key = get<string>(data, 'page_settings.0.belongs_to_key')
+    const colletion = get<string>(data, 'page_settings.0.belongs_to_collection')
+
+    if (key == null || colletion == null) {
+      throw new Error('No page settings found')
+    }
+
+    return `/${colletion}/${key}`
   } catch (e) {
     console.error('GraphQL Error', (e as Error).message)
     return null
   }
-}
-
-function transformSlugs(input: string): string {
-  return input.replace(/\{\{(.*?)\}\}/g, '[$1]')
 }
 
 export async function middleware(request: NextRequest) {
@@ -67,11 +69,9 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  const newPath = transformSlugs(route)
-
   // Perform a rewrite to the new path.
   const url = request.nextUrl.clone()
-  url.pathname = newPath
+  url.pathname = route
 
   return NextResponse.rewrite(url)
 }
