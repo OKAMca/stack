@@ -2,7 +2,8 @@
 
 import { useOverlayTriggerState } from '@react-stately/overlays'
 import React, { useEffect } from 'react'
-import { useButton } from 'react-aria'
+import type { PressEvent } from 'react-aria'
+import { useOverlayTrigger } from 'react-aria'
 import type { TOnCloseCallback, TOnOpenCallback } from './interface'
 
 const useOverlayHook = (isOpen?: boolean, onOpenCallBack?: TOnOpenCallback, onCloseCallBack?: TOnCloseCallback) => {
@@ -31,20 +32,41 @@ const useOverlayHook = (isOpen?: boolean, onOpenCallBack?: TOnOpenCallback, onCl
     onCloseCallBack?.()
   }
 
-  const { buttonProps: openButtonProps } = useButton(
+  const {
+    triggerProps: { onPress: onOpenPressStart, ...restOfOpenButtonProps },
+  } = useOverlayTrigger(
     {
-      elementType: 'div',
-      onPress: handleOpen,
+      type: 'dialog',
     },
+    state,
     openButtonRef,
   )
 
-  const { buttonProps: closeButtonProps } = useButton(
-    {
-      onPress: handleClose,
+  const openButtonProps = {
+    ...restOfOpenButtonProps,
+    onClick: (e: PressEvent) => {
+      handleClose()
+      onOpenPressStart?.(e)
     },
+  }
+
+  const {
+    triggerProps: { onPress: onClosePressStart, ...restOfCloseButtonProps },
+  } = useOverlayTrigger(
+    {
+      type: 'dialog',
+    },
+    state,
     closeButtonRef,
   )
+
+  const closeButtonProps = {
+    ...restOfCloseButtonProps,
+    onClick: (e: PressEvent) => {
+      handleClose()
+      onClosePressStart?.(e)
+    },
+  }
 
   return {
     state,

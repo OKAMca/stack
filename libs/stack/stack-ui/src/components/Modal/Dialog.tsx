@@ -21,7 +21,7 @@ const ModalDialog = (props: ModalDialogProps) => {
     <div {...underlayProps}>
       <FocusRing focusRingClass="has-focus-ring" within autoFocus>
         <FocusScope contain restoreFocus autoFocus>
-          <div {...overlayProps} {...dialogProps} {...modalProps} ref={ref}>
+          <div {...overlayProps} {...dialogProps} {...modalProps} ref={ref} aria-modal>
             {children}
           </div>
         </FocusScope>
