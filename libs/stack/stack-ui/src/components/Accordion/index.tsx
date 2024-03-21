@@ -7,13 +7,17 @@ import { useTreeState } from 'react-stately'
 import { AccordionContextProvider } from '../../providers/Accordion'
 import { BoxWithForwardRef } from '../Box'
 import AriaAccordionItem from './components/AriaAccordionItem'
+import useDefaultExpandedKeys from './hooks/useDefaultExpandedKeys'
 import type { TAccordionItemProps, TAccordionProps } from './interface'
 
 const Accordion = (props: TAccordionProps) => {
   const { themeName = 'accordion', tokens, customTheme, TransitionAnimation, selectionMode = 'single', ...rest } = props
 
   const accordionRef = useRef(null)
-  const state = useTreeState({ selectionMode, ...rest })
+  const defaultExpandedKeys = useDefaultExpandedKeys(props)
+
+  const state = useTreeState({ selectionMode, defaultExpandedKeys, ...rest })
+
   const { accordionProps } = useAccordion(props, state, accordionRef)
 
   return (
