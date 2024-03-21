@@ -1,16 +1,30 @@
-import type React from 'react'
+/* eslint-disable @typescript-eslint/naming-convention */
+import type { AccordionItemAriaProps } from '@react-aria/accordion'
+import type { ComponentType, ReactElement } from 'react'
+import type { ItemProps, TreeProps } from 'react-stately'
 import type { TToken } from '../../providers/Theme/interface'
-import type { TDefaultComponent } from '../../types/components'
+import type { TDefaultComponent, TTransition } from '../../types/components'
 
-export interface TAccordionProps extends TDefaultComponent<TAccordionTokens> {
+type TAccordionDefaultComponent = Omit<TDefaultComponent<TAccordionTokens>, 'children'>
+
+export interface TAccordionProps extends TAccordionDefaultComponent, TreeProps<TAccordionItemProps> {
   id: string
-  title: string
+  children: ReactElement<TAccordionItemProps> | ReactElement<TAccordionItemProps>[]
+  TransitionAnimation?: ComponentType<TTransition>
+}
+
+export interface TAccordionItemProps extends ItemProps<TAccordionItemProps>, TAccordionDefaultComponent {
   icon?: React.ReactNode
-  ariaLabel: string
-  children: React.ReactNode
   onClick?: (isOpen: boolean) => void
   defaultIsOpen?: boolean
 }
+
+export type TAriaAccordionItemProps = TAccordionDefaultComponent &
+  Omit<AccordionItemAriaProps<TAccordionItemProps>, 'item'> & {
+    item: Omit<AccordionItemAriaProps<TAccordionItemProps>['item'], 'props'> & {
+      props?: TAccordionItemProps
+    }
+  }
 
 interface TAccordionTokens extends TToken {
   titleBold: boolean
