@@ -38,12 +38,11 @@ const TextInputField = (props: TTextInputProps) => {
   const wrapper = useThemeContext(`${themeName}.wrapper`, inputTokens, customTheme)
   const labelTheme = useThemeContext(`${themeName}.label`, inputTokens, customTheme)
   const input = useThemeContext(`${themeName}.input`, inputTokens, customTheme)
+  const inputContainer = useThemeContext(`${themeName}.inputContainer`, inputTokens, customTheme)
   const container = useThemeContext(`${themeName}.container`, inputTokens, customTheme)
 
-  console.log(useThemeContext(`${themeName}.errorMessage`, inputTokens, customTheme))
-
   return (
-    <div>
+    <div className={container}>
       <FocusRing focusRingClass="has-focus-ring" within>
         <div aria-disabled={disabled} className={wrapper}>
           {label && (
@@ -52,7 +51,7 @@ const TextInputField = (props: TTextInputProps) => {
               {label}
             </label>
           )}
-          <div className={container}>
+          <div className={inputContainer}>
             {children}
 
             <input

@@ -9,6 +9,9 @@ export const selectButton = tv({
 export const selectList = tv({
   extend: typography,
   base: 'outline outline-2 outline-white outline-offset-2 p-2 my-4 rounded-md w-full flex flex-col gap-6',
+  defaultVariants: {
+    size: 'footnotes',
+  },
 })
 
 export const selectPopover = tv({

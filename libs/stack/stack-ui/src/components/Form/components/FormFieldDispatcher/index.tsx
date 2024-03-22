@@ -1,14 +1,18 @@
 import FormField from '../FormField'
-import type { TFormFieldDispatcherProps } from './interface'
+import type { TFormConfig, TFormFieldDispatcherProps } from './interface'
+
+export const formConfig: TFormConfig = (schema) => {
+  return schema
+}
 
 const FormFieldDispatcher = (props: TFormFieldDispatcherProps) => {
-  const { fields, config, customTheme, themeName, tokens } = props
+  const { fields, config, customTheme, themeName } = props
 
   return fields.map((field) => (
     <FormField
-      customTheme={customTheme}
       themeName={themeName}
-      tokens={tokens}
+      tokens={field.tokens}
+      customTheme={field.customTheme || customTheme}
       key={`${field.item?.name}-${field.type}`}
       item={field.item}
       config={config}

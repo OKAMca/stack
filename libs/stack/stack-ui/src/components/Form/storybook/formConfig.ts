@@ -1,53 +1,35 @@
-import type { JSONSchemaType } from 'ajv'
-import type { FieldValues } from 'react-hook-form'
+import FormTextAreaField from '../components/fields/FormTextArea'
 import FormTextInputField from '../components/fields/FormTextInputField'
 import type { TFormField } from '../components/FormField/interface'
-import type { TFormFieldDispatcherConfig } from '../components/FormFieldDispatcher/interface'
+import { formConfig } from '../components/FormFieldDispatcher'
 
-export const formConfig: TFormFieldDispatcherConfig = {
+export const formConfigTest = formConfig({
   mapping: {
     base: 'type',
+    variants: { variant: 'type' },
   },
   fields: {
     text_field: {
       default: FormTextInputField,
+      themeKey: 'textInputField',
+      variants: {
+        variant1: {
+          default: FormTextInputField,
+        },
+      },
+    },
+    text_area: {
+      default: FormTextAreaField,
+      themeKey: 'textAreaField',
     },
   },
-}
-
-export const formSchemaTest: JSONSchemaType<FieldValues> = {
-  type: 'object',
-  properties: {
-    firstName: {
-      type: 'string',
-      minLength: 10,
-      nullable: true,
-      errorMessage: { minLength: 'firstname should be longer than 10' },
-    },
-    lastName: {
-      type: 'string',
-      minLength: 1,
-      nullable: true,
-      errorMessage: { minLength: 'lastname is required' },
-    },
-    email: {
-      type: 'string',
-      minLength: 1,
-      nullable: true,
-      errorMessage: { minLength: 'email is required' },
-    },
-    password: {
-      type: 'string',
-      minLength: 1,
-      nullable: true,
-      errorMessage: { minLength: 'password is required' },
-    },
-  },
-  additionalProperties: false,
-}
+})
 
 export const fieldsTest: TFormField[] = [
   {
+    tokens: {
+      width: 'half',
+    },
     type: 'text_field',
     item: {
       id: 'first-name',
@@ -68,6 +50,9 @@ export const fieldsTest: TFormField[] = [
     },
   },
   {
+    tokens: {
+      width: 'half',
+    },
     type: 'text_field',
     item: {
       id: 'last-name',
@@ -104,6 +89,19 @@ export const fieldsTest: TFormField[] = [
       disabled: false,
       isError: false,
       ariaLabel: 'Password input',
+    },
+  },
+  {
+    type: 'text_area',
+    item: {
+      id: 'description',
+      label: 'Description',
+      name: 'description',
+      placeholder: 'Enter description',
+      required: true,
+      disabled: false,
+      isError: false,
+      ariaLabel: 'Description input',
     },
   },
 ]

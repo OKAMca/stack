@@ -35,20 +35,21 @@ const TextArea = (props: TTextInputProps) => {
 
   const inputTokens = { ...tokens, isDisabled: disabled, isError: errorMessage != null }
 
+  const container = useThemeContext(`${themeName}.container`, inputTokens, customTheme)
   const wrapper = useThemeContext(`${themeName}.wrapper`, inputTokens, customTheme)
   const input = useThemeContext(`${themeName}.input`, inputTokens, customTheme)
   const labelTheme = useThemeContext(`${themeName}.label`, inputTokens, customTheme)
-  const container = useThemeContext(`${themeName}.container`, inputTokens, customTheme)
+  const inputContainer = useThemeContext(`${themeName}.inputContainer`, inputTokens, customTheme)
 
   return (
-    <div>
+    <div className={container}>
       <div className={wrapper} aria-disabled={disabled}>
         {label && (
           <label className={labelTheme} {...labelProps}>
             {label}
           </label>
         )}
-        <div className={container}>
+        <div className={inputContainer}>
           <FocusRing focusRingClass="has-focus-ring">
             <textarea
               {...(inputProps as object)}
