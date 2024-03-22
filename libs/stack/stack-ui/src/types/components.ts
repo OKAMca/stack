@@ -23,11 +23,6 @@ export type TReactHookForm = {
   validation?: object
 }
 
-export interface TTransition extends TDefaultComponent {
-  isVisible: boolean
-  children: React.ReactNode
-}
-
 export type Nullable<T> = T | undefined | null
 
 export type Maybe<T> = T | null

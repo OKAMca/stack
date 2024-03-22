@@ -2,10 +2,6 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import { ArgTypes } from '@storybook/blocks'
 import Accordion from './'
 import CloseBtn from '../icons/CloseBtn'
-import Button from '../Button'
-import Typography from '../Typography'
-import { Item } from '@react-stately/collections'
-import AccordionItem from './components/AccordionItem'
 
 <Meta
   title="Base Components/Accordion"
@@ -14,9 +10,22 @@ import AccordionItem from './components/AccordionItem'
     id: {
       description: 'Used for accessibility of controls',
     },
+    title: {
+      description:
+        'This prop is used for the title of the accordion, in the docs case: "This is an accordion". It also extends `TTypogaphpyProps` to customize the as and size of the title',
+    },
+    ariaLabel: {
+      description: 'Used for accessibility',
+    },
+    icon: {
+      description: 'Takes in the name of an Icon inside the available icons folder or a component icon',
+      defaultValue: {
+        summary: 'ArrowRight',
+      },
+    },
     onClick: {
       description:
-        'Function passed into onClick will be called when clicking any accordion item child. It also gives back the state of the accordion after clicking it (`true` for opened, `false` for closed)',
+        'Function passed into onClick will be called when clicking the Accordion button. It also gives back the state of the accordion after clicking it (`true` for opened, `false` for closed)',
     },
     tokens: {
       description: 'Takes in `textAlign` (`left` | `center`), `titleBold` (`boolean`)',
@@ -24,36 +33,22 @@ import AccordionItem from './components/AccordionItem'
         summary: '{ textAlign: left, titleBold: false }',
       },
     },
-    children: {
-      description: 'List of `AccordionItem`',
-    }
   }}
   args={{
     id: '1',
-    onClick: (isOpen) => console.log('On accordion click', `isOpen: ${isOpen}`)
+    title: 'This is an accordion',
+    ariaLabel: 'Accordion',
   }}
   parameters={{ layout: 'fullscreen' }}
 />
 
 export const Template = (args) => (
   <Accordion {...args}>
-    <AccordionItem key="item-1" title="This is an accordion">
+    <p>
       BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
       prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
       mind.
-    </AccordionItem>
-  </Accordion>
-)
-
-export const TemplateWithFocusableChildren = (args) => (
-  <Accordion {...args}>
-    <AccordionItem key="item-1" title="This is an accordion" onClick={(isOpen) => console.log('On accordion item click', `isOpen: ${isOpen}`)}>
-      <Button>Focusable item 1</Button>
-      <Button>Focusable item 2</Button>
-    </AccordionItem>
-    <AccordionItem key="item-2" title="This is an accordion 2" defaultIsOpen>
-      <Button>Focusable item</Button>
-    </AccordionItem>
+    </p>
   </Accordion>
 )
 
@@ -84,9 +79,7 @@ export const TemplateWithFocusableChildren = (args) => (
     {Template.bind({})}
   </Story>
 </Canvas>
-
 ### Centered Accordion
-
 <Canvas>
   <Story
     name="Center Aligned"
@@ -100,9 +93,7 @@ export const TemplateWithFocusableChildren = (args) => (
     {Template.bind({})}
   </Story>
 </Canvas>
-
 ### Default opened accordion
-
 <Canvas>
   <Story
     name="Default opened"
@@ -116,22 +107,5 @@ export const TemplateWithFocusableChildren = (args) => (
     }}
   >
     {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Accordion with focusable items inside
-
-<Canvas>
-  <Story
-    name="With focusable items"
-    args={{
-      id: 'accordion',
-      tokens: {
-        textAlign: 'left',
-      },
-      icon: <CloseBtn />,
-    }}
-  >
-    {TemplateWithFocusableChildren.bind({})}
   </Story>
 </Canvas>

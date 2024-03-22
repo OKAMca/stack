@@ -1,52 +1,66 @@
 'use client'
 
-import { useAccordion } from '@react-aria/accordion'
-import { useRef } from 'react'
-import type { Node } from 'react-stately'
-import { useTreeState } from 'react-stately'
-import { AccordionContextProvider } from '../../providers/Accordion'
-import { BoxWithForwardRef } from '../Box'
-import AriaAccordionItem from './components/AriaAccordionItem'
-import type { TAccordionItemProps, TAccordionProps } from './interface'
+import React, { useState } from 'react'
+import useThemeContext from '../../providers/Theme/hooks'
+import Button from '../Button'
+import Icon from '../Icon'
+import type { TAccordionProps } from './interface'
 
 const Accordion = (props: TAccordionProps) => {
-  const { themeName = 'accordion', tokens, customTheme, onClick, TransitionAnimation, ...rest } = props
+  const {
+    customTheme,
+    themeName = 'accordion',
+    id,
+    tokens,
+    title,
+    ariaLabel,
+    onClick,
+    icon,
+    children,
+    defaultIsOpen = false,
+  } = props
 
-  const accordionRef = useRef(null)
-  const state = useTreeState({ ...props, selectionMode: 'single' })
-  const { accordionProps } = useAccordion(rest, state, accordionRef)
+  const [isOpen, setIsOpen] = useState(defaultIsOpen)
+
+  const containerTheme = useThemeContext(`${themeName}.container`, { ...tokens, isOpen }, customTheme)
+  const titleTheme = useThemeContext(`${themeName}.title`, { ...tokens, isOpen }, customTheme)
+  const iconTheme = useThemeContext(`${themeName}.icon`, { ...tokens, isOpen }, customTheme)
+  const regionTheme = useThemeContext(`${themeName}.region`, { ...tokens, isOpen }, customTheme)
+  const contentTheme = useThemeContext(`${themeName}.content`, { ...tokens, isOpen }, customTheme)
 
   return (
-    <AccordionContextProvider state={state} TransitionAnimation={TransitionAnimation}>
-      <BoxWithForwardRef
-        themeName={`${themeName}.wrapper`}
-        tokens={tokens}
-        customTheme={customTheme}
-        ref={accordionRef}
-        {...accordionProps}
+    <div
+      className={containerTheme}
+      id={`accordion-control-${id}`}
+      aria-label={ariaLabel}
+      aria-expanded={isOpen}
+      aria-controls={`accordion-content-${id}`}
+    >
+      <Button
+        themeName={`${themeName}.button`}
+        tokens={{ ...tokens, isOpen }}
+        handlePress={() => {
+          setIsOpen(!isOpen)
+          onClick?.(isOpen)
+        }}
+        as="button"
+        id={`accordion-control-${id}`}
+        aria-label={ariaLabel}
       >
-        {[...state.collection].map((item: Node<TAccordionItemProps>) => {
-          const { props: itemProps } = item
-          return (
-            <AriaAccordionItem
-              key={item.key}
-              item={{
-                ...item,
-                props: {
-                  ...itemProps,
-                  onClick: (isOpen) => {
-                    itemProps?.onClick?.(isOpen)
-                    onClick?.(isOpen)
-                  },
-                },
-              }}
-              themeName={themeName}
-              tokens={tokens}
-            />
-          )
-        })}
-      </BoxWithForwardRef>
-    </AccordionContextProvider>
+        <div className={titleTheme}>{title}</div>
+        <div className={iconTheme}>
+          <Icon icon={icon ?? 'ArrowDown'} />
+        </div>
+      </Button>
+      <div
+        className={regionTheme}
+        role="region"
+        id={`accordion-content-${id}`}
+        aria-labelledby={`accordion-control-${id}`}
+      >
+        <div className={contentTheme}>{children}</div>
+      </div>
+    </div>
   )
 }
 

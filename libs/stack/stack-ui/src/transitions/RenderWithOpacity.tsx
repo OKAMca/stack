@@ -1,8 +1,12 @@
+import React from 'react'
 import { animated, config, useTransition } from 'react-spring'
-import useThemeContext from '../providers/Theme/hooks'
-import type { TTransition } from '../types/components'
 
-const RenderWithOpacity = ({ isVisible, children, themeName, tokens, customTheme }: TTransition) => {
+interface TProps {
+  isVisible: boolean
+  children: React.ReactNode
+}
+
+const RenderWithOpacity = ({ isVisible, children }: TProps) => {
   const transition = useTransition(isVisible, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -10,16 +14,7 @@ const RenderWithOpacity = ({ isVisible, children, themeName, tokens, customTheme
     config: config.stiff,
   })
 
-  const transitionTheme = useThemeContext(themeName, tokens, customTheme)
-
-  return transition(
-    (styles, bool) =>
-      bool && (
-        <animated.div className={transitionTheme} style={styles}>
-          {children}
-        </animated.div>
-      ),
-  )
+  return transition((styles, bool) => bool && <animated.div style={styles}>{children}</animated.div>)
 }
 
 export default RenderWithOpacity
