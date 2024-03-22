@@ -15,6 +15,7 @@ export interface TButtonProps extends TDefaultComponent {
   tabIndex?: number
   role?: string
   isDisabled?: boolean
+  type?: 'submit' | 'button' | 'reset'
 }
 
 export interface TAnchorPropsProps extends TButtonProps {

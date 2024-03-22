@@ -36,10 +36,22 @@ import {
   datePickerIcon,
   datePickerLabel,
 } from './DatePicker'
+import { formContainer, formField, formSubmitButton } from './Form'
+import { formTextInputField } from './Form/fields'
+import formTextAreaField from './Form/fields/FormTextArea'
 import { imgTheme } from './Image'
 import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
+import {
+  selectButton,
+  selectContainer,
+  selectErrorMessage,
+  selectList,
+  selectListItem,
+  selectPopover,
+  selectWrapper,
+} from './Select'
 import {
   shareButton,
   shareButtonContainer,
@@ -50,6 +62,7 @@ import {
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
 import { textArea } from './TextArea'
+import { textInput } from './TextInputField'
 import typography from './Typography'
 
 const BaseTheme = makeTheme({
@@ -90,6 +103,27 @@ const BaseTheme = makeTheme({
     label: (props) => datePickerLabel(props),
     calendarPopover: (props) => datePickerCalendarPopoverContainer(props),
     calendarUnderlay: (props) => datePickerCalendarPopoverUnderlay(props),
+  },
+  form: {
+    container: (props) => formContainer(props),
+    submitButton: (props) => formSubmitButton(props),
+    field: (props) => formField(props),
+    textInputField: {
+      wrapper: (props) => formTextInputField(props).wrapper(),
+      label: (props) => formTextInputField(props).label(),
+      container: (props) => formTextInputField(props).container(),
+      inputContainer: (props) => formTextInputField(props).inputContainer(),
+      input: (props) => formTextInputField(props).input(),
+      errorMessage: (props) => formTextInputField(props).errorMessage(),
+    },
+    textAreaField: {
+      wrapper: (props) => formTextAreaField(props).wrapper(),
+      label: (props) => formTextAreaField(props).label(),
+      container: (props) => formTextAreaField(props).container(),
+      inputContainer: (props) => formTextAreaField(props).inputContainer(),
+      input: (props) => formTextAreaField(props).input(),
+      errorMessage: (props) => formTextAreaField(props).errorMessage(),
+    },
   },
   popover: {
     button: (props) => button(props),
@@ -141,32 +175,29 @@ const BaseTheme = makeTheme({
     errormessage: (props) => typography(props),
   },
   select: {
-    button: (props) => button(props),
-    ul: (props) =>
-      typography({
-        ...props,
-        className: 'outline outline-2 outline-white outline-offset-2 p-2 my-4 rounded-md w-full flex flex-col gap-6',
-      }),
-    popover: (props) => button({ ...props, className: 'w-[var(--select-container-width)]' }),
-    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
-    wrapper: () => 'flex flex-col gap-4 relative',
-    container: () => 'flex flex-col gap-4',
-    li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
+    button: (props) => selectButton(props),
+    ul: (props) => selectList(props),
+    popover: (props) => selectPopover(props),
+    errorMessage: (props) => selectErrorMessage(props),
+    wrapper: (props) => selectWrapper(props),
+    container: (props) => selectContainer(props),
+    li: (props) => selectListItem(props),
   },
   textarea: {
-    wrapper: () => 'flex flex-col',
-    container: () => 'flex items-center gap-4',
-    label: () => 'text-gray-3 px-6',
-    input: (props) => textArea(props),
-    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
+    container: (props) => textArea(props).container(),
+    wrapper: (props) => textArea(props).wrapper(),
+    label: (props) => textArea(props).label(),
+    inputContainer: (props) => textArea(props).inputContainer(),
+    input: (props) => textArea(props).input(),
+    errorMessage: (props) => textArea(props).errorMessage(),
   },
   textInput: {
-    wrapper: () =>
-      `flex flex-col rounded-md px-4 py-1 mb-3 m-0.5 border-2 aria-disabled:pointer-events-none aria-disabled:opacity-30 focus-ring-black`,
-    label: () => 'text-xs',
-    container: () => 'flex items-center gap-4',
-    input: () => '',
-    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
+    wrapper: (props) => textInput(props).wrapper(),
+    label: (props) => textInput(props).label(),
+    container: (props) => textInput(props).container(),
+    inputContainer: (props) => textInput(props).inputContainer(),
+    input: (props) => textInput(props).input(),
+    errorMessage: (props) => textInput(props).errorMessage(),
   },
   menu: {
     sidePanel: {
