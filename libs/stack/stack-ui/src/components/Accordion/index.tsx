@@ -10,11 +10,11 @@ import AriaAccordionItem from './components/AriaAccordionItem'
 import type { TAccordionItemProps, TAccordionProps } from './interface'
 
 const Accordion = (props: TAccordionProps) => {
-  const { themeName = 'accordion', tokens, customTheme, TransitionAnimation, selectionMode = 'single', ...rest } = props
+  const { themeName = 'accordion', tokens, customTheme, onClick, TransitionAnimation, ...rest } = props
 
   const accordionRef = useRef(null)
-  const state = useTreeState({ selectionMode, ...rest })
-  const { accordionProps } = useAccordion(props, state, accordionRef)
+  const state = useTreeState({ ...props, selectionMode: 'single' })
+  const { accordionProps } = useAccordion(rest, state, accordionRef)
 
   return (
     <AccordionContextProvider state={state} TransitionAnimation={TransitionAnimation}>
@@ -26,7 +26,24 @@ const Accordion = (props: TAccordionProps) => {
         {...accordionProps}
       >
         {[...state.collection].map((item: Node<TAccordionItemProps>) => {
-          return <AriaAccordionItem key={item.key} item={item} themeName={themeName} tokens={tokens} />
+          const { props: itemProps } = item
+          return (
+            <AriaAccordionItem
+              key={item.key}
+              item={{
+                ...item,
+                props: {
+                  ...itemProps,
+                  onClick: (isOpen) => {
+                    itemProps?.onClick?.(isOpen)
+                    onClick?.(isOpen)
+                  },
+                },
+              }}
+              themeName={themeName}
+              tokens={tokens}
+            />
+          )
         })}
       </BoxWithForwardRef>
     </AccordionContextProvider>

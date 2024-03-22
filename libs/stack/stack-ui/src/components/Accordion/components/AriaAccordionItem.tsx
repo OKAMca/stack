@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import type { PointerEvent } from 'react'
 import { FocusScope } from 'react-aria'
 import { useAccordionCtx } from '../../../providers/Accordion'
-import AccordionTransition from '../../../transitions/AccordionTransition'
+import RenderWithOpacity from '../../../transitions/RenderWithOpacity'
 import Box from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
@@ -15,7 +15,7 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
   const { icon, title, onClick } = itemProps ?? {}
 
   const ref = useRef(null)
-  const { state, TransitionAnimation = AccordionTransition } = useAccordionCtx()
+  const { state, TransitionAnimation = RenderWithOpacity } = useAccordionCtx()
 
   const {
     buttonProps: { onClick: onButtonClick, ...buttonProps },
@@ -50,18 +50,13 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
           <Icon icon={icon ?? 'ArrowDown'} />
         </Box>
       </ButtonWithForwardRef>
-      <TransitionAnimation
-        isVisible={isOpen}
-        themeName={`${themeName}.region`}
-        {...regionProps}
-        tokens={accordionTokens}
-      >
-        <Box themeName={`${themeName}.content`} tokens={accordionTokens}>
+      <Box themeName={`${themeName}.region`} {...regionProps} tokens={accordionTokens}>
+        <TransitionAnimation isVisible={isOpen} themeName={`${themeName}.content`} tokens={accordionTokens}>
           <FocusScope contain autoFocus restoreFocus>
             {rendered}
           </FocusScope>
-        </Box>
-      </TransitionAnimation>
+        </TransitionAnimation>
+      </Box>
     </Box>
   )
 }

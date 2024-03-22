@@ -2,7 +2,14 @@
 
 import React from 'react'
 import { makeTheme, createThemeProvider } from '../providers/Theme'
-import { accordionTheme } from './Accordion'
+import {
+  accordionButton,
+  accordionContainer,
+  accordionContent,
+  accordionIcon,
+  accordionRegion,
+  accordionTitle,
+} from './Accordion'
 import { container, grid, gridItem, main } from './Box'
 import button from './Button'
 import {
@@ -50,7 +57,14 @@ const BaseTheme = makeTheme({
   gridItem: (props) => gridItem(props),
   grid: (props) => grid(props),
   container: (props) => container(props),
-  accordion: accordionTheme,
+  accordion: {
+    container: (props) => accordionContainer(props),
+    button: (props) => accordionButton(props),
+    title: (props) => accordionTitle(props),
+    icon: (props) => accordionIcon(props),
+    region: (props) => accordionRegion(props),
+    content: (props) => accordionContent(props),
+  },
   carousel: {
     container: (props) => carouselContainer(props),
     slideContainer: (props) => carouselSlideContainer(props),

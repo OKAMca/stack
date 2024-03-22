@@ -1,5 +1,4 @@
 import { tv } from 'tailwind-variants'
-import type { TToken } from '../../providers/Theme/interface'
 
 export const accordionContainer = tv({
   base: '[border-radius: 32px] p-1.5 focus:outline-none text-color-1-500',
@@ -52,16 +51,16 @@ export const accordionIcon = tv({
 })
 
 export const accordionRegion = tv({
-  base: `
-    font-body 
-    text-inherit
-    h-auto
-    grid
-  `,
+  base: 'font-body text-inherit h-auto grid grid-rows-[0fr] transition-all duration-500',
   defaultVariants: {
     textAlign: 'left',
+    isOpen: false,
   },
   variants: {
+    isOpen: {
+      true: 'pb-8 pt-3 grid-rows-[1fr]',
+      false: '',
+    },
     textAlign: {
       center: 'grid-cols-[3rem_1fr_3rem] px-6 text-center',
       left: 'grid-cols-[1fr_3rem] text-left',
@@ -70,7 +69,7 @@ export const accordionRegion = tv({
 })
 
 export const accordionContent = tv({
-  base: 'overflow-hidden flex flex-col gap-2 items-start',
+  base: 'overflow-hidden',
   defaultVariants: {
     textAlign: 'left',
   },
@@ -81,12 +80,3 @@ export const accordionContent = tv({
     },
   },
 })
-
-export const accordionTheme = {
-  container: (props: TToken) => accordionContainer(props),
-  button: (props: TToken) => accordionButton(props),
-  title: (props: TToken) => accordionTitle(props),
-  icon: (props: TToken) => accordionIcon(props),
-  region: (props: TToken) => accordionRegion(props),
-  content: (props: TToken) => accordionContent(props),
-}

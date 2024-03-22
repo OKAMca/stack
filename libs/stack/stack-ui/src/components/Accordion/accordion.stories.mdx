@@ -26,17 +26,11 @@ import AccordionItem from './components/AccordionItem'
     },
     children: {
       description: 'List of `AccordionItem`',
-    },
-    selectionMode: {
-      description: 'Describes the selection mode for all the children items',
-      options: ['multiple', 'single', 'none'],
-      control: { type: 'radio' },
-      defaultValue: 'single',
-    },
+    }
   }}
   args={{
     id: '1',
-    onSelectionChange: (keys) => console.log('Selection changed to: ', keys)
+    onClick: (isOpen) => console.log('On accordion click', `isOpen: ${isOpen}`)
   }}
   parameters={{ layout: 'fullscreen' }}
 />
