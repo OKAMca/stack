@@ -1,7 +1,7 @@
-import type { AccordionItemAria } from '@react-aria/accordion'
 import { useAccordionItem } from '@react-aria/accordion'
 import { useRef } from 'react'
-import { FocusRing, FocusScope } from 'react-aria'
+import type { PointerEvent } from 'react'
+import { FocusScope } from 'react-aria'
 import { useAccordionCtx } from '../../../providers/Accordion'
 import AccordionTransition from '../../../transitions/AccordionTransition'
 import Box from '../../Box'
@@ -11,7 +11,7 @@ import type { TAriaAccordionItemProps } from '../interface'
 
 const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
   const { item, themeName, tokens, customTheme } = props
-  const { props: itemProps, rendered, key } = item
+  const { props: itemProps, rendered } = item
   const { icon, title, onClick } = itemProps ?? {}
 
   const ref = useRef(null)
@@ -21,11 +21,10 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
     buttonProps: { onClick: onButtonClick, ...buttonProps },
     regionProps,
   } = useAccordionItem(props, state, ref)
-
-  const isOpen = state.expandedKeys.has(key)
+  const isOpen = state.selectionManager.isSelected(item.key)
   const accordionTokens = { ...tokens, isOpen }
 
-  const handlePress: (typeof buttonProps)['onPointerDown'] = (e) => {
+  const handlePress = (e: PointerEvent<HTMLElement>) => {
     state.selectionManager.select(item.key)
     if (onClick) onClick?.(isOpen)
     buttonProps.onPointerDown?.(e)
@@ -38,21 +37,19 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
 
   return (
     <Box themeName={`${themeName}.container`} tokens={accordionTokens} customTheme={customTheme}>
-      <FocusRing focusRingClass="has-focus-ring">
-        <ButtonWithForwardRef
-          ref={ref}
-          themeName={`${themeName}.button`}
-          tokens={accordionTokens}
-          {...updatedButtonProps}
-        >
-          <Box themeName={`${themeName}.title`} tokens={accordionTokens}>
-            {title}
-          </Box>
-          <Box themeName={`${themeName}.icon`} tokens={accordionTokens}>
-            <Icon icon={icon ?? 'ArrowDown'} />
-          </Box>
-        </ButtonWithForwardRef>
-      </FocusRing>
+      <ButtonWithForwardRef
+        ref={ref}
+        themeName={`${themeName}.button`}
+        tokens={accordionTokens}
+        {...updatedButtonProps}
+      >
+        <Box themeName={`${themeName}.title`} tokens={accordionTokens}>
+          {title}
+        </Box>
+        <Box themeName={`${themeName}.icon`} tokens={accordionTokens}>
+          <Icon icon={icon ?? 'ArrowDown'} />
+        </Box>
+      </ButtonWithForwardRef>
       <TransitionAnimation
         isVisible={isOpen}
         themeName={`${themeName}.region`}
@@ -60,7 +57,7 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
         tokens={accordionTokens}
       >
         <Box themeName={`${themeName}.content`} tokens={accordionTokens}>
-          <FocusScope autoFocus contain restoreFocus>
+          <FocusScope contain autoFocus restoreFocus>
             {rendered}
           </FocusScope>
         </Box>

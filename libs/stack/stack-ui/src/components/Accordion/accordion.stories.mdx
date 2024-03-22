@@ -57,18 +57,8 @@ export const TemplateWithFocusableChildren = (args) => (
       <Button>Focusable item 1</Button>
       <Button>Focusable item 2</Button>
     </AccordionItem>
-    <AccordionItem key="item-2" title="This is an accordion 2">
+    <AccordionItem key="item-2" title="This is an accordion 2" defaultIsOpen>
       <Button>Focusable item</Button>
-    </AccordionItem>
-  </Accordion>
-)
-
-export const TemplateDefaultOpenedItem = (args) => (
-  <Accordion {...args}>
-    <AccordionItem key="item-1" title="This is an accordion" defaultIsOpen>
-      BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
-      prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
-      mind.
     </AccordionItem>
   </Accordion>
 )
@@ -127,10 +117,11 @@ export const TemplateDefaultOpenedItem = (args) => (
       tokens: {
         textAlign: 'left',
       },
+      defaultIsOpen: true,
       icon: <CloseBtn />,
     }}
   >
-    {TemplateDefaultOpenedItem.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>
 

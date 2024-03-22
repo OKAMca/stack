@@ -2,6 +2,7 @@
 import type { PartialNode } from '@react-stately/collections'
 import type { ReactElement, ReactNode } from 'react'
 import React from 'react'
+import { type ItemProps } from 'react-stately'
 import type { TAccordionItemProps } from '../interface'
 
 //  https://github.com/adobe/react-spectrum/blob/main/packages/%40react-stately/collections/src/Item.ts
@@ -11,9 +12,7 @@ const AccordionItem = (props: TAccordionItemProps): ReactNode => {
   return null
 }
 
-AccordionItem.getCollectionNode = function* getCollectionNode(
-  props: TAccordionItemProps,
-): Generator<PartialNode<TAccordionItemProps>> {
+AccordionItem.getCollectionNode = function* getCollectionNode<T>(props: ItemProps<T>): Generator<PartialNode<T>> {
   const { children, childItems, title } = props
   const textValue = props.textValue || (typeof children === 'string' ? children : '') || props['aria-label'] || ''
   yield {
@@ -28,16 +27,16 @@ AccordionItem.getCollectionNode = function* getCollectionNode(
         // eslint-disable-next-line no-restricted-syntax
         for (const child of childItems) {
           yield {
-            type: 'item',
+            type: 'acordionItem',
             value: child,
           }
         }
       } else if (title) {
-        const items: PartialNode<TAccordionItemProps>[] = []
+        const items: PartialNode<T>[] = []
         React.Children.forEach(children, (child) => {
           items.push({
             type: 'item',
-            element: child as ReactElement<TAccordionItemProps>,
+            element: child as ReactElement<T>,
           })
         })
 
