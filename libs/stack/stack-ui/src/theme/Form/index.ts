@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants'
 import button from '../Button'
 
 export const formContainer = tv({
-  base: 'w-[50vw]',
+  base: 'w-[512px] grid grid-cols-2 gap-2',
 })
 
 export const formField = tv({
@@ -14,12 +14,8 @@ export const formField = tv({
     },
   },
   defaultVariants: {
-    width: 'half',
+    width: 'full',
   },
-})
-
-export const formTextInputField = tv({
-  base: '',
 })
 
 export const formSubmitButton = tv({
@@ -31,7 +27,7 @@ export const formSubmitButton = tv({
       ...formField.defaultVariants,
     },
   }),
-  base: 'w-full',
+  base: 'w-full col-span-2',
   defaultVariants: {
     shape: 'circular',
     width: 'full',

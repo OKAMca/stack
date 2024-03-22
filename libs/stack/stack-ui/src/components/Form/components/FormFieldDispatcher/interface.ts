@@ -1,27 +1,43 @@
-import type { TStyleValue } from 'libs/stack/stack-ui/src/providers/Theme/interface'
 import type { TDefaultComponent } from 'libs/stack/stack-ui/src/types/components'
 import type { FunctionComponent } from 'react'
 import type { TFormField } from '../FormField/interface'
 
+export type TFormConfig = {
+  <B extends string, V extends TFormConfigVariants<B>>(
+    config: TFormFieldDispatcherConfig<B, V>,
+  ): TFormFieldDispatcherConfig<B, V>
+}
+
 export interface TFormFieldDispatcherProps extends TDefaultComponent {
-  config: TFormFieldDispatcherConfig
+  config: TFormFieldDispatcherConfig<string, TFormConfigVariants<string>>
   fields: TFormField[]
 }
 
-export interface TFormFieldDispatcherConfig {
-  mapping: TFormFieldDispatcherMappingConfig
+export type TFormFieldDispatcherConfig<B extends string, V extends TFormConfigVariants<B>> = {
+  mapping: TFormFieldDispatcherMappingConfig<B, V>
   fields: TFormFieldDispatcherFieldsConfig
 }
 
-interface TFormFieldDispatcherMappingConfig {
-  base: string
-  variants?: string[]
+interface TFormFieldDispatcherMappingConfig<B extends string, V extends TFormConfigVariants<B>> {
+  base: B
+  variants?: V
 }
 
-interface TFormFieldDispatcherFieldsConfig {
-  [fieldType: string]: {
-    default: FunctionComponent
-    theme?: TStyleValue[]
-    variants?: TFormFieldDispatcherFieldsConfig
+export type TFormConfigVariants<B extends string> = {
+  [key: string]: B
+}
+
+interface TFormFieldDispatcherFieldConfig {
+  default: FunctionComponent
+  themeKey?: string
+}
+
+export interface TDispatchedField extends TFormFieldDispatcherFieldConfig {
+  variants?: {
+    [variant: string]: TFormFieldDispatcherFieldConfig
   }
+}
+
+export interface TFormFieldDispatcherFieldsConfig {
+  [fieldType: string]: TDispatchedField
 }

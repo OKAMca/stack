@@ -23,9 +23,9 @@ const Form = <T extends FieldValues>(props: TFormProps<T>) => {
     <FormProvider {...formMethods}>
       <form className={containerTheme} onSubmit={formMethods.handleSubmit(handleSubmit)}>
         <FormFieldDispatcher
-          // themeName={`${themeName}.field`}
-          // tokens={tokens}
-          // customTheme={customTheme}
+          themeName={themeName}
+          tokens={tokens}
+          customTheme={customTheme}
           config={config}
           fields={fields}
         />
