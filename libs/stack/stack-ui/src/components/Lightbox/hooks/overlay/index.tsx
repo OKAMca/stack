@@ -2,10 +2,10 @@
 
 import { useSlotId } from '@react-aria/utils'
 import { useOverlayTrigger } from 'react-aria'
-import type { OverlayTriggerProps } from 'react-aria'
 import type { OverlayTriggerState } from 'react-stately'
+import type { LightboxProps } from '../../interface'
 
-function useOverlayHook(props: OverlayTriggerProps, state: OverlayTriggerState) {
+function useOverlayHook(props: LightboxProps, state: OverlayTriggerState) {
   const { type = 'dialog' } = props
   const {
     triggerProps: { onPress, ...triggerProps },
@@ -19,7 +19,13 @@ function useOverlayHook(props: OverlayTriggerProps, state: OverlayTriggerState) 
 
   const labelId = useSlotId()
 
+  const openTriggerProps = {
+    'aria-labelledby': labelId,
+    ...updatedTriggerProps,
+  }
+
   return {
+    openTriggerProps,
     triggerProps: updatedTriggerProps,
     labelProps: { id: labelId },
     overlayProps: { ...overlayProps, 'aria-labelledby': labelId },

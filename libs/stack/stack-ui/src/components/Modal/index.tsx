@@ -1,5 +1,6 @@
 'use client'
 
+import { Overlay } from 'react-aria'
 import ModalTransition from '../../transitions/ModalTransition'
 import ModalDialog from './components/ModalDialog'
 import ModalOverlay from './components/ModalOverlay'
@@ -16,13 +17,15 @@ const Modal = (props: TModalProps) => {
   } = props
 
   return (
-    <ModalOverlay themeName={themeName} tokens={tokens} state={state} {...rest}>
+    <Overlay>
       <TransitionComponent isVisible={state.isOpen}>
-        <ModalDialog themeName={themeName} tokens={tokens} {...rest}>
-          {children}
-        </ModalDialog>
+        <ModalOverlay themeName={themeName} tokens={tokens} state={state} {...rest}>
+          <ModalDialog themeName={themeName} tokens={tokens} {...rest}>
+            {children}
+          </ModalDialog>
+        </ModalOverlay>
       </TransitionComponent>
-    </ModalOverlay>
+    </Overlay>
   )
 }
 

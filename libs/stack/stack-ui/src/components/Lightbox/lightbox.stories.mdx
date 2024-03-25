@@ -24,6 +24,12 @@ import image from '../../../static/images/image.png'
     closeButton: {
       description: `To replace the lightbox's default close button`
     },
+    closeButtonAriaLabel: {
+      description: `Adds accessibility to the lightbox's default close button`,
+      control: {
+        type: 'text'
+      },
+    },
     isOpen: {
       description: 'Handles an optional controlled state'
     },
@@ -35,6 +41,7 @@ import image from '../../../static/images/image.png'
     label: 'Open Dialog',
     thumbnailContent: <Image src={image} width={570} height={762} alt="Dog picture" />,
     onOpenChange: (isOpen) => console.log(`Lightbox is now ${isOpen}`),
+    closeButtonAriaLabel: 'Close the modal',
   }}
 />
 

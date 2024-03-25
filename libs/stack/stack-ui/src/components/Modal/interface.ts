@@ -7,7 +7,6 @@ export interface TModalProps extends AriaModalOverlayProps, TDefaultComponent {
   state: OverlayTriggerState
   children: React.ReactNode
   transitionComponent?: (props: { isVisible: boolean; children: React.ReactNode }) => JSX.Element
-  label?: string
 }
 
 export interface TModalOverlayProps extends AriaModalOverlayProps, TDefaultComponent {
@@ -17,5 +16,4 @@ export interface TModalOverlayProps extends AriaModalOverlayProps, TDefaultCompo
 
 export interface TModalDialogProps extends AriaDialogProps, TDefaultComponent {
   children: React.ReactNode
-  label?: string
 }

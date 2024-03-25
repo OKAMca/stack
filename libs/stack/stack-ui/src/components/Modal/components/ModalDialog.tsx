@@ -1,15 +1,14 @@
 import React from 'react'
 import { FocusRing, FocusScope, useDialog } from 'react-aria'
 import { BoxWithForwardRef } from '../../Box'
-import Typography from '../../Typography'
 import type { TModalDialogProps } from '../interface'
 
 const ModalDialog = (props: TModalDialogProps) => {
-  const { children, label, themeName, tokens, customTheme } = props
+  const { children, themeName, tokens, customTheme } = props
 
   const ref = React.useRef(null)
 
-  const { dialogProps, titleProps } = useDialog(props, ref)
+  const { dialogProps } = useDialog(props, ref)
 
   return (
     <BoxWithForwardRef
@@ -17,16 +16,12 @@ const ModalDialog = (props: TModalDialogProps) => {
       tokens={tokens}
       customTheme={customTheme}
       ref={ref}
+      aria-modal
       {...dialogProps}
     >
       <FocusRing focusRingClass="has-focus-ring" within autoFocus>
         <FocusScope contain restoreFocus autoFocus>
           {children}
-          {label && (
-            <Typography themeName={`${themeName}.label`} tokens={tokens} {...titleProps}>
-              {label}
-            </Typography>
-          )}
         </FocusScope>
       </FocusRing>
     </BoxWithForwardRef>

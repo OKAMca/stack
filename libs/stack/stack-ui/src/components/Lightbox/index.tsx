@@ -30,21 +30,25 @@ const Lightbox = (props: TLightboxProps) => {
     closeButton: CloseButton = LightboxCloseButton,
     setOpen,
     isOpen,
+    closeButtonAriaLabel,
   } = props
 
   const state = useOverlayTriggerState(props)
 
-  const { triggerProps, overlayProps, labelProps } = useOverlayHook({ type: 'dialog', ...props }, state)
+  const { openTriggerProps, triggerProps, overlayProps, labelProps } = useOverlayHook(
+    { ...props, type: 'dialog' },
+    state,
+  )
 
   const handleOpen: TButtonProps['handlePress'] = (e) => {
     setOpen?.(!isOpen)
-    triggerProps.handlePress?.(e)
+    openTriggerProps.handlePress?.(e)
   }
 
   return (
     <>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <Button themeName={`${themeName}.wrapper`} tokens={tokens} {...triggerProps} handlePress={handleOpen}>
+        <Button themeName={`${themeName}.wrapper`} tokens={tokens} {...openTriggerProps} handlePress={handleOpen}>
           {label && (
             <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }} {...labelProps}>
               {label}
@@ -54,7 +58,12 @@ const Lightbox = (props: TLightboxProps) => {
         </Button>
       </FocusRing>
       <Modal themeName={`${themeName}.modal`} tokens={tokens} state={state} {...overlayProps}>
-        <CloseButton themeName={`${themeName}.closeBtn`} tokens={tokens} {...triggerProps} />
+        <CloseButton
+          themeName={`${themeName}.closeBtn`}
+          tokens={tokens}
+          aria-label={closeButtonAriaLabel}
+          {...triggerProps}
+        />
         <Box themeName={`${themeName}.container`} tokens={tokens}>
           {children}
         </Box>
