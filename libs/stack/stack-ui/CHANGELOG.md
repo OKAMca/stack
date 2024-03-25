@@ -1,3 +1,10 @@
+## [1.19.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.0...stack-ui-v1.19.1) (2024-03-25)
+
+
+### Bug Fixes
+
+* stack UI should export checkbox group ([c331644](https://github.com/OKAMca/stack/commit/c331644a3565f32ecd6327786224eadcd4731ee9))
+
 # [1.19.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.2...stack-ui-v1.19.0) (2024-03-05)
 
 
