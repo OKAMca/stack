@@ -1,66 +1,74 @@
 'use client'
 
 import { FocusRing } from '@react-aria/focus'
-import useThemeContext from '../../providers/Theme/hooks'
-import { ButtonWithForwardRef } from '../Button'
+import { useOverlayTriggerState } from 'react-stately'
+import Box from '../Box'
+import Button from '../Button'
+import type { TButtonProps } from '../Button/interface'
 import Icon from '../Icon'
 import Modal from '../Modal'
 import Typography from '../Typography'
 import useOverlayHook from './hooks/overlay'
-import type { LightboxProps } from './interface'
+import type { TLightboxProps } from './interface'
 
-const Lightbox = (props: LightboxProps) => {
+const LightboxCloseButton = (props: TButtonProps) => {
+  const { themeName, tokens, children, ...rest } = props
+  return (
+    <Button themeName={themeName} tokens={tokens} {...rest}>
+      <Icon icon="CloseBtn" />
+    </Button>
+  )
+}
+
+const Lightbox = (props: TLightboxProps) => {
   const {
     children,
     thumbnailContent,
-    isOpen,
-    onOpenCallBack,
-    onCloseCallBack,
     label,
     themeName = 'lightBox',
     tokens,
-    customTheme,
+    closeButton: CloseButton = LightboxCloseButton,
+    setOpen,
+    isOpen,
+    closeButtonAriaLabel,
   } = props
 
-  const { state, openButtonRef, openButtonProps, closeButtonProps, closeButtonRef } = useOverlayHook(
-    isOpen,
-    onOpenCallBack,
-    onCloseCallBack,
+  const state = useOverlayTriggerState(props)
+
+  const { openTriggerProps, triggerProps, overlayProps, labelProps } = useOverlayHook(
+    { ...props, type: 'dialog' },
+    state,
   )
 
-  const containerTheme = useThemeContext(`${themeName}.container`, tokens, customTheme)
+  const handleOpen: TButtonProps['handlePress'] = (e) => {
+    setOpen?.(!isOpen)
+    openTriggerProps.handlePress?.(e)
+  }
 
   return (
-    <div>
+    <>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <ButtonWithForwardRef
-          ref={openButtonRef}
-          themeName={`${themeName}.wrapper`}
-          {...openButtonProps}
-          {...(isOpen ? { tabIndex: -1 } : {})}
-        >
+        <Button themeName={`${themeName}.wrapper`} tokens={tokens} {...openTriggerProps} handlePress={handleOpen}>
           {label && (
-            <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }}>
+            <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }} {...labelProps}>
               {label}
             </Typography>
           )}
           {thumbnailContent}
-        </ButtonWithForwardRef>
+        </Button>
       </FocusRing>
-      <Modal onCloseCallBack={onCloseCallBack} state={state}>
-        <div>
-          <ButtonWithForwardRef
-            themeName={`${themeName}.closeBtn`}
-            type="button"
-            {...closeButtonProps}
-            ref={closeButtonRef}
-          >
-            <Icon icon="CloseBtn" />
-          </ButtonWithForwardRef>
-          <div className={containerTheme}>{children}</div>
-        </div>
+      <Modal themeName={`${themeName}.modal`} tokens={tokens} state={state} {...overlayProps}>
+        <CloseButton
+          themeName={`${themeName}.closeBtn`}
+          tokens={tokens}
+          aria-label={closeButtonAriaLabel}
+          {...triggerProps}
+        />
+        <Box themeName={`${themeName}.container`} tokens={tokens}>
+          {children}
+        </Box>
       </Modal>
-    </div>
+    </>
   )
 }
 

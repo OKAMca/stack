@@ -20,6 +20,7 @@ import {
   TextInputField,
   DirectusImg,
 } from '@okam/stack-ui'
+import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
 import SidePanelControl from './components/SidePanelControl'
 
@@ -72,11 +73,10 @@ export default async function Index() {
           </Box>
           <Box>
             <Lightbox
-              id="lightbox"
-              thumbnailContent={<Image src="/" width="500" height="500" alt="image" />}
+              thumbnailContent={<Image src={image} width="500" height="500" alt="image" />}
               label="Open lightbox"
             >
-              <Image src="/" width="500" height="500" alt="image" />
+              <Image src={image} width="500" height="500" alt="image" />
             </Lightbox>
           </Box>
           <Box>

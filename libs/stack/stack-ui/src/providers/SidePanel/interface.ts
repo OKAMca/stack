@@ -1,7 +1,8 @@
 import type { OverlayTriggerState } from '@react-stately/overlays'
 import type React from 'react'
+import type { OverlayTriggerProps } from 'react-aria'
 
-export type TSidePanelProviderProps = {
+export type TSidePanelProviderProps = OverlayTriggerProps & {
   children: React.ReactNode
   defaultSelectedKey: string
   defaultIsOpen?: boolean

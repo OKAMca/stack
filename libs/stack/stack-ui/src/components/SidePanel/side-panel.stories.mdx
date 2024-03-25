@@ -4,8 +4,15 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import { ButtonWithForwardRef } from '../Button'
 import SidePanel from './'
 import { SidePanelContextProvider, useSidePanel } from '../../providers/SidePanel'
+import { log } from 'console'
 
-<Meta title="BASE COMPONENTS/Side Panel" component={SidePanel} />
+<Meta 
+  title="BASE COMPONENTS/Side Panel" 
+  component={SidePanel} 
+  args={{
+    
+  }}
+/>
 
 export const SidePanelControl = () => {
   const { buttonProps } = useSidePanel()
@@ -20,7 +27,10 @@ export const SidePanelControl = () => {
 }
 
 export const Template = (args) => (
-  <SidePanelContextProvider>
+  <SidePanelContextProvider 
+    onOpenCallback={() => console.log('Side panel is now opened!')}
+    onCloseCallback={() => console.log('Side panel is now closed!')}
+  >
     <SidePanelControl />
     <SidePanel {...args}>
       <div>Hello world!</div>
