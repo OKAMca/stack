@@ -5343,7 +5343,7 @@
     remark-slug "^6.0.0"
     ts-dedent "^2.0.0"
 
-"@storybook/addon-essentials@^7.6.6":
+"@storybook/addon-essentials@7.6.17":
   version "7.6.17"
   resolved "https://registry.yarnpkg.com/@storybook/addon-essentials/-/addon-essentials-7.6.17.tgz#d49d9a77edc999518c6871b66032a647787c39f4"
   integrity sha512-qlSpamxuYfT2taF953nC9QijGF2pSbg1ewMNpdwLTj16PTZvR/d8NCDMTJujI1bDwM2m18u8Yc43ibh5LEmxCw==
@@ -5624,7 +5624,7 @@
   dependencies:
     ts-dedent "^2.0.0"
 
-"@storybook/core-server@^7.6.6":
+"@storybook/core-server@7.6.17":
   version "7.6.17"
   resolved "https://registry.yarnpkg.com/@storybook/core-server/-/core-server-7.6.17.tgz#bf5b7a9db7abe157a14dba6279936e43efa79250"
   integrity sha512-KWGhTTaL1Q14FolcoKKZgytlPJUbH6sbJ1Ptj/84EYWFewcnEgVs0Zlnh1VStRZg+Rd1WC1V4yVd/bbDzxrvQA==
@@ -5911,6 +5911,16 @@
   version "7.6.17"
   resolved "https://registry.yarnpkg.com/@storybook/react-dom-shim/-/react-dom-shim-7.6.17.tgz#5875915316f687bf658cc6686ea49f2928eae4b2"
   integrity sha512-32Sa/G+WnvaPiQ1Wvjjw5UM9rr2c4GDohwCcWVv3/LJuiFPqNS6zglAtmnsrlIBnUwRBMLMh/ekCTdqMiUmfDw==
+
+"@storybook/react-webpack5@7.6.17":
+  version "7.6.17"
+  resolved "https://registry.yarnpkg.com/@storybook/react-webpack5/-/react-webpack5-7.6.17.tgz#c1ab808bac41dde4a9bd96c3afc800b914eda9e6"
+  integrity sha512-qGc2JxaSmvPXV7ndxA/8qPtPLK7lAwejL/QdrzLXhxEmVdZLMew640FBYgOV/zWnehV3BnivThln/8PsQyst/g==
+  dependencies:
+    "@storybook/builder-webpack5" "7.6.17"
+    "@storybook/preset-react-webpack" "7.6.17"
+    "@storybook/react" "7.6.17"
+    "@types/node" "^18.0.0"
 
 "@storybook/react@7.6.17":
   version "7.6.17"
@@ -9644,6 +9654,11 @@ core-js@3.35.0:
   version "3.35.0"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.35.0.tgz#58e651688484f83c34196ca13f099574ee53d6b4"
   integrity sha512-ntakECeqg81KqMueeGJ79Q5ZgQNR+6eaE8sxGCx62zMbAIj65q+uYvatToew3m6eAGdU4gNZwpZ34NMe4GYswg==
+
+core-js@^3.6.5:
+  version "3.36.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.36.1.tgz#c97a7160ebd00b2de19e62f4bbd3406ab720e578"
+  integrity sha512-BTvUrwxVBezj5SZ3f10ImnX2oRByMxql3EimVqMysepbC9EeMUOpLwdy6Eoili2x6E4kf+ZUB5k/+Jv55alPfA==
 
 core-util-is@1.0.2:
   version "1.0.2"
