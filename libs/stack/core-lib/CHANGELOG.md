@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/OKAMca/stack/compare/core-lib-v1.10.0...core-lib-v1.10.1) (2024-03-25)
+
+
+### Bug Fixes
+
+* stack UI should export checkbox group ([c331644](https://github.com/OKAMca/stack/commit/c331644a3565f32ecd6327786224eadcd4731ee9))
+
 # [1.10.0](https://github.com/OKAMca/stack/compare/core-lib-v1.9.1...core-lib-v1.10.0) (2024-03-05)
 
 
