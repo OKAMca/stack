@@ -6,7 +6,7 @@ import type { OverlayTriggerProps } from 'react-stately'
 import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
 
-export interface LightboxProps extends AriaOverlayTriggerProps {
+export interface LightboxProps extends Omit<AriaOverlayTriggerProps, 'type'> {
   closeButtonAriaLabel?: string
   setOpen?: Dispatch<SetStateAction<boolean>>
 }

@@ -1,11 +1,11 @@
 'use client'
 
 import { useSlotId } from '@react-aria/utils'
+import type { OverlayTriggerProps } from 'react-aria'
 import { useOverlayTrigger } from 'react-aria'
 import type { OverlayTriggerState } from 'react-stately'
-import type { LightboxProps } from '../../interface'
 
-function useOverlayHook(props: LightboxProps, state: OverlayTriggerState) {
+function useOverlayHook(props: OverlayTriggerProps, state: OverlayTriggerState) {
   const { type = 'dialog' } = props
   const {
     triggerProps: { onPress, ...triggerProps },
