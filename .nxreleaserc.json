@@ -1,3 +1,9 @@
 {
-  "repositoryUrl": "https://github.com/OKAMca/stack.git"
+  "repositoryUrl": "https://github.com/OKAMca/stack.git",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/npm",
+    "@semantic-release/github"
+  ]
 }
