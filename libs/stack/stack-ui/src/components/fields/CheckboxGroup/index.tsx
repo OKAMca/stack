@@ -36,7 +36,7 @@ const CheckboxGroup = (props: TCheckboxGroupProps) => {
         </Typography>
       )}
       <Box themeName={`${themeName}.checkboxGroupItemsGroup`}>
-        <CheckboxGroupProvider>{children}</CheckboxGroupProvider>
+        <CheckboxGroupProvider state={state}>{children}</CheckboxGroupProvider>
       </Box>
       {isError && errorMessage && (
         <Typography {...errorMessageProps} tokens={{ isError: true }}>
