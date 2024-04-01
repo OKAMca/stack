@@ -4,7 +4,6 @@ import Accordion from './'
 import CloseBtn from '../icons/CloseBtn'
 import Button from '../Button'
 import Typography from '../Typography'
-import { Item } from '@react-stately/collections'
 import AccordionItem from './components/AccordionItem'
 
 <Meta
@@ -36,41 +35,13 @@ import AccordionItem from './components/AccordionItem'
   }}
   args={{
     id: '1',
-    onSelectionChange: (keys) => console.log('Selection changed to: ', keys)
+    onSelectionChange: (keys) => console.log('Selection changed to: ', keys),
   }}
   parameters={{ layout: 'fullscreen' }}
 />
 
 export const Template = (args) => (
-  <Accordion {...args}>
-    <AccordionItem key="item-1" title="This is an accordion">
-      BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
-      prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
-      mind.
-    </AccordionItem>
-  </Accordion>
-)
-
-export const TemplateWithFocusableChildren = (args) => (
-  <Accordion {...args}>
-    <AccordionItem key="item-1" title="This is an accordion" onClick={(isOpen) => console.log('On accordion item click', `isOpen: ${isOpen}`)}>
-      <Button>Focusable item 1</Button>
-      <Button>Focusable item 2</Button>
-    </AccordionItem>
-    <AccordionItem key="item-2" title="This is an accordion 2">
-      <Button>Focusable item</Button>
-    </AccordionItem>
-  </Accordion>
-)
-
-export const TemplateDefaultOpenedItem = (args) => (
-  <Accordion {...args}>
-    <AccordionItem key="item-1" title="This is an accordion" defaultIsOpen>
-      BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
-      prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
-      mind.
-    </AccordionItem>
-  </Accordion>
+  <Accordion {...args} />
 )
 
 # Accordion
@@ -95,6 +66,13 @@ export const TemplateDefaultOpenedItem = (args) => (
         titleBold: true,
         textAlign: 'left',
       },
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
+          prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
+          mind.
+        </AccordionItem>
+      ]
     }}
   >
     {Template.bind({})}
@@ -111,6 +89,13 @@ export const TemplateDefaultOpenedItem = (args) => (
       tokens: {
         textAlign: 'center',
       },
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
+          prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
+          mind.
+        </AccordionItem>
+      ]
     }}
   >
     {Template.bind({})}
@@ -128,9 +113,16 @@ export const TemplateDefaultOpenedItem = (args) => (
         textAlign: 'left',
       },
       icon: <CloseBtn />,
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" defaultOpen onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
+          prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
+          mind.
+        </AccordionItem>
+      ]
     }}
   >
-    {TemplateDefaultOpenedItem.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>
 
@@ -145,8 +137,17 @@ export const TemplateDefaultOpenedItem = (args) => (
         textAlign: 'left',
       },
       icon: <CloseBtn />,
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          <Button>Focusable item 1</Button>
+          <Button>Focusable item 2</Button>
+        </AccordionItem>,
+        <AccordionItem key="item-2" title="This is an accordion 2" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          <Button>Focusable item</Button>
+        </AccordionItem>
+      ]
     }}
   >
-    {TemplateWithFocusableChildren.bind({})}
+    {Template.bind({})}
   </Story>
 </Canvas>

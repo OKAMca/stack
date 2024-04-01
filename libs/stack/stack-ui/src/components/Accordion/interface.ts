@@ -15,8 +15,9 @@ export interface TAccordionProps extends TAccordionDefaultComponent, TreeProps<T
 
 export interface TAccordionItemProps extends ItemProps<TAccordionItemProps>, TAccordionDefaultComponent {
   icon?: React.ReactNode
-  onClick?: (isOpen: boolean) => void
-  defaultIsOpen?: boolean
+  onOpenChange: (isOpen: boolean) => void
+  defaultOpen?: boolean
+  isOpen?: boolean
 }
 
 export type TAriaAccordionItemProps = TAccordionDefaultComponent &
