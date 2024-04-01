@@ -3,25 +3,18 @@
 import { useAccordion } from '@react-aria/accordion'
 import { useRef } from 'react'
 import type { Node } from 'react-stately'
-import { useTreeState } from 'react-stately'
 import { AccordionContextProvider } from '../../providers/Accordion'
 import { BoxWithForwardRef } from '../Box'
 import AriaAccordionItem from './components/AriaAccordionItem'
-import useDefaultOpenKeys from './hooks/useDefaultOpenKeys'
+import useAccordionState from './hooks/useAccordionState'
 import type { TAccordionItemProps, TAccordionProps } from './interface'
 
 const Accordion = (props: TAccordionProps) => {
-  const { themeName = 'accordion', tokens, customTheme, TransitionAnimation, selectionMode = 'single', ...rest } = props
+  const { themeName = 'accordion', tokens, customTheme, TransitionAnimation } = props
 
   const accordionRef = useRef(null)
-  const defaultOpenKeys = useDefaultOpenKeys(props)
 
-  const state = useTreeState({
-    selectionMode,
-    defaultExpandedKeys: defaultOpenKeys,
-    defaultSelectedKeys: defaultOpenKeys,
-    ...rest,
-  })
+  const state = useAccordionState(props)
 
   const { accordionProps } = useAccordion(props, state, accordionRef)
 
