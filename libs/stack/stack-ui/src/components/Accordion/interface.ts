@@ -7,9 +7,12 @@ import type { TDefaultComponent, TTransition } from '../../types/components'
 
 type TAccordionDefaultComponent = Omit<TDefaultComponent<TAccordionTokens>, 'children'>
 
-export interface TAccordionProps extends TAccordionDefaultComponent, TreeProps<TAccordionItemProps> {
-  id: string
+export interface AccordionProps extends TreeProps<TAccordionItemProps> {
   children: ReactElement<TAccordionItemProps> | ReactElement<TAccordionItemProps>[]
+}
+
+export interface TAccordionProps extends TAccordionDefaultComponent, AccordionProps {
+  id: string
   TransitionAnimation?: ComponentType<TTransition>
 }
 

@@ -5,6 +5,7 @@ import CloseBtn from '../icons/CloseBtn'
 import Button from '../Button'
 import Typography from '../Typography'
 import AccordionItem from './components/AccordionItem'
+import useAccordionState from './hooks/useAccordionState'
 
 <Meta
   title="Base Components/Accordion"
@@ -12,10 +13,6 @@ import AccordionItem from './components/AccordionItem'
   argTypes={{
     id: {
       description: 'Used for accessibility of controls',
-    },
-    onClick: {
-      description:
-        'Function passed into onClick will be called when clicking any accordion item child. It also gives back the state of the accordion after clicking it (`true` for opened, `false` for closed)',
     },
     tokens: {
       description: 'Takes in `textAlign` (`left` | `center`), `titleBold` (`boolean`)',
@@ -25,17 +22,40 @@ import AccordionItem from './components/AccordionItem'
     },
     children: {
       description: 'List of `AccordionItem`',
+      control: {
+        type: 'none'
+      }
+    },
+    TransitionAnimation: {
+      description: 'React spring animation component that will be used for the opening/closing transition of accordion items',
+      control: {
+        type: 'none'
+      }
     },
     selectionMode: {
       description: 'Describes the selection mode for all the children items',
       options: ['multiple', 'single', 'none'],
-      control: { type: 'radio' },
-      defaultValue: 'single',
+      defaultValue: {
+        summary: 'single'
+      },
+      control: { 
+        type: 'radio',
+      },
+    },
+    defaultSelectedKeys: {
+      description: 'Array containing all the keys to be selected by default'
+    },
+    selectedKeys: {
+      description: 'Array containing all the currently selected keys for a controlled state mechanism'
+    },
+    onSelectionChange: {
+      description: 'Function called every time selected keys change. Passes an array containing all the open keys'
     },
   }}
   args={{
     id: '1',
     onSelectionChange: (keys) => console.log('Selection changed to: ', keys),
+    selectionMode: 'single',
   }}
   parameters={{ layout: 'fullscreen' }}
 />
@@ -43,6 +63,23 @@ import AccordionItem from './components/AccordionItem'
 export const Template = (args) => (
   <Accordion {...args} />
 )
+
+export const TemplateControlledState = (args) => {
+  const state = useAccordionState(args)
+  const { selectionManager } = state
+
+  return (
+    <div>
+      <Button handlePress={() => selectionManager.select('item-1')}>
+        Open item 1
+      </Button>
+      <Button handlePress={() => selectionManager.select('item-2')}>
+        Open item 2
+      </Button>
+      <Accordion {...args} selectedKeys={selectionManager.selectedKeys} />
+    </div>
+  )
+}
 
 # Accordion
 
@@ -61,13 +98,17 @@ export const Template = (args) => (
     name="Left Aligned"
     args={{
       id: 'accordion',
-      icon: 'Plus',
       tokens: {
         titleBold: true,
         textAlign: 'left',
       },
       children: [
-        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+        <AccordionItem 
+          key="item-1" 
+          title="This is an accordion" 
+          onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+          icon="Plus"
+        >
           BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
           prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
           mind.
@@ -149,5 +190,30 @@ export const Template = (args) => (
     }}
   >
     {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Accordion with controlled state
+
+<Canvas>
+  <Story
+    name="Controlled state"
+    args={{
+      id: 'accordion',
+      tokens: {
+        textAlign: 'left',
+      },
+      icon: <CloseBtn />,
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          Item 1
+        </AccordionItem>,
+        <AccordionItem key="item-2" title="This is an accordion 2" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          Item 2
+        </AccordionItem>
+      ]
+    }}
+  >
+    {TemplateControlledState.bind({})}
   </Story>
 </Canvas>
