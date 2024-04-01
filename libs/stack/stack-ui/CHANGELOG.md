@@ -1,3 +1,10 @@
+## [1.19.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.1...stack-ui-v1.19.2) (2024-04-01)
+
+
+### Bug Fixes
+
+* checkbox group should pass the state to its provider ([#104](https://github.com/OKAMca/stack/issues/104)) ([c4f09bf](https://github.com/OKAMca/stack/commit/c4f09bfd1d084e9148b7a602e672ff8b346e52d6))
+
 ## [1.19.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.0...stack-ui-v1.19.1) (2024-03-25)
 
 
