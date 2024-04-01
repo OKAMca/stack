@@ -1,3 +1,38 @@
+## [1.19.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.1...stack-ui-v1.19.2) (2024-04-01)
+
+
+### Bug Fixes
+
+* checkbox group should pass the state to its provider ([#104](https://github.com/OKAMca/stack/issues/104)) ([c4f09bf](https://github.com/OKAMca/stack/commit/c4f09bfd1d084e9148b7a602e672ff8b346e52d6))
+
+## [1.19.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.0...stack-ui-v1.19.1) (2024-03-25)
+
+
+### Bug Fixes
+
+* stack UI should export checkbox group ([c331644](https://github.com/OKAMca/stack/commit/c331644a3565f32ecd6327786224eadcd4731ee9))
+
+# [1.19.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.2...stack-ui-v1.19.0) (2024-03-05)
+
+
+### Features
+
+* add storybook a11y addon ([4287a66](https://github.com/OKAMca/stack/commit/4287a6614543527dae3b5ee2c87f7db8bcd8a725))
+
+## [1.18.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.1...stack-ui-v1.18.2) (2024-03-05)
+
+
+### Bug Fixes
+
+* pass state to provider ([fe67cf9](https://github.com/OKAMca/stack/commit/fe67cf93a4495571abdadfb427d5a36475b13700))
+
+## [1.18.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.0...stack-ui-v1.18.1) (2024-02-16)
+
+
+### Bug Fixes
+
+* **textinputfield:** adding inputProps type casting ([#90](https://github.com/OKAMca/stack/issues/90)) ([a7d6ff2](https://github.com/OKAMca/stack/commit/a7d6ff2da4868c4d7b424b9cafb249f722b577ba))
+
 # [1.18.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.17.0...stack-ui-v1.18.0) (2024-02-12)
 
 
