@@ -1,59 +1,34 @@
 'use client'
 
-import { useOverlayTriggerState } from '@react-stately/overlays'
-import React, { useEffect } from 'react'
-import { useButton } from 'react-aria'
-import type { TOnCloseCallback, TOnOpenCallback } from './interface'
+import { useSlotId } from '@react-aria/utils'
+import type { OverlayTriggerProps } from 'react-aria'
+import { useOverlayTrigger } from 'react-aria'
+import type { OverlayTriggerState } from 'react-stately'
 
-const useOverlayHook = (isOpen?: boolean, onOpenCallBack?: TOnOpenCallback, onCloseCallBack?: TOnCloseCallback) => {
-  const state = useOverlayTriggerState({
-    defaultOpen: isOpen,
-    onOpenChange: (e) => onOpenCallBack?.(e),
-  })
-  const openButtonRef = React.useRef(null)
-  const closeButtonRef = React.useRef(null)
+function useOverlayHook(props: OverlayTriggerProps, state: OverlayTriggerState) {
+  const { type = 'dialog' } = props
+  const {
+    triggerProps: { onPress, ...triggerProps },
+    overlayProps,
+  } = useOverlayTrigger({ type }, state)
 
-  useEffect(() => {
-    if (isOpen) {
-      state.open()
-      return
-    }
-    state.close()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen])
-
-  const handleOpen = () => {
-    state.open()
+  const updatedTriggerProps = {
+    handlePress: onPress,
+    ...triggerProps,
   }
 
-  const handleClose = () => {
-    state.close()
-    onCloseCallBack?.()
+  const labelId = useSlotId()
+
+  const openTriggerProps = {
+    'aria-labelledby': labelId,
+    ...updatedTriggerProps,
   }
-
-  const { buttonProps: openButtonProps } = useButton(
-    {
-      elementType: 'div',
-      onPress: handleOpen,
-    },
-    openButtonRef,
-  )
-
-  const { buttonProps: closeButtonProps } = useButton(
-    {
-      onPress: handleClose,
-    },
-    closeButtonRef,
-  )
 
   return {
-    state,
-    openButtonProps,
-    closeButtonProps,
-    handleOpen,
-    handleClose,
-    openButtonRef,
-    closeButtonRef,
+    openTriggerProps,
+    triggerProps: updatedTriggerProps,
+    labelProps: { id: labelId },
+    overlayProps: { ...overlayProps, 'aria-labelledby': labelId },
   }
 }
 
