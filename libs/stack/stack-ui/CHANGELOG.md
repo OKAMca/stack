@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.2...stack-ui-v1.20.0) (2024-04-02)
+
+
+### Features
+
+* component accordion closed items should not be focusable via keyboard ([c027cda](https://github.com/OKAMca/stack/commit/c027cda3f39faeb269026e45d56a4f4c35c7498d))
+
 ## [1.19.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.1...stack-ui-v1.19.2) (2024-04-01)
 
 
