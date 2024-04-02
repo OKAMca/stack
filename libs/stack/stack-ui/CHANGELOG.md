@@ -1,3 +1,10 @@
+## [1.20.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.0...stack-ui-v1.20.1) (2024-04-02)
+
+
+### Bug Fixes
+
+* lightbox component accessibility + modal integrates react aria ([85e791e](https://github.com/OKAMca/stack/commit/85e791e21e7da9f9a87f15dea1426f5f65435461))
+
 # [1.20.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.2...stack-ui-v1.20.0) (2024-04-02)
 
 
