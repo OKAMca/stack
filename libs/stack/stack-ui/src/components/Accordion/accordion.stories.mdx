@@ -2,6 +2,10 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import { ArgTypes } from '@storybook/blocks'
 import Accordion from './'
 import CloseBtn from '../icons/CloseBtn'
+import Button from '../Button'
+import Typography from '../Typography'
+import AccordionItem from './components/AccordionItem'
+import useAccordionState from './hooks/useAccordionState'
 
 <Meta
   title="Base Components/Accordion"
@@ -10,47 +14,72 @@ import CloseBtn from '../icons/CloseBtn'
     id: {
       description: 'Used for accessibility of controls',
     },
-    title: {
-      description:
-        'This prop is used for the title of the accordion, in the docs case: "This is an accordion". It also extends `TTypogaphpyProps` to customize the as and size of the title',
-    },
-    ariaLabel: {
-      description: 'Used for accessibility',
-    },
-    icon: {
-      description: 'Takes in the name of an Icon inside the available icons folder or a component icon',
-      defaultValue: {
-        summary: 'ArrowRight',
-      },
-    },
-    onClick: {
-      description:
-        'Function passed into onClick will be called when clicking the Accordion button. It also gives back the state of the accordion after clicking it (`true` for opened, `false` for closed)',
-    },
     tokens: {
       description: 'Takes in `textAlign` (`left` | `center`), `titleBold` (`boolean`)',
       defaultValue: {
         summary: '{ textAlign: left, titleBold: false }',
       },
     },
+    children: {
+      description: 'List of `AccordionItem`',
+      control: {
+        type: 'none'
+      }
+    },
+    TransitionAnimation: {
+      description: 'React spring animation component that will be used for the opening/closing transition of accordion items',
+      control: {
+        type: 'none'
+      }
+    },
+    selectionMode: {
+      description: 'Describes the selection mode for all the children items',
+      options: ['multiple', 'single', 'none'],
+      defaultValue: {
+        summary: 'single'
+      },
+      control: { 
+        type: 'radio',
+      },
+    },
+    defaultSelectedKeys: {
+      description: 'Array containing all the keys to be selected by default'
+    },
+    selectedKeys: {
+      description: 'Array containing all the currently selected keys for a controlled state mechanism'
+    },
+    onSelectionChange: {
+      description: 'Function called every time selected keys change. Passes an array containing all the open keys'
+    },
   }}
   args={{
     id: '1',
-    title: 'This is an accordion',
-    ariaLabel: 'Accordion',
+    onSelectionChange: (keys) => console.log('Selection changed to: ', keys),
+    selectionMode: 'single',
   }}
   parameters={{ layout: 'fullscreen' }}
 />
 
 export const Template = (args) => (
-  <Accordion {...args}>
-    <p>
-      BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
-      prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
-      mind.
-    </p>
-  </Accordion>
+  <Accordion {...args} />
 )
+
+export const TemplateControlledState = (args) => {
+  const state = useAccordionState(args)
+  const { selectionManager } = state
+
+  return (
+    <div>
+      <Button handlePress={() => selectionManager.select('item-1')}>
+        Open item 1
+      </Button>
+      <Button handlePress={() => selectionManager.select('item-2')}>
+        Open item 2
+      </Button>
+      <Accordion {...args} selectedKeys={selectionManager.selectedKeys} />
+    </div>
+  )
+}
 
 # Accordion
 
@@ -69,17 +98,30 @@ export const Template = (args) => (
     name="Left Aligned"
     args={{
       id: 'accordion',
-      icon: 'Plus',
       tokens: {
         titleBold: true,
         textAlign: 'left',
       },
+      children: [
+        <AccordionItem 
+          key="item-1" 
+          title="This is an accordion" 
+          onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+          icon="Plus"
+        >
+          BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
+          prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
+          mind.
+        </AccordionItem>
+      ]
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
+
 ### Centered Accordion
+
 <Canvas>
   <Story
     name="Center Aligned"
@@ -88,12 +130,21 @@ export const Template = (args) => (
       tokens: {
         textAlign: 'center',
       },
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
+          prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
+          mind.
+        </AccordionItem>
+      ]
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
+
 ### Default opened accordion
+
 <Canvas>
   <Story
     name="Default opened"
@@ -102,10 +153,67 @@ export const Template = (args) => (
       tokens: {
         textAlign: 'left',
       },
-      defaultIsOpen: true,
       icon: <CloseBtn />,
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" defaultOpen onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
+          prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
+          mind.
+        </AccordionItem>
+      ]
     }}
   >
     {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Accordion with focusable items inside
+
+<Canvas>
+  <Story
+    name="With focusable items"
+    args={{
+      id: 'accordion',
+      tokens: {
+        textAlign: 'left',
+      },
+      icon: <CloseBtn />,
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          <Button>Focusable item 1</Button>
+          <Button>Focusable item 2</Button>
+        </AccordionItem>,
+        <AccordionItem key="item-2" title="This is an accordion 2" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          <Button>Focusable item</Button>
+        </AccordionItem>
+      ]
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Accordion with controlled state
+
+<Canvas>
+  <Story
+    name="Controlled state"
+    args={{
+      id: 'accordion',
+      tokens: {
+        textAlign: 'left',
+      },
+      icon: <CloseBtn />,
+      children: [
+        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          Item 1
+        </AccordionItem>,
+        <AccordionItem key="item-2" title="This is an accordion 2" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+          Item 2
+        </AccordionItem>
+      ]
+    }}
+  >
+    {TemplateControlledState.bind({})}
   </Story>
 </Canvas>
