@@ -1,3 +1,10 @@
+## [1.20.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.2...stack-ui-v1.20.3) (2024-04-04)
+
+
+### Bug Fixes
+
+* typing error + expose id from use side panel ([9e76b89](https://github.com/OKAMca/stack/commit/9e76b89c1b2b86ca8a7a4c8e93a13a70d7a37ee8))
+
 ## [1.20.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.1...stack-ui-v1.20.2) (2024-04-04)
 
 
