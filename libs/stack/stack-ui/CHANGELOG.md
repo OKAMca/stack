@@ -1,3 +1,17 @@
+## [1.20.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.0...stack-ui-v1.20.1) (2024-04-02)
+
+
+### Bug Fixes
+
+* lightbox component accessibility + modal integrates react aria ([85e791e](https://github.com/OKAMca/stack/commit/85e791e21e7da9f9a87f15dea1426f5f65435461))
+
+# [1.20.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.2...stack-ui-v1.20.0) (2024-04-02)
+
+
+### Features
+
+* component accordion closed items should not be focusable via keyboard ([c027cda](https://github.com/OKAMca/stack/commit/c027cda3f39faeb269026e45d56a4f4c35c7498d))
+
 ## [1.19.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.1...stack-ui-v1.19.2) (2024-04-01)
 
 
