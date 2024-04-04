@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/OKAMca/stack/compare/core-lib-v1.11.0...core-lib-v1.11.1) (2024-04-04)
+
+
+### Bug Fixes
+
+* **packages:** merge with main ([5611d64](https://github.com/OKAMca/stack/commit/5611d64950b4b262b95041a36658a84a5b0fdcd0))
+
 # [1.11.0](https://github.com/OKAMca/stack/compare/core-lib-v1.10.2...core-lib-v1.11.0) (2024-04-02)
 
 
