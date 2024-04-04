@@ -43,7 +43,7 @@
     "react-spring": "^9.7.3",
     "react-stately": "^3.30.0",
     "react-use": "17.4.2",
-    "swiper": "9.4.1",
+    "swiper": "11.0.6",
     "tailwind-variants": "^0.1.19",
     "tslib": "^2.6.2",
     "unlazy": "^0.10.2",
