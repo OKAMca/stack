@@ -1,4 +1,5 @@
 import type { OverlayTriggerState } from '@react-stately/overlays'
+import type { DOMProps } from '@react-types/shared'
 import type React from 'react'
 import type { OverlayTriggerProps } from 'react-aria'
 
@@ -21,4 +22,5 @@ export type TSidePanelContext = {
   defaultSelectedKey: string
   overlayState: OverlayTriggerState
   buttonProps: TButtonProps
+  overlayProps: DOMProps
 }
