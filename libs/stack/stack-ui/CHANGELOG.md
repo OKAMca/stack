@@ -1,3 +1,10 @@
+## [1.20.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.1...stack-ui-v1.20.2) (2024-04-04)
+
+
+### Bug Fixes
+
+* **packages:** merge with main ([5611d64](https://github.com/OKAMca/stack/commit/5611d64950b4b262b95041a36658a84a5b0fdcd0))
+
 ## [1.20.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.0...stack-ui-v1.20.1) (2024-04-02)
 
 
