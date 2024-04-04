@@ -34,22 +34,21 @@ export function SidePanelContextProvider(props: TSidePanelProviderProps) {
     },
   })
 
-  const { triggerProps: openButtonProps } = useOverlayHook({ type }, overlayState)
-  const { triggerProps: closeButtonProps } = useOverlayHook({ type }, overlayState)
+  const { triggerProps, overlayProps } = useOverlayHook({ type }, overlayState)
 
   const value = useMemo<TSidePanelContext>(
     () => ({
+      overlayProps,
       defaultSelectedKey,
       overlayState,
       buttonProps: {
-        closeButtonProps,
+        closeButtonProps: triggerProps,
         closeButtonRef,
-        openButtonProps,
+        openButtonProps: triggerProps,
         openButtonRef,
       },
     }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [overlayState, defaultSelectedKey, closeButtonProps, openButtonProps],
+    [overlayState, defaultSelectedKey, triggerProps, overlayProps],
   )
 
   return <SidePanelProvider value={value}>{children}</SidePanelProvider>
