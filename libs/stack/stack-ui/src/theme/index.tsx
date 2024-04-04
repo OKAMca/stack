@@ -30,7 +30,7 @@ import {
   datePickerLabel,
 } from './DatePicker'
 import { imgTheme } from './Image'
-import lightboxTheme, { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
+import lightboxTheme from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
 import {
