@@ -3,7 +3,7 @@ import type { DOMProps } from '@react-types/shared'
 import type React from 'react'
 import type { OverlayTriggerProps } from 'react-aria'
 
-export type TSidePanelProviderProps = OverlayTriggerProps & {
+export type TSidePanelProviderProps = Partial<OverlayTriggerProps> & {
   children: React.ReactNode
   defaultSelectedKey: string
   defaultIsOpen?: boolean
