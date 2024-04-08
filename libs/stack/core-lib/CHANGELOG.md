@@ -1,3 +1,24 @@
+## [1.11.1](https://github.com/OKAMca/stack/compare/core-lib-v1.11.0...core-lib-v1.11.1) (2024-04-04)
+
+
+### Bug Fixes
+
+* **packages:** merge with main ([5611d64](https://github.com/OKAMca/stack/commit/5611d64950b4b262b95041a36658a84a5b0fdcd0))
+
+# [1.11.0](https://github.com/OKAMca/stack/compare/core-lib-v1.10.2...core-lib-v1.11.0) (2024-04-02)
+
+
+### Features
+
+* component accordion closed items should not be focusable via keyboard ([c027cda](https://github.com/OKAMca/stack/commit/c027cda3f39faeb269026e45d56a4f4c35c7498d))
+
+## [1.10.2](https://github.com/OKAMca/stack/compare/core-lib-v1.10.1...core-lib-v1.10.2) (2024-04-01)
+
+
+### Bug Fixes
+
+* checkbox group should pass the state to its provider ([#104](https://github.com/OKAMca/stack/issues/104)) ([c4f09bf](https://github.com/OKAMca/stack/commit/c4f09bfd1d084e9148b7a602e672ff8b346e52d6))
+
 ## [1.10.1](https://github.com/OKAMca/stack/compare/core-lib-v1.10.0...core-lib-v1.10.1) (2024-03-25)
 
 
