@@ -19,6 +19,8 @@ import {
   TextArea,
   TextInputField,
   DirectusImg,
+  Select,
+  SelectItem,
 } from '@okam/stack-ui'
 import Image from 'next/image'
 import SidePanelControl from './components/SidePanelControl'
@@ -41,6 +43,12 @@ export default async function Index() {
             thumbhash="aRgODIKUQmq/WIdzh3klj1LgGA=="
           />
         </Box>
+        <Select id="season" name="season" placeholderLabel="Season">
+          <SelectItem label="Summer" value="summer" />
+          <SelectItem label="Fall" value="fall" />
+          <SelectItem label="Winter" value="winter" />
+          <SelectItem label="Spring" value="spring" />
+        </Select>
         <Box>
           <Typography tokens={{ size: 'h1' }}>This is a test of all available components</Typography>
         </Box>
