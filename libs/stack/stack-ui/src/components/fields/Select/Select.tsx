@@ -1,10 +1,10 @@
 'use client'
 
 import { isEmpty } from 'lodash'
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
-import { useSelectState } from 'react-stately'
+import { Item, useSelectState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
@@ -34,8 +34,11 @@ const Select = (props: TSelectProps) => {
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
 
+  const children = React.Children.map(props?.children, (child) => <Item key={child.key}>{child.props.children}</Item>)
+
   const state = useSelectState({
     ...rest,
+    children,
     selectedKey: value,
     defaultSelectedKey: defaultValue,
     onSelectionChange,
