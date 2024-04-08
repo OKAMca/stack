@@ -1,5 +1,4 @@
-import type { CollectionChildren, CollectionElement } from '@react-types/shared'
-import type { Key, ReactElement, ReactHTMLElement } from 'react'
+import type { Key, ReactElement } from 'react'
 import type React from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
