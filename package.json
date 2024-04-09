@@ -21,6 +21,7 @@
   "private": true,
   "dependencies": {
     "@nx/next": "17.2.6",
+    "@react-aria/accordion": "^3.0.0-alpha.27",
     "@react-aria/focus": "^3.16.0",
     "@react-aria/i18n": "^3.10.0",
     "@react-types/shared": "3.22.0",
@@ -43,7 +44,7 @@
     "react-spring": "^9.7.3",
     "react-stately": "^3.30.0",
     "react-use": "17.4.2",
-    "swiper": "9.4.1",
+    "swiper": "11.0.6",
     "tailwind-variants": "^0.1.19",
     "tslib": "^2.6.2",
     "unlazy": "^0.10.2",

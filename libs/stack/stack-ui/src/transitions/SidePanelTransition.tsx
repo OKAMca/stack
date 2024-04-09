@@ -18,7 +18,6 @@ const SidePanelTransition = ({ isVisible, children }: TProps) => {
       zIndex: 1000,
       bottom: 0,
       height: '100%',
-      width: '100%',
     },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
