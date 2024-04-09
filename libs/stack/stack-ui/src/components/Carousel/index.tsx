@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import type { PressEvent } from 'react-aria'
 import type Swiper from 'swiper'
-import { Navigation, Mousewheel, Keyboard, Pagination, Autoplay, A11y } from 'swiper'
+import { Navigation, Mousewheel, Keyboard, Pagination, Autoplay, A11y } from 'swiper/modules'
 import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react'
 import useThemeContext from '../../providers/Theme/hooks'
 import Button from '../Button'
