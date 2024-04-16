@@ -21,9 +21,11 @@
   "dependencies": {
     "@graphql-codegen/cli": "^5.0.2",
     "@nx/next": "17.2.6",
+    "@react-aria/accordion": "^3.0.0-alpha.27",
     "@react-aria/focus": "^3.16.0",
     "@react-aria/i18n": "^3.10.0",
     "@react-types/shared": "3.22.0",
+    "@storybook/addon-a11y": "^7.6.17",
     "@swc/helpers": "0.5.3",
     "@tanstack/react-query": "^5.17.1",
     "@tsed/exceptions": "^7.52.0",
@@ -34,15 +36,15 @@
     "next": "^14.0.4",
     "radash": "11.0.0",
     "react": "^18.2.0",
-    "react-aria": "^3.31.0",
+    "react-aria": "^3.32.0",
     "react-div-100vh": "0.7.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "7.49.2",
     "react-i18next": "13.5.0",
     "react-spring": "^9.7.3",
-    "react-stately": "^3.29.0",
+    "react-stately": "^3.30.0",
     "react-use": "17.4.2",
-    "swiper": "9.4.1",
+    "swiper": "11.0.6",
     "tailwind-variants": "^0.1.19",
     "tslib": "^2.6.2",
     "unlazy": "^0.10.2",
@@ -134,7 +136,7 @@
     "vite": "^5.0.10",
     "vite-plugin-dts": "~2.3.0",
     "vite-tsconfig-paths": "^4.2.2",
-    "vitest": "1.1.0"
+    "vitest": ">=0.34.6"
   },
   "nx": {
     "includedScripts": []

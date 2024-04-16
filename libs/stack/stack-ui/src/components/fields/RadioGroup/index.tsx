@@ -6,7 +6,7 @@ import { useRadioGroup } from 'react-aria'
 import { RadioGroupProvider } from '../../../providers/RadioGroup/RadioGroup'
 import Box from '../../Box'
 import Typography from '../../Typography'
-import type { TRadioGroupProps } from './RadioGroup.interface'
+import type { TRadioGroupProps } from './interface'
 
 const RadioGroup = (props: TRadioGroupProps) => {
   const { label, isError = false, errorMessage, isDisabled = false, children, themeName = 'radioGroup', tokens } = props
@@ -24,7 +24,7 @@ const RadioGroup = (props: TRadioGroupProps) => {
     >
       {label && <Typography tokens={{ size: 'h6' }}>{label}</Typography>}
       <Box themeName={`${themeName}.radioGroupItemsGroup`}>
-        <RadioGroupProvider>{children}</RadioGroupProvider>
+        <RadioGroupProvider state={state}>{children}</RadioGroupProvider>
       </Box>
       {isError && errorMessage && <Typography tokens={{ isError: true }}>{errorMessage}</Typography>}
     </Box>

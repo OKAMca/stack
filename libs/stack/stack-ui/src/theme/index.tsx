@@ -2,14 +2,7 @@
 
 import React from 'react'
 import { makeTheme, createThemeProvider } from '../providers/Theme'
-import {
-  accordionButton,
-  accordionContainer,
-  accordionContent,
-  accordionIcon,
-  accordionRegion,
-  accordionTitle,
-} from './Accordion'
+import { accordionTheme } from './Accordion'
 import { container, grid, gridItem, main } from './Box'
 import button from './Button'
 import {
@@ -37,7 +30,7 @@ import {
   datePickerLabel,
 } from './DatePicker'
 import { imgTheme } from './Image'
-import { lightBoxCloseBtn, lightBoxContainer, lightBoxLabel, lightBoxWrapper } from './LightBox'
+import lightboxTheme from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
 import {
@@ -57,14 +50,7 @@ const BaseTheme = makeTheme({
   gridItem: (props) => gridItem(props),
   grid: (props) => grid(props),
   container: (props) => container(props),
-  accordion: {
-    container: (props) => accordionContainer(props),
-    button: (props) => accordionButton(props),
-    title: (props) => accordionTitle(props),
-    icon: (props) => accordionIcon(props),
-    region: (props) => accordionRegion(props),
-    content: (props) => accordionContent(props),
-  },
+  accordion: accordionTheme,
   carousel: {
     container: (props) => carouselContainer(props),
     slideContainer: (props) => carouselSlideContainer(props),
@@ -102,12 +88,7 @@ const BaseTheme = makeTheme({
     container: (props) => sidePanelContainer(props),
     innerContainer: (props) => sidePanelInnerContainer(props),
   },
-  lightBox: {
-    wrapper: (props) => lightBoxWrapper(props),
-    container: (props) => lightBoxContainer(props),
-    closeBtn: (props) => lightBoxCloseBtn(props),
-    label: (props) => lightBoxLabel(props),
-  },
+  lightBox: lightboxTheme,
   shareButton: {
     icon: (props) => shareButtonIcon(props),
     button: (props) => shareButton(props),
@@ -147,7 +128,7 @@ const BaseTheme = makeTheme({
         ...props,
         className: 'outline outline-2 outline-white outline-offset-2 p-2 my-4 rounded-md w-full flex flex-col gap-6',
       }),
-    popover: (props) => button(props),
+    popover: (props) => button({ ...props, className: 'w-[var(--select-container-width)]' }),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
     wrapper: () => 'flex flex-col gap-4 relative',
     container: () => 'flex flex-col gap-4',
