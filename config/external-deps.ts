@@ -45,6 +45,7 @@ const externalDeps = [
   '@internationalized',
   'tslib',
   '@graphql-typed-document-node/core',
+  '@tsed/exceptions'
 ]
 
 export default externalDeps
