@@ -9,7 +9,11 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/directus/directus-query/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/directus/directus-query/**/*.{ts,tsx,js,jsx}",
+          "libs/directus/directus-query/package.json",
+          "libs/directus/directus-query/project.json"
+        ]
       }
     },
     "build": {

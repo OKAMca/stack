@@ -18,5 +18,10 @@
   },
   "nxrelease": {
     "repositoryUrl": "https://github.com/OKAMca/stack.git"
+  },
+  "dependencies": {
+    "@tsed/exceptions": "^7.52.0",
+    "dequal": "^2.0.3",
+    "react": "^18.2.0"
   }
 }

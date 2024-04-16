@@ -24,7 +24,8 @@
       "@okam/directus-query": ["libs/directus/directus-query/src/index.ts"],
       "@okam/next-component": ["libs/stack/next-component/src/index.ts"],
       "@okam/next-component/server": ["libs/stack/next-component/src/server.ts"],
-      "@okam/stack-ui": ["libs/stack/stack-ui/src/index.ts"]
+      "@okam/stack-ui": ["libs/stack/stack-ui/src/index.ts"],
+      "@okam/test": ["test/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
