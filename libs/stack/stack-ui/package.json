@@ -1,7 +1,7 @@
 {
   "name": "@okam/stack-ui",
   "main": "./index.js",
-  "version": "1.19.0",
+  "version": "1.20.3",
   "types": "./index.d.ts",
   "exports": {
     ".": {

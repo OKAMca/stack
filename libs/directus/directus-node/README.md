@@ -21,14 +21,28 @@ Run `nx test directus-node` to execute the unit tests via [Jest](https://jestjs.
  * npx env-cmd -f ../../.env.local node fetch-redirect.js
  */
 const { fetchRedirects, getDefaultConfig } = require('@okam/directus-node')
+
 fetchRedirects(getDefaultConfig())
 ```
 
-2. In project.json targets.build, add "dependsOn": ["fetch-redirect"]
+2. In project.json,
+ 1. In targets.build, add `"dependsOn": ["fetch-redirect"],`
+ 2. In targets:
+```
+    "fetch-redirect": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node fetch-redirect"
+      }
+    },
+```
+ 3. Don't forget to change the cwd path
 
-3. Create directory redirection
 
-4. Create file redirection/index.js
+3. Create directory redirect
+
+4. Create file redirect/index.js
 ```
 const redirects = require('./redirects.json')
 const rewrites = require('./rewrites.json')
@@ -46,7 +60,38 @@ NEXT_PUBLIC_GRAPHQL_URL=
 NEXT_API_TOKEN_ADMIN=
 ```
 
-6. Generate redirects.json and rewrites.json using fetch-redirect (or build project with nx)
+6. Generate redirect/redirects.json and redirect/rewrites.json using fetch-redirect (or build project with nx)
 ```
 npx env-cmd -f ../../.env.local node fetch-redirect.js
+```
+
+7. Update nextConfig in next.config.js with
+```
+const { rewrites, redirects } = require('./redirect/index')
+```
+```
+const nextConfig = {
+...
+  async redirects() {
+    const rest = await redirects()
+    return [
+       ...i18nReRouter({locale: false, permanent: true}, 'redirect'),
+       ...rest,
+    ]
+    return rest
+  },
+  async rewrites() {
+    const fallback = await rewrites()
+    return {
+      beforeFiles: [
+        ...i18nReRouter({locale: false}, 'rewrite'),
+      ],
+      afterFiles: [
+        ...i18nRewriter({...i18nConfigWithoutLocaleDetector, localeDetector: false}),
+      ],
+      fallback,
+    }
+  },
+...
+}
 ```

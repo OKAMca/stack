@@ -1,3 +1,45 @@
+## [1.20.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.2...stack-ui-v1.20.3) (2024-04-04)
+
+
+### Bug Fixes
+
+* typing error + expose id from use side panel ([9e76b89](https://github.com/OKAMca/stack/commit/9e76b89c1b2b86ca8a7a4c8e93a13a70d7a37ee8))
+
+## [1.20.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.1...stack-ui-v1.20.2) (2024-04-04)
+
+
+### Bug Fixes
+
+* **packages:** merge with main ([5611d64](https://github.com/OKAMca/stack/commit/5611d64950b4b262b95041a36658a84a5b0fdcd0))
+
+## [1.20.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.0...stack-ui-v1.20.1) (2024-04-02)
+
+
+### Bug Fixes
+
+* lightbox component accessibility + modal integrates react aria ([85e791e](https://github.com/OKAMca/stack/commit/85e791e21e7da9f9a87f15dea1426f5f65435461))
+
+# [1.20.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.2...stack-ui-v1.20.0) (2024-04-02)
+
+
+### Features
+
+* component accordion closed items should not be focusable via keyboard ([c027cda](https://github.com/OKAMca/stack/commit/c027cda3f39faeb269026e45d56a4f4c35c7498d))
+
+## [1.19.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.1...stack-ui-v1.19.2) (2024-04-01)
+
+
+### Bug Fixes
+
+* checkbox group should pass the state to its provider ([#104](https://github.com/OKAMca/stack/issues/104)) ([c4f09bf](https://github.com/OKAMca/stack/commit/c4f09bfd1d084e9148b7a602e672ff8b346e52d6))
+
+## [1.19.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.19.0...stack-ui-v1.19.1) (2024-03-25)
+
+
+### Bug Fixes
+
+* stack UI should export checkbox group ([c331644](https://github.com/OKAMca/stack/commit/c331644a3565f32ecd6327786224eadcd4731ee9))
+
 # [1.19.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.18.2...stack-ui-v1.19.0) (2024-03-05)
 
 
