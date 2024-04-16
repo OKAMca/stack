@@ -4,21 +4,26 @@ import { get } from 'radash'
 
 export async function fetchPageSettings(pathName: string, lang = 'fr=CA') {
   const graphqlEndpoint = process.env.NEXT_PUBLIC_GRAPHQL_URL
-  const graphqlApiKey = process.env.NEXT_API_TOKEN_PUBLIC
+  const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
   if (!graphqlEndpoint || !graphqlApiKey) {
     throw new Error('Missing graphql configuration: NEXT_PUBLIC_GRAPHQL_URL or NEXT_API_TOKEN_ADMIN')
   }
 
+  let langCodeFilter = '_eq'
+
+  if (lang.length === 2) {
+    langCodeFilter = '_contains'
+  }
+
   const query = `
     query PageSettings($path: String = null, $lang: String = "fr-CA") {
       page_settings(
-        filter: { translations: { path: { _eq: $path } } },
+        filter: { translations: { path: { _eq: $path }, languages_code: {code: {${langCodeFilter}: $lang}} }},
         limit: 1
       ) {
           belongs_to_key
           belongs_to_collection
-        }
       }
     }
   `
@@ -46,24 +51,33 @@ export async function fetchPageSettings(pathName: string, lang = 'fr=CA') {
     const { data } = await response.json()
 
     const key = get<string>(data, 'page_settings.0.belongs_to_key')
-    const colletion = get<string>(data, 'page_settings.0.belongs_to_collection')
+    const collection = get<string>(data, 'page_settings.0.belongs_to_collection')
 
-    if (key == null || colletion == null) {
+    if (key == null || collection == null) {
       throw new Error('No page settings found')
     }
 
-    return `/${colletion}/${key}`
+    return `/${collection}/${key}`
   } catch (e) {
     console.error('GraphQL Error', (e as Error).message)
     return null
   }
 }
 
+function removeLocaleFromPathName(pathName: string, locale: string) {
+  if (pathName.includes(locale)) {
+    return pathName.replace(`/${locale}`, '')
+  }
+  return pathName
+}
+
 export async function directusRouteMiddleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname, locale } = request.nextUrl
+
+  const pathNameWithoutLocale = removeLocaleFromPathName(pathname, locale)
 
   // Fetch page settings based on the request path.
-  const route = await fetchPageSettings(pathname)
+  const route = await fetchPageSettings(pathNameWithoutLocale, locale)
 
   if (route === null) {
     return NextResponse.next()
