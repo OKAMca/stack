@@ -19,9 +19,12 @@ module.exports = {
       parserOptions: {
         project: `${__dirname}/tsconfig.*?.json`,
       },
+      rules: {
+        "@nx/dependency-checks": "error"
+      }
     },
     {
-      "files": ["{package,project}.json"],
+      "files": ["*.json"],
       "parser": "jsonc-eslint-parser",
       "rules": {
         "@nx/dependency-checks": [
