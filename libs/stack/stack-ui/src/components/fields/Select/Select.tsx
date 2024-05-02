@@ -4,11 +4,13 @@ import { isEmpty } from 'lodash'
 import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
-import { Item, useSelectState } from 'react-stately'
+import { useSelectState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
+import Box from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
 import Typography from '../../Typography'
+import SelectItem from '../SelectItem/SelectItem'
 import { ListBox } from './components/Listbox'
 import Popover from './components/Popover'
 import type { TSelectProps } from './Select.interface'
@@ -30,35 +32,32 @@ const Select = (props: TSelectProps) => {
     value,
     icon,
     popoverMatchesWidth,
+    options,
     ...rest
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
 
-  const children = React.Children.map(props?.children, (child) => <Item key={child.key}>{child.props.children}</Item>)
-
   const state = useSelectState({
     ...rest,
-    children,
+    children: SelectItem,
     selectedKey: value,
     defaultSelectedKey: defaultValue,
+    items: options,
     onSelectionChange,
   })
 
-  const { triggerProps, menuProps, labelProps } = useSelect({ ...rest }, state, fieldRef)
-
-  const wrapper = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
-  const container = useThemeContext(`${themeName}.container`, tokens, customTheme)
+  const { triggerProps, menuProps, labelProps } = useSelect({ ...rest, label }, state, fieldRef)
   const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
 
   return (
-    <div className={wrapper}>
+    <Box themeName={`${themeName}.wrapper`}>
       {label && (
         <Typography {...labelProps} as="label" themeName={`${themeName}.label`}>
           {label}
         </Typography>
       )}
       <HiddenSelect {...hookFormRef} state={state} triggerRef={fieldRef} name={name} isDisabled />
-      <div className={container}>
+      <Box themeName={`${themeName}.container`}>
         <ButtonWithForwardRef
           {...restofTriggerProps}
           handlePress={(event) => {
@@ -90,13 +89,13 @@ const Select = (props: TSelectProps) => {
             {errorMessage}
           </Typography>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 
 export const ReactHookFormSelect = (props: TSelectProps) => {
-  const { name, required, children } = props
+  const { name, required } = props
   const { register, formState } = useFormContext()
   const errors = get(formState.errors, name)
   const errMsg = errors?.message ?? undefined
@@ -104,11 +103,7 @@ export const ReactHookFormSelect = (props: TSelectProps) => {
     required: required ? 'This is an error message' : false,
   })
 
-  return (
-    <Select {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} hookFormRef={ref}>
-      {children}
-    </Select>
-  )
+  return <Select {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} hookFormRef={ref} />
 }
 
 export default Select
