@@ -43,12 +43,13 @@ const SelectContent = ({
           console.log('selection changed')
         }}
         value={value}
-      >
-        <Item key={1}>Item One</Item>
-        <Item key={2}>Item Two</Item>
-        <Item key={3}>Item Three</Item>
-        <Item key={4}>Item Four</Item>
-      </Select>
+        options={[
+          { key: '1', value: 'Option 1' },
+          { key: '2', value: 'Option 2' },
+          { key: '3', value: 'Option 3' },
+          { key: '4', value: 'Option 4' },
+        ]}
+      />
     </>
   )
 }
