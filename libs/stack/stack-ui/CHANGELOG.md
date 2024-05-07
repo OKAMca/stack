@@ -1,3 +1,10 @@
+## [1.20.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.3...stack-ui-v1.20.4) (2024-05-07)
+
+
+### Bug Fixes
+
+* Stack-143 accordion accordion items can t define their own ([#112](https://github.com/OKAMca/stack/issues/112)) ([dd4f807](https://github.com/OKAMca/stack/commit/dd4f807b7b3185461266399a59914fd4fd507c82))
+
 ## [1.20.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.2...stack-ui-v1.20.3) (2024-04-04)
 
 
