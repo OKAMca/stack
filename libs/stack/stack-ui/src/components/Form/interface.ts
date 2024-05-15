@@ -3,7 +3,7 @@ import type { FormatName } from 'ajv-formats'
 import type { FieldValues, SubmitHandler } from 'react-hook-form'
 import type { TDefaultComponent } from '../../types/components'
 import type { TFormField } from './components/FormField/interface'
-import type { TFormFieldDispatcherConfig } from './components/FormFieldDispatcher/interface'
+import type { TFormConfigVariants, TFormFieldDispatcherConfig } from './components/FormFieldDispatcher/interface'
 
 export interface TFormProps<T extends FieldValues> extends TDefaultComponent {
   fields: TFormField[]
@@ -11,7 +11,7 @@ export interface TFormProps<T extends FieldValues> extends TDefaultComponent {
     handleSubmit: SubmitHandler<T>
     label?: string
   }
-  config: TFormFieldDispatcherConfig
+  config: TFormFieldDispatcherConfig<string, TFormConfigVariants<string>>
   customSchema?: JSONSchemaType<T>
 }
 
