@@ -1,6 +1,5 @@
 import type { JSONSchemaType } from 'ajv'
 import type { FieldValues } from 'react-hook-form'
-import { T } from 'vitest/dist/reporters-O4LBziQ_'
 import type { TFormField } from '../components/FormField/interface'
 import type { TFormFieldValidation } from '../interface'
 
