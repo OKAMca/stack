@@ -1,7 +1,6 @@
 'use client'
 
 import { FocusRing } from '@react-aria/focus'
-import { isEmpty } from 'lodash'
 import { useRef } from 'react'
 import { useTextField } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
@@ -12,28 +11,37 @@ import type { TTextInputProps, TUseTextFieldInputProps } from './interface'
 
 const TextInputField = (props: TTextInputProps) => {
   const {
-    id,
     label,
+    isRequired = false,
+    isDisabled = false,
     required,
-    disabled = false,
+    disabled,
     errorMessage,
-    ariaLabel,
-    value,
-    onBlur,
-    onChange,
     fieldRef,
-    type = 'text',
     children,
     themeName = 'textInput',
     tokens,
     customTheme,
   } = props
+
+  const legacyRequired = required ?? isRequired
+  const legacyDisabled = disabled ?? isDisabled
+
   const ref = useRef<HTMLInputElement | null>(null)
   // inputProps will be cast to TUseTextFieldInputProps
   // so you should only use useTextField<'input'>
-  const { errorMessageProps, inputProps, labelProps } = useTextField<'input'>(props, ref)
+  const { errorMessageProps, inputProps, labelProps } = useTextField<'input'>(
+    { ...props, isRequired: legacyRequired, isDisabled: legacyDisabled },
+    ref,
+  )
 
-  const inputTokens = { ...tokens, isDisabled: disabled, isError: errorMessage != null }
+  const { 'aria-labelledby': inputPropsAriaLabelledBy, ...accessibleInputProps } = {
+    ...(inputProps as TUseTextFieldInputProps),
+    required: legacyRequired,
+    disabled: legacyDisabled,
+  }
+
+  const inputTokens = { ...tokens, isDisabled, isRequired, isError: !!errorMessage }
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, inputTokens, customTheme)
   const labelTheme = useThemeContext(`${themeName}.label`, inputTokens, customTheme)
@@ -43,7 +51,7 @@ const TextInputField = (props: TTextInputProps) => {
   return (
     <div>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <div aria-disabled={disabled} className={wrapper}>
+        <div aria-disabled={isDisabled} className={wrapper}>
           {label && (
             // eslint-disable-next-line jsx-a11y/label-has-associated-control
             <label className={labelTheme} {...labelProps}>
@@ -54,20 +62,12 @@ const TextInputField = (props: TTextInputProps) => {
             {children}
 
             <input
-              {...(inputProps as TUseTextFieldInputProps)}
+              {...accessibleInputProps}
               className={input}
-              disabled={disabled}
-              required={required}
               ref={(e) => {
                 fieldRef?.(e)
                 ref.current = e
               }}
-              aria-label={ariaLabel}
-              aria-labelledby={id}
-              value={value}
-              onBlur={onBlur}
-              onChange={onChange}
-              type={type}
             />
           </div>
         </div>
@@ -82,13 +82,13 @@ const TextInputField = (props: TTextInputProps) => {
 }
 
 export const ReactHookFormInput = (props: TTextInputProps) => {
-  const { name, required, minLength = 0, maxLength = 99999999, validation } = props
+  const { name, required, isRequired, minLength = 0, maxLength = 99999999, validation } = props
   const { register, formState } = useFormContext()
   const error: Error = get(formState.errors, name)
   const errMsg = error?.message ?? undefined
   const { t } = useTranslation('components')
   const { ref: refCallback, ...rest } = register(name, {
-    required: required ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
+    required: required ?? isRequired ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
     minLength: {
       value: minLength,
       message: t('FORM.ERROR.MIN_LENGTH', { length: minLength }),
@@ -100,7 +100,7 @@ export const ReactHookFormInput = (props: TTextInputProps) => {
     ...validation,
   })
 
-  return <TextInputField fieldRef={refCallback} {...rest} {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} />
+  return <TextInputField fieldRef={refCallback} {...rest} {...props} errorMessage={errMsg} />
 }
 
 export default TextInputField
