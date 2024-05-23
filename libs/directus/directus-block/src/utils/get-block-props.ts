@@ -22,10 +22,16 @@ type TBlockQuery<BlockFragment extends TCommonBlockFragment> = {
 }
 
 type TGetBlockPropsParams<BlockFragment extends TCommonBlockFragment, BlockVariables extends Variables = Variables> = {
-  document?: TypedDocumentNode<TBlockQuery<BlockFragment>, Partial<BlockVariables>>
+  document?: TypedDocumentNode<TBlockQuery<BlockFragment>, BlockVariables>
   item?: Nullable<NonNullable<NonNullable<TBlockQuery<BlockFragment>[string]>[' $fragmentRefs']>[string]>
   blockKey?: string
   variables?: Partial<BlockVariables>
+}
+
+function isVariables<BlockVariables extends Variables>(
+  maybeVariables: Nullable<Variables>,
+): maybeVariables is BlockVariables {
+  return !!maybeVariables
 }
 
 /**
@@ -42,7 +48,7 @@ export default async function getBlockProps<
 
   if (item) return item
 
-  if (!document) return null
+  if (!document || !isVariables<BlockVariables>(variables)) return null
 
   const queriedBlockProps = await queryGql(document, variables)
 
