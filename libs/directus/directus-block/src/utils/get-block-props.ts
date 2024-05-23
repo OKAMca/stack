@@ -28,6 +28,12 @@ type TGetBlockPropsParams<BlockFragment extends TCommonBlockFragment, BlockVaria
   variables?: Partial<BlockVariables>
 }
 
+/**
+ * Returns the passed item if it is defined. Otherwise, queried its own block
+ * @param params.blockKey Key of the queried field
+ * @param params.item Item of the block. If null, the function will make a query
+ * @returns The block data
+ */
 export default async function getBlockProps<
   BlockFragment extends TCommonBlockFragment,
   BlockVariables extends Variables = Variables,
