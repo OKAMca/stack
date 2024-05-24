@@ -54,11 +54,3 @@ jobs:
         run: npx nx run-many --target=semantic-release --parallel=false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish Project to Chromatic
-        uses: chromaui/action@v1
-        # Chromatic GitHub Action options
-        with:
-          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-          storybookBuildDir: dist/libs/stack/stack-ui
