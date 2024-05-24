@@ -55,7 +55,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  chromatic:
       - name: Publish Project to Chromatic
         uses: chromaui/action@v1
         # Chromatic GitHub Action options
