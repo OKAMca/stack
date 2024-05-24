@@ -26,7 +26,7 @@ export const accordionButton = tv({
       left: 'grid-cols-[1fr_3rem]',
     },
     bgColor: {
-      gray: 'bg-gray-300',
+      gray: 'bg-red-300',
       white: 'bg-white',
     },
   },
