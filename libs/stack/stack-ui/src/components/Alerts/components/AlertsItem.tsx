@@ -1,5 +1,8 @@
 import React from 'react'
-import { Box, Button, Icon, useThemeContext } from '../../..'
+import useThemeContext from '../../../providers/Theme/hooks'
+import Box from '../../Box'
+import Button from '../../Button'
+import Icon from '../../Icon'
 import type { TAlertsItemProps } from '../interface'
 
 const AlertsItem = (props: TAlertsItemProps) => {

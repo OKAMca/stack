@@ -1,8 +1,9 @@
 import type { Ref } from 'react'
 import { forwardRef } from 'react'
-import { CloseBtn, Icon } from '../../..'
 import { ButtonWithForwardRef } from '../../Button'
 import type { TButtonProps } from '../../Button/interface'
+import Icon from '../../Icon'
+import CloseBtn from '../../icons/CloseBtn'
 
 const AlertsCloseButton = forwardRef((props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
   const { themeName = 'alerts.closeBtn', ...rest } = props
