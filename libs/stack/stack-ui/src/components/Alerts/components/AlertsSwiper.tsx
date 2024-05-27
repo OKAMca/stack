@@ -1,7 +1,12 @@
+import { A11y, Keyboard, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useThemeContext from '../../../providers/Theme/hooks'
 import type { TAlertsComponentProps } from '../interface'
 import AlertsItem from './AlertsItem'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/a11y'
+import 'swiper/css/keyboard'
 
 const AlertsSwiper = (props: TAlertsComponentProps) => {
   const {
@@ -19,10 +24,12 @@ const AlertsSwiper = (props: TAlertsComponentProps) => {
   const {
     itemRoleDescriptionMessage = 'slide',
     slideRole = 'group',
-    containerRoleDescriptionMessage = 'group',
+    containerRoleDescriptionMessage = 'carousel',
   } = a11y ?? {}
 
   const itemWrapperTheme = useThemeContext(`${themeName}.item.wrapper`, tokens, customTheme)
+  const swiperTheme = useThemeContext(`${themeName}.swiper.swiper`, tokens, customTheme)
+  const swiperWrapperTheme = useThemeContext(`${themeName}.swiper.wrapper`, tokens, customTheme)
 
   return (
     <Swiper
@@ -31,6 +38,13 @@ const AlertsSwiper = (props: TAlertsComponentProps) => {
       aria-roledescription={containerRoleDescriptionMessage ?? undefined}
       slidesPerView={slidesPerView}
       spaceBetween={spaceBetween}
+      className={swiperTheme}
+      wrapperClass={swiperWrapperTheme}
+      modules={[Navigation, Keyboard, A11y]}
+      keyboard={{
+        enabled: true,
+        onlyInViewport: false,
+      }}
     >
       {alerts.map((alert) => {
         const { id, title, ariaLabel } = alert

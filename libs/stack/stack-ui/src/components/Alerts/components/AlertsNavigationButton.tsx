@@ -1,8 +1,9 @@
 import type { Ref } from 'react'
 import { forwardRef } from 'react'
 import { FocusRing } from 'react-aria'
-import { Icon, useThemeContext } from '../../..'
+import useThemeContext from '../../../providers/Theme/hooks'
 import type { TButtonProps } from '../../Button/interface'
+import Icon from '../../Icon'
 
 const AlertsNavigationButton = forwardRef((props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
   const { themeName = 'alerts.navigationBtn', tokens, customTheme, children, ...rest } = props
