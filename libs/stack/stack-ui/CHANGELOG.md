@@ -1,3 +1,11 @@
+## [1.20.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.4...stack-ui-v1.20.5) (2024-05-28)
+
+
+### Bug Fixes
+
+* aria-label -> ariaLabel (support both) ([f5238d7](https://github.com/OKAMca/stack/commit/f5238d7967fdfb6f64e5035f7676b0eb353b1f38))
+* input doesnt define its own aria-labelledby + required prop works with aria-required ([f52c1ab](https://github.com/OKAMca/stack/commit/f52c1ab9556a3b58c8022ad1ed79757fc179a867))
+
 ## [1.20.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.3...stack-ui-v1.20.4) (2024-05-07)
 
 
