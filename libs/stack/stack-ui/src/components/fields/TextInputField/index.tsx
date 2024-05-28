@@ -22,6 +22,7 @@ const TextInputField = (props: TTextInputProps) => {
     themeName = 'textInput',
     tokens,
     customTheme,
+    ariaLabel,
   } = props
 
   const legacyRequired = required ?? isRequired
@@ -31,7 +32,7 @@ const TextInputField = (props: TTextInputProps) => {
   // inputProps will be cast to TUseTextFieldInputProps
   // so you should only use useTextField<'input'>
   const { errorMessageProps, inputProps, labelProps } = useTextField<'input'>(
-    { ...props, isRequired: legacyRequired, isDisabled: legacyDisabled },
+    { 'aria-label': ariaLabel, ...props, isRequired: legacyRequired, isDisabled: legacyDisabled },
     ref,
   )
 
