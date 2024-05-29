@@ -14,7 +14,6 @@ export interface TSelectProps extends TFieldReactHookForm {
   disabled?: boolean
   isError?: boolean
   errorMessage?: string
-  children: ReactElement<TSelectItemProps>[]
   fieldRef?: RefCallBack
   placeholderLabel: string
   hookFormRef?: RefCallBack
@@ -22,4 +21,5 @@ export interface TSelectProps extends TFieldReactHookForm {
   defaultValue?: string
   value?: string
   popoverMatchesWidth?: boolean
+  options?: { key: string; value: string }[]
 }
