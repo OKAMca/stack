@@ -1,3 +1,11 @@
+## [1.20.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.5...stack-ui-v1.20.6) (2024-05-29)
+
+
+### Bug Fixes
+
+* select do not work on in nextjs app ([5b04406](https://github.com/OKAMca/stack/commit/5b044064c4f0818255e0b65b8959b2a58f74176f))
+* **select:** console warnings & cleaner code ([560cea2](https://github.com/OKAMca/stack/commit/560cea283d7c470f5d130342924acafbd5b3c471))
+
 ## [1.20.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.4...stack-ui-v1.20.5) (2024-05-28)
 
 
