@@ -1,3 +1,10 @@
+## [1.11.2](https://github.com/OKAMca/stack/compare/core-lib-v1.11.1...core-lib-v1.11.2) (2024-05-29)
+
+
+### Bug Fixes
+
+* select do not work on in nextjs app ([5b04406](https://github.com/OKAMca/stack/commit/5b044064c4f0818255e0b65b8959b2a58f74176f))
+
 ## [1.11.1](https://github.com/OKAMca/stack/compare/core-lib-v1.11.0...core-lib-v1.11.1) (2024-04-04)
 
 
