@@ -30,7 +30,7 @@ export { default as MenuItems } from './components/Menu/components/MenuItems'
 export { default as TabContainer } from './components/Menu/components/TabContainer'
 export { default as Alerts } from './components/Alerts'
 export { default as AlertsItem } from './components/Alerts/components/AlertsItem'
-
+export { default as SelectItem } from './components/fields/SelectItem/SelectItem'
 export { default as DirectusImg } from './components/DirectusImg'
 export { default as Img } from './components/Img'
 export * from './components/icons'
