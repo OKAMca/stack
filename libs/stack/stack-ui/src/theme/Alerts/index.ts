@@ -10,10 +10,6 @@ const alertsContainer = tv({
   base: 'flex justify-between items-center gap-4',
 })
 
-const alertsNavigationBtn = tv({
-  extend: button,
-})
-
 const alertsCloseBtn = tv({
   extend: button,
   base: 'self-end',
@@ -50,10 +46,25 @@ const alertsItemIcon = tv({
   base: 'block w-min bg-color-1-400 p-2 rounded-lg',
 })
 
+const alertsNavigationButton = tv({
+  extend: button,
+})
+
+const alertsPaginationWrapper = tv({
+  base: 'flex gap-4 justify-center',
+})
+
+const alertsPaginationBullet = tv({
+  base: 'w-4 h-4 rounded-full block bg-color-1-600',
+})
+
+const alertsPaginationActiveBullet = tv({
+  base: '!bg-color-1-100',
+})
+
 const alertsTheme = {
   wrapper: alertsWrapper,
   container: alertsContainer,
-  navigationBtn: alertsNavigationBtn,
   closeBtn: alertsCloseBtn,
   swiper: {
     swiper: alertsSwiperSwiper,
@@ -61,10 +72,18 @@ const alertsTheme = {
   },
   item: {
     wrapper: alertsItemWrapper,
-    contaienr: alertsItemContainer,
+    container: alertsItemContainer,
     title: alertsItemTitle,
     content: alertsItemContent,
     icon: alertsItemIcon,
+  },
+  navigation: {
+    button: alertsNavigationButton,
+  },
+  pagination: {
+    wrapper: alertsPaginationWrapper,
+    bullet: alertsPaginationBullet,
+    activeBullet: alertsPaginationActiveBullet,
   },
 }
 

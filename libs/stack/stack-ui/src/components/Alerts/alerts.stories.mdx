@@ -17,41 +17,12 @@ import Typography from '../Typography'
     a11y: {
       nextSlideMessage: 'Next alert',
       prevSlideMessage: 'Previous alert',
+      paginationBulletMessage: 'Navigate to slide number {{index}}'
     },
     closeButtonAriaLabel: 'Close alerts',
     onOpenChange: (isOpen) => console.log(`Alerts component was ${isOpen ? 'opened' : 'closed'}`),
     onNavigationPrev: () => console.log('Navigated to previous slide'),
     onNavigationNext: () => console.log('Navigated to next slide'),
-    alerts: [
-      {
-        id: '1',
-        title: 'Alert 1 title',
-        'aria-label': 'Alert 1 aria',
-        icon: 'X',
-        content: (
-          <>
-            <Box>
-              <Typography tokens={{ size: 'h4' }}>This is alert 1 large content</Typography>
-            </Box>
-            <Box>
-              <Typography tokens={{ size: 'xs' }}>This is alert 1 small content</Typography>
-            </Box>
-          </>
-        )
-      },
-      {
-        id: '2',
-        title: 'Alert 2 title',
-        'aria-label': 'Alert 2 aria',
-        icon: 'YouTube',
-      },
-      {
-        id: '3',
-        title: 'Alert 3 title',
-        'aria-label': 'Alert 3 aria',
-        icon: 'Mail',
-      },
-    ]
   }}
   argTypes={{
     closeButton: {
@@ -101,6 +72,17 @@ import Typography from '../Typography'
         }
       },
       description: 'Triggered when the alerts are closed or opened'
+    },
+    modules: {
+      table: {
+        defaultValue: {
+          summary: "['A11y', 'Keyboard']"
+        },
+        type: {
+          summary: 'Array<A11y | Autoplay | Controller | EffectCoverflow | EffectCube | EffectFade | EffectFlip | EffectCreative | EffectCards | HashNavigation | History | Keyboard | Lazy | Mousewheel | Navigation | Pagination | Parallax | Scrollbar | Thumbs | Virtual | Zoom | FreeMode | Grid | Manipulation>'
+        }
+      },
+      description: 'String list of modules the swiper will automatically import'
     }
   }}
 />
@@ -133,15 +115,163 @@ export const Template = (args) => (
   'onNavigationPrev',
   'onNavigationNext',
   'children',
+  'modules',
 ]} />
 
 ## Showcase
 
-### Default
+### Single alert
 
 <Canvas>
   <Story
-    name="Default"
+    name="Single alert"
+    args={{
+      alerts: [{
+        id: '1',
+        title: 'Alert 1 title',
+        'aria-label': 'Alert 1 aria',
+        icon: 'X',
+        content: (
+          <>
+            <Box>
+              <Typography tokens={{ size: 'h4' }}>This is alert 1 large content</Typography>
+            </Box>
+            <Box>
+              <Typography tokens={{ size: 'xs' }}>This is alert 1 small content</Typography>
+            </Box>
+          </>
+        )
+      }]
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Navigation
+
+<Canvas>
+  <Story
+    name="Navigation"
+    args={{
+      modules: ['Navigation'],
+      alerts: [
+        {
+          id: '1',
+          title: 'Alert 1 title',
+          'aria-label': 'Alert 1 aria',
+          icon: 'X',
+          content: (
+            <>
+              <Box>
+                <Typography tokens={{ size: 'h4' }}>This is alert 1 large content</Typography>
+              </Box>
+              <Box>
+                <Typography tokens={{ size: 'xs' }}>This is alert 1 small content</Typography>
+              </Box>
+            </>
+          )
+        },
+        {
+          id: '2',
+          title: 'Alert 2 title',
+          'aria-label': 'Alert 2 aria',
+          icon: 'YouTube',
+        },
+        {
+          id: '3',
+          title: 'Alert 3 title',
+          'aria-label': 'Alert 3 aria',
+          icon: 'Mail',
+        },
+      ]
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Pagination
+
+<Canvas>
+  <Story
+    name="Pagination"
+    args={{
+      modules: ['Pagination'],
+      alerts: [
+        {
+          id: '1',
+          title: 'Alert 1 title',
+          'aria-label': 'Alert 1 aria',
+          icon: 'X',
+          content: (
+            <>
+              <Box>
+                <Typography tokens={{ size: 'h4' }}>This is alert 1 large content</Typography>
+              </Box>
+              <Box>
+                <Typography tokens={{ size: 'xs' }}>This is alert 1 small content</Typography>
+              </Box>
+            </>
+          )
+        },
+        {
+          id: '2',
+          title: 'Alert 2 title',
+          'aria-label': 'Alert 2 aria',
+          icon: 'YouTube',
+        },
+        {
+          id: '3',
+          title: 'Alert 3 title',
+          'aria-label': 'Alert 3 aria',
+          icon: 'Mail',
+        },
+      ]
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Pagination & Navigation
+
+<Canvas>
+  <Story
+    name="Pagination & Navigation"
+    args={{
+      modules: ['Pagination', 'Navigation'],
+      alerts: [
+        {
+          id: '1',
+          title: 'Alert 1 title',
+          'aria-label': 'Alert 1 aria',
+          icon: 'X',
+          content: (
+            <>
+              <Box>
+                <Typography tokens={{ size: 'h4' }}>This is alert 1 large content</Typography>
+              </Box>
+              <Box>
+                <Typography tokens={{ size: 'xs' }}>This is alert 1 small content</Typography>
+              </Box>
+            </>
+          )
+        },
+        {
+          id: '2',
+          title: 'Alert 2 title',
+          'aria-label': 'Alert 2 aria',
+          icon: 'YouTube',
+        },
+        {
+          id: '3',
+          title: 'Alert 3 title',
+          'aria-label': 'Alert 3 aria',
+          icon: 'Mail',
+        },
+      ]
+    }}
   >
     {Template.bind({})}
   </Story>

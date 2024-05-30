@@ -1,4 +1,5 @@
 import type React from 'react'
+import type * as SwiperModules from 'swiper/modules'
 import type { SwiperProps } from 'swiper/react'
 import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
@@ -17,9 +18,12 @@ export interface TAlertsItem {
   button?: TButtonProps
 }
 
-export interface TAlertsComponentProps extends Omit<TDefaultComponent, 'children'>, Omit<SwiperProps, 'children'> {
+export interface TAlertsComponentProps
+  extends Omit<TDefaultComponent, 'children'>,
+    Omit<SwiperProps, 'children' | 'modules'> {
   alerts: TAlertsItem[]
   children?: (props: TAlertsItemProps) => React.ReactNode
+  modules?: (keyof typeof SwiperModules)[]
 }
 
 export type TAlertsItemProps = TAlertsItem & TDefaultComponent
