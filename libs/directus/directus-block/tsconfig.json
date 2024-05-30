@@ -2,25 +2,19 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "allowJs": false,
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "incremental": true,
+    "strict": true
   },
-  "plugins": [
-    {
-      "name": "next"
-    }
-  ],
   "files": [],
   "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"
     },
+    {
+      "path": "./.storybook/tsconfig.json"
+    }
   ],
   "extends": "../../../tsconfig.base.json"
 }
