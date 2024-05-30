@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/OKAMca/stack/compare/core-lib-v1.11.2...core-lib-v1.12.0) (2024-05-30)
+
+
+### Features
+
+* alerts component ([35ee942](https://github.com/OKAMca/stack/commit/35ee942432edc38d9dd7be9c81992bbe314fba61))
+
 ## [1.11.2](https://github.com/OKAMca/stack/compare/core-lib-v1.11.1...core-lib-v1.11.2) (2024-05-29)
 
 
