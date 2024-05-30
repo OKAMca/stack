@@ -3,6 +3,7 @@
 import React from 'react'
 import { makeTheme, createThemeProvider } from '../providers/Theme'
 import { accordionTheme } from './Accordion'
+import alertsTheme from './Alerts'
 import { container, grid, gridItem, main } from './Box'
 import button from './Button'
 import {
@@ -165,6 +166,7 @@ const BaseTheme = makeTheme({
     anchor: () => ``,
   },
   img: imgTheme,
+  alerts: alertsTheme,
 })
 
 export default React.memo(createThemeProvider(BaseTheme))
