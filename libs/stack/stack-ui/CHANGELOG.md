@@ -1,3 +1,19 @@
+## [1.20.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.5...stack-ui-v1.20.6) (2024-05-29)
+
+
+### Bug Fixes
+
+* select do not work on in nextjs app ([5b04406](https://github.com/OKAMca/stack/commit/5b044064c4f0818255e0b65b8959b2a58f74176f))
+* **select:** console warnings & cleaner code ([560cea2](https://github.com/OKAMca/stack/commit/560cea283d7c470f5d130342924acafbd5b3c471))
+
+## [1.20.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.4...stack-ui-v1.20.5) (2024-05-28)
+
+
+### Bug Fixes
+
+* aria-label -> ariaLabel (support both) ([f5238d7](https://github.com/OKAMca/stack/commit/f5238d7967fdfb6f64e5035f7676b0eb353b1f38))
+* input doesnt define its own aria-labelledby + required prop works with aria-required ([f52c1ab](https://github.com/OKAMca/stack/commit/f52c1ab9556a3b58c8022ad1ed79757fc179a867))
+
 ## [1.20.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.3...stack-ui-v1.20.4) (2024-05-07)
 
 
