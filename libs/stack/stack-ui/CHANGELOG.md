@@ -1,3 +1,16 @@
+# [1.21.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.6...stack-ui-v1.21.0) (2024-05-30)
+
+
+### Bug Fixes
+
+* better imports + styling examples ([feb6a38](https://github.com/OKAMca/stack/commit/feb6a387387118fbec4d5b408ac86c30de48841f))
+* story with one alert, pagination module integration ([6c79df9](https://github.com/OKAMca/stack/commit/6c79df9816e5c4def5b1c2238ce325339f8e63e2))
+
+
+### Features
+
+* alerts component ([35ee942](https://github.com/OKAMca/stack/commit/35ee942432edc38d9dd7be9c81992bbe314fba61))
+
 ## [1.20.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.5...stack-ui-v1.20.6) (2024-05-29)
 
 
