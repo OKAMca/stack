@@ -1,3 +1,10 @@
+## [1.21.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.1...stack-ui-v1.21.2) (2024-05-31)
+
+
+### Bug Fixes
+
+* add export for dateRangePicker ([e39095a](https://github.com/OKAMca/stack/commit/e39095ac120f958b94e1bc6b3f5a89d35c382265))
+
 ## [1.21.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.0...stack-ui-v1.21.1) (2024-05-31)
 
 
