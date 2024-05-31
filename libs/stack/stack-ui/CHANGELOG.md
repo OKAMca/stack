@@ -1,3 +1,10 @@
+## [1.21.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.0...stack-ui-v1.21.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* lightbox typing error ([85ee4f4](https://github.com/OKAMca/stack/commit/85ee4f4a39ecf889a3b95ee88e7e28c95cc5cc7c))
+
 # [1.21.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.6...stack-ui-v1.21.0) (2024-05-30)
 
 
