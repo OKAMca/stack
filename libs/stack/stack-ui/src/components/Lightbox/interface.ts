@@ -6,9 +6,9 @@ import type { OverlayTriggerProps } from 'react-stately'
 import type { TDefaultComponent, TTransition } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
 
-type TCloseButtonProps = React.ForwardRefExoticComponent<
-  TButtonProps & React.RefAttributes<HTMLButtonElement & HTMLAnchorElement>
->
+type TCloseButtonProps =
+  | React.ForwardRefExoticComponent<TButtonProps & React.RefAttributes<HTMLButtonElement & HTMLAnchorElement>>
+  | FunctionComponent<TButtonProps>
 
 export interface LightboxProps extends TDefaultComponent, OverlayTriggerProps, Omit<AriaOverlayTriggerProps, 'type'> {
   closeButtonAriaLabel?: string
