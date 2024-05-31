@@ -18,6 +18,7 @@ export { default as CheckboxGroupItem } from './components/fields/CheckboxGroup/
 export { default as TextArea, ReactHookFormTextArea } from './components/fields/TextArea'
 export { default as TextInputField, ReactHookFormInput } from './components/fields/TextInputField'
 export { default as DatePicker } from './components/fields/DatePicker'
+export { default as DateRangePicker } from './components/fields/DatePicker/DateRangePicker'
 export { default as Box, BoxWithForwardRef } from './components/Box'
 export { default as Calendar } from './components/Calendar'
 export { default as Modal } from './components/Modal'
