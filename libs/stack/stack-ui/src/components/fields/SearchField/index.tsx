@@ -25,27 +25,28 @@ const SearchField = (props: TSearchProps) => {
   const containerTheme = useThemeContext(`${themeName}.container`, searchTokens, customTheme)
 
   return (
-    <div className={wrapperTheme}>
-      <div aria-disabled={disabled}>
-        {label && (
-          // eslint-disable-next-line jsx-a11y/label-has-associated-control
-          <label {...labelProps} className={labelTheme}>
-            {label}
-          </label>
-        )}
-        <div className={containerTheme}>
-          <input ref={ref} {...inputProps} placeholder={placeholder} className={inputTheme} />
-          <FocusRing focusRingClass="has-focus-ring">
-            <Button
-              handlePress={clearButtonProps.onPress}
-              tokens={{ isIconOnly: true, buttonStyle: 'hollow' }}
-              themeName={`${themeName}.icon`}
-            >
-              {state.value === '' ? <Search width="16" height="16" /> : <Close width="16" height="16" />}
-            </Button>
-          </FocusRing>
-        </div>
+    <div className={wrapperTheme} aria-disabled={disabled}>
+      {/* <div aria-disabled={disabled}> */}
+      {label && (
+        // eslint-disable-next-line jsx-a11y/label-has-associated-control
+        <label {...labelProps} className={labelTheme}>
+          {label}
+        </label>
+      )}
+      <div className={containerTheme}>
+        <input ref={ref} {...inputProps} placeholder={placeholder} className={inputTheme} disabled={disabled} />
+        <FocusRing focusRingClass="has-focus-ring">
+          <Button
+            handlePress={clearButtonProps.onPress}
+            tokens={{ isIconOnly: true, buttonStyle: 'hollow' }}
+            themeName={`${themeName}.icon`}
+            aria-label="clear"
+          >
+            {state.value === '' ? <Search width="16" height="16" /> : <Close width="16" height="16" />}
+          </Button>
+        </FocusRing>
       </div>
+      {/* </div> */}
       {errorMessage && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={searchTokens} {...errorMessageProps}>
           {errorMessage}
