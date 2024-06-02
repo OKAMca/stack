@@ -34,6 +34,7 @@ import { imgTheme } from './Image'
 import lightboxTheme from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
+import SearchField from './SearchField'
 import {
   shareButton,
   shareButtonContainer,
@@ -136,6 +137,13 @@ const BaseTheme = makeTheme({
     li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
   },
   textarea: {
+    wrapper: () => 'flex flex-col',
+    container: () => 'flex items-center gap-4',
+    label: () => 'text-gray-3 px-6',
+    input: (props) => textArea(props),
+    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
+  },
+  searchField: {
     wrapper: () => 'flex flex-col',
     container: () => 'flex items-center gap-4',
     label: () => 'text-gray-3 px-6',
