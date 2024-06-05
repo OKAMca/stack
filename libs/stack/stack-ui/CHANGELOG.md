@@ -1,3 +1,16 @@
+# [1.22.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.2...stack-ui-v1.22.0) (2024-06-05)
+
+
+### Bug Fixes
+
+* different id ([c37b8dc](https://github.com/OKAMca/stack/commit/c37b8dc68ad53af8e9dbc7ee3d087db72555f33a))
+
+
+### Features
+
+* add search ([e4724f1](https://github.com/OKAMca/stack/commit/e4724f1a5caa719f64bb178957482dbac12bed38))
+* add style ([59b154d](https://github.com/OKAMca/stack/commit/59b154dcd54c23ec59e0c0b2c5f67c65630c53f5))
+
 ## [1.21.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.1...stack-ui-v1.21.2) (2024-05-31)
 
 
