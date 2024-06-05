@@ -26,7 +26,6 @@ const SearchField = (props: TSearchProps) => {
 
   return (
     <div className={wrapperTheme} aria-disabled={disabled}>
-      {/* <div aria-disabled={disabled}> */}
       {label && (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label {...labelProps} className={labelTheme}>
@@ -46,7 +45,6 @@ const SearchField = (props: TSearchProps) => {
           </Button>
         </FocusRing>
       </div>
-      {/* </div> */}
       {errorMessage && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={searchTokens} {...errorMessageProps}>
           {errorMessage}

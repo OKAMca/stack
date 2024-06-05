@@ -11,11 +11,14 @@ import { SearchBarProvider } from '../../../providers/UserSearchQuery'
     onChange: (value) => console.log(`You have typed ${value}`),
     onSubmit: (value) => console.log(`You have submitted ${value}`),
     'aria-label': 'Search',
-    id: 'Search',
   }}
 />
 
-export const Template = (args) => <SearchBarProvider userQuery=""><Search {...args} /></SearchBarProvider>
+export const Template = (args) => (
+  <SearchBarProvider userQuery="">
+    <Search {...args} />
+  </SearchBarProvider>
+)
 
 # Search
 
@@ -26,11 +29,14 @@ export const Template = (args) => <SearchBarProvider userQuery=""><Search {...ar
 <ArgTypes />
 
 ## Showcase
+
 ### Default
+
 <Canvas>
   <Story
     name="Default"
     args={{
+      id: 'default',
       label: 'Search',
     }}
   >
@@ -39,19 +45,25 @@ export const Template = (args) => <SearchBarProvider userQuery=""><Search {...ar
 </Canvas>
 
 ### No label
+
 <Canvas>
   <Story
     name="No label"
+    args={{
+      id: 'no-label',
+    }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
 ### Disabled
+
 <Canvas>
   <Story
     name="Disabled"
     args={{
+      id: 'disabled',
       label: 'Search',
       disabled: true,
     }}
@@ -61,14 +73,19 @@ export const Template = (args) => <SearchBarProvider userQuery=""><Search {...ar
 </Canvas>
 
 ### Error
+
 <Canvas>
   <Story
     name="Error"
     args={{
+      id: 'error',
       label: 'Search',
       errorMessage: 'This is an error message',
     }}
-  >
+
+>
+
     {Template.bind({})}
+
   </Story>
 </Canvas>
