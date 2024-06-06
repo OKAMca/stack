@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.22.0...stack-ui-v1.23.0) (2024-06-06)
+
+
+### Features
+
+* export search field ([3a5fcfc](https://github.com/OKAMca/stack/commit/3a5fcfcbd976e53a1b83344afe548dcc1bc4d04e))
+
 # [1.22.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.2...stack-ui-v1.22.0) (2024-06-05)
 
 
