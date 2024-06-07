@@ -1,0 +1,55 @@
+query Pages {
+	pages {
+		flexible_editor
+		editor_nodes {
+			id
+			item {
+				... on block_video {
+					headline
+					id
+					title
+					type
+					video_url
+				}
+				... on block_button {
+					color
+					date_created
+					date_updated
+					external_url
+					id
+					label
+					sort
+					type
+					user_created
+					user_updated
+					variant
+				}
+				... on block_quote {
+					content
+					id
+					subtitle
+					title
+				}
+				... on block_faqs {
+					alignment
+					faqs
+					headline
+					id
+					title
+				}
+				... on block_team {
+					content
+					headline
+					id
+					title
+				}
+				... on block_gallery {
+					headline
+					id
+					title
+				}
+			}
+			collection
+		}
+	}
+}

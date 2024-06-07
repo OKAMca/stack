@@ -24,6 +24,7 @@ export default function useAccordionState(params: AccordionProps) {
   const defaultOpenKeys =
     propDefaultSelectedKeys ??
     childrenArray.reduce<string[]>((openKeys, item) => {
+      if (!item) return openKeys
       const { props: itemProps, key } = item
       const { defaultOpen } = itemProps ?? {}
       if (!defaultOpen || !key) return openKeys
