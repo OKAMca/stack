@@ -1,7 +1,8 @@
-import { formatFiles, generateFiles, Tree } from '@nx/devkit'
 import * as path from 'path'
-import { ComponentGeneratorSchema } from './schema'
+import type { Tree } from '@nx/devkit'
+import { formatFiles, generateFiles } from '@nx/devkit'
 import { capitalizeFirstLetter } from '@okam/core-lib'
+import type { ComponentGeneratorSchema } from './schema'
 
 export async function componentGenerator(tree: Tree, options: ComponentGeneratorSchema) {
   const projectRoot = `${options.path}/${options.name}`

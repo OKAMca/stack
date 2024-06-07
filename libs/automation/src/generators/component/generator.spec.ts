@@ -1,8 +1,9 @@
+import type { Tree } from '@nx/devkit'
+import { readProjectConfiguration } from '@nx/devkit'
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing'
-import { Tree, readProjectConfiguration } from '@nx/devkit'
 
 import { componentGenerator } from './generator'
-import { ComponentGeneratorSchema } from './schema'
+import type { ComponentGeneratorSchema } from './schema'
 
 describe('component generator', () => {
   let tree: Tree
