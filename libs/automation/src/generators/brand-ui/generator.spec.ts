@@ -1,8 +1,9 @@
+import type { Tree } from '@nx/devkit'
+import { readProjectConfiguration } from '@nx/devkit'
 import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing'
-import { Tree, readProjectConfiguration } from '@nx/devkit'
 
 import { brandUiGenerator } from './generator'
-import { BrandUiGeneratorSchema } from './schema'
+import type { BrandUiGeneratorSchema } from './schema'
 
 describe('brand-ui generator', () => {
   let tree: Tree

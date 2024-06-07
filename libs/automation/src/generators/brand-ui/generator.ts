@@ -1,6 +1,7 @@
-import { addProjectConfiguration, formatFiles, generateFiles, Tree } from '@nx/devkit'
 import * as path from 'path'
-import { BrandUiGeneratorSchema } from './schema'
+import type { Tree } from '@nx/devkit'
+import { addProjectConfiguration, formatFiles, generateFiles } from '@nx/devkit'
+import type { BrandUiGeneratorSchema } from './schema'
 
 export async function brandUiGenerator(tree: Tree, options: BrandUiGeneratorSchema) {
   const projectRoot = `libs/${options.name}`
