@@ -1,3 +1,10 @@
+## [1.23.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.0...stack-ui-v1.23.1) (2024-06-07)
+
+
+### Bug Fixes
+
+* yeah... ([e01a744](https://github.com/OKAMca/stack/commit/e01a744eb831e8e7b81277b0cf9f2292186ae4a5))
+
 # [1.23.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.22.0...stack-ui-v1.23.0) (2024-06-06)
 
 
