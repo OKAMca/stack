@@ -45,6 +45,7 @@ export { useSidePanel, SidePanelContextProvider } from './providers/SidePanel'
 export { MenuContextProvider, useMenu } from './providers/Menu'
 export { RadioGroupProvider, useRadioGroupCtx } from './providers/RadioGroup/RadioGroup'
 export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion'
+export { SearchBarProvider } from './providers/UserSearchQuery'
 
 // types & interfaces
 export type { TButtonProps } from './components/Button/interface'
