@@ -1,16 +1,17 @@
 'use client'
 
 import { useSlotId } from '@react-aria/utils'
+import type { RefObject } from 'react'
 import type { OverlayTriggerProps } from 'react-aria'
 import { useOverlayTrigger } from 'react-aria'
 import type { OverlayTriggerState } from 'react-stately'
 
-function useOverlayHook(props: OverlayTriggerProps, state: OverlayTriggerState) {
+function useOverlayHook(props: OverlayTriggerProps, state: OverlayTriggerState, ref?: RefObject<Element>) {
   const { type = 'dialog' } = props
   const {
     triggerProps: { onPress, ...triggerProps },
     overlayProps,
-  } = useOverlayTrigger({ type }, state)
+  } = useOverlayTrigger({ type }, state, ref)
 
   const updatedTriggerProps = {
     handlePress: onPress,

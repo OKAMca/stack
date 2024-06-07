@@ -31,6 +31,7 @@ const Lightbox = (props: TLightboxProps) => {
     setOpen,
     isOpen,
     closeButtonAriaLabel,
+    transitionComponent,
   } = props
 
   const state = useOverlayTriggerState(props)
@@ -57,7 +58,13 @@ const Lightbox = (props: TLightboxProps) => {
           {thumbnailContent}
         </Button>
       </FocusRing>
-      <Modal themeName={`${themeName}.modal`} tokens={tokens} state={state} {...overlayProps}>
+      <Modal
+        themeName={`${themeName}.modal`}
+        tokens={tokens}
+        state={state}
+        {...overlayProps}
+        transitionComponent={transitionComponent}
+      >
         <CloseButton
           themeName={`${themeName}.closeBtn`}
           tokens={tokens}
