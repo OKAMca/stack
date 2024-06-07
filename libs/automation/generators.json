@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "brand-ui": {
+      "factory": "./src/generators/brand-ui/generator",
+      "schema": "./src/generators/brand-ui/schema.json",
+      "description": "brand-ui generator"
+    },
+    "component": {
+      "factory": "./src/generators/component/generator",
+      "schema": "./src/generators/component/schema.json",
+      "description": "component generator"
+    }
+  }
+}
