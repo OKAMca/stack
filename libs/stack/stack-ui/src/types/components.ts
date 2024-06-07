@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from 'react'
+import type { DetailedHTMLProps, HTMLAttributes } from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TCustomTheme, TToken } from '../providers/Theme/interface'
 
@@ -23,7 +24,7 @@ export type TReactHookForm = {
   validation?: object
 }
 
-export interface TTransition extends TDefaultComponent {
+export interface TTransition extends TDefaultComponent, HTMLAttributes<HTMLElement> {
   isVisible: boolean
   children: React.ReactNode
 }
