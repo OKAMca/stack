@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "BUSL-1.1",
   "scripts": {
+    "codegen": "graphql-codegen --config ./codegen.ts",
     "g:lint": "nx run-many --all --target=lint",
     "storybook": "nx run stack-ui:storybook",
     "storybook-next-component": "nx run next-component:storybook",
@@ -20,6 +21,7 @@
   },
   "private": true,
   "dependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
     "@nx/next": "17.2.6",
     "@react-aria/accordion": "^3.0.0-alpha.27",
     "@react-aria/focus": "^3.16.0",
@@ -30,8 +32,9 @@
     "@tanstack/react-query": "^5.17.1",
     "@tsed/exceptions": "^7.52.0",
     "dequal": "^2.0.3",
+    "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
-    "isomorphic-dompurify": "1.13.0",
+    "isomorphic-dompurify": "2.10.0",
     "lodash.isequal": "4.5.0",
     "next": "^14.0.4",
     "radash": "11.0.0",

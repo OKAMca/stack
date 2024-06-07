@@ -1,7 +1,7 @@
+import { queryGql } from '@okam/directus-query'
 import { NextComponent } from '@okam/next-component'
 import { HelloServer } from '@okam/next-component/server'
 import {
-  Accordion,
   Box,
   Button,
   Calendar,
@@ -18,13 +18,39 @@ import {
   WysiwygBlock,
   TextArea,
   TextInputField,
-  DirectusImg,
 } from '@okam/stack-ui'
+import { PagesDocument } from 'libs/directus-data-query/src/index'
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
 import SidePanelControl from './components/SidePanelControl'
 
 export default async function Index() {
+  const flexibleContent = await queryGql(PagesDocument)
+
+  const pageFlexibleContent = flexibleContent.pages.find((p) => p.flexible_editor !== null)
+
+  const content = pageFlexibleContent?.flexible_editor?.content as Array<{
+    type: string
+    attrs: Record<string, string>
+    content?: unknown
+  }>
+
+  console.log(pageFlexibleContent?.editor_nodes)
+
+  console.log(
+    content.map((block) => {
+      if (block.type !== 'relation-block') {
+        console.log(block.content)
+        return block
+      }
+
+      return {
+        type: block.attrs.collection ?? block.type,
+        block: pageFlexibleContent?.editor_nodes?.find((node) => node?.id === block.attrs.id)?.item,
+      }
+    }),
+  )
+
   return (
     <div>
       <div className="flex flex-col gap-16 p-8">
@@ -34,13 +60,13 @@ export default async function Index() {
 
       <div className="flex flex-col gap-16 p-8">
         <Box>
-          <DirectusImg
+          {/* <DirectusImg
             filenameDownload="Mask group.jpg"
             width={882}
             height={496}
             id="0d4005d0-6472-4fb1-9340-b14387b264ef"
             thumbhash="aRgODIKUQmq/WIdzh3klj1LgGA=="
-          />
+          /> */}
         </Box>
         <Box>
           <Typography tokens={{ size: 'h1' }}>This is a test of all available components</Typography>
@@ -62,11 +88,11 @@ export default async function Index() {
             <Typography tokens={{ size: 'h2' }}>Interactive components</Typography>
           </Box>
           <Box>
-            <Accordion id="accordion" title="Accordion" ariaLabel="Open accordion">
-              <Typography>
-                This is just random content to test what the inside of the Accordion component looks like.
-              </Typography>
-            </Accordion>
+            {/* <Accordion id="accordion">
+              <AccordionItem title="This is an accordion">
+                <Typography>This is the body of the accordion</Typography>
+              </AccordionItem>
+            </Accordion> */}
           </Box>
           <Box>
             <Button>This is an example button</Button>

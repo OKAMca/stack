@@ -8,6 +8,7 @@ export function queryGql<TResult, TVariables extends Variables>(
   queryKey?: TVariables,
   client = graphqlRequestClient,
 ) {
+  console.log(document)
   return client.request<TResult>(document, {
     ...queryKey,
   })
