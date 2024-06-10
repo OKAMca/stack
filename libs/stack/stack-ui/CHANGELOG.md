@@ -1,3 +1,80 @@
+## [1.23.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.1...stack-ui-v1.23.2) (2024-06-10)
+
+
+### Bug Fixes
+
+* aria expanded property on multiple item accordions ([6e1aea2](https://github.com/OKAMca/stack/commit/6e1aea2818fca7c9ff7196869485ca3d41e4b4ba))
+
+## [1.23.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.0...stack-ui-v1.23.1) (2024-06-07)
+
+
+### Bug Fixes
+
+* yeah... ([e01a744](https://github.com/OKAMca/stack/commit/e01a744eb831e8e7b81277b0cf9f2292186ae4a5))
+
+# [1.23.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.22.0...stack-ui-v1.23.0) (2024-06-06)
+
+
+### Features
+
+* export search field ([3a5fcfc](https://github.com/OKAMca/stack/commit/3a5fcfcbd976e53a1b83344afe548dcc1bc4d04e))
+
+# [1.22.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.2...stack-ui-v1.22.0) (2024-06-05)
+
+
+### Bug Fixes
+
+* different id ([c37b8dc](https://github.com/OKAMca/stack/commit/c37b8dc68ad53af8e9dbc7ee3d087db72555f33a))
+
+
+### Features
+
+* add search ([e4724f1](https://github.com/OKAMca/stack/commit/e4724f1a5caa719f64bb178957482dbac12bed38))
+* add style ([59b154d](https://github.com/OKAMca/stack/commit/59b154dcd54c23ec59e0c0b2c5f67c65630c53f5))
+
+## [1.21.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.1...stack-ui-v1.21.2) (2024-05-31)
+
+
+### Bug Fixes
+
+* add export for dateRangePicker ([e39095a](https://github.com/OKAMca/stack/commit/e39095ac120f958b94e1bc6b3f5a89d35c382265))
+
+## [1.21.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.21.0...stack-ui-v1.21.1) (2024-05-31)
+
+
+### Bug Fixes
+
+* lightbox typing error ([85ee4f4](https://github.com/OKAMca/stack/commit/85ee4f4a39ecf889a3b95ee88e7e28c95cc5cc7c))
+
+# [1.21.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.6...stack-ui-v1.21.0) (2024-05-30)
+
+
+### Bug Fixes
+
+* better imports + styling examples ([feb6a38](https://github.com/OKAMca/stack/commit/feb6a387387118fbec4d5b408ac86c30de48841f))
+* story with one alert, pagination module integration ([6c79df9](https://github.com/OKAMca/stack/commit/6c79df9816e5c4def5b1c2238ce325339f8e63e2))
+
+
+### Features
+
+* alerts component ([35ee942](https://github.com/OKAMca/stack/commit/35ee942432edc38d9dd7be9c81992bbe314fba61))
+
+## [1.20.6](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.5...stack-ui-v1.20.6) (2024-05-29)
+
+
+### Bug Fixes
+
+* select do not work on in nextjs app ([5b04406](https://github.com/OKAMca/stack/commit/5b044064c4f0818255e0b65b8959b2a58f74176f))
+* **select:** console warnings & cleaner code ([560cea2](https://github.com/OKAMca/stack/commit/560cea283d7c470f5d130342924acafbd5b3c471))
+
+## [1.20.5](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.4...stack-ui-v1.20.5) (2024-05-28)
+
+
+### Bug Fixes
+
+* aria-label -> ariaLabel (support both) ([f5238d7](https://github.com/OKAMca/stack/commit/f5238d7967fdfb6f64e5035f7676b0eb353b1f38))
+* input doesnt define its own aria-labelledby + required prop works with aria-required ([f52c1ab](https://github.com/OKAMca/stack/commit/f52c1ab9556a3b58c8022ad1ed79757fc179a867))
+
 ## [1.20.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.3...stack-ui-v1.20.4) (2024-05-07)
 
 
