@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { get } from 'radash'
 
-export async function fetchPageSettings(pathName: string, lang = 'fr=CA') {
+export async function fetchPageSettings(pathName: string, lang = 'fr-CA') {
   const graphqlEndpoint = process.env.NEXT_PUBLIC_GRAPHQL_URL
   const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
