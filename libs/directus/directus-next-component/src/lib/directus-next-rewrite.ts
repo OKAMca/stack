@@ -71,10 +71,12 @@ function removeLocaleFromPathName(pathName: string, locale: string) {
   return pathName
 }
 
-export async function directusRouteMiddleware(request: NextRequest) {
-  const { pathname, locale } = request.nextUrl
+export async function directusRouteMiddleware(request: NextRequest, locales: string[]) {
+  const { pathname } = request.nextUrl
 
-  const pathNameWithoutLocale = removeLocaleFromPathName(pathname, locale)
+  const locale = locales.find((l) => pathname.startsWith(`/${l}`))
+
+  const pathNameWithoutLocale = locale ? removeLocaleFromPathName(pathname, locale) : pathname
 
   // Fetch page settings based on the request path.
   const route = await fetchPageSettings(pathNameWithoutLocale, locale)
