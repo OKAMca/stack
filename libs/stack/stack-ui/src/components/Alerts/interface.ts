@@ -16,6 +16,7 @@ export interface TAlertsItem {
   ariaLabel?: string
   content?: React.ReactNode
   button?: TButtonProps
+  isActive?: boolean
 }
 
 export interface TAlertsComponentProps

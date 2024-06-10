@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import * as swiperModules from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useThemeContext from '../../../providers/Theme/hooks'
@@ -23,7 +23,6 @@ const AlertsSwiper = (props: TAlertsProps) => {
     nextButton: NextButton = AlertsNextNavigationButton,
     ...rest
   } = props
-
   const prevButtonRef = useRef(null)
   const nextButtonRef = useRef(null)
 
@@ -46,17 +45,28 @@ const AlertsSwiper = (props: TAlertsProps) => {
 
   const hasNavigation = modules?.includes('Navigation')
 
+  const [activeIndex, setActiveIndex] = useState(0)
+
   return (
     <>
       {hasNavigation && (
         <PrevButton
           themeName={`${themeName}.navigation.button`}
-          tokens={tokens}
+          tokens={{ ...tokens, order: 'prev' }}
           ref={prevButtonRef}
           aria-label={a11y?.prevSlideMessage}
         />
       )}
+      {hasNavigation && (
+        <NextButton
+          themeName={`${themeName}.navigation.button`}
+          tokens={{ ...tokens, order: 'next' }}
+          ref={nextButtonRef}
+          aria-label={a11y?.nextSlideMessage}
+        />
+      )}
       <Swiper
+        tabIndex={0}
         {...rest}
         navigation={{ prevEl: prevButtonRef.current, nextEl: nextButtonRef.current }}
         pagination={{
@@ -65,6 +75,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
           bulletActiveClass: paginationActiveBulletTheme,
           clickable: true,
         }}
+        onActiveIndexChange={(index) => setActiveIndex(index.activeIndex)}
         role="group"
         aria-roledescription={containerRoleDescriptionMessage ?? undefined}
         slidesPerView={slidesPerView}
@@ -78,7 +89,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
         }}
         a11y={a11y}
       >
-        {alerts.map((alert) => {
+        {alerts.map((alert, index) => {
           const { id, title, ariaLabel } = alert
 
           return (
@@ -89,19 +100,11 @@ const AlertsSwiper = (props: TAlertsProps) => {
               role={slideRole}
               aria-roledescription={itemRoleDescriptionMessage ?? undefined}
             >
-              {children({ ...alert, themeName: `${themeName}.item`, tokens })}
+              {children({ ...alert, themeName: `${themeName}.item`, tokens, isActive: index === activeIndex })}
             </SwiperSlide>
           )
         })}
       </Swiper>
-      {hasNavigation && (
-        <NextButton
-          themeName={`${themeName}.navigation.button`}
-          tokens={tokens}
-          ref={nextButtonRef}
-          aria-label={a11y?.nextSlideMessage}
-        />
-      )}
     </>
   )
 }
