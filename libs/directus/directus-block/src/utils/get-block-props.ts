@@ -1,31 +1,14 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import { queryGql } from '@okam/directus-query'
 import type { Nullable } from '@okam/stack-ui'
 import type { Variables } from 'graphql-request'
-import type { TCommonBlockFragment } from '../types/block'
-
-type TBlockQuery<BlockFragment extends TCommonBlockFragment> = {
-  __typename?: 'Query'
-} & {
-  [blockKey: string]:
-    | {
-        ' $fragmentRefs'?:
-          | {
-              [blockFragmentKey: string]: BlockFragment
-            }
-          | null
-          | undefined
-      }
-    | null
-    | undefined
-}
+import type { TBlockDocument, TBlockQuery, TBlockVariables, TCommonBlockFragment } from '../types/block'
 
 type TGetBlockPropsParams<BlockFragment extends TCommonBlockFragment, BlockVariables extends Variables = Variables> = {
-  document?: TypedDocumentNode<TBlockQuery<BlockFragment>, BlockVariables>
+  document?: TBlockDocument<BlockFragment, BlockVariables>
   item?: Nullable<NonNullable<NonNullable<TBlockQuery<BlockFragment>[string]>[' $fragmentRefs']>[string]>
   blockKey?: string
-  variables?: Partial<BlockVariables>
+  variables?: TBlockVariables<BlockVariables>
 }
 
 function isVariables<BlockVariables extends Variables>(

@@ -1,17 +1,17 @@
 import { Box, WysiwygBlock } from '@okam/stack-ui'
 import React from 'react'
 import type { TBlockSerializerProps } from '../../components/BlockSerializer/interface'
-import type { BlockWysiwygFragment, BlockWysiwygQueryVariables } from '../../generated/graphql'
-import { BlockSettingsFragmentDoc, BlockWysiwygDocument } from '../../generated/graphql'
+import { BlockSettingsFragmentDoc } from '../../generated/graphql'
 import { getBlockProps, getFragment } from '../../utils'
+import type { BlockWysiwygFragment } from './interface'
 
-const BlockWysiwyg = async (props: TBlockSerializerProps<BlockWysiwygFragment, BlockWysiwygQueryVariables>) => {
-  const { variables, themeName = 'wysiwyg', tokens, item } = props
+const BlockWysiwyg = async (props: TBlockSerializerProps<BlockWysiwygFragment>) => {
+  const { variables, themeName = 'wysiwyg', tokens, item, document } = props
 
   const propsWithFallback = await getBlockProps({
     item,
     blockKey: 'block_wysiwyg_by_id',
-    document: BlockWysiwygDocument,
+    document,
     variables,
   })
 

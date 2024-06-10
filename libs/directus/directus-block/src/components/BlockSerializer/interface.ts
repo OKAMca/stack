@@ -1,7 +1,14 @@
+import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { Nullable, TDefaultComponent } from '@okam/stack-ui'
 import type { Variables } from 'graphql-request'
 import type { FunctionComponent } from 'react'
-import type { TCommonBlockFragment, TAdditionalProps } from '../../types/block'
+import type {
+  TCommonBlockFragment,
+  TAdditionalProps,
+  TBlockQuery,
+  TBlockVariables,
+  TBlockDocument,
+} from '../../types/block'
 
 export interface TBlock<
   BlockFragment extends TCommonBlockFragment = TCommonBlockFragment,
@@ -9,12 +16,13 @@ export interface TBlock<
 > {
   collection?: Nullable<string>
   item?: Nullable<BlockFragment>
-  variables?: Partial<BlockVariables>
+  variables?: TBlockVariables<BlockVariables>
+  document?: TypedDocumentNode<TBlockQuery<BlockFragment>, BlockVariables>
 }
 
 export interface TBlockSerializerProps<
   BlockFragment extends TCommonBlockFragment = TCommonBlockFragment,
-  BlockVariables extends Variables = Variables,
+  BlockVariables extends Variables = TBlockVariables,
   AdditionalProps extends TAdditionalProps = TAdditionalProps,
 > extends TBlock<BlockFragment, BlockVariables>,
     TDefaultComponent {
@@ -29,6 +37,7 @@ export type TBlockFunctionComponent<BlockFragment extends TCommonBlockFragment =
 export type TBlockSerializerConfigComponent<BlockFragment extends TCommonBlockFragment = TCommonBlockFragment> = {
   [blockKey: string]: {
     default: TBlockFunctionComponent<BlockFragment>
+    document?: TBlockDocument<BlockFragment>
     defaultVariant?: string
     getVariant?: (props: TBlockSerializerProps<BlockFragment>) => Nullable<string>
     variants?: {

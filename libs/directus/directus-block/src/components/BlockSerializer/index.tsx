@@ -17,7 +17,8 @@ const BlockSerializer = (props: TBlockSerializerProps) => {
 
   const variantWithFallback = blockConfig.getVariant?.(props) ?? variant ?? defaultVariant
 
-  const defaultBlockComponent = blockConfig.default
+  const { default: defaultBlockComponent, document } = blockConfig
+
   const variantBlockComponent = blockConfig.variants?.[variantWithFallback ?? '']
   const BlockComponent = variantBlockComponent ?? defaultBlockComponent
 
@@ -26,10 +27,11 @@ const BlockSerializer = (props: TBlockSerializerProps) => {
   return (
     <BlockComponent
       key={id}
+      document={document}
       config={config}
       collection={collection}
       item={item}
-      variables={{ id, ...variables }}
+      {...(id ? { variables: { ...variables, id } } : { variables })}
       {...rest}
     />
   )
