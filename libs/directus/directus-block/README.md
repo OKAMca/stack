@@ -62,7 +62,25 @@ const config = {
 - defaultVariant: Overrides the default use of the `default` prop, instead mapping the default component on a specific variant
 - getVariant: Callback to specify a different variant path from the one in the block's settings
 - variants: key-value mapping of `{[variant]: component}`
-- document: The necessary document for querying the data. This prop can either be passed directly to the block or in the config
+- document: The necessary document for querying the data. This prop can either be passed directly to the block or in the config. Since Stack blocks don't yet have their own documents, you can override them and add their document like so:
+
+```tsx
+import { blockWysiwygConfig } from '@okam/directus-block'
+
+const brandConfig = {
+  components: {
+    block_wysiwyg: {
+      document: BlockWysiwygDocument,
+      ...blockWysiwygConfig.block_wysiwyg,
+    },
+    block_image: {
+      default: (props) => <BrandBlockImage {...props} />
+    },
+  },
+}
+
+<BlockDispatcher config={brandConfig} />
+```
 
 #### Overriding the configuration with brand blocks
 
