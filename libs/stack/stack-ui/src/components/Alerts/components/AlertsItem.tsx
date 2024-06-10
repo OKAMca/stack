@@ -6,7 +6,7 @@ import Icon from '../../Icon'
 import type { TAlertsItemProps } from '../interface'
 
 const AlertsItem = (props: TAlertsItemProps) => {
-  const { title, button, content, themeName = 'alerts.item', tokens, icon, id } = props
+  const { title, button, content, themeName = 'alerts.item', tokens, icon, id, isActive } = props
 
   const titleTheme = useThemeContext(`${themeName}.title`, tokens)
 
@@ -22,7 +22,9 @@ const AlertsItem = (props: TAlertsItemProps) => {
               {title}
             </span>
           )}
-          {button && <Button themeName={`${themeName}.button`} tokens={tokens} {...button} />}
+          {button && (
+            <Button tabIndex={isActive ? 0 : -1} themeName={`${themeName}.button`} tokens={tokens} {...button} />
+          )}
           {content &&
             (React.isValidElement(content)
               ? React.cloneElement(content, { ...content.props, themeName: `${themeName}.content`, tokens })
