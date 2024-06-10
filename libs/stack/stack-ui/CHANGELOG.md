@@ -1,3 +1,10 @@
+## [1.23.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.1...stack-ui-v1.23.2) (2024-06-10)
+
+
+### Bug Fixes
+
+* aria expanded property on multiple item accordions ([6e1aea2](https://github.com/OKAMca/stack/commit/6e1aea2818fca7c9ff7196869485ca3d41e4b4ba))
+
 ## [1.23.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.0...stack-ui-v1.23.1) (2024-06-07)
 
 
