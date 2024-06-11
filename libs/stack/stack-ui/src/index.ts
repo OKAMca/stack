@@ -60,6 +60,7 @@ export type {
   TStyleValue,
 } from './providers/Theme/interface'
 export type { TMenuProps, TMenuItemProps } from './components/Menu/interface'
+export type { TDefaultComponent, Nullable } from './types/components'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
