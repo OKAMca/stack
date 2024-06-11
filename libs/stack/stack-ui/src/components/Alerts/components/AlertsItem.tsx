@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSwiperSlide } from 'swiper/react'
 import useThemeContext from '../../../providers/Theme/hooks'
 import Box from '../../Box'
 import Button from '../../Button'
@@ -6,9 +7,10 @@ import Icon from '../../Icon'
 import type { TAlertsItemProps } from '../interface'
 
 const AlertsItem = (props: TAlertsItemProps) => {
-  const { title, button, content, themeName = 'alerts.item', tokens, icon, id, isActive } = props
+  const { title, button, content, themeName = 'alerts.item', tokens, icon, id } = props
 
   const titleTheme = useThemeContext(`${themeName}.title`, tokens)
+  const { isActive } = useSwiperSlide()
 
   if (!title && !button && !content && !icon) return null
 

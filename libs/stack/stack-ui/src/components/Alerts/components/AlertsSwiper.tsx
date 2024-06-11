@@ -97,10 +97,14 @@ const AlertsSwiper = (props: TAlertsProps) => {
               role={slideRole}
               aria-roledescription={itemRoleDescriptionMessage ?? undefined}
             >
-              {({ isActive }) => children({ ...alert, themeName: `${themeName}.item`, tokens, isActive })}
+              {children({ ...alert, themeName: `${themeName}.item`, tokens })}
             </SwiperSlide>
           )
         })}
+        <span slot="container-start">Container Start</span>
+        <span slot="container-end">Container End</span>
+        <span slot="wrapper-start">Wrapper Start</span>
+        <span slot="wrapper-end">Wrapper End</span>
       </Swiper>
     </>
   )
