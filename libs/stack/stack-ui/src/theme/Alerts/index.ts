@@ -16,7 +16,7 @@ const alertsCloseBtn = tv({
 })
 
 const alertsSwiperSwiper = tv({
-  base: 'bg-color-1-300 m-2 rounded-lg',
+  base: 'bg-color-1-300 m-2 rounded-lg order-2',
 })
 
 const alertsSwiperWrapper = tv({
@@ -48,6 +48,12 @@ const alertsItemIcon = tv({
 
 const alertsNavigationButton = tv({
   extend: button,
+  variants: {
+    order: {
+      prev: 'order-1',
+      next: 'order-3',
+    },
+  },
 })
 
 const alertsPaginationWrapper = tv({
