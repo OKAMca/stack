@@ -1,3 +1,10 @@
+## [1.13.1](https://github.com/OKAMca/stack/compare/core-lib-v1.13.0...core-lib-v1.13.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* publishing for new libs ([#126](https://github.com/OKAMca/stack/issues/126)) ([8750ea6](https://github.com/OKAMca/stack/commit/8750ea643fa22ca06979c8d4030fa2a2d865b86f))
+
 # [1.13.0](https://github.com/OKAMca/stack/compare/core-lib-v1.12.0...core-lib-v1.13.0) (2024-06-11)
 
 
