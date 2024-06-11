@@ -45,8 +45,6 @@ const AlertsSwiper = (props: TAlertsProps) => {
 
   const hasNavigation = modules?.includes('Navigation')
 
-  const [activeIndex, setActiveIndex] = useState(0)
-
   return (
     <>
       {hasNavigation && (
@@ -75,7 +73,6 @@ const AlertsSwiper = (props: TAlertsProps) => {
           bulletActiveClass: paginationActiveBulletTheme,
           clickable: true,
         }}
-        onActiveIndexChange={(index) => setActiveIndex(index.activeIndex)}
         role="group"
         aria-roledescription={containerRoleDescriptionMessage ?? undefined}
         slidesPerView={slidesPerView}
@@ -89,7 +86,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
         }}
         a11y={a11y}
       >
-        {alerts.map((alert, index) => {
+        {alerts.map((alert) => {
           const { id, title, ariaLabel } = alert
 
           return (
@@ -100,7 +97,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
               role={slideRole}
               aria-roledescription={itemRoleDescriptionMessage ?? undefined}
             >
-              {children({ ...alert, themeName: `${themeName}.item`, tokens, isActive: index === activeIndex })}
+              {({ isActive }) => children({ ...alert, themeName: `${themeName}.item`, tokens, isActive })}
             </SwiperSlide>
           )
         })}
