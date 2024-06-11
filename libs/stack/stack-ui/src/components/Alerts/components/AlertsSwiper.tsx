@@ -101,10 +101,6 @@ const AlertsSwiper = (props: TAlertsProps) => {
             </SwiperSlide>
           )
         })}
-        <span slot="container-start">Container Start</span>
-        <span slot="container-end">Container End</span>
-        <span slot="wrapper-start">Wrapper Start</span>
-        <span slot="wrapper-end">Wrapper End</span>
       </Swiper>
     </>
   )
