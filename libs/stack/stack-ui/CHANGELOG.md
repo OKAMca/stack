@@ -1,3 +1,10 @@
+# [1.24.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.3...stack-ui-v1.24.0) (2024-06-11)
+
+
+### Features
+
+* STACK-72-Lib-Create-directus-block ([#115](https://github.com/OKAMca/stack/issues/115)) ([c07db82](https://github.com/OKAMca/stack/commit/c07db82d3b2a483e737e8d0dd07074cfa0b82152))
+
 ## [1.23.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.2...stack-ui-v1.23.3) (2024-06-11)
 
 
