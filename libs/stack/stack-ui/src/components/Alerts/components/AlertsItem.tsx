@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSwiperSlide } from 'swiper/react'
 import useThemeContext from '../../../providers/Theme/hooks'
 import Box from '../../Box'
 import Button from '../../Button'
@@ -9,6 +10,7 @@ const AlertsItem = (props: TAlertsItemProps) => {
   const { title, button, content, themeName = 'alerts.item', tokens, icon, id } = props
 
   const titleTheme = useThemeContext(`${themeName}.title`, tokens)
+  const { isActive } = useSwiperSlide()
 
   if (!title && !button && !content && !icon) return null
 
@@ -22,7 +24,9 @@ const AlertsItem = (props: TAlertsItemProps) => {
               {title}
             </span>
           )}
-          {button && <Button themeName={`${themeName}.button`} tokens={tokens} {...button} />}
+          {button && (
+            <Button tabIndex={isActive ? 0 : -1} themeName={`${themeName}.button`} tokens={tokens} {...button} />
+          )}
           {content &&
             (React.isValidElement(content)
               ? React.cloneElement(content, { ...content.props, themeName: `${themeName}.content`, tokens })
