@@ -1,4 +1,4 @@
-import type { Nullable } from 'vitest'
+import type { Nullable } from '@okam/stack-ui'
 import { mergeConfigs } from '../../utils'
 import BlockSerializer from '../BlockSerializer'
 import type { TBlockSerializerProps } from '../BlockSerializer/interface'
