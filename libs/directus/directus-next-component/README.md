@@ -19,3 +19,4 @@ export config = {
   ...directusRouteMiddlewareConfig
 }
 ```
+
