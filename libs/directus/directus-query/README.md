@@ -27,3 +27,4 @@ Then, you can use the client to query data from Directus:
 const variables = {id: 1}
 const data = await queryClient.queryGql(DOCUMENT, variables)
 ```
+
