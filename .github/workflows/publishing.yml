@@ -189,7 +189,7 @@ jobs:
         run: yarn build-directus-next-component
 
       - name: Publish Directus Node Package
-        run: publish-directus-next-component
+        run: yarn publish-directus-next-component
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   publish-next-component:
@@ -216,6 +216,6 @@ jobs:
         run: yarn build-next-component
 
       - name: Publish Directus Node Package
-        run: publish-next-component
+        run: yarn publish-next-component
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
