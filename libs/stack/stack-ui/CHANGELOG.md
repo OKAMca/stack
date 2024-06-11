@@ -1,3 +1,13 @@
+## [1.23.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.2...stack-ui-v1.23.3) (2024-06-11)
+
+
+### Bug Fixes
+
+* focus order and focus container ([0a8f534](https://github.com/OKAMca/stack/commit/0a8f5347943f12e0574fdabc610a0ef25d8f78f2))
+* found even better isActive handling ([6385bc7](https://github.com/OKAMca/stack/commit/6385bc7fe40725d88e0bc0de4f40d6311851588b))
+* isActive handling ([c55df9c](https://github.com/OKAMca/stack/commit/c55df9c6e7566fea05d84ca3cf835aee799ea76b))
+* remove test slots ([0764c72](https://github.com/OKAMca/stack/commit/0764c72b13174aec29d0ae19bdbe7e84c9892d3f))
+
 ## [1.23.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.1...stack-ui-v1.23.2) (2024-06-10)
 
 
