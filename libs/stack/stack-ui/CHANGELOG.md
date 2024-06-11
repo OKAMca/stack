@@ -1,3 +1,10 @@
+## [1.24.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.0...stack-ui-v1.24.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* publishing for new libs ([#126](https://github.com/OKAMca/stack/issues/126)) ([8750ea6](https://github.com/OKAMca/stack/commit/8750ea643fa22ca06979c8d4030fa2a2d865b86f))
+
 # [1.24.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.3...stack-ui-v1.24.0) (2024-06-11)
 
 
