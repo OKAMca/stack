@@ -20,4 +20,11 @@ export type {
 
 // Blocks
 export { default as BlockWysiwyg } from './blocks/BlockWysiwyg'
+
+// Utils
+export { default as getBlockProps } from './utils/get-block-props'
+export { default as mergeConfigs } from './utils/merge-configs'
+
+// Configs
 export { default as blockWysiwygConfig } from './blocks/BlockWysiwyg/config'
+export { default as baseConfig } from './components/BlockDispatcher/config'
