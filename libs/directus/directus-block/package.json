@@ -1,9 +1,8 @@
 {
-  "name": "@okam/core-lib",
-  "version": "1.13.1",
+  "name": "@okam/directus-block",
   "main": "./index.js",
+  "version": "1.0.0",
   "types": "./index.d.ts",
-  "license": "MIT",
   "exports": {
     ".": {
       "import": "./index.mjs",
@@ -15,8 +14,5 @@
   },
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
-  },
-  "nxrelease": {
-    "repositoryUrl": "https://github.com/OKAMca/stack.git"
   }
 }
