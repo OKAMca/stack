@@ -2,6 +2,21 @@
 
 This library was generated with [Nx](https://nx.dev).
 
-## Running unit tests
+## directusRouteMiddleware usage
 
-Run `nx test directus-next-component` to execute the unit tests via [Jest](https://jestjs.io).
+Create a middleware.js file in your project and add the following code to it.
+
+```jsx
+// middleware.js
+
+import  {directusRouteMiddleware, directusRouteMiddlewareConfig} from @okam/directus-next-component
+
+export function middleware(request) {
+  return directusRouteMiddleware(request);
+}
+
+export config = {
+  ...directusRouteMiddlewareConfig
+}
+```
+

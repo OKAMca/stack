@@ -1,3 +1,34 @@
+## [1.24.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.0...stack-ui-v1.24.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* publishing for new libs ([#126](https://github.com/OKAMca/stack/issues/126)) ([8750ea6](https://github.com/OKAMca/stack/commit/8750ea643fa22ca06979c8d4030fa2a2d865b86f))
+
+# [1.24.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.3...stack-ui-v1.24.0) (2024-06-11)
+
+
+### Features
+
+* STACK-72-Lib-Create-directus-block ([#115](https://github.com/OKAMca/stack/issues/115)) ([c07db82](https://github.com/OKAMca/stack/commit/c07db82d3b2a483e737e8d0dd07074cfa0b82152))
+
+## [1.23.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.2...stack-ui-v1.23.3) (2024-06-11)
+
+
+### Bug Fixes
+
+* focus order and focus container ([0a8f534](https://github.com/OKAMca/stack/commit/0a8f5347943f12e0574fdabc610a0ef25d8f78f2))
+* found even better isActive handling ([6385bc7](https://github.com/OKAMca/stack/commit/6385bc7fe40725d88e0bc0de4f40d6311851588b))
+* isActive handling ([c55df9c](https://github.com/OKAMca/stack/commit/c55df9c6e7566fea05d84ca3cf835aee799ea76b))
+* remove test slots ([0764c72](https://github.com/OKAMca/stack/commit/0764c72b13174aec29d0ae19bdbe7e84c9892d3f))
+
+## [1.23.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.1...stack-ui-v1.23.2) (2024-06-10)
+
+
+### Bug Fixes
+
+* aria expanded property on multiple item accordions ([6e1aea2](https://github.com/OKAMca/stack/commit/6e1aea2818fca7c9ff7196869485ca3d41e4b4ba))
+
 ## [1.23.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.23.0...stack-ui-v1.23.1) (2024-06-07)
 
 
