@@ -1,6 +1,6 @@
 import type React from 'react'
 import type * as SwiperModules from 'swiper/modules'
-import type { SwiperProps } from 'swiper/react'
+import type { SwiperClass, SwiperProps } from 'swiper/react'
 import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
 import type { LightboxProps } from '../Lightbox/interface'
@@ -16,6 +16,12 @@ export interface TAlertsItem {
   ariaLabel?: string
   content?: React.ReactNode
   button?: TButtonProps
+}
+
+export interface TAlertsPaginationProps extends TDefaultComponent {
+  activeIndex: number
+  alerts: TAlertsItem[]
+  controller?: SwiperClass
 }
 
 export interface TAlertsComponentProps
