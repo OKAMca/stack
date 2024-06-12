@@ -20,16 +20,16 @@ export interface TBlock<
   document?: TypedDocumentNode<TBlockQuery<BlockFragment>, BlockVariables>
 }
 
-export interface TBlockSerializerProps<
+export type TBlockSerializerProps<
   BlockFragment extends TCommonBlockFragment = TCommonBlockFragment,
   BlockVariables extends Variables = TBlockVariables,
   AdditionalProps extends TAdditionalProps = TAdditionalProps,
-> extends TBlock<BlockFragment, BlockVariables>,
-    TDefaultComponent {
-  config?: TBlockSerializerConfig
-  defaultVariant?: string
-  additionalProps?: AdditionalProps
-}
+> = TBlock<BlockFragment, BlockVariables> &
+  TDefaultComponent & {
+    config?: TBlockSerializerConfig
+    defaultVariant?: string
+    additionalProps?: AdditionalProps
+  }
 
 export type TBlockFunctionComponent<BlockFragment extends TCommonBlockFragment = TCommonBlockFragment> =
   FunctionComponent<TBlockSerializerProps<BlockFragment>>
