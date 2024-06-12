@@ -2,7 +2,7 @@ import type { Nullable } from '@okam/stack-ui'
 import { mergeConfigs } from '../../utils'
 import BlockSerializer from '../BlockSerializer'
 import type { TBlockSerializerProps } from '../BlockSerializer/interface'
-import { baseConfig } from './config'
+import baseConfig from './config'
 import type { TBlockDispatcherProps } from './interface'
 
 const BlockDispatcher = (props: TBlockDispatcherProps) => {
