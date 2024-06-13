@@ -32,6 +32,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
     itemRoleDescriptionMessage = 'slide',
     slideRole = 'group',
     containerRoleDescriptionMessage = 'carousel',
+    paginationGroupLabel = 'pagination',
   } = a11y ?? {}
 
   const itemWrapperTheme = useThemeContext(`${themeName}.item.wrapper`, tokens, customTheme)
@@ -75,6 +76,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
           activeIndex={activeIndex}
           alerts={alerts}
           controller={controller}
+          paginationGroupLabel={paginationGroupLabel}
         />
       )}
       <Swiper
