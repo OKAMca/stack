@@ -1,3 +1,10 @@
+## [1.13.2](https://github.com/OKAMca/stack/compare/core-lib-v1.13.1...core-lib-v1.13.2) (2024-06-14)
+
+
+### Bug Fixes
+
+* aria labelled by ([6380791](https://github.com/OKAMca/stack/commit/63807918a253462211c35f1119acff64c093027d))
+
 ## [1.13.1](https://github.com/OKAMca/stack/compare/core-lib-v1.13.0...core-lib-v1.13.1) (2024-06-11)
 
 
