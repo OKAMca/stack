@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Button from '../../components/Button'
+import type { TButtonProps } from '../../components/Button/interface'
 import Lightbox from '../../components/Lightbox'
 import type { TLightboxProps } from '../../components/Lightbox/interface'
 
@@ -8,7 +9,7 @@ const LightboxControlledState = (props: TLightboxProps) => {
 
   const [isOpen, setOpen] = useState(false)
 
-  const closeButtonRender: TLightboxProps['closeButton'] = (buttonProps) => (
+  const closeButtonRender = (buttonProps: TButtonProps) => (
     <Button {...buttonProps} handlePress={() => setOpen(!isOpen)}>
       Close lightbox
     </Button>

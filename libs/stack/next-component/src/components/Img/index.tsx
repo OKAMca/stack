@@ -1,4 +1,4 @@
-import useThemeContext from 'libs/stack/stack-ui/src/providers/Theme/hooks'
+import { useThemeContext } from '@okam/stack-ui'
 import Image from 'next/image'
 import type TImgProps from './interface'
 
