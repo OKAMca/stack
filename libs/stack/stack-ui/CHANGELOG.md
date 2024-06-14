@@ -1,3 +1,11 @@
+## [1.24.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.2...stack-ui-v1.24.3) (2024-06-14)
+
+
+### Bug Fixes
+
+* add missing tokens ([9a5d3c0](https://github.com/OKAMca/stack/commit/9a5d3c084925d2e3ff12025004c745d804809235))
+* alert slide theme ([ba199b1](https://github.com/OKAMca/stack/commit/ba199b1a748b9e2cc8038a1c22cc6802426e0e00))
+
 ## [1.24.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.1...stack-ui-v1.24.2) (2024-06-14)
 
 
