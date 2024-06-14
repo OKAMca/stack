@@ -1,3 +1,12 @@
+## [1.24.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.1...stack-ui-v1.24.2) (2024-06-14)
+
+
+### Bug Fixes
+
+* a11y on pagination for alerts ([853fa74](https://github.com/OKAMca/stack/commit/853fa74cd953598569d02e69f6fd985cf8d314e9))
+* aria labelled by ([6380791](https://github.com/OKAMca/stack/commit/63807918a253462211c35f1119acff64c093027d))
+* missing a11y pagination features ([3a5b774](https://github.com/OKAMca/stack/commit/3a5b774713a477a311d43c3381a06b411d9efddc))
+
 ## [1.24.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.0...stack-ui-v1.24.1) (2024-06-11)
 
 
