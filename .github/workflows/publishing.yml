@@ -85,14 +85,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish Project to Chromatic
-        uses: chromaui/action@v1
-        # Chromatic GitHub Action options
-        with:
-          # 👇 Chromatic projectToken, refer to the manage page to obtain it.
-          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-          storybookBuildDir: dist/libs/stack/stack-ui
-
   publish-directus-node:
     runs-on: ubuntu-latest
     steps:
