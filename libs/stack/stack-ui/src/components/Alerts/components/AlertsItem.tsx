@@ -18,7 +18,7 @@ const AlertsItem = (props: TAlertsItemProps) => {
     <>
       {icon && <Icon icon={icon} themeName={`${themeName}.icon`} tokens={tokens} />}
       {(title || button || content) && (
-        <Box themeName={`${themeName}.container`}>
+        <Box themeName={`${themeName}.container`} tokens={tokens}>
           {title && (
             <span className={titleTheme} id={id}>
               {title}
