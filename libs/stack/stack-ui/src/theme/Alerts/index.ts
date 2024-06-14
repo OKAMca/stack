@@ -62,10 +62,12 @@ const alertsPaginationWrapper = tv({
 
 const alertsPaginationBullet = tv({
   base: 'w-4 h-4 rounded-full block bg-color-1-600',
-})
-
-const alertsPaginationActiveBullet = tv({
-  base: '!bg-color-1-100',
+  variants: {
+    active: {
+      true: 'bg-color-1-100',
+      false: '',
+    },
+  },
 })
 
 const alertsTheme = {
@@ -89,7 +91,6 @@ const alertsTheme = {
   pagination: {
     wrapper: alertsPaginationWrapper,
     bullet: alertsPaginationBullet,
-    activeBullet: alertsPaginationActiveBullet,
   },
 }
 

@@ -1,13 +1,17 @@
-import useThemeContext from 'libs/stack/stack-ui/src/providers/Theme/hooks'
+import Box from '../../../Box'
 import type { TAlertsPaginationProps } from '../../interface'
 import AlertsPaginationBullet from './AlertsPaginationBullet'
 
 const AlertsPagination = (props: TAlertsPaginationProps) => {
   const { themeName, tokens, controller, alerts, activeIndex, paginationGroupLabel } = props
-  const paginationWrapperTheme = useThemeContext(`${themeName}.wrapper`, tokens)
 
   return (
-    <div className={paginationWrapperTheme} role="group" aria-label={paginationGroupLabel}>
+    <Box
+      as="div"
+      themeName={`${themeName}.wrapper`}
+      tokens={tokens}
+      {...{ role: 'group', 'aria-label': paginationGroupLabel }}
+    >
       {alerts.map((_, index) => (
         <AlertsPaginationBullet
           key={JSON.stringify(_)}
@@ -19,7 +23,7 @@ const AlertsPagination = (props: TAlertsPaginationProps) => {
           tokens={tokens}
         />
       ))}
-    </div>
+    </Box>
   )
 }
 
