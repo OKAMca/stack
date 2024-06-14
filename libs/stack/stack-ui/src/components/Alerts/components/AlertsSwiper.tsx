@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import slugify from 'slugify'
 import * as swiperModules from 'swiper/modules'
 import type { SwiperClass } from 'swiper/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -109,6 +110,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
               key={id}
               className={itemWrapperTheme}
               {...(title ? { 'aria-labelledby': id } : { 'aria-label': ariaLabel })}
+              {...{ id: slugify(`${id}-${title}`) }}
               role={slideRole}
               aria-roledescription={itemRoleDescriptionMessage ?? undefined}
             >

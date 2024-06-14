@@ -1,5 +1,4 @@
 import React from 'react'
-import slugify from 'slugify'
 import { useSwiperSlide } from 'swiper/react'
 import useThemeContext from '../../../providers/Theme/hooks'
 import Box from '../../Box'
@@ -16,10 +15,10 @@ const AlertsItem = (props: TAlertsItemProps) => {
   if (!title && !button && !content && !icon) return null
 
   return (
-    <Box as="div" {...{ id: slugify(`${id}-${title}`) }}>
+    <>
       {icon && <Icon icon={icon} themeName={`${themeName}.icon`} tokens={tokens} />}
       {(title || button || content) && (
-        <Box themeName={`${themeName}.container`}>
+        <Box themeName={`${themeName}.container`} tokens={tokens}>
           {title && (
             <span className={titleTheme} id={id}>
               {title}
@@ -34,7 +33,7 @@ const AlertsItem = (props: TAlertsItemProps) => {
               : content)}
         </Box>
       )}
-    </Box>
+    </>
   )
 }
 
