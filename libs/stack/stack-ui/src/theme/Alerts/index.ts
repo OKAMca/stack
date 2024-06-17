@@ -61,7 +61,7 @@ const alertsPaginationWrapper = tv({
 })
 
 const alertsPaginationBullet = tv({
-  base: 'w-4 h-4 rounded-full block bg-color-1-600',
+  base: 'w-4 h-4 rounded-full block bg-color-1-600 focus-ring-black',
   variants: {
     active: {
       true: 'bg-color-1-100',

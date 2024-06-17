@@ -1,16 +1,30 @@
-import { useKeyboard, usePress } from 'react-aria'
+import { useAlertsController } from 'libs/stack/stack-ui/src/providers/Alerts'
+import { useFocusManager, useKeyboard, usePress } from 'react-aria'
 import slugify from 'slugify'
-import Box from '../../../Box'
+import Button from '../../../Button'
 import type { TAlertsPaginationBulletProps } from '../../interface'
 
 const AlertsPaginationBullet = (props: TAlertsPaginationBulletProps) => {
-  const { themeName, tokens, controller, alerts, activeIndex, index } = props
+  const { themeName, tokens, alerts, activeIndex, index } = props
+
+  const { controller } = useAlertsController()
+
+  const focusManager = useFocusManager()
+  const prevIndex = index === 0 ? alerts.length - 1 : index - 1
+  const nextIndex = index === alerts.length - 1 ? 0 : index + 1
 
   const { keyboardProps } = useKeyboard({
-    onKeyDown: (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+    onKeyUp: (e) => {
+      if (e.key === 'ArrowLeft') {
         e.preventDefault()
-        controller?.slideTo(index)
+        focusManager?.focusPrevious({ wrap: true })
+        controller?.slideTo(prevIndex)
+      }
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault()
+        focusManager?.focusNext({ wrap: true })
+        controller?.slideTo(nextIndex)
       }
     },
   })
@@ -26,10 +40,10 @@ const AlertsPaginationBullet = (props: TAlertsPaginationBulletProps) => {
   const hasTitle = title && title.length > 0
 
   return (
-    <Box
-      as="span"
+    <Button
+      as="button"
       {...{
-        tabindex: 0,
+        tabIndex: 0,
         role: 'button',
         'aria-current': isActive ? 'true' : 'false',
         'aria-disabled': isActive,
