@@ -13,6 +13,7 @@ type TAlertsNavigationButtonProps = TButtonProps & {
 const AlertsNavigationButton = forwardRef(
   (props: TAlertsNavigationButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const { themeName = 'alerts.navigationBtn', tokens, customTheme, children, onSubmit, ...rest } = props
+    const { isDisabled } = rest
 
     const { pressProps } = usePress({
       onPress: () => onSubmit?.(),
@@ -20,7 +21,14 @@ const AlertsNavigationButton = forwardRef(
 
     return (
       <FocusRing within focusRingClass="has-focus-ring">
-        <ButtonWithForwardRef themeName={themeName} tokens={tokens} ref={ref} {...pressProps} {...rest}>
+        <ButtonWithForwardRef
+          themeName={themeName}
+          tokens={tokens}
+          ref={ref}
+          {...pressProps}
+          {...rest}
+          {...{ 'aria-disabled': isDisabled }}
+        >
           {children}
         </ButtonWithForwardRef>
       </FocusRing>
@@ -32,8 +40,10 @@ export const AlertsNextNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const { controller } = useAlertsController()
 
+    const disabled = controller?.activeIndex === (controller?.slides?.length ?? 1) - 1
+
     return (
-      <AlertsNavigationButton onSubmit={() => controller?.slideNext()} {...props} ref={ref}>
+      <AlertsNavigationButton onSubmit={() => controller?.slideNext()} {...props} ref={ref} isDisabled={disabled}>
         <Icon icon="ArrowRight" />
       </AlertsNavigationButton>
     )
@@ -44,8 +54,10 @@ export const AlertsPrevNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const { controller } = useAlertsController()
 
+    const disabled = controller?.activeIndex === 0
+
     return (
-      <AlertsNavigationButton onSubmit={() => controller?.slidePrev()} {...props} ref={ref}>
+      <AlertsNavigationButton onSubmit={() => controller?.slidePrev()} {...props} ref={ref} isDisabled={disabled}>
         <Icon icon="ArrowLeft" />
       </AlertsNavigationButton>
     )
