@@ -1,3 +1,10 @@
+# [1.25.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.3...stack-ui-v1.25.0) (2024-06-17)
+
+
+### Features
+
+* export carousel ([45fb2ef](https://github.com/OKAMca/stack/commit/45fb2ef6a4b77fb214e62dfaefde2819b0f7d870))
+
 ## [1.24.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.2...stack-ui-v1.24.3) (2024-06-14)
 
 
