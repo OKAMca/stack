@@ -21,11 +21,12 @@
       "@okam/directus-lib": ["libs/directus/directus-lib/src/index.ts"],
       "@okam/directus-next-component": ["libs/directus/directus-next-component/src/index.ts"],
       "@okam/directus-next-component/server": ["libs/directus/directus-next-component/src/server.ts"],
+      "@okam/directus/directus-next": ["libs/directus/directus-next/src/index.ts"],
       "@okam/directus-node": ["libs/directus/directus-node/src/index.ts"],
       "@okam/directus-query": ["libs/directus/directus-query/src/index.ts"],
       "@okam/next-component": ["libs/stack/next-component/src/index.ts"],
       "@okam/next-component/server": ["libs/stack/next-component/src/server.ts"],
-      "@okam/stack-ui": ["libs/stack/stack-ui/src/index.ts"]
+      "@okam/stack-ui": ["libs/stack/stack-ui/src/index.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]
