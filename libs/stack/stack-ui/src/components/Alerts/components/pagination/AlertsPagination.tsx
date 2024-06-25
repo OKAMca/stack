@@ -1,25 +1,31 @@
-import useThemeContext from 'libs/stack/stack-ui/src/providers/Theme/hooks'
+import { FocusScope } from 'react-aria'
+import Box from '../../../Box'
 import type { TAlertsPaginationProps } from '../../interface'
 import AlertsPaginationBullet from './AlertsPaginationBullet'
 
 const AlertsPagination = (props: TAlertsPaginationProps) => {
-  const { themeName, tokens, controller, alerts, activeIndex, paginationGroupLabel } = props
-  const paginationWrapperTheme = useThemeContext(`${themeName}.wrapper`, tokens)
+  const { themeName, tokens, alerts, activeIndex, paginationGroupLabel } = props
 
   return (
-    <div className={paginationWrapperTheme} role="group" aria-label={paginationGroupLabel}>
-      {alerts.map((_, index) => (
-        <AlertsPaginationBullet
-          key={JSON.stringify(_)}
-          index={index}
-          activeIndex={activeIndex}
-          alerts={alerts}
-          controller={controller}
-          themeName={themeName}
-          tokens={tokens}
-        />
-      ))}
-    </div>
+    <Box
+      as="div"
+      themeName={`${themeName}.wrapper`}
+      tokens={tokens}
+      {...{ role: 'group', 'aria-label': paginationGroupLabel }}
+    >
+      <FocusScope>
+        {alerts.map((_, index) => (
+          <AlertsPaginationBullet
+            key={JSON.stringify(_)}
+            index={index}
+            activeIndex={activeIndex}
+            alerts={alerts}
+            themeName={themeName}
+            tokens={tokens}
+          />
+        ))}
+      </FocusScope>
+    </Box>
   )
 }
 
