@@ -1,6 +1,6 @@
 import type React from 'react'
 import type * as SwiperModules from 'swiper/modules'
-import type { SwiperClass, SwiperProps } from 'swiper/react'
+import type { SwiperProps } from 'swiper/react'
 import type { A11yOptions } from 'swiper/types'
 import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
@@ -22,14 +22,12 @@ export interface TAlertsItem {
 export interface TAlertsPaginationProps extends TDefaultComponent {
   activeIndex: number
   alerts: TAlertsItem[]
-  controller?: SwiperClass
   paginationGroupLabel?: string
 }
 
 export interface TAlertsPaginationBulletProps extends TDefaultComponent {
   activeIndex: number
   alerts: TAlertsItem[]
-  controller?: SwiperClass
   index: number
 }
 interface TCustomA11yOptions extends A11yOptions {
