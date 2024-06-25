@@ -52,6 +52,7 @@
     "react-spring": "^9.7.3",
     "react-stately": "^3.30.0",
     "react-use": "17.4.2",
+    "server-only": "^0.0.1",
     "swiper": "11.0.6",
     "tailwind-variants": "^0.1.19",
     "tslib": "^2.6.2",

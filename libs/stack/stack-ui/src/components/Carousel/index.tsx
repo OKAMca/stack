@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 import type { PressEvent } from 'react-aria'
 import type Swiper from 'swiper'
