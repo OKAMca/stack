@@ -12,7 +12,7 @@ const BlockDispatcher = (props: TBlockDispatcherProps) => {
 
   const renderBlock = (blockProps: Nullable<TBlockSerializerProps>) => {
     return children ? (
-      children({ ...rest, ...blockProps })
+      children({ ...rest, ...blockProps, config: finalConfig })
     ) : (
       <BlockSerializer {...rest} {...blockProps} config={finalConfig} />
     )

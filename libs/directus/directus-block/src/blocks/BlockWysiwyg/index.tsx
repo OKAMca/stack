@@ -24,14 +24,14 @@ const BlockWysiwyg = async (props: TBlockSerializerProps<BlockWysiwygFragment>) 
   if (!content && !(title && level)) return null
 
   return (
-    <Box>
+    <>
       {title && level && (
         <Box as="span" themeName={themeName} tokens={{ ...tokens, ...cmsTokens }}>
           {React.createElement(level, {}, title)}
         </Box>
       )}
       {content && <WysiwygBlock themeName={themeName} tokens={{ ...tokens, ...cmsTokens }} content={content} />}
-    </Box>
+    </>
   )
 }
 
