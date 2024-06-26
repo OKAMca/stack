@@ -11,14 +11,6 @@ import Button from '../Button'
 import Icon from '../Icon'
 import type { TCarouselButtonProps, TCarouselProps } from './interface'
 
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/a11y'
-import 'swiper/css/autoplay'
-import 'swiper/css/navigation'
-import 'swiper/css/mousewheel'
-import 'swiper/css/keyboard'
-
 const CarouselButton = (props: TCarouselButtonProps) => {
   const { navigationButton, icon, themeName = 'carousel', tokens, id, swiperFn } = props
   const onKeyDown = (key: React.KeyboardEvent | PressEvent) => {
