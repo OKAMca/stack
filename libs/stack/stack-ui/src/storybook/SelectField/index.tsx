@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Item } from 'react-stately'
 import Select from '../../components/fields/Select/Select'
 import type { TSelectProps } from '../../components/fields/Select/Select.interface'
 
@@ -40,6 +39,7 @@ const SelectContent = ({
         {...rest}
         onSelectionChange={(key) => {
           setValue(key.toString())
+          // eslint-disable-next-line no-console
           console.log('selection changed')
         }}
         value={value}
