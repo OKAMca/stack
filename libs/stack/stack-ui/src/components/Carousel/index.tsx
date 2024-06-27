@@ -1,104 +1,100 @@
-'use client'
-
-import React, { useState } from 'react'
-import type { PressEvent } from 'react-aria'
-import type Swiper from 'swiper'
-import { Navigation, Mousewheel, Keyboard, Pagination, Autoplay, A11y } from 'swiper/modules'
-import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react'
-import useThemeContext from '../../providers/Theme/hooks'
-import Button from '../Button'
-import Icon from '../Icon'
-import type { TCarouselButtonProps, TCarouselProps } from './interface'
-
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/a11y'
-import 'swiper/css/autoplay'
-import 'swiper/css/navigation'
-import 'swiper/css/mousewheel'
-import 'swiper/css/keyboard'
-
-const CarouselButton = (props: TCarouselButtonProps) => {
-  const { navigationButton, icon, themeName = 'carousel', tokens, id, swiperFn } = props
-  const onKeyDown = (key: React.KeyboardEvent | PressEvent) => {
-    if (('pointerType' in key && key.pointerType === 'keyboard') || ('code' in key && key.code === 'Enter'))
-      swiperFn?.()
-  }
-  return navigationButton ? (
-    React.cloneElement(navigationButton, {
-      onKeyDown,
-      handlePress: onKeyDown,
-    })
-  ) : (
-    <Button themeName={`${themeName}.navigationButtons`} tokens={{ ...tokens, className: id }} handlePress={onKeyDown}>
-      <Icon icon={icon} />
-    </Button>
-  )
-}
+import { useRef, useState } from 'react'
+import { VisuallyHidden } from 'react-aria'
+import type { SwiperClass } from 'swiper/react'
+import { SwiperControllerContextProvider } from '../../providers/Swiper'
+import Box from '../Box'
+import { CarouselNextNavigationButton, CarouselPrevNavigationButton } from './components/CarouselNavigationButton'
+import CarouselSwiper from './components/CarouselSwiper'
+import CarouselPagination from './components/pagination/CarouselPagination'
+import type { TCarouselProps } from './interface'
 
 const Carousel = (props: TCarouselProps) => {
-  const { id, slides, children, navigationButtons, themeName = 'carousel', tokens, customTheme, ...rest } = props
-  const showNavigation = slides && slides?.length > 1
+  const {
+    id,
+    themeName = 'carousel',
+    tokens,
+    customTheme,
+    slides,
+    a11y,
+    modules,
+    prevButton: PrevButton = CarouselPrevNavigationButton,
+    nextButton: NextButton = CarouselNextNavigationButton,
+    onSwiper,
+    onSlideChange,
+    ...rest
+  } = props
+  const prevButtonRef = useRef(null)
+  const nextButtonRef = useRef(null)
 
-  const { navigation, slidesPerView } = props
+  const { enabled: a11yEnabled = true, paginationGroupLabel = 'pagination', ...restOfA11y } = a11y ?? {}
 
-  const containerTheme = useThemeContext(`${themeName}.container`, { ...tokens }, customTheme)
-  const slideContainerTheme = useThemeContext(`${themeName}.slideContainer`, { ...tokens }, customTheme)
+  const hasNavigation = modules?.includes('Navigation')
+  const hasPagination = modules?.includes('Pagination')
 
-  const [swiper, setSwiper] = useState<Swiper>()
+  const [controller, setController] = useState<SwiperClass>()
+  const [activeIndex, setActiveIndex] = useState<number>(0)
+
+  const slidesWithFallbacks = slides.map((slide, index) => ({
+    ...slide,
+    ariaLabel: slide.ariaLabel ?? `${index + 1} / ${slides.length}`,
+  }))
 
   return (
-    <div className={containerTheme} {...rest}>
-      {showNavigation && navigation && (
-        <CarouselButton
+    <Box themeName={`${themeName}.wrapper`} tokens={tokens}>
+      <SwiperControllerContextProvider controller={controller}>
+        {hasNavigation && (
+          <PrevButton
+            themeName={`${themeName}.navigation.button`}
+            tokens={{ ...tokens, order: 'prev' }}
+            ref={prevButtonRef}
+            aria-label={a11y?.prevSlideMessage}
+            aria-controls={id}
+          />
+        )}
+        {hasNavigation && (
+          <NextButton
+            themeName={`${themeName}.navigation.button`}
+            tokens={{ ...tokens, order: 'next' }}
+            ref={nextButtonRef}
+            aria-label={a11y?.nextSlideMessage}
+            aria-controls={id}
+          />
+        )}
+        {hasPagination && (
+          <CarouselPagination
+            themeName={`${themeName}.pagination`}
+            tokens={tokens}
+            activeIndex={activeIndex}
+            slides={slidesWithFallbacks}
+            paginationGroupLabel={paginationGroupLabel}
+          />
+        )}
+        <CarouselSwiper
           themeName={themeName}
           tokens={tokens}
-          customTheme={customTheme}
-          navigationButton={navigationButtons?.leftButton}
-          id={`button-prev-${id}`}
-          icon="ArrowLeft"
-          swiperFn={() => swiper?.slidePrev()}
-          swiper={swiper}
+          id={id}
+          slides={slidesWithFallbacks}
+          onSwiper={(c) => {
+            setController(c)
+            onSwiper?.(c)
+          }}
+          onSlideChange={(c) => {
+            setActiveIndex(c.activeIndex)
+            onSlideChange?.(c)
+          }}
+          a11y={restOfA11y}
+          modules={modules}
+          {...rest}
         />
-      )}
-      <SwiperComponent
-        modules={[Navigation, Mousewheel, Keyboard, Pagination, Autoplay, A11y]}
-        {...rest}
-        navigation={{
-          prevEl: `.button-prev-${id}`,
-          nextEl: `.button-next-${id}`,
-          disabledClass: `button-disabled`,
-        }}
-        onSwiper={setSwiper}
-        wrapperClass="!flex !w-full !max-w-full"
-        mousewheel
-        keyboard
-        watchOverflow
-        slidesPerView={slidesPerView ?? 1}
-      >
-        {slides?.map((slide) => {
-          return (
-            <SwiperSlide key={slide.id}>
-              <div className={slideContainerTheme}>{slide.child}</div>
-            </SwiperSlide>
-          )
-        })}
-      </SwiperComponent>
-      {showNavigation && navigation && (
-        <CarouselButton
-          themeName={themeName}
-          tokens={tokens}
-          customTheme={customTheme}
-          navigationButton={navigationButtons?.rightButton}
-          id={`button-next-${id}`}
-          icon="ArrowRight"
-          swiperFn={() => swiper?.slideNext()}
-          swiper={swiper}
-        />
-      )}
-
-      {children}
-    </div>
+        {a11yEnabled && (
+          <VisuallyHidden>
+            <div aria-live="polite">
+              {slidesWithFallbacks[activeIndex].title ?? slidesWithFallbacks[activeIndex].ariaLabel}
+            </div>
+          </VisuallyHidden>
+        )}
+      </SwiperControllerContextProvider>
+    </Box>
   )
 }
 
