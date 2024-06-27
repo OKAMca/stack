@@ -1,1 +1,1 @@
-export * from './lib/directus-lib'
+export * from './providers/PageContext'
