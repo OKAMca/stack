@@ -3,7 +3,7 @@ import slugify from 'slugify'
 import * as swiperModules from 'swiper/modules'
 import type { SwiperClass } from 'swiper/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { AlertsControllerContextProvider } from '../../../providers/Alerts'
+import { SwiperControllerContextProvider } from '../../../providers/Swiper'
 import useThemeContext from '../../../providers/Theme/hooks'
 import type { TAlertsComponentProps, TAlertsProps } from '../interface'
 import AlertsItem from './AlertsItem'
@@ -54,7 +54,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
 
   return (
-    <AlertsControllerContextProvider controller={controller}>
+    <SwiperControllerContextProvider controller={controller}>
       {hasNavigation && (
         <PrevButton
           themeName={`${themeName}.navigation.button`}
@@ -118,7 +118,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
           )
         })}
       </Swiper>
-    </AlertsControllerContextProvider>
+    </SwiperControllerContextProvider>
   )
 }
 

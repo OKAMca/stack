@@ -1,7 +1,7 @@
 import type { Ref } from 'react'
 import { forwardRef } from 'react'
 import { FocusRing, usePress } from 'react-aria'
-import { useAlertsController } from '../../../providers/Alerts'
+import { useSwiperController } from '../../../providers/Swiper'
 import { ButtonWithForwardRef } from '../../Button'
 import type { TButtonProps } from '../../Button/interface'
 import Icon from '../../Icon'
@@ -38,7 +38,7 @@ const AlertsNavigationButton = forwardRef(
 
 export const AlertsNextNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
-    const { controller } = useAlertsController()
+    const { controller } = useSwiperController()
 
     const disabled = controller?.activeIndex === (controller?.slides?.length ?? 1) - 1
 
@@ -52,7 +52,7 @@ export const AlertsNextNavigationButton = forwardRef(
 
 export const AlertsPrevNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
-    const { controller } = useAlertsController()
+    const { controller } = useSwiperController()
 
     const disabled = controller?.activeIndex === 0
 
