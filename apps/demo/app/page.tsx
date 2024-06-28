@@ -19,6 +19,9 @@ import {
   TextArea,
   TextInputField,
 } from '@okam/stack-ui'
+import type { JSONContent } from '@tiptap/core'
+import { FlexibleEditorContent, injectDataIntoContent } from 'libs/directus/directus-flexible-content/src/index'
+import type { ReactRelationBlockSerializers } from 'libs/directus/directus-flexible-content/src/lib/functions/types'
 import { PagesDocument } from 'libs/directus-data-query/src/index'
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
@@ -27,32 +30,23 @@ import SidePanelControl from './components/SidePanelControl'
 export default async function Index() {
   const flexibleContent = await queryGql(PagesDocument)
 
-  const pageFlexibleContent = flexibleContent.pages.find((p) => p.flexible_editor !== null)
+  const pageFlexibleContent = flexibleContent.pages.find((p) => p.translations?.[0]?.flexible_editor?.content)
 
-  const content = pageFlexibleContent?.flexible_editor?.content as Array<{
-    type: string
-    attrs: Record<string, string>
-    content?: unknown
-  }>
+  const editorNodes = pageFlexibleContent?.translations?.[0]?.editor_nodes
+  const content = pageFlexibleContent?.translations?.[0]?.flexible_editor as JSONContent
 
-  console.log(pageFlexibleContent?.editor_nodes)
+  const injectedContent = injectDataIntoContent(editorNodes, content)
 
-  console.log(
-    content.map((block) => {
-      if (block.type !== 'relation-block') {
-        console.log(block.content)
-        return block
-      }
-
-      return {
-        type: block.attrs.collection ?? block.type,
-        block: pageFlexibleContent?.editor_nodes?.find((node) => node?.id === block.attrs.id)?.item,
-      }
-    }),
-  )
+  const componentSerializer: ReactRelationBlockSerializers = [
+    {
+      collection: 'related_block_faqs',
+      component: (props) => <Box {...props}>Block faq</Box>,
+    },
+  ]
 
   return (
     <div>
+      <FlexibleEditorContent content={injectedContent} relationBlocks={componentSerializer} />
       <div className="flex flex-col gap-16 p-8">
         <HelloServer />
         <NextComponent />

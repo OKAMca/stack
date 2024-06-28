@@ -1,0 +1,40 @@
+{
+  "name": "directus-flexible-content",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/directus/directus-flexible-content/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/directus/directus-flexible-content",
+        "tsConfig": "libs/directus/directus-flexible-content/tsconfig.lib.json",
+        "project": "libs/directus/directus-flexible-content/package.json",
+        "entryFile": "libs/directus/directus-flexible-content/src/index.ts",
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "swc",
+        "assets": [
+          {
+            "glob": "libs/directus/directus-flexible-content/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/directus/directus-flexible-content"
+      }
+    }
+  }
+}

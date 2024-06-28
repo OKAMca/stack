@@ -17,6 +17,8 @@
     "paths": {
       "@okam/config": ["libs/shared/config/src/index.ts"],
       "@okam/core-lib": ["libs/stack/core-lib/src/index.ts"],
+      "@okam/directus-flexible-content": ["libs/directus/directus-flexible-content/src/index.ts"],
+      "@okam/directus-flexible-content/server": ["libs/directus/directus-flexible-content/src/server.ts"],
       "@okam/directus-lib": ["libs/directus/directus-lib/src/index.ts"],
       "@okam/directus-next-component": ["libs/directus/directus-next-component/src/index.ts"],
       "@okam/directus-next-component/server": ["libs/directus/directus-next-component/src/server.ts"],
