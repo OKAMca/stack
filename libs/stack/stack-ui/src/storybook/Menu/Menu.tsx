@@ -10,7 +10,6 @@ import MenuSidePanel from '../../components/Menu/MenuSidePanel'
 import Typography from '../../components/Typography'
 import { MenuContextProvider, useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
-import RenderWithOpacity from '../../transitions/RenderWithOpacity'
 import RenderWithSlide from '../../transitions/RenderWithSlide'
 import { items } from './mock'
 
