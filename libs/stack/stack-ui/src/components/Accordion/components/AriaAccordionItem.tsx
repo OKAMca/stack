@@ -43,6 +43,7 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
       <FocusRing focusRingClass="has-focus-ring">
         <ButtonWithForwardRef
           {...buttonProps}
+          aria-expanded={isOpen}
           handlePress={handlePress}
           ref={ref}
           themeName={`${themeName}.button`}

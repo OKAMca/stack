@@ -2,6 +2,28 @@
 
 This library was generated with [Nx](https://nx.dev).
 
-## Running unit tests
+## directusRouteMiddleware usage
 
-Run `nx test directus-next-component` to execute the unit tests via [Jest](https://jestjs.io).
+Create a middleware.ts file in the project, in the `/src/app` directory of the next application, and add the following code to it.
+
+```jsx
+// middleware.ts
+
+import {
+  directusRouteMiddleware,
+  config as directusRouteMiddlewareConfig,
+} from '@okam/directus-next-component/src/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  const { locale } = request.nextUrl
+  return directusRouteMiddleware(request, [locale])
+}
+
+export const config = {
+  ...directusRouteMiddlewareConfig,
+}
+
+```
+
+After, modify the `next.config.js` file to add `withDirectus` in the plugins.

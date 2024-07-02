@@ -1,12 +1,13 @@
 import type { OverlayTriggerState } from '@react-stately/overlays'
 import type React from 'react'
+import type { FunctionComponent } from 'react'
 import type { AriaDialogProps, AriaModalOverlayProps } from 'react-aria'
-import type { TDefaultComponent } from '../../types/components'
+import type { TDefaultComponent, TTransition } from '../../types/components'
 
 export interface TModalProps extends AriaModalOverlayProps, TDefaultComponent {
   state: OverlayTriggerState
   children: React.ReactNode
-  transitionComponent?: (props: { isVisible: boolean; children: React.ReactNode }) => JSX.Element
+  transitionComponent?: FunctionComponent<TTransition>
 }
 
 export interface TModalOverlayProps extends AriaModalOverlayProps, TDefaultComponent {
