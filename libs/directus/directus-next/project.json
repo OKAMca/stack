@@ -7,14 +7,20 @@
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/directus/directus-next/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/directus/directus-next/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/directus/directus-next"
@@ -27,6 +33,8 @@
           "mode": "production"
         }
       }
-    }
+    },
+    "poject-dry-release": {},
+    "project-release": {}
   }
 }

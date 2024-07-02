@@ -72,6 +72,8 @@
           "quiet": true
         }
       }
-    }
+    },
+    "poject-dry-release": {},
+    "project-release": {}
   }
 }
