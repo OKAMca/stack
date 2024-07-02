@@ -35,14 +35,24 @@ const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
         const blocks = items?.map((item) => {
           return { ...item, collection: attrs?.collection }
         })
-        console.log(blocks)
         return <BlockDispatcher blocks={blocks} config={config} />
       }
       return null
     },
   })
 
+  const tableSerializer = Node.create({
+    name: 'table',
+    renderHTML: ({ HTMLAttributes }) => {
+      const element = 'table'
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return [element, HTMLAttributes, 0] as any
+    },
+  })
+
   effectiveSerializers.push(relationBlockSerializer)
+  effectiveSerializers.push(tableSerializer)
 
   if (!content) {
     return null
