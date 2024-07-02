@@ -1,11 +1,12 @@
-import type { JSONContent } from '@tiptap/core'
+import type { TBlock } from '@okam/directus-block'
 
 export type RelationBlockSerializers<T> = {
   collection: string
   component: T
 }[]
 export type RelationBlockProps = RelationBlockAttrs & {
-  data?: JSONContent | null
+  type: string
+  attrs: RelationBlockAttrs & { data: { blocks: TBlock[] } }
 }
 
 export type RelationBlockAttrs = {

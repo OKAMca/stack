@@ -25,8 +25,14 @@ const RenderNodes: FunctionComponent<RenderNodesProps> = ({ content, serializers
   return renderView(
     clonedContent,
     mergedSerializers,
+    // @ts-expect-error Expects ReactNode
     (tag: ElementType, attrs: JSONContent['attrs'], children: ReactNode) => {
-      return <Box as={tag}>{children}</Box>
+      const attributes = { ...attrs, style: {} }
+      return (
+        <Box as={tag} {...attributes}>
+          {children}
+        </Box>
+      )
     },
   )
 }
