@@ -17,35 +17,38 @@ export interface TCarouselSlideProps extends TDefaultComponent {
   id: string
   title?: string
   ariaLabel?: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
-export interface TCarouselPaginationProps extends TDefaultComponent {
+export interface TCarouselPaginationProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
+  extends TDefaultComponent {
   activeIndex: number
-  slides: TCarouselSlideProps[]
+  slides: TSlideProps[]
   paginationGroupLabel?: string
 }
 
-export interface TCarouselPaginationBulletProps extends TDefaultComponent {
+export interface TCarouselPaginationBulletProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
+  extends TDefaultComponent {
   activeIndex: number
-  slides: TCarouselSlideProps[]
+  slides: TSlideProps[]
   index: number
 }
 interface TCustomA11yOptions extends A11yOptions {
   paginationGroupLabel?: string
 }
 
-export interface TCarouselComponentProps
+export interface TCarouselComponentProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
   extends Omit<TDefaultComponent, 'children'>,
     Omit<SwiperProps, 'children' | 'modules' | 'a11y'> {
   a11y?: TCustomA11yOptions
-  slides: TCarouselSlideProps[]
-  children?: (props: TCarouselSlideProps) => React.ReactNode
+  slides: TSlideProps[]
+  children?: (props: TSlideProps) => React.ReactNode
   id: string
   modules?: (keyof typeof SwiperModules)[]
 }
 
-export interface TCarouselProps extends TCarouselComponentProps {
+export interface TCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
+  extends TCarouselComponentProps<TSlideProps> {
   prevButton?: TCarouselNavigationButtonComponent
   nextButton?: TCarouselNavigationButtonComponent
 }
