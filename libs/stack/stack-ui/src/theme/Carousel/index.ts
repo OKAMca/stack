@@ -38,7 +38,7 @@ const carouselPaginationBullet = tv({
 })
 
 const carouselTheme = {
-  wrapper: carouselWrapper,
+  carouselWrapper,
   swiper: {
     swiper: carouselSwiperSwiper,
     wrapper: carouselSwiperWrapper,

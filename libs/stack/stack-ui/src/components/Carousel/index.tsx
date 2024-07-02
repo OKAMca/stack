@@ -40,7 +40,7 @@ const Carousel = (props: TCarouselProps) => {
   }))
 
   return (
-    <Box themeName={`${themeName}.wrapper`} tokens={tokens}>
+    <Box themeName={`${themeName}.carouselWrapper`} tokens={tokens}>
       <SwiperControllerContextProvider controller={controller}>
         {hasNavigation && (
           <PrevButton

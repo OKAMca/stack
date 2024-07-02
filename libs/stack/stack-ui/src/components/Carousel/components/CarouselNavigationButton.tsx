@@ -37,10 +37,17 @@ export const CarouselNextNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const { children, ...rest } = props
     const { controller } = useSwiperController()
-    const { params, activeIndex = 1 } = controller ?? {}
+    const { params, activeIndex = 1, slides } = controller ?? {}
     const { slidesPerView = 1, loop } = params ?? {}
 
-    const allowNavigateNext = typeof slidesPerView === 'number' && slidesPerView > activeIndex
+    const slidesGroupIndex = Math.round(
+      typeof slidesPerView === 'number' ? (activeIndex + 1) / slidesPerView : activeIndex,
+    )
+    const slidesGroupLength = Math.round(
+      slides && typeof slidesPerView === 'number' ? slides.length / slidesPerView : slides?.length ?? 1,
+    )
+
+    const allowNavigateNext = slidesGroupIndex < slidesGroupLength
 
     const disabled = !loop && !allowNavigateNext
 
