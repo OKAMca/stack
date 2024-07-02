@@ -1,3 +1,10 @@
+## [1.25.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.25.1...stack-ui-v1.25.2) (2024-06-28)
+
+
+### Bug Fixes
+
+* all carousel elements are stylable ([#138](https://github.com/OKAMca/stack/issues/138)) ([6c7db7e](https://github.com/OKAMca/stack/commit/6c7db7eb61553041bb94356a43c84aea7fb44bda))
+
 ## [1.25.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.25.0...stack-ui-v1.25.1) (2024-06-25)
 
 
