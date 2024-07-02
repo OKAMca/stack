@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useState } from 'react'
 import { VisuallyHidden } from 'react-aria'
 import type { SwiperClass } from 'swiper/react'
