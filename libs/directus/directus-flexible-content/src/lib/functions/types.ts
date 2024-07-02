@@ -1,3 +1,4 @@
+import type { TBlock } from '@okam/directus-block'
 import type { JSONContent, Extensions, AnyExtension } from '@tiptap/core'
 import type { ElementType, FunctionComponent, ReactNode } from 'react'
 
@@ -9,12 +10,13 @@ export type Tag = ElementType
 export type Attrs = JSONContent['attrs']
 export type NodeType = 'mark' | 'node'
 
-export type RenderCallback<T> = (tag: Tag, attrs: Attrs, content?: JSONContent[]) => RenderedNode<T>
+export type RenderCallback<T> = (tag: Tag, attrs: Attrs, content?: T) => RenderedNode<T>
 
 export type SerializedNode = [tag?: Tag, attrs?: Attrs]
 export type Serializer = AnyExtension & {
   options?: unknown
   renderHTML?: (attributes: Record<string, unknown>) => SerializedNode
+  render?: (props: TBlock['item']) => ReactNode
   addAttributes: () => unknown
 }
 

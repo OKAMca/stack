@@ -9,6 +9,7 @@ query Pages {
         pages_translations_id {
 					languages_code
 				}
+        collection
 				item {
 					... on block_quote {
 						content
@@ -33,7 +34,7 @@ query Pages {
 						id
 						blocks {
 							id
-							block_faqs_id {
+							item: block_faqs_id {
 								alignment
 								faqs
 								headline

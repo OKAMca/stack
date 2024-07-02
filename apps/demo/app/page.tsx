@@ -1,3 +1,4 @@
+import type { TBlockSerializerConfig } from '@okam/directus-block'
 import { queryGql } from '@okam/directus-query'
 import { NextComponent } from '@okam/next-component'
 import { HelloServer } from '@okam/next-component/server'
@@ -22,7 +23,6 @@ import {
 } from '@okam/stack-ui'
 import type { JSONContent } from '@tiptap/core'
 import { FlexibleEditorContent, injectDataIntoContent } from 'libs/directus/directus-flexible-content/src/index'
-import type { ReactRelationBlockSerializers } from 'libs/directus/directus-flexible-content/src/lib/functions/types'
 import { PagesDocument } from 'libs/directus-data-query/src/index'
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
@@ -31,23 +31,24 @@ import SidePanelControl from './components/SidePanelControl'
 export default async function Index() {
   const flexibleContent = await queryGql(PagesDocument)
 
-  const pageFlexibleContent = flexibleContent.pages.find((p) => p.translations?.[0]?.flexible_editor?.content)
+  const pageFlexibleContent = flexibleContent.pages.find((p) => p.title === 'Team')
 
   const editorNodes = pageFlexibleContent?.translations?.[0]?.editor_nodes
   const content = pageFlexibleContent?.translations?.[0]?.flexible_editor as JSONContent
 
   const injectedContent = injectDataIntoContent(editorNodes, content)
 
-  const componentSerializer: ReactRelationBlockSerializers = [
-    {
-      collection: 'related_block_faqs',
-      component: (props) => <Box {...props}>Block faq</Box>,
+  const relationBlocks: TBlockSerializerConfig = {
+    components: {
+      related_block_faqs: {
+        default: (props) => <Box>Related Block FAQ</Box>,
+      },
     },
-  ]
+  }
 
   return (
     <div>
-      <FlexibleEditorContent content={injectedContent} relationBlocks={componentSerializer} />
+      <FlexibleEditorContent content={injectedContent} config={relationBlocks} />
       <div className="flex flex-col gap-16 p-8">
         <HelloServer />
         <NextComponent />

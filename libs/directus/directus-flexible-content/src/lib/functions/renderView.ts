@@ -1,5 +1,6 @@
 'use server'
 
+import type { ReactNode } from 'react'
 import type {
   JSONContent,
   Extensions,
@@ -34,14 +35,17 @@ const getHTMLAttributes = (attrs: Attrs, serializer: Serializer['config']) => {
   return Object.fromEntries(Object.entries(attrs).filter(([key]) => serializerAttrs[key]?.rendered !== false))
 }
 
-const serializeNode = (node: JSONContent, serializers: Extensions, type: NodeType = 'node'): SerializedNode => {
+const serializeNode = (
+  node: JSONContent,
+  serializers: Extensions,
+  type: NodeType = 'node',
+): SerializedNode | ReactNode => {
   const serializer = getSerializer(node.type, type, serializers)
   if (!serializer?.renderHTML) return []
 
   const htmlAttributes = getHTMLAttributes(node.attrs, serializer)
-
-  if (serializer.name === 'relation-block') {
-    console.log(node)
+  if (node.type === 'relation-block' && serializer.render) {
+    return serializer.render(node)
   }
 
   return serializer.renderHTML({
@@ -50,7 +54,11 @@ const serializeNode = (node: JSONContent, serializers: Extensions, type: NodeTyp
   })
 }
 
-const render = <T>(node: JSONContent, serializers: Extensions, renderCallback: RenderCallback<T>): RenderedNode<T> => {
+const render = <T>(
+  node: JSONContent,
+  serializers: Extensions,
+  renderCallback: RenderCallback<ReactNode | JSONContent[]>,
+): RenderedNode<T> | ReactNode => {
   if (node?.content) {
     // eslint-disable-next-line no-param-reassign
     node.content = node.content.map((item) => render<T>(item, serializers, renderCallback)) as JSONContent[]
@@ -62,7 +70,7 @@ const render = <T>(node: JSONContent, serializers: Extensions, renderCallback: R
       let _node: any
 
       node.marks.reverse().forEach((mark) => {
-        const [tag = 'span', attrs = mark.attrs] = serializeNode(mark, serializers, 'mark')
+        const [tag = 'span', attrs = mark.attrs] = serializeNode(mark, serializers, 'mark') as SerializedNode
 
         _node = renderCallback(tag, attrs, _node || node.text)
       })
@@ -72,20 +80,21 @@ const render = <T>(node: JSONContent, serializers: Extensions, renderCallback: R
 
     return node.text ?? ''
   }
+  if (node.type === 'relation-block') {
+    return serializeNode(node, serializers) as ReactNode
+  }
 
-  const [tag = 'div', attrs = node.attrs] = serializeNode(node, serializers)
-  const value = renderCallback(tag, attrs, node.content)
-  // console.log(value, node.content)
+  const [tag = 'div', attrs = node.attrs] = serializeNode(node, serializers) as SerializedNode
 
-  return renderCallback(tag, attrs, node.content)
+  return renderCallback(tag, attrs, node.content) as RenderedNode<T>
 }
 
 const renderView = <T>(
   node: JSONContent,
   serializers: Extensions,
-  renderCallback: RenderCallback<T>,
+  renderCallback: RenderCallback<ReactNode | JSONContent[]>,
 ): RenderedNode<T> => {
-  return render<T>(node, serializers, renderCallback)
+  return render<T>(node, serializers, renderCallback) as RenderedNode<T>
 }
 
 export default renderView
