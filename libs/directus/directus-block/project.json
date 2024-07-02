@@ -7,14 +7,20 @@
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/directus/directus-block/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/directus/directus-block/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/directus/directus-block"
@@ -42,7 +48,9 @@
     },
     "build-storybook": {
       "executor": "@nx/storybook:build",
-      "outputs": ["{options.outputDir}"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
       "options": {
         "outputDir": "dist/storybook/directus-block",
         "configDir": "libs/directus/directus-block/.storybook"
@@ -52,6 +60,8 @@
           "quiet": true
         }
       }
-    }
+    },
+    "poject-dry-release": {},
+    "project-release": {}
   }
 }

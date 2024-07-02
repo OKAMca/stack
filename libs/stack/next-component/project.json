@@ -10,7 +10,9 @@
     },
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/stack/next-component",
         "tsConfig": "libs/stack/next-component/tsconfig.lib.json",
@@ -42,7 +44,9 @@
     },
     "build-storybook": {
       "executor": "@nx/storybook:build",
-      "outputs": ["{options.outputDir}"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
       "options": {
         "outputDir": "dist/storybook/next-component",
         "configDir": "libs/stack/next-component/.storybook"
@@ -70,6 +74,8 @@
           "buildTarget": "next-component:build-storybook:ci"
         }
       }
-    }
+    },
+    "poject-dry-release": {},
+    "project-release": {}
   }
 }

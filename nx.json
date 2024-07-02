@@ -86,6 +86,22 @@
         "{workspaceRoot}/.eslintignore"
       ],
       "cache": true
+    },
+    "poject-dry-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx release --projects={projectName} --dry-run"
+        ]
+      }
+    },
+    "project-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx release --projects={projectName}"
+        ]
+      }
     }
   },
   "namedInputs": {

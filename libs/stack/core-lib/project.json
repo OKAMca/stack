@@ -45,6 +45,8 @@
           "mode": "production"
         }
       }
-    }
+    },
+    "poject-dry-release": {},
+    "project-release": {}
   }
 }
