@@ -18,6 +18,7 @@ import {
   WysiwygBlock,
   TextArea,
   TextInputField,
+  Select,
 } from '@okam/stack-ui'
 import type { JSONContent } from '@tiptap/core'
 import { FlexibleEditorContent, injectDataIntoContent } from 'libs/directus/directus-flexible-content/src/index'
@@ -62,6 +63,18 @@ export default async function Index() {
             thumbhash="aRgODIKUQmq/WIdzh3klj1LgGA=="
           /> */}
         </Box>
+        <Select
+          id="season"
+          label="Select a season"
+          name="season"
+          placeholderLabel="Season"
+          options={[
+            { key: 'summer', value: 'Summer' },
+            { key: 'fall', value: 'Fall' },
+            { key: 'winter', value: 'Winter' },
+            { key: 'spring', value: 'Spring' },
+          ]}
+        />
         <Box>
           <Typography tokens={{ size: 'h1' }}>This is a test of all available components</Typography>
         </Box>
@@ -81,13 +94,7 @@ export default async function Index() {
           <Box>
             <Typography tokens={{ size: 'h2' }}>Interactive components</Typography>
           </Box>
-          <Box>
-            {/* <Accordion id="accordion">
-              <AccordionItem title="This is an accordion">
-                <Typography>This is the body of the accordion</Typography>
-              </AccordionItem>
-            </Accordion> */}
-          </Box>
+          <Box />
           <Box>
             <Button>This is an example button</Button>
           </Box>

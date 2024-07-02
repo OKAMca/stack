@@ -12,19 +12,27 @@
         "npm": true,
         "github": true,
         "repositoryUrl": "https://github.com/OKAMca/stack.git",
-        "branches": ["main"]
+        "branches": [
+          "main"
+        ]
       }
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/stack/core-lib/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/stack/core-lib/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/stack/core-lib"

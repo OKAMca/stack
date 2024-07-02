@@ -1,44 +1,98 @@
 {
+  "release": {
+    "projects": [
+      "stack-ui",
+      "core-lib",
+      "next-component",
+      "directus-node",
+      "directus-query",
+      "directus-block",
+      "directus-next-component"
+    ],
+    "releaseTagPattern": "{projectName}-v{version}",
+    "projectsRelationship": "independent",
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    },
+    "version": {
+      "conventionalCommits": true
+    }
+  },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"],
-        "accessToken": "NjYxNDliYmQtYzJjOC00OWIyLTk4ODAtZTI1ZDJmNDdhYTRlfHJlYWQtd3JpdGU="
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ],
+        "accessToken": "ZjIyMjRhNDAtMDQ4MS00ZmU2LWExYzktOGQ0ZDU0MWYzYTI4fHJlYWQ="
       }
     }
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
-    },
-    "e2e": {
-      "inputs": ["default", "^production"]
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ]
     },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"]
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ]
     },
     "build-storybook": {
-      "inputs": ["default", "^production", "{projectRoot}/.storybook/**/*", "{projectRoot}/tsconfig.storybook.json"],
+      "inputs": [
+        "default",
+        "^production",
+        "{projectRoot}/.storybook/**/*",
+        "{projectRoot}/tsconfig.storybook.json"
+      ],
       "cache": true
-    },
-    "@nx/vite:test": {
-      "cache": true,
-      "inputs": ["default", "^production"]
     },
     "@nx/js:tsc": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "@nx/eslint:lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ],
+      "cache": true
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -66,5 +120,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "useInferencePlugins": false
 }

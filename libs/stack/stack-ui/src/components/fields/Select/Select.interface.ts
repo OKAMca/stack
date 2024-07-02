@@ -1,4 +1,3 @@
-import type { CollectionChildren } from '@react-types/shared'
 import type { Key } from 'react'
 import type React from 'react'
 import type { RefCallBack } from 'react-hook-form'
@@ -14,7 +13,6 @@ export interface TSelectProps extends TFieldReactHookForm {
   disabled?: boolean
   isError?: boolean
   errorMessage?: string
-  children: CollectionChildren<object>
   fieldRef?: RefCallBack
   placeholderLabel: string
   hookFormRef?: RefCallBack
@@ -22,4 +20,5 @@ export interface TSelectProps extends TFieldReactHookForm {
   defaultValue?: string
   value?: string
   popoverMatchesWidth?: boolean
+  options?: { key: string; value: string }[]
 }
