@@ -44,7 +44,7 @@ const serializeNode = (
   if (!serializer?.renderHTML) return []
 
   const htmlAttributes = getHTMLAttributes(node.attrs, serializer)
-  if (node.type === 'relation-block' && serializer.render) {
+  if (serializer.render) {
     return serializer.render(node)
   }
 
@@ -80,7 +80,10 @@ const render = <T>(
 
     return node.text ?? ''
   }
-  if (node.type === 'relation-block') {
+
+  const serializer = getSerializer(node.type, 'node', serializers)
+
+  if (serializer?.render) {
     return serializeNode(node, serializers) as ReactNode
   }
 

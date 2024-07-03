@@ -1,6 +1,5 @@
 import type { JSONContent } from '@tiptap/core'
-
-type EditorNodes = Record<string, unknown> | null
+import type { EditorNodes } from './types'
 
 const injectDataIntoContent = (
   data: EditorNodes[] | undefined | null,

@@ -2,21 +2,38 @@
 
 import type { TBlockSerializerConfig } from '@okam/directus-block'
 import { BlockDispatcher } from '@okam/directus-block'
+import type { TDefaultComponent } from '@okam/stack-ui'
 import { Node } from '@tiptap/core'
-import type { JSONContent, Extensions, ReactComponentSerializers } from '../../functions/types'
+import { injectDataIntoContent } from '../../functions'
+import type { JSONContent, Extensions, EditorNodes } from '../../functions/types'
 import type { RelationBlockProps } from '../../types'
+import type { TRenderingNodes } from '../nodes/types'
 import RenderNodes from '../RenderNodes'
 import extensions from './extensions'
 
-interface FlexibleEditorContentProps {
-  content: JSONContent | null
+interface FlexibleEditorContentProps extends TDefaultComponent {
+  flexibleEditor: JSONContent
+  editorNodes?: EditorNodes[] | undefined | null
   serializers?: Extensions
-  componentSerializers?: ReactComponentSerializers
   config?: TBlockSerializerConfig
+  nodes?: TRenderingNodes
+  remappedAttributes?: Record<string, string>
 }
 
 const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
-  const { content, serializers, componentSerializers, config } = props
+  const {
+    flexibleEditor,
+    editorNodes,
+    serializers,
+    nodes,
+    config,
+    themeName,
+    tokens,
+    customTheme,
+    remappedAttributes,
+  } = props
+
+  const content = injectDataIntoContent(editorNodes, flexibleEditor)
 
   // `.slice(0)` to clone the extensions array
   const effectiveSerializers = serializers ?? [...extensions] ?? []
@@ -41,25 +58,22 @@ const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
     },
   })
 
-  const tableSerializer = Node.create({
-    name: 'table',
-    renderHTML: ({ HTMLAttributes }) => {
-      const element = 'table'
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return [element, HTMLAttributes, 0] as any
-    },
-  })
-
   effectiveSerializers.push(relationBlockSerializer)
-  effectiveSerializers.push(tableSerializer)
 
   if (!content) {
     return null
   }
 
   return (
-    <RenderNodes content={content} serializers={effectiveSerializers} componentSerializers={componentSerializers} />
+    <RenderNodes
+      content={content}
+      serializers={effectiveSerializers}
+      renderingNodes={nodes}
+      themeName={themeName}
+      tokens={tokens}
+      customTheme={customTheme}
+      remappedAttributes={remappedAttributes}
+    />
   )
 }
 
