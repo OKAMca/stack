@@ -31,7 +31,7 @@ const TextArea = (props: TTextInputProps) => {
     customTheme,
   } = props
   const ref = useRef<HTMLTextAreaElement | null>(null)
-  const { errorMessageProps, inputProps, labelProps } = useTextField<'input'>(props, ref)
+  const { errorMessageProps, inputProps, labelProps } = useTextField<'textarea' | 'input'>(props, ref)
 
   const inputTokens = { ...tokens, isDisabled: disabled, isError: errorMessage != null }
 

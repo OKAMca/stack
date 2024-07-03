@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef } from 'react'
 import { useOverlayTriggerState } from 'react-stately'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'

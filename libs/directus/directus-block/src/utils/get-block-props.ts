@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+'server-only'
+
 import { queryGql } from '@okam/directus-query'
 import type { Nullable } from '@okam/stack-ui'
 import type { Variables } from 'graphql-request'
