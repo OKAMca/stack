@@ -38,7 +38,7 @@
         "jestConfig": "libs/directus/directus-node/jest.config.ts"
       }
     },
-    "poject-dry-release": {},
+    "project-dry-release": {},
     "project-release": {}
   }
 }
