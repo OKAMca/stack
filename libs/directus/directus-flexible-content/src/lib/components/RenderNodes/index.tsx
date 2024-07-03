@@ -1,35 +1,58 @@
 'use server'
 
+import type { TDefaultComponent } from '@okam/stack-ui'
 import { Box } from '@okam/stack-ui'
-import type { ElementType, FunctionComponent, ReactNode } from 'react'
+import type { FunctionComponent } from 'react'
 import { renderView, mergeSerializers } from '../../functions'
 
 import type { JSONContent, Extensions, ReactComponentSerializers } from '../../functions/types'
+import remapAttributes from '../attributes/remapAttributes'
+import nodes from '../nodes'
+import type { TRenderingNodes } from '../nodes/types'
 
-interface RenderNodesProps {
+interface RenderNodesProps extends TDefaultComponent {
   content: JSONContent
   serializers?: Extensions
   componentSerializers?: ReactComponentSerializers
+  renderingNodes?: TRenderingNodes
+  remappedAttributes?: Record<string, string>
 }
 
-const RenderNodes: FunctionComponent<RenderNodesProps> = ({ content, serializers = [], componentSerializers = [] }) => {
-  // Clone the content to avoid mutating the original prop
+const RenderNodes: FunctionComponent<RenderNodesProps> = (props) => {
+  const {
+    content,
+    serializers = [],
+    componentSerializers = [],
+    renderingNodes,
+    remappedAttributes,
+    themeName,
+    tokens,
+    customTheme,
+  } = props
+
   const clonedContent = JSON.parse(JSON.stringify(content))
 
-  // Merge serializers with componentSerializers
   const mergedSerializers = mergeSerializers(serializers, componentSerializers)
 
-  // renderView should be a function that knows how to render the content
-  // using React components instead of Vue's render function.
-  // This is a placeholder function and should be implemented according to your needs.
   return renderView(
     clonedContent,
     mergedSerializers,
     // @ts-expect-error Expects ReactNode
-    (tag: ElementType, attrs: JSONContent['attrs'], children: ReactNode) => {
-      const attributes = { ...attrs, style: {} }
+    (tag: keyof JSX.IntrinsicElements, attrs: JSONContent['attrs'], children: ReactNode) => {
+      const defaultAttributes = {
+        ...attrs,
+        style: undefined,
+      }
+      const mappedAttributes = remapAttributes(remappedAttributes, defaultAttributes)
+
+      const renderingNode = renderingNodes?.[tag] ?? nodes?.[tag]
+
+      if (renderingNode) {
+        return renderingNode({ children, attrs: mappedAttributes, themeName, tokens, customTheme })
+      }
+
       return (
-        <Box as={tag} {...attributes}>
+        <Box as={tag} {...mappedAttributes} themeName={themeName} tokens={tokens} customTheme={customTheme}>
           {children}
         </Box>
       )

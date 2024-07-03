@@ -34,3 +34,4 @@ export type RelationBlockSerializers<T> = {
 
 export type ReactComponentSerializers = ComponentSerializers<FunctionComponent>
 export type ReactRelationBlockSerializers = RelationBlockSerializers<ReactNode>
+export type EditorNodes = Record<string, unknown> | null
