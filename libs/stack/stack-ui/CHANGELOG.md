@@ -1,3 +1,25 @@
+## [1.25.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.25.1...stack-ui-v1.25.2) (2024-06-28)
+
+
+### Bug Fixes
+
+* all carousel elements are stylable ([#138](https://github.com/OKAMca/stack/issues/138)) ([6c7db7e](https://github.com/OKAMca/stack/commit/6c7db7eb61553041bb94356a43c84aea7fb44bda))
+
+## [1.25.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.25.0...stack-ui-v1.25.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* alerts semantic html to theme components ([#131](https://github.com/OKAMca/stack/issues/131)) ([00c39ef](https://github.com/OKAMca/stack/commit/00c39ef339d7b597575f74d821c0eb3f4befecc4))
+* **block-directus:** add server only to get block props ([330e76f](https://github.com/OKAMca/stack/commit/330e76f7fee53634bfb991e813060f0e8f1a0cb6))
+
+# [1.25.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.3...stack-ui-v1.25.0) (2024-06-17)
+
+
+### Features
+
+* export carousel ([45fb2ef](https://github.com/OKAMca/stack/commit/45fb2ef6a4b77fb214e62dfaefde2819b0f7d870))
+
 ## [1.24.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.2...stack-ui-v1.24.3) (2024-06-14)
 
 

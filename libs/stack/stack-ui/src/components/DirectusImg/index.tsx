@@ -15,6 +15,7 @@ const DirectusImg = (props: TDirectusImageProps) => {
       img.searchParams.set('fit', fit ?? 'contain')
       return img
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn(error)
       return null
     }

@@ -1,3 +1,10 @@
+## [1.13.3](https://github.com/OKAMca/stack/compare/core-lib-v1.13.2...core-lib-v1.13.3) (2024-06-25)
+
+
+### Bug Fixes
+
+* **block-directus:** add server only to get block props ([330e76f](https://github.com/OKAMca/stack/commit/330e76f7fee53634bfb991e813060f0e8f1a0cb6))
+
 ## [1.13.2](https://github.com/OKAMca/stack/compare/core-lib-v1.13.1...core-lib-v1.13.2) (2024-06-14)
 
 
