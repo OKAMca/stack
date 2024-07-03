@@ -1,4 +1,4 @@
-import { BlockDispatcher, BlockSerializer } from '@okam/directus-block'
+import { BlockDispatcher, BlockSerializer } from '@okam/directus-block/server'
 import { Box } from '@okam/stack-ui'
 
 export default function Index() {
@@ -29,7 +29,7 @@ export default function Index() {
       ]}
     >
       {(block) => (
-        <Box key={block?.item?.id}>
+        <Box key={block.item?.id}>
           <BlockSerializer {...block} />
         </Box>
       )}
