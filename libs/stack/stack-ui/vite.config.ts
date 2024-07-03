@@ -1,8 +1,8 @@
 /* eslint-disable import/no-relative-packages */
 /// <reference types="vitest" />
 import * as path from 'path'
-
 import react from '@vitejs/plugin-react'
+import preserveDirectives from 'rollup-plugin-preserve-directives'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
@@ -53,6 +53,10 @@ export default defineConfig({
         }
         warn(warning)
       },
+      output: {
+        preserveModules: true,
+      },
+      plugins: [preserveDirectives()],
     },
   },
 })
