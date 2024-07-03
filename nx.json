@@ -87,7 +87,7 @@
       ],
       "cache": true
     },
-    "poject-dry-release": {
+    "project-dry-release": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
