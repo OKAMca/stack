@@ -16,7 +16,13 @@ export default function Index() {
         },
         {
           item: {
-            id: '1',
+            id: 'passing only item.id for querying works',
+          },
+          collection: 'block_wysiwyg',
+        },
+        {
+          variables: {
+            id: 'passing only variables works',
           },
           collection: 'block_wysiwyg',
         },
