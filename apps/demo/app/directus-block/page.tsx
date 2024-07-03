@@ -14,6 +14,12 @@ export default function Index() {
           },
           collection: 'block_wysiwyg',
         },
+        {
+          item: {
+            id: '1',
+          },
+          collection: 'block_wysiwyg',
+        },
       ]}
     >
       {(block) => (
