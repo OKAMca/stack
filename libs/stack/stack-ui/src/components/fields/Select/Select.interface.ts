@@ -1,8 +1,7 @@
-import type { Key, ReactElement } from 'react'
+import type { Key } from 'react'
 import type React from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
-import type { TSelectItemProps } from '../SelectItem/SelectItem.interface'
 
 export type TFieldReactHookForm = TReactHookForm & Omit<TDefaultComponent, 'children'>
 export interface TSelectProps extends TFieldReactHookForm {

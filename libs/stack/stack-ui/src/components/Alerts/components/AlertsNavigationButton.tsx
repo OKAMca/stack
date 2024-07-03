@@ -1,28 +1,49 @@
 import type { Ref } from 'react'
 import { forwardRef } from 'react'
-import { FocusRing } from 'react-aria'
-import useThemeContext from '../../../providers/Theme/hooks'
+import { FocusRing, usePress } from 'react-aria'
+import { useAlertsController } from '../../../providers/Alerts'
+import { ButtonWithForwardRef } from '../../Button'
 import type { TButtonProps } from '../../Button/interface'
 import Icon from '../../Icon'
 
-const AlertsNavigationButton = forwardRef((props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
-  const { themeName = 'alerts.navigationBtn', tokens, customTheme, children, ...rest } = props
+type TAlertsNavigationButtonProps = TButtonProps & {
+  onSubmit?: () => void
+}
 
-  const theme = useThemeContext(themeName, tokens, customTheme)
+const AlertsNavigationButton = forwardRef(
+  (props: TAlertsNavigationButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
+    const { themeName = 'alerts.navigationBtn', tokens, customTheme, children, onSubmit, ...rest } = props
+    const { isDisabled } = rest
 
-  return (
-    <FocusRing within focusRingClass="has-focus-ring">
-      <button className={theme} ref={ref} type="button" {...rest}>
-        {children}
-      </button>
-    </FocusRing>
-  )
-})
+    const { pressProps } = usePress({
+      onPress: () => onSubmit?.(),
+    })
+
+    return (
+      <FocusRing within focusRingClass="has-focus-ring">
+        <ButtonWithForwardRef
+          themeName={themeName}
+          tokens={tokens}
+          ref={ref}
+          {...pressProps}
+          {...rest}
+          {...{ 'aria-disabled': isDisabled }}
+        >
+          {children}
+        </ButtonWithForwardRef>
+      </FocusRing>
+    )
+  },
+)
 
 export const AlertsNextNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
+    const { controller } = useAlertsController()
+
+    const disabled = controller?.activeIndex === (controller?.slides?.length ?? 1) - 1
+
     return (
-      <AlertsNavigationButton {...props} ref={ref}>
+      <AlertsNavigationButton onSubmit={() => controller?.slideNext()} {...props} ref={ref} isDisabled={disabled}>
         <Icon icon="ArrowRight" />
       </AlertsNavigationButton>
     )
@@ -31,8 +52,12 @@ export const AlertsNextNavigationButton = forwardRef(
 
 export const AlertsPrevNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
+    const { controller } = useAlertsController()
+
+    const disabled = controller?.activeIndex === 0
+
     return (
-      <AlertsNavigationButton {...props} ref={ref}>
+      <AlertsNavigationButton onSubmit={() => controller?.slidePrev()} {...props} ref={ref} isDisabled={disabled}>
         <Icon icon="ArrowLeft" />
       </AlertsNavigationButton>
     )

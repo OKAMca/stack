@@ -1,20 +1,15 @@
+'use client'
+
 import React, { useState } from 'react'
 import type { PressEvent } from 'react-aria'
 import type Swiper from 'swiper'
 import { Navigation, Mousewheel, Keyboard, Pagination, Autoplay, A11y } from 'swiper/modules'
 import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react'
 import useThemeContext from '../../providers/Theme/hooks'
+import Box from '../Box'
 import Button from '../Button'
 import Icon from '../Icon'
 import type { TCarouselButtonProps, TCarouselProps } from './interface'
-
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/a11y'
-import 'swiper/css/autoplay'
-import 'swiper/css/navigation'
-import 'swiper/css/mousewheel'
-import 'swiper/css/keyboard'
 
 const CarouselButton = (props: TCarouselButtonProps) => {
   const { navigationButton, icon, themeName = 'carousel', tokens, id, swiperFn } = props
@@ -40,18 +35,18 @@ const Carousel = (props: TCarouselProps) => {
 
   const { navigation, slidesPerView } = props
 
-  const containerTheme = useThemeContext(`${themeName}.container`, { ...tokens }, customTheme)
-  const slideContainerTheme = useThemeContext(`${themeName}.slideContainer`, { ...tokens }, customTheme)
+  const swiperTheme = useThemeContext(`${themeName}.swiper`, tokens)
+  const swiperWrapperTheme = useThemeContext(`${themeName}.swiperWrapper`, tokens)
+  const slideWrapperTheme = useThemeContext(`${themeName}.slideWrapper`, tokens)
 
   const [swiper, setSwiper] = useState<Swiper>()
 
   return (
-    <div className={containerTheme} {...rest}>
+    <Box themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme} {...rest}>
       {showNavigation && navigation && (
         <CarouselButton
           themeName={themeName}
           tokens={tokens}
-          customTheme={customTheme}
           navigationButton={navigationButtons?.leftButton}
           id={`button-prev-${id}`}
           icon="ArrowLeft"
@@ -68,7 +63,8 @@ const Carousel = (props: TCarouselProps) => {
           disabledClass: `button-disabled`,
         }}
         onSwiper={setSwiper}
-        wrapperClass="!flex !w-full !max-w-full"
+        wrapperClass={swiperWrapperTheme}
+        className={swiperTheme}
         mousewheel
         keyboard
         watchOverflow
@@ -76,8 +72,10 @@ const Carousel = (props: TCarouselProps) => {
       >
         {slides?.map((slide) => {
           return (
-            <SwiperSlide key={slide.id}>
-              <div className={slideContainerTheme}>{slide.child}</div>
+            <SwiperSlide key={slide.id} className={slideWrapperTheme}>
+              <Box themeName={`${themeName}.slideContainer`} tokens={tokens}>
+                {slide.child}
+              </Box>
             </SwiperSlide>
           )
         })}
@@ -86,7 +84,6 @@ const Carousel = (props: TCarouselProps) => {
         <CarouselButton
           themeName={themeName}
           tokens={tokens}
-          customTheme={customTheme}
           navigationButton={navigationButtons?.rightButton}
           id={`button-next-${id}`}
           icon="ArrowRight"
@@ -94,9 +91,8 @@ const Carousel = (props: TCarouselProps) => {
           swiper={swiper}
         />
       )}
-
       {children}
-    </div>
+    </Box>
   )
 }
 
