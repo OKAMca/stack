@@ -18,6 +18,7 @@ import {
   TextArea,
   TextInputField,
   Select,
+  DirectusImg,
 } from '@okam/stack-ui'
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
@@ -33,13 +34,13 @@ export default async function Index() {
 
       <div className="flex flex-col gap-16 p-8">
         <Box>
-          {/* <DirectusImg
+          <DirectusImg
             filenameDownload="Mask group.jpg"
             width={882}
             height={496}
             id="0d4005d0-6472-4fb1-9340-b14387b264ef"
             thumbhash="aRgODIKUQmq/WIdzh3klj1LgGA=="
-          /> */}
+          />
         </Box>
         <Select
           id="season"

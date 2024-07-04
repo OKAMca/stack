@@ -18,7 +18,6 @@ const getSerializer = (
   serializers: Extensions,
 ): Serializer['config'] | undefined => {
   const serializer = serializers.find((item) => item.type === type && item.name === name)
-  // console.log(name, type, serializer)
 
   if (!serializer) return undefined
 

@@ -1,5 +1,3 @@
-'use server'
-
 import type { TBlockSerializerConfig } from '@okam/directus-block'
 import type { JSONContent } from '@okam/directus-flexible-content'
 import { FlexibleEditorContent } from '@okam/directus-flexible-content'

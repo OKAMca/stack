@@ -3,7 +3,7 @@
 import { QueryCache, QueryClient } from '@tanstack/react-query'
 import { GraphQLClient } from 'graphql-request'
 
-const GRAPHQL_ENDPOINT = (process.env.NEXT_PUBLIC_GRAPHQL_URL as string) ?? 'https://agencyos.okam.one/graphql'
+const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_GRAPHQL_URL as string
 const GRAPHQL_ENDPOINT_ADMIN = process.env.NEXT_GRAPHQL_URL_ADMIN as string
 const AUTH_TOKEN = (process.env.NEXT_PUBLIC_API_TOKEN as string) ?? ''
 const AUTH_TOKEN_ADMIN = process.env.NEXT_PUBLIC_API_TOKEN as string
