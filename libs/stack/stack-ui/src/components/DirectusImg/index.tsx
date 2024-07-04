@@ -2,12 +2,28 @@ import { createPngDataUri } from 'unlazy/thumbhash'
 import Img from '../Img'
 import type TDirectusImageProps from './interface'
 
-const imgDomain = process.env.NEXT_PUBLIC_IMG_DOMAIN ?? ''
+const envImgDomain = process.env.NEXT_PUBLIC_IMG_DOMAIN
 
 const DirectusImg = (props: TDirectusImageProps) => {
-  const { fit, customTheme, thumbhash, description, width, height, id, filenameDownload, ...rest } = props
+  const {
+    fit,
+    customTheme,
+    thumbhash,
+    description,
+    width,
+    height,
+    id,
+    filenameDownload,
+    imgDomain = envImgDomain,
+    ...rest
+  } = props
 
   if (!id || !filenameDownload) return null
+
+  if (!imgDomain) {
+    console.warn('No image domain was provided')
+    return null
+  }
 
   const getDirectusImage = () => {
     try {
