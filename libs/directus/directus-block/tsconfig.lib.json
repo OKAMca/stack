@@ -2,9 +2,16 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../../dist/out-tsc",
-    "types": ["node", "next"]
+    "types": [
+      "node",
+      "next"
+    ]
   },
-  "paths": { "@workspace/*": ["dist/libs/*"] },
+  "paths": {
+    "@workspace/*": [
+      "dist/libs/*"
+    ]
+  },
   "files": [
     "../../../node_modules/@nx/react/typings/cssmodule.d.ts",
     "../../../node_modules/@nx/react/typings/image.d.ts"
@@ -21,5 +28,10 @@
     "**/*.stories.ts",
     "**/*.stories.js"
   ],
-  "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

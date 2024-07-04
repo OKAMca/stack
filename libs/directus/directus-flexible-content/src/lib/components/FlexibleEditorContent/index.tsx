@@ -1,4 +1,4 @@
-'use server'
+import 'server-only'
 
 import type { TBlockSerializerConfig } from '@okam/directus-block'
 import { BlockDispatcher } from '@okam/directus-block'

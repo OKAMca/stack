@@ -106,7 +106,7 @@ function PopoverButton(props: TPopoverButtonProps) {
   const { onPress: handlePress, ...triggerButtonProps } = triggerProps
 
   return (
-    <div className="transition-all">
+    <>
       <ButtonWithForwardRef
         themeName={`${themeName}.button`}
         handlePress={handlePress}
@@ -131,7 +131,7 @@ function PopoverButton(props: TPopoverButtonProps) {
           </Popover>
         </OverlayContainer>
       )}
-    </div>
+    </>
   )
 }
 
