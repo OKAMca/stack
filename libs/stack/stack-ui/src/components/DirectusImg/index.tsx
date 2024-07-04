@@ -21,6 +21,7 @@ const DirectusImg = (props: TDirectusImageProps) => {
   if (!id || !filenameDownload) return null
 
   if (!imgDomain) {
+    // eslint-disable-next-line no-console
     console.warn('No image domain was provided')
     return null
   }
