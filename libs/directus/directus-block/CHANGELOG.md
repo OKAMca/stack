@@ -1,3 +1,7 @@
+## 1.2.1 (2024-07-05)
+
+This was a version bump only for directus-block to align it with other projects, there were no code changes.
+
 ## 1.2.0 (2024-06-28)
 
 
