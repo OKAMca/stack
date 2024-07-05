@@ -10,6 +10,10 @@ type TDirectusImageProps = Omit<TImgProps, 'src' | 'id' | 'width' | 'height' | '
   height: Nullable<number>
   id: Nullable<string>
   filenameDownload: Nullable<string>
+  /**
+   * @default NEXT_PUBLIC_IMG_DOMAIN
+   */
+  imgDomain?: string
 }
 
 export default TDirectusImageProps

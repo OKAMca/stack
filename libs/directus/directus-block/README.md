@@ -35,6 +35,12 @@ This would allow to remove a lot of repetitive code accross blocks definitions, 
 
 This component calls the good component in the configuration from the `collection` prop
 
+#### Props
+
+- item: The block's data. Can either contain just the block's `id`, be null (in that case, the `id` will need to be sent using the block's variables). If `item` only contains the id, it will be sent to the variables for making the query
+- variables: The block's variables. Passing the id is necessary
+- document: Can also be passed in the config. The document that will be used to make a query
+
 ## Configuration
 
 A configuration uses the `components` prop to map a key value, like so:
