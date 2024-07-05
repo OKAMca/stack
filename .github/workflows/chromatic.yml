@@ -33,8 +33,11 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
           # not needed
           # storybookBaseDir: libs/stack/stack-ui/src/storybook
-          # workingDir: is the directory with a package.json that contains "build-storybook" script
+          # directory with a package.json that contains "build-storybook" {buildScriptName} script
           # if at root, don't set workingDir
+          # workingDir:
           # if the script is not build-storybook, set buildScriptName
-          buildScriptName: storybook
+          # don't use storybook (dev mode)
+          # available: build-storybook (stack-ui), build-storybook-next-component (next-component)
+          # buildScriptName: storybook
 
