@@ -34,6 +34,11 @@
         }
       }
     },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/directus/{packageName}"
+      }
+    },
     "project-dry-release": {},
     "project-release": {}
   }

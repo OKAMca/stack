@@ -38,6 +38,11 @@
         "jestConfig": "libs/directus/directus-node/jest.config.ts"
       }
     },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/directus/{packageName}"
+      }
+    },
     "project-dry-release": {},
     "project-release": {}
   }

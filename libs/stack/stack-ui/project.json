@@ -73,6 +73,11 @@
         }
       }
     },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/stack/{packageName}"
+      }
+    },
     "project-dry-release": {},
     "project-release": {}
   }
