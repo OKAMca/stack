@@ -18,6 +18,7 @@
       "@okam/config": ["libs/shared/config/src/index.ts"],
       "@okam/core-lib": ["libs/stack/core-lib/src/index.ts"],
       "@okam/directus-block": ["libs/directus/directus-block/src/index.ts"],
+      "@okam/directus-block/server": ["libs/directus/directus-block/src/server.ts"],
       "@okam/directus-lib": ["libs/directus/directus-lib/src/index.ts"],
       "@okam/directus-next-component": ["libs/directus/directus-next-component/src/index.ts"],
       "@okam/directus-next-component/server": ["libs/directus/directus-next-component/src/server.ts"],
