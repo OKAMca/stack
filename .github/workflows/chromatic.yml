@@ -40,4 +40,6 @@ jobs:
           # don't use storybook (dev mode)
           # available: build-storybook (stack-ui), build-storybook-next-component (next-component)
           # buildScriptName: storybook
+          # don't wait for results after publish
+          exitOnceUploaded: true
 
