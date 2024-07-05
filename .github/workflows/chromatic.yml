@@ -31,6 +31,10 @@ jobs:
         with:
           # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-          storybookBaseDir: libs/stack/stack-ui/src/storybook
-          workingDir: libs/stack/stack-ui/
+          # not needed
+          # storybookBaseDir: libs/stack/stack-ui/src/storybook
+          # workingDir: is the directory with a package.json that contains "build-storybook" script
+          # if at root, don't set workingDir
+          # if the script is not build-storybook, set buildScriptName
+          buildScriptName: storybook
 
