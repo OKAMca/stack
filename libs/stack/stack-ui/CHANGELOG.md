@@ -1,3 +1,7 @@
+## 1.25.3 (2024-07-05)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
 ## [1.25.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.25.1...stack-ui-v1.25.2) (2024-06-28)
 
 
