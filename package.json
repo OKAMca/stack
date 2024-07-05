@@ -6,6 +6,8 @@
     "g:lint": "nx run-many --all --target=lint",
     "storybook": "nx run stack-ui:storybook",
     "storybook-next-component": "nx run next-component:storybook",
+    "build-storybook": "nx run stack-ui:build-storybook",
+    "build-storybook-next-component": "nx run next-component:build-storybook",
     "dry-release": "nx release --dry-run",
     "release": "nx release",
     "dry-first-release": "nx release --first-release --dry-run",
