@@ -1,4 +1,4 @@
-import { BlockDispatcher, BlockSerializer } from '@okam/directus-block'
+import { BlockDispatcher, BlockSerializer } from '@okam/directus-block/server'
 import { Box } from '@okam/stack-ui'
 
 export default function Index() {
@@ -14,10 +14,22 @@ export default function Index() {
           },
           collection: 'block_wysiwyg',
         },
+        {
+          item: {
+            id: 'passing only item.id for querying works',
+          },
+          collection: 'block_wysiwyg',
+        },
+        {
+          variables: {
+            id: 'passing only variables works',
+          },
+          collection: 'block_wysiwyg',
+        },
       ]}
     >
       {(block) => (
-        <Box key={block?.item?.id}>
+        <Box key={block.item?.id}>
           <BlockSerializer {...block} />
         </Box>
       )}

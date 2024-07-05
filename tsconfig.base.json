@@ -33,6 +33,9 @@
       "@okam/directus-block": [
         "libs/directus/directus-block/src/index.ts"
       ],
+      "@okam/directus-block/server": [
+        "libs/directus/directus-block/src/server.ts"
+      ],
       "@okam/directus-lib": [
         "libs/directus/directus-lib/src/index.ts"
       ],
