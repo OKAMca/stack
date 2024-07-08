@@ -12,7 +12,7 @@ const CarouselSlide = (props: TCarouselSlideProps) => {
   const carouselSlideTokens = { ...tokens, isActive }
 
   return (
-    <Box themeName={`${themeName}.container`} tokens={carouselSlideTokens}>
+    <Box themeName={`${themeName}.container`} tokens={carouselSlideTokens} {...(!isActive ? { inert: 'true' } : {})}>
       {title && (
         <Typography themeName={`${themeName}.title`} tokens={carouselSlideTokens} {...{ id }}>
           {title}
