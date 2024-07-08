@@ -6,7 +6,6 @@ import CarouselSlide from './CarouselSlide'
 
 const CarouselSwiper = (props: TCarouselComponentProps) => {
   const {
-    id,
     slides,
     slidesPerView = 1,
     spaceBetween = 50,
@@ -36,9 +35,9 @@ const CarouselSwiper = (props: TCarouselComponentProps) => {
 
   return (
     <Swiper
-      id={id}
       tabIndex={0}
       {...rest}
+      watchSlidesProgress
       role="group"
       aria-roledescription={containerRoleDescriptionMessage ?? undefined}
       slidesPerView={slidesPerView}
