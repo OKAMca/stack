@@ -7,7 +7,8 @@
       "directus-node",
       "directus-query",
       "directus-block",
-      "directus-next-component"
+      "directus-next-component",
+      "directus-flexible-content"
     ],
     "releaseTagPattern": "{projectName}-v{version}",
     "projectsRelationship": "independent",

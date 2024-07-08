@@ -3,7 +3,9 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-next/src",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
@@ -36,7 +38,7 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/directus/{packageName}"
+        "packageRoot": "dist/libs/directus/{packageName}"
       }
     },
     "project-dry-release": {},
