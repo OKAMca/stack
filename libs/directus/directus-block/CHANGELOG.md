@@ -1,3 +1,15 @@
+## 1.2.2 (2024-07-08)
+
+
+### 🩹 Fixes
+
+- **publish:** add building packages step to workflow ([c9ce442](https://github.com/OKAMca/stack/commit/c9ce442))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
 ## 1.2.1 (2024-07-05)
 
 This was a version bump only for directus-block to align it with other projects, there were no code changes.
