@@ -1,3 +1,15 @@
+## 1.25.4 (2024-07-08)
+
+
+### 🩹 Fixes
+
+- **publish:** add building packages step to workflow ([c9ce442](https://github.com/OKAMca/stack/commit/c9ce442))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
 ## 1.25.3 (2024-07-05)
 
 This was a version bump only for stack-ui to align it with other projects, there were no code changes.
