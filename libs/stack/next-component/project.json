@@ -3,7 +3,9 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/stack/next-component/src",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"
@@ -77,7 +79,7 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/stack/{packageName}"
+        "packageRoot": "dist/libs/stack/next-component"
       }
     },
     "project-dry-release": {},

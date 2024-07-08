@@ -1,7 +1,7 @@
 import 'server-only'
 
 import type { TBlockSerializerConfig } from '@okam/directus-block'
-import { BlockDispatcher } from '@okam/directus-block'
+import { BlockDispatcher } from '@okam/directus-block/server'
 import type { TDefaultComponent } from '@okam/stack-ui'
 import { Node } from '@tiptap/core'
 import { injectDataIntoContent } from '../../functions'
