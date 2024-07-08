@@ -7,14 +7,20 @@
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/directus/directus-block/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/directus/directus-block/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/directus/directus-block",
         "tsConfig": "libs/directus/directus-block/tsconfig.lib.json",
@@ -31,6 +37,13 @@
           }
         ]
       }
-    }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/directus/{packageName}"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
   }
 }

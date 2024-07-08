@@ -10,8 +10,6 @@
     "build-storybook-next-component": "nx run next-component:build-storybook",
     "dry-release": "nx release --dry-run",
     "release": "nx release",
-    "dry-first-release": "nx release --first-release --dry-run",
-    "first-release": "nx release --first-release",
     "dev": "nx serve demo",
     "build": "nx build demo",
     "postinstall": "is-ci || npx husky install"
@@ -143,7 +141,5 @@
     "vite-tsconfig-paths": "^4.2.2",
     "vitest": "1.6.0"
   },
-  "nx": {
-    "includedScripts": []
-  }
+  "nx": {}
 }

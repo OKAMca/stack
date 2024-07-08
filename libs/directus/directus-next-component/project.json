@@ -10,7 +10,9 @@
     },
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/directus/directus-next-component",
         "tsConfig": "libs/directus/directus-next-component/tsconfig.lib.json",
@@ -27,6 +29,13 @@
           }
         ]
       }
-    }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/directus/{packageName}"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
   }
 }
