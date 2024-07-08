@@ -3,7 +3,9 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/stack/stack-ui/src",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "semantic-release": {
       "executor": "@theunderscorer/nx-semantic-release:semantic-release",
@@ -75,7 +77,7 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/stack/{packageName}"
+        "packageRoot": "dist/libs/stack/{packageName}"
       }
     },
     "project-dry-release": {},
