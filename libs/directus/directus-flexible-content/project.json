@@ -42,7 +42,7 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/libs/stack/directus-flexible-content"
+        "packageRoot": "dist/libs/directus/directus-flexible-content"
       }
     },
     "project-dry-release": {},
