@@ -1,7 +1,6 @@
 import { NextComponent } from '@okam/next-component'
 import { HelloServer } from '@okam/next-component/server'
 import {
-  Accordion,
   Box,
   Button,
   Calendar,
@@ -18,8 +17,8 @@ import {
   WysiwygBlock,
   TextArea,
   TextInputField,
-  DirectusImg,
   Select,
+  DirectusImg,
 } from '@okam/stack-ui'
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'

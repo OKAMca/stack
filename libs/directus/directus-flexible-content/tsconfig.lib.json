@@ -25,6 +25,8 @@
     "**/*.test.js",
     "**/*.spec.jsx",
     "**/*.test.jsx",
+    "**/*.stories.ts",
+    "**/*.stories.js"
   ],
   "include": [
     "**/*.js",
