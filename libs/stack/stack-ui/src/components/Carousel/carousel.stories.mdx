@@ -131,11 +131,11 @@ import 'swiper/css/keyboard'
 
 ## Showcase
 
-### Basic carousel with 2 slides per view
+### Multiple slides per view
 
 <Canvas>
   <Story
-    name="Basic"
+    name="Multiple slides per view"
     args={{
       slidesPerView: 2,
       modules: ['Navigation']
@@ -145,11 +145,11 @@ import 'swiper/css/keyboard'
   </Story>
 </Canvas>
 
-### Carousel with autoplay
+### Autoplay
 
 <Canvas>
   <Story
-    name="Carousel with autoplay"
+    name="Autoplay"
     args={{
       modules: ['Autoplay', 'Navigation', 'Pagination'],
       autoplay: true,
@@ -159,12 +159,65 @@ import 'swiper/css/keyboard'
   </Story>
 </Canvas>
 
-### Carousel with infinite looping
+### Focusable content
 
 <Canvas>
   <Story
-    name="Carousel with infinite looping"
+    name="Focusable content"
     args={{
+      id: 3,
+      modules: ['Navigation'],
+      slides: [
+        {
+          id: 1,
+          children: (
+            <div>
+              <p>Slide 1</p>
+              <a href="#">Focusable content 1</a>
+            </div>
+          ),
+        },
+        {
+          id: 2,
+          children: (
+            <div>
+              <p>Slide 2</p>
+              <a href="#">Focusable content 2</a>
+            </div>
+          ),
+        },
+        {
+          id: 3,
+          children: (
+            <div>
+              <p>Slide 3</p>
+              <a href="#">Focusable content 3</a>
+            </div>
+          ),
+        },
+        {
+          id: 4,
+          children: (
+            <div>
+              <p>Slide 4</p>
+              <a href="#">Focusable content 4</a>
+            </div>
+          ),
+        },
+      ]
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Infinite looping
+
+<Canvas>
+  <Story
+    name="Infinite looping"
+    args={{
+      id: 4,
       loop: true,
       modules: ['Navigation'],
     }}
@@ -173,11 +226,11 @@ import 'swiper/css/keyboard'
   </Story>
 </Canvas>
 
-### Carousel with pagination
+### Pagination
 
 <Canvas>
   <Story
-    name="Carousel with pagination"
+    name="Pagination"
     args={{
       modules: ['Pagination'],
     }}
