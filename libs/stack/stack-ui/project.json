@@ -77,7 +77,7 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/libs/stack/{packageName}"
+        "packageRoot": "dist/libs/stack/stack-ui"
       }
     },
     "project-dry-release": {},

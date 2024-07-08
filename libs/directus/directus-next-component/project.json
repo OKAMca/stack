@@ -34,7 +34,7 @@
     },
     "nx-release-publish": {
       "options": {
-        "packageRoot": "dist/libs/directus/{packageName}"
+        "packageRoot": "dist/libs/directus/directus-next-component"
       }
     },
     "project-dry-release": {},
