@@ -31,6 +31,10 @@ jobs:
         run: npx nx report
         shell: bash
 
+      - name: Build packages
+        run : npx nx run-many -t=build --projects=tag:publishable
+        shell: bash
+
       - name: Publish packages
         run: npx nx release publish
         shell: bash
