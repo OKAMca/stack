@@ -1,3 +1,15 @@
+## 1.2.3 (2024-07-09)
+
+
+### 🩹 Fixes
+
+- **directus-block:** export server components ([05f1a31](https://github.com/OKAMca/stack/commit/05f1a31))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
 ## 1.2.2 (2024-07-08)
 
 
