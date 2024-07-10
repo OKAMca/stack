@@ -15,6 +15,7 @@ const DirectusImg = (props: TDirectusImageProps) => {
     id,
     filenameDownload,
     imgDomain = envImgDomain,
+    protocol = 'https',
     ...rest
   } = props
 
@@ -28,7 +29,7 @@ const DirectusImg = (props: TDirectusImageProps) => {
 
   const getDirectusImage = () => {
     try {
-      const img = new URL(`/assets/${id}/${filenameDownload}`, `https://${imgDomain}`)
+      const img = new URL(`/assets/${id}/${filenameDownload}`, `${protocol}://${imgDomain}`)
       img.searchParams.set('fit', fit ?? 'contain')
       return img
     } catch (error) {
