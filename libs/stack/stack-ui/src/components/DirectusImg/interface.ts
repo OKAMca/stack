@@ -14,6 +14,7 @@ type TDirectusImageProps = Omit<TImgProps, 'src' | 'id' | 'width' | 'height' | '
    * @default NEXT_PUBLIC_IMG_DOMAIN
    */
   imgDomain?: string
+  protocol?: 'http' | 'https'
 }
 
 export default TDirectusImageProps
