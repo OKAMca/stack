@@ -1,3 +1,23 @@
+## 1.25.5 (2024-07-10)
+
+
+### 🩹 Fixes
+
+- allow changing directus img protocol ([#152](https://github.com/OKAMca/stack/pull/152))
+
+
+### ✅ Tests
+
+- with rollup plugin preserve directives ([ce58694](https://github.com/OKAMca/stack/commit/ce58694))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- yanmorinokamca @yanmorinokamca
+
 ## 1.25.4 (2024-07-08)
 
 
