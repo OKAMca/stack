@@ -1,3 +1,15 @@
+## 1.0.3 (2024-07-11)
+
+
+### 🩹 Fixes
+
+- **directus-flexible-editor:** fixed content injection and prop name ([91705fb](https://github.com/OKAMca/stack/commit/91705fb))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
 ## 1.0.2 (2024-07-11)
 
 
