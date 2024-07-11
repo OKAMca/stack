@@ -23,7 +23,7 @@ export default async function Index() {
 
   return (
     <FlexibleEditorContent
-      flexibleEditor={content}
+      jsonContent={content}
       editorNodes={editorNodes}
       config={relationBlocks}
       nodes={{
