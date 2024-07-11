@@ -8,6 +8,7 @@ const injectDataIntoContent = (
   itemField = 'item',
 ) => {
   const toContentWithInjectedData = (jsonContent: JSONContent) => {
+    if (!data && jsonContent) return jsonContent
     if (!jsonContent || !data) return null
 
     if (jsonContent.type === 'relation-block' && jsonContent.attrs?.id) {

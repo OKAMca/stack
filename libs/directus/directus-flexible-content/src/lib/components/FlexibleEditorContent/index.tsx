@@ -10,7 +10,7 @@ import RenderNodes from '../RenderNodes'
 import extensions from './extensions'
 
 interface FlexibleEditorContentProps extends TDefaultComponent {
-  flexibleEditor: JSONContent
+  jsonContent: JSONContent
   editorNodes?: EditorNodes[] | undefined | null
   serializers?: Extensions
   config?: TBlockSerializerConfig
@@ -19,19 +19,10 @@ interface FlexibleEditorContentProps extends TDefaultComponent {
 }
 
 const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
-  const {
-    flexibleEditor,
-    editorNodes,
-    serializers,
-    nodes,
-    config,
-    themeName,
-    tokens,
-    customTheme,
-    remappedAttributes,
-  } = props
+  const { jsonContent, editorNodes, serializers, nodes, config, themeName, tokens, customTheme, remappedAttributes } =
+    props
 
-  const content = injectDataIntoContent(editorNodes, flexibleEditor)
+  const content = injectDataIntoContent(editorNodes, jsonContent)
 
   // `.slice(0)` to clone the extensions array
   const effectiveSerializers = serializers ?? [...extensions] ?? []
