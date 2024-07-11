@@ -1,3 +1,15 @@
+## 1.0.2 (2024-07-11)
+
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** remove use server uses ([9c62479](https://github.com/OKAMca/stack/commit/9c62479))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
 ## 1.0.1 (2024-07-10)
 
 
