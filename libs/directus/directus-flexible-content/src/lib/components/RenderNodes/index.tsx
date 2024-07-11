@@ -1,5 +1,3 @@
-import 'server-only'
-
 import type { TDefaultComponent } from '@okam/stack-ui'
 import { Box } from '@okam/stack-ui'
 import type { FunctionComponent } from 'react'
