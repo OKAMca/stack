@@ -16,6 +16,8 @@ const DirectusImg = (props: TDirectusImageProps) => {
     filenameDownload,
     imgDomain = envImgDomain,
     protocol = 'https',
+    focalPointX,
+    focalPointY,
     ...rest
   } = props
 
@@ -44,9 +46,17 @@ const DirectusImg = (props: TDirectusImageProps) => {
   if (directusImageUrl == null) {
     return null
   }
-
+  const hasFocalPoint = !!focalPointX && !!focalPointY && !!width && !!height
   return (
     <Img
+      style={
+        hasFocalPoint
+          ? {
+              objectFit: 'cover',
+              objectPosition: `${(focalPointX / width) * 100}% ${(focalPointY / height) * 100}%`,
+            }
+          : undefined
+      }
       alt={description ?? ''}
       {...(thumbhash ? { blurDataURL: createPngDataUri(thumbhash), placeholder: 'blur' } : {})}
       src={directusImageUrl.href}
