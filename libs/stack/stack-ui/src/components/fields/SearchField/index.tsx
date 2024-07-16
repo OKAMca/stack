@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'

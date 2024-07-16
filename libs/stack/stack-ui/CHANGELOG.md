@@ -1,3 +1,98 @@
+## 1.25.6 (2024-07-10)
+
+
+### 🩹 Fixes
+
+- allow changing directus img protocol ([#152](https://github.com/OKAMca/stack/pull/152))
+
+
+### ✅ Tests
+
+- with rollup plugin preserve directives ([ce58694](https://github.com/OKAMca/stack/commit/ce58694))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- yanmorinokamca @yanmorinokamca
+
+## 1.25.5 (2024-07-10)
+
+
+### 🩹 Fixes
+
+- allow changing directus img protocol ([#152](https://github.com/OKAMca/stack/pull/152))
+
+
+### ✅ Tests
+
+- with rollup plugin preserve directives ([ce58694](https://github.com/OKAMca/stack/commit/ce58694))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- yanmorinokamca @yanmorinokamca
+
+## 1.25.4 (2024-07-08)
+
+
+### 🩹 Fixes
+
+- **publish:** add building packages step to workflow ([c9ce442](https://github.com/OKAMca/stack/commit/c9ce442))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
+## 1.25.3 (2024-07-05)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
+## [1.25.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.25.1...stack-ui-v1.25.2) (2024-06-28)
+
+
+### Bug Fixes
+
+* all carousel elements are stylable ([#138](https://github.com/OKAMca/stack/issues/138)) ([6c7db7e](https://github.com/OKAMca/stack/commit/6c7db7eb61553041bb94356a43c84aea7fb44bda))
+
+## [1.25.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.25.0...stack-ui-v1.25.1) (2024-06-25)
+
+
+### Bug Fixes
+
+* alerts semantic html to theme components ([#131](https://github.com/OKAMca/stack/issues/131)) ([00c39ef](https://github.com/OKAMca/stack/commit/00c39ef339d7b597575f74d821c0eb3f4befecc4))
+* **block-directus:** add server only to get block props ([330e76f](https://github.com/OKAMca/stack/commit/330e76f7fee53634bfb991e813060f0e8f1a0cb6))
+
+# [1.25.0](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.3...stack-ui-v1.25.0) (2024-06-17)
+
+
+### Features
+
+* export carousel ([45fb2ef](https://github.com/OKAMca/stack/commit/45fb2ef6a4b77fb214e62dfaefde2819b0f7d870))
+
+## [1.24.3](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.2...stack-ui-v1.24.3) (2024-06-14)
+
+
+### Bug Fixes
+
+* add missing tokens ([9a5d3c0](https://github.com/OKAMca/stack/commit/9a5d3c084925d2e3ff12025004c745d804809235))
+* alert slide theme ([ba199b1](https://github.com/OKAMca/stack/commit/ba199b1a748b9e2cc8038a1c22cc6802426e0e00))
+
+## [1.24.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.1...stack-ui-v1.24.2) (2024-06-14)
+
+
+### Bug Fixes
+
+* a11y on pagination for alerts ([853fa74](https://github.com/OKAMca/stack/commit/853fa74cd953598569d02e69f6fd985cf8d314e9))
+* aria labelled by ([6380791](https://github.com/OKAMca/stack/commit/63807918a253462211c35f1119acff64c093027d))
+* missing a11y pagination features ([3a5b774](https://github.com/OKAMca/stack/commit/3a5b774713a477a311d43c3381a06b411d9efddc))
+
 ## [1.24.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.24.0...stack-ui-v1.24.1) (2024-06-11)
 
 

@@ -3,6 +3,7 @@
 import * as path from 'path'
 import MillionLint from '@million/lint'
 import react from '@vitejs/plugin-react'
+import preserveDirectives from 'rollup-plugin-preserve-directives'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
@@ -47,6 +48,9 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
+      output: {
+        preserveModules: true,
+      },
       external: externalDeps,
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
@@ -54,6 +58,7 @@ export default defineConfig({
         }
         warn(warning)
       },
+      plugins: [preserveDirectives()],
     },
   },
 })

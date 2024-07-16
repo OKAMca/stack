@@ -1,12 +1,16 @@
 import { useRef, useState } from 'react'
+import slugify from 'slugify'
 import * as swiperModules from 'swiper/modules'
+import type { SwiperClass } from 'swiper/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { AlertsControllerContextProvider } from '../../../providers/Alerts'
 import useThemeContext from '../../../providers/Theme/hooks'
 import type { TAlertsComponentProps, TAlertsProps } from '../interface'
 import AlertsItem from './AlertsItem'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import { AlertsNextNavigationButton, AlertsPrevNavigationButton } from './AlertsNavigationButton'
+import AlertsPagination from './pagination/AlertsPagination'
 
 const AlertsSwiper = (props: TAlertsProps) => {
   const {
@@ -30,23 +34,27 @@ const AlertsSwiper = (props: TAlertsProps) => {
     itemRoleDescriptionMessage = 'slide',
     slideRole = 'group',
     containerRoleDescriptionMessage = 'carousel',
+    paginationGroupLabel = 'pagination',
   } = a11y ?? {}
 
   const itemWrapperTheme = useThemeContext(`${themeName}.item.wrapper`, tokens, customTheme)
   const swiperTheme = useThemeContext(`${themeName}.swiper.swiper`, tokens, customTheme)
   const swiperWrapperTheme = useThemeContext(`${themeName}.swiper.wrapper`, tokens, customTheme)
-  const paginationWrapperTheme = useThemeContext(`${themeName}.pagination.wrapper`, tokens)
-  const paginationBulletTheme = useThemeContext(`${themeName}.pagination.bullet`, tokens) ?? 'swiper-pagination-bullet'
-  const paginationActiveBulletTheme = useThemeContext(`${themeName}.pagination.activeBullet`, tokens)
 
-  const defaultModules: TAlertsComponentProps['modules'] = ['Keyboard', 'A11y']
+  const defaultModules: TAlertsComponentProps['modules'] = ['A11y']
 
-  const importedModules = [...(modules ?? []), ...defaultModules].map((module) => swiperModules[module])
+  const importedModules = [...(modules?.filter((module) => module !== 'Pagination') ?? []), ...defaultModules].map(
+    (module) => swiperModules[module],
+  )
 
   const hasNavigation = modules?.includes('Navigation')
+  const hasPagination = modules?.includes('Pagination')
+
+  const [controller, setController] = useState<SwiperClass>()
+  const [activeIndex, setActiveIndex] = useState<number>(0)
 
   return (
-    <>
+    <AlertsControllerContextProvider controller={controller}>
       {hasNavigation && (
         <PrevButton
           themeName={`${themeName}.navigation.button`}
@@ -63,16 +71,23 @@ const AlertsSwiper = (props: TAlertsProps) => {
           aria-label={a11y?.nextSlideMessage}
         />
       )}
+      {hasPagination && (
+        <AlertsPagination
+          themeName={`${themeName}.pagination`}
+          tokens={tokens}
+          activeIndex={activeIndex}
+          alerts={alerts}
+          paginationGroupLabel={paginationGroupLabel}
+        />
+      )}
       <Swiper
         tabIndex={0}
         {...rest}
-        navigation={{ prevEl: prevButtonRef.current, nextEl: nextButtonRef.current }}
-        pagination={{
-          bulletClass: paginationBulletTheme,
-          clickableClass: paginationWrapperTheme,
-          bulletActiveClass: paginationActiveBulletTheme,
-          clickable: true,
+        onSwiper={(c) => {
+          setController(c)
+          setActiveIndex(c.activeIndex)
         }}
+        onSlideChange={(c) => setActiveIndex(c.activeIndex)}
         role="group"
         aria-roledescription={containerRoleDescriptionMessage ?? undefined}
         slidesPerView={slidesPerView}
@@ -94,6 +109,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
               key={id}
               className={itemWrapperTheme}
               {...(title ? { 'aria-labelledby': id } : { 'aria-label': ariaLabel })}
+              {...{ id: slugify(`${id}-${title}`) }}
               role={slideRole}
               aria-roledescription={itemRoleDescriptionMessage ?? undefined}
             >
@@ -102,7 +118,7 @@ const AlertsSwiper = (props: TAlertsProps) => {
           )
         })}
       </Swiper>
-    </>
+    </AlertsControllerContextProvider>
   )
 }
 

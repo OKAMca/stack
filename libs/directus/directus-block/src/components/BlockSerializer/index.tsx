@@ -5,13 +5,16 @@ import type { TBlockSerializerProps } from './interface'
 const BlockSerializer = (props: TBlockSerializerProps) => {
   const { item, collection, config, variables, defaultVariant, ...rest } = props
 
-  if (!collection || !item || !config) return null
+  if (!collection || !config) return null
 
   const blockConfig = config?.components?.[collection]
 
   if (!blockConfig) return null
 
-  const { id, settings } = item
+  const { settings } = item ?? {}
+  const id = item?.id ?? variables?.id
+
+  if (!id) return null
 
   const { variant } = getFragment(BlockSettingsFragmentDoc, settings) ?? {}
 

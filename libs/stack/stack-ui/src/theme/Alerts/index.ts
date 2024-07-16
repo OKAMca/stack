@@ -7,7 +7,7 @@ const alertsWrapper = tv({
 })
 
 const alertsContainer = tv({
-  base: 'flex justify-between items-center gap-4',
+  base: 'flex justify-between items-center gap-4 relative',
 })
 
 const alertsCloseBtn = tv({
@@ -57,15 +57,17 @@ const alertsNavigationButton = tv({
 })
 
 const alertsPaginationWrapper = tv({
-  base: 'flex gap-4 justify-center',
+  base: 'flex gap-4 justify-center absolute z-10 bottom-4 left-0 right-0',
 })
 
 const alertsPaginationBullet = tv({
-  base: 'w-4 h-4 rounded-full block bg-color-1-600',
-})
-
-const alertsPaginationActiveBullet = tv({
-  base: '!bg-color-1-100',
+  base: 'w-4 h-4 rounded-full block bg-color-1-600 focus-ring-black',
+  variants: {
+    active: {
+      true: 'bg-color-1-100',
+      false: '',
+    },
+  },
 })
 
 const alertsTheme = {
@@ -89,7 +91,6 @@ const alertsTheme = {
   pagination: {
     wrapper: alertsPaginationWrapper,
     bullet: alertsPaginationBullet,
-    activeBullet: alertsPaginationActiveBullet,
   },
 }
 

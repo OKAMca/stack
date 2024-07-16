@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from 'react'
-import type { DetailedHTMLProps, HTMLAttributes } from 'react'
+import type { HTMLAttributes } from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TCustomTheme, TToken } from '../providers/Theme/interface'
 

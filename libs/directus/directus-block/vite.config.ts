@@ -36,16 +36,18 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: ['src/index.ts', 'src/server.ts'],
       name: 'directus-block',
       fileName: 'index',
+
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: externalDeps,
+      external: [...externalDeps, '@okam/stack-ui'],
     },
+    ssr: true,
   },
 })
