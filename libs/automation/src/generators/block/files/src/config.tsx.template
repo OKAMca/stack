@@ -1,10 +1,10 @@
 import type { TBlockSerializerConfigComponent } from '@okam/directus-block'
-import BlockWysiwyg from '.'
+import <%= componentName %> from '.'
 
-const blockWysiwygConfig: TBlockSerializerConfigComponent = {
-  block_wysiwyg: {
-    default: (props) => <BlockWysiwyg {...props} />,
+const <%= variableName %>Config: TBlockSerializerConfigComponent = {
+  <%= snakeName %>: {
+    default: (props) => <<%= componentName %> {...props} />,
   },
 }
 
-export default blockWysiwygConfig
+export default <%= variableName %>Config

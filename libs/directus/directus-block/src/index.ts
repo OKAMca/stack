@@ -16,6 +16,7 @@ export type {
 
 // Blocks
 export { default as BlockWysiwyg } from './blocks/BlockWysiwyg'
+export { default as useBlock } from './hooks/useBlock'
 
 // Configs
 export { default as blockWysiwygConfig } from './blocks/BlockWysiwyg/config'

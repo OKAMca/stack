@@ -7,7 +7,15 @@ import type { BlockGeneratorSchema } from './schema'
 
 describe('block generator', () => {
   let tree: Tree
-  const options: BlockGeneratorSchema = { name: 'test', path: '/' }
+  const options: BlockGeneratorSchema = {
+    name: 'BlockTest',
+    path: '/',
+    snakeName: 'block_test',
+    componentName: 'BlockTest',
+    type: 'IBlockTestFragment',
+    variableName: 'blockTest',
+    key: 'block_test_by_id',
+  }
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace()
@@ -15,7 +23,7 @@ describe('block generator', () => {
 
   it('should run successfully', async () => {
     await blockGenerator(tree, options)
-    const config = readProjectConfiguration(tree, 'test')
+    const config = readProjectConfiguration(tree, 'block')
     expect(config).toBeDefined()
   })
 })

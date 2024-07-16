@@ -1,38 +1,22 @@
-import { Box, WysiwygBlock } from '@okam/stack-ui'
+import { Box } from '@okam/stack-ui'
 import React from 'react'
-import type { TBlockSerializerProps } from '../../components/BlockSerializer/interface'
-import { BlockSettingsFragmentDoc } from '@okam/generated/graphql'
-import type { BlockWysiwygFragment } from './interface'
-import { getBlockProps, getFragment } from '@okam/directus-block';
+import type { TBlockSerializerProps } from '@okam/directus-block'
+import { useBlock } from '@okam/directus-block'
+import type { <%= type %> } from './interface'
 
 const <%= componentName %> = async (props: TBlockSerializerProps<<%= type %>>) => {
-  const { variables, themeName = 'wysiwyg', tokens, item, document } = props
+  const key = '<%= key %>'
+  const { themeName = '<%= snakeName %>', tokens } = props
+  const { id, cmsTokens } = await useBlock<<%= type %>>(props, key)
 
-  const propsWithFallback = await getBlockProps({
-    item,
-    blockKey: 'block_wysiwyg_by_id',
-    document,
-    variables,
-  })
-
-  if (!propsWithFallback) return null
-
-  const { content, title, level, settings } = propsWithFallback
-
-  const { tokens: cmsTokens } = getFragment(BlockSettingsFragmentDoc, settings) ?? {}
-
-  if (!content && !(title && level)) return null
+  if (!id) return null
 
   return (
-    <Box>
-      {title && level && (
-        <Box as="span" themeName={themeName} tokens={{ ...tokens, ...cmsTokens }}>
-          {React.createElement(level, {}, title)}
-        </Box>
-      )}
-      {content && <WysiwygBlock themeName={themeName} tokens={{ ...tokens, ...cmsTokens }} content={content} />}
+    <Box as="span" themeName={themeName} tokens={{ ...tokens, ...cmsTokens }}>
+      {"Hello world with id:"}
+      {id}
     </Box>
   )
 }
 
-export default BlockWysiwyg
+export default <%= componentName %>
