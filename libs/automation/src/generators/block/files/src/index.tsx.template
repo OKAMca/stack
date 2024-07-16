@@ -5,7 +5,7 @@ import { BlockSettingsFragmentDoc } from '@okam/generated/graphql'
 import type { BlockWysiwygFragment } from './interface'
 import { getBlockProps, getFragment } from '@okam/directus-block';
 
-const BlockWysiwyg = async (props: TBlockSerializerProps<BlockWysiwygFragment>) => {
+const <%= componentName %> = async (props: TBlockSerializerProps<<%= type %>>) => {
   const { variables, themeName = 'wysiwyg', tokens, item, document } = props
 
   const propsWithFallback = await getBlockProps({

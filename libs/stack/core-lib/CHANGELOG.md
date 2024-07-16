@@ -1,3 +1,17 @@
+## [1.13.3](https://github.com/OKAMca/stack/compare/core-lib-v1.13.2...core-lib-v1.13.3) (2024-06-25)
+
+
+### Bug Fixes
+
+* **block-directus:** add server only to get block props ([330e76f](https://github.com/OKAMca/stack/commit/330e76f7fee53634bfb991e813060f0e8f1a0cb6))
+
+## [1.13.2](https://github.com/OKAMca/stack/compare/core-lib-v1.13.1...core-lib-v1.13.2) (2024-06-14)
+
+
+### Bug Fixes
+
+* aria labelled by ([6380791](https://github.com/OKAMca/stack/commit/63807918a253462211c35f1119acff64c093027d))
+
 ## [1.13.1](https://github.com/OKAMca/stack/compare/core-lib-v1.13.0...core-lib-v1.13.1) (2024-06-11)
 
 

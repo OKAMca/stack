@@ -7,3 +7,4 @@
 **/build/**
 **/tmp/**
 **/node_modules/**
+/.nx/workspace-data

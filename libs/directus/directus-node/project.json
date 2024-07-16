@@ -3,32 +3,59 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-node/src",
   "projectType": "library",
+<<<<<<< HEAD
   "tags": [],
+=======
+  "tags": [
+    "publishable"
+  ],
+>>>>>>> 404c68fceb9facc62d8f4f5effb5e41a9b007ce9
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/directus/directus-node",
         "tsConfig": "libs/directus/directus-node/tsconfig.lib.json",
         "packageJson": "libs/directus/directus-node/package.json",
         "main": "libs/directus/directus-node/src/index.ts",
-        "assets": ["libs/directus/directus-node/*.md"]
+        "assets": [
+          "libs/directus/directus-node/*.md"
+        ]
       }
     },
     "publish": {
       "command": "node tools/scripts/publish.mjs directus-node {args.ver} {args.tag}",
-      "dependsOn": ["build"]
+      "dependsOn": [
+        "build"
+      ]
     },
     "lint": {
       "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "libs/directus/directus-node/jest.config.ts"
       }
+<<<<<<< HEAD
     }
   }
 }
+=======
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/libs/directus/directus-node"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
+  }
+}
+>>>>>>> 404c68fceb9facc62d8f4f5effb5e41a9b007ce9

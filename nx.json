@@ -1,10 +1,38 @@
 {
+  "release": {
+    "projects": [
+      "stack-ui",
+      "core-lib",
+      "next-component",
+      "directus-node",
+      "directus-query",
+      "directus-block",
+      "directus-next-component",
+      "directus-flexible-content"
+    ],
+    "releaseTagPattern": "{projectName}-v{version}",
+    "projectsRelationship": "independent",
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    },
+    "version": {
+      "conventionalCommits": true
+    }
+  },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ],
         "accessToken": "ZjIyMjRhNDAtMDQ4MS00ZmU2LWExYzktOGQ0ZDU0MWYzYTI4fHJlYWQ="
       }
     }
@@ -59,6 +87,22 @@
         "{workspaceRoot}/.eslintignore"
       ],
       "cache": true
+    },
+    "project-dry-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx release --projects={projectName} --dry-run"
+        ]
+      }
+    },
+    "project-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx release --projects={projectName}"
+        ]
+      }
     }
   },
   "namedInputs": {

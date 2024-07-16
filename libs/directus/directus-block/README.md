@@ -10,10 +10,15 @@ Run `nx build directus-block` to build the library.
 
 ### Dispatcher
 
-This component will loop over every block it is sent and call the Serializer. It is possible to wrap children in any component by passing a function to children, just like so:
+#### Props
+
+- config: Configuration the block dispatcher will use. This configuration will get merged with the base config of directus-block. In case of overrides, the passed configuration will always win over the directus-block configuration.
+- blocks: Array of `TBlockSerializerProps` containing the actual blocks data. This is the prop that will be used by the block dispatcher to iterate through its children.
+- block: In case you want to pass a single block
+- children: Function receiving the current block `TBlockSerializerProps` as props. Will use BlockSerializer alone by default. This is useful in scenarios where you want every block to be wrapped in other components:
 
 ```tsx
-  <BlockDispatcher config={baseBlockDispatcherConfig}>
+  <BlockDispatcher config={baseBlockDispatcherConfig} blocks={blocks}>
     {(block) => (
       <Container tokens={{ isLowestContainerLevel: true }}>
         <ErrorBoundary fallback={<ErrorFallback />}>
@@ -26,13 +31,17 @@ This component will loop over every block it is sent and call the Serializer. It
 
 This would allow to remove a lot of repetitive code accross blocks definitions, for example as they all need to be wrapped in a `Container` and an `ErrorBoundary`
 
-If no children are passed, the Dispatcher will map every block using only the Serializer component.
-
 ### Serializer
 
 This component calls the good component in the configuration from the `collection` prop
 
-### Configuration
+#### Props
+
+- item: The block's data. Can either contain just the block's `id`, be null (in that case, the `id` will need to be sent using the block's variables). If `item` only contains the id, it will be sent to the variables for making the query
+- variables: The block's variables. Passing the id is necessary
+- document: Can also be passed in the config. The document that will be used to make a query
+
+## Configuration
 
 A configuration uses the `components` prop to map a key value, like so:
 
@@ -56,7 +65,7 @@ const config = {
 }
 ```
 
-#### Props
+### Props
 
 - default: The default component if no variants/invalid variants are used
 - defaultVariant: Overrides the default use of the `default` prop, instead mapping the default component on a specific variant
@@ -82,7 +91,7 @@ const brandConfig = {
 <BlockDispatcher config={brandConfig} />
 ```
 
-#### Overriding the configuration with brand blocks
+### Overriding the configuration with brand blocks
 
 To override the base block dispatcher configuration, you name a block component configuration with the same key as the ones in the configuration.
 
@@ -140,7 +149,7 @@ const brandConfig = {
 <BlockDispatcher config={brandConfig} />
 ```
 
-#### Extending the configuration with stack blocks
+### Extending the configuration with stack blocks
 
 Some blocks may be in the Stack without being in the base configuration. To use them, simply import their own configuration from the stack and spread them in yours
 

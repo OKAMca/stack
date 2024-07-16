@@ -1,12 +1,16 @@
 {
   "name": "@okam/directus-block",
+  "version": "1.2.3",
   "main": "./index.js",
-  "version": "1.0.0",
   "types": "./index.d.ts",
   "exports": {
     ".": {
       "import": "./index.mjs",
       "require": "./index.js"
+    },
+    "./server": {
+      "import": "./server.mjs",
+      "require": "./server.js"
     }
   },
   "publishConfig": {
