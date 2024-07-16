@@ -3,13 +3,9 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-node/src",
   "projectType": "library",
-<<<<<<< HEAD
-  "tags": [],
-=======
   "tags": [
     "publishable"
   ],
->>>>>>> 404c68fceb9facc62d8f4f5effb5e41a9b007ce9
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
@@ -43,11 +39,6 @@
       "options": {
         "jestConfig": "libs/directus/directus-node/jest.config.ts"
       }
-<<<<<<< HEAD
-    }
-  }
-}
-=======
     },
     "nx-release-publish": {
       "options": {
@@ -58,4 +49,3 @@
     "project-release": {}
   }
 }
->>>>>>> 404c68fceb9facc62d8f4f5effb5e41a9b007ce9
