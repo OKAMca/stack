@@ -18,6 +18,9 @@ export default async function Index() {
       related_block_faqs: {
         default: (props) => <Box>Related Block FAQ</Box>,
       },
+      block_quote: {
+        default: (props) => <Box>Block Quotes</Box>,
+      },
     },
   }
 
