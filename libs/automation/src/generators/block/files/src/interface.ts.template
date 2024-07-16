@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import type { BlockSettingsFragment } from '../../generated/graphql'
 
-export type BlockWysiwygFragment = {
-  __typename?: 'block_wysiwyg'
-  title?: string | null
-  content?: string | null
-  level?: string | null
-  variant?: string | null
+export type <%= type %> = {
+  __typename?: '<%= snakeName %>'
+  id?: Nullable<string>
   settings?:
     | ({ __typename?: 'block_settings' } & { ' $fragmentRefs'?: { BlockSettingsFragment: BlockSettingsFragment } })
     | null
-} & { ' $fragmentName'?: 'BlockWysiwygFragment' }
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+} & { ' $fragmentName'?: '<%= type %>' }

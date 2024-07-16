@@ -7,7 +7,7 @@ import type { ComponentGeneratorSchema } from './schema'
 
 describe('component generator', () => {
   let tree: Tree
-  const options: ComponentGeneratorSchema = { name: 'test' }
+  const options: ComponentGeneratorSchema = { name: 'test', path: '/' }
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace()
@@ -15,7 +15,7 @@ describe('component generator', () => {
 
   it('should run successfully', async () => {
     await componentGenerator(tree, options)
-    const config = readProjectConfiguration(tree, 'test')
+    const config = readProjectConfiguration(tree, 'component')
     expect(config).toBeDefined()
   })
 })
