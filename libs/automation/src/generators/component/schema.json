@@ -11,7 +11,8 @@
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What name would you like to use?",
+      "default": "MyComponent"
     },
     "path": {
       "type": "string",
@@ -20,7 +21,7 @@
         "$source": "argv",
         "index": 1
       },
-      "default": "libs/brand-ui/src/components",
+      "default": "libs/ui/src/components",
       "x-prompt": "File path from root"
     }
   },

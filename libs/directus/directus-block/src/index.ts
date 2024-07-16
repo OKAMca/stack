@@ -1,3 +1,5 @@
+export type { BlockSettingsFragment } from './generated/graphql'
+
 // Types
 export type { TBlockDispatcherProps } from './components/BlockDispatcher/interface'
 export type {

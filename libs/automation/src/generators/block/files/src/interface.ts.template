@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { BlockSettingsFragment } from '../../generated/graphql'
+import type { Nullable } from '@okam/stack-ui'
+import type { BlockSettingsFragment } from '@okam/directus-block'
 
 export type <%= type %> = {
   __typename?: '<%= snakeName %>'

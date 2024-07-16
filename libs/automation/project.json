@@ -3,7 +3,9 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/automation/src",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
@@ -46,6 +48,13 @@
       "options": {
         "jestConfig": "libs/automation/jest.config.ts"
       }
-    }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/libs/automation"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
   }
 }
