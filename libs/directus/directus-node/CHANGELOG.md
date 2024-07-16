@@ -1,3 +1,17 @@
+## 0.1.2 (2024-07-16)
+
+
+### 🩹 Fixes
+
+- **directus-node:** fix package.json with published structured reference ([#153](https://github.com/OKAMca/stack/pull/153))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Pierre-Olivier Clerson @poclerson
+- yanmorinokamca @yanmorinokamca
+
 ## 0.1.1 (2024-07-09)
 
 
