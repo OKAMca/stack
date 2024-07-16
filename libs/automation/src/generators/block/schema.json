@@ -11,7 +11,18 @@
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What name would you like to use?",
+      "default": "BlockName"
+    },
+    "path": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "default": "libs/blocks/src/components",
+      "x-prompt": "File path from root"
     }
   },
   "required": ["name"]

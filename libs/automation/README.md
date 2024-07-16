@@ -2,10 +2,17 @@
 
 This library was generated with [Nx](https://nx.dev).
 
-## Building
+## usage
 
-Run `nx build automation` to build the library.
+install library
 
-## Running unit tests
+```bash
+npm install @okam/automation
+```
 
-Run `nx test automation` to execute the unit tests via [Jest](https://jestjs.io).
+use generators
+
+```bash
+npx nx generate @okam/automation:block
+
+npx nx generate @okam/automation:component

@@ -9,6 +9,11 @@
       "factory": "./src/generators/component/generator",
       "schema": "./src/generators/component/schema.json",
       "description": "component generator"
+    },
+    "block": {
+      "factory": "./src/generators/block/generator",
+      "schema": "./src/generators/block/schema.json",
+      "description": "block generator"
     }
   }
 }
