@@ -1,4 +1,3 @@
-import { randomUUID } from 'node:crypto'
 import type { TBlockSerializerConfig } from '@okam/directus-block'
 import { BlockDispatcher } from '@okam/directus-block/server'
 import type { TDefaultComponent } from '@okam/stack-ui'
@@ -37,14 +36,14 @@ const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
       if (attrs?.data) {
         if (!attrs?.data?.blocks) {
           const properBlock = { collection: attrs.collection, item: { ...attrs?.data } }
-          return <BlockDispatcher key={randomUUID()} block={properBlock} config={config} />
+          return <BlockDispatcher key={JSON.stringify(properBlock)} block={properBlock} config={config} />
         }
         const items = attrs?.data?.blocks
         const blocks = items?.map((item) => {
           const properItem = item?.[blockKey] as Record<string, unknown>
           return { item: properItem, collection: attrs?.collection }
         })
-        return <BlockDispatcher key={randomUUID()} blocks={blocks} config={config} />
+        return <BlockDispatcher key={JSON.stringify(items)} blocks={blocks} config={config} />
       }
       return null
     },
