@@ -214,10 +214,6 @@ export type Query = {
   related_block_faqs_block_faqs_by_version?: Maybe<Version_Related_Block_Faqs_Block_Faqs>;
   related_block_faqs_by_id?: Maybe<Related_Block_Faqs>;
   related_block_faqs_by_version?: Maybe<Version_Related_Block_Faqs>;
-  related_block_faqs_related_block_faqs: Array<Related_Block_Faqs_Related_Block_Faqs>;
-  related_block_faqs_related_block_faqs_aggregated: Array<Related_Block_Faqs_Related_Block_Faqs_Aggregated>;
-  related_block_faqs_related_block_faqs_by_id?: Maybe<Related_Block_Faqs_Related_Block_Faqs>;
-  related_block_faqs_related_block_faqs_by_version?: Maybe<Version_Related_Block_Faqs_Related_Block_Faqs>;
   seo: Array<Seo>;
   seo_aggregated: Array<Seo_Aggregated>;
   seo_by_id?: Maybe<Seo>;
@@ -1436,38 +1432,6 @@ export type QueryRelated_Block_Faqs_By_VersionArgs = {
 };
 
 
-export type QueryRelated_Block_Faqs_Related_Block_FaqsArgs = {
-  filter?: InputMaybe<Related_Block_Faqs_Related_Block_Faqs_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type QueryRelated_Block_Faqs_Related_Block_Faqs_AggregatedArgs = {
-  filter?: InputMaybe<Related_Block_Faqs_Related_Block_Faqs_Filter>;
-  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type QueryRelated_Block_Faqs_Related_Block_Faqs_By_IdArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type QueryRelated_Block_Faqs_Related_Block_Faqs_By_VersionArgs = {
-  id: Scalars['ID']['input'];
-  version: Scalars['String']['input'];
-};
-
-
 export type QuerySeoArgs = {
   filter?: InputMaybe<Seo_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -1640,7 +1604,6 @@ export type Subscription = {
   redirects_mutated?: Maybe<Redirects_Mutated>;
   related_block_faqs_block_faqs_mutated?: Maybe<Related_Block_Faqs_Block_Faqs_Mutated>;
   related_block_faqs_mutated?: Maybe<Related_Block_Faqs_Mutated>;
-  related_block_faqs_related_block_faqs_mutated?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Mutated>;
   seo_mutated?: Maybe<Seo_Mutated>;
   team_mutated?: Maybe<Team_Mutated>;
   testimonials_mutated?: Maybe<Testimonials_Mutated>;
@@ -1859,11 +1822,6 @@ export type SubscriptionRelated_Block_Faqs_Block_Faqs_MutatedArgs = {
 
 
 export type SubscriptionRelated_Block_Faqs_MutatedArgs = {
-  event?: InputMaybe<EventEnum>;
-};
-
-
-export type SubscriptionRelated_Block_Faqs_Related_Block_Faqs_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -4478,6 +4436,8 @@ export type Pages_Projects_Mutated = {
 
 export type Pages_Translations = {
   __typename?: 'pages_translations';
+  block_editor?: Maybe<Scalars['JSON']['output']>;
+  block_editor_func?: Maybe<Count_Functions>;
   editor_nodes?: Maybe<Array<Maybe<Page_Editor_Nodes>>>;
   editor_nodes_func?: Maybe<Count_Functions>;
   flexible_editor?: Maybe<Scalars['JSON']['output']>;
@@ -4523,6 +4483,7 @@ export type Pages_Translations_Aggregated = {
 
 export type Pages_Translations_Aggregated_Count = {
   __typename?: 'pages_translations_aggregated_count';
+  block_editor?: Maybe<Scalars['Int']['output']>;
   editor_nodes?: Maybe<Scalars['Int']['output']>;
   flexible_editor?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
@@ -4538,6 +4499,8 @@ export type Pages_Translations_Aggregated_Fields = {
 export type Pages_Translations_Filter = {
   _and?: InputMaybe<Array<InputMaybe<Pages_Translations_Filter>>>;
   _or?: InputMaybe<Array<InputMaybe<Pages_Translations_Filter>>>;
+  block_editor?: InputMaybe<String_Filter_Operators>;
+  block_editor_func?: InputMaybe<Count_Function_Filter_Operators>;
   editor_nodes?: InputMaybe<Page_Editor_Nodes_Filter>;
   editor_nodes_func?: InputMaybe<Count_Function_Filter_Operators>;
   flexible_editor?: InputMaybe<String_Filter_Operators>;
@@ -4983,76 +4946,6 @@ export type Related_Block_Faqs_Filter = {
 export type Related_Block_Faqs_Mutated = {
   __typename?: 'related_block_faqs_mutated';
   data?: Maybe<Related_Block_Faqs>;
-  event?: Maybe<EventEnum>;
-  key: Scalars['ID']['output'];
-};
-
-export type Related_Block_Faqs_Related_Block_Faqs = {
-  __typename?: 'related_block_faqs_related_block_faqs';
-  id: Scalars['ID']['output'];
-  related_block_faqs_id?: Maybe<Related_Block_Faqs>;
-  related_related_block_faqs_id?: Maybe<Related_Block_Faqs>;
-};
-
-
-export type Related_Block_Faqs_Related_Block_FaqsRelated_Block_Faqs_IdArgs = {
-  filter?: InputMaybe<Related_Block_Faqs_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type Related_Block_Faqs_Related_Block_FaqsRelated_Related_Block_Faqs_IdArgs = {
-  filter?: InputMaybe<Related_Block_Faqs_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type Related_Block_Faqs_Related_Block_Faqs_Aggregated = {
-  __typename?: 'related_block_faqs_related_block_faqs_aggregated';
-  avg?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Aggregated_Fields>;
-  avgDistinct?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Aggregated_Fields>;
-  count?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Aggregated_Count>;
-  countAll?: Maybe<Scalars['Int']['output']>;
-  countDistinct?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Aggregated_Count>;
-  group?: Maybe<Scalars['JSON']['output']>;
-  max?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Aggregated_Fields>;
-  min?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Aggregated_Fields>;
-  sum?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Aggregated_Fields>;
-  sumDistinct?: Maybe<Related_Block_Faqs_Related_Block_Faqs_Aggregated_Fields>;
-};
-
-export type Related_Block_Faqs_Related_Block_Faqs_Aggregated_Count = {
-  __typename?: 'related_block_faqs_related_block_faqs_aggregated_count';
-  id?: Maybe<Scalars['Int']['output']>;
-  related_block_faqs_id?: Maybe<Scalars['Int']['output']>;
-  related_related_block_faqs_id?: Maybe<Scalars['Int']['output']>;
-};
-
-export type Related_Block_Faqs_Related_Block_Faqs_Aggregated_Fields = {
-  __typename?: 'related_block_faqs_related_block_faqs_aggregated_fields';
-  id?: Maybe<Scalars['Float']['output']>;
-  related_block_faqs_id?: Maybe<Scalars['Float']['output']>;
-  related_related_block_faqs_id?: Maybe<Scalars['Float']['output']>;
-};
-
-export type Related_Block_Faqs_Related_Block_Faqs_Filter = {
-  _and?: InputMaybe<Array<InputMaybe<Related_Block_Faqs_Related_Block_Faqs_Filter>>>;
-  _or?: InputMaybe<Array<InputMaybe<Related_Block_Faqs_Related_Block_Faqs_Filter>>>;
-  id?: InputMaybe<Number_Filter_Operators>;
-  related_block_faqs_id?: InputMaybe<Related_Block_Faqs_Filter>;
-  related_related_block_faqs_id?: InputMaybe<Related_Block_Faqs_Filter>;
-};
-
-export type Related_Block_Faqs_Related_Block_Faqs_Mutated = {
-  __typename?: 'related_block_faqs_related_block_faqs_mutated';
-  data?: Maybe<Related_Block_Faqs_Related_Block_Faqs>;
   event?: Maybe<EventEnum>;
   key: Scalars['ID']['output'];
 };
@@ -5795,6 +5688,8 @@ export type Version_Pages_Projects = {
 
 export type Version_Pages_Translations = {
   __typename?: 'version_pages_translations';
+  block_editor?: Maybe<Scalars['JSON']['output']>;
+  block_editor_func?: Maybe<Count_Functions>;
   editor_nodes?: Maybe<Scalars['JSON']['output']>;
   editor_nodes_func?: Maybe<Count_Functions>;
   flexible_editor?: Maybe<Scalars['JSON']['output']>;
@@ -5871,13 +5766,6 @@ export type Version_Related_Block_Faqs_Block_Faqs = {
   block_faqs_id?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   related_block_faqs_id?: Maybe<Scalars['Int']['output']>;
-};
-
-export type Version_Related_Block_Faqs_Related_Block_Faqs = {
-  __typename?: 'version_related_block_faqs_related_block_faqs';
-  id: Scalars['ID']['output'];
-  related_block_faqs_id?: Maybe<Scalars['Int']['output']>;
-  related_related_block_faqs_id?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Version_Seo = {
@@ -6025,7 +5913,7 @@ export type Versioning_Example_Mutated = {
 export type PagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PagesQuery = { __typename?: 'Query', pages: Array<{ __typename?: 'pages', title?: string | null, translations?: Array<{ __typename?: 'pages_translations', languages_code?: string | null, flexible_editor?: any | null, editor_nodes?: Array<{ __typename?: 'page_editor_nodes', id: string, collection?: string | null, pages_translations_id?: { __typename?: 'pages_translations', languages_code?: string | null } | null, item?: { __typename?: 'block_button', color?: string | null, date_created?: any | null, date_updated?: any | null, external_url?: string | null, id: string, label?: string | null, sort?: number | null, type?: string | null, user_created?: string | null, user_updated?: string | null, variant?: string | null } | { __typename?: 'block_quote', content?: string | null, id: string, subtitle?: string | null, title?: string | null } | { __typename?: 'related_block_faqs', id: string, blocks?: Array<{ __typename?: 'related_block_faqs_block_faqs', id: string, item?: { __typename?: 'block_faqs', alignment?: string | null, faqs?: any | null, headline?: string | null, id: string, title?: string | null } | null } | null> | null } | null } | null> | null } | null> | null }> };
+export type PagesQuery = { __typename?: 'Query', pages: Array<{ __typename?: 'pages', title?: string | null, translations?: Array<{ __typename?: 'pages_translations', languages_code?: string | null, flexible_editor?: any | null, editor_nodes?: Array<{ __typename?: 'page_editor_nodes', id: string, collection?: string | null, pages_translations_id?: { __typename?: 'pages_translations', languages_code?: string | null } | null, item?: { __typename?: 'block_button', color?: string | null, date_created?: any | null, date_updated?: any | null, external_url?: string | null, id: string, label?: string | null, sort?: number | null, type?: string | null, user_created?: string | null, user_updated?: string | null, variant?: string | null } | { __typename?: 'block_quote', content?: string | null, id: string, subtitle?: string | null, title?: string | null } | { __typename?: 'related_block_faqs', id: string, blocks?: Array<{ __typename?: 'related_block_faqs_block_faqs', id: string, block_faqs_id?: { __typename?: 'block_faqs', alignment?: string | null, faqs?: any | null, headline?: string | null, id: string, title?: string | null } | null } | null> | null } | null } | null> | null } | null> | null }> };
 
 
-export const PagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"}},{"kind":"Field","name":{"kind":"Name","value":"flexible_editor"}},{"kind":"Field","name":{"kind":"Name","value":"editor_nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pages_translations_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"collection"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"block_quote"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"block_button"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"external_url"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"sort"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"user_created"}},{"kind":"Field","name":{"kind":"Name","value":"user_updated"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"related_block_faqs"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"blocks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","alias":{"kind":"Name","value":"item"},"name":{"kind":"Name","value":"block_faqs_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alignment"}},{"kind":"Field","name":{"kind":"Name","value":"faqs"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<PagesQuery, PagesQueryVariables>;
+export const PagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"}},{"kind":"Field","name":{"kind":"Name","value":"flexible_editor"}},{"kind":"Field","name":{"kind":"Name","value":"editor_nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pages_translations_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"collection"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"block_quote"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"block_button"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"external_url"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"sort"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"user_created"}},{"kind":"Field","name":{"kind":"Name","value":"user_updated"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"related_block_faqs"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"blocks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"block_faqs_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alignment"}},{"kind":"Field","name":{"kind":"Name","value":"faqs"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<PagesQuery, PagesQueryVariables>;
