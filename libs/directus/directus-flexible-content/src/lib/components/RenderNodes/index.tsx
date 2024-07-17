@@ -1,4 +1,3 @@
-import { randomUUID } from 'node:crypto'
 import type { TDefaultComponent } from '@okam/stack-ui'
 import { Box } from '@okam/stack-ui'
 import type { FunctionComponent } from 'react'
@@ -52,7 +51,7 @@ const RenderNodes: FunctionComponent<RenderNodesProps> = (props) => {
 
       return (
         <Box
-          key={randomUUID()}
+          key={JSON.stringify(children)}
           as={tag}
           {...mappedAttributes}
           themeName={themeName}
