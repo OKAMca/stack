@@ -1,3 +1,20 @@
+## 1.26.0 (2024-07-17)
+
+
+### 🚀 Features
+
+- **stack-ui:** added focal point props ([abab9b1](https://github.com/OKAMca/stack/commit/abab9b1))
+
+
+### 🩹 Fixes
+
+- **stack-ui:** added focal point styling ([351e38c](https://github.com/OKAMca/stack/commit/351e38c))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
 ## 1.25.6 (2024-07-10)
 
 
