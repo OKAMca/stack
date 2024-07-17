@@ -1,3 +1,15 @@
+## 1.0.4 (2024-07-17)
+
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** support base block key for dispatching ([1e6344c](https://github.com/OKAMca/stack/commit/1e6344c))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
 ## 1.0.3 (2024-07-11)
 
 
