@@ -1,3 +1,15 @@
+## 1.0.5 (2024-07-17)
+
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** build fix ([9d38a63](https://github.com/OKAMca/stack/commit/9d38a63))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
 ## 1.0.4 (2024-07-17)
 
 
