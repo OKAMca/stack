@@ -34,7 +34,7 @@ query Pages {
 						id
 						blocks {
 							id
-							item: block_faqs_id {
+							block_faqs_id {
 								alignment
 								faqs
 								headline

@@ -1,4 +1,4 @@
-import type { TBlock } from '@okam/directus-block'
+import type { TCommonBlockFragment } from '@okam/directus-block'
 
 export type RelationBlockSerializers<T> = {
   collection: string
@@ -6,7 +6,7 @@ export type RelationBlockSerializers<T> = {
 }[]
 export type RelationBlockProps = RelationBlockAttrs & {
   type: string
-  attrs: RelationBlockAttrs & { data: { blocks: TBlock[] } }
+  attrs: RelationBlockAttrs & { data: { blocks: TCommonBlockFragment[] } }
 }
 
 export type RelationBlockAttrs = {
