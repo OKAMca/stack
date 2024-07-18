@@ -53,6 +53,23 @@ const Carousel = (props: TCarouselProps) => {
             aria-controls={id}
           />
         )}
+        <CarouselSwiper
+          themeName={themeName}
+          tokens={tokens}
+          id={id}
+          slides={slidesWithFallbacks}
+          onSwiper={(c) => {
+            setController(c)
+            onSwiper?.(c)
+          }}
+          onSlideChange={(c) => {
+            setActiveIndex(c.activeIndex)
+            onSlideChange?.(c)
+          }}
+          a11y={restOfA11y}
+          modules={modules}
+          {...rest}
+        />
         {hasNavigation && (
           <NextButton
             themeName={`${themeName}.navigation.button`}
@@ -71,23 +88,6 @@ const Carousel = (props: TCarouselProps) => {
             paginationGroupLabel={paginationGroupLabel}
           />
         )}
-        <CarouselSwiper
-          themeName={themeName}
-          tokens={tokens}
-          id={id}
-          slides={slidesWithFallbacks}
-          onSwiper={(c) => {
-            setController(c)
-            onSwiper?.(c)
-          }}
-          onSlideChange={(c) => {
-            setActiveIndex(c.activeIndex)
-            onSlideChange?.(c)
-          }}
-          a11y={restOfA11y}
-          modules={modules}
-          {...rest}
-        />
         {a11yEnabled && (
           <VisuallyHidden>
             <div aria-live="polite">
