@@ -6,7 +6,15 @@ const carouselWrapper = tv({
 })
 
 const carouselSwiperSwiper = tv({
-  base: 'bg-color-1-300 m-2 rounded-lg order-2',
+  base: `
+    bg-color-1-300
+    m-2
+    rounded-lg
+    order-2
+    focus-visible:outline-2
+  focus-visible:outline-black
+    focus-visible:outline-offset-2
+  `,
 })
 
 const carouselSwiperWrapper = tv({
@@ -37,6 +45,14 @@ const carouselPaginationBullet = tv({
   },
 })
 
+const carouselSlideWrapper = tv({
+  base: 'bg-color-1-400 ',
+})
+
+const carouselSlideContainer = tv({
+  base: '',
+})
+
 const carouselTheme = {
   carouselWrapper,
   swiper: {
@@ -49,6 +65,10 @@ const carouselTheme = {
   pagination: {
     wrapper: carouselPaginationWrapper,
     bullet: carouselPaginationBullet,
+  },
+  slide: {
+    wrapper: carouselSlideWrapper,
+    container: carouselSlideContainer,
   },
 }
 

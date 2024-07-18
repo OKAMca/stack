@@ -1,5 +1,4 @@
 import { useFocusManager, useKeyboard, usePress } from 'react-aria'
-import slugify from 'slugify'
 import { useSwiperController } from '../../../../providers/Swiper'
 import Button from '../../../Button'
 import type { TCarouselPaginationBulletProps } from '../../interface'
@@ -48,7 +47,7 @@ const CarouselPaginationBullet = (props: TCarouselPaginationBulletProps) => {
         'aria-current': isActive ? 'true' : 'false',
         'aria-disabled': isActive,
         'aria-label': !hasTitle ? `${index + 1} / ${slides.length}` : undefined,
-        'aria-labelledby': hasTitle ? slugify(`${id}-${title}`) : undefined,
+        'aria-labelledby': hasTitle ? id : undefined,
       }}
       {...keyboardProps}
       {...pressProps}

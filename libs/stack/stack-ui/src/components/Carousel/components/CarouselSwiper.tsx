@@ -62,7 +62,6 @@ const CarouselSwiper = (props: TCarouselComponentProps) => {
             key={slideId}
             className={slideWrapperTheme}
             {...(title ? { 'aria-labelledby': slideId } : { 'aria-label': slide.ariaLabel })}
-            id={slideId}
             role={slideRole}
             aria-roledescription={itemRoleDescriptionMessage ?? undefined}
           >
