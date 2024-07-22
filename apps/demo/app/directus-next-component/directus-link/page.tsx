@@ -140,23 +140,33 @@ const depthMap: Record<number, object> = {
 
 function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   if (!tree) return null
-  const { children, link, depth } = tree
+  const { children, link, depth, linkProps } = tree
   const style = depthMap[depth]
 
   if (!link && !children) return null
   if (!children) {
     return (
       <li style={style}>
-        {link}
-        <strong>Depth: {depth}</strong>
+        <div>{link}</div>
+        <div>
+          <strong>Depth: {depth}</strong>
+        </div>
+        <div>
+          <strong>Type: {linkProps?.type}</strong>
+        </div>
       </li>
     )
   }
   return (
     <ul>
       <li style={style}>
-        {link}
-        <strong>Depth: {depth}</strong>
+        <div>{link}</div>
+        <div>
+          <strong>Depth: {depth}</strong>
+        </div>
+        <div>
+          <strong>Type: {linkProps?.type}</strong>
+        </div>
       </li>
       {children.map((child) => renderTree(child))}
     </ul>
