@@ -3,13 +3,17 @@ import { ArgTypes } from '@storybook/blocks'
 import Alerts from '.'
 import Box from '../Box'
 import Typography from '../Typography'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/autoplay'
 
 <Meta
   title="Base components/Alerts"
   parameters={{
     layout: 'fullscreen',
     controls: {
-      include: ['alerts']
+      include: ['slides']
     }
   }}
   component={Alerts}
@@ -39,10 +43,10 @@ import Typography from '../Typography'
       description: 'Function looping through every alert and passing the current alert. Can be used for rendering all alerts wrapping `AlertsItem` in another component',
       table: {
         type: {
-          summary: '(alert: TAlertsItem) => React.ReactNode'
+          summary: '(slide: TAlertsItem) => React.ReactNode'
         },
         defaultValue: {
-          summary: '(alert: TAlertsItem) => <AlertsItem {...alert />}'
+          summary: '(slide: TAlertsItem) => <AlertsItem {...slide />}'
         }
       }
     },
@@ -98,7 +102,7 @@ export const Template = (args) => (
 ## Props
 
 <ArgTypes include={[
-  'alerts',
+  'aleslidesrts',
   'onOpenChange',
   'a11y',
   'closeButtonAriaLabel',
@@ -126,7 +130,7 @@ export const Template = (args) => (
   <Story
     name="Single alert"
     args={{
-      alerts: [{
+      slides: [{
         id: '1',
         title: 'Alert 1 title',
         'aria-label': 'Alert 1 aria',
@@ -155,7 +159,7 @@ export const Template = (args) => (
     name="Navigation"
     args={{
       modules: ['Navigation'],
-      alerts: [
+      slides: [
         {
           id: '1',
           title: 'Alert 1 title',
@@ -203,7 +207,7 @@ export const Template = (args) => (
     name="Pagination"
     args={{
       modules: ['Pagination'],
-      alerts: [
+      slides: [
         {
           id: '1',
           'aria-label': 'Alert 1 aria',
@@ -245,7 +249,7 @@ export const Template = (args) => (
     name="Pagination & Navigation"
     args={{
       modules: ['Pagination', 'Navigation'],
-      alerts: [
+      slides: [
         {
           id: '1',
           title: 'Alert 1 title',
