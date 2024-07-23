@@ -17,7 +17,7 @@ import {
   calendarNavigationButtonsContainer,
   calendarTable,
 } from './Calendar'
-import carousel from './Carousel'
+import carouselTheme from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
 import { checkboxGroup, checkboxGroupItemsGroup } from './CheckboxGroup'
 import {
@@ -53,7 +53,7 @@ const BaseTheme = makeTheme({
   grid: (props) => grid(props),
   container: (props) => container(props),
   accordion: accordionTheme,
-  carousel,
+  carousel: carouselTheme,
   calendar: {
     container: (props) => calendarContainer(props),
     header: (props) => calendarHeaderContainer(props),

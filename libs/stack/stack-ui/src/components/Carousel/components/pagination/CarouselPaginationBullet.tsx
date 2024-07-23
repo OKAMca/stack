@@ -1,17 +1,16 @@
-import { useAlertsController } from 'libs/stack/stack-ui/src/providers/Alerts'
 import { useFocusManager, useKeyboard, usePress } from 'react-aria'
-import slugify from 'slugify'
+import { useSwiperController } from '../../../../providers/Swiper'
 import Button from '../../../Button'
-import type { TAlertsPaginationBulletProps } from '../../interface'
+import type { TCarouselPaginationBulletProps } from '../../interface'
 
-const AlertsPaginationBullet = (props: TAlertsPaginationBulletProps) => {
-  const { themeName, tokens, alerts, activeIndex, index } = props
+const CarouselPaginationBullet = (props: TCarouselPaginationBulletProps) => {
+  const { themeName, tokens, slides, activeIndex, index } = props
 
-  const { controller } = useAlertsController()
+  const { controller } = useSwiperController()
 
   const focusManager = useFocusManager()
-  const prevIndex = index === 0 ? alerts.length - 1 : index - 1
-  const nextIndex = index === alerts.length - 1 ? 0 : index + 1
+  const prevIndex = index === 0 ? slides.length - 1 : index - 1
+  const nextIndex = index === slides.length - 1 ? 0 : index + 1
 
   const { keyboardProps } = useKeyboard({
     onKeyUp: (e) => {
@@ -33,9 +32,9 @@ const AlertsPaginationBullet = (props: TAlertsPaginationBulletProps) => {
     onPress: () => controller?.slideTo(index),
   })
 
-  const alert = alerts[index]
+  const slide = slides[index]
   const isActive = index === activeIndex
-  const { title, id } = alert
+  const { title, id } = slide
 
   const hasTitle = title && title.length > 0
 
@@ -47,8 +46,8 @@ const AlertsPaginationBullet = (props: TAlertsPaginationBulletProps) => {
         role: 'button',
         'aria-current': isActive ? 'true' : 'false',
         'aria-disabled': isActive,
-        'aria-label': !hasTitle ? `${index + 1} / ${alerts.length}` : undefined,
-        'aria-labelledby': hasTitle ? slugify(`${id}-${title}`) : undefined,
+        'aria-label': !hasTitle ? `${index + 1} / ${slides.length}` : undefined,
+        'aria-labelledby': hasTitle ? id : undefined,
       }}
       {...keyboardProps}
       {...pressProps}
@@ -58,4 +57,4 @@ const AlertsPaginationBullet = (props: TAlertsPaginationBulletProps) => {
   )
 }
 
-export default AlertsPaginationBullet
+export default CarouselPaginationBullet

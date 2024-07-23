@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useSwiperSlide } from 'swiper/react'
+import { useSwiperController } from '../../../providers/Swiper'
 import Box from '../../Box'
 import Button from '../../Button'
 import Icon from '../../Icon'
@@ -9,7 +9,8 @@ import type { TAlertsItemProps } from '../interface'
 
 const AlertsItem = (props: TAlertsItemProps) => {
   const { title, button, content, themeName = 'alerts.item', tokens, icon, id } = props
-  const { isActive } = useSwiperSlide()
+  const { controller } = useSwiperController()
+  const isActive = controller?.slides?.findIndex((slide) => slide.id === id) === controller?.activeIndex
 
   if (!title && !button && !content && !icon) return null
 

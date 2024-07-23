@@ -1,36 +1,75 @@
 import { tv } from 'tailwind-variants'
+import button from '../Button'
 
-const carouselContainer = tv({
-  base: 'flex justify-between items-center relative h-[475px] mb-18 lg:h-[650px]',
+const carouselWrapper = tv({
+  base: 'flex justify-between items-center gap-4 relative',
 })
 
-const carouselSwiper = tv({
-  base: 'bg-color-1-400 !py-4',
+const carouselSwiperSwiper = tv({
+  base: `
+    bg-color-1-300
+    m-2
+    rounded-lg
+    order-2
+    focus-visible:outline-2
+  focus-visible:outline-black
+    focus-visible:outline-offset-2
+  `,
 })
 
 const carouselSwiperWrapper = tv({
-  base: 'bg-color-1-100 py-4',
+  base: 'm-4',
 })
 
-const carouselSlideContainer = tv({
-  base: 'flex justify-center m-auto px-8 w-full h-full',
+const carouselNavigationButton = tv({
+  extend: button,
+  variants: {
+    order: {
+      prev: 'order-1',
+      next: 'order-3',
+    },
+  },
+})
+
+const carouselPaginationWrapper = tv({
+  base: 'flex gap-4 justify-center absolute z-10 bottom-4 left-0 right-0',
+})
+
+const carouselPaginationBullet = tv({
+  base: 'w-4 h-4 rounded-full block bg-color-1-600 focus-ring-black',
+  variants: {
+    active: {
+      true: 'bg-color-1-100',
+      false: '',
+    },
+  },
 })
 
 const carouselSlideWrapper = tv({
-  base: 'bg-color-1-200 p-2',
+  base: 'bg-color-1-400 ',
 })
 
-const carouselNavigationButtons = tv({
-  base: 'bg-color-1-500 rounded-full p-4 text-white',
+const carouselSlideContainer = tv({
+  base: '',
 })
 
-const carousel = {
-  container: carouselContainer,
-  slideContainer: carouselSlideContainer,
-  slideWrapper: carouselSlideWrapper,
-  navigationButtons: carouselNavigationButtons,
-  swiper: carouselSwiper,
-  swiperWrapper: carouselSwiperWrapper,
+const carouselTheme = {
+  carouselWrapper,
+  swiper: {
+    swiper: carouselSwiperSwiper,
+    wrapper: carouselSwiperWrapper,
+  },
+  navigation: {
+    button: carouselNavigationButton,
+  },
+  pagination: {
+    wrapper: carouselPaginationWrapper,
+    bullet: carouselPaginationBullet,
+  },
+  slide: {
+    wrapper: carouselSlideWrapper,
+    container: carouselSlideContainer,
+  },
 }
 
-export default carousel
+export default carouselTheme
