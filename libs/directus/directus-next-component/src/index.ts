@@ -3,6 +3,10 @@ export { default as Collection } from './components/DirectusLink/components/Coll
 export { default as File } from './components/DirectusLink/components/File'
 export { default as ExternalLink } from './components/DirectusLink/components/ExternalLink'
 export { default as Anchor } from './components/DirectusLink/components/Anchor'
+export { default as DirectusLink } from './components/DirectusLink'
+
+export { default as useDirectusFile } from './hooks/directus-file'
+export { default as useNavigationItems } from './hooks/navigation-items'
 
 export type { TFiles } from './types/files'
 export type { TPageSettings } from './types/page-settings'
