@@ -112,7 +112,7 @@ const navigationItems = [
               "anchor": "#",
               "external_link": "https://facebook.com",
               "id": "f135ba57-a7f2-41c3-93b7-94b500ff6ed0",
-              "label": "Grand enfant 1",
+              "label": "Petit enfant 1",
               "prefetch": null,
               "replace": false,
               "scroll": true,
