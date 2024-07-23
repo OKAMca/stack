@@ -59,6 +59,7 @@ export async function fetchPageSettings(pathName: string, lang = 'fr-CA') {
 
     return `/${collection}/${key}`
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error('GraphQL Error', (e as Error).message)
     return null
   }
