@@ -1,5 +1,6 @@
 import { useNavigationItems } from '@okam/directus-next-component/server'
 import type { Nullable } from '@okam/stack-ui'
+import type { TLinks } from 'libs/directus/directus-next-component/src/types/links'
 import type { TNavigationItemsTree } from 'libs/directus/directus-next-component/src/types/navigation-items'
 
 /* eslint-disable */
@@ -143,7 +144,7 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   const { children, link, depth, linkProps } = tree
   const style = depthMap[depth]
 
-  if (!link && !children) return null
+  if (!link || !linkProps) return null
   if (!children) {
     return (
       <li style={style}>
@@ -174,8 +175,11 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
 }
 
 export default async function Index() {
-  const navigationTree = useNavigationItems(navigationItems)
+  const navigationTree = useNavigationItems<3, { link?: Nullable<TLinks> }>(navigationItems, (item) => {
+    const { link } = item ?? {}
+    return { ...link, collection: link?.collection, file: link?.file }
+  })
 
-  console.log(JSON.stringify(navigationTree, null, 2))
+  // console.log(JSON.stringify(navigationTree, null, 2))
   return navigationTree?.map((child) => renderTree(child))
 }

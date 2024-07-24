@@ -9,7 +9,7 @@ import type { TPageSettings } from './page-settings'
 export type TLinks = {
   anchor?: string | null
   external_link?: string | null
-  id: string
+  id?: string
   label?: string | null
   prefetch?: boolean | null
   replace?: boolean | null

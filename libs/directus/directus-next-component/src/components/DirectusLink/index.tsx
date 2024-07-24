@@ -1,19 +1,23 @@
-import { pascal } from 'radash'
-import directusLinkConfig from './config'
+import { Anchor } from '@okam/stack-ui'
+import Link from 'next/link'
+import useDirectusLink from '../../hooks/directus-link'
 import type { TDirectusLinkProps } from './interface'
 
 const DirectusLink = (props: TDirectusLinkProps) => {
-  const { type, config, ...rest } = props
+  const { type, componentsConfig, ...rest } = props
 
-  if (!type) return null
+  const linkProps = useDirectusLink(props)
 
-  const finalConfig = { ...directusLinkConfig, ...(config ?? {}) }
+  if (!type || !linkProps.href) return null
 
-  const LinkComponent = finalConfig[pascal(type)]
+  const LinkComponent = componentsConfig?.[type]
 
-  if (!LinkComponent) return null
+  const LinkComponentRender = (() => {
+    if (!LinkComponent) return <Anchor as={Link} {...linkProps} />
+    return <LinkComponent {...rest} />
+  })()
 
-  return <LinkComponent {...rest} />
+  return LinkComponentRender
 }
 
 export default DirectusLink
