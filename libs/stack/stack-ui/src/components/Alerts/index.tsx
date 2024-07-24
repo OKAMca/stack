@@ -3,10 +3,10 @@
 import { useRef } from 'react'
 import { useOverlayTriggerState } from 'react-stately'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'
-import Box from '../Box'
+import Carousel from '../Carousel'
 import useOverlayHook from '../Lightbox/hooks/overlay'
 import AlertsCloseButton from './components/AlertsCloseButton'
-import AlertsSwiper from './components/AlertsSwiper'
+import AlertsItem from './components/AlertsItem'
 import type { TAlertsProps } from './interface'
 
 const Alerts = (props: TAlertsProps) => {
@@ -21,6 +21,7 @@ const Alerts = (props: TAlertsProps) => {
     isOpen,
     onOpenChange,
     setOpen,
+    children = AlertsItem,
     ...rest
   } = props
 
@@ -44,9 +45,9 @@ const Alerts = (props: TAlertsProps) => {
         aria-label={closeButtonAriaLabel}
         {...triggerProps}
       />
-      <Box themeName={`${themeName}.container`} tokens={tokens}>
-        <AlertsSwiper themeName={themeName} tokens={tokens} {...rest} />
-      </Box>
+      <Carousel themeName={themeName} tokens={tokens} {...rest}>
+        {children}
+      </Carousel>
     </TransitionComponent>
   )
 }

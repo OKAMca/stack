@@ -1,0 +1,7 @@
+import type { TDefaultComponent } from '@okam/stack-ui';
+
+interface <%= type %> extends TDefaultComponent {
+  // Add your props here
+}
+
+export default <%= type %>

@@ -1,0 +1,11 @@
+/* eslint-disable @typescript-eslint/naming-convention */
+import type { Nullable } from '@okam/stack-ui'
+import type { BlockSettingsFragment } from '@okam/directus-block'
+
+export type <%= type %> = {
+  __typename?: '<%= snakeName %>'
+  id?: Nullable<string>
+  settings?:
+    | ({ __typename?: 'block_settings' } & { ' $fragmentRefs'?: { BlockSettingsFragment: BlockSettingsFragment } })
+    | null
+} & { ' $fragmentName'?: '<%= type %>' }

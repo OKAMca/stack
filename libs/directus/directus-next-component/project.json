@@ -3,14 +3,18 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-next-component/src",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"
     },
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/directus/directus-next-component",
         "tsConfig": "libs/directus/directus-next-component/tsconfig.lib.json",
@@ -27,6 +31,13 @@
           }
         ]
       }
-    }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/libs/directus/directus-next-component"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
   }
 }

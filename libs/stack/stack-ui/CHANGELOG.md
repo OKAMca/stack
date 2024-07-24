@@ -1,3 +1,76 @@
+## 1.26.0 (2024-07-17)
+
+
+### 🚀 Features
+
+- **stack-ui:** added focal point props ([abab9b1](https://github.com/OKAMca/stack/commit/abab9b1))
+
+
+### 🩹 Fixes
+
+- **stack-ui:** added focal point styling ([351e38c](https://github.com/OKAMca/stack/commit/351e38c))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
+## 1.25.6 (2024-07-10)
+
+
+### 🩹 Fixes
+
+- allow changing directus img protocol ([#152](https://github.com/OKAMca/stack/pull/152))
+
+
+### ✅ Tests
+
+- with rollup plugin preserve directives ([ce58694](https://github.com/OKAMca/stack/commit/ce58694))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- yanmorinokamca @yanmorinokamca
+
+## 1.25.5 (2024-07-10)
+
+
+### 🩹 Fixes
+
+- allow changing directus img protocol ([#152](https://github.com/OKAMca/stack/pull/152))
+
+
+### ✅ Tests
+
+- with rollup plugin preserve directives ([ce58694](https://github.com/OKAMca/stack/commit/ce58694))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- yanmorinokamca @yanmorinokamca
+
+## 1.25.4 (2024-07-08)
+
+
+### 🩹 Fixes
+
+- **publish:** add building packages step to workflow ([c9ce442](https://github.com/OKAMca/stack/commit/c9ce442))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
+## 1.25.3 (2024-07-05)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
 ## [1.25.2](https://github.com/OKAMca/stack/compare/stack-ui-v1.25.1...stack-ui-v1.25.2) (2024-06-28)
 
 
