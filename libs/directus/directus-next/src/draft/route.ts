@@ -113,8 +113,8 @@ export function getPathFromRoute(routeUrl: string, url: string, index = 0) {
 export type HandleDraftOptions = {
   url: string
   getDirectusLanguage: () => string
-  getDraftSecret: (() => string) | undefined
-  getJsonError: (() => Response) | undefined
+  getDraftSecret?: (() => string) | undefined
+  getJsonError?: (() => Response) | undefined
 }
 
 /**

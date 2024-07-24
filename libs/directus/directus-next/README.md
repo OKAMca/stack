@@ -25,9 +25,18 @@ import { handleDraftRoute } from '@okam/directus-next'
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export async function GET(request: Request) {
-   handleDraftRoute({
+   return handleDraftRoute({
      url: request.url,
      getDirectusLanguage: () => 'en-CA' // default language to show
    })
 }
 ```
+
+### Environement
+Set the secret in your .env and your directus application (preview_secret field).
+
+.env
+```
+NEXT_API_DRAFT_SECRET=123
+```
+
