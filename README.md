@@ -72,3 +72,18 @@ Run `npm run release` to release every project independantly at once.
 If you want to release only one package specifically you can use the nx command available in each project called `project-release` and `project-dry-release`
 2. Publish
 Run the `Publish` workflow on main with github actions.
+
+## Adding a library to the repository
+After adding a library with nx, don't forget to add the path naming in tsconfig for import.
+
+In tsconfig.base.json, compilerOptions.path, add:
+```
+  "@okam/package-name": ["libs/section/library/src/index.ts"],
+```
+
+In the local source code:
+```
+import { something } from '@okam/package-name'
+```
+
+Restart your editor to make sure typescript is recompiled.
