@@ -1,10 +1,10 @@
 import { FocusScope } from 'react-aria'
 import Box from '../../../Box'
-import type { TAlertsPaginationProps } from '../../interface'
-import AlertsPaginationBullet from './AlertsPaginationBullet'
+import type { TCarouselPaginationProps } from '../../interface'
+import CarouselPaginationBullet from './CarouselPaginationBullet'
 
-const AlertsPagination = (props: TAlertsPaginationProps) => {
-  const { themeName, tokens, alerts, activeIndex, paginationGroupLabel } = props
+const CarouselPagination = (props: TCarouselPaginationProps) => {
+  const { themeName, tokens, slides, activeIndex, paginationGroupLabel } = props
 
   return (
     <Box
@@ -14,12 +14,12 @@ const AlertsPagination = (props: TAlertsPaginationProps) => {
       {...{ role: 'group', 'aria-label': paginationGroupLabel }}
     >
       <FocusScope>
-        {alerts.map((_, index) => (
-          <AlertsPaginationBullet
+        {slides.map((_, index) => (
+          <CarouselPaginationBullet
             key={JSON.stringify(_)}
             index={index}
             activeIndex={activeIndex}
-            alerts={alerts}
+            slides={slides}
             themeName={themeName}
             tokens={tokens}
           />
@@ -29,4 +29,4 @@ const AlertsPagination = (props: TAlertsPaginationProps) => {
   )
 }
 
-export default AlertsPagination
+export default CarouselPagination

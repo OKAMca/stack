@@ -7,7 +7,9 @@
       "directus-node",
       "directus-query",
       "directus-block",
-      "directus-next-component"
+      "directus-next-component",
+      "directus-flexible-content",
+      "automation"
     ],
     "releaseTagPattern": "{projectName}-v{version}",
     "projectsRelationship": "independent",
@@ -86,6 +88,22 @@
         "{workspaceRoot}/.eslintignore"
       ],
       "cache": true
+    },
+    "project-dry-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx release --projects={projectName} --dry-run"
+        ]
+      }
+    },
+    "project-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx release --projects={projectName}"
+        ]
+      }
     }
   },
   "namedInputs": {

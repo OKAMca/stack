@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react'
 import type { SwiperClass } from 'swiper/react'
 
-export interface TAlertsControllerProviderProps {
+export interface TSwiperControllerProviderProps {
   children: ReactNode
   controller: SwiperClass | undefined
 }
 
-export type TAlertsControllerContext = {
+export type TSwiperControllerContext = {
   controller: SwiperClass | undefined
 }

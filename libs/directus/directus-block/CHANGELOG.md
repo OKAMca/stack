@@ -1,3 +1,31 @@
+## 1.2.3 (2024-07-09)
+
+
+### 🩹 Fixes
+
+- **directus-block:** export server components ([05f1a31](https://github.com/OKAMca/stack/commit/05f1a31))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
+## 1.2.2 (2024-07-08)
+
+
+### 🩹 Fixes
+
+- **publish:** add building packages step to workflow ([c9ce442](https://github.com/OKAMca/stack/commit/c9ce442))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+
+## 1.2.1 (2024-07-05)
+
+This was a version bump only for directus-block to align it with other projects, there were no code changes.
+
 ## 1.2.0 (2024-06-28)
 
 

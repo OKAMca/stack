@@ -3,18 +3,26 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-block/src",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/directus/directus-block/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "libs/directus/directus-block/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/directus/directus-block"
@@ -42,7 +50,9 @@
     },
     "build-storybook": {
       "executor": "@nx/storybook:build",
-      "outputs": ["{options.outputDir}"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
       "options": {
         "outputDir": "dist/storybook/directus-block",
         "configDir": "libs/directus/directus-block/.storybook"
@@ -52,6 +62,13 @@
           "quiet": true
         }
       }
-    }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/libs/directus/directus-block"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
   }
 }

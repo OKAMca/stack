@@ -6,7 +6,7 @@ const alertsWrapper = tv({
   base: 'bg-color-1-200 p-4 flex flex-col gap-4',
 })
 
-const alertsContainer = tv({
+const alertsCarouselWrapper = tv({
   base: 'flex justify-between items-center gap-4 relative',
 })
 
@@ -72,7 +72,7 @@ const alertsPaginationBullet = tv({
 
 const alertsTheme = {
   wrapper: alertsWrapper,
-  container: alertsContainer,
+  carouselWrapper: alertsCarouselWrapper,
   closeBtn: alertsCloseBtn,
   swiper: {
     swiper: alertsSwiperSwiper,

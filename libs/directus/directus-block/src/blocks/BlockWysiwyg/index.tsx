@@ -1,25 +1,13 @@
 import { Box, WysiwygBlock } from '@okam/stack-ui'
 import React from 'react'
 import type { TBlockSerializerProps } from '../../components/BlockSerializer/interface'
-import { BlockSettingsFragmentDoc } from '../../generated/graphql'
-import { getBlockProps, getFragment } from '../../utils'
+import useBlock from '../../hooks/useBlock'
 import type { BlockWysiwygFragment } from './interface'
 
 const BlockWysiwyg = async (props: TBlockSerializerProps<BlockWysiwygFragment>) => {
-  const { variables, themeName = 'wysiwyg', tokens, item, document } = props
-
-  const propsWithFallback = await getBlockProps({
-    item,
-    blockKey: 'block_wysiwyg_by_id',
-    document,
-    variables,
-  })
-
-  if (!propsWithFallback) return null
-
-  const { content, title, level, settings } = propsWithFallback
-
-  const { tokens: cmsTokens } = getFragment(BlockSettingsFragmentDoc, settings) ?? {}
+  const key = 'block_wysiwyg_by_id'
+  const { themeName = 'wysiwyg', tokens } = props
+  const { content, title, level, cmsTokens } = await useBlock<BlockWysiwygFragment>(props, key)
 
   if (!content && !(title && level)) return null
 
