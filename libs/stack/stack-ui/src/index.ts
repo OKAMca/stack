@@ -3,7 +3,7 @@ export { default as ThemeProvider } from './theme'
 export { default as Typography } from './components/Typography'
 export { default as Accordion } from './components/Accordion'
 export { default as AccordionItem } from './components/Accordion/components/AccordionItem'
-export { default as Button, ButtonWithForwardRef } from './components/Button'
+export { default as Button, ButtonWithForwardRef, Anchor } from './components/Button'
 export { default as ShareButton } from './components/ShareButton'
 export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
@@ -49,7 +49,7 @@ export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion
 export { SearchBarProvider } from './providers/UserSearchQuery'
 
 // types & interfaces
-export type { TButtonProps } from './components/Button/interface'
+export type { TButtonProps, TAnchorProps } from './components/Button/interface'
 export type { TTypographyProps } from './components/Typography/interface'
 export type {
   TTheme,
