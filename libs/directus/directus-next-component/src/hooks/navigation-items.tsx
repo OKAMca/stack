@@ -1,6 +1,6 @@
 import type { Nullable } from '@okam/stack-ui'
 import DirectusLink from '../components/DirectusLink'
-import type { TLinks } from '../types/links'
+import type { TDirectusLinkProps } from '../components/DirectusLink/interface'
 import type {
   TNavigationItems,
   TNavigationItemsChildren,
@@ -14,7 +14,9 @@ function createParentTree<
   NavigationItems extends TNavigationItems<NavigationItems, Link, Depth>,
 >(
   item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>,
-  onNavigationItem: (item: Nullable<TNavigationItemsParents<NavigationItems, Link, Depth>>) => Nullable<TLinks>,
+  onNavigationItem: (
+    item: Nullable<TNavigationItemsParents<NavigationItems, Link, Depth>>,
+  ) => Nullable<TDirectusLinkProps>,
   depth = -1,
 ): Nullable<TNavigationItemsTree> {
   const { parent } = item ?? {}
@@ -37,7 +39,9 @@ function createChildrenTree<
   NavigationItems extends TNavigationItems<NavigationItems, Link, Depth>,
 >(
   item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>,
-  onNavigationItem: (item: Nullable<TNavigationItemsChildren<NavigationItems, Link, Depth>>) => Nullable<TLinks>,
+  onNavigationItem: (
+    item: Nullable<TNavigationItemsChildren<NavigationItems, Link, Depth>>,
+  ) => Nullable<TDirectusLinkProps>,
   depth = 1,
 ): Nullable<TNavigationItemsTree> {
   const { children } = item ?? {}
@@ -61,11 +65,11 @@ function createChildrenTree<
  */
 export default function useNavigationItems<
   Depth extends number,
-  Link = unknown,
+  Link,
   NavigationItems extends TNavigationItems<NavigationItems, Link, Depth> = TNavigationItems<unknown, Link, Depth>,
 >(
   items: Nullable<Nullable<TNavigationItems<NavigationItems, Link, Depth>>[]>,
-  onNavigationItem: (item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>) => Nullable<TLinks>,
+  onNavigationItem: (item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>) => Nullable<TDirectusLinkProps>,
 ): Nullable<Nullable<TNavigationItemsTree>[]> {
   const tree = items?.map((item) => {
     const { children, parent } = item ?? {}

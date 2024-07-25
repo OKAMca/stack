@@ -96,7 +96,21 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
 }
 
 const NavigationComponent = (props) => {
-  const navigation = useNavigationItems(props.navigationItems)
+  // Depth and links type cannot be inferred directly, they must be passed
+  const navigation = useNavigationItems<3, { link?: LinksFragment }>(
+    props.navigationItems, 
+
+    // Use `onNavigationItem` to parse the fragments
+    (item) => {
+      const { link } = item ?? {}
+      const collection = getFragment(PageSettingsFragmentDoc, link?.collection)
+      const file = getFragment(FilesFragmentDoc, link?.file)
+      return {
+        ...link,
+        collection,
+        file,
+    }
+  })
 
   return (
     <nav>

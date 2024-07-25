@@ -4,7 +4,7 @@ import useDirectusLink from '../../hooks/directus-link'
 import type { TDirectusLinkProps } from './interface'
 
 const DirectusLink = (props: TDirectusLinkProps) => {
-  const { type, componentsConfig, ...rest } = props
+  const { type, variant, componentsConfig, themeName, tokens, customTheme, ...rest } = props
 
   const linkProps = useDirectusLink(props)
 
@@ -12,7 +12,8 @@ const DirectusLink = (props: TDirectusLinkProps) => {
 
   const LinkComponent = componentsConfig?.[type]
 
-  if (!LinkComponent) return <Anchor as={Link} {...linkProps} />
+  if (!LinkComponent)
+    return <Anchor as={Link} themeName={themeName} tokens={tokens} customTheme={customTheme} {...linkProps} />
   return <LinkComponent {...rest} />
 }
 
