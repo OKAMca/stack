@@ -1,3 +1,17 @@
+## 1.14.0 (2024-07-25)
+
+
+### 🚀 Features
+
+- generator for block & component ([#161](https://github.com/OKAMca/stack/pull/161))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.13.4 (2024-07-16)
 
 

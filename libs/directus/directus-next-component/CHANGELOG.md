@@ -1,3 +1,17 @@
+## 1.2.0 (2024-07-25)
+
+
+### 🚀 Features
+
+- directus link component + use nav items hook ([750fa5c](https://github.com/OKAMca/stack/commit/750fa5c))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.1.1 (2024-07-16)
 
 
