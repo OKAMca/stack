@@ -2,6 +2,7 @@
 export { default as DirectusLink } from './components/DirectusLink'
 
 export { default as useDirectusFile } from './hooks/directus-file'
+export { default as useDirectusLink } from './hooks/directus-link'
 export { default as useNavigationItems } from './hooks/navigation-items'
 
 export type { TFiles } from './types/files'

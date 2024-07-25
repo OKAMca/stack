@@ -1,7 +1,6 @@
-import { useNavigationItems } from '@okam/directus-next-component/server'
-import type { Nullable } from '@okam/stack-ui'
-import type { TLinks } from 'libs/directus/directus-next-component/src/types/links'
-import type { TNavigationItemsTree } from 'libs/directus/directus-next-component/src/types/navigation-items'
+import type { TDirectusLinkProps, TLinks, TNavigationItemsTree } from '@okam/directus-next-component'
+import { useDirectusLink, useNavigationItems } from '@okam/directus-next-component/server'
+import { Anchor, type Nullable } from '@okam/stack-ui'
 
 /* eslint-disable */
 const navigationItems = [
@@ -139,6 +138,12 @@ const depthMap: Record<number, object> = {
   2: { padding: '4px', backgroundColor: 'green' },
 }
 
+const BrandDirectusLink = (props: TDirectusLinkProps) => {
+  const linkProps = useDirectusLink(props)
+
+  return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline' }} />
+}
+
 function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   if (!tree) return null
   const { children, link, depth, linkProps } = tree
@@ -148,6 +153,9 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   if (!children) {
     return (
       <li style={style}>
+        {/* You can render your own component with linkProps */}
+        <BrandDirectusLink {...linkProps} />
+        {/* Or use the pre-rendered version */}
         <div>{link}</div>
         <div>
           <strong>Depth: {depth}</strong>
@@ -161,6 +169,9 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   return (
     <ul>
       <li style={style}>
+        <div>
+          <BrandDirectusLink {...linkProps} />
+        </div>
         <div>{link}</div>
         <div>
           <strong>Depth: {depth}</strong>

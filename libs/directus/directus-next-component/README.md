@@ -28,9 +28,15 @@ export const config = {
 
 After, modify the `next.config.js` file to add `withDirectus` in the plugins.
 
+## useDirectusLink hook
+
+The role of the directus link hook is to dispatch different props according to the type of the directus link. The configuration for the dispatching is overridable using the `propsConfig` prop
+
 ## DirectusLink component
 
-The role of the directus link component is to wrap `next/link` and provide the appropriate props from dispatching the different types of links to different components.
+The role of the directus link component is to wrap `next/link` and dispatch the props to different components according to a configuration. The configuration for dispatching different components is overridable using the `componentsConfig` prop.
+
+The directus link component uses the directus link hook, which means it can be passed both `componentsConfig` and `propsConfig` for both dispatching uses.
 
 By default, the following are included:
 
@@ -39,7 +45,7 @@ By default, the following are included:
 - ExternalLink: Render a link with an external URL (e.g.: https://google.com)
 - File: Render a link for a downloadable file
 
-The mentionned configuration can be overwritten by passing a `config` prop to the directus link component
+The mentionned configuration can be overwritten by passing a `componentsConfig` prop to the directus link component
 
 ```jsx
 const overrideConfig = {
@@ -51,7 +57,7 @@ const BrandLink = (props) => {
 }
 ```
 
-## useNavigationItems
+## useNavigationItems hook
 
 The `useNavigationItems` hook allows to build recursively a navigation structure using the `DirectusLink` component. 
 
@@ -76,7 +82,11 @@ const depthMap: Record<number, object> = {
 // Loop recursively through navigation items and assign style based on depth
 function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   if (!tree) return null
-  const { children, link, depth } = tree
+  /*
+   * Here, `link` represents a rendered version of `DirectusLink` for quick use
+   * Use `linkProps` for custom rendering needs
+   */
+  const { children, link, linkProps, depth } = tree
   const style = depthMap[depth]
 
   if (!link && !children) return null

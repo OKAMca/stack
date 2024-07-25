@@ -1,4 +1,4 @@
-import type { TAnchorPropsProps } from 'libs/stack/stack-ui/src/components/Button/interface'
+import type { TAnchorPropsProps } from '@okam/stack-ui'
 import type { TDirectusLinkProps, TDirectusLinkPropsConfig } from '../components/DirectusLink/interface'
 import useDirectusFile from './directus-file'
 

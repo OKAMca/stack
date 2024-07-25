@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { TDefaultComponent } from '@okam/stack-ui'
-import type { TAnchorPropsProps } from 'libs/stack/stack-ui/src/components/Button/interface'
+import type { TDefaultComponent, TAnchorPropsProps } from '@okam/stack-ui'
 import type { ComponentType } from 'react'
 import type { TLinks } from '../../types/links'
 
