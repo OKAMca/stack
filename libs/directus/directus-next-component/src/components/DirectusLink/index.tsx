@@ -12,12 +12,8 @@ const DirectusLink = (props: TDirectusLinkProps) => {
 
   const LinkComponent = componentsConfig?.[type]
 
-  const LinkComponentRender = (() => {
-    if (!LinkComponent) return <Anchor as={Link} {...linkProps} />
-    return <LinkComponent {...rest} />
-  })()
-
-  return LinkComponentRender
+  if (!LinkComponent) return <Anchor as={Link} {...linkProps} />
+  return <LinkComponent {...rest} />
 }
 
 export default DirectusLink
