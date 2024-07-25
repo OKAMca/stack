@@ -49,7 +49,7 @@ export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion
 export { SearchBarProvider } from './providers/UserSearchQuery'
 
 // types & interfaces
-export type { TButtonProps, TAnchorPropsProps } from './components/Button/interface'
+export type { TButtonProps, TAnchorProps } from './components/Button/interface'
 export type { TTypographyProps } from './components/Typography/interface'
 export type {
   TTheme,

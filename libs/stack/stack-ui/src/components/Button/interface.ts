@@ -17,6 +17,6 @@ export interface TButtonProps extends TDefaultComponent {
   isDisabled?: boolean
 }
 
-export interface TAnchorPropsProps extends TButtonProps {
+export interface TAnchorProps extends TButtonProps {
   nextLinkProps?: LinkProps
 }

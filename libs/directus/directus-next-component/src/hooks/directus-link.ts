@@ -1,4 +1,4 @@
-import type { TAnchorPropsProps } from '@okam/stack-ui'
+import type { TAnchorProps } from '@okam/stack-ui'
 import type { TDirectusLinkProps, TDirectusLinkPropsConfig } from '../components/DirectusLink/interface'
 import useDirectusFile from './directus-file'
 
@@ -25,7 +25,7 @@ const defaultPropsConfig: TDirectusLinkPropsConfig = {
   anchor: ({ anchor }) => ({ href: anchor ?? undefined }),
 }
 
-export default function useDirectusLink(props: TDirectusLinkProps): TAnchorPropsProps {
+export default function useDirectusLink(props: TDirectusLinkProps): TAnchorProps {
   const { type, label, prefetch, replace, scroll, variant, tokens, themeName, customTheme, propsConfig } = props
 
   if (!type) return {}

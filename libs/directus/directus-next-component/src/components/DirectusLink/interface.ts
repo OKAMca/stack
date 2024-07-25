@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { TDefaultComponent, TAnchorPropsProps } from '@okam/stack-ui'
+import type { TDefaultComponent, TAnchorProps } from '@okam/stack-ui'
 import type { ComponentType } from 'react'
 import type { TLinks } from '../../types/links'
 
@@ -16,7 +16,7 @@ export type TDirectusLink = Omit<
 
 export type TDirectusLinkComponentsConfig = Record<string, ComponentType<TDirectusLink>>
 
-export type TDirectusLinkPropsConfig<ReturnProps extends TAnchorPropsProps = TAnchorPropsProps> = Record<
+export type TDirectusLinkPropsConfig<ReturnProps extends TAnchorProps = TAnchorProps> = Record<
   string,
   (props: TDirectusLinkProps) => ReturnProps
 >
