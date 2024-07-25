@@ -9,12 +9,7 @@ export interface TDirectusLinkProps extends Omit<TDefaultComponent, 'children'>,
   propsConfig?: TDirectusLinkPropsConfig
 }
 
-export type TDirectusLink = Omit<
-  TDirectusLinkProps,
-  'collection' | 'anchor' | 'external_link' | 'file' | 'target' | 'type'
->
-
-export type TDirectusLinkComponentsConfig = Record<string, ComponentType<TDirectusLink>>
+export type TDirectusLinkComponentsConfig = Record<string, ComponentType<TDirectusLinkProps>>
 
 export type TDirectusLinkPropsConfig<ReturnProps extends TAnchorProps = TAnchorProps> = Record<
   string,
