@@ -9,7 +9,7 @@ import viteTsConfigPaths from 'vite-tsconfig-paths'
 import externalDeps from '../../../config/external-deps'
 
 export default defineConfig({
-  cacheDir: '../../../node_modules/.vite/directus-block',
+  cacheDir: '../../../node_modules/.vite/directus-next-component',
 
   plugins: [
     dts({
@@ -38,7 +38,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: ['src/index.ts', 'src/server.ts'],
-      name: 'directus-block',
+      name: 'directus-next-component',
       fileName: 'index',
 
       // Change this to the formats you want to support.
