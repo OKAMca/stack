@@ -3,31 +3,45 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-next-component/src",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    },
-    "build": {
-      "executor": "@nx/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "outputPath": "dist/libs/directus/directus-next-component",
-        "tsConfig": "libs/directus/directus-next-component/tsconfig.lib.json",
-        "project": "libs/directus/directus-next-component/package.json",
-        "entryFile": "libs/directus/directus-next-component/src/index.ts",
-        "external": "all",
-        "rollupConfig": "@nx/react/plugins/bundle-rollup",
-        "compiler": "swc",
-        "assets": [
-          {
-            "glob": "libs/directus/directus-next-component/README.md",
-            "input": ".",
-            "output": "."
-          }
+        "lintFilePatterns": [
+          "libs/directus/directus-next-component/**/*.{ts,tsx,js,jsx}"
         ]
       }
-    }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/directus/directus-next-component"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/libs/directus/directus-next-component"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
   }
 }

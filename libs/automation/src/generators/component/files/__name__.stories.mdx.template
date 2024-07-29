@@ -1,0 +1,31 @@
+{/* <%= name %>.stories.mdx */}
+
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import <%= componentName %> from './index';
+
+<Meta
+  title="Components/<%= componentName %>"
+  component={<%= componentName %>}
+/>
+
+export const Template = (args) => (
+  <div>
+    <<%= componentName %> {...args}>Hello world!</<%= componentName %>>
+  </div>
+)
+
+# <%= componentName %>
+
+Stories for <%= componentName %>
+
+<ArgsTable story="<%= componentName %>" />
+
+## Examples for <%= componentName %>
+
+<Canvas>
+  <Story
+    name="Primary"
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>

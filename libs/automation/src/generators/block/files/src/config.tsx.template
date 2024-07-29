@@ -1,0 +1,11 @@
+import type { TBlockSerializerConfigComponent } from '@okam/directus-block'
+import React from 'react'
+import <%= componentName %> from '.'
+
+const <%= variableName %>Config: TBlockSerializerConfigComponent = {
+  <%= snakeName %>: {
+    default: (props) => <<%= componentName %> {...props} />,
+  },
+}
+
+export default <%= variableName %>Config

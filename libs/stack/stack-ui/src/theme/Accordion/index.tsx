@@ -25,6 +25,15 @@ export const accordionButton = tv({
       center: 'grid-cols-[3rem_1fr_3rem] pl-0 sm:pl-0',
       left: 'grid-cols-[1fr_3rem]',
     },
+    bgColor: {
+      gray: 'bg-gray-300',
+      white: 'bg-white',
+    },
+  },
+  defaultVariants: {
+    titleBold: false,
+    textAlign: 'left',
+    bgColor: 'white',
   },
 })
 

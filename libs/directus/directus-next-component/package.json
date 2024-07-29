@@ -1,4 +1,22 @@
 {
   "name": "@okam/directus-next-component",
-  "version": "0.0.1"
+  "version": "1.2.0",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    },
+    "./server": {
+      "import": "./server.mjs",
+      "require": "./server.js"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
+  }
 }

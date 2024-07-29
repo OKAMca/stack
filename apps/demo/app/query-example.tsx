@@ -1,6 +1,6 @@
-import { initDiretusQuery } from '@okam/directus-query'
+import { initDirectusQuery } from '@okam/directus-query'
 
-const queryClient = initDiretusQuery(process.env.NEXT_PUBLIC_GRAPHQL_URL, {
+const queryClient = initDirectusQuery(process.env.NEXT_PUBLIC_GRAPHQL_URL, {
   credentials: 'include',
   mode: 'cors',
   fetch,

@@ -1,0 +1,91 @@
+import { Canvas, Meta, Story } from '@storybook/addon-docs'
+import { ArgTypes } from '@storybook/blocks'
+import Search from './'
+import { SearchBarProvider } from '../../../providers/UserSearchQuery'
+
+<Meta
+  title="Form/Fields/Search"
+  component={Search}
+  args={{
+    placeholder: 'Search',
+    onChange: (value) => console.log(`You have typed ${value}`),
+    onSubmit: (value) => console.log(`You have submitted ${value}`),
+    'aria-label': 'Search',
+  }}
+/>
+
+export const Template = (args) => (
+  <SearchBarProvider userQuery="">
+    <Search {...args} />
+  </SearchBarProvider>
+)
+
+# Search
+
+### Search component. Used to search various information. To see typing events, look at the console.
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+### Default
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{
+      id: 'default',
+      label: 'Search',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### No label
+
+<Canvas>
+  <Story
+    name="No label"
+    args={{
+      id: 'no-label',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Disabled
+
+<Canvas>
+  <Story
+    name="Disabled"
+    args={{
+      id: 'disabled',
+      label: 'Search',
+      disabled: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Error
+
+<Canvas>
+  <Story
+    name="Error"
+    args={{
+      id: 'error',
+      label: 'Search',
+      errorMessage: 'This is an error message',
+    }}
+
+>
+
+    {Template.bind({})}
+
+  </Story>
+</Canvas>

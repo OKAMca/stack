@@ -1,3 +1,87 @@
+## 1.14.0 (2024-07-25)
+
+
+### 🚀 Features
+
+- generator for block & component ([#161](https://github.com/OKAMca/stack/pull/161))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
+## 1.13.4 (2024-07-16)
+
+
+### 🩹 Fixes
+
+- **publish:** add building packages step to workflow ([c9ce442](https://github.com/OKAMca/stack/commit/c9ce442))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Pierre-Olivier Clerson @poclerson
+- yanmorinokamca @yanmorinokamca
+
+## [1.13.3](https://github.com/OKAMca/stack/compare/core-lib-v1.13.2...core-lib-v1.13.3) (2024-06-25)
+
+
+### Bug Fixes
+
+* **block-directus:** add server only to get block props ([330e76f](https://github.com/OKAMca/stack/commit/330e76f7fee53634bfb991e813060f0e8f1a0cb6))
+
+## [1.13.2](https://github.com/OKAMca/stack/compare/core-lib-v1.13.1...core-lib-v1.13.2) (2024-06-14)
+
+
+### Bug Fixes
+
+* aria labelled by ([6380791](https://github.com/OKAMca/stack/commit/63807918a253462211c35f1119acff64c093027d))
+
+## [1.13.1](https://github.com/OKAMca/stack/compare/core-lib-v1.13.0...core-lib-v1.13.1) (2024-06-11)
+
+
+### Bug Fixes
+
+* publishing for new libs ([#126](https://github.com/OKAMca/stack/issues/126)) ([8750ea6](https://github.com/OKAMca/stack/commit/8750ea643fa22ca06979c8d4030fa2a2d865b86f))
+
+# [1.13.0](https://github.com/OKAMca/stack/compare/core-lib-v1.12.0...core-lib-v1.13.0) (2024-06-11)
+
+
+### Features
+
+* STACK-72-Lib-Create-directus-block ([#115](https://github.com/OKAMca/stack/issues/115)) ([c07db82](https://github.com/OKAMca/stack/commit/c07db82d3b2a483e737e8d0dd07074cfa0b82152))
+
+# [1.12.0](https://github.com/OKAMca/stack/compare/core-lib-v1.11.2...core-lib-v1.12.0) (2024-05-30)
+
+
+### Features
+
+* alerts component ([35ee942](https://github.com/OKAMca/stack/commit/35ee942432edc38d9dd7be9c81992bbe314fba61))
+
+## [1.11.2](https://github.com/OKAMca/stack/compare/core-lib-v1.11.1...core-lib-v1.11.2) (2024-05-29)
+
+
+### Bug Fixes
+
+* select do not work on in nextjs app ([5b04406](https://github.com/OKAMca/stack/commit/5b044064c4f0818255e0b65b8959b2a58f74176f))
+
+## [1.11.1](https://github.com/OKAMca/stack/compare/core-lib-v1.11.0...core-lib-v1.11.1) (2024-04-04)
+
+
+### Bug Fixes
+
+* **packages:** merge with main ([5611d64](https://github.com/OKAMca/stack/commit/5611d64950b4b262b95041a36658a84a5b0fdcd0))
+
+# [1.11.0](https://github.com/OKAMca/stack/compare/core-lib-v1.10.2...core-lib-v1.11.0) (2024-04-02)
+
+
+### Features
+
+* component accordion closed items should not be focusable via keyboard ([c027cda](https://github.com/OKAMca/stack/commit/c027cda3f39faeb269026e45d56a4f4c35c7498d))
+
 ## [1.10.2](https://github.com/OKAMca/stack/compare/core-lib-v1.10.1...core-lib-v1.10.2) (2024-04-01)
 
 
@@ -42,8 +126,6 @@
 
 # [1.8.0](https://github.com/OKAMca/stack/compare/core-lib-v1.7.1...core-lib-v1.8.0) (2023-12-22)
 
-<<<<<<< HEAD
-=======
 
 ### Features
 
@@ -51,7 +133,6 @@
 
 ## [1.7.1](https://github.com/OKAMca/stack/compare/core-lib-v1.7.0...core-lib-v1.7.1) (2023-12-21)
 
->>>>>>> 865ed45dc09fdf3a6b151ed12612eeda6c97f306
 ### Bug Fixes
 
 - lint issue ([#70](https://github.com/OKAMca/stack/issues/70)) ([abd6026](https://github.com/OKAMca/stack/commit/abd6026f94bd78aee6131148195af16a9f9b0bb0))

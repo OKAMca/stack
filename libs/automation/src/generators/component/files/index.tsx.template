@@ -1,0 +1,12 @@
+import { Box } from "@okam/stack-ui"
+import <%= type %> from "./interface"
+
+const <%= componentName %> = (props: <%= type %>) => {
+  return (
+    <Box {...props}>
+      {"Hello <%= name %>"}
+    </Box>
+  )
+}
+
+export default <%= componentName %>
