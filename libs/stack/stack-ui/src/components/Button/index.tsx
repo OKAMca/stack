@@ -6,10 +6,10 @@ import type { RefObject } from 'react'
 import React, { useRef } from 'react'
 import { FocusRing, useButton, useLink } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
-import type { TAnchorPropsProps, TButtonProps } from './interface'
+import type { TAnchorProps, TButtonProps } from './interface'
 
 export const Anchor = React.forwardRef(
-  (props: TAnchorPropsProps, forwardRef: React.Ref<HTMLButtonElement & HTMLAnchorElement>) => {
+  (props: TAnchorProps, forwardRef: React.Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const {
       as: Component = 'a',
       handlePress,

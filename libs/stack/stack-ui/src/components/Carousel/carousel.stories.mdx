@@ -2,17 +2,58 @@ import { Canvas, Meta, Story } from '@storybook/addon-docs'
 import { ArgTypes } from '@storybook/blocks'
 import Carousel from './index'
 import Button from '../Button'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/autoplay'
+import { CarouselNextNavigationButton, CarouselPrevNavigationButton } from './components/CarouselNavigationButton'
+import { forwardRef } from 'react'
 
 <Meta
   title="Base Components/Carousel"
   component={Carousel}
   argTypes={{
-    navigationButtons: {
-      description: 'This prop allows the override of the button proposed in the default state',
+    a11y: {
+      description: "React Swiper's accessibility module parameters"
     },
-    slides: {
-      description: 'Slides takes in an array of object with an `id` and a `child` being a ReactNode',
+    children: {
+      description: 'Function looping through every alert and passing the current alert. Can be used for rendering all alerts wrapping `AlertsItem` in another component',
+      table: {
+        type: {
+          summary: '(slide: TCarouselSlideProps) => React.ReactNode'
+        },
+        defaultValue: {
+          summary: '(slide: TCarouselSlideProps) => <CarouselSlide {...slide />}'
+        }
+      }
     },
+    prevButton: {
+      description: 'Custom previous button component for the carousel. Falls back to an arrow button',
+      table: {
+        defaultValue: {
+          summary: 'CarouselPrevNavigationButton'
+        }
+      }
+    },
+    nextButton: {
+      description: 'Custom previous button component for the carousel. Falls back to an arrow button',
+      table: {
+        defaultValue: {
+          summary: 'CarouselNextNavigationButton'
+        }
+      }
+    },
+    modules: {
+      table: {
+        defaultValue: {
+          summary: "['A11y', 'Keyboard']"
+        },
+        type: {
+          summary: 'Array<A11y | Autoplay | Controller | EffectCoverflow | EffectCube | EffectFade | EffectFlip | EffectCreative | EffectCards | HashNavigation | History | Keyboard | Lazy | Mousewheel | Navigation | Pagination | Parallax | Scrollbar | Thumbs | Virtual | Zoom | FreeMode | Grid | Manipulation>'
+        }
+      },
+      description: 'String list of modules the swiper will automatically import'
+    }
   }}
   parameters={{
     layout: 'fullscreen',
@@ -21,21 +62,32 @@ import Button from '../Button'
     slides: [
       {
         id: 1,
-        child: <div>Slide 1</div>,
+        ariaLabel: 'Slide 1 aria label',
+        children: <div>Slide 1</div>,
       },
       {
         id: 2,
-        child: <div>Slide 2</div>,
+        title: 'Slide 2 title',
+        children: <div>Slide 2</div>,
       },
       {
         id: 3,
-        child: <div>Slide 3</div>,
+        children: <div>Slide 3</div>,
       },
       {
         id: 4,
-        child: <div>Slide 4</div>,
+        ariaLabel: 'Slide 4 aria label',
+        title: 'Slide 4 title',
+        children: <div>Slide 4</div>,
       },
     ],
+    onNavigationPrev: () => console.log('Navigated to previous slide'),
+    onNavigationNext: () => console.log('Navigated to next slide'),
+    a11y: {
+      nextSlideMessage: 'Next alert',
+      prevSlideMessage: 'Previous alert',
+      paginationBulletMessage: 'Navigate to slide number {{index}}'
+    },
   }}
 />
 
@@ -45,126 +97,158 @@ export const Template = (args) => {
 
 # Carousel
 
-#### Carousel component. More commonly used for a showcase of images.
+Carousel component. More commonly used for a showcase of images. When using the carousel component, you must import React Swiper CSS files
+
+```ts
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/a11y'
+import 'swiper/css/autoplay'
+import 'swiper/css/navigation'
+import 'swiper/css/mousewheel'
+import 'swiper/css/keyboard'
+```
 
 ## Props
 
-<ArgTypes />
+<ArgTypes
+  include={[
+    'slides',
+    'a11y',
+    'nextButton',
+    'prevButton',
+    'themeName',
+    'tokens',
+    'customTheme',
+    'as',
+    'onSwiper',
+    'onNavigationPrev',
+    'onNavigationNext',
+    'children',
+    'modules',
+  ]}
+ />
 
 ## Showcase
 
-### Basic carousel with 2 slides per view
+### Multiple slides per view
 
 <Canvas>
   <Story
-    name="Carousel"
+    name="Multiple slides per view"
     args={{
-      id: 1,
-      navigation: true,
       slidesPerView: 2,
+      modules: ['Navigation']
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-### Carousel with autoplay
+### Autoplay
 
 <Canvas>
   <Story
-    name="Carousel with autoplay"
+    name="Autoplay"
     args={{
-      id: 2,
+      modules: ['Autoplay', 'Navigation', 'Pagination'],
       autoplay: true,
-      navigation: true,
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-### Carousel with infinite looping
+### Focusable content
 
 <Canvas>
   <Story
-    name="Carousel with infinite looping"
+    name="Focusable content"
     args={{
       id: 3,
-      loop: true,
-      navigation: true,
-    }}
-  >
-    {Template.bind({})}
-  </Story>
-</Canvas>
-
-### Carousel with pagination
-
-<Canvas>
-  <Story
-    name="Carousel with pagination"
-    args={{
-      id: 4,
+      modules: ['Navigation'],
+      slidesPerView: 2,
       slides: [
         {
           id: 1,
-          child: (
+          children: (
             <div>
-              Slide 1<br />
-              &#x200B;
+              <p>Slide 1</p>
+              <a href="#">Focusable content 1</a>
             </div>
           ),
         },
         {
           id: 2,
-          child: (
+          children: (
             <div>
-              Slide 2<br />
-              &#x200B;
+              <p>Slide 2</p>
+              <a href="#">Focusable content 2</a>
             </div>
           ),
         },
         {
           id: 3,
-          child: (
+          children: (
             <div>
-              Slide 3<br />
-              &#x200B;
+              <p>Slide 3</p>
+              <a href="#">Focusable content 3</a>
             </div>
           ),
         },
         {
           id: 4,
-          child: (
+          children: (
             <div>
-              Slide 4<br />
-              &#x200B;
+              <p>Slide 4</p>
+              <a href="#">Focusable content 4</a>
             </div>
           ),
         },
-      ],
-      pagination: {
-        clickable: true,
-      },
-      navigation: false,
+      ]
     }}
   >
     {Template.bind({})}
   </Story>
 </Canvas>
 
-### Carousel with custom buttons
+### Infinite looping
 
 <Canvas>
   <Story
-    name="Carousel custom buttons"
+    name="Infinite looping"
     args={{
       id: 4,
-      navigation: true,
-      navigationButtons: {
-        leftButton: <Button>Previous slide</Button>,
-        rightButton: <Button>Next slide</Button>,
-      },
+      loop: true,
+      modules: ['Navigation'],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Pagination
+
+<Canvas>
+  <Story
+    name="Pagination"
+    args={{
+      modules: ['Pagination'],
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Carousel with custom navigation
+
+<Canvas>
+  <Story
+    name="Carousel custom navigation"
+    args={{
+      modules: ['Navigation'],
+      prevButton: forwardRef((props, ref) => <CarouselPrevNavigationButton {...props} ref={ref}>Previous slide</CarouselPrevNavigationButton>),
+      nextButton: forwardRef((props, ref) => <CarouselNextNavigationButton {...props} ref={ref}>Next slide</CarouselNextNavigationButton>),
     }}
   >
     {Template.bind({})}

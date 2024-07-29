@@ -4,26 +4,24 @@ import TextInputField from './index'
 <Meta
   title="Form/Fields/Text Input"
   component={TextInputField}
-  parameters={{
-    layout: 'fullscreen',
-  }}
   args={{
     id: '',
     label: 'First Name',
     name: 'name',
-    placeholder: 'First Name',
-    required: true,
-    disabled: false,
+    placeholder: 'Your name here',
+    isDisabled: false,
     isError: false,
     ariaLabel: 'First name',
     icon: 'ArrowRight',
+    onChange: (value) => console.log(`Value is now ${value}`),
+    onBlur: (e) => console.log(`Value was ${e.target.value} when the field was blurred`)
   }}
 />
 
 export const Template = (args) => {
   const { backgroundColor, ...rest } = args
   return (
-    <div className={`flex flex-col m-auto h-screen justify-center items-center`}>
+    <div className={`flex flex-col m-auto justify-center items-center`}>
       <TextInputField {...rest} />
     </div>
   )
@@ -32,14 +30,21 @@ export const Template = (args) => {
 # Text Input Field
 
 <Canvas>
-  <Story name="Default">{Template.bind({})}</Story>
+  <Story 
+    name="Default"
+    args={{
+      isRequired: true,
+    }}
+  >
+    {Template.bind({})}
+  </Story>
 </Canvas>
 
 <Canvas>
   <Story
     name="Disabled"
     args={{
-      disabled: true,
+      isDisabled: true,
     }}
   >
     {Template.bind({})}

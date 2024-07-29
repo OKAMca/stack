@@ -10,7 +10,7 @@ const WysiwygBlock = ({ content, themeName = 'wysiwyg', ...rest }: TWysiwygBlock
       dangerouslySetInnerHTML={{
         __html: DOMPurify.sanitize(content, {
           ADD_TAGS: ['iframe'],
-          ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'],
+          ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'target'],
         }),
       }}
     />

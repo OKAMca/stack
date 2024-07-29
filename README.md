@@ -61,3 +61,14 @@ Nx comes with local caching already built-in (check your `nx.json`). On CI you m
 - [Join the community](https://nx.dev/community)
 - [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
 - [Follow us on Twitter](https://twitter.com/nxdevtools)
+
+## Release and publish
+Before any publish, releasing is mandatory if you want it to take any effect.
+
+1. Release
+Run `npm run dry-release` to see the changes that will be made are all good.
+Run `npm run release` to release every project independantly at once.
+
+If you want to release only one package specifically you can use the nx command available in each project called `project-release` and `project-dry-release`
+2. Publish
+Run the `Publish` workflow on main with github actions.

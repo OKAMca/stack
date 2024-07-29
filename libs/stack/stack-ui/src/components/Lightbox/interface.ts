@@ -1,24 +1,28 @@
-import type { AriaOverlayProps } from '@react-aria/overlays'
-import type { AriaDialogProps } from '@react-types/dialog'
-import type { HTMLAttributes } from 'react'
+import type { DOMAttributes } from '@react-types/shared'
 import type React from 'react'
-import type { TDefaultComponent } from '../../types/components'
+import type { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import type { OverlayTriggerProps as AriaOverlayTriggerProps } from 'react-aria'
+import type { OverlayTriggerProps } from 'react-stately'
+import type { TDefaultComponent, TTransition } from '../../types/components'
+import type { TButtonProps } from '../Button/interface'
 
-export interface ModalProps {
-  children?: React.ReactNode
+type TCloseButtonProps =
+  | React.ForwardRefExoticComponent<TButtonProps & React.RefAttributes<HTMLButtonElement & HTMLAnchorElement>>
+  | FunctionComponent<TButtonProps>
+
+export interface LightboxProps extends TDefaultComponent, OverlayTriggerProps, Omit<AriaOverlayTriggerProps, 'type'> {
+  closeButtonAriaLabel?: string
+  setOpen?: Dispatch<SetStateAction<boolean>>
+  closeButton?: TCloseButtonProps
+  transitionComponent?: FunctionComponent<TTransition>
 }
 
-export interface ILightboxProps extends HTMLAttributes<HTMLElement> {
-  id: string
-  children?: React.ReactNode
-  label?: string
-  thumbnailContent?: React.ReactNode
-  lightboxContent?: React.ReactNode
-  isOpen?: boolean
-  onOpenCallBack?: (bool: boolean) => void
-  onCloseCallBack?: () => void
+export interface TLightboxProps extends LightboxProps {
+  label: string
+  thumbnailContent: React.ReactNode
 }
 
-export type LightboxProps = ILightboxProps & TDefaultComponent
-
-export type ModalDialogProps = AriaOverlayProps & AriaDialogProps & ModalProps
+export interface LightboxAria {
+  overlayProps: DOMAttributes & { label?: string }
+  labelProps: DOMAttributes
+}

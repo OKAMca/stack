@@ -2,10 +2,9 @@
 import type { AccordionItemAriaProps } from '@react-aria/accordion'
 import type { ComponentType, ReactElement } from 'react'
 import type { ItemProps, TreeProps } from 'react-stately'
-import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent, TTransition } from '../../types/components'
 
-type TAccordionDefaultComponent = Omit<TDefaultComponent<TAccordionTokens>, 'children'>
+type TAccordionDefaultComponent = Omit<TDefaultComponent, 'children'>
 
 export interface AccordionProps extends TreeProps<TAccordionItemProps> {
   children: ReactElement<TAccordionItemProps> | ReactElement<TAccordionItemProps>[]
@@ -18,7 +17,7 @@ export interface TAccordionProps extends TAccordionDefaultComponent, AccordionPr
 
 export interface TAccordionItemProps extends ItemProps<TAccordionItemProps>, TAccordionDefaultComponent {
   icon?: React.ReactNode
-  onOpenChange: (isOpen: boolean) => void
+  onOpenChange?: (isOpen: boolean) => void
   defaultOpen?: boolean
   isOpen?: boolean
 }
@@ -29,8 +28,3 @@ export type TAriaAccordionItemProps = TAccordionDefaultComponent &
       props?: TAccordionItemProps
     }
   }
-
-interface TAccordionTokens extends TToken {
-  titleBold: boolean
-  textAlign: 'center' | 'left'
-}

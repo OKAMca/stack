@@ -1,9 +1,10 @@
+import { Item } from 'react-stately'
 import type { TSelectItemProps } from './SelectItem.interface'
 
 const SelectItem = (props: TSelectItemProps) => {
-  const { label, value } = props
+  const { key, value } = props
 
-  return <option value={value}>{label}</option>
+  return <Item key={key}>{value}</Item>
 }
 
 export default SelectItem
