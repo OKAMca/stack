@@ -131,7 +131,11 @@ export const TemplateControlledState = (args) => {
         textAlign: 'center',
       },
       children: [
-        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+        <AccordionItem 
+          key="item-1" 
+          title="This is an accordion" 
+          onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        >
           BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
           prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
           mind.
@@ -155,7 +159,12 @@ export const TemplateControlledState = (args) => {
       },
       icon: <CloseBtn />,
       children: [
-        <AccordionItem key="item-1" title="This is an accordion" defaultOpen onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+        <AccordionItem 
+          key="item-1" 
+          title="This is an accordion" 
+          defaultOpen 
+          onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        >
           BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
           prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
           mind.
@@ -179,11 +188,23 @@ export const TemplateControlledState = (args) => {
       },
       icon: <CloseBtn />,
       children: [
-        <AccordionItem key="item-1" title="This is an accordion" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+        <AccordionItem 
+          key="item-1" 
+          title="This is an accordion" 
+          tokens={{ bgColor: 'white' }} 
+          onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+          icon="Plus"
+        >
           <Button>Focusable item 1</Button>
           <Button>Focusable item 2</Button>
         </AccordionItem>,
-        <AccordionItem key="item-2" title="This is an accordion 2" onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}>
+        <AccordionItem 
+          key="item-2" 
+          title="This is an accordion 2" 
+          tokens={{ bgColor: 'gray' }} 
+          onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+          icon="Plus"
+        >
           <Button>Focusable item</Button>
         </AccordionItem>
       ]

@@ -1,0 +1,22 @@
+import { Box } from '@okam/stack-ui'
+import React from 'react'
+import type { TBlockSerializerProps } from '@okam/directus-block'
+import { useBlock } from '@okam/directus-block'
+import type { <%= type %> } from './interface'
+
+const <%= componentName %> = async (props: TBlockSerializerProps<<%= type %>>) => {
+  const key = '<%= key %>'
+  const { themeName = '<%= snakeName %>', tokens } = props
+  const { id, cmsTokens } = await useBlock<<%= type %>>(props, key)
+
+  if (!id) return null
+
+  return (
+    <Box as="span" themeName={themeName} tokens={{ ...tokens, ...cmsTokens }}>
+      {"Hello world with id:"}
+      {id}
+    </Box>
+  )
+}
+
+export default <%= componentName %>

@@ -1,43 +1,116 @@
 {
+  "release": {
+    "projects": [
+      "stack-ui",
+      "core-lib",
+      "next-component",
+      "directus-node",
+      "directus-query",
+      "directus-block",
+      "directus-next-component",
+      "directus-flexible-content",
+      "automation"
+    ],
+    "releaseTagPattern": "{projectName}-v{version}",
+    "projectsRelationship": "independent",
+    "changelog": {
+      "projectChangelogs": {
+        "createRelease": "github"
+      }
+    },
+    "version": {
+      "conventionalCommits": true
+    }
+  },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"],
-        "accessToken": "NjYxNDliYmQtYzJjOC00OWIyLTk4ODAtZTI1ZDJmNDdhYTRlfHJlYWQtd3JpdGU="
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e",
+          "build-storybook"
+        ],
+        "accessToken": "ZjIyMjRhNDAtMDQ4MS00ZmU2LWExYzktOGQ0ZDU0MWYzYTI4fHJlYWQ="
       }
     }
   },
   "targetDefaults": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
-    },
-    "e2e": {
-      "inputs": ["default", "^production"]
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ]
     },
     "lint": {
-      "inputs": ["default", "{workspaceRoot}/.eslintrc.json", "{workspaceRoot}/.eslintignore"]
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ]
     },
     "build-storybook": {
-      "inputs": ["default", "^production", "!{projectRoot}/.storybook/**/*"]
-    },
-    "@nx/vite:test": {
-      "cache": true,
-      "inputs": ["default", "^production"]
+      "inputs": [
+        "default",
+        "^production",
+        "{projectRoot}/.storybook/**/*",
+        "{projectRoot}/tsconfig.storybook.json"
+      ],
+      "cache": true
     },
     "@nx/js:tsc": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
+    },
+    "@nx/eslint:lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ],
+      "cache": true
+    },
+    "project-dry-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx release --projects={projectName} --dry-run"
+        ]
+      }
+    },
+    "project-release": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx release --projects={projectName}"
+        ]
+      }
     }
   },
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -45,7 +118,8 @@
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/.eslintrc.json",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-      "!{projectRoot}/.storybook/**/*"
+      "!{projectRoot}/.storybook/**/*",
+      "!{projectRoot}/tsconfig.storybook.json"
     ],
     "sharedGlobals": []
   },
@@ -64,5 +138,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "useInferencePlugins": false
 }

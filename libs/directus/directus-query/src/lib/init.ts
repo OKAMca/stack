@@ -5,7 +5,7 @@ import type { RequestConfig } from 'graphql-request/build/esm/types'
 import { GRAPHQL_ENDPOINT, defaultConfig } from './config'
 import { queryGql } from './query'
 
-const initDiretusQuery = (graphqlEndPoint = GRAPHQL_ENDPOINT, requestConfig: RequestConfig = defaultConfig) => {
+const initDirectusQuery = (graphqlEndPoint = GRAPHQL_ENDPOINT, requestConfig: RequestConfig = defaultConfig) => {
   const client = new GraphQLClient(graphqlEndPoint, requestConfig)
 
   function internalQueryGql<TResult, TVariables extends Variables>(
@@ -21,4 +21,4 @@ const initDiretusQuery = (graphqlEndPoint = GRAPHQL_ENDPOINT, requestConfig: Req
   }
 }
 
-export default initDiretusQuery
+export default initDirectusQuery

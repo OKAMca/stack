@@ -11,9 +11,10 @@ import Icon from '../../Icon'
 import type { TAriaAccordionItemProps } from '../interface'
 
 const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
-  const { item, themeName, tokens, customTheme } = props
+  const { item, tokens, customTheme } = props
   const { props: itemProps, rendered, key } = item
-  const { icon, title, onOpenChange } = itemProps ?? {}
+  const { icon, title, onOpenChange, tokens: itemTokens, themeName: itemThemeName } = itemProps ?? {}
+  const { themeName = itemThemeName } = props
 
   const ref = useRef(null)
   const { state, TransitionAnimation = AccordionTransition } = useAccordionCtx()
@@ -25,7 +26,7 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
 
   const isOpen = state.selectionManager.selectedKeys.has(key)
 
-  const accordionTokens = { ...tokens, isOpen }
+  const accordionItemTokens = { ...tokens, isOpen, ...itemTokens }
 
   const handlePress: TButtonProps['handlePress'] = (e) => {
     e.continuePropagation()
@@ -38,30 +39,33 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
   }, [isOpen])
 
   return (
-    <Box themeName={`${themeName}.container`} tokens={accordionTokens} customTheme={customTheme}>
+    <Box themeName={`${themeName}.container`} tokens={accordionItemTokens} customTheme={customTheme}>
       <FocusRing focusRingClass="has-focus-ring">
         <ButtonWithForwardRef
           {...buttonProps}
+          aria-expanded={isOpen}
           handlePress={handlePress}
           ref={ref}
           themeName={`${themeName}.button`}
-          tokens={accordionTokens}
+          tokens={accordionItemTokens}
         >
-          <Box themeName={`${themeName}.title`} tokens={accordionTokens}>
+          <Box themeName={`${themeName}.title`} tokens={accordionItemTokens}>
             {title}
           </Box>
-          <Box themeName={`${themeName}.icon`} tokens={accordionTokens}>
-            <Icon icon={icon ?? 'ArrowDown'} />
-          </Box>
+          {icon && (
+            <Box themeName={`${themeName}.icon`} tokens={accordionItemTokens}>
+              <Icon icon={icon} />
+            </Box>
+          )}
         </ButtonWithForwardRef>
       </FocusRing>
       <TransitionAnimation
         isVisible={isOpen}
         themeName={`${themeName}.region`}
         {...regionProps}
-        tokens={accordionTokens}
+        tokens={accordionItemTokens}
       >
-        <Box themeName={`${themeName}.content`} tokens={accordionTokens}>
+        <Box themeName={`${themeName}.content`} tokens={accordionItemTokens}>
           <FocusScope autoFocus>{rendered}</FocusScope>
         </Box>
       </TransitionAnimation>

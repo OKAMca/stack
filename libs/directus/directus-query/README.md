@@ -7,9 +7,9 @@ This library was generated with [Nx](https://nx.dev).
 To create a new client, first create a new file with the following content:
 
 ```ts
-import { initDiretusQuery } from '@okam/directus-query'
+import { initDirectusQuery } from '@okam/directus-query'
 
-const queryClient = initDiretusQuery('https://example.com/api', {
+const queryClient = initDirectusQuery('https://example.com/api', {
   credentials: 'include',
   mode: 'cors',
   fetch,ù
@@ -27,3 +27,4 @@ Then, you can use the client to query data from Directus:
 const variables = {id: 1}
 const data = await queryClient.queryGql(DOCUMENT, variables)
 ```
+

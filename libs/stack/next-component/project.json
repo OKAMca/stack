@@ -3,15 +3,18 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/stack/next-component/src",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "executor": "@nx/eslint:lint"
     },
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/stack/next-component",
         "tsConfig": "libs/stack/next-component/tsconfig.lib.json",
@@ -28,6 +31,58 @@
           }
         ]
       }
-    }
+    },
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/stack/next-component/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@nx/storybook:build",
+      "outputs": [
+        "{options.outputDir}"
+      ],
+      "options": {
+        "outputDir": "dist/storybook/next-component",
+        "configDir": "libs/stack/next-component/.storybook"
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/stack/next-component/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "next-component:build-storybook",
+        "staticFilePath": "dist/storybook/next-component"
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "next-component:build-storybook:ci"
+        }
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/libs/stack/next-component"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
   }
 }

@@ -1,8 +1,8 @@
 {
   "name": "@okam/directus-node",
-  "main": "./index.js",
-  "version": "0.0.2",
-  "types": "./index.d.ts",
+  "main": "./src/index.js",
+  "version": "0.2.0",
+  "types": "./src/index.d.ts",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
