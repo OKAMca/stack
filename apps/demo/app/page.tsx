@@ -1,7 +1,6 @@
 import { NextComponent } from '@okam/next-component'
 import { HelloServer } from '@okam/next-component/server'
 import {
-  Accordion,
   Box,
   Button,
   Calendar,
@@ -18,6 +17,7 @@ import {
   WysiwygBlock,
   TextArea,
   TextInputField,
+  Select,
   DirectusImg,
 } from '@okam/stack-ui'
 import image from 'libs/stack/stack-ui/static/images/image.png'
@@ -42,6 +42,18 @@ export default async function Index() {
             thumbhash="aRgODIKUQmq/WIdzh3klj1LgGA=="
           />
         </Box>
+        <Select
+          id="season"
+          label="Select a season"
+          name="season"
+          placeholderLabel="Season"
+          options={[
+            { key: 'summer', value: 'Summer' },
+            { key: 'fall', value: 'Fall' },
+            { key: 'winter', value: 'Winter' },
+            { key: 'spring', value: 'Spring' },
+          ]}
+        />
         <Box>
           <Typography tokens={{ size: 'h1' }}>This is a test of all available components</Typography>
         </Box>
@@ -61,13 +73,7 @@ export default async function Index() {
           <Box>
             <Typography tokens={{ size: 'h2' }}>Interactive components</Typography>
           </Box>
-          <Box>
-            <Accordion id="accordion" title="Accordion" ariaLabel="Open accordion">
-              <Typography>
-                This is just random content to test what the inside of the Accordion component looks like.
-              </Typography>
-            </Accordion>
-          </Box>
+          <Box />
           <Box>
             <Button>This is an example button</Button>
           </Box>

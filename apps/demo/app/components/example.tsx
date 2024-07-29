@@ -1,3 +1,3 @@
-import { initDiretusQuery } from '@okam/directus-query'
+import { initDirectusQuery } from '@okam/directus-query'
 
-const { queryGql } = initDiretusQuery()
+const { queryGql } = initDirectusQuery()

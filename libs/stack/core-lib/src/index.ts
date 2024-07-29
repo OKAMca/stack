@@ -14,3 +14,5 @@ export { createCtxNullable } from './utils/createContext'
 export { default as getNestedObjectValueOfKey } from './utils/object-find-deep-nested'
 
 export { default as checkObjectProperty } from './utils/object-property'
+
+export { capitalizeFirstLetter } from './utils/string-transform'

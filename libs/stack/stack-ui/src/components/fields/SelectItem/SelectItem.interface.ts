@@ -1,6 +1,6 @@
 import type { TDefaultComponent } from '../../../types/components'
 
 export interface TSelectItemProps extends TDefaultComponent {
-  label: string
+  key: string
   value: string
 }

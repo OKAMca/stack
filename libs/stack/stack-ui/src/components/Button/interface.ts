@@ -8,7 +8,7 @@ export interface TButtonProps extends TDefaultComponent {
   id?: string
   href?: string
   disabled?: boolean
-  download?: boolean
+  download?: boolean | string
   target?: string
   rel?: string
   handlePress?: ((e: PressEvent) => void) | undefined
@@ -17,6 +17,6 @@ export interface TButtonProps extends TDefaultComponent {
   isDisabled?: boolean
 }
 
-export interface TAnchorPropsProps extends TButtonProps {
+export interface TAnchorProps extends TButtonProps {
   nextLinkProps?: LinkProps
 }

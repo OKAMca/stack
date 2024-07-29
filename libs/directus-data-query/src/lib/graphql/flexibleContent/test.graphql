@@ -1,0 +1,50 @@
+query Pages {
+	pages {
+		title
+		translations {
+      languages_code
+      flexible_editor
+			editor_nodes {
+        id
+        pages_translations_id {
+					languages_code
+				}
+        collection
+				item {
+					... on block_quote {
+						content
+						id
+						subtitle
+						title
+					}
+					... on block_button {
+						color
+						date_created
+						date_updated
+						external_url
+						id
+						label
+						sort
+						type
+						user_created
+						user_updated
+						variant
+					}
+					... on related_block_faqs {
+						id
+						blocks {
+							id
+							block_faqs_id {
+								alignment
+								faqs
+								headline
+								id
+								title
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
