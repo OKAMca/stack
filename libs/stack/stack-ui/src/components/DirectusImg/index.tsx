@@ -1,5 +1,3 @@
-'use client'
-
 import { createPngDataUri } from 'unlazy/thumbhash'
 import Img from '../Img'
 import type TDirectusImageProps from './interface'
