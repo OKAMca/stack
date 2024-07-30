@@ -72,3 +72,15 @@ Run `npm run release` to release every project independantly at once.
 If you want to release only one package specifically you can use the nx command available in each project called `project-release` and `project-dry-release`
 2. Publish
 Run the `Publish` workflow on main with github actions.
+
+## Codegen (internal only)
+
+First define NEXT_PUBLIC_GRAPHQL_URL in your .env file
+```
+NEXT_PUBLIC_GRAPHQL_URL=https://website.com/graphql/
+```
+
+Then run codegen
+```
+npm run codegen
+```
