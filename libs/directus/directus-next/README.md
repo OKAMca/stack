@@ -32,7 +32,7 @@ export async function GET(request: Request) {
 }
 ```
 
-### Environement
+### Environment
 Set the secret in your .env and your directus application (preview_secret field).
 
 .env
