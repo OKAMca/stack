@@ -45,7 +45,7 @@ export default function useDirectusLink(props: TDirectusLinkProps): TAnchorProps
 
   const finalConfig = { ...defaultPropsConfig, ...(propsConfig ?? {}) }
 
-  const { href, ...rest } = finalConfig[type](props)
+  const { href, ...rest } = finalConfig[type]?.(props) ?? {}
 
   if (!href) return {}
 
