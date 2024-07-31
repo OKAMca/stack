@@ -1,4 +1,5 @@
 import type { TAnchorProps } from '@okam/stack-ui'
+import Link from 'next/link'
 import type { TDirectusLinkProps, TDirectusLinkPropsConfig } from '../components/DirectusLink/interface'
 import useDirectusFile from './directus-file'
 
@@ -26,7 +27,19 @@ const defaultPropsConfig: TDirectusLinkPropsConfig = {
 }
 
 export default function useDirectusLink(props: TDirectusLinkProps): TAnchorProps {
-  const { type, label, prefetch, replace, scroll, variant, tokens, themeName, customTheme, propsConfig } = props
+  const {
+    type,
+    label,
+    prefetch,
+    replace,
+    scroll,
+    variant,
+    tokens,
+    themeName,
+    customTheme,
+    propsConfig,
+    as = Link,
+  } = props
 
   if (!type) return {}
 
@@ -37,6 +50,7 @@ export default function useDirectusLink(props: TDirectusLinkProps): TAnchorProps
   if (!href) return {}
 
   return {
+    as,
     themeName,
     tokens: { ...tokens, ...(variant ? { type: variant } : {}) },
     customTheme,
