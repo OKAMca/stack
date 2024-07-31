@@ -1,5 +1,4 @@
 # Stack UI Next.js Demo
-# demo nextjs app
 
 ## Configuration
 Configure your .env (at the root of the monorepo) with at least theses variables:
