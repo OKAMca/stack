@@ -87,3 +87,15 @@ import { something } from '@okam/package-name'
 ```
 
 Restart your editor to make sure typescript is recompiled.
+
+## Codegen (internal only)
+
+First define NEXT_PUBLIC_GRAPHQL_URL in your .env file
+```
+NEXT_PUBLIC_GRAPHQL_URL=https://website.com/graphql/
+```
+
+Then run codegen
+```
+npm run codegen
+```
