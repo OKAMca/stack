@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import useThemeContext from '../../providers/Theme/hooks'
 import type TImgProps from './interface'
