@@ -4,6 +4,7 @@
       "stack-ui",
       "core-lib",
       "next-component",
+      "directus-next",
       "directus-node",
       "directus-query",
       "directus-block",
