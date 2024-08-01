@@ -7,12 +7,15 @@ const DirectusLink = (props: TDirectusLinkProps) => {
 
   const linkProps = useDirectusLink(props)
 
-  if (!type || !linkProps.href) return null
+  if (!type) return null
 
   const LinkComponent = componentsConfig?.[type]
 
-  if (!LinkComponent) return <Anchor {...linkProps} />
-  return <LinkComponent {...props} />
+  if (LinkComponent) return <LinkComponent {...props} />
+
+  if (!linkProps.href) return null
+
+  return <Anchor {...linkProps} />
 }
 
 export default DirectusLink
