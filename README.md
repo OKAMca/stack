@@ -66,11 +66,63 @@ Nx comes with local caching already built-in (check your `nx.json`). On CI you m
 Before any publish, releasing is mandatory if you want it to take any effect.
 
 1. Release
+
+You will need to be connected to github (GITHUB_TOKEN, GH_TOKEN) or with cli login.
+
+- Install `gh`
+
+  Linux
+  ```
+  sudo apt install gh
+  ```
+
+  MacOS
+  ```
+  brew install gh
+  ```
+
+- Connect to  github
+  ```
+  gh auth login
+  # GitHub.com
+  # SSH
+  # upload  ssh public key? skip
+  # how ? login with a web browser
+  # press enter, login.
+  ```
+
 Run `npm run dry-release` to see the changes that will be made are all good.
 Run `npm run release` to release every project independantly at once.
 
 If you want to release only one package specifically you can use the nx command available in each project called `project-release` and `project-dry-release`
+
+Check that the project name is inside nx.json, release.projects array.
+
+```
+# first time
+npx nx run PROJECTNAME:project-dry-release --first-release
+# next time
+npx nx run PROJECTNAME:project-dry-release
+
+# when you are ready
+# first time
+npx nx run PROJECTNAME:project-release --first-release
+npx nx run PROJECTNAME:project-release
+```
+
 2. Publish
+
+Check that projects were released before and that the tag "publishable" is inside project.json of each project.
+
+/some/project/project.json
+```
+{
+   "tags": [
+     "publishable"
+   ],
+}
+```
+
 Run the `Publish` workflow on main with github actions.
 
 ## Adding a library to the repository
