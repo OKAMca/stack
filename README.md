@@ -111,6 +111,18 @@ npx nx run PROJECTNAME:project-release
 ```
 
 2. Publish
+
+Check that projects were released before and that the tag "publishable" is inside project.json of each project.
+
+/some/project/project.json
+```
+{
+   "tags": [
+     "publishable"
+   ],
+}
+```
+
 Run the `Publish` workflow on main with github actions.
 
 ## Adding a library to the repository
