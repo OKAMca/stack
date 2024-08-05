@@ -68,15 +68,28 @@ Before any publish, releasing is mandatory if you want it to take any effect.
 1. Release
 
 You will need to be connected to github (GITHUB_TOKEN, GH_TOKEN) or with cli login.
-```
-sudo apt install gh
-gh auth login
-# GitHub.com
-# SSH
-# upload  ssh public key? skip
-# how ? login with a web browser
-# press enter, login.
-```
+
+- Install `gh`
+
+  Linux
+  ```
+  sudo apt install gh
+  ```
+
+  MacOS
+  ```
+  brew install gh
+  ```
+
+- Connect to  github
+  ```
+  gh auth login
+  # GitHub.com
+  # SSH
+  # upload  ssh public key? skip
+  # how ? login with a web browser
+  # press enter, login.
+  ```
 
 Run `npm run dry-release` to see the changes that will be made are all good.
 Run `npm run release` to release every project independantly at once.
