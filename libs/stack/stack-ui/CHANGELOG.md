@@ -1,4 +1,4 @@
-## [1.20.4.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.4...stack-ui-v1.20.4.1) (2024-08-06)
+## [1.20.4-1](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.4...stack-ui-v1.20.4-1) (2024-08-06)
 
 ### Bug Fixes
 
