@@ -1,3 +1,10 @@
+## [1.20.4.1](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.4...stack-ui-v1.20.4.1) (2024-08-06)
+
+### Bug Fixes
+
+* Patch for Next.js 13.4.8 to 14.0.x next/image import with default bug in cjs (build)
+* Solve other problems in loading demo Next.js app to test the build
+
 ## [1.20.4](https://github.com/OKAMca/stack/compare/stack-ui-v1.20.3...stack-ui-v1.20.4) (2024-05-07)
 
 
