@@ -7,7 +7,7 @@ import type { TButtonProps } from '../../Button/interface'
 import Icon from '../../Icon'
 import type { TCarouselNavigationButtonProps } from '../interface'
 
-const CarouselNavigationButton = forwardRef(
+export const CarouselNavigationButton = forwardRef(
   (props: TCarouselNavigationButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const { themeName, tokens, customTheme, children, onSubmit, ...rest } = props
     const { isDisabled } = rest
