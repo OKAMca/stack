@@ -1,7 +1,7 @@
 import { NextComponent } from '@okam/next-component'
 import { HelloServer } from '@okam/next-component/server'
 import {
-  Accordion,
+  // Accordion,
   Box,
   Button,
   Calendar,
@@ -62,11 +62,13 @@ export default async function Index() {
             <Typography tokens={{ size: 'h2' }}>Interactive components</Typography>
           </Box>
           <Box>
+            {/*
             <Accordion id="accordion" title="Accordion" ariaLabel="Open accordion">
               <Typography>
                 This is just random content to test what the inside of the Accordion component looks like.
               </Typography>
             </Accordion>
+            */}
           </Box>
           <Box>
             <Button>This is an example button</Button>

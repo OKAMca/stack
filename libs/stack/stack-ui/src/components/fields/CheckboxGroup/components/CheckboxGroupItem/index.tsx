@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef } from 'react'
 import { FocusRing, VisuallyHidden, useCheckboxGroupItem } from 'react-aria'
 import type { CheckboxGroupState } from 'react-stately'
