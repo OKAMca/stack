@@ -9,6 +9,11 @@ export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
 export { default as Popover } from './components/Popover'
 export { default as Carousel } from './components/Carousel'
+export {
+  CarouselNextNavigationButton,
+  CarouselPrevNavigationButton,
+  CarouselNavigationButton,
+} from './components/Carousel/components/CarouselNavigationButton'
 export { default as WysiwygBlock } from './components/WysiwygBlock'
 export { default as Icon } from './components/Icon'
 export { default as Date } from './components/Date'
@@ -47,6 +52,7 @@ export { MenuContextProvider, useMenu } from './providers/Menu'
 export { RadioGroupProvider, useRadioGroupCtx } from './providers/RadioGroup/RadioGroup'
 export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion'
 export { SearchBarProvider } from './providers/UserSearchQuery'
+export { SwiperControllerContextProvider, useSwiperController } from './providers/Swiper'
 
 // types & interfaces
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
