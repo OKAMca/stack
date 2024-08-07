@@ -61,6 +61,11 @@ const BrandLink = (props) => {
 
 The `useNavigationItems` hook allows to build recursively a navigation structure using the `DirectusLink` component. 
 
+The tokens passed to `link` and `linkProps` include also include, in order of priority:
+- The tokens passed from `onNavigationItem`
+- The variant of the navigation item, passed as the `type` token
+- The tokens of the navigation item
+
 ### Props
 
 - `link`: A rendered react node of the `DirectusLink` component

@@ -26,7 +26,7 @@ const defaultPropsConfig: TDirectusLinkPropsConfig = {
 }
 
 export default function useDirectusLink(props: TDirectusLinkProps): TAnchorProps {
-  const { type, label, prefetch, replace, scroll, variant, tokens, themeName, customTheme, propsConfig } = props
+  const { type, label, prefetch, replace, scroll, tokens, themeName, customTheme, propsConfig } = props
 
   if (!type) return {}
 
@@ -38,7 +38,7 @@ export default function useDirectusLink(props: TDirectusLinkProps): TAnchorProps
 
   return {
     themeName,
-    tokens: { ...tokens, ...(variant ? { type: variant } : {}) },
+    tokens,
     customTheme,
     nextLinkProps: {
       href,
