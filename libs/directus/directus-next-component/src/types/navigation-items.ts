@@ -19,17 +19,23 @@ export type TNavigationItemsTree = {
 
 type DepthLimit = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+export type TNavigationItemsBase<Link> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tokens?: any | null
+  variant?: string | null
+} & Link
+
 export type TNavigationItemsParents<NavigationItems, Link, Depth extends number> = Depth extends never
-  ? Link
+  ? TNavigationItemsBase<Link>
   : {
       parent?: Nullable<TNavigationItemsParents<NavigationItems, Link, Depth>>
-    } & Link
+    } & TNavigationItemsBase<Link>
 
 export type TNavigationItemsChildren<NavigationItems, Link, Depth extends number> = Depth extends never
-  ? Link
+  ? TNavigationItemsBase<Link>
   : {
       children?: Nullable<Nullable<TNavigationItemsChildren<NavigationItems, Link, DepthLimit[Depth]>>[]>
-    } & Link
+    } & TNavigationItemsBase<Link>
 
 export type TNavigationItems<NavigationItems, Link, Depth extends number> = TNavigationItemsChildren<
   NavigationItems,

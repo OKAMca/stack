@@ -8,11 +8,27 @@ import type {
   TNavigationItemsTree,
 } from '../types/navigation-items'
 
-function createParentTree<
-  Depth extends number,
-  Link,
-  NavigationItems extends TNavigationItems<NavigationItems, Link, Depth>,
->(
+function createLinkProps<Depth extends number, Link, NavigationItems>(
+  item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>,
+  onNavigationItem: (item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>) => Nullable<TDirectusLinkProps>,
+) {
+  const { tokens, variant } = item ?? {}
+  const link = onNavigationItem(item)
+
+  const linkTokens = {
+    ...tokens,
+    ...link?.tokens,
+    type: variant,
+  }
+  const linkProps = {
+    ...link,
+    tokens: linkTokens,
+  }
+
+  return linkProps
+}
+
+function createParentTree<Depth extends number, Link, NavigationItems>(
   item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>,
   onNavigationItem: (
     item: Nullable<TNavigationItemsParents<NavigationItems, Link, Depth>>,
@@ -20,24 +36,20 @@ function createParentTree<
   depth = -1,
 ): Nullable<TNavigationItemsTree> {
   const { parent } = item ?? {}
-  const link = onNavigationItem(item)
-  const { id } = link ?? {}
+  const linkProps = createLinkProps(item, onNavigationItem)
+  const { id } = linkProps ?? {}
 
   if (!id) return null
 
   return {
-    link: <DirectusLink {...link} />,
-    linkProps: link,
+    link: <DirectusLink {...linkProps} />,
+    linkProps,
     parent: createParentTree(parent as typeof item, onNavigationItem, depth - 1),
     depth,
   }
 }
 
-function createChildrenTree<
-  Depth extends number,
-  Link,
-  NavigationItems extends TNavigationItems<NavigationItems, Link, Depth>,
->(
+function createChildrenTree<Depth extends number, Link, NavigationItems>(
   item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>,
   onNavigationItem: (
     item: Nullable<TNavigationItemsChildren<NavigationItems, Link, Depth>>,
@@ -45,14 +57,14 @@ function createChildrenTree<
   depth = 1,
 ): Nullable<TNavigationItemsTree> {
   const { children } = item ?? {}
-  const link = onNavigationItem(item)
-
-  const { id } = link ?? {}
+  const linkProps = createLinkProps(item, onNavigationItem)
+  const { id } = linkProps ?? {}
 
   if (!id) return null
+
   return {
-    link: <DirectusLink {...link} />,
-    linkProps: link,
+    link: <DirectusLink {...linkProps} />,
+    linkProps,
     children: children?.map((child) => createChildrenTree(child as typeof item, onNavigationItem, depth + 1)),
     depth,
   }
@@ -73,7 +85,9 @@ export default function useNavigationItems<
 ): Nullable<Nullable<TNavigationItemsTree>[]> {
   const tree = items?.map((item) => {
     const { children, parent } = item ?? {}
-    const link = onNavigationItem(item)
+
+    const linkProps = createLinkProps(item, onNavigationItem)
+
     const parentTree = createParentTree(parent as typeof item, onNavigationItem)
     const childrenTree = children?.map((child) => createChildrenTree(child as typeof item, onNavigationItem))
 
@@ -81,8 +95,8 @@ export default function useNavigationItems<
       depth: 0,
       parent: parentTree,
       children: childrenTree,
-      link: <DirectusLink {...link} />,
-      linkProps: link,
+      link: <DirectusLink {...linkProps} />,
+      linkProps,
     }
   })
 
