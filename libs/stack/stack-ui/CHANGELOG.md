@@ -1,3 +1,7 @@
+## 1.27.2 (2024-08-07)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
 ## 1.27.1 (2024-08-07)
 
 
