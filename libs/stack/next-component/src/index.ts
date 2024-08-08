@@ -1,3 +1,3 @@
-// Use this file to export React client components (e.g. those with 'use client' directive) or other non-server utilities
+export { default as Img } from './components/Img'
 
-export * from './lib/next-component'
+export type { default as TImgProps } from './components/Img/interface'

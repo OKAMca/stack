@@ -2,12 +2,16 @@ query Pages {
 	pages {
 		title
 		translations {
-      languages_code
+      languages_code {
+        code
+      }
       flexible_editor
 			editor_nodes {
         id
         pages_translations_id {
-					languages_code
+					languages_code {
+            code
+          }
 				}
         collection
 				item {
@@ -26,8 +30,6 @@ query Pages {
 						label
 						sort
 						type
-						user_created
-						user_updated
 						variant
 					}
 					... on related_block_faqs {
