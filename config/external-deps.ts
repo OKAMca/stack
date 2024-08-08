@@ -6,7 +6,7 @@ const externalDeps = [
   'react/jsx-runtime',
   'react-aria',
   'react-stately',
-  'isomorphic-dompurify',
+  'sanitize-html',
   '@react-aria/calendar',
   '@react-aria/checkbox',
   '@react-aria/datepicker',
