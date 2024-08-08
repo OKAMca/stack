@@ -20,6 +20,10 @@ const button = tv({
     shape: 'rounded',
   },
   variants: {
+    type: {
+      button: '',
+      menu: 'text-2xl',
+    },
     buttonStyle: {
       default: `
             px-4
