@@ -1,3 +1,15 @@
+## 1.27.3 (2024-08-08)
+
+
+### 🩹 Fixes
+
+- missing use client on carousel nav button ([13a0316](https://github.com/OKAMca/stack/commit/13a0316))
+
+
+### ❤️  Thank You
+
+- poclerson
+
 ## 1.27.2 (2024-08-07)
 
 This was a version bump only for stack-ui to align it with other projects, there were no code changes.
