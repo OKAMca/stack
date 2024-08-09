@@ -60,6 +60,13 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     customTheme,
     propsConfig,
     as = Link,
+    target,
+    anchor,
+    collection,
+    external_link: externalLink,
+    file,
+    id,
+    ...rest
   } = props
 
   if (!type) return {}
@@ -68,15 +75,16 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
 
   const linkProps = finalConfig[type]?.(props) ?? {}
 
-  const { href, ...rest } = linkProps
+  const { href, ...restOfLinkProps } = linkProps
 
   if (!href) return {}
 
   return {
+    ...rest,
     as,
-    themeName,
+    ...(themeName ? { themeName } : {}),
+    ...(customTheme ? { customTheme } : {}),
     tokens: { ...tokens, ...(variant ? { type: variant } : {}) },
-    customTheme,
     nextLinkProps: {
       href,
       prefetch: prefetch ?? undefined,
@@ -85,6 +93,6 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     },
     href,
     children: label,
-    ...rest,
+    ...restOfLinkProps,
   }
 }
