@@ -28,8 +28,6 @@ const Lightbox = (props: TLightboxProps) => {
     themeName = 'lightBox',
     tokens,
     closeButton: CloseButton = LightboxCloseButton,
-    setOpen,
-    isOpen,
     closeButtonAriaLabel,
     transitionComponent,
   } = props
@@ -41,15 +39,10 @@ const Lightbox = (props: TLightboxProps) => {
     state,
   )
 
-  const handleOpen: TButtonProps['handlePress'] = (e) => {
-    setOpen?.(!isOpen)
-    openTriggerProps.handlePress?.(e)
-  }
-
   return (
     <>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <Button themeName={`${themeName}.wrapper`} tokens={tokens} {...openTriggerProps} handlePress={handleOpen}>
+        <Button themeName={`${themeName}.wrapper`} tokens={tokens} {...openTriggerProps}>
           {label && (
             <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }} {...labelProps}>
               {label}
