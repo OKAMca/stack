@@ -1,3 +1,15 @@
+## 1.28.0 (2024-08-13)
+
+
+### 🚀 Features
+
+- add wysiwyg stories with iframe and allowed attributes ([4efd70b](https://github.com/OKAMca/stack/commit/4efd70b))
+
+
+### ❤️  Thank You
+
+- mykimd
+
 ## 1.27.3 (2024-08-08)
 
 
