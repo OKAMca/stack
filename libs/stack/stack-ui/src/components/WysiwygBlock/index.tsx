@@ -7,7 +7,18 @@ const WysiwygBlock = ({ content, themeName = 'wysiwyg', ...rest }: TWysiwygBlock
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['iframe']),
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,
-      iframe: ['src', 'allow', 'allowfullscreen', 'frameborder', 'scrolling', 'target'],
+      iframe: [
+        'src',
+        'allow',
+        'allowfullscreen',
+        'frameborder',
+        'scrolling',
+        'target',
+        'title',
+        'height',
+        'width',
+        'referrerpolicy',
+      ],
     },
   })
 
