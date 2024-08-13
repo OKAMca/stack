@@ -51,3 +51,25 @@ export const Template = (args) => {
     {Template.bind({})}
   </Story>
 </Canvas>
+
+<Canvas>
+  <Story
+    name="Youtube embed video iframe"
+    args={{
+      content: '<p>Attributes of iframe : width, height, src, title, frameborder, allow, referrerpolicy, allowfullscreen</p><iframe width="560" height="315" src="https://www.youtube.com/embed/p-LFh5Y89eM?si=kTfC2QRi646JaaeK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Website with scrolling"
+    args={{
+      content: '<iframe src="https://storybook.js.org/docs" title="storybook doc" height="600" width="600" marginwidth="50" scrolling="yes"></iframe>',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
