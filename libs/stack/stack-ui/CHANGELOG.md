@@ -1,3 +1,33 @@
+## 1.27.3 (2024-08-08)
+
+
+### 🩹 Fixes
+
+- missing use client on carousel nav button ([13a0316](https://github.com/OKAMca/stack/commit/13a0316))
+
+
+### ❤️  Thank You
+
+- poclerson
+
+## 1.27.2 (2024-08-07)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
+## 1.27.1 (2024-08-07)
+
+
+### 🩹 Fixes
+
+- **demo:** adding use client for Img and DirectusImg fix build problem ([d79c8fc](https://github.com/OKAMca/stack/commit/d79c8fc))
+
+- **stack-ui:** remove use client from directus-img that doesn't use theme ([5a1c04c](https://github.com/OKAMca/stack/commit/5a1c04c))
+
+
+### ❤️  Thank You
+
+- Yan Morin
+
 ## 1.27.0 (2024-07-25)
 
 
