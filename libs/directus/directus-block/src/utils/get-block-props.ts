@@ -19,8 +19,13 @@ function isVariables<BlockVariables extends Variables>(
   return !!maybeVariables
 }
 
-function isOnlyIdInItem(item: TCommonBlockFragment): item is TBlockVariables {
-  return !isEmpty(item) && Object.keys(item).length === 1 && Object.keys(item)[0] === 'id' && !!item.id
+/**
+ * Checks wether or not the item `getBlockProps` receives is valid, or if `getBlockProps` needs to query the item
+ * Since `id` and `settings` are the minimum props of a block, they don't count in the actual item's data
+ */
+function isItemEmpty(item: TCommonBlockFragment): item is TBlockVariables {
+  const { id, settings, ...restOfItem } = item ?? {}
+  return isEmpty(restOfItem)
 }
 
 async function queryFromVariables<
@@ -54,7 +59,7 @@ export default async function getBlockProps<
 
   if (item) {
     // If the item actually contains the block's data, just return it
-    if (!isOnlyIdInItem(item)) {
+    if (!isItemEmpty(item)) {
       return item
     }
 
