@@ -54,7 +54,6 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     prefetch,
     replace,
     scroll,
-    variant,
     tokens,
     themeName,
     customTheme,
@@ -84,7 +83,7 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     as,
     ...(themeName ? { themeName } : {}),
     ...(customTheme ? { customTheme } : {}),
-    tokens: { ...tokens, ...(variant ? { type: variant } : {}) },
+    ...(tokens ? { tokens } : {}),
     nextLinkProps: {
       href,
       prefetch: prefetch ?? undefined,
