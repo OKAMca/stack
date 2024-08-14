@@ -1,3 +1,20 @@
+## 1.3.1 (2024-08-14)
+
+
+### 🩹 Fixes
+
+- if a block has settings, doesnt mean it has data ([#180](https://github.com/OKAMca/stack/pull/180))
+
+
+### ❤️  Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- mykimd
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- Yan Morin
+- yanmorinokamca @yanmorinokamca
+
 ## 1.3.0 (2024-07-25)
 
 
