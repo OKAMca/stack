@@ -39,6 +39,8 @@ export interface TMenuItemsProps extends TDefaultComponent {
   menuItems?: TMenuItemProps[] | null
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   menuLinkComponent?: React.ElementType<any>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  buttonLinkComponent?: React.ElementType<any>
   children?: React.ReactNode
 }
 
