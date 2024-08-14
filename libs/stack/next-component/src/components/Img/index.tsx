@@ -1,3 +1,5 @@
+'use client'
+
 import { useThemeContext } from '@okam/stack-ui'
 import Image from 'next/image'
 import type TImgProps from './interface'
