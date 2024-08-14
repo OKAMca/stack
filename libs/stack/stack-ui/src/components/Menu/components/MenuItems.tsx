@@ -9,7 +9,19 @@ import type { TMenuItemProps, TMenuItemsProps } from '../interface'
 const ButtonElement = (menuItem: TMenuItemProps) => {
   const { tabState, defaultSelectedKey } = useMenu()
   const { setSelectedKey } = tabState
-  const { id, path, label, themeName = 'button', tokens, customTheme, target, children, childItems, ...rest } = menuItem
+  const {
+    id,
+    path,
+    label,
+    themeName = 'button',
+    tokens,
+    customTheme,
+    target,
+    children,
+    childItems,
+    as,
+    ...rest
+  } = menuItem
   const itemKey = path?.substring(1)
 
   const handlePress = useCallback(() => {
@@ -33,6 +45,7 @@ const ButtonElement = (menuItem: TMenuItemProps) => {
       customTheme={customTheme}
       key={`button-${id}`}
       handlePress={handlePress}
+      as={as}
     >
       {React.isValidElement(children) ? children : label}
     </Button>
@@ -82,7 +95,15 @@ const LinkElement = (menuItem: TMenuItemProps) => {
 }
 
 const MenuItems = (props: TMenuItemsProps) => {
-  const { menuItems, children, themeName = 'menuItem', tokens, customTheme, menuLinkComponent } = props
+  const {
+    menuItems,
+    children,
+    themeName = 'menuItem',
+    tokens,
+    customTheme,
+    menuLinkComponent,
+    buttonLinkComponent,
+  } = props
 
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={tokens} customTheme={customTheme}>
@@ -111,6 +132,7 @@ const MenuItems = (props: TMenuItemsProps) => {
                   themeName={`${themeName}.button`}
                   tokens={menuItemTokens}
                   customTheme={customTheme}
+                  as={as ?? buttonLinkComponent}
                 />
               ) : (
                 <LinkElement
