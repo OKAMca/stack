@@ -1,7 +1,7 @@
 import type { AriaTabListProps } from '@react-types/tabs'
-import type { LinkProps } from 'next/link'
 import type React from 'react'
 import type { Maybe, TDefaultComponent } from '../../types/components'
+import type { NextLinkProps } from '../../types/next-link'
 
 export type MenuProps = {
   id: string
@@ -27,7 +27,9 @@ export interface IMenuItemProp {
   target?: string | null
   path?: string
   label?: string
-  nextLinkProps?: LinkProps
+  nextLinkProps?: NextLinkProps
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  as?: React.ElementType<any>
   onClick?: () => void
 }
 
@@ -35,6 +37,10 @@ export type TMenuItemProps = IMenuItemProp & TDefaultComponent & PartialHtmlBase
 
 export interface TMenuItemsProps extends TDefaultComponent {
   menuItems?: TMenuItemProps[] | null
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  menuLinkComponent?: React.ElementType<any>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  buttonLinkComponent?: React.ElementType<any>
   children?: React.ReactNode
 }
 
