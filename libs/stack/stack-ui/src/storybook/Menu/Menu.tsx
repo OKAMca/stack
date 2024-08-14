@@ -111,7 +111,7 @@ export const MenuFactory = ({
       <>
         {openBtn}
         <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (props: unknown) => JSX.Element}>
-          <MenuItems menuItems={menuItems} />
+          <MenuItems menuLinkComponent="a" menuItems={menuItems} />
         </MenuComponent>
       </>
     </MenuContextProvider>
