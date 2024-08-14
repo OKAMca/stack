@@ -10,7 +10,13 @@ const LightboxControlledState = (props: TLightboxProps) => {
   const [isOpen, setOpen] = useState(false)
 
   const closeButtonRender = (buttonProps: TButtonProps) => (
-    <Button {...buttonProps} handlePress={() => setOpen(!isOpen)}>
+    <Button
+      {...buttonProps}
+      handlePress={(e) => {
+        buttonProps?.handlePress?.(e)
+        setOpen(!isOpen)
+      }}
+    >
       Close lightbox
     </Button>
   )
@@ -18,7 +24,13 @@ const LightboxControlledState = (props: TLightboxProps) => {
   return (
     <>
       <Button handlePress={() => setOpen(!isOpen)}>Open lightbox</Button>
-      <Lightbox {...rest} isOpen={isOpen} setOpen={setOpen} closeButton={closeButtonRender}>
+      <Lightbox
+        {...rest}
+        isOpen={isOpen}
+        setOpen={setOpen}
+        closeButton={closeButtonRender}
+        onOpenChange={() => setOpen(!isOpen)}
+      >
         {children}
       </Lightbox>
     </>

@@ -40,16 +40,16 @@ The directus link component uses the directus link hook, which means it can be p
 
 By default, the following are included:
 
-- Collection: Render a link using a `page_settings` relation
-- Anchor: Render a link pointing to an element's id on the page (always starts with `#`)
-- ExternalLink: Render a link with an external URL (e.g.: https://google.com)
-- File: Render a link for a downloadable file
+- `collection`: Render a link using a `page_settings` relation
+- `anchor`: Render a link pointing to an element's id on the page (always starts with `#`)
+- `external-link`: Render a link with an external URL (e.g.: https://google.com)
+- `file`: Render a link for a downloadable file
 
 The mentionned configuration can be overwritten by passing a `componentsConfig` prop to the directus link component
 
 ```jsx
 const overrideConfig = {
-  ExternalLink: (props) => <CustomExternalLinkComponent {...props} />
+  'external-link': (props) => <CustomExternalLinkComponent {...props} />
 }
 
 const BrandLink = (props) => {
@@ -67,6 +67,10 @@ The tokens passed to `link` and `linkProps` include also include, in order of pr
 - The tokens of the navigation item
 
 ### Props
+
+
+
+### Returned props of each parsed navigation item in the tree
 
 - `link`: A rendered react node of the `DirectusLink` component
 - `linkProps`: The props that were passed to the link
@@ -87,10 +91,6 @@ const depthMap: Record<number, object> = {
 // Loop recursively through navigation items and assign style based on depth
 function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   if (!tree) return null
-  /*
-   * Here, `link` represents a rendered version of `DirectusLink` for quick use
-   * Use `linkProps` for custom rendering needs
-   */
   const { children, link, linkProps, depth } = tree
   const style = depthMap[depth]
 
@@ -98,6 +98,12 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   if (!children) {
     return (
       <li style={style} key={link.id}>
+        {
+          /*
+           * Here, `link` represents a rendered version of `DirectusLink` for quick use
+           * Use `linkProps` for custom rendering needs
+           */
+        }
         {link}
       </li>
     )
