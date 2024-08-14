@@ -19,7 +19,7 @@ import image from '../../../static/images/image.png'
       description: `The lightbox's preview content`
     },
     onOpenChange: {
-      description: 'Callback for executing some code when the state of the lightbox changes. Passes a boolean `isOpen`'
+      description: 'Callback for executing some code when the state of the lightbox changes. Passes a boolean `isOpen`. In controlled state mode, you can use this function to change the controlled state every time the state would normally be changed in non-controlled state mode'
     },
     closeButton: {
       description: `To replace the lightbox's default close button`

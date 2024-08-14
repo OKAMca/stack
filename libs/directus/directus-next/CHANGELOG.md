@@ -1,3 +1,17 @@
+## 0.1.1 (2024-08-13)
+
+
+### 🩹 Fixes
+
+- **directus-next:** update build dependencies, exclude next ([#179](https://github.com/OKAMca/stack/pull/179))
+
+
+### ❤️  Thank You
+
+- mykimd
+- poclerson
+- yanmorinokamca @yanmorinokamca
+
 ## 0.1.0 (2024-08-01)
 
 

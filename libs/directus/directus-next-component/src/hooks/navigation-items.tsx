@@ -73,6 +73,7 @@ function createChildrenTree<Depth extends number, Link, NavigationItems>(
 /**
  *
  * @param navigationItems A tree of navigation items, with parents and children
+ * @param onNavigationItem Called when a navigation item is about to be added to the tree
  * @returns A tree of navigation items with ready-to-use DirectusLink components
  */
 export default function useNavigationItems<

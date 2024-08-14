@@ -153,7 +153,7 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   if (!link || !linkProps) return null
   if (!children) {
     return (
-      <li style={style}>
+      <li style={style} key={linkProps?.id}>
         {/* You can render your own component with linkProps */}
         <BrandDirectusLink {...linkProps} />
         {/* Or use the pre-rendered version */}
@@ -169,7 +169,7 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   }
   return (
     <ul>
-      <li style={style}>
+      <li style={style} key={linkProps?.id}>
         <div>
           <BrandDirectusLink {...linkProps} />
         </div>
