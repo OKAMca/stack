@@ -9,4 +9,10 @@ export type { TFiles } from './types/files'
 export type { TPageSettings } from './types/page-settings'
 export type { TNavigationItems, TNavigationItemsTree } from './types/navigation-items'
 export type { TLinks } from './types/links'
-export type { TDirectusLinkProps } from './components/DirectusLink/interface'
+export type {
+  TDirectusLinkProps,
+  TUseDirectusLink,
+  TDirectusLink,
+  TDirectusLinkPropsConfig,
+  TDirectusLinkComponentsConfig,
+} from './components/DirectusLink/interface'
