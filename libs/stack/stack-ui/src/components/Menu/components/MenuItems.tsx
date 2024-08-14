@@ -1,6 +1,5 @@
 'use client'
 
-import NextLink from 'next/link'
 import React, { useCallback, useRef } from 'react'
 import { useMenu } from '../../../providers/Menu'
 import Box from '../../Box'
@@ -51,6 +50,7 @@ const LinkElement = (menuItem: TMenuItemProps) => {
     tokens,
     nextLinkProps,
     children,
+    as,
     childItems,
     ...rest
   } = menuItem
@@ -73,8 +73,8 @@ const LinkElement = (menuItem: TMenuItemProps) => {
       }}
       ref={ref}
       key={`link-${id}`}
-      as={NextLink}
       target={target ?? '_self'}
+      as={as}
     >
       {React.isValidElement(children) ? children : label}
     </Anchor>
@@ -82,13 +82,13 @@ const LinkElement = (menuItem: TMenuItemProps) => {
 }
 
 const MenuItems = (props: TMenuItemsProps) => {
-  const { menuItems, children, themeName = 'menuItem', tokens, customTheme } = props
+  const { menuItems, children, themeName = 'menuItem', tokens, customTheme, menuLinkComponent } = props
 
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={tokens} customTheme={customTheme}>
       <Box themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
         {menuItems?.map((menuItem) => {
-          const { id, path, label, ...rest } = menuItem ?? {}
+          const { id, path, label, as, ...rest } = menuItem ?? {}
 
           const menuItemTokens = { ...tokens, ...menuItem.tokens }
 
@@ -119,6 +119,7 @@ const MenuItems = (props: TMenuItemsProps) => {
                   themeName={`${themeName}.anchor`}
                   tokens={menuItemTokens}
                   customTheme={customTheme}
+                  as={as ?? menuLinkComponent}
                 />
               )}
             </Box>
