@@ -1,3 +1,16 @@
+## 1.3.2 (2024-08-15)
+
+
+### 🩹 Fixes
+
+- **directus-block:** exclude directus-query from bundling + export useBlock from /server ([6345390](https://github.com/OKAMca/stack/commit/6345390))
+
+
+### ❤️  Thank You
+
+- Marie-Maxime Tanguay
+- poclerson
+
 ## 1.3.1 (2024-08-14)
 
 
