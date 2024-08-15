@@ -1,3 +1,15 @@
+## 1.3.1 (2024-08-15)
+
+
+### 🩹 Fixes
+
+- **directus-link:** file type links render correct href ([454a847](https://github.com/OKAMca/stack/commit/454a847))
+
+
+### ❤️  Thank You
+
+- poclerson
+
 ## 1.3.0 (2024-08-15)
 
 
