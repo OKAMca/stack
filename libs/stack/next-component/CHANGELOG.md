@@ -1,3 +1,21 @@
+## 0.2.0 (2024-08-15)
+
+
+### 🚀 Features
+
+- directus image support for videos ([4d45c9c](https://github.com/OKAMca/stack/commit/4d45c9c))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Marie-Maxime Tanguay @marie-maxime
+- mykimd
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- Yan Morin
+- yanmorinokamca @yanmorinokamca
+
 ## 0.1.1 (2024-07-16)
 
 
