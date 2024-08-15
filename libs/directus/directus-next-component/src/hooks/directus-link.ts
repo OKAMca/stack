@@ -7,10 +7,10 @@ function useFile(props: TUseDirectusLink) {
   const { file } = props
 
   const { filename_download: filenameDownload } = file ?? {}
-  const href = useDirectusFile(file)
+  const { src } = useDirectusFile(file) ?? {}
 
   return {
-    href: href?.toString() ?? undefined,
+    href: src,
     download: filenameDownload ?? true,
   }
 }
