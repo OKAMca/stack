@@ -1,3 +1,27 @@
+## 1.3.0 (2024-08-15)
+
+
+### 🚀 Features
+
+- directus image support for videos ([4d45c9c](https://github.com/OKAMca/stack/commit/4d45c9c))
+
+
+### 🩹 Fixes
+
+- move tokens and variant from links to navigation item ([7fca919](https://github.com/OKAMca/stack/commit/7fca919))
+
+- **directus-next-component:** a11y props and bugfix ([dc3dbde](https://github.com/OKAMca/stack/commit/dc3dbde))
+
+
+### ❤️  Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- mykimd
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- Yan Morin
+- yanmorinokamca @yanmorinokamca
+
 ## 1.2.0 (2024-07-25)
 
 
