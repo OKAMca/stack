@@ -143,6 +143,7 @@ module.exports = {
       require('@tailwindcss/line-clamp'),
       require('tailwindcss-logical'),
       plugin(function ({ addVariant, matchUtilities, theme }) {
+        addVariant('disabled', `&:is([disabled], [disabled="true"], [disabled='true'])`)
         addVariant('aria-disabled', `&[aria-disabled='true']`)
         addVariant('has-focus-ring', `&.has-focus-ring`)
         matchUtilities({
