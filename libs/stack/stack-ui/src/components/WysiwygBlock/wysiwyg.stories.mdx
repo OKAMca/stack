@@ -34,7 +34,6 @@ export const Template = (args) => {
 
 ### Wysiwyg Block link with target \_self
 
-
 <Canvas>
   <Story name="Link with target _self">{Template.bind({})}</Story>
 </Canvas>
@@ -46,6 +45,45 @@ export const Template = (args) => {
     name="Link with target blank"
     args={{
       content: '<a target="_blank" href="https://www.google.com/">Link with target _blank</a>',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Wysiwyg Block with tailwind styles
+
+<Canvas>
+  <Story
+    name="With Tailwind styles"
+    args={{
+      content: '<div class="bg-color-1-300"><h1 class="text-5xl">Title</h1></div>',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Wysiwyg Block with style tag
+
+<Canvas>
+  <Story
+    name="With style tag"
+    args={{
+      content: '<div style="background-color: red;"><h1 style="font-size: 3rem;">Title</h1></div>',
+    }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+### Wysiwyg Block with aria attributes
+
+<Canvas>
+  <Story
+    name="With aria attributes"
+    args={{
+      content: '<a class="bg-color-1-300 disabled:opacity-50" href="#" disabled="true" aria-label="I am a disabled link">Accessible link</a>',
     }}
   >
     {Template.bind({})}

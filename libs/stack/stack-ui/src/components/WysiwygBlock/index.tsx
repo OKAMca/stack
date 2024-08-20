@@ -1,12 +1,15 @@
 import sanitizeHtml from 'sanitize-html'
 import Typography from '../Typography'
+import { ariaAttributes, booleanAttributes } from './attributes'
 import type TWysiwygBlockProps from './interface'
 
 const WysiwygBlock = ({ content, themeName = 'wysiwyg', ...rest }: TWysiwygBlockProps) => {
   const sanitizedContent = sanitizeHtml(content, {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['iframe']),
+    nonBooleanAttributes: [],
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,
+      '*': [...sanitizeHtml.defaults.nonBooleanAttributes, ...ariaAttributes, ...booleanAttributes],
       iframe: [
         'src',
         'allow',
