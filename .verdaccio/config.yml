@@ -4,7 +4,7 @@ storage: ../tmp/local-registry/storage
 # a list of other known repositories we can talk to
 uplinks:
   npmjs:
-    url: https://registry.yarnpkg.com
+    url: https://registry.npmjs.org/
     maxage: 60m
 
 packages:
