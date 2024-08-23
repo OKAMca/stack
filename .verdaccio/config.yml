@@ -26,3 +26,8 @@ logs:
 
 publish:
   allow_offline: true # set offline to true to allow publish offline
+# Authentication settings
+auth:
+  htpasswd:
+    file: ./htpasswd
+    max_users: 1000
