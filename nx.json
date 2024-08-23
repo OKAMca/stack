@@ -1,5 +1,5 @@
 {
-  "release": {
+  "release": {    
     "projects": [
       "stack-ui",
       "core-lib",
@@ -20,6 +20,7 @@
       }
     },
     "version": {
+      "preVersionCommand": "npx nx run-many -t build -exclude demo",
       "conventionalCommits": true
     }
   },
