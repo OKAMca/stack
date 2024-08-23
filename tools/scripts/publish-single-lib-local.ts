@@ -7,40 +7,40 @@ import { logger } from '@nrwl/devkit';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-// Parse command line arguments using yargs
-const argv = yargs(hideBin(process.argv))
-  .version(false) // don't use the default meaning of version in yargs
-  .option('libraries', {
-    type: 'string',
-    description: 'Comma-separated list of libraries to update and publish',
-    demandOption: true
-  })
-  .option('version', {
-    type: 'string',
-    description: 'Version to publish',
-  })
-  .option('targetPath', {
-    type: 'string',
-    description: 'Target path to install the libraries',
-    demandOption: true
-  })
-  .option('skipCache', {
-    type: 'boolean',
-    description: 'Skip the Nx build cache',
-    default: false
-  })
-  .parseSync();  // Use .parseSync() to avoid returning a promise
+(async () => {
+  // Parse command line arguments using yargs
+  const argv = await yargs(hideBin(process.argv))
+    .version(false) // don't use the default meaning of version in yargs
+    .option('libraries', {
+      type: 'string',
+      description: 'Comma-separated list of libraries to update and publish',
+      demandOption: true
+    })
+    .option('version', {
+      type: 'string',
+      description: 'Version to publish',
+    })
+    .option('targetPath', {
+      type: 'string',
+      description: 'Target path to install the libraries',
+      demandOption: true
+    })
+    .option('skipCache', {
+      type: 'boolean',
+      description: 'Skip the Nx build cache',
+      default: false
+    })
+    .parseAsync();  // Use .parseAsync() to handle promises
 
-const options = {
-  libraries: argv.libraries.split(',').map(lib => lib.trim()),
-  version: argv.version,
-  targetPath: argv.targetPath || '',  // Ensure targetPath is always defined
-  skipCache: argv.skipCache
-};
+  const options = {
+    libraries: argv.libraries.split(',').map(lib => lib.trim()),
+    version: argv.version,
+    targetPath: argv.targetPath || '',  // Ensure targetPath is always defined
+    skipCache: argv.skipCache
+  };
 
-async function run() {
   try {
-    console.log('Executor started with options:', options); // Debugging log
+    console.log('Executor started with options:', options); // Debug log
     const version = options.version || `0.0.0-local.${Date.now()}`;
     const libraries = options.libraries;
     const targetPath = options.targetPath;
@@ -49,33 +49,9 @@ async function run() {
       throw new Error('At least one library name must be specified');
     }
 
-    console.log('Starting releaseVersion with version:', version); // Debugging log
-    console.log('Libraries to update:', libraries.join(', ')); // Debugging log
+    console.log('Starting releaseVersion with version:', version); // Debug log
+    console.log('Libraries to update:', libraries.join(', ')); // Debug log
 
-    /**
-     * Step 1: Build all specified libraries
-     * This section is now handled by the dependsOn configuration in project.json
-     
-    for (const library of libraries) {
-      console.log(`Building ${library}...`); // Debugging log
-      const buildResult = await runExecutor(
-        { project: library, target: 'build' },
-        { skipNxCache: options.skipCache },
-        {} as any  // Provide an empty object as a dummy context
-      );
-
-      for await (const result of buildResult) {
-        if (!result.success) {
-          throw new Error(`Failed to build ${library}`);
-        }
-      }
-      console.log(`Successfully built ${library}`); // Debugging log
-    }
-    */
-
-    /**
-     * Step 2: Update Versions in the specified libraries
-     */
     const { projectsVersionData } = await releaseVersion({
       specifier: version,
       stageChanges: false,
@@ -88,21 +64,15 @@ async function run() {
       },
     });
 
-    console.log('Version update completed. Project version data:', projectsVersionData); // Debugging log
+    console.log('Version update completed. Project version data:', projectsVersionData); // Debug log
 
-    /**
-     * Step 3: Publish Libraries on Verdaccio
-     */
     const publishStatus = await releasePublish({
       firstRelease: true,
       projects: libraries,
     });
 
-    console.log('Publish completed. Publish status:', publishStatus); // Debugging log
+    console.log('Publish completed. Publish status:', publishStatus); // Debug log
 
-    /**
-     * Step 4: Install your Libraries
-     */
     const projectGraph = readCachedProjectGraph();
 
     for (const library of libraries) {
@@ -117,13 +87,13 @@ async function run() {
 
       const installCommand = `${getInstallCommand(targetPath)} ${packageToInstall} --registry=http://localhost:4873`;
 
-      console.log(`Running install command for ${library}: ${installCommand}`); // Debugging log
+      console.log(`Running install command for ${library}: ${installCommand}`); // Debug log
       process.chdir(targetPath);
       execSync(installCommand);
-      console.log(`Successfully installed ${packageToInstall}`); // Debugging log
+      console.log(`Successfully installed ${packageToInstall}`); // Debug log
     }
 
-    return { success: true, publishStatus };
+    process.exit(0);
   } catch (e) {
     if (e instanceof Error) {
       logger.error(`Error occurred: ${e.message}`);
@@ -131,9 +101,9 @@ async function run() {
     } else {
       logger.error(`Unknown error occurred: ${JSON.stringify(e)}`);
     }
-    return { success: false };
+    process.exit(1);
   }
-}
+})();
 
 // Used to define which install command should be used on the targetPath
 function getInstallCommand(targetPath: string): string {
@@ -149,5 +119,3 @@ function getInstallCommand(targetPath: string): string {
   }
   throw new Error(`No package manager found for target repository: ${targetPath}`);
 }
-
-run();
