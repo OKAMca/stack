@@ -9,6 +9,16 @@
         "config": ".verdaccio/config.yml",
         "storage": "tmp/local-registry/storage"
       }
+    },
+    "publish-local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node ./tools/scripts/publish-single-lib-local.ts",
+        "skipCache": true,
+        "libraries": "",
+        "version": "",
+        "targetPath": ""
+      }
     }
   }
 }
