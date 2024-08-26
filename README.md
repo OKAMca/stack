@@ -44,23 +44,62 @@ Targets can be defined in the `package.json` or `projects.json`. Learn more [in 
 
 Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provides autocomplete support, a UI for exploring and running tasks & generators, and more! Available for VSCode, IntelliJ and comes with a LSP for Vim users.
 
-## Ready to deploy?
 
-Just run `nx build demoapp` to build the application. The build artifacts will be stored in the `dist/` directory, ready to be deployed.
+Certainly! Here's an updated section for your README that includes the requirement to start the local registry before running the `publish-local` command.
 
-## Set up CI!
+---
 
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
+## Local Development Workflow
 
-- [Set up remote caching](https://nx.dev/core-features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/core-features/distribute-task-execution)
-- [Learn more how to setup CI](https://nx.dev/recipes/ci)
+When working with the `stack` collection of packages, you may need to test changes in a dependent project before committing or publishing those changes. This is especially useful when you want to ensure that updates to a package do not introduce any issues in projects that rely on it.
 
-## Connect with us!
+### Prerequisite: Start the Local Registry
 
-- [Join the community](https://nx.dev/community)
-- [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)
+Before you can publish packages locally, ensure that your local Verdaccio instance is running. You can start it using the following command:
+
+```bash
+nx run @stack-ui/source:local-registry
+```
+
+This command sets up a local registry at `http://localhost:4873`, which is necessary for the `publish-local` process.
+
+### Publishing Packages Locally
+
+To publish one or more packages as a "dev" version to your local Verdaccio instance, use the following command:
+
+```bash
+npx nx run @stack-ui/source:publish-local --libraries directus-next-component
+```
+
+#### Command Breakdown
+
+- **`npx nx run`**: This is the command used to execute Nx tasks.
+- **`@stack-ui/source:publish-local`**: This specifies the target project and task to run. In this case, it is the `publish-local` task for the `@stack-ui/source` project.
+- **`--libraries directus-next-component`**: This option specifies the libraries you want to update and publish. You can list multiple libraries separated by commas.
+
+#### How It Works
+
+1. **Versioning**: The command assigns a local version to the specified libraries. By default, it uses a version format like `0.0.0-local.<timestamp>`.
+   
+2. **Publishing**: The libraries are published to your local Verdaccio instance. This allows you to install and test them in other projects without affecting the main registry.
+
+3. **Installation**: If you specify a `targetPath`, the command will automatically install the updated libraries in the target project using the appropriate package manager (npm, yarn, or pnpm). If no `targetPath` is provided, it will output the installation command for manual execution.
+
+#### Example Usage
+
+Suppose you are working on the `directus-next-component` library and want to test it in a project located at `/path/to/your/project`. You can run:
+
+```bash
+npx nx run @stack-ui/source:publish-local --libraries directus-next-component --targetPath /path/to/your/project
+```
+
+This will publish the `directus-next-component` as a local version and install it in the specified project, allowing you to test your changes immediately.
+
+### Error Handling
+
+If an error occurs during the execution, detailed error messages will be logged to help you diagnose the issue. Ensure that your local Verdaccio instance is running and accessible at `http://localhost:4873`.
+
+
 
 ## Release and publish
 Before any publish, releasing is mandatory if you want it to take any effect.
