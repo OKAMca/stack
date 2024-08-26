@@ -6,7 +6,6 @@ import { resolve } from 'path';
 
 import { readCachedProjectGraph } from '@nx/devkit';
 
-
 // Related to the target generated in the root project.json
 const localRegistryTarget = '@stack-ui/source:local-registry';
 
@@ -31,13 +30,13 @@ let stopLocalRegistry = () => {};
     })
     .parseAsync();
 
-//   /**
-//    * Step 1: Start Verdaccio
-//    */
-//   stopLocalRegistry = await startLocalRegistry({
-//     localRegistryTarget,
-//     verbose: false,
-//   });
+  //   /**
+  //    * Step 1: Start Verdaccio
+  //    */
+  //   stopLocalRegistry = await startLocalRegistry({
+  //     localRegistryTarget,
+  //     verbose: false,
+  //   });
 
   /**
    * Step 2: Build your Libraries
@@ -51,6 +50,7 @@ let stopLocalRegistry = () => {};
     firstRelease: true,
     generatorOptionsOverrides: {
       skipLockFileUpdate: true,
+      conventionalCommits: false
     },
   });
 
@@ -80,16 +80,19 @@ let stopLocalRegistry = () => {};
   );
 
   // Prepare the install command
-  const targetPath = resolve(process.cwd(), options.targetPath);
+  const targetPath = options.targetPath ? resolve(process.cwd(), options.targetPath) : '';
   const installCommand = `${getInstallCommand(
     targetPath
   )} ${packagesToInstall.join(' ')} --registry=http://localhost:4873`;
 
-  console.log(installCommand);
-
-  // Locate to target dir and run the install command
-  process.chdir(targetPath);
-  execSync(installCommand);
+  if (options.targetPath) {
+    // Locate to target dir and run the install command
+    process.chdir(targetPath);
+    execSync(installCommand);
+  } else {
+    // Output the command to console
+    console.log(`Run the following command in your target project: ${installCommand}`);
+  }
 
   /**
    * Final: When installation is done, no need to have Verdaccio
@@ -106,6 +109,10 @@ let stopLocalRegistry = () => {};
 
 // Used to define which install command should be used on the targetPath
 function getInstallCommand(targetPath: string): string {
+  if (!targetPath || targetPath === '') {
+    return 'npm install';
+  }
+  console.log(`Generating packageManager command for targetPath: ${targetPath}`);
   const siblingFiles = readdirSync(targetPath);
 
   if (siblingFiles.includes('yarn.lock')) {
