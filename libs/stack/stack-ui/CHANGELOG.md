@@ -1,3 +1,18 @@
+## 1.29.1 (2024-08-21)
+
+
+### 🩹 Fixes
+
+- wysiwyg sanitize html accepts most attributes ([1c829b2](https://github.com/OKAMca/stack/commit/1c829b2))
+
+- more permissive tailwind disabled variant ([9548240](https://github.com/OKAMca/stack/commit/9548240))
+
+
+### ❤️  Thank You
+
+- mykimd @mykimd
+- poclerson
+
 ## 1.29.0 (2024-08-15)
 
 
