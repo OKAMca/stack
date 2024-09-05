@@ -22,6 +22,12 @@ Run `nx test directus-node` to execute the unit tests via [Jest](https://jestjs.
  */
 const { fetchRedirects, getDefaultConfig } = require('@okam/directus-node')
 
+// getDefaultConfig() will return an object with
+// graphqlEndpoint: use environment variable NEXT_PUBLIC_GRAPHQL_URL
+// graphqlApiKey: use environment variable NEXT_API_TOKEN_ADMIN
+// redirectsFilename
+// rewritesFilename
+// limit: 2000  (number of redirect or rewrite rules fetched by graphql)
 fetchRedirects(getDefaultConfig())
 ```
 
