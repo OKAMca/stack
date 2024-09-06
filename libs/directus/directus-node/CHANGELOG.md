@@ -1,3 +1,20 @@
+## 0.2.1 (2024-09-06)
+
+
+### 🩹 Fixes
+
+- **directus-node:** adding limit = 200 for graphql redirects queries ([#192](https://github.com/OKAMca/stack/pull/192))
+
+
+### ❤️  Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- mykimd @mykimd
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- Yan Morin
+- yanmorinokamca @yanmorinokamca
+
 ## 0.2.0 (2024-07-25)
 
 
