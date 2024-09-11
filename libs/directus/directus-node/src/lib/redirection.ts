@@ -27,8 +27,11 @@ export function getDefaultConfig(): TFetchRedirectsConfig {
 export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boolean> {
   const { graphqlEndpoint, graphqlApiKey, redirectsFilename, rewritesFilename, limit } = config
 
-  if (!graphqlEndpoint || !graphqlApiKey) {
-    throw new Error('Missing graphql configuration: NEXT_PUBLIC_GRAPHQL_URL or NEXT_API_TOKEN_ADMIN')
+  if (!graphqlEndpoint) {
+    console.warn('Warning: Missing graphql configuration: NEXT_PUBLIC_GRAPHQL_URL is empty')
+  }
+  if (!graphqlApiKey) {
+    console.warn('Warning: Missing graphql configuration: NEXT_API_TOKEN_ADMIN is empty')
   }
 
   if (!redirectsFilename || !rewritesFilename) {
