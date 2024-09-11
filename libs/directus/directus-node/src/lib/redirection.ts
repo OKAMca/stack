@@ -80,7 +80,7 @@ export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boo
     console.log(`Redirects count: ${data.redirects?.length || 0}, Rewrites count: ${data.rewrites?.length || 0}`)
   } catch (e) {
     console.warn('Error fetching redirects:', (e as Error).message)
-    return false
+    return true // still want build to pass
   }
 
   return true
