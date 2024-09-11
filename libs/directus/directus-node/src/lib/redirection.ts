@@ -79,8 +79,8 @@ export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boo
 
     console.log(`Redirects count: ${data.redirects?.length || 0}, Rewrites count: ${data.rewrites?.length || 0}`)
   } catch (e) {
-    // console.error('GraphQL Error', (e as Error).message)
-    // return false
+    console.warn('Error fetching redirects:', (e as Error).message)
+    return false
   }
 
   return true
