@@ -5,7 +5,11 @@ interface TFetchRedirectsConfig {
   graphqlApiKey: string
   redirectsFilename: string
   rewritesFilename: string
+  limit: number | undefined
 }
+
+export const redirectDefaultLimit = 2000
+
 /**
  * Get Fetch Redirects Configuration
  * @returns {object}
@@ -16,11 +20,12 @@ export function getDefaultConfig(): TFetchRedirectsConfig {
     graphqlApiKey: process.env['NEXT_API_TOKEN_ADMIN'] || '',
     redirectsFilename: './redirect/redirects.json',
     rewritesFilename: './redirect/rewrites.json',
+    limit: redirectDefaultLimit,
   }
 }
 
 export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boolean> {
-  const { graphqlEndpoint, graphqlApiKey, redirectsFilename, rewritesFilename } = config
+  const { graphqlEndpoint, graphqlApiKey, redirectsFilename, rewritesFilename, limit } = config
 
   if (!graphqlEndpoint || !graphqlApiKey) {
     throw new Error('Missing graphql configuration: NEXT_PUBLIC_GRAPHQL_URL or NEXT_API_TOKEN_ADMIN')
@@ -30,14 +35,14 @@ export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boo
     throw new Error('Missing filename')
   }
 
-  const query = `query fetchRedirects {
-  redirects(filter: {status:{_eq:"published"},isrewrite:{_eq:false}}, sort: "sort") {
+  const query = `query fetchRedirects($limit: Int = 2000) {
+  redirects(filter: {status:{_eq:"published"},isrewrite:{_eq:false}}, sort: "sort", limit: $limit) {
     source
     destination
     permanent
     locale
   }
-  rewrites: redirects(filter: {status:{_eq:"published"},isrewrite:{_eq:true}}, sort: "sort") {
+  rewrites: redirects(filter: {status:{_eq:"published"},isrewrite:{_eq:true}}, sort: "sort", limit: $limit) {
     source
     destination
     permanent
@@ -48,7 +53,9 @@ export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boo
   const graphqlBody = {
     query,
     // "operationName": "",
-    variables: {},
+    variables: {
+      limit: Number(limit) || redirectDefaultLimit,
+    },
   }
 
   try {
@@ -69,9 +76,11 @@ export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boo
 
     const writeDataRewrites = JSON.stringify(data.rewrites || [])
     await writeFile(rewritesFilename, writeDataRewrites)
+
+    console.log(`Redirects count: ${data.redirects?.length || 0}, Rewrites count: ${data.rewrites?.length || 0}`)
   } catch (e) {
-    // console.error('GraphQL Error', (e as Error).message)
-    // return false
+    console.warn('Error fetching redirects:', (e as Error).message)
+    return true // still want build to pass
   }
 
   return true
