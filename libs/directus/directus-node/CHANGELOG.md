@@ -1,3 +1,23 @@
+## 0.3.0 (2024-09-11)
+
+
+### 🚀 Features
+
+- Add console log for redirects and rewrites count ([2ae2d19](https://github.com/OKAMca/stack/commit/2ae2d19))
+
+
+### 🩹 Fixes
+
+- add console.warn with error in catch block ([865cd5e](https://github.com/OKAMca/stack/commit/865cd5e))
+
+- return true on error when fetching redirects ([54c34c6](https://github.com/OKAMca/stack/commit/54c34c6))
+
+
+### ❤️  Thank You
+
+- David Paquet Pitts
+- David Paquet Pitts (aider)
+
 ## 0.2.1 (2024-09-06)
 
 
