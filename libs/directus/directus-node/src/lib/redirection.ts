@@ -80,8 +80,6 @@ export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boo
     const writeDataRewrites = JSON.stringify(data.rewrites || [])
     await writeFile(rewritesFilename, writeDataRewrites)
   } catch (e) {
-    // console.error('GraphQL Error', (e as Error).message)
-    // return false
   }
 
   return true
