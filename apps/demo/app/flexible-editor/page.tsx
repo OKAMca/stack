@@ -2,13 +2,13 @@ import type { TBlockSerializerConfig } from '@okam/directus-block'
 import type { JSONContent } from '@okam/directus-flexible-content'
 import { FlexibleEditorContent } from '@okam/directus-flexible-content'
 import { queryGql } from '@okam/directus-query'
-import { Box } from '@okam/stack-ui'
+import { Box, Typography } from '@okam/stack-ui'
 import { PagesDocument } from 'libs/directus-data-query/src'
 
 export default async function Index() {
   const flexibleContent = await queryGql(PagesDocument)
 
-  const pageFlexibleContent = flexibleContent.pages.find((p) => p.title === 'Team')
+  const pageFlexibleContent = flexibleContent.pages.find((p) => p.title === 'Guinea pigs')
 
   const editorNodes = pageFlexibleContent?.translations?.[0]?.editor_nodes
   const content = pageFlexibleContent?.translations?.[0]?.flexible_editor as JSONContent
@@ -35,6 +35,11 @@ export default async function Index() {
           <Box as="table" themeName={props.themeName}>
             <Box as="tbody">{props.children}</Box>
           </Box>
+        ),
+        sub: (props) => (
+          <Typography as="sub" {...props}>
+            {props.children}
+          </Typography>
         ),
       }}
       remappedAttributes={{ colspan: 'colSpan' }} // Used to remap attributes, if not present in this case, error will be thrown for colspan
