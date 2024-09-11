@@ -7,7 +7,23 @@ import { logger } from '@nrwl/devkit';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
+async function checkVerdaccioRunning() {
+  try {
+    const response = await fetch('http://localhost:4873/-/ping');
+    return response.ok;
+  } catch (error) {
+    return false;
+  }
+}
+
 (async () => {
+  // Check if Verdaccio is running
+  const verdaccioRunning = await checkVerdaccioRunning();
+  if (!verdaccioRunning) {
+    logger.error('Verdaccio is not running. Please start it using the following command:');
+    logger.error('nx run @stack-ui/source:local-registry');
+    process.exit(1);
+  }
   // Parse command line arguments using yargs
   const argv = await yargs(hideBin(process.argv))
     .version(false) // don't use the default meaning of version in yargs
