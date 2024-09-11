@@ -79,7 +79,10 @@ export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boo
 
     const writeDataRewrites = JSON.stringify(data.rewrites || [])
     await writeFile(rewritesFilename, writeDataRewrites)
+
+    console.log(`Fetch successful. Redirects count: ${data.redirects?.length || 0}, Rewrites count: ${data.rewrites?.length || 0}`)
   } catch (e) {
+    console.warn('Failed to fetch redirects:', e)
   }
 
   return true
