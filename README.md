@@ -63,6 +63,8 @@ nx run @stack-ui/source:local-registry
 
 This command sets up a local registry at `http://localhost:4873`, which is necessary for the `publish-local` process.
 
+> **Note:** The default username and password for Verdaccio are both set to `admin`. You may need these credentials when interacting with the local registry.
+
 ### Publishing Packages Locally
 
 To publish one or more packages as a "dev" version to your local Verdaccio instance, use the following command:
