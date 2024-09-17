@@ -5,9 +5,29 @@ import useDirectusFile from '../../hooks/directus-file'
 import type { TDirectusImgProps } from './interface'
 
 const DirectusImg = (props: TDirectusImgProps) => {
-  const { fit, baseUrl, focal_point_x: focalPointX, focal_point_y: focalPointY, thumbhash, width, height } = props
+  const {
+    fit,
+    baseUrl,
+    focal_point_x: focalPointX,
+    focal_point_y: focalPointY,
+    thumbhash,
+    width,
+    height,
+    quality,
+    format,
+    withoutEnlargement,
+    presetKey,
+  } = props
 
-  const fileProps = useDirectusFile(props, baseUrl, { fit })
+  const fileProps = useDirectusFile(props, baseUrl, {
+    fit,
+    width,
+    height,
+    quality,
+    format,
+    withoutEnlargement,
+    key: presetKey,
+  })
   if (!fileProps) return null
 
   const hasFocalPoint = !!focalPointX && !!focalPointY && !!width && !!height
