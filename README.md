@@ -45,10 +45,6 @@ Targets can be defined in the `package.json` or `projects.json`. Learn more [in 
 Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provides autocomplete support, a UI for exploring and running tasks & generators, and more! Available for VSCode, IntelliJ and comes with a LSP for Vim users.
 
 
-Certainly! Here's an updated section for your README that includes the requirement to start the local registry before running the `publish-local` command.
-
----
-
 ## Local Development Workflow
 
 When working with the `stack` collection of packages, you may need to test changes in a dependent project before committing or publishing those changes. This is especially useful when you want to ensure that updates to a package do not introduce any issues in projects that rely on it.
