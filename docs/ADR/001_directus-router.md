@@ -1,7 +1,7 @@
 # ADR 001: Directus Dynamic Routing Integration
 
 ## Status
-Proposed
+Implemented
 
 ## Context
 The `directusRouteMiddleware` function in our stack project needs refactoring to enhance its dynamic routing
@@ -123,13 +123,12 @@ and matcher.
 organization.
 
 ## Next Steps
-1. Implement and test the changes in the stack project.
-2. Update documentation for projects using the stack, including guidance on how to configure the middleware, use the
+1. Update documentation for projects using the stack, including guidance on how to configure the middleware, use the
 new locale mapping feature, set up collection-specific settings, and interpret development logs.
-3. Consider caching strategies to optimize performance (to be addressed in a future ADR).
-4. Gather feedback from projects using the stack to ensure the new implementation meets their needs.
-5. Provide examples and best practices for configuring the middleware in different project scenarios.
-6. Investigate and plan for the implementation of a "reverse" routing feature.
+2. Consider caching strategies to optimize performance (to be addressed in a future ADR).
+3. Gather feedback from projects using the stack to ensure the new implementation meets their needs.
+4. Provide examples and best practices for configuring the middleware in different project scenarios.
+5. Investigate and plan for the implementation of a "reverse" routing feature.
 
 ## Reference
 ### GraphQL Query
