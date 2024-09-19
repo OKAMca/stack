@@ -1,20 +1,29 @@
 /* eslint-disable no-console */
-import type { NextRequest, NextResponse } from 'next/server'
+/* eslint-disable @typescript-eslint/naming-convention */
+import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 
-export interface DirectusRouteConfig {
-  localeMap?: Record<string, string>
-  collectionSettings: {
-    [collection: string]: {
-      idField: string
-    }
-  } & {
-    default: {
-      idField: string
-    }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function log(...messages: any[]) {
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[directusRouter]', ...messages)
   }
 }
 
-async function fetchPageSettingsTranslation(path: string): Promise<Array<any> | null> {
+interface PageSettingsTranslation {
+  languages_code: {
+    code: string
+  }
+  id: string
+  page_settings_id: {
+    belongs_to_collection: string
+    belongs_to_key: string
+  }
+  title: string
+  slug: string
+  path: string
+}
+
+async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsTranslation[] | null> {
   const graphqlEndpoint = process.env.NEXT_PUBLIC_GRAPHQL_URL
   const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
@@ -48,10 +57,12 @@ async function fetchPageSettingsTranslation(path: string): Promise<Array<any> | 
   }
 
   try {
+    log('Executing GraphQL query:', query)
+    log('Query variables:', variables)
+
     const response = await fetch(graphqlEndpoint, {
       method: 'POST',
       headers: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         'Content-Type': 'application/json',
         Authorization: `Bearer ${graphqlApiKey}`,
       },
@@ -59,51 +70,49 @@ async function fetchPageSettingsTranslation(path: string): Promise<Array<any> | 
     })
 
     const { data } = await response.json()
-    return data.page_settings_translations
+    log('GraphQL response:', data)
+    return data.page_settings_translations as PageSettingsTranslation[]
   } catch (error) {
-    console.error('GraphQL Error:', error)
+    log('GraphQL Error:', error)
     return null
   }
 }
 
-/**
- * Handles dynamic routing for Directus-based content.
- *
- * @param {NextRequest} request - The incoming request object from Next.js.
- * @param {DirectusRouteConfig} config - Configuration object for the router.
- * @param {{
- *   next: () => NextResponse,
- *   rewrite: (url: URL) => NextResponse
- * }} NextResponse - Next.js Response object with required methods.
- * @returns {Promise<NextResponse>} A promise that resolves to a Next.js response.
- *
- * @description
- * This function processes incoming requests, queries Directus for matching page settings,
- * and rewrites the URL path based on the retrieved information and provided configuration.
- * It supports locale mapping and collection-specific settings.
- */
+// Minimal interfaces for Next.js types
+interface MinimalNextUrl {
+  pathname: string
+  clone: () => MinimalNextUrl
+}
+
+interface MinimalNextRequest {
+  nextUrl: MinimalNextUrl
+}
+
+interface MinimalNextResponse {
+  next: () => MinimalNextResponse
+  rewrite: (url: MinimalNextUrl | URL) => MinimalNextResponse
+}
+
 export async function directusRouteRouter(
-  request: NextRequest,
+  request: MinimalNextRequest,
   config: DirectusRouteConfig,
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  NextResponse: {
-    next: () => NextResponse
-    rewrite: (url: URL) => NextResponse
-  },
-): Promise<NextResponse> {
+  NextResponse: MinimalNextResponse,
+): Promise<MinimalNextResponse> {
   const { pathname } = request.nextUrl
+  log('Processing request for pathname:', pathname)
 
   const translations = await fetchPageSettingsTranslation(pathname)
 
   if (!translations || translations.length === 0) {
-    console.log(`No translation found for path: ${pathname}`)
+    log('No translation found for path:', pathname)
     return NextResponse.next()
   }
 
   const translation = translations[0]
+  log('Using translation:', translation)
 
   if (!translation.languages_code || !translation.page_settings_id) {
-    console.log(`Invalid translation data for path: ${pathname}`)
+    log('Invalid translation data for path:', pathname)
     return NextResponse.next()
   }
 
@@ -111,19 +120,26 @@ export async function directusRouteRouter(
   const collection = translation.page_settings_id.belongs_to_collection
   const id = translation.page_settings_id.belongs_to_key
 
+  if (!collection) {
+    console.warn(`[directusRouter] PageSettings with id ${translation.id} was found but is not associated with any collection.`)
+    return NextResponse.next()
+  }
+
   const mappedLocale = config.localeMap?.[directusLocale] || directusLocale
   const idField = config.collectionSettings[collection]?.idField || config.collectionSettings.default.idField
 
-  const newPath = `/${mappedLocale}/${collection}/${id}`
+  log('Directus locale:', directusLocale)
+  log('Mapped locale:', mappedLocale)
+  log('Collection:', collection)
+  log('ID Field:', idField)
+  log('ID:', id)
 
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`Rewriting path: ${pathname} -> ${newPath}`)
-    console.log(`Locale: ${directusLocale} -> ${mappedLocale}`)
-    console.log(`Collection: ${collection}, ID Field: ${idField}, ID: ${id}`)
-  }
+  const newPath = `/${mappedLocale}/${collection}/${id}`
+  log('Rewriting path:', pathname, '->', newPath)
 
   const url = request.nextUrl.clone()
   url.pathname = newPath
 
+  log('Rewriting to URL:', url.toString())
   return NextResponse.rewrite(url)
 }
