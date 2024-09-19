@@ -131,6 +131,51 @@ new locale mapping feature, set up collection-specific settings, and interpret d
 5. Provide examples and best practices for configuring the middleware in different project scenarios.
 6. Investigate and plan for the implementation of a "reverse" routing feature.
 
+## Reference
+### GraphQL Query
+
+```graphql
+query Languages_code($filter: page_settings_translations_filter) {
+  page_settings_translations(filter: $filter) {
+    languages_code {
+      name
+    }
+    id
+    page_settings_id {
+      belongs_to_collection
+      belongs_to_key
+    }
+    title
+    slug
+    path
+  }
+}
+```
+
+### Complete payload (example):
+```json
+{
+    "query": "query Languages_code($filter: page_settings_translations_filter) {\n  page_settings_translations(filter: $filter) {\n    languages_code {\n      name\n    }\n    id\n    page_settings_id {\n      belongs_to_collection\n      belongs_to_key\n    }\n    title\n    slug\n    path\n  }\n}",
+    "variables": {
+        "filter": {
+            "path": {
+                "_eq": "/news/vanier-s-nathan-zsombor-murray-wins-an-olympic-bronze-medal-in-diving"
+            },
+            "_and": [
+                {
+                    "page_settings_id": {
+                        "belongs_to_key": {
+                            "_nempty": true
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "operationName": "Languages_code"
+}
+```
+
 ## Future Considerations
 
 ### Reverse Routing Feature
