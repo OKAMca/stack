@@ -83,6 +83,7 @@ async function fetchPageSettingsTranslation(path: string) {
 export async function directusRouteRouter(
   request: NextRequest,
   config: DirectusRouteConfig,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   NextResponse: {
     next: () => NextResponse
     rewrite: (url: URL) => NextResponse
