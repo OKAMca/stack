@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { NextRequest, NextResponse } from 'next/server'
 
 interface DirectusRouteConfig {
@@ -50,6 +51,7 @@ async function fetchPageSettingsTranslation(path: string) {
     const response = await fetch(graphqlEndpoint, {
       method: 'POST',
       headers: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         'Content-Type': 'application/json',
         Authorization: `Bearer ${graphqlApiKey}`,
       },
@@ -88,7 +90,7 @@ export async function directusRouteRouter(
     next: () => NextResponse
     rewrite: (url: URL) => NextResponse
   },
-) {
+): Promise<NextResponse> {
   const { pathname } = request.nextUrl
 
   const translation = await fetchPageSettingsTranslation(pathname)
