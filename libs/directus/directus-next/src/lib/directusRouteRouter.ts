@@ -14,7 +14,7 @@ interface DirectusRouteConfig {
   }
 }
 
-async function fetchPageSettingsTranslation(path: string) {
+async function fetchPageSettingsTranslation(path: string): Promise<Array<any> | null> {
   const graphqlEndpoint = process.env.NEXT_PUBLIC_GRAPHQL_URL
   const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
@@ -59,7 +59,7 @@ async function fetchPageSettingsTranslation(path: string) {
     })
 
     const { data } = await response.json()
-    return data.page_settings_translations[0]
+    return data.page_settings_translations
   } catch (error) {
     console.error('GraphQL Error:', error)
     return null
@@ -93,10 +93,17 @@ export async function directusRouteRouter(
 ): Promise<NextResponse> {
   const { pathname } = request.nextUrl
 
-  const translation = await fetchPageSettingsTranslation(pathname)
+  const translations = await fetchPageSettingsTranslation(pathname)
 
-  if (!translation) {
+  if (!translations || translations.length === 0) {
     console.log(`No translation found for path: ${pathname}`)
+    return NextResponse.next()
+  }
+
+  const translation = translations[0]
+
+  if (!translation.languages_code || !translation.page_settings_id) {
+    console.log(`Invalid translation data for path: ${pathname}`)
     return NextResponse.next()
   }
 
