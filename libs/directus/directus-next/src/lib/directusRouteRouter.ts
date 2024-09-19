@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import type { NextRequest, NextResponse } from 'next/server'
 
-interface DirectusRouteConfig {
+export interface DirectusRouteConfig {
   localeMap?: Record<string, string>
   collectionSettings: {
     [collection: string]: {
