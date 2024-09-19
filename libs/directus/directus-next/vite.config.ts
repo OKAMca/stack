@@ -36,8 +36,8 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
-      name: 'directus-block',
+      entry: ['src/index.ts', 'src/server.ts'],
+      name: 'directus-next',
       fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
@@ -45,7 +45,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, 'next/navigation', 'next/headers'],
+      external: [...externalDeps, 'next/navigation', 'next/headers', 'next/server'],
     },
   },
 })
