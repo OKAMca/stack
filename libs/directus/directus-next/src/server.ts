@@ -1,1 +1,1 @@
-export { directusRouteRouter } from './lib/directusRouteRouter'
+export { directusRouteRouter, DirectusRouteConfig } from './lib/directusRouteRouter'
