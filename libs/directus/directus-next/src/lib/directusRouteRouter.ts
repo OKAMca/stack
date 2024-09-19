@@ -1,4 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
 interface DirectusRouteConfig {
   localeMap?: Record<string, string>
@@ -42,8 +43,8 @@ async function fetchPageSettingsTranslation(path: string) {
   const variables = {
     filter: {
       path: { _eq: path },
-      _and: [{ page_settings_id: { belongs_to_key: { _nempty: true } } }]
-    }
+      _and: [{ page_settings_id: { belongs_to_key: { _nempty: true } } }],
+    },
   }
 
   try {
