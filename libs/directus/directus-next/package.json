@@ -1,12 +1,16 @@
 {
   "name": "@okam/directus-next",
   "main": "./index.js",
-  "version": "0.0.0-local.1726771824724",
+  "version": "0.0.0-local.1726777374103",
   "types": "./index.d.ts",
   "exports": {
     ".": {
       "import": "./index.mjs",
       "require": "./index.js"
+    },
+    "./server": {
+      "import": "./server.mjs",
+      "require": "./server.js"
     }
   },
   "repository": {
