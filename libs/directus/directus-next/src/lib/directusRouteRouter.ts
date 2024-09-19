@@ -90,6 +90,7 @@ interface MinimalNextRequest {
 
 interface MinimalNextResponse {
   next: () => MinimalNextResponse
+  notFound: () => MinimalNextResponse
   rewrite: (url: MinimalNextUrl | URL) => MinimalNextResponse
 }
 
@@ -112,7 +113,7 @@ export async function directusRouteRouter(
   log('Using translation:', translation)
 
   if (!translation.languages_code || !translation.page_settings_id) {
-    log('Invalid translation data for path:', pathname)
+    console.warn(`[directusRouter] Invalid translation data for path: ${pathname}`)
     return NextResponse.next()
   }
 
@@ -121,7 +122,7 @@ export async function directusRouteRouter(
   const id = translation.page_settings_id.belongs_to_key
 
   if (!collection) {
-    console.warn(`[directusRouter] PageSettings with id ${translation.id} was found but is not associated with any collection.`)
+    console.warn(`[directusRouter] PageSettings with id ${id} was found but is not associated with any collection.`)
     return NextResponse.next()
   }
 
