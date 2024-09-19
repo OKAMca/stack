@@ -20,6 +20,26 @@
  5. Provide verbose logging in development mode for easier debugging.
  6. Remove the `config` export, allowing projects to define their own matcher in their `middleware.ts` file.
 
+
+ ```mermaid
+ sequenceDiagram
+     participant Client
+     participant Middleware
+     participant DirectusRouteRouter
+     participant Directus
+     participant NextJS
+
+     Client->>Middleware: GET /activite/gymnastique-adultes/
+     Middleware->>DirectusRouteRouter: Pass request
+     DirectusRouteRouter->>Directus: Query for path "/activite/gymnastique-adultes/"
+     Directus-->>DirectusRouteRouter: Return page settings (collection: activite, id: 4023, locale: fr-CA)
+     DirectusRouteRouter->>DirectusRouteRouter: Map locale fr-CA to fr
+     DirectusRouteRouter->>Middleware: Rewrite to /fr/activite/4023
+     Middleware->>NextJS: Forward rewritten request
+     NextJS-->>Client: Serve content for /fr/activite/4023
+ ```
+
+
  ## Changes
  1. Rename `directusRouteMiddleware` to `directusRouteRouter`.
  2. Modify the GraphQL query to search for translations directly based on the path.
