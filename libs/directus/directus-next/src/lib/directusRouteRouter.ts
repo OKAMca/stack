@@ -1,5 +1,4 @@
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
+import type { NextRequest, NextResponse } from 'next/server'
 
 interface DirectusRouteConfig {
   localeMap?: Record<string, string>
@@ -65,7 +64,14 @@ async function fetchPageSettingsTranslation(path: string) {
   }
 }
 
-export async function directusRouteRouter(request: NextRequest, config: DirectusRouteConfig) {
+export async function directusRouteRouter(
+  request: NextRequest,
+  config: DirectusRouteConfig,
+  NextResponse: {
+    next: () => NextResponse
+    rewrite: (url: URL) => NextResponse
+  }
+) {
   const { pathname } = request.nextUrl
 
   const translation = await fetchPageSettingsTranslation(pathname)
