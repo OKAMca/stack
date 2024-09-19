@@ -5,7 +5,7 @@ export function directusRouteRouter(
   request: NextRequest,
   config: Parameters<typeof originalDirectusRouteRouter>[1],
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  NextResponse: Parameters<typeof originalDirectusRouteRouter>[2]
+  NextResponse: Parameters<typeof originalDirectusRouteRouter>[2],
 ) {
   return originalDirectusRouteRouter(request, config, NextResponse)
 }
