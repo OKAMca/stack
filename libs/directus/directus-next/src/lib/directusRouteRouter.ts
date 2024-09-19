@@ -66,7 +66,7 @@ async function fetchPageSettingsTranslation(path: string) {
 
 /**
  * Handles dynamic routing for Directus-based content.
- * 
+ *
  * @param {NextRequest} request - The incoming request object from Next.js.
  * @param {DirectusRouteConfig} config - Configuration object for the router.
  * @param {{
@@ -74,7 +74,7 @@ async function fetchPageSettingsTranslation(path: string) {
  *   rewrite: (url: URL) => NextResponse
  * }} NextResponse - Next.js Response object with required methods.
  * @returns {Promise<NextResponse>} A promise that resolves to a Next.js response.
- * 
+ *
  * @description
  * This function processes incoming requests, queries Directus for matching page settings,
  * and rewrites the URL path based on the retrieved information and provided configuration.
@@ -86,7 +86,7 @@ export async function directusRouteRouter(
   NextResponse: {
     next: () => NextResponse
     rewrite: (url: URL) => NextResponse
-  }
+  },
 ) {
   const { pathname } = request.nextUrl
 
