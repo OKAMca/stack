@@ -15,9 +15,7 @@ export type TLinks = {
   replace?: boolean | null
   scroll?: boolean | null
   target?: string | null
-  tokens?: any | null
   type?: string | null
-  variant?: string | null
   collection?: TPageSettings | null
   file?: TFiles | null
 }

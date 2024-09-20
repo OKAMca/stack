@@ -1,7 +1,7 @@
 import type { PressEvent } from '@react-types/shared'
-import type { LinkProps } from 'next/link'
 import type React from 'react'
 import type { TDefaultComponent } from '../../types/components'
+import type { NextLinkProps } from '../../types/next-link'
 
 export interface TButtonProps extends TDefaultComponent {
   children?: React.ReactNode
@@ -18,5 +18,5 @@ export interface TButtonProps extends TDefaultComponent {
 }
 
 export interface TAnchorProps extends TButtonProps {
-  nextLinkProps?: LinkProps
+  nextLinkProps?: NextLinkProps
 }

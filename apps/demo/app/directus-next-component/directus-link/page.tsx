@@ -6,6 +6,11 @@ import { Anchor, type Nullable } from '@okam/stack-ui'
 const navigationItems = [
   {
     "id": "f9e5baee-22e3-4770-936c-a3a9614cdaf4",
+    "tokens": {
+      "size": "large",
+      "shape": "circular"
+    },
+    "variant": "menu",
     "link": {
       "anchor": "#parent-1",
       "external_link": null,
@@ -15,9 +20,7 @@ const navigationItems = [
       "replace": false,
       "scroll": true,
       "target": "_self",
-      "tokens": null,
       "type": "anchor",
-      "variant": null,
       "collection": null,
       "file": null
     },
@@ -34,9 +37,7 @@ const navigationItems = [
           "replace": false,
           "scroll": true,
           "target": "_self",
-          "tokens": null,
           "type": "external-link",
-          "variant": null,
           "collection": null,
           "file": null
         },
@@ -44,6 +45,8 @@ const navigationItems = [
       },
       {
         "id": "8f3a2eae-f2d9-47bc-9e8c-5453d62729e7",
+        "tokens": null,
+        "variant": null,
         "link": {
           "anchor": "#",
           "external_link": null,
@@ -53,9 +56,7 @@ const navigationItems = [
           "replace": false,
           "scroll": true,
           "target": "_self",
-          "tokens": null,
           "type": "collection",
-          "variant": null,
           "collection": {
             "id": "1e9d25bb-a3d9-43c4-97ab-e2174e30a30a",
             "belongs_to_collection": null,
@@ -77,6 +78,8 @@ const navigationItems = [
       },
       {
         "id": "c3184e0b-f526-47ef-9c5f-6185206946f6",
+        "tokens": null,
+        "variant": null,
         "link": {
           "anchor": "#",
           "external_link": null,
@@ -86,9 +89,7 @@ const navigationItems = [
           "replace": false,
           "scroll": true,
           "target": "_self",
-          "tokens": null,
           "type": "file",
-          "variant": null,
           "collection": null,
           "file": {
             "id": "e33f4e3b-5707-47ae-a8d4-7ff8e75ebc16",
@@ -108,6 +109,8 @@ const navigationItems = [
         "children": [
           {
             "id": "cafd18e7-b933-44bc-91a3-ebefed3b7765",
+            "tokens": null,
+            "variant": null,
             "link": {
               "anchor": "#",
               "external_link": "https://facebook.com",
@@ -117,9 +120,7 @@ const navigationItems = [
               "replace": false,
               "scroll": true,
               "target": "_self",
-              "tokens": null,
               "type": "external-link",
-              "variant": null,
               "collection": null,
               "file": null
             },
@@ -141,7 +142,7 @@ const depthMap: Record<number, object> = {
 const BrandDirectusLink = (props: TDirectusLinkProps) => {
   const linkProps = useDirectusLink(props)
 
-  return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline' }} />
+  return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline', ...linkProps.tokens }} />
 }
 
 function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
@@ -152,7 +153,7 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   if (!link || !linkProps) return null
   if (!children) {
     return (
-      <li style={style}>
+      <li style={style} key={linkProps?.id}>
         {/* You can render your own component with linkProps */}
         <BrandDirectusLink {...linkProps} />
         {/* Or use the pre-rendered version */}
@@ -168,7 +169,7 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   }
   return (
     <ul>
-      <li style={style}>
+      <li style={style} key={linkProps?.id}>
         <div>
           <BrandDirectusLink {...linkProps} />
         </div>
