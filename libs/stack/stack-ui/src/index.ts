@@ -1,3 +1,5 @@
+import dynamic from 'next/dynamic'
+
 export { default as ThemeProvider } from './theme'
 
 export { default as Typography } from './components/Typography'
@@ -76,3 +78,8 @@ export { default as useFacebookShareUrl } from './components/ShareButton/utils/u
 export { default as useMailToShareUrl } from './components/ShareButton/utils/useMailToShareUrl'
 export { default as useTwitterShareUrl } from './components/ShareButton/utils/useTwitterShareUrl'
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const DirectusSurvey = dynamic(() => import('./components/DirectusSurvey'), {
+  ssr: false,
+})
