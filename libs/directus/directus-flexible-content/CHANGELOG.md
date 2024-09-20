@@ -1,3 +1,20 @@
+## 1.0.6 (2024-08-30)
+
+
+### 🩹 Fixes
+
+- added sup & sub to flexible editor ([c08398b](https://github.com/OKAMca/stack/commit/c08398b))
+
+
+### ❤️  Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- mykimd @mykimd
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- Yan Morin
+- yanmorinokamca @yanmorinokamca
+
 ## 1.0.5 (2024-07-17)
 
 

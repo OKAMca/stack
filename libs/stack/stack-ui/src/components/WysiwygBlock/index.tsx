@@ -1,17 +1,36 @@
-import DOMPurify from 'isomorphic-dompurify'
+import sanitizeHtml from 'sanitize-html'
 import Typography from '../Typography'
+import { ariaAttributes, booleanAttributes } from './attributes'
 import type TWysiwygBlockProps from './interface'
 
 const WysiwygBlock = ({ content, themeName = 'wysiwyg', ...rest }: TWysiwygBlockProps) => {
+  const sanitizedContent = sanitizeHtml(content, {
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['iframe']),
+    nonBooleanAttributes: [],
+    allowedAttributes: {
+      ...sanitizeHtml.defaults.allowedAttributes,
+      '*': [...sanitizeHtml.defaults.nonBooleanAttributes, ...ariaAttributes, ...booleanAttributes],
+      iframe: [
+        'src',
+        'allow',
+        'allowfullscreen',
+        'frameborder',
+        'scrolling',
+        'target',
+        'title',
+        'height',
+        'width',
+        'referrerpolicy',
+      ],
+    },
+  })
+
   return (
     <Typography
       {...rest}
       themeName={themeName}
       dangerouslySetInnerHTML={{
-        __html: DOMPurify.sanitize(content, {
-          ADD_TAGS: ['iframe'],
-          ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling', 'target'],
-        }),
+        __html: sanitizedContent,
       }}
     />
   )

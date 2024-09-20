@@ -123,6 +123,13 @@ Check that projects were released before and that the tag "publishable" is insid
 }
 ```
 
+Check that the project is public in package.json
+{
+  "publishConfig": {
+    "access": "public"
+  }
+}
+
 Run the `Publish` workflow on main with github actions.
 
 ## Adding a library to the repository

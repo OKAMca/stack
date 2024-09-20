@@ -41,8 +41,7 @@ export { default as TabContainer } from './components/Menu/components/TabContain
 export { default as Alerts } from './components/Alerts'
 export { default as AlertsItem } from './components/Alerts/components/AlertsItem'
 export { default as SelectItem } from './components/fields/SelectItem/SelectItem'
-export { default as DirectusImg } from './components/DirectusImg'
-export { default as Img } from './components/Img'
+export { default as Video } from './components/Video'
 export * from './components/icons'
 
 // providers

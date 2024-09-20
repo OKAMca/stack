@@ -1,0 +1,9 @@
+query BlockFiles($id: ID!) {
+  block_files_by_id(id: $id) {
+    files {
+      directus_files_id {
+        ...DirectusFiles
+      }
+    }
+  }
+}

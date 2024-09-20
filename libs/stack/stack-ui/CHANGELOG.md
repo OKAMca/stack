@@ -1,3 +1,54 @@
+## 1.29.1 (2024-08-21)
+
+
+### 🩹 Fixes
+
+- wysiwyg sanitize html accepts most attributes ([1c829b2](https://github.com/OKAMca/stack/commit/1c829b2))
+
+- more permissive tailwind disabled variant ([9548240](https://github.com/OKAMca/stack/commit/9548240))
+
+
+### ❤️  Thank You
+
+- mykimd @mykimd
+- poclerson
+
+## 1.29.0 (2024-08-15)
+
+
+### 🚀 Features
+
+- directus image support for videos ([4d45c9c](https://github.com/OKAMca/stack/commit/4d45c9c))
+
+
+### 🩹 Fixes
+
+- lightbox can use escape button while in controlled state ([ab87f8c](https://github.com/OKAMca/stack/commit/ab87f8c))
+
+- move tokens and variant from links to navigation item ([7fca919](https://github.com/OKAMca/stack/commit/7fca919))
+
+- **stack-ui:** remove nextlink deps on MenuItems component ([#181](https://github.com/OKAMca/stack/pull/181))
+
+
+### ❤️  Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- yanmorinokamca @yanmorinokamca
+
+## 1.28.0 (2024-08-13)
+
+
+### 🚀 Features
+
+- add wysiwyg stories with iframe and allowed attributes ([4efd70b](https://github.com/OKAMca/stack/commit/4efd70b))
+
+
+### ❤️  Thank You
+
+- mykimd
+
 ## 1.27.3 (2024-08-08)
 
 

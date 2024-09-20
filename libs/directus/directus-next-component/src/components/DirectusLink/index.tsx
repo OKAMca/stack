@@ -1,5 +1,4 @@
 import { Anchor } from '@okam/stack-ui'
-import Link from 'next/link'
 import useDirectusLink from '../../hooks/directus-link'
 import type { TDirectusLinkProps } from './interface'
 
@@ -8,12 +7,15 @@ const DirectusLink = (props: TDirectusLinkProps) => {
 
   const linkProps = useDirectusLink(props)
 
-  if (!type || !linkProps.href) return null
+  if (!type) return null
 
   const LinkComponent = componentsConfig?.[type]
 
-  if (!LinkComponent) return <Anchor as={Link} {...linkProps} />
-  return <LinkComponent {...props} />
+  if (LinkComponent) return <LinkComponent {...props} />
+
+  if (!linkProps.href) return null
+
+  return <Anchor {...linkProps} />
 }
 
 export default DirectusLink

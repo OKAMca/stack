@@ -1,7 +1,7 @@
 {
   "name": "@okam/directus-next",
   "main": "./index.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "types": "./index.d.ts",
   "exports": {
     ".": {
@@ -10,7 +10,8 @@
     }
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
