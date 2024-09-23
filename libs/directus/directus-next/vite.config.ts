@@ -36,15 +36,9 @@ export default defineConfig({
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
     lib: {
-      // Could also be a dictionary or array of multiple entry points.
       entry: ['src/index.ts', 'src/server.ts'],
       name: 'directus-next',
       // Removed 'fileName' because multiple entry points are specified
-      formats: ['es', 'cjs'],
-      name: 'directus-next',
-      fileName: 'index',
-      // Change this to the formats you want to support.
-      // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
