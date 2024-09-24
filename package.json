@@ -166,7 +166,7 @@
     "ts-jest": "^29.1.1",
     "ts-node": "10.9.2",
     "typescript": "5.4.5",
-    "verdaccio": "^5.29.0",
+    "verdaccio": "^5.32.2",
     "vite": "^5.0.13",
     "vite-plugin-dts": "~2.3.0",
     "vite-tsconfig-paths": "^4.2.2",
