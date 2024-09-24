@@ -1,3 +1,15 @@
+## 1.4.0 (2024-09-24)
+
+
+### 🚀 Features
+
+- **directus-next:** directus based routing ([196ab1e](https://github.com/OKAMca/stack/commit/196ab1e))
+
+
+### ❤️  Thank You
+
+- David Paquet Pitts
+
 ## 1.3.1 (2024-08-15)
 
 
