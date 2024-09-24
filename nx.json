@@ -20,7 +20,11 @@
       }
     },
     "version": {
-      "conventionalCommits": true
+      "preVersionCommand": "npx nx run-many -t=build --projects=tag:publishable --generatePackageJson=true",
+      "generatorOptions": {
+        "currentVersionResolver": "git-tag",
+        "conventionalCommits": true
+      }
     }
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",

@@ -4,7 +4,7 @@ storage: ../tmp/local-registry/storage
 # a list of other known repositories we can talk to
 uplinks:
   npmjs:
-    url: https://registry.yarnpkg.com
+    url: https://registry.npmjs.org/
     maxage: 60m
 
 packages:
@@ -26,3 +26,8 @@ logs:
 
 publish:
   allow_offline: true # set offline to true to allow publish offline
+# Authentication settings
+auth:
+  htpasswd:
+    file: ./htpasswd
+    max_users: 1000
