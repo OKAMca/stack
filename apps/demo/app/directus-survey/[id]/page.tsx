@@ -3,7 +3,7 @@ import { DirectusSurvey } from '@okam/stack-ui'
 import { FormConfigDocument, FormConfigFragmentDoc, useFragment } from 'libs/directus-data-query/survey'
 
 export default async function Index({ params }: { params: { id: string } }) {
-  const token = 'd2aDAOs2Eb5slM2k-Ck70MSh7k6LuNOd'
+  const token = process.env.DIRECTUS_FORM_API_TOKEN
   const directusUrl = 'https://survey-demo.okam.one'
   const queryClient = initDirectusQuery(`${directusUrl}/graphql`, {
     credentials: 'include',
