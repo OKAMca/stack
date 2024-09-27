@@ -6,9 +6,9 @@ import { Box, Typography } from '@okam/stack-ui'
 import { PagesDocument } from 'libs/directus-data-query/src'
 
 export default async function Index() {
-  const flexibleContent = await queryGql(PagesDocument)
+  const pages = await queryGql(PagesDocument)
 
-  const pageFlexibleContent = flexibleContent.pages.find((p) => p.title === 'Guinea pigs')
+  const pageFlexibleContent = pages.pages[0]
 
   const editorNodes = pageFlexibleContent?.translations?.[0]?.editor_nodes
   const content = pageFlexibleContent?.translations?.[0]?.flexible_editor as JSONContent

@@ -1,0 +1,16 @@
+fragment FormConfig on form_configs {
+  id
+  date_updated
+  friendly_id
+  date_created
+  schema
+  form_submission_collection
+  title
+  field_map
+}
+
+query FormConfig($id: ID!) {
+    form_configs_by_id(id: $id) {
+        ...FormConfig
+    }
+}
