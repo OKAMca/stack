@@ -3,12 +3,11 @@
 import '../src/tailwind.css' // replace with the name of your tailwind css file
 import React, { Suspense } from 'react'
 import { I18nProvider, OverlayProvider } from 'react-aria'
-import { useGlobals } from '@storybook/client-api'
 import BaseThemeProvider from '../src/theme'
 import { IsClientContextProvider } from '../src/providers/Client'
+import { useGlobals } from 'storybook/internal/preview-api'
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
   layout: 'centered',
   controls: { expanded: true },
   backgrounds: {

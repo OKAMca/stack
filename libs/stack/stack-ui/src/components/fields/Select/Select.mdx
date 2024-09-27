@@ -1,0 +1,28 @@
+{/* Select.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import Select, { SelectStyled } from './Select'
+import SelectItem from '../SelectItem/SelectItem'
+import SelectContent from '../../../storybook/SelectField'
+import ChevronLeft from '../../icons/ChevronLeft'
+import * as SelectStories from './Select.stories';
+
+<Meta of={SelectStories} />
+
+export const Template = (args) => <SelectContent {...args} />
+
+# Select
+
+Select Field component.
+
+<Canvas>
+  <Story of={SelectStories.Default} />
+</Canvas>
+
+<Canvas>
+  <Story of={SelectStories.Disabled} />
+</Canvas>
+
+<Canvas>
+  <Story of={SelectStories.Error} />
+</Canvas>

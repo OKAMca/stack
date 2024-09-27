@@ -1,0 +1,47 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ArgTypes } from '@storybook/blocks'
+import Search from './'
+import { SearchBarProvider } from '../../../providers/UserSearchQuery'
+import * as SearchStories from './search.stories';
+
+<Meta of={SearchStories} />
+
+export const Template = (args) => (
+  <SearchBarProvider userQuery="">
+    <Search {...args} />
+  </SearchBarProvider>
+)
+
+# Search
+
+### Search component. Used to search various information. To see typing events, look at the console.
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+### Default
+
+<Canvas>
+  <Story of={SearchStories.Default} />
+</Canvas>
+
+### No label
+
+<Canvas>
+  <Story of={SearchStories.NoLabel} />
+</Canvas>
+
+### Disabled
+
+<Canvas>
+  <Story of={SearchStories.Disabled} />
+</Canvas>
+
+### Error
+
+<Canvas>
+  <Story of={SearchStories.Error} />
+</Canvas>

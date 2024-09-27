@@ -1,0 +1,45 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ArgTypes } from '@storybook/blocks'
+import Lightbox from './'
+import LightboxControlledState from '../../storybook/Lightbox/LightboxControlledState'
+import Image from 'next/image'
+import image from '../../../static/images/image.png'
+import * as LightboxStories from './lightbox.stories';
+
+<Meta of={LightboxStories} />
+
+export const Template = (args) => {
+  return (
+    <Lightbox {...args}>
+      <Image src={image} width={570} height={762} alt="Lightbox preview" />
+    </Lightbox>
+  )
+}
+
+export const TemplateControlledState = (args) => {
+  return (
+    <LightboxControlledState {...args}>
+      <Image src={image} width={570} height={762} alt="Lightbox preview" />
+    </LightboxControlledState>
+  )
+}
+
+# Lightbox
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+### Default
+
+<Canvas>
+  <Story of={LightboxStories.Default} />
+</Canvas>
+
+### With a controlled state
+
+<Canvas>
+  <Story of={LightboxStories.ControlledState} />
+</Canvas>
