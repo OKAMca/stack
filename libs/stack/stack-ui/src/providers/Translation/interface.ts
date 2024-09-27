@@ -13,5 +13,5 @@ export type TTranslationProps = {
 }
 
 export type TTranslationContext = {
-  t: (key: string, obj?: Record<string, unknown>) => string
+  t: TTranslateFunc
 }
