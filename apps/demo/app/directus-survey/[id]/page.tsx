@@ -4,7 +4,7 @@ import { FormConfigDocument, FormConfigFragmentDoc, useFragment } from 'libs/dir
 
 export default async function Index({ params }: { params: { id: string } }) {
   const token = process.env.DIRECTUS_FORM_API_TOKEN
-  const directusUrl = 'https://survey-demo.okam.one'
+  const directusUrl = process.env.DIRECTUS_FORM_URL
   const queryClient = initDirectusQuery(`${directusUrl}/graphql`, {
     credentials: 'include',
     mode: 'cors',
