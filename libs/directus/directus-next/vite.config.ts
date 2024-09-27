@@ -2,6 +2,7 @@
 /// <reference types="vitest" />
 import * as path from 'path'
 import react from '@vitejs/plugin-react'
+import preserveDirectives from 'rollup-plugin-preserve-directives'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import viteTsConfigPaths from 'vite-tsconfig-paths'
@@ -35,17 +36,19 @@ export default defineConfig({
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
     lib: {
-      // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
-      name: 'directus-block',
-      fileName: 'index',
-      // Change this to the formats you want to support.
-      // Don't forget to update your package.json as well.
+      entry: ['src/index.ts', 'src/server.ts'],
+      name: 'directus-next',
+      // Removed 'fileName' because multiple entry points are specified
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
+      plugins: [preserveDirectives()],
+      output: {
+        preserveModules: true,
+      },
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, 'next/navigation', 'next/headers'],
+      external: [...externalDeps, 'next/navigation', 'next/headers', 'next/server'],
     },
+    ssr: true,
   },
 })

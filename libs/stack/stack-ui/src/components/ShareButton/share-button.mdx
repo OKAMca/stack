@@ -1,0 +1,30 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ArgTypes } from '@storybook/blocks'
+import ShareButtonExample from '../../storybook/ShareButtonExample'
+import * as ShareButtonStories from './share-button.stories';
+
+<Meta of={ShareButtonStories} />
+
+export const Template = (args) => <ShareButtonExample {...args} />
+
+# ShareButton
+
+#### Share button component. Can be used to display sharing links to other social media platforms or other medias (email, links, etc.)
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+## Column share button
+
+<Canvas>
+  <Story of={ShareButtonStories.ColumnShareButton} />
+</Canvas>
+
+## Row share button
+
+<Canvas>
+  <Story of={ShareButtonStories.RowShareButton} />
+</Canvas>

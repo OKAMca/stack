@@ -1,0 +1,29 @@
+{/* layout.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import PageLayoutExample from './index'
+import * as LayoutStories from './layout.stories';
+
+<Meta of={LayoutStories} />
+
+export const Template = (args) => (
+  <>
+    <style>
+      {`
+        #storybook-root {
+          width: 100%;
+          padding: 0! important;
+        }
+      `}
+    </style>
+    <PageLayoutExample {...args} />
+  </>
+)
+
+# Box
+
+Box component. Generic wrapper for your website or app.
+
+<Canvas layout="fullscreen">
+  <Story of={LayoutStories.Box} />
+</Canvas>

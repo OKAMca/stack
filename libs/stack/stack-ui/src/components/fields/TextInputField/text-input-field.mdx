@@ -1,0 +1,28 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import TextInputField from './index'
+import * as TextInputFieldStories from './text-input-field.stories';
+
+<Meta of={TextInputFieldStories} />
+
+export const Template = (args) => {
+  const { backgroundColor, ...rest } = args
+  return (
+    <div className={`flex flex-col m-auto justify-center items-center`}>
+      <TextInputField {...rest} />
+    </div>
+  )
+}
+
+# Text Input Field
+
+<Canvas>
+  <Story of={TextInputFieldStories.Default} />
+</Canvas>
+
+<Canvas>
+  <Story of={TextInputFieldStories.Disabled} />
+</Canvas>
+
+<Canvas>
+  <Story of={TextInputFieldStories.Error} />
+</Canvas>
