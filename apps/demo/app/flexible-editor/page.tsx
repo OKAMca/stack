@@ -8,18 +8,32 @@ import { PagesDocument } from 'libs/directus-data-query/src'
 export default async function Index() {
   const flexibleContent = await queryGql(PagesDocument)
 
-  const pageFlexibleContent = flexibleContent.pages.find((p) => p.title === 'Guinea pigs')
+  const pageFlexibleContent = flexibleContent.pages.find((p) => p.title === 'Team')
 
   const editorNodes = pageFlexibleContent?.translations?.[0]?.editor_nodes
   const content = pageFlexibleContent?.translations?.[0]?.flexible_editor as JSONContent
 
   const relationBlocks: TBlockSerializerConfig = {
     components: {
+      block_button: {
+        default: (props) => <Box as="span">Related Block Button</Box>,
+      },
       related_block_faqs: {
-        default: (props) => <Box>Related Block FAQ</Box>,
+        default: (props) => <Box as="span">Related Block FAQ</Box>,
       },
       block_quote: {
         default: (props) => <Box>Block Quotes</Box>,
+      },
+    },
+  }
+
+  const relationMarks: TBlockSerializerConfig = {
+    components: {
+      links: {
+        default: (props) => {
+          const label = props?.item?.markText as string
+          return <Box as="span">{label}</Box>
+        },
       },
     },
   }
@@ -29,6 +43,7 @@ export default async function Index() {
       jsonContent={content}
       editorNodes={editorNodes}
       config={relationBlocks}
+      relationMarksConfig={relationMarks}
       nodes={{
         // Used to remap default HTML nodes
         table: (props) => (
@@ -42,7 +57,7 @@ export default async function Index() {
           </Typography>
         ),
       }}
-      remappedAttributes={{ colspan: 'colSpan' }} // Used to remap attributes, if not present in this case, error will be thrown for colspan
+      remappedAttributes={{ colspan: 'colSpan', noRelatedItem: 'null' }} // Used to remap attributes, if not present in this case, error will be thrown for colspan
     />
   )
 }
