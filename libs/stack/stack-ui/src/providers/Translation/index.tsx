@@ -12,7 +12,15 @@ export function TranslationContextProvider({
   translateFunctionName = 't',
 }: TTranslationProps) {
   const translate = useTranslationFunc(namespace)
-  const t = get<TTranslateFunc>(translate, translateFunctionName)
+
+  const fallbackFn = (key: string, _obj?: Record<string, unknown>) => {
+    console.warn(
+      `STACK-UI/Translation --> translation function not found: translateFunctionName: ${translateFunctionName}`,
+    )
+    return key
+  }
+
+  const t = get<TTranslateFunc>(translate, translateFunctionName, fallbackFn)
 
   const translationFunc = useCallback(
     (key: string, obj?: Record<string, unknown>) => {
