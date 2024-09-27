@@ -1,0 +1,72 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ArgTypes } from '@storybook/blocks'
+import Accordion from './'
+import CloseBtn from '../icons/CloseBtn'
+import Button from '../Button'
+import Typography from '../Typography'
+import AccordionItem from './components/AccordionItem'
+import useAccordionState from './hooks/useAccordionState'
+import * as AccordionStories from './accordion.stories';
+
+<Meta of={AccordionStories} />
+
+export const Template = (args) => (
+  <Accordion {...args} />
+)
+
+export const TemplateControlledState = (args) => {
+  const state = useAccordionState(args)
+  const { selectionManager } = state
+
+  return (
+    <div>
+      <Button handlePress={() => selectionManager.select('item-1')}>
+        Open item 1
+      </Button>
+      <Button handlePress={() => selectionManager.select('item-2')}>
+        Open item 2
+      </Button>
+      <Accordion {...args} selectedKeys={selectionManager.selectedKeys} />
+    </div>
+  )
+}
+
+# Accordion
+
+#### Accordion component. Elements that hide some more information when clicking on it.
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+### Left Aligned Accordion
+
+<Canvas>
+  <Story of={AccordionStories.LeftAligned} />
+</Canvas>
+
+### Centered Accordion
+
+<Canvas>
+  <Story of={AccordionStories.CenterAligned} />
+</Canvas>
+
+### Default opened accordion
+
+<Canvas>
+  <Story of={AccordionStories.DefaultOpened} />
+</Canvas>
+
+### Accordion with focusable items inside
+
+<Canvas>
+  <Story of={AccordionStories.WithFocusableItems} />
+</Canvas>
+
+### Accordion with controlled state
+
+<Canvas>
+  <Story of={AccordionStories.ControlledState} />
+</Canvas>

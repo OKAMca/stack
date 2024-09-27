@@ -1,0 +1,30 @@
+{/* TextArea.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import TextArea from './index'
+import * as TextAreaStories from './textArea.stories';
+
+<Meta of={TextAreaStories} />
+
+export const Template = (args) => {
+  const { backgroundColor, ...rest } = args
+  return (
+    <div className={`flex flex-col m-auto h-screen justify-center items-center`}>
+      <TextArea {...rest} />
+    </div>
+  )
+}
+
+# Text Input Field
+
+<Canvas>
+  <Story of={TextAreaStories.Default} />
+</Canvas>
+
+<Canvas>
+  <Story of={TextAreaStories.Disabled} />
+</Canvas>
+
+<Canvas>
+  <Story of={TextAreaStories.Error} />
+</Canvas>

@@ -1,0 +1,31 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import DatePicker from './'
+import DateRangePicker from './DateRangePicker'
+import { OverlayContainer } from '@react-aria/overlays'
+import * as DatePickerStories from './date-picker.stories';
+
+<Meta of={DatePickerStories} />
+
+export const DatePickerTemplate = (args) => <DatePicker {...args} />
+
+export const DateRangePickerTemplate = (args) => <DateRangePicker {...args} />
+
+# Date Picker
+
+Date Picker component.
+
+<Canvas>
+  <Story of={DatePickerStories.Default} />
+</Canvas>
+
+<Canvas>
+  <Story of={DatePickerStories.DateFieldAndIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DatePickerStories.OnlyIcon} />
+</Canvas>
+
+<Canvas>
+  <Story of={DatePickerStories.DateRangePicker} />
+</Canvas>

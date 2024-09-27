@@ -1,0 +1,89 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ArgTypes } from '@storybook/blocks'
+import Carousel from './index'
+import Button from '../Button'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/autoplay'
+import { CarouselNextNavigationButton, CarouselPrevNavigationButton } from './components/CarouselNavigationButton'
+import { forwardRef } from 'react'
+import * as CarouselStories from './carousel.stories';
+
+<Meta of={CarouselStories} />
+
+export const Template = (args) => {
+  return <Carousel {...args} />
+}
+
+# Carousel
+
+Carousel component. More commonly used for a showcase of images. When using the carousel component, you must import React Swiper CSS files
+
+```ts
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/a11y'
+import 'swiper/css/autoplay'
+import 'swiper/css/navigation'
+import 'swiper/css/mousewheel'
+import 'swiper/css/keyboard'
+```
+
+## Props
+
+<ArgTypes
+  include={[
+    'slides',
+    'a11y',
+    'nextButton',
+    'prevButton',
+    'themeName',
+    'tokens',
+    'customTheme',
+    'as',
+    'onSwiper',
+    'onNavigationPrev',
+    'onNavigationNext',
+    'children',
+    'modules',
+  ]}
+/>
+
+## Showcase
+
+### Multiple slides per view
+
+<Canvas>
+  <Story of={CarouselStories.MultipleSlidesPerView} />
+</Canvas>
+
+### Autoplay
+
+<Canvas>
+  <Story of={CarouselStories.Autoplay} />
+</Canvas>
+
+### Focusable content
+
+<Canvas>
+  <Story of={CarouselStories.FocusableContent} />
+</Canvas>
+
+### Infinite looping
+
+<Canvas>
+  <Story of={CarouselStories.InfiniteLooping} />
+</Canvas>
+
+### Pagination
+
+<Canvas>
+  <Story of={CarouselStories.Pagination} />
+</Canvas>
+
+### Carousel with custom navigation
+
+<Canvas>
+  <Story of={CarouselStories.CarouselCustomNavigation} />
+</Canvas>

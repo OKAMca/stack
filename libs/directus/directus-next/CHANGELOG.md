@@ -1,3 +1,21 @@
+## 0.2.0 (2024-09-24)
+
+
+### 🚀 Features
+
+- **directus-next:** directus based routing ([196ab1e](https://github.com/OKAMca/stack/commit/196ab1e))
+
+
+### 🩹 Fixes
+
+- **directus-next:** make package public ([#172](https://github.com/OKAMca/stack/pull/172))
+
+
+### ❤️  Thank You
+
+- David Paquet Pitts
+- yanmorinokamca @yanmorinokamca
+
 ## 0.1.1 (2024-08-13)
 
 
