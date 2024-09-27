@@ -43,7 +43,7 @@ export const Default = {
   },
 }
 
-export const ClosesWhenInteactingOutside = {
+export const ClosesWhenInteractingOutside = {
   render: Template.bind({}),
   name: 'Closes when inteacting outside',
 
