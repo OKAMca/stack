@@ -1,12 +1,11 @@
 import React from 'react'
 import { animated, config, useTransition } from 'react-spring'
+import useThemeContext from '../providers/Theme/hooks'
+import type { TTransition } from '../types/components'
 
-interface TProps {
-  isVisible: boolean
-  children: React.ReactNode
-}
+const ModalTransition = ({ isVisible, children, themeName, tokens, customTheme }: TTransition) => {
+  const theme = useThemeContext(themeName, tokens, customTheme)
 
-const ModalTransition = ({ isVisible, children }: TProps) => {
   const transition = useTransition(isVisible, {
     from: { opacity: 0, scale: 0.75 },
     enter: { opacity: 1, scale: 1 },
@@ -18,6 +17,7 @@ const ModalTransition = ({ isVisible, children }: TProps) => {
     (styles, bool) =>
       bool && (
         <animated.div
+          className={theme}
           style={{
             position: 'fixed',
             left: 0,
