@@ -1,15 +1,15 @@
 import type { HTMLAttributes } from 'react'
 import type React from 'react'
-import type { TDefaultComponent } from '../../types/components'
+import type { TDefaultComponent, TTransition } from '../../types/components'
 
 export interface ISidePanelProps extends HTMLAttributes<HTMLElement> {
   id: string
   children?: React.ReactNode
   closeBtnRender?: () => React.ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  TransitionAnimation?: (props: unknown) => JSX.Element
+  TransitionAnimation?: (props: TTransition) => JSX.Element
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  PanelTransition?: (props: unknown) => JSX.Element
+  PanelTransition?: (props: TTransition) => JSX.Element
   onCloseCallBack?: () => void
 }
 

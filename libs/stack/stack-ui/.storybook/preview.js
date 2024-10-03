@@ -27,8 +27,7 @@ export const parameters = {
 
 export const decorators = [
   (Story, context) => {
-    const [{ locale }] = useGlobals()
-
+    const locale = context?.globals?.locale || 'en'
     return (
       <>
         <style>

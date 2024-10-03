@@ -17,36 +17,6 @@ const nextConfig = {
     // See: https://github.com/gregberge/svgr
     svgr: false,
   },
-  webpack: (config, { webpack, isServer }) => {
-    // Fixes following issue
-    // https://github.com/kkomelin/isomorphic-dompurify/issues/54
-    config.externals = [...config.externals, 'canvas', 'jsdom']
-
-    config.module.rules.push({
-      test: /\.svg$/,
-      issuer: /\.(js|ts)x?$/,
-      use: [
-        {
-          loader: '@svgr/webpack',
-          // https://react-svgr.com/docs/webpack/#passing-options
-          options: {
-            svgo: true,
-            // @link https://github.com/svg/svgo#configuration
-            svgoConfig: {
-              multipass: false,
-              datauri: 'base64',
-              js2svg: {
-                indent: 2,
-                pretty: false,
-              },
-            },
-          },
-        },
-      ],
-    })
-
-    return config
-  },
 }
 
 const plugins = [
