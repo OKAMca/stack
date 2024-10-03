@@ -22,6 +22,7 @@ const externalDeps = [
   'react-i18next',
   'react-use',
   'react-spring',
+  '@react-spring/web',
   'react-div-100vh',
   'react-hook-form',
   'lodash',

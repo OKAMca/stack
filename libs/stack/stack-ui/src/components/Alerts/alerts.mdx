@@ -1,0 +1,71 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ArgTypes } from '@storybook/blocks'
+import Alerts from '.'
+import Box from '../Box'
+import Typography from '../Typography'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/autoplay'
+import * as AlertsStories from './alerts.stories';
+
+<Meta of={AlertsStories} />
+
+export const Template = (args) => (
+  <Alerts {...args} />
+)
+
+# Alerts
+
+### A closable and navigable carousel showcasing multiple alerts
+
+## Props
+
+<ArgTypes
+  include={[
+  'aleslidesrts',
+  'onOpenChange',
+  'a11y',
+  'closeButtonAriaLabel',
+  'setOpen',
+  'nextButton',
+  'prevButton',
+  'closeButton',
+  'transitionComponent',
+  'themeName',
+  'tokens',
+  'customTheme',
+  'as',
+  'onSwiper',
+  'onNavigationPrev',
+  'onNavigationNext',
+  'children',
+  'modules',
+]}
+/>
+
+## Showcase
+
+### Single alert
+
+<Canvas>
+  <Story of={AlertsStories.SingleAlert} />
+</Canvas>
+
+### Navigation
+
+<Canvas>
+  <Story of={AlertsStories.Navigation} />
+</Canvas>
+
+### Pagination
+
+<Canvas>
+  <Story of={AlertsStories.Pagination} />
+</Canvas>
+
+### Pagination & Navigation
+
+<Canvas>
+  <Story of={AlertsStories.PaginationNavigation} />
+</Canvas>

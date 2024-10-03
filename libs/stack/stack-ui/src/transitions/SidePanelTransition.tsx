@@ -1,4 +1,5 @@
-import { animated, config, useTransition } from 'react-spring'
+import { animated, config, useTransition } from '@react-spring/web'
+import React from 'react'
 import useThemeContext from '../providers/Theme/hooks'
 import type { TTransition } from '../types/components'
 

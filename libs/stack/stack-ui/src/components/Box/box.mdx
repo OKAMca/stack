@@ -1,0 +1,21 @@
+{/* box.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import Box from './index'
+import * as BoxStories from './box.stories';
+
+<Meta of={BoxStories} />
+
+export const Template = (args) => (
+  <div className="bg-slate-200 p-4">
+    <Box {...args}>Hello world!</Box>
+  </div>
+)
+
+# Box
+
+Box component. Generic wrapper for your website or app.
+
+<Canvas>
+  <Story of={BoxStories.Box} />
+</Canvas>
