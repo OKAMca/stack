@@ -1,5 +1,6 @@
 import type { HTMLAttributes } from 'react'
 import type React from 'react'
+import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 
 export interface ISidePanelProps extends HTMLAttributes<HTMLElement> {
@@ -13,4 +14,4 @@ export interface ISidePanelProps extends HTMLAttributes<HTMLElement> {
   onCloseCallBack?: () => void
 }
 
-export type TSidePanelProps = ISidePanelProps & TDefaultComponent
+export type TSidePanelProps<T = TToken> = ISidePanelProps & TDefaultComponent<T>

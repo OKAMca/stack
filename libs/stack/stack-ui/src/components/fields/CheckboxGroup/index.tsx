@@ -4,11 +4,12 @@
 import { useCheckboxGroupState } from '@react-stately/checkbox'
 import { useCheckboxGroup } from 'react-aria'
 import { CheckboxGroupProvider } from '../../../providers/CheckboxGroup'
+import type { TToken } from '../../../providers/Theme/interface'
 import Box from '../../Box'
 import Typography from '../../Typography'
 import type { TCheckboxGroupProps } from './interface'
 
-const CheckboxGroup = (props: TCheckboxGroupProps) => {
+const CheckboxGroup = <T extends TToken>(props: TCheckboxGroupProps<T>) => {
   const {
     label,
     isError = false,
