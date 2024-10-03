@@ -56,7 +56,7 @@ export const ReactHookFormRadio = <T extends TToken>(props: TRadioProps<T>) => {
   const errMsg = error?.message ?? undefined
   const { t } = useTranslation()
   const { ref: refCallback, ...rest } = register(name, {
-    required: required ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
+    required: required ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
   })
 
   return <Radio fieldRef={refCallback} {...rest} {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} />

@@ -46,7 +46,7 @@ export const CarouselNextNavigationButton = forwardRef(
       typeof slidesPerView === 'number' ? (activeIndex + 1) / slidesPerView : activeIndex,
     )
     const slidesGroupLength = Math.round(
-      slides && typeof slidesPerView === 'number' ? slides.length / slidesPerView : slides?.length ?? 1,
+      slides && typeof slidesPerView === 'number' ? slides.length / slidesPerView : (slides?.length ?? 1),
     )
 
     const allowNavigateNext = slidesGroupIndex < slidesGroupLength

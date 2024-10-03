@@ -1,7 +1,7 @@
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import { GraphQLClient } from 'graphql-request'
 import type { Variables } from 'graphql-request'
-import type { RequestConfig } from 'graphql-request/build/esm/types'
+import type { RequestConfig } from 'node_modules/graphql-request/build/legacy/helpers/types'
 import { GRAPHQL_ENDPOINT, defaultConfig } from './config'
 import { queryGql } from './query'
 
