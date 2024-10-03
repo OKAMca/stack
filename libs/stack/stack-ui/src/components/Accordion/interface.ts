@@ -2,15 +2,16 @@
 import type { AccordionItemAriaProps } from '@react-aria/accordion'
 import type { ComponentType, ReactElement } from 'react'
 import type { ItemProps, TreeProps } from 'react-stately'
+import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent, TTransition } from '../../types/components'
 
-type TAccordionDefaultComponent = Omit<TDefaultComponent, 'children'>
+type TAccordionDefaultComponent<T = TToken> = Omit<TDefaultComponent<T>, 'children'>
 
 export interface AccordionProps extends TreeProps<TAccordionItemProps> {
   children: ReactElement<TAccordionItemProps> | ReactElement<TAccordionItemProps>[]
 }
 
-export interface TAccordionProps extends TAccordionDefaultComponent, AccordionProps {
+export interface TAccordionProps<T = TToken> extends TAccordionDefaultComponent<T>, AccordionProps {
   id: string
   TransitionAnimation?: ComponentType<TTransition>
 }

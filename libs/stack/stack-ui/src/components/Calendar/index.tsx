@@ -7,13 +7,20 @@ import { useLocale } from '@react-aria/i18n'
 import { useCalendarState } from '@react-stately/calendar'
 import { useRef } from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import Button from '../Button'
 import Icon from '../Icon'
 import Typography from '../Typography'
 import CalendarGrid from './components/CalendarGrid'
 import type { TCalendarProps } from './interface'
 
-function Calendar({ buttons, tokens, customTheme, themeName = 'calendar', ...rest }: TCalendarProps) {
+function Calendar<T extends TToken>({
+  buttons,
+  tokens,
+  customTheme,
+  themeName = 'calendar',
+  ...rest
+}: TCalendarProps<T>) {
   const { locale } = useLocale()
   const state = useCalendarState({
     ...rest,
@@ -59,5 +66,7 @@ function Calendar({ buttons, tokens, customTheme, themeName = 'calendar', ...res
     </div>
   )
 }
+
+Calendar.displayName = 'Calendar'
 
 export default Calendar
