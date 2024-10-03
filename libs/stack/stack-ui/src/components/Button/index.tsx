@@ -92,4 +92,4 @@ const ButtonComponent = <T extends TToken>(props: TButtonProps<T>) => {
   return <Button ref={ref} {...props} />
 }
 
-export default React.memo(ButtonComponent)
+export default ButtonComponent
