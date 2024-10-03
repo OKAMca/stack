@@ -1,7 +1,7 @@
 'use client'
 
+import { animated, useTransition } from '@react-spring/web'
 import React from 'react'
-import { animated, useTransition } from 'react-spring'
 
 interface TProps {
   isVisible: boolean

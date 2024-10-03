@@ -1,0 +1,58 @@
+{/* typo.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import Typography from './index'
+import * as TypoStories from './typo.stories';
+
+<Meta of={TypoStories} />
+
+export const Template = (args) => (
+  <div>
+    <Typography {...args}>Hello world!</Typography>
+  </div>
+)
+
+# Typography
+
+Typography component. You can pass `size tokens` to change the style, from 'h1' to 'h6', 'leading', 'paragraph' and 'footnote' and 'xs'.
+You can use property `as` to render the typography with a different component, e.g. `h1` to `h6` or even `div` and `header`.
+
+<Canvas>
+  <Story of={TypoStories.Heading1} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.Heading2} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.Heading3} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.Heading4} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.Heading5} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.Heading6} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.Default} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.Leading} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.Footnotes} />
+</Canvas>
+
+<Canvas>
+  <Story of={TypoStories.XSmall} />
+</Canvas>
