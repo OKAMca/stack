@@ -1,9 +1,10 @@
 import type { PressEvent } from '@react-types/shared'
 import type React from 'react'
+import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 import type { NextLinkProps } from '../../types/next-link'
 
-export interface TButtonProps extends TDefaultComponent {
+export interface TButtonProps<T = TToken> extends TDefaultComponent<T> {
   children?: React.ReactNode
   id?: string
   href?: string
@@ -17,6 +18,6 @@ export interface TButtonProps extends TDefaultComponent {
   isDisabled?: boolean
 }
 
-export interface TAnchorProps extends TButtonProps {
+export interface TAnchorProps<T = TToken> extends TButtonProps<T> {
   nextLinkProps?: NextLinkProps
 }

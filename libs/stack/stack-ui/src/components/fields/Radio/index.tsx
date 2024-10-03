@@ -6,11 +6,12 @@ import { useRadio, VisuallyHidden, useFocusRing, FocusRing, mergeProps } from 'r
 import { get, useFormContext } from 'react-hook-form'
 import { useRadioGroupCtx } from '../../../providers/RadioGroup/RadioGroup'
 import useThemeContext from '../../../providers/Theme/hooks'
+import type { TToken } from '../../../providers/Theme/interface'
 import { useTranslation } from '../../../providers/Translation'
 import Typography from '../../Typography'
 import type { TRadioProps } from './Radio.interface'
 
-const Radio = (props: TRadioProps) => {
+const Radio = <T extends TToken>(props: TRadioProps<T>) => {
   const { id, label, themeName = 'radio', tokens, customTheme, value, fieldRef } = props
   const state = useRadioGroupCtx()
   const ref = useRef<HTMLInputElement | null>(null)
@@ -48,7 +49,7 @@ const Radio = (props: TRadioProps) => {
   )
 }
 
-export const ReactHookFormRadio = (props: TRadioProps) => {
+export const ReactHookFormRadio = <T extends TToken>(props: TRadioProps<T>) => {
   const { name, required } = props
   const { register, formState } = useFormContext()
   const error: Error = get(formState.errors, name)
