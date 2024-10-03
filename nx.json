@@ -140,5 +140,6 @@
       }
     }
   },
-  "useInferencePlugins": false
+  "useInferencePlugins": false,
+  "neverConnectToCloud": true
 }
