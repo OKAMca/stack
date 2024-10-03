@@ -1,6 +1,6 @@
 import type { AriaTabListProps } from '@react-types/tabs'
 import type React from 'react'
-import type { Maybe, TDefaultComponent } from '../../types/components'
+import type { Maybe, TDefaultComponent, TTransition } from '../../types/components'
 import type { NextLinkProps } from '../../types/next-link'
 
 export type MenuProps = {
@@ -9,14 +9,14 @@ export type MenuProps = {
   beforeTabContent?: React.ReactNode
   afterTabContent?: React.ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  PanelTransition?: (props: unknown) => JSX.Element
+  PanelTransition?: (props: TTransition) => JSX.Element
 }
 
 export type TMenuProps = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent
 
 export type TMenuSidePanelProps = TMenuProps & {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  TransitionAnimation?: (props: unknown) => JSX.Element
+  TransitionAnimation?: (props: TTransition) => JSX.Element
 }
 
 export type PartialHtmlBaseElement = Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>

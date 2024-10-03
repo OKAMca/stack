@@ -18,7 +18,7 @@ const Modal = (props: TModalProps) => {
 
   return (
     <OverlayContainer>
-      <TransitionComponent isVisible={state.isOpen}>
+      <TransitionComponent themeName={`${themeName}.transition`} isVisible={state.isOpen}>
         <ModalOverlay themeName={themeName} tokens={tokens} state={state} {...rest}>
           <ModalDialog themeName={themeName} tokens={tokens} {...rest}>
             {children}

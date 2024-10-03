@@ -1,14 +1,12 @@
 import { animated, config, useTransition } from '@react-spring/web'
 import React from 'react'
+import useThemeContext from '../providers/Theme/hooks'
+import type { TTransition } from '../types/components'
 
 const fixed: 'absolute' | 'relative' | 'fixed' = 'fixed'
 
-interface TProps {
-  isVisible: boolean
-  children: React.ReactNode
-}
-
-const SidePanelTransition = ({ isVisible, children }: TProps) => {
+const SidePanelTransition = ({ isVisible, children, themeName, tokens, customTheme }: TTransition) => {
+  const theme = useThemeContext(themeName, tokens, customTheme)
   const transition = useTransition(isVisible, {
     from: {
       opacity: 0,
@@ -24,7 +22,14 @@ const SidePanelTransition = ({ isVisible, children }: TProps) => {
     config: config.stiff,
   })
 
-  return transition((styles, bool) => bool && <animated.div style={styles}>{children}</animated.div>)
+  return transition(
+    (styles, bool) =>
+      bool && (
+        <animated.div className={theme} style={styles}>
+          {children}
+        </animated.div>
+      ),
+  )
 }
 
 export default SidePanelTransition
