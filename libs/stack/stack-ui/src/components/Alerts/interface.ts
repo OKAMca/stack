@@ -16,8 +16,8 @@ export interface TAlertsItem {
 
 export type TAlertsComponentProps<T extends TToken = TToken> = TCarouselComponentProps<TAlertsItemProps<T>>
 
-export type TAlertsItemProps<T = TToken> = TAlertsItem & TDefaultComponent<T>
+export type TAlertsItemProps<T extends TToken = TToken> = TAlertsItem & TDefaultComponent<T>
 
-export type TAlertsProps<T extends TToken> = TAlertsComponentProps<T> &
+export type TAlertsProps<T extends TToken = TToken> = TAlertsComponentProps<T> &
   Omit<TCarouselProps<TAlertsItemProps>, 'slides'> &
   Omit<LightboxProps, 'children'>

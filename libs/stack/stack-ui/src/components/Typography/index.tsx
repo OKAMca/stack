@@ -23,16 +23,14 @@ const Typography = <T extends TToken>({
   )
 }
 
-export const TypographyWithForwardRef = React.forwardRef(
-  <T extends TToken>(props: TTypographyProps<T>, ref: React.Ref<HTMLElement>) => {
-    const { as: Component = 'span', tokens, themeName = 'typography', customTheme, children, ...rest } = props
-    const theme = useThemeContext(themeName, tokens, customTheme)
-    return (
-      <Component {...rest} ref={ref} className={theme}>
-        {children}
-      </Component>
-    )
-  },
-)
+export const TypographyWithForwardRef = React.forwardRef((props: TTypographyProps, ref: React.Ref<HTMLElement>) => {
+  const { as: Component = 'span', tokens, themeName = 'typography', customTheme, children, ...rest } = props
+  const theme = useThemeContext(themeName, tokens, customTheme)
+  return (
+    <Component {...rest} ref={ref} className={theme}>
+      {children}
+    </Component>
+  )
+})
 
 export default Typography
