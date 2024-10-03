@@ -22,10 +22,10 @@ const Menu = <T extends TToken>(props: TMenuProps<T>) => {
   const { closeBtn } = useMenu()
 
   return (
-    <PanelTransition isVisible={overlayState?.isOpen}>
-      <Box themeName={`${themeName}.wrapper`}>
+    <PanelTransition themeName={`${themeName}.panelTransition`} tokens={tokens} isVisible={overlayState?.isOpen}>
+      <Box themeName={`${themeName}.wrapper`} tokens={tokens}>
         {closeBtn && closeBtn()}
-        <Box themeName={`${themeName}.container`}>
+        <Box themeName={`${themeName}.container`} tokens={tokens}>
           <InnerContent
             id={id}
             themeName={`${themeName}.innerContent`}
