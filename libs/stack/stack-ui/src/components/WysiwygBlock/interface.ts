@@ -1,6 +1,7 @@
+import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 
-interface TWysiwygBlockProps extends TDefaultComponent {
+interface TWysiwygBlockProps<T = TToken> extends TDefaultComponent<T> {
   content: string
 }
 

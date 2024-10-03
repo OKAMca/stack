@@ -6,11 +6,12 @@ import { VisuallyHidden } from '@react-aria/visually-hidden'
 import { useToggleState } from '@react-stately/toggle'
 import { useRef } from 'react'
 import useThemeContext from '../../../providers/Theme/hooks'
+import type { TToken } from '../../../providers/Theme/interface'
 import Icon from '../../Icon'
 import Typography from '../../Typography'
 import type { TCheckboxProps } from './Checkbox.interface'
 
-const Checkbox = (props: TCheckboxProps) => {
+const Checkbox = <T extends TToken>(props: TCheckboxProps<T>) => {
   const {
     id,
     label,
