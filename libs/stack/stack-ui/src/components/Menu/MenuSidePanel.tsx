@@ -25,8 +25,8 @@ const MenuSidePanel = (props: TMenuSidePanelProps) => {
       customTheme={customTheme}
       closeBtnRender={closeBtn}
       id={id}
-      TransitionAnimation={TransitionAnimation as (props: unknown) => JSX.Element}
-      PanelTransition={PanelTransition as (props: unknown) => JSX.Element}
+      TransitionAnimation={TransitionAnimation}
+      PanelTransition={PanelTransition}
       onCloseCallBack={() => {
         tabState?.setSelectedKey(defaultSelectedKey)
       }}
