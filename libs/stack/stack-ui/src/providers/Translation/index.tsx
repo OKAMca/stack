@@ -1,3 +1,5 @@
+'use client'
+
 import { createCtx } from '@okam/core-lib'
 import { logger } from '@okam/logger'
 import { get } from 'radash'
