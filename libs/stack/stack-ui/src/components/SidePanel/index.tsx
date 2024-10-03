@@ -41,4 +41,4 @@ const SidePanel = <T extends TToken>(props: TSidePanelProps<T>) => {
   )
 }
 
-export default React.memo(SidePanel)
+export default SidePanel
