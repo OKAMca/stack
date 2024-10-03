@@ -4,9 +4,9 @@ import { isEmpty } from 'lodash'
 import { useRef } from 'react'
 import { useRadio, VisuallyHidden, useFocusRing, FocusRing, mergeProps } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import { useRadioGroupCtx } from '../../../providers/RadioGroup/RadioGroup'
 import useThemeContext from '../../../providers/Theme/hooks'
+import { useTranslation } from '../../../providers/Translation'
 import Typography from '../../Typography'
 import type { TRadioProps } from './Radio.interface'
 
@@ -53,9 +53,9 @@ export const ReactHookFormRadio = (props: TRadioProps) => {
   const { register, formState } = useFormContext()
   const error: Error = get(formState.errors, name)
   const errMsg = error?.message ?? undefined
-  const { t } = useTranslation('components')
+  const { t } = useTranslation()
   const { ref: refCallback, ...rest } = register(name, {
-    required: required ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
+    required: required ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
   })
 
   return <Radio fieldRef={refCallback} {...rest} {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} />

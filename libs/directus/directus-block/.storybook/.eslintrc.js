@@ -11,7 +11,6 @@ module.exports = {
     '../../../../linter/bases/storybook',
     '../../../../linter/bases/react',
     '../../../../linter/bases/prettier',
-    'plugin:storybook/recommended',
   ],
   ignorePatterns: ['!**/*', ...getDefaultIgnorePatterns()],
   overrides: [

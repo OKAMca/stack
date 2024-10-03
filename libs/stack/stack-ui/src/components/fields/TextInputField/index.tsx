@@ -4,8 +4,8 @@ import { FocusRing } from '@react-aria/focus'
 import { useRef } from 'react'
 import { useTextField } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import useThemeContext from '../../../providers/Theme/hooks'
+import { useTranslation } from '../../../providers/Translation'
 import Typography from '../../Typography'
 import type { TTextInputProps, TUseTextFieldInputProps } from './interface'
 
@@ -87,9 +87,9 @@ export const ReactHookFormInput = (props: TTextInputProps) => {
   const { register, formState } = useFormContext()
   const error: Error = get(formState.errors, name)
   const errMsg = error?.message ?? undefined
-  const { t } = useTranslation('components')
+  const { t } = useTranslation()
   const { ref: refCallback, ...rest } = register(name, {
-    required: required ?? isRequired ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
+    required: (required ?? isRequired) ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
     minLength: {
       value: minLength,
       message: t('FORM.ERROR.MIN_LENGTH', { length: minLength }),

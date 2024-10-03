@@ -1,5 +1,5 @@
+import { animated, config, useTransition } from '@react-spring/web'
 import React from 'react'
-import { animated, config, useTransition } from 'react-spring'
 
 const fixed: 'absolute' | 'relative' | 'fixed' = 'fixed'
 

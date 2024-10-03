@@ -1,0 +1,26 @@
+{/* menu */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import MenuContent from '../../storybook/Menu/Menu'
+import NestedMenuContent from '../../storybook/Menu/NestedMenu'
+import * as MenuStories from './menu.stories';
+
+<Meta of={MenuStories} />
+
+export const Template = (args) => <MenuContent />
+
+export const TemplateNested = (args) => <NestedMenuContent />
+
+# Menu
+
+## Side panel menu
+
+<Canvas>
+  <Story of={MenuStories.Menu} />
+</Canvas>
+
+## Nested menu
+
+<Canvas>
+  <Story of={MenuStories.NestedMenu} />
+</Canvas>

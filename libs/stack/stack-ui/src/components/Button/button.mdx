@@ -1,0 +1,44 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import Button from './'
+import Icon from '../Icon'
+import * as ButtonStories from './button.stories';
+
+<Meta of={ButtonStories} />
+
+export const Template = (args) => <Button {...args}>Button</Button>
+
+export const IconButton = (args) => (
+  <Button {...args}>
+    <span>Button</span>
+    <Icon icon="ArrowRight" />
+  </Button>
+)
+
+# Button
+
+Button component. You can pass `shape`, `size` and `buttonStyle` into the `tokens` object to change the style.
+You can use property `as` to render the button with a different component, e.g. `button` to `a` if its a link.
+
+<Canvas>
+  <Story of={ButtonStories.Primary} />
+</Canvas>
+
+<Canvas>
+  <Story of={ButtonStories.Large} />
+</Canvas>
+
+<Canvas>
+  <Story of={ButtonStories.Rounded} />
+</Canvas>
+
+<Canvas>
+  <Story of={ButtonStories.Outline} />
+</Canvas>
+
+<Canvas>
+  <Story of={ButtonStories.Hollow} />
+</Canvas>
+
+<Canvas>
+  <Story of={ButtonStories.Icon} />
+</Canvas>
