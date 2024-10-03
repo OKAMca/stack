@@ -5,7 +5,6 @@ import React, { Suspense } from 'react'
 import { I18nProvider, OverlayProvider } from 'react-aria'
 import BaseThemeProvider from '../src/theme'
 import { IsClientContextProvider } from '../src/providers/Client'
-import { useGlobals } from 'storybook/internal/preview-api'
 
 export const parameters = {
   layout: 'centered',
@@ -27,8 +26,7 @@ export const parameters = {
 
 export const decorators = [
   (Story, context) => {
-    const [{ locale }] = useGlobals()
-
+    const locale = context?.globals?.locale || 'en'
     return (
       <>
         <style>
