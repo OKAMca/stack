@@ -24,16 +24,14 @@ const Box = <T extends TToken>({
   )
 }
 
-export const BoxWithForwardRef = React.forwardRef(
-  <T extends TToken>(props: TBoxProps<T>, ref: React.Ref<HTMLElement>) => {
-    const { as: Component = 'div', tokens, themeName = 'box', customTheme, children, ...rest } = props
-    const theme = useThemeContext(themeName, tokens, customTheme)
-    return (
-      <Component {...rest} ref={ref} className={theme}>
-        {children}
-      </Component>
-    )
-  },
-)
+export const BoxWithForwardRef = React.forwardRef((props: TBoxProps, ref: React.Ref<HTMLElement>) => {
+  const { as: Component = 'div', tokens, themeName = 'box', customTheme, children, ...rest } = props
+  const theme = useThemeContext(themeName, tokens, customTheme)
+  return (
+    <Component {...rest} ref={ref} className={theme}>
+      {children}
+    </Component>
+  )
+})
 
 export default Box
