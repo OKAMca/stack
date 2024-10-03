@@ -7,8 +7,8 @@ import { isEmpty } from 'radash'
 import React, { useRef } from 'react'
 import { useTextField } from 'react-aria'
 import { useFormContext, get } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
 import useThemeContext from '../../../providers/Theme/hooks'
+import { useTranslation } from '../../../providers/Translation'
 import Typography from '../../Typography'
 import type { TTextInputProps } from '../TextInputField/interface'
 
@@ -85,9 +85,9 @@ export const ReactHookFormTextArea = (props: TTextInputProps) => {
   const { register, formState } = useFormContext()
   const error: Error = get(formState.errors, name)
   const errMsg = error?.message ?? undefined
-  const { t } = useTranslation('components')
+  const { t } = useTranslation()
   const { ref: refCallback, ...rest } = register(name, {
-    required: required ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
+    required: required ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
     minLength: {
       value: minLength,
       message: t('FORM.ERROR.MIN_LENGTH', { length: minLength }),

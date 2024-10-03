@@ -15,12 +15,13 @@ function CalendarCell({ themeName = 'calendar', tokens, state, date }: TCalendar
 
   // The start and end date of the selected range will have
   // an emphasized appearance.
-  const isSelectionStart = (state as RangeCalendarState)?.highlightedRange
-    ? isSameDay(date, (state as RangeCalendarState)?.highlightedRange.start)
-    : isSelected
-  const isSelectionEnd = (state as RangeCalendarState)?.highlightedRange
-    ? isSameDay(date, (state as RangeCalendarState)?.highlightedRange.end)
-    : isSelected
+
+  const range = (state as RangeCalendarState)?.highlightedRange
+  const startDate = range?.start
+  const endDate = range?.end
+
+  const isSelectionStart = range && startDate ? isSameDay(date, startDate) : isSelected
+  const isSelectionEnd = range && endDate ? isSameDay(date, endDate) : isSelected
 
   const { locale } = useLocale()
   const dayOfWeek = getDayOfWeek(date, locale)

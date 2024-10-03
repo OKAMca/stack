@@ -1,0 +1,39 @@
+{/* side-panel.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ButtonWithForwardRef } from '../Button'
+import SidePanel from './'
+import { SidePanelContextProvider, useSidePanel } from '../../providers/SidePanel'
+import * as SidePanelStories from './side-panel.stories';
+
+<Meta of={SidePanelStories} />
+
+export const SidePanelControl = () => {
+  const { buttonProps } = useSidePanel()
+  if (buttonProps == null) {
+    return null
+  }
+  return (
+    <ButtonWithForwardRef variant="black" {...buttonProps?.openButtonProps} ref={buttonProps?.openButtonRef}>
+      Open
+    </ButtonWithForwardRef>
+  )
+}
+
+export const Template = (args) => (
+  <SidePanelContextProvider 
+    onOpenCallback={() => console.log('Side panel is now opened!')}
+    onCloseCallback={() => console.log('Side panel is now closed!')}
+  >
+    <SidePanelControl />
+    <SidePanel {...args}>
+      <div>Hello world!</div>
+    </SidePanel>
+  </SidePanelContextProvider>
+)
+
+# Side Panel
+
+<Canvas>
+  <Story of={SidePanelStories.Default} />
+</Canvas>

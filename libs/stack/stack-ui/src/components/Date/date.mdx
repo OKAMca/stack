@@ -1,0 +1,44 @@
+{/* Date.stories.mdx */}
+
+import { I18nProvider } from 'react-aria'
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import Date from './index'
+import * as DateStories from './date.stories';
+
+<Meta of={DateStories} />
+
+export const Template = (args) => <Date {...args} />
+export const FrenchTemplate = (args) => (
+  <I18nProvider locale="fr-FR">
+    <Date {...args} />
+  </I18nProvider>
+)
+
+# Date
+
+Date component. Must pass a valid ISO `date`. You can also pass an object `dateFormatterOptions` to change the format, e.g. `MMM dd, yyyy` or `MM/DD/YY`.
+The language is handled by the `I18nProvider` of `react-aria`.
+
+<Canvas>
+  <Story of={DateStories.DifferentLanguage} />
+</Canvas>
+
+<Canvas>
+  <Story of={DateStories.Short} />
+</Canvas>
+
+<Canvas>
+  <Story of={DateStories.Long} />
+</Canvas>
+
+<Canvas>
+  <Story of={DateStories.TimeWithH4Style} />
+</Canvas>
+
+<Canvas>
+  <Story of={DateStories.MonthAndDayOnly} />
+</Canvas>
+
+<Canvas>
+  <Story of={DateStories.$2Digits} />
+</Canvas>

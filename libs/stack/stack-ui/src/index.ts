@@ -52,6 +52,7 @@ export { RadioGroupProvider, useRadioGroupCtx } from './providers/RadioGroup/Rad
 export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion'
 export { SearchBarProvider } from './providers/UserSearchQuery'
 export { SwiperControllerContextProvider, useSwiperController } from './providers/Swiper'
+export { TranslationContextProvider, useTranslation } from './providers/Translation'
 
 // types & interfaces
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
