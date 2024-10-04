@@ -18,6 +18,7 @@ import {
 } from 'react-aria'
 import { useOverlayTriggerState } from 'react-stately'
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import { BoxWithForwardRef } from '../Box'
 import { ButtonWithForwardRef } from '../Button'
 import type { IPopoverProps, TPopoverButtonProps } from './interface'
@@ -73,7 +74,7 @@ const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLEleme
   )
 })
 
-function PopoverButton(props: TPopoverButtonProps) {
+function PopoverButton<T extends TToken>(props: TPopoverButtonProps<T>) {
   const {
     children,
     buttonProps,

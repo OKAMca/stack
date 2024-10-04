@@ -2,7 +2,7 @@ import type React from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 
-export interface TShareButtonProps extends TDefaultComponent<TShareButtonTokens> {
+export interface TShareButtonProps<T = TToken> extends TDefaultComponent<TShareButtonTokens & T> {
   id: string
   icon?: React.ReactNode
   ariaLabel: string
@@ -15,7 +15,7 @@ interface TShareButtonTokens extends TToken {
   listDirection: 'row' | 'column'
 }
 
-export interface TIconsContainerProps extends Omit<TShareButtonProps, 'ariaLabel' | 'icon'> {
+export interface TIconsContainerProps<T = TToken> extends Omit<TShareButtonProps<T>, 'ariaLabel' | 'icon'> {
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
 }

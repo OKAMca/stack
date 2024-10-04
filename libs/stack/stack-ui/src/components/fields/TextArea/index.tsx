@@ -8,11 +8,12 @@ import React, { useRef } from 'react'
 import { useTextField } from 'react-aria'
 import { useFormContext, get } from 'react-hook-form'
 import useThemeContext from '../../../providers/Theme/hooks'
+import type { TToken } from '../../../providers/Theme/interface'
 import { useTranslation } from '../../../providers/Translation'
 import Typography from '../../Typography'
 import type { TTextInputProps } from '../TextInputField/interface'
 
-const TextArea = (props: TTextInputProps) => {
+const TextArea = <T extends TToken>(props: TTextInputProps<T>) => {
   const {
     id,
     label,

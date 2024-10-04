@@ -6,6 +6,7 @@ import type { RefObject } from 'react'
 import React, { useRef } from 'react'
 import { FocusRing, useButton, useLink } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import type { TAnchorProps, TButtonProps } from './interface'
 
 export const Anchor = React.forwardRef(
@@ -82,11 +83,13 @@ export const ButtonWithForwardRef = React.forwardRef(
   },
 )
 
-const ButtonComponent = (props: TButtonProps) => {
+const ButtonComponent = <T extends TToken>(props: TButtonProps<T>) => {
   const { as } = props
   const ref = useRef(null)
   if (as === 'a') return <Anchor ref={ref} {...props} />
   return <Button ref={ref} {...props} />
 }
 
-export default React.memo(ButtonComponent)
+ButtonComponent.displayName = 'Button'
+
+export default ButtonComponent

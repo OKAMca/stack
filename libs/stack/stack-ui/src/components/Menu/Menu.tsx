@@ -2,12 +2,13 @@
 
 import { useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
+import type { TToken } from '../../providers/Theme/interface'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'
 import Box from '../Box'
 import InnerContent from './components/InnerContent'
 import type TMenuProps from './interface'
 
-const Menu = (props: TMenuProps) => {
+const Menu = <T extends TToken>(props: TMenuProps<T>) => {
   const {
     id = 'main-menu',
     children,

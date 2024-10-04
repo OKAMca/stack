@@ -10,6 +10,7 @@ import type { RangeValue } from '@react-types/shared'
 import type React from 'react'
 import type { AriaPopoverProps } from 'react-aria'
 import type { OverlayTriggerState } from 'react-stately'
+import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../../types/components'
 
 export interface TDateSegmentProps {
@@ -41,7 +42,7 @@ type PopoverPlacement =
   | 'end top'
   | 'end bottom'
 
-export interface TDatePickerProps extends DatePickerStateOptions<DateValue>, TDefaultComponent {
+export interface TDatePickerProps<T = TToken> extends DatePickerStateOptions<DateValue>, TDefaultComponent<T> {
   label?: string
   popoverPlacement?: PopoverPlacement
   icon?: string

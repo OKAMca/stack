@@ -4,9 +4,10 @@ import { useDateFormatter } from '@react-aria/i18n'
 import { isEmpty } from 'lodash'
 import { useIsSSR } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import type { TDateProps } from './interface'
 
-const DateComponent = (props: TDateProps) => {
+const DateComponent = <T extends TToken>(props: TDateProps<T>) => {
   const {
     as: Component = 'time',
     date,

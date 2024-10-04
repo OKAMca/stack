@@ -3,16 +3,17 @@
 /* eslint-disable react/display-name */
 import React from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import type { TTypographyProps } from './interface'
 
-const Typography = ({
+const Typography = <T extends TToken>({
   as: Component = 'span',
   themeName = 'typography',
   tokens,
   customTheme,
   children,
   ...rest
-}: TTypographyProps) => {
+}: TTypographyProps<T>) => {
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
