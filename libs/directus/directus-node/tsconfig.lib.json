@@ -1,7 +1,8 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "ES2015",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "../../../dist/out-tsc",
     "declaration": true,
     "types": ["node"]
