@@ -1,3 +1,15 @@
+## 0.1.2 (2024-10-04)
+
+
+### 🩹 Fixes
+
+- **directus-next:** make package public ([#172](https://github.com/OKAMca/stack/pull/172))
+
+
+### ❤️  Thank You
+
+- yanmorinokamca @yanmorinokamca
+
 ## 0.2.0 (2024-09-24)
 
 
