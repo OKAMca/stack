@@ -9,7 +9,7 @@ export class StringConvert {
   }
 
   static toFloat = (value: string | unknown): number | null => {
-    if (!isParsableNumeric(typeof value === 'number' ? value.toString(10) : (value ?? ''))) {
+    if (!isParsableNumeric(typeof value === 'number' ? value.toString(10) : value ?? '')) {
       return null
     }
     const v = Number.parseFloat(typeof value === 'string' ? value : (value as number).toString(10))
