@@ -1,3 +1,25 @@
+## 1.30.0 (2024-10-04)
+
+
+### 🚀 Features
+
+- updates & cleanup packages and dependancies ([#210](https://github.com/OKAMca/stack/pull/210))
+
+
+### 🩹 Fixes
+
+- **stack-ui:** pass tokens to menu component ([a9e3b71](https://github.com/OKAMca/stack/commit/a9e3b71))
+
+
+### ❤️  Thank You
+
+- David Paquet Pitts
+- Jérôme Trottier
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+- yanmorinokamca @yanmorinokamca
+
 ## 1.29.1 (2024-08-21)
 
 
