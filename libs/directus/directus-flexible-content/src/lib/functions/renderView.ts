@@ -16,7 +16,6 @@ const getSerializer = (
   serializers: Extensions,
 ): Serializer['config'] | undefined => {
   const serializer = serializers.find((item) => item.type === type && item.name === name)
-
   if (!serializer) return undefined
 
   return {
@@ -39,7 +38,6 @@ const serializeNode = (
 ): SerializedNode | ReactNode => {
   const serializer = getSerializer(node.type, type, serializers)
   if (!serializer?.renderHTML) return []
-
   const htmlAttributes = getHTMLAttributes(node.attrs, serializer)
   if (serializer.render) {
     return serializer.render(node)
@@ -65,13 +63,21 @@ const render = <T>(
     if (node.marks) {
       // eslint-disable-next-line
       let _node: any
-
       node.marks.reverse().forEach((mark) => {
-        const [tag = 'span', attrs = mark.attrs] = serializeNode(mark, serializers, 'mark') as SerializedNode
-
-        _node = renderCallback(tag, attrs, _node || node.text)
+        const serializedNode = serializeNode(
+          { ...mark, attrs: { ...mark.attrs, data: { ...mark?.attrs?.data, markText: node.text } } },
+          serializers,
+          'mark',
+        ) as SerializedNode
+        if (Array.isArray(serializedNode)) {
+          const [tag = 'span', attrs = mark.attrs] = serializedNode
+          const mappedAttrs = { ...attrs, data: undefined }
+          _node = renderCallback(tag, mappedAttrs, _node || node.text)
+        } else {
+          const objectSerializedNode = serializedNode as object
+          _node = { ...objectSerializedNode, text: node.text }
+        }
       })
-
       return _node
     }
 
