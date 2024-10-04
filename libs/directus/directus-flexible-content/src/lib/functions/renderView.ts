@@ -64,18 +64,19 @@ const render = <T>(
       // eslint-disable-next-line
       let _node: any
       node.marks.reverse().forEach((mark) => {
-        const seralizedNode = serializeNode(
+        const serializedNode = serializeNode(
           { ...mark, attrs: { ...mark.attrs, data: { ...mark?.attrs?.data, markText: node.text } } },
           serializers,
           'mark',
-        ) as SerializedNode & { key?: string | null }
-        const tag = seralizedNode?.[0] ?? 'span'
-        const attrs = seralizedNode?.[1] ?? mark.attrs
-        const mappedAttrs = { ...attrs, data: undefined }
-
-        _node = seralizedNode?.key
-          ? { ...seralizedNode, text: node.text }
-          : renderCallback(tag, mappedAttrs, _node || node.text)
+        ) as SerializedNode
+        if (Array.isArray(serializedNode)) {
+          const [tag = 'span', attrs = mark.attrs] = serializedNode
+          const mappedAttrs = { ...attrs, data: undefined }
+          _node = renderCallback(tag, mappedAttrs, _node || node.text)
+        } else {
+          const objectSerializedNode = serializedNode as object
+          _node = { ...objectSerializedNode, text: node.text }
+        }
       })
       return _node
     }

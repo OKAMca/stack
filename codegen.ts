@@ -4,8 +4,8 @@ import { config as deconfig } from 'dotenv'
 
 deconfig({ path: path.resolve(process.cwd(), '.env') })
 
-const schemaUrl = process.env.NEXT_PUBLIC_GRAPHQL_URL as string ?? 'https://agencyos.okam.one/graphql'
-const authToken = process.env.NEXT_PUBLIC_API_TOKEN as string ?? ''
+const schemaUrl = process.env.NEXT_PUBLIC_GRAPHQL_URL as string
+const authToken = process.env.NEXT_PUBLIC_API_TOKEN as string
 
 const config: CodegenConfig = {
   overwrite: true,
