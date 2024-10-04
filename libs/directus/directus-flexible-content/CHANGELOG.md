@@ -1,3 +1,23 @@
+## 1.1.0 (2024-10-04)
+
+
+### 🚀 Features
+
+- updates & cleanup packages and dependancies ([#210](https://github.com/OKAMca/stack/pull/210))
+
+- **directus-flexible-content:** added support for marks and inline blocks ([5ffa03a](https://github.com/OKAMca/stack/commit/5ffa03a))
+
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** typo and codegen config ([0141b1f](https://github.com/OKAMca/stack/commit/0141b1f))
+
+
+### ❤️  Thank You
+
+- Jérôme Trottier
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 1.0.6 (2024-08-30)
 
 
