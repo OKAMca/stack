@@ -1,9 +1,10 @@
 'use client'
 
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import type { TVideoProps } from './interface'
 
-const Video = (props: TVideoProps) => {
+const Video = <T extends TToken>(props: TVideoProps<T>) => {
   const {
     themeName = 'video',
     tokens,

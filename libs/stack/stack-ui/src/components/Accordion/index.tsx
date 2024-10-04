@@ -4,12 +4,13 @@ import { useAccordion } from '@react-aria/accordion'
 import { useRef } from 'react'
 import type { Node } from 'react-stately'
 import { AccordionContextProvider } from '../../providers/Accordion'
+import type { TToken } from '../../providers/Theme/interface'
 import { BoxWithForwardRef } from '../Box'
 import AriaAccordionItem from './components/AriaAccordionItem'
 import useAccordionState from './hooks/useAccordionState'
 import type { TAccordionItemProps, TAccordionProps } from './interface'
 
-const Accordion = (props: TAccordionProps) => {
+const Accordion = <T extends TToken>(props: TAccordionProps<T>) => {
   const { themeName = 'accordion', tokens, customTheme, TransitionAnimation } = props
 
   const accordionRef = useRef(null)

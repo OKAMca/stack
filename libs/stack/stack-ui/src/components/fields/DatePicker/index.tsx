@@ -4,6 +4,7 @@ import { useDatePicker } from '@react-aria/datepicker'
 import { useDatePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'
 import useThemeContext from '../../../providers/Theme/hooks'
+import type { TToken } from '../../../providers/Theme/interface'
 import Button from '../../Button'
 import Calendar from '../../Calendar'
 import { Dialog } from '../../Dialog'
@@ -12,7 +13,7 @@ import { CalendarPopover } from './components/CalendarPopover'
 import DateField from './components/DateField'
 import type { TDatePickerProps } from './interface'
 
-function DatePicker({
+function DatePicker<T extends TToken>({
   popoverPlacement = 'bottom start',
   tokens,
   customTheme,
@@ -21,7 +22,7 @@ function DatePicker({
   description,
   buttonLabel,
   ...rest
-}: TDatePickerProps) {
+}: TDatePickerProps<T>) {
   const state = useDatePickerState({ ...rest })
   const ref = useRef(null)
   const { groupProps, fieldProps, labelProps, descriptionProps, buttonProps, dialogProps, calendarProps } =

@@ -4,11 +4,12 @@
 import { useRadioGroupState } from '@react-stately/radio'
 import { useRadioGroup } from 'react-aria'
 import { RadioGroupProvider } from '../../../providers/RadioGroup/RadioGroup'
+import type { TToken } from '../../../providers/Theme/interface'
 import Box from '../../Box'
 import Typography from '../../Typography'
 import type { TRadioGroupProps } from './interface'
 
-const RadioGroup = (props: TRadioGroupProps) => {
+const RadioGroup = <T extends TToken>(props: TRadioGroupProps<T>) => {
   const { label, isError = false, errorMessage, isDisabled = false, children, themeName = 'radioGroup', tokens } = props
   const state = useRadioGroupState(props)
   const { radioGroupProps } = useRadioGroup(props, state)

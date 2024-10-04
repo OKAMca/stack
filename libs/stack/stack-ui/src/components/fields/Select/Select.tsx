@@ -5,6 +5,7 @@ import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
 import { useSelectState } from 'react-stately'
+import type { TToken } from '../../../providers/Theme/interface'
 import Box from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
@@ -14,7 +15,7 @@ import { ListBox } from './components/Listbox'
 import Popover from './components/Popover'
 import type { TSelectProps } from './Select.interface'
 
-const Select = (props: TSelectProps) => {
+const Select = <T extends TToken>(props: TSelectProps<T>) => {
   const {
     name,
     placeholderLabel,

@@ -4,6 +4,7 @@ import React from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
+import type { TToken } from '../../../providers/Theme/interface'
 import { useUserQueryValHook } from '../../../providers/UserSearchQuery'
 import Button from '../../Button'
 import Close from '../../icons/CloseBtn'
@@ -11,7 +12,7 @@ import Search from '../../icons/Search'
 import Typography from '../../Typography'
 import type TSearchProps from './interface'
 
-const SearchField = (props: TSearchProps) => {
+const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
   const { setUserSearchQuery } = useUserQueryValHook()
   const { label, themeName = 'search', tokens, customTheme, disabled, errorMessage, placeholder } = props
   const state = useSearchFieldState(props)
