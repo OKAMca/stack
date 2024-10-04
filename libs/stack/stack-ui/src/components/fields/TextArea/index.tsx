@@ -87,7 +87,7 @@ export const ReactHookFormTextArea = (props: TTextInputProps) => {
   const errMsg = error?.message ?? undefined
   const { t } = useTranslation()
   const { ref: refCallback, ...rest } = register(name, {
-    required: required ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
+    required: required ? t('FORM.ERROR.REQUIRED') ?? 'required' : false,
     minLength: {
       value: minLength,
       message: t('FORM.ERROR.MIN_LENGTH', { length: minLength }),
