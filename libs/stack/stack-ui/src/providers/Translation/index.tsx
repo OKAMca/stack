@@ -1,13 +1,12 @@
 'use client'
 
 import { createCtx } from '@okam/core-lib'
+import { logger } from '@okam/logger'
 import { get } from 'radash'
 import { useCallback, useMemo } from 'react'
 import type { TTranslateFunc, TTranslationContext, TTranslationProps } from './interface'
 
-const [useTranslation, TranslationProvider] = createCtx<TTranslationContext>()
-
-export { useTranslation }
+export const [useTranslation, TranslationProvider] = createCtx<TTranslationContext>()
 
 export function TranslationContextProvider({
   useTranslationFunc,
@@ -18,8 +17,10 @@ export function TranslationContextProvider({
   const translate = useTranslationFunc(namespace)
 
   const fallbackFn = (key: string, _obj?: Record<string, unknown>) => {
-    console.warn(
+    logger.log(
       `STACK-UI/Translation --> translation function not found: translateFunctionName: ${translateFunctionName}`,
+      'warn',
+      { key, obj: _obj, namespace },
     )
     return key
   }

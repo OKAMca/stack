@@ -39,8 +39,6 @@ const SelectContent = ({
         {...rest}
         onSelectionChange={(key) => {
           setValue(key.toString())
-          // eslint-disable-next-line no-console
-          console.log('selection changed')
         }}
         value={value}
         options={[

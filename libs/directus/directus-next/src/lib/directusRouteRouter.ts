@@ -1,11 +1,12 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/naming-convention */
+import { logger } from '@okam/logger'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function log(...messages: any[]) {
   if (process.env.NODE_ENV === 'development') {
-    console.log('[directusRouter]', ...messages)
+    logger.log(`[directusRouter] ${messages.toString()}`)
   }
 }
 
