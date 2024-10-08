@@ -7,14 +7,18 @@ const IMG_DOMAIN = process.env.NEXT_PUBLIC_IMG_DOMAIN
 const IMG_PORT = process.env.NEXT_PUBLIC_IMG_PORT
 const IMG_PROTOCOL = process.env.NEXT_PUBLIC_IMG_PROTOCOL ?? 'https'
 
-function setSearchParams(url: URL, searchParams: Record<string, Nullable<string>>) {
+function setSearchParams(url: URL, searchParams: Record<string, Nullable<string | number | boolean>>) {
   Object.entries(searchParams).forEach(([key, value]) => {
     if (!value) return
-    url.searchParams.set(key, value)
+    url.searchParams.set(key, value.toString())
   })
 }
 
-function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Record<string, Nullable<string>>) {
+function getDirectusUrl(
+  file: Nullable<TFiles>,
+  baseUrl?: URL,
+  searchParams?: Record<string, Nullable<string | number | boolean>>,
+) {
   const { id, filename_download, filenameDownload } = file ?? {}
   const { protocol = IMG_PROTOCOL, port = IMG_PORT, hostname = IMG_DOMAIN } = baseUrl ?? {}
 
@@ -37,7 +41,7 @@ function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Re
 export default function useDirectusFile(
   file: Nullable<TFiles>,
   baseUrl?: URL,
-  searchParams?: Record<string, Nullable<string>>,
+  searchParams?: Record<string, Nullable<string | number | boolean>>,
 ) {
   const { description, width, height, title, id, ...rest } = file ?? {}
   if (!file || !id) return null
