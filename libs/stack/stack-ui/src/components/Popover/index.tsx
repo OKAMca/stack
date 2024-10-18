@@ -23,7 +23,7 @@ import { BoxWithForwardRef } from '../Box'
 import { ButtonWithForwardRef } from '../Button'
 import type { IPopoverProps, TPopoverButtonProps } from './interface'
 
-const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLElement>) => {
+export const Popover = React.forwardRef((props: IPopoverProps, ref: React.Ref<HTMLElement>) => {
   const {
     isOpen,
     onClose,

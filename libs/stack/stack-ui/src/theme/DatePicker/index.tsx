@@ -30,7 +30,7 @@ export const datePickerDateField = tv({
 })
 
 export const datePickerDateSegment = tv({
-  base: 'focus-ring-black',
+  base: 'focus-ring-black  focus:bg-blue-300',
 })
 
 export const datePickerIcon = tv({

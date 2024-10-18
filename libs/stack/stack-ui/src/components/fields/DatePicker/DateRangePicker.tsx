@@ -49,7 +49,7 @@ function DateRangePicker(props: TDateRangePickerProps) {
           <div className={dateFieldTheme}>
             <DateField {...startFieldProps} /> -
             <DateField {...endFieldProps} />
-            {state.validationState === 'invalid' && '❌'}
+            {state.isInvalid && '❌'}
           </div>
           <Icon themeName={`${themeName}.icon`} tokens={{ ...tokens }} icon={icon ?? 'ArrowDown'} />
         </Button>
@@ -60,7 +60,7 @@ function DateRangePicker(props: TDateRangePickerProps) {
             <div className={dateFieldTheme}>
               <DateField {...startFieldProps} /> -
               <DateField {...endFieldProps} />
-              {state.validationState === 'invalid' && '❌'}
+              {state.isInvalid && '❌'}
             </div>
             <RangeCalendar {...calendarProps} />
           </Dialog>
