@@ -5,6 +5,10 @@ export const datePickerContainer = tv({
 })
 
 export const datePickerButton = tv({
+  base: 'flex items-center focus-ring-black border-l-0',
+})
+
+export const datePickerWrapper = tv({
   base: 'flex items-center border-2 border-color-1-500 rounded focus-ring-black',
 })
 
@@ -30,7 +34,7 @@ export const datePickerDateField = tv({
 })
 
 export const datePickerDateSegment = tv({
-  base: 'focus-ring-black',
+  base: 'focus-ring-black  focus:bg-blue-300',
 })
 
 export const datePickerIcon = tv({

@@ -29,6 +29,7 @@ import {
   datePickerDateSegment,
   datePickerIcon,
   datePickerLabel,
+  datePickerWrapper,
 } from './DatePicker'
 import { imgTheme } from './Image'
 import lightboxTheme from './LightBox'
@@ -68,6 +69,7 @@ const BaseTheme = makeTheme({
   datePicker: {
     container: (props) => datePickerContainer(props),
     button: (props) => datePickerButton(props),
+    wrapper: (props) => datePickerWrapper(props),
     icon: (props) => datePickerIcon(props),
     dateField: (props) => datePickerDateField(props),
     dateSegment: (props) => datePickerDateSegment(props),
