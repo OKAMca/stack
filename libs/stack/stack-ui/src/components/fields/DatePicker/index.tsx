@@ -5,6 +5,7 @@ import { useDatePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'
 import useThemeContext from '../../../providers/Theme/hooks'
 import type { TToken } from '../../../providers/Theme/interface'
+import Box from '../../Box'
 import Button from '../../Button'
 import Calendar from '../../Calendar'
 import { Dialog } from '../../Dialog'
@@ -39,27 +40,29 @@ function DatePicker<T extends TToken>({
       {label && <span {...labelProps}>{label}</span>}
       {description && <div {...descriptionProps}>{description}</div>}
       <div {...groupProps} ref={ref}>
-        <Button
-          themeName={`${themeName}.button`}
-          tokens={{ ...tokens }}
-          type="button"
-          {...buttonProps}
-          handlePress={buttonProps.onPress}
-        >
+        <Box themeName={`${themeName}.wrapper`} tokens={{ ...tokens }}>
           {buttonLabel && <p className={labelTheme}>{buttonLabel}</p>}
           <div className={dateFieldTheme}>
             <DateField {...fieldProps} />
-            {state.validationState === 'invalid' && '❌'}
+            {state.isInvalid && '❌'}
           </div>
-          <Icon themeName={`${themeName}.icon`} tokens={{ ...tokens }} icon={icon} />
-        </Button>
+          <Button
+            {...buttonProps}
+            themeName={`${themeName}.button`}
+            tokens={{ ...tokens }}
+            customTheme="border-none p-0"
+            handlePress={buttonProps.onPress}
+          >
+            <Icon themeName={`${themeName}.icon`} tokens={{ ...tokens }} icon={icon} />
+          </Button>
+        </Box>
       </div>
       {state.isOpen && (
         <CalendarPopover triggerRef={ref} state={state} placement={popoverPlacement}>
           <Dialog {...dialogProps}>
             <div>
               <DateField {...fieldProps} />
-              {state.validationState === 'invalid' && '❌'}
+              {state.isInvalid && '❌'}
             </div>
             <Calendar {...calendarProps} />
           </Dialog>

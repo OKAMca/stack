@@ -9,7 +9,8 @@ import CalendarCell from './CalendarCell'
 
 function CalendarGrid({ themeName = 'calendar', customTheme, tokens, state, ...rest }: TCalendarGridProps) {
   const { locale } = useLocale()
-  const { gridProps, headerProps, weekDays } = useCalendarGrid({ ...rest }, state)
+  const { gridProps, headerProps } = useCalendarGrid({ ...rest }, state)
+  const weekDays = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
 
   // Get the number of weeks in the month so we can render the proper number of rows.
   const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
@@ -22,7 +23,7 @@ function CalendarGrid({ themeName = 'calendar', customTheme, tokens, state, ...r
       <thead {...headerProps}>
         <tr>
           {weekDays.map((day) => (
-            <th key={`${day}`} className={dayLabelTheme}>
+            <th key={`day-${day}`} className={dayLabelTheme}>
               {day}
             </th>
           ))}
@@ -30,7 +31,7 @@ function CalendarGrid({ themeName = 'calendar', customTheme, tokens, state, ...r
       </thead>
       <tbody>
         {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
-          <tr key={weekIndex}>
+          <tr key={`week-${weekIndex}`}>
             {state
               .getDatesInWeek(weekIndex)
               .map((date, i) => (date ? <CalendarCell key={date?.day} state={state} date={date} /> : <td key={i} />))}
