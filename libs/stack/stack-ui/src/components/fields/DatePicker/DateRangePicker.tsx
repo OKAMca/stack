@@ -5,6 +5,7 @@ import { useDateRangePicker } from '@react-aria/datepicker'
 import { useDateRangePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'
 import useThemeContext from '../../../providers/Theme/hooks'
+import Box from '../../Box'
 import Button from '../../Button'
 import RangeCalendar from '../../Calendar/RangeCalendar'
 import { Dialog } from '../../Dialog'
@@ -38,21 +39,23 @@ function DateRangePicker(props: TDateRangePickerProps) {
       {label && <span {...labelProps}>{label}</span>}
       {description && <div {...descriptionProps}>{description}</div>}
       <div {...groupProps} ref={ref}>
-        <Button
-          themeName={`${themeName}.button`}
-          tokens={{ ...tokens }}
-          type="button"
-          {...buttonProps}
-          handlePress={buttonProps.onPress}
-        >
+        <Box themeName={`${themeName}.wrapper`} tokens={{ ...tokens }}>
           {buttonLabel && <p className={labelTheme}>{buttonLabel}</p>}
           <div className={dateFieldTheme}>
             <DateField {...startFieldProps} /> -
             <DateField {...endFieldProps} />
             {state.isInvalid && '❌'}
           </div>
-          <Icon themeName={`${themeName}.icon`} tokens={{ ...tokens }} icon={icon ?? 'ArrowDown'} />
-        </Button>
+          <Button
+            themeName={`${themeName}.button`}
+            tokens={{ ...tokens }}
+            type="button"
+            {...buttonProps}
+            handlePress={buttonProps.onPress}
+          >
+            <Icon themeName={`${themeName}.icon`} tokens={{ ...tokens }} icon={icon ?? 'ArrowDown'} />
+          </Button>
+        </Box>
       </div>
       {state.isOpen && (
         <CalendarPopover triggerRef={ref} state={state} placement={popoverPlacement}>

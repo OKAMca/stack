@@ -40,7 +40,7 @@ function DatePicker<T extends TToken>({
       {label && <span {...labelProps}>{label}</span>}
       {description && <div {...descriptionProps}>{description}</div>}
       <div {...groupProps} ref={ref}>
-        <Box themeName={`${themeName}.button`} tokens={{ ...tokens }}>
+        <Box themeName={`${themeName}.wrapper`} tokens={{ ...tokens }}>
           {buttonLabel && <p className={labelTheme}>{buttonLabel}</p>}
           <div className={dateFieldTheme}>
             <DateField {...fieldProps} />
