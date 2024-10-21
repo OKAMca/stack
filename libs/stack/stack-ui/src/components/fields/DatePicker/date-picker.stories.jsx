@@ -1,8 +1,16 @@
 import DateRangePicker from './DateRangePicker'
 import DatePicker from '.'
 
-const DatePickerTemplate = (args) => <DatePicker {...args} />
-const DateRangePickerTemplate = (args) => <DateRangePicker {...args} />
+const DatePickerTemplate = (args) => (
+  <div style={{ minHeight: '500px' }}>
+    <DatePicker {...args} />
+  </div>
+)
+const DateRangePickerTemplate = (args) => (
+  <div style={{ minHeight: '500px' }}>
+    <DateRangePicker {...args} />
+  </div>
+)
 
 export default {
   title: 'Form/Fields/DatePicker',
