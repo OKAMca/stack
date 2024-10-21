@@ -1,10 +1,11 @@
 import type React from 'react'
 import type { ChangeHandler, RefCallBack } from 'react-hook-form'
+import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
 
-export type TFieldReactHookForm = TReactHookForm & TDefaultComponent
+export type TFieldReactHookForm<T> = TReactHookForm & TDefaultComponent<T>
 
-export interface TRadioProps extends TFieldReactHookForm {
+export interface TRadioProps<T = TToken> extends TFieldReactHookForm<T> {
   id: string
   label: string
   name: string

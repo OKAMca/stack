@@ -2,6 +2,7 @@
 
 import React, { Suspense, lazy, useMemo } from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import Fallback from '../icons/IconFallback'
 import type { TIconProps } from './interface'
 
@@ -16,7 +17,7 @@ const Icon = (props: TIconProps) => {
   )
 }
 
-const IconDispatcher = (props: TIconProps) => {
+const IconDispatcher = <T extends TToken>(props: TIconProps<T>) => {
   const { icon, as: Component = 'span', tokens, customTheme, themeName = 'icon', children, ...rest } = props
   const theme = useThemeContext(themeName, tokens, customTheme)
 

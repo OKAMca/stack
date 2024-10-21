@@ -2,6 +2,7 @@
 
 import { FocusRing } from '@react-aria/focus'
 import { useOverlayTriggerState } from 'react-stately'
+import type { TToken } from '../../providers/Theme/interface'
 import Box from '../Box'
 import Button from '../Button'
 import type { TButtonProps } from '../Button/interface'
@@ -20,7 +21,7 @@ const LightboxCloseButton = (props: TButtonProps) => {
   )
 }
 
-const Lightbox = (props: TLightboxProps) => {
+const Lightbox = <T extends TToken>(props: TLightboxProps<T>) => {
   const {
     children,
     thumbnailContent,

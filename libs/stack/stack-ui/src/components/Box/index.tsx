@@ -3,9 +3,10 @@
 /* eslint-disable react/display-name */
 import React from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import type { TBoxProps } from './interface'
 
-const Box = ({
+const Box = <T extends TToken>({
   as: Component = 'div',
   themeName = 'box',
   tokens,
@@ -13,7 +14,7 @@ const Box = ({
   children,
   className,
   ...rest
-}: TBoxProps) => {
+}: TBoxProps<T>) => {
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (

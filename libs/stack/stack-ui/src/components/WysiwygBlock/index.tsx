@@ -1,9 +1,10 @@
 import sanitizeHtml from 'sanitize-html'
+import type { TToken } from '../../providers/Theme/interface'
 import Typography from '../Typography'
 import { ariaAttributes, booleanAttributes } from './attributes'
 import type TWysiwygBlockProps from './interface'
 
-const WysiwygBlock = ({ content, themeName = 'wysiwyg', ...rest }: TWysiwygBlockProps) => {
+const WysiwygBlock = <T extends TToken>({ content, themeName = 'wysiwyg', ...rest }: TWysiwygBlockProps<T>) => {
   const sanitizedContent = sanitizeHtml(content, {
     allowedTags: sanitizeHtml.defaults.allowedTags.concat(['iframe']),
     nonBooleanAttributes: [],

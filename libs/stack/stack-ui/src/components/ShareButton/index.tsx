@@ -4,11 +4,12 @@ import type { PressEvent } from '@react-types/shared'
 import React, { useState } from 'react'
 import { FocusScope, useFocusManager } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
+import type { TToken } from '../../providers/Theme/interface'
 import Button, { ButtonWithForwardRef } from '../Button'
 import Icon from '../Icon'
 import type { TIconsContainerProps, TShareButtonProps } from './interface'
 
-export const IconsContainer = (props: TIconsContainerProps) => {
+export const IconsContainer = <T extends TToken>(props: TIconsContainerProps<T>) => {
   const { sharingLinksList, id, isOpen, setIsOpen, onShare, themeName = 'shareButton', tokens, customTheme } = props
 
   const linksListTheme = useThemeContext(`${themeName}.linksList`, { ...tokens, isOpen }, customTheme)

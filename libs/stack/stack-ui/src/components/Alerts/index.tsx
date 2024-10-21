@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { useOverlayTriggerState } from 'react-stately'
+import type { TToken } from '../../providers/Theme/interface'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'
 import Carousel from '../Carousel'
 import useOverlayHook from '../Lightbox/hooks/overlay'
@@ -9,7 +10,7 @@ import AlertsCloseButton from './components/AlertsCloseButton'
 import AlertsItem from './components/AlertsItem'
 import type { TAlertsProps } from './interface'
 
-const Alerts = (props: TAlertsProps) => {
+const Alerts = <T extends TToken>(props: TAlertsProps<T>) => {
   const {
     themeName = 'alerts',
     tokens,
