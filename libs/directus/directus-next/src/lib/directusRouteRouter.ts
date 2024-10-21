@@ -1,13 +1,8 @@
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/naming-convention */
+import { log } from '../logger'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function log(...messages: any[]) {
-  if (process.env.NODE_ENV === 'development') {
-    console.log('[directusRouter]', ...messages)
-  }
-}
 
 interface PageSettingsTranslation {
   languages_code: {
@@ -113,7 +108,7 @@ export async function directusRouteRouter(
   log('Using translation:', translation)
 
   if (!translation.languages_code || !translation.page_settings_id) {
-    console.warn(`[directusRouter] Invalid translation data for path: ${pathname}`)
+    log(`Invalid translation data for path: ${pathname}`, { pathname }, 'warn')
     return NextResponse.next()
   }
 
@@ -122,7 +117,7 @@ export async function directusRouteRouter(
   const id = translation.page_settings_id.belongs_to_key
 
   if (!collection) {
-    console.warn(`[directusRouter] PageSettings with id ${id} was found but is not associated with any collection.`)
+    log(`PageSettings with id ${id} was found but is not associated with any collection.`, { id }, 'warn')
     return NextResponse.next()
   }
 
@@ -136,7 +131,7 @@ export async function directusRouteRouter(
   log('ID:', id)
 
   const newPath = `/${mappedLocale}/${collection}/${id}`
-  log('Rewriting path:', pathname, '->', newPath)
+  log(`Rewriting path: ${pathname} -> ${newPath}`)
 
   const url = request.nextUrl.clone()
   url.pathname = newPath

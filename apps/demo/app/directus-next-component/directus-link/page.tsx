@@ -192,6 +192,5 @@ export default async function Index() {
     return { ...link, collection: link?.collection, file: link?.file }
   })
 
-  // console.log(JSON.stringify(navigationTree, null, 2))
   return navigationTree?.map((child) => renderTree(child))
 }
