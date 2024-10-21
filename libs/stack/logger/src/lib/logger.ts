@@ -1,28 +1,37 @@
 export type LogSeverity = 'info' | 'warn' | 'error' | 'log'
 export type LogFunction = (message: string, severity?: LogSeverity, context?: Record<string, unknown>) => void
 
-class Logger {
+export class Logger {
   private static instance: Logger
 
   private logger: LogFunction
 
+  private nameSpace: string = '[STACK]'
+
+  private suppressConsole = false
+
   private env = process.env['NODE_ENV']
 
-  private constructor() {
-    this.logger = this.internalLogger
+  public constructor(nameSpace?: string, logger?: LogFunction, suppressConsole?: boolean) {
+    this.nameSpace = nameSpace ?? this.nameSpace
+    this.suppressConsole = suppressConsole ?? this.suppressConsole
+    this.logger = logger ?? this.internalLogger
   }
 
   private internalLogger(message: string, severity?: LogSeverity, context?: Record<string, unknown>): void {
-    if (this.env === 'test' || this.env === 'production') {
+    if (this.env === 'production') {
       return
     }
     // eslint-disable-next-line no-console
-    console[severity || 'log'](message, context)
+    console[severity || 'log'](`${this.nameSpace} ${message}`.trimStart(), context)
   }
 
   public setLogger(logger: LogFunction) {
     this.logger = (message: string, severity?: LogSeverity, context?: Record<string, unknown>) => {
-      this.internalLogger(message, severity, context)
+      if (this.suppressConsole) {
+        this.internalLogger(message, severity, context)
+      }
+
       logger(message, severity, context)
     }
   }
