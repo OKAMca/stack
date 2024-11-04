@@ -84,3 +84,12 @@ export const WebsiteWithScrolling = {
       '<iframe src="https://storybook.js.org/docs" title="storybook doc" height="600" width="600" marginwidth="50" scrolling="yes"></iframe>',
   },
 }
+
+export const WithImageTag = {
+  render: Template.bind({}),
+  name: 'With image tag',
+
+  args: {
+    content: '<img src="/images/image.png" alt="image" />',
+  },
+}
