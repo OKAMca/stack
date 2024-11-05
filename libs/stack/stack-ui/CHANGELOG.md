@@ -1,3 +1,15 @@
+## 1.30.1 (2024-11-05)
+
+
+### 🩹 Fixes
+
+- issue with DatePicker fields not always working correctly ([8da5809](https://github.com/OKAMca/stack/commit/8da5809))
+
+
+### ❤️  Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 1.30.0 (2024-10-04)
 
 
