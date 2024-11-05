@@ -6,7 +6,7 @@ import type TWysiwygBlockProps from './interface'
 
 const WysiwygBlock = <T extends TToken>({ content, themeName = 'wysiwyg', ...rest }: TWysiwygBlockProps<T>) => {
   const sanitizedContent = sanitizeHtml(content, {
-    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['iframe']),
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(['iframe', 'img']),
     nonBooleanAttributes: [],
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,
@@ -23,6 +23,7 @@ const WysiwygBlock = <T extends TToken>({ content, themeName = 'wysiwyg', ...res
         'width',
         'referrerpolicy',
       ],
+      img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
     },
   })
 
