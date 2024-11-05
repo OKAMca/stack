@@ -28,3 +28,17 @@ const variables = {id: 1}
 const data = await queryClient.queryGql(DOCUMENT, variables)
 ```
 
+## Default Environment Variables
+Those environment variables are used in graphqlRequestClient (queryGql, useSuspenseGqlQuery) and graphqlRequestAdmin (useSuspenseGqlQueryAdmin)
+
+### Server/Client
+```
+NEXT_SERVER_GRAPHQL_URL=http://server.internal/graphql/ # server side only
+NEXT_PUBLIC_GRAPHQL_URL=https://server.okam.one/graphql/ # server fallback and client side
+NEXT_PUBLIC_API_TOKEN=abcdef
+```
+### Admin
+```
+NEXT_GRAPHQL_URL_ADMIN=http://server-admin.okam.one/graphql/ # server side only
+# admin request use the same token NEXT_PUBLIC_API_TOKEN
+```
