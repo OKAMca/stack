@@ -23,6 +23,7 @@ const WysiwygBlock = <T extends TToken>({ content, themeName = 'wysiwyg', ...res
         'width',
         'referrerpolicy',
       ],
+      img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
     },
   })
 
