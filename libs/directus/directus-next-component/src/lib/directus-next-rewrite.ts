@@ -1,6 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { get } from 'radash'
+import { logger } from '../logger'
 
 export async function fetchPageSettings(pathName: string, lang = 'fr-CA') {
   const graphqlEndpoint = process.env.NEXT_PUBLIC_GRAPHQL_URL
@@ -59,8 +60,7 @@ export async function fetchPageSettings(pathName: string, lang = 'fr-CA') {
 
     return `/${collection}/${key}`
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error('GraphQL Error', (e as Error).message)
+    logger.log('GraphQL Error', 'error', { err: e })
     return null
   }
 }

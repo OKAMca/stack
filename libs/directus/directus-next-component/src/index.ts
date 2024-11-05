@@ -7,6 +7,7 @@ export { default as DirectusFile } from './components/DirectusFile'
 export { default as useDirectusFile } from './hooks/directus-file'
 export { default as useDirectusLink } from './hooks/directus-link'
 export { default as useNavigationItems } from './hooks/navigation-items'
+export { logger as DirectusNextComponent } from './logger'
 
 export type { TFiles } from './types/files'
 export type { TPageSettings } from './types/page-settings'

@@ -76,3 +76,6 @@ export { default as useFacebookShareUrl } from './components/ShareButton/utils/u
 export { default as useMailToShareUrl } from './components/ShareButton/utils/useMailToShareUrl'
 export { default as useTwitterShareUrl } from './components/ShareButton/utils/useTwitterShareUrl'
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
+
+// dev tools
+export { logger as StackUILogger } from './logger'

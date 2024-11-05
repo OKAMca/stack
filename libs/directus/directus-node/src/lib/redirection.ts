@@ -1,4 +1,6 @@
 import { writeFile } from 'node:fs/promises'
+import { logger } from '@okam/logger'
+import { log } from '../logger'
 
 interface TFetchRedirectsConfig {
   graphqlEndpoint: string
@@ -77,9 +79,9 @@ export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boo
     const writeDataRewrites = JSON.stringify(data.rewrites || [])
     await writeFile(rewritesFilename, writeDataRewrites)
 
-    console.log(`Redirects count: ${data.redirects?.length || 0}, Rewrites count: ${data.rewrites?.length || 0}`)
+    log(`Redirects count: ${data.redirects?.length || 0}, Rewrites count: ${data.rewrites?.length || 0}`)
   } catch (e) {
-    console.warn('Error fetching redirects:', (e as Error).message)
+    log(`Error fetching redirects: ${(e as Error).message}`, 'error')
     return true // still want build to pass
   }
 
