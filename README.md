@@ -20,6 +20,14 @@ Learn more about [Nx generators on the docs](https://nx.dev/plugin-features/use-
 
 ## Running tasks
 
+For nx caching, set up environment variable in .env.
+See bitwarden "VERCEL REMOTE CACHE NX TOKEN" entry.
+
+```
+NX_VERCEL_REMOTE_CACHE_TOKEN=
+NX_VERCEL_REMOTE_CACHE_TEAM=
+```
+
 To execute tasks with Nx use the following syntax:
 
 ```
