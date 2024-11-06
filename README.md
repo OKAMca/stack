@@ -131,10 +131,13 @@ Check that projects were released before and that the tag "publishable" is insid
 }
 ```
 
-Check that the project is public in package.json
+Check that the project is public in package.json and repository is set to stack.
 {
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
   }
 }
 

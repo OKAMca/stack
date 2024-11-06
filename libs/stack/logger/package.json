@@ -9,5 +9,8 @@
   "typings": "./src/index.d.ts",
   "publishConfig": {
     "access": "public"
+  },
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
   }
 }
