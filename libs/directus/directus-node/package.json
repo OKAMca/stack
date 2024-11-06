@@ -4,7 +4,8 @@
   "version": "0.3.0",
   "types": "./src/index.d.ts",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org",
+    "access": "public"
   },
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
