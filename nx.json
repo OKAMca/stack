@@ -28,13 +28,15 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx-cloud",
+      "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"],
-        "accessToken": "ZjIyMjRhNDAtMDQ4MS00ZmU2LWExYzktOGQ0ZDU0MWYzYTI4fHJlYWQ="
+        "accessToken": "${NX_VERCEL_REMOTE_CACHE_TOKEN}",
+        "teamId": "${NX_VERCEL_REMOTE_CACHE_TEAM}"
       }
     }
   },
+  "cacheDirectory": "/tmp/nx-cache",
   "targetDefaults": {
     "build": {
       "dependsOn": ["^build"],
