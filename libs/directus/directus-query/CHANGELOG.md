@@ -1,3 +1,15 @@
+## 1.3.0 (2024-11-06)
+
+
+### 🚀 Features
+
+- **directus-query:** adding server side fallback for graphql endpoint ([f89d662](https://github.com/OKAMca/stack/commit/f89d662))
+
+
+### ❤️  Thank You
+
+- Yan Morin
+
 ## 1.2.0 (2024-10-04)
 
 
