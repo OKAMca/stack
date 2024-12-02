@@ -19,7 +19,7 @@ interface PageSettingsTranslation {
 }
 
 async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsTranslation[] | null> {
-  const graphqlEndpoint = process.env.NEXT_PUBLIC_GRAPHQL_URL
+  const graphqlEndpoint = process.env.NEXT_SERVER_GRAPHQL_URL || process.env.NEXT_PUBLIC_GRAPHQL_URL
   const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
   if (!graphqlEndpoint || !graphqlApiKey) {
