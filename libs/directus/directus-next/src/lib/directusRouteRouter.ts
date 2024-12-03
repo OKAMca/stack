@@ -2,8 +2,6 @@
 import { log } from '../logger'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-
 interface PageSettingsTranslation {
   languages_code: {
     code: string
