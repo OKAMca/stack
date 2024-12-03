@@ -1,3 +1,15 @@
+## 0.3.0 (2024-12-03)
+
+
+### 🚀 Features
+
+- **directus-next:** not a real change but need to trigger new version ([57f2a54](https://github.com/OKAMca/stack/commit/57f2a54))
+
+
+### ❤️  Thank You
+
+- David Paquet Pitts
+
 ## 0.1.2 (2024-10-04)
 
 
