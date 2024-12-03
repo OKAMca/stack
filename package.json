@@ -108,7 +108,7 @@
     "@storybook/react-webpack5": "^8.3.3",
     "@svgr/rollup": "^8.1.0",
     "@swc-node/register": "1.9.2",
-    "@swc/cli": "0.3.14",
+    "@swc/cli": "0.5.2",
     "@swc/core": "1.5.7",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@testing-library/react": "15.0.6",
