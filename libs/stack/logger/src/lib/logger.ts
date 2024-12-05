@@ -23,7 +23,7 @@ export class Logger {
       return
     }
     // eslint-disable-next-line no-console
-    console[severity || 'log'](`${this.nameSpace} ${message}`.trimStart(), context)
+    console[severity || 'log'](`${this.nameSpace} ${message}`.trimStart(), context ?? '')
   }
 
   public setLogger(logger: LogFunction) {

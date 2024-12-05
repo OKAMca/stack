@@ -16,13 +16,21 @@
   ],
   "targets": {
     "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@nx/vite:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/stack/logger",
-        "main": "libs/stack/logger/src/index.ts",
-        "tsConfig": "libs/stack/logger/tsconfig.lib.json",
-        "assets": ["libs/stack/logger/*.md"]
+        "outputPath": "dist/libs/stack/logger"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
       }
     },
     "nx-release-publish": {
