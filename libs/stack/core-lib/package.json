@@ -1,13 +1,19 @@
 {
   "name": "@okam/core-lib",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "main": "./index.js",
   "types": "./index.d.ts",
   "license": "MIT",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
     }
   },
   "publishConfig": {
