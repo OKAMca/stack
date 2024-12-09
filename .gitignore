@@ -114,3 +114,5 @@ yarn-error.log*
 
 .vercel
 .aider*
+
+vite.config.*.timestamp*

@@ -19,17 +19,6 @@
         ]
       }
     },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
-      "options": {
-        "lintFilePatterns": [
-          "libs/stack/stack-ui/**/*.{ts,tsx,js,jsx}"
-        ]
-      }
-    },
     "build": {
       "executor": "@nx/vite:build",
       "outputs": [
