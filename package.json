@@ -12,7 +12,7 @@
     "dry-release": "nx release --dry-run",
     "release": "nx release",
     "dev": "nx serve demo",
-    "build": "nx build demo",
+    "build": "nx build demo --verbose",
     "postinstall": "npx husky || true"
   },
   "private": true,
