@@ -16,7 +16,7 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/libs/stack/next-component",
+        "outputPath": "{projectRoot}/dist/libs/stack/next-component",
         "tsConfig": "libs/stack/next-component/tsconfig.lib.json",
         "project": "libs/stack/next-component/package.json",
         "entryFile": "libs/stack/next-component/src/index.ts",

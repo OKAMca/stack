@@ -11,7 +11,7 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/automation",
+        "outputPath": "{projectRoot}/dist/libs/automation",
         "main": "libs/automation/src/index.ts",
         "tsConfig": "libs/automation/tsconfig.lib.json",
         "assets": [

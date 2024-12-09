@@ -20,7 +20,7 @@
       ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/directus/directus-flexible-content"
+        "outputPath": "{projectRoot}/dist/libs/directus/directus-flexible-content"
       },
       "configurations": {
         "development": {

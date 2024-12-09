@@ -13,7 +13,7 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/libs/directus/directus-node",
+        "outputPath": "{projectRoot}/dist/libs/directus/directus-node",
         "tsConfig": "libs/directus/directus-node/tsconfig.lib.json",
         "packageJson": "libs/directus/directus-node/package.json",
         "main": "libs/directus/directus-node/src/index.ts",

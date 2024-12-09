@@ -22,7 +22,7 @@
       ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/stack/logger"
+        "outputPath": "{projectRoot}/dist/libs/stack/logger"
       },
       "configurations": {
         "development": {

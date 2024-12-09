@@ -9,7 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/demo"
+        "outputPath": "{projectRoot}/dist/apps/demo"
       },
       "configurations": {
         "development": {
@@ -55,13 +55,6 @@
           "ci": true,
           "codeCoverage": true
         }
-      }
-    },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/demo/**/*.{ts,tsx,js,jsx}"]
       }
     }
   },
