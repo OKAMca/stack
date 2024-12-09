@@ -7,17 +7,6 @@
     "publishable"
   ],
   "targets": {
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
-      "options": {
-        "lintFilePatterns": [
-          "libs/directus/directus-block/**/*.{ts,tsx,js,jsx}"
-        ]
-      }
-    },
     "build": {
       "executor": "@nx/vite:build",
       "outputs": [
