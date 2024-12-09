@@ -13,7 +13,7 @@
     "release": "nx release",
     "dev": "nx serve demo",
     "build": "nx build demo",
-    "postinstall": "is-ci || npx husky"
+    "postinstall": "npx husky || true"
   },
   "private": true,
   "dependencies": {
