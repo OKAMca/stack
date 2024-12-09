@@ -26,7 +26,7 @@
       ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/stack/stack-ui"
+        "outputPath": "{projectRoot}/dist/libs/stack/stack-ui"
       },
       "configurations": {
         "development": {

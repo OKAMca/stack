@@ -14,7 +14,7 @@
       ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/directus/directus-next"
+        "outputPath": "{projectRoot}/dist/libs/directus/directus-next"
       },
       "configurations": {
         "development": {

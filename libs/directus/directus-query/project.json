@@ -14,7 +14,7 @@
       ],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/libs/directus/directus-query"
+        "outputPath": "{projectRoot}/dist/libs/directus/directus-query"
       },
       "configurations": {
         "development": {
