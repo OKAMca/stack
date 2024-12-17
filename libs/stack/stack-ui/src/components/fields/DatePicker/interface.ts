@@ -61,7 +61,7 @@ export interface TDateRangePickerProps extends DateRangePickerStateOptions<DateV
     start: DateValue
     end: DateValue
   }
-  onChange?: (value: RangeValue<DateValue>) => void
+  onChange?: (value: RangeValue<DateValue> | null) => void
 }
 
 export interface TCalendarPopoverProps extends Omit<AriaPopoverProps, 'popoverRef'>, TDefaultComponent {

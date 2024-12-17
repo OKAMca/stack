@@ -8,7 +8,7 @@ export type TFieldReactHookForm<T = TToken> = TDefaultComponent<T> & TReactHookF
 
 export interface TTextInputProps<T = TToken>
   extends TFieldReactHookForm<T>,
-    Omit<AriaTextFieldOptions<'input'>, 'onChange' | 'onBlur'> {
+    Omit<AriaTextFieldOptions<'input'>, 'onChange' | 'onBlur' | 'onFocus'> {
   name: string
   ariaLabel?: string
   errorMessage?: string
