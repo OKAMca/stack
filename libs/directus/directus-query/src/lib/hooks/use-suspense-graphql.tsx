@@ -10,7 +10,7 @@ import { graphqlRequestAdmin } from '../request'
 export function useSuspenseGqlQuery<TResult, TVariables extends Variables>(
   document: TypedDocumentNode<TResult, TVariables>,
   variables?: TVariables,
-  options?: QueryOptions & { enabled: boolean; useErrorBoundary: boolean },
+  options?: Omit<QueryOptions, 'queryFn'> & { enabled: boolean; useErrorBoundary: boolean },
 ): UseSuspenseQueryResult<TResult> {
   const values = getQueryValues<TResult, TVariables>(document, variables)
 
@@ -24,7 +24,7 @@ export function useSuspenseGqlQuery<TResult, TVariables extends Variables>(
 export function useSuspenseGqlQueryAdmin<TResult, TVariables extends Variables>(
   document: TypedDocumentNode<TResult, TVariables>,
   variables?: TVariables,
-  options?: QueryOptions,
+  options?: Omit<QueryOptions, 'queryFn'>,
 ): UseSuspenseQueryResult<TResult> {
   const values = getQueryValues<TResult, TVariables>(document, variables)
   return useSuspenseQuery({
