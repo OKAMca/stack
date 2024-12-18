@@ -1,6 +1,6 @@
 import { useTabList } from '@react-aria/tabs'
 import { useTabListState } from '@react-stately/tabs'
-import isEmpty from 'lodash.isempty'
+import { isEmpty } from 'radashi'
 import { useRef } from 'react'
 import Box, { BoxWithForwardRef } from '../Box'
 import Heading from '../Typography'
