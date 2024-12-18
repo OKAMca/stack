@@ -1,7 +1,7 @@
 'use client'
 
 import { useDateFormatter } from '@react-aria/i18n'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash.isempty'
 import { useIsSSR } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
 import type { TToken } from '../../providers/Theme/interface'

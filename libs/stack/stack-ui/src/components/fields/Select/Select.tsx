@@ -1,6 +1,6 @@
 'use client'
 
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash.isempty'
 import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'

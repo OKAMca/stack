@@ -10,7 +10,7 @@
 
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { template } from 'radash'
+import { template } from 'radashi'
 import { getJsonErrorResponse } from '../response'
 import { getDraftSecretDefault } from './env'
 

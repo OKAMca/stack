@@ -1,6 +1,6 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
-import { get } from 'radash'
+import { get } from 'radashi'
 import { logger } from '../logger'
 
 export async function fetchPageSettings(pathName: string, lang = 'fr-CA') {
