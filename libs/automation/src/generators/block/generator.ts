@@ -2,7 +2,7 @@ import * as path from 'path'
 import type { Tree } from '@nx/devkit'
 import { formatFiles, generateFiles } from '@nx/devkit'
 import { capitalizeFirstLetter } from '@okam/core-lib'
-import { camel, snake } from 'radash'
+import { camel, snake } from 'radashi'
 import type { BlockGeneratorSchema } from './schema'
 
 export async function blockGenerator(tree: Tree, options: BlockGeneratorSchema) {

@@ -1,6 +1,6 @@
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { Variables } from 'graphql-request'
-import { get } from 'radash'
+import { get } from 'radashi'
 import graphqlRequestClient from './request'
 
 export function queryGql<TResult, TVariables extends Variables>(

@@ -3,26 +3,22 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-next-component/src",
   "projectType": "library",
-  "tags": [
-    "publishable"
-  ],
+  "tags": ["publishable"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/directus/directus-next-component/**/*.{ts,tsx,js,jsx}"
+          "libs/directus/directus-next-component/**/*.{ts,tsx,js,jsx}",
+          "libs/directus/directus-next-component/package.json",
+          "libs/directus/directus-next-component/project.json"
         ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/directus/directus-next-component"

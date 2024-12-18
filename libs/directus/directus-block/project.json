@@ -3,26 +3,22 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-block/src",
   "projectType": "library",
-  "tags": [
-    "publishable"
-  ],
+  "tags": ["publishable"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/directus/directus-block/**/*.{ts,tsx,js,jsx}"
+          "libs/directus/directus-block/**/*.{ts,tsx,js,jsx}",
+          "libs/directus/directus-block/package.json",
+          "libs/directus/directus-block/project.json"
         ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/directus/directus-block"
@@ -50,9 +46,7 @@
     },
     "build-storybook": {
       "executor": "@nx/storybook:build",
-      "outputs": [
-        "{options.outputDir}"
-      ],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/directus-block",
         "configDir": "libs/directus/directus-block/.storybook"

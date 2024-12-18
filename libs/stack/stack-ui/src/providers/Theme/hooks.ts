@@ -1,6 +1,6 @@
 'use client'
 
-import { get } from 'radash'
+import { get } from 'radashi'
 import type { TCustomTheme, TToken } from './interface'
 import { useTheme } from './index'
 

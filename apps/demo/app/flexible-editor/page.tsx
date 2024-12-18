@@ -3,7 +3,7 @@ import type { JSONContent } from '@okam/directus-flexible-content'
 import { FlexibleEditorContent } from '@okam/directus-flexible-content'
 import { queryGql } from '@okam/directus-query'
 import { Box, Typography } from '@okam/stack-ui'
-import { PagesDocument } from 'libs/directus-data-query/src'
+import { PagesDocument } from 'apps/directus-data-query/src'
 
 export default async function Index() {
   const flexibleContent = await queryGql(PagesDocument)

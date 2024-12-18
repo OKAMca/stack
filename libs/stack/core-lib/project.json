@@ -3,9 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/stack/core-lib/src",
   "projectType": "library",
-  "tags": [
-    "publishable"
-  ],
+  "tags": ["publishable"],
   "targets": {
     "semantic-release": {
       "executor": "@theunderscorer/nx-semantic-release:semantic-release",
@@ -14,27 +12,23 @@
         "npm": true,
         "github": true,
         "repositoryUrl": "https://github.com/OKAMca/stack.git",
-        "branches": [
-          "main"
-        ]
+        "branches": ["main"]
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": [
-        "{options.outputFile}"
-      ],
+      "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/stack/core-lib/**/*.{ts,tsx,js,jsx}"
+          "libs/stack/core-lib/**/*.{ts,tsx,js,jsx}",
+          "libs/stack/core-lib/package.json",
+          "libs/stack/core-lib/project.json"
         ]
       }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/stack/core-lib"

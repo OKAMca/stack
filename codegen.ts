@@ -18,10 +18,10 @@ const config: CodegenConfig = {
       }
     }
   ],
-  documents: [`${__dirname}/libs/directus-data-query/src/**/*.graphql`],
+  documents: [`${__dirname}/apps/directus-data-query/src/**/*.graphql`],
   ignoreNoDocuments: true, // for better experience with the watcher
   generates: {
-    [`${__dirname}/libs/directus-data-query/src/lib/gql/generated/`]: {
+    [`${__dirname}/apps/directus-data-query/src/lib/gql/generated/`]: {
       preset: 'client'
     }
   }
