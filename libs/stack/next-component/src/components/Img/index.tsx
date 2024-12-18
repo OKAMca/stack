@@ -2,7 +2,11 @@
 
 import { useThemeContext } from '@okam/stack-ui'
 import Image from 'next/image'
+import { isValidElement } from 'react'
 import type TImgProps from './interface'
+
+const ResolvedImage =
+  'default' in Image && isValidElement(Image.default) ? (Image as unknown as { default: typeof Image }).default : Image
 
 const Img = (props: TImgProps) => {
   const { src, width, height, themeName = 'img', tokens, customTheme, ...rest } = props
@@ -16,7 +20,7 @@ const Img = (props: TImgProps) => {
     }
 
     return (
-      <Image
+      <ResolvedImage
         className={theme}
         {...withoutBlurDimensions}
         {...rest}
