@@ -1,6 +1,6 @@
 'use client'
 
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash.isempty'
 import { useRef } from 'react'
 import { useRadio, VisuallyHidden, useFocusRing, FocusRing, mergeProps } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'

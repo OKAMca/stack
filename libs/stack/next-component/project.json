@@ -3,18 +3,14 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/stack/next-component/src",
   "projectType": "library",
-  "tags": [
-    "publishable"
-  ],
+  "tags": ["publishable"],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint"
     },
     "build": {
       "executor": "@nx/rollup:rollup",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/stack/next-component",
         "tsConfig": "libs/stack/next-component/tsconfig.lib.json",
@@ -46,9 +42,7 @@
     },
     "build-storybook": {
       "executor": "@nx/storybook:build",
-      "outputs": [
-        "{options.outputDir}"
-      ],
+      "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/next-component",
         "configDir": "libs/stack/next-component/.storybook"
