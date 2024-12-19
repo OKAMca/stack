@@ -3,7 +3,7 @@
 import { queryGql } from '@okam/directus-query'
 import type { Nullable } from '@okam/stack-ui'
 import type { Variables } from 'graphql-request'
-import { isEmpty } from 'radash'
+import { isEmpty } from 'radashi'
 import type { TBlockDocument, TBlockQuery, TBlockVariables, TCommonBlockFragment } from '../types/block'
 
 type TGetBlockPropsParams<BlockFragment extends TCommonBlockFragment, BlockVariables extends Variables = Variables> = {

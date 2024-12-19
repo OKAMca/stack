@@ -1,6 +1,6 @@
 import type { Nullable, TToken } from '@okam/stack-ui'
 import type { TypedQueryDocumentNode } from 'graphql'
-import { get } from 'radash'
+import { get } from 'radashi'
 import type { TBlockSerializerProps } from '../components/BlockSerializer/interface'
 import { BlockSettingsFragmentDoc } from '../generated/graphql'
 import type { TBlockQuery, TBlockVariables, TCommonBlockFragment } from '../types/block'

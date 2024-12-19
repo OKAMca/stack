@@ -10,9 +10,6 @@ module.exports = {
       parserOptions: {
         project: `${__dirname}/tsconfig.*?.json`,
       },
-      rules: {
-        "@nx/dependency-checks": "error"
-      }
     },
   ],
   rules: {

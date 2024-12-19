@@ -1,4 +1,3 @@
-import { HelloServer } from '@okam/next-component/server'
 import {
   Box,
   Button,
@@ -25,10 +24,6 @@ import SidePanelControl from './components/SidePanelControl'
 export default async function Index() {
   return (
     <div>
-      <div className="flex flex-col gap-16 p-8">
-        <HelloServer />
-      </div>
-
       <div className="flex flex-col gap-16 p-8">
         <Select
           id="season"

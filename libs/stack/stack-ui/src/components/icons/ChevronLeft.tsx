@@ -1,4 +1,4 @@
-import isEqual from 'lodash.isequal'
+import { isEqual } from 'radashi'
 import React, { memo } from 'react'
 
 const SvgComponent = (props: React.SVGProps<SVGSVGElement>) => (
