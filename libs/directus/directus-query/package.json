@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-query",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -18,8 +18,8 @@
   "dependencies": {
     "@graphql-codegen/cli": "^5.0.3",
     "@graphql-typed-document-node/core": "3.2.0",
-    "@okam/core-lib": "1.15.1",
-    "@okam/logger": "1.0.1",
+    "@okam/core-lib": "1.16.0",
+    "@okam/logger": "1.1.0",
     "@tanstack/react-query": "^5.62.3",
     "graphql-request": "^7.1.2",
     "radashi": "^12.3.0",
