@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-next-component",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -20,9 +20,9 @@
     "url": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
-    "@okam/logger": "1.0.1",
-    "@okam/next-component": "0.3.0",
-    "@okam/stack-ui": "1.30.1",
+    "@okam/logger": "1.1.0",
+    "@okam/next-component": "0.4.0",
+    "@okam/stack-ui": "1.31.0",
     "@react-spring/web": "^9.7.5",
     "next": "^14.1.1",
     "radashi": "^12.3.0",
