@@ -1,6 +1,6 @@
 {
   "name": "@okam/core-lib",
-  "version": "1.15.1",
+  "version": "1.16.0",
   "main": "./index.js",
   "types": "./index.d.ts",
   "license": "MIT",
