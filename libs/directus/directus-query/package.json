@@ -1,12 +1,18 @@
 {
   "name": "@okam/directus-query",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
     }
   },
   "publishConfig": {
