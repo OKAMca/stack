@@ -18,8 +18,8 @@ export interface TSelectProps<T = TToken> extends TFieldReactHookForm<T> {
   placeholderLabel: string
   hookFormRef?: RefCallBack
   onSelectionChange?: (value: Key) => void
-  defaultValue?: Nullable<string>
-  value?: string
+  defaultValue?: string
+  value?: Nullable<string>
   popoverMatchesWidth?: boolean
   options?: { key: string; value: string }[]
 }
