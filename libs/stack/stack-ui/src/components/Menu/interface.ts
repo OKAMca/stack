@@ -1,5 +1,6 @@
 import type { AriaTabListProps } from '@react-types/tabs'
 import type React from 'react'
+import type { AriaAttributes } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { Maybe, TDefaultComponent, TTransition } from '../../types/components'
 import type { NextLinkProps } from '../../types/next-link'
@@ -20,7 +21,8 @@ export type TMenuSidePanelProps = TMenuProps & {
   TransitionAnimation?: (props: TTransition) => JSX.Element
 }
 
-export type PartialHtmlBaseElement = Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>
+export type PartialHtmlBaseElement = AriaAttributes &
+  Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>
 
 export interface IMenuItemProp {
   childItems?: Maybe<TMenuItemProps[] | null>
