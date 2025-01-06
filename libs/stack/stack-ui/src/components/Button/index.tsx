@@ -38,7 +38,13 @@ export const Anchor = React.forwardRef(
 
     return (
       <FocusRing focusRingClass="has-focus-ring">
-        <Component ref={ref} {...linkProps} {...nextLinkProps} {...rest} className={theme}>
+        <Component
+          ref={ref}
+          {...linkProps}
+          {...(typeof Component === 'object' ? nextLinkProps : {})}
+          {...rest}
+          className={theme}
+        >
           {children}
         </Component>
       </FocusRing>
