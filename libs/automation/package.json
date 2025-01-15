@@ -4,7 +4,7 @@
   "dependencies": {
     "@nx/devkit": "20.2.2",
     "tslib": "^2.3.0",
-    "@okam/core-lib": "1.15.1",
+    "@okam/core-lib": "1.16.0",
     "radashi": "^12.3.0"
   },
   "type": "commonjs",
