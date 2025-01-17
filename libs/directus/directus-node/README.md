@@ -57,13 +57,22 @@ module.exports = {
   redirects: async () => redirects,
   rewrites: async () => rewrites,
 }
+```
 
+4.1 or redirect/index.mjs
+```
+import redirectsData from './redirects.json' with { type: 'json' }
+import rewritesData from './rewrites.json' with { type: 'json' }
+
+export const redirects = async () => redirectsData
+export const rewrites = async () => rewritesData
 ```
 
 5. Define environments variables
 ```
-NEXT_PUBLIC_GRAPHQL_URL=
-NEXT_API_TOKEN_ADMIN=
+NEXT_SERVER_GRAPHQL_URL=http://server.internal/graphql
+NEXT_PUBLIC_GRAPHQL_URL=https://server.external/graphql
+NEXT_API_TOKEN_ADMIN=user_token_for_graphql
 ```
 
 6. Generate redirect/redirects.json and redirect/rewrites.json using fetch-redirect (or build project with nx)
@@ -75,13 +84,23 @@ npx env-cmd -f ../../.env.local node fetch-redirect.js
 ```
 const { rewrites, redirects } = require('./redirect/index')
 ```
+
+for next.config.mjs
+```
+import { redirects, rewrites } from './redirect/index.mjs'
+```
+
+and
+
 ```
 const nextConfig = {
 ...
   async redirects() {
     const rest = await redirects()
     return [
+      // optional i18nrouter should be before
        ...i18nReRouter({locale: false, permanent: true}, 'redirect'),
+      // custom redirect should be here
        ...rest,
     ]
     return rest
@@ -90,9 +109,11 @@ const nextConfig = {
     const fallback = await rewrites()
     return {
       beforeFiles: [
+        // optional i18n router
         ...i18nReRouter({locale: false}, 'rewrite'),
       ],
       afterFiles: [
+        // optional i18n router
         ...i18nRewriter({...i18nConfigWithoutLocaleDetector, localeDetector: false}),
       ],
       fallback,
@@ -101,3 +122,6 @@ const nextConfig = {
 ...
 }
 ```
+
+## Warning
+In production (build), you can't reload dynamically in next.config.(m?)js in rewrites()/redirects() because it was compiled in `.nx/route-manifest.json`. Updating the files in redirects/ won't work. In dev mode, both rewrites()/redirects() of next.config.(m?)js are runned on each server start.
