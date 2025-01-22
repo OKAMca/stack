@@ -1,5 +1,5 @@
 // Usage: pnpm nx test directus-node
-// add NEXT_SERVER_GRAPHQL_URL and NEXT_API_TOKEN_ADMIN to your .env
+// add NEXT_REDIRECT_GRAPHQL_URL and NEXT_API_TOKEN_ADMIN to your .env
 
 import { fetchRedirects, fetchRedirectsData, getDefaultConfig, readRedirectFile, redirectDefaultLimit, writeRedirectFile } from '../redirection'
 
