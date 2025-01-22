@@ -70,7 +70,7 @@ export const rewrites = async () => rewritesData
 
 5. Define environments variables
 ```
-NEXT_SERVER_GRAPHQL_URL=http://server.internal/graphql
+NEXT_REDIRECT_GRAPHQL_URL=http://server.some.url/graphql
 NEXT_PUBLIC_GRAPHQL_URL=https://server.external/graphql
 NEXT_API_TOKEN_ADMIN=user_token_for_graphql
 ```

@@ -32,7 +32,7 @@ export const redirectDefaultLimit = 2000
  */
 export function getDefaultConfig(): TFetchRedirectsConfig {
   return {
-    graphqlEndpoint: process.env['NEXT_SERVER_GRAPHQL_URL'] || process.env['NEXT_PUBLIC_GRAPHQL_URL'] || '',
+    graphqlEndpoint: process.env['NEXT_REDIRECT_GRAPHQL_URL'] || process.env['NEXT_PUBLIC_GRAPHQL_URL'] || '',
     graphqlApiKey: process.env['NEXT_API_TOKEN_ADMIN'] || '',
     redirectsFilename: './redirect/redirects.json',
     rewritesFilename: './redirect/rewrites.json',
@@ -45,7 +45,7 @@ export async function fetchRedirectsData(config: TFetchRedirectsConfig): Promise
 
   if (!graphqlEndpoint) {
     throw new Error(
-      'Missing fetchRedirects configuration `graphqlEndpoint`. Check environment variables NEXT_SERVER_GRAPHQL_URL or NEXT_PUBLIC_GRAPHQL_URL',
+      'Missing fetchRedirects configuration `graphqlEndpoint`. Check environment variables NEXT_REDIRECT_GRAPHQL_URL or NEXT_PUBLIC_GRAPHQL_URL',
     )
   }
   if (!graphqlApiKey) {

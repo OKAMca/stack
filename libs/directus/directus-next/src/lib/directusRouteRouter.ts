@@ -20,8 +20,12 @@ async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsT
   const graphqlEndpoint = process.env.NEXT_SERVER_GRAPHQL_URL || process.env.NEXT_PUBLIC_GRAPHQL_URL
   const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
-  if (!graphqlEndpoint || !graphqlApiKey) {
-    throw new Error('Missing GraphQL configuration')
+  if (!graphqlEndpoint) {
+    throw new Error('Missing GraphQL configuration `graphqlEndpoint`')
+  }
+
+  if (!graphqlApiKey) {
+    throw new Error('Missing GraphQL configuration `graphqlApiKey`')
   }
 
   const query = `
