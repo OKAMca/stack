@@ -1,3 +1,4 @@
+import MailIcon from '../../icons/Mail'
 import TextInputField from './index'
 
 const Template = (args) => {
@@ -14,16 +15,37 @@ export default {
   component: TextInputField,
 
   args: {
-    id: '',
     label: 'First Name',
     name: 'name',
     placeholder: 'Your name here',
     isDisabled: false,
     isError: false,
     ariaLabel: 'First name',
-    icon: 'ArrowRight',
+    errorIcon: 'Error',
     onChange: (value) => console.log(`Value is now ${value}`),
     onBlur: (e) => console.log(`Value was ${e.target.value} when the field was blurred`),
+    onFocus: () => console.log('Was focused'),
+  },
+  argTypes: {
+    themeName: {
+      defaultValue: {
+        summary: 'textInput',
+      },
+    },
+    isDisabled: {
+      defaultValue: {
+        summary: false,
+      },
+    },
+    isRequired: {
+      defaultValue: {
+        summary: false,
+      },
+    },
+    errorIcon: {
+      description:
+        "The error icon's visibility does **not** rely on the presence of the `errorMessage` prop. To display it only when there is an error, use the `isError` token",
+    },
   },
 }
 
@@ -32,6 +54,7 @@ export const Default = {
   name: 'Default',
 
   args: {
+    id: 'default',
     isRequired: true,
   },
 }
@@ -41,6 +64,7 @@ export const Disabled = {
   name: 'Disabled',
 
   args: {
+    id: 'disabled',
     isDisabled: true,
   },
 }
@@ -50,7 +74,20 @@ export const Error = {
   name: 'Error',
 
   args: {
+    id: 'error',
     errorMessage: 'This is an error message',
     isError: true,
+  },
+}
+
+export const ErrorWithIcon = {
+  render: Template.bind({}),
+  name: 'ErrorWithIcon',
+
+  args: {
+    id: 'error-with-icon',
+    errorMessage: 'This is an error message',
+    isError: true,
+    icon: <MailIcon width={16} height={16} />,
   },
 }
