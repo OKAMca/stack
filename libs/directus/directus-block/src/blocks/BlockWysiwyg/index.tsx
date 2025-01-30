@@ -5,7 +5,7 @@ import useBlock from '../../hooks/useBlock'
 import type { BlockWysiwygFragment } from './interface'
 
 const BlockWysiwyg = async (props: TBlockSerializerProps<BlockWysiwygFragment>) => {
-  const key = 'block_wysiwyg_by_id'
+  const key = 'block_wysiwygs_by_id'
   const { themeName = 'wysiwyg', tokens } = props
   const { content, title, level, cmsTokens } = await useBlock<BlockWysiwygFragment>(props, key)
 

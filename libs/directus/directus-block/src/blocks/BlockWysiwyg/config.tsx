@@ -3,7 +3,7 @@ import type { BlockWysiwygFragment } from './interface'
 import BlockWysiwyg from '.'
 
 const blockWysiwygConfig: TBlockSerializerConfigComponent<BlockWysiwygFragment> = {
-  block_wysiwyg: {
+  block_wysiwygs: {
     default: (props) => <BlockWysiwyg {...props} />,
   },
 }
