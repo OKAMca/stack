@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes } from 'react'
+import type { InputHTMLAttributes, ReactNode } from 'react'
 import type { AriaTextFieldOptions } from 'react-aria'
 import type { RefCallBack } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
@@ -13,6 +13,8 @@ export interface TTextInputProps<T = TToken>
   ariaLabel?: string
   errorMessage?: string
   fieldRef?: RefCallBack
+  icon?: ReactNode
+  errorIcon?: ReactNode
   /**
    * @deprecated use isRequired instead
    */
@@ -22,7 +24,7 @@ export interface TTextInputProps<T = TToken>
    */
   disabled?: boolean
   /**
-   * @deprecated depends on errorMEssage
+   * @deprecated depends on errorMessage
    */
   isError?: boolean
 }

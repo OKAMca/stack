@@ -6,11 +6,15 @@ import { useTextField } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
 import useThemeContext from '../../../providers/Theme/hooks'
 import { useTranslation } from '../../../providers/Translation'
+import Box from '../../Box'
+import Icon from '../../Icon'
 import Typography from '../../Typography'
 import type { TTextInputProps, TUseTextFieldInputProps } from './interface'
 
 const TextInputField = (props: TTextInputProps) => {
   const {
+    icon,
+    errorIcon,
     label,
     isRequired = false,
     isDisabled = false,
@@ -45,32 +49,55 @@ const TextInputField = (props: TTextInputProps) => {
   const inputTokens = { ...tokens, isDisabled, isRequired, isError: !!errorMessage }
 
   const wrapper = useThemeContext(`${themeName}.wrapper`, inputTokens, customTheme)
-  const labelTheme = useThemeContext(`${themeName}.label`, inputTokens, customTheme)
   const input = useThemeContext(`${themeName}.input`, inputTokens, customTheme)
-  const container = useThemeContext(`${themeName}.container`, inputTokens, customTheme)
 
   return (
-    <div>
+    <Box>
       <FocusRing focusRingClass="has-focus-ring" within>
         <div aria-disabled={isDisabled} className={wrapper}>
-          {label && (
-            // eslint-disable-next-line jsx-a11y/label-has-associated-control
-            <label className={labelTheme} {...labelProps}>
-              {label}
-            </label>
-          )}
-          <div className={container}>
-            {children}
-
-            <input
-              {...accessibleInputProps}
-              className={input}
-              ref={(e) => {
-                fieldRef?.(e)
-                ref.current = e
-              }}
+          <Box themeName={`${themeName}.inputWrapper`} tokens={inputTokens} customTheme={customTheme}>
+            {label && (
+              // eslint-disable-next-line jsx-a11y/label-has-associated-control
+              <Box
+                as="label"
+                themeName={`${themeName}.label`}
+                tokens={inputTokens}
+                customTheme={customTheme}
+                {...labelProps}
+              >
+                {label}
+              </Box>
+            )}
+            <Box themeName={`${themeName}`} tokens={inputTokens} customTheme={customTheme}>
+              {children}
+              <input
+                {...accessibleInputProps}
+                className={input}
+                ref={(e) => {
+                  fieldRef?.(e)
+                  ref.current = e
+                }}
+              />
+            </Box>
+          </Box>
+          {icon && (
+            <Icon
+              themeName={`${themeName}.icon`}
+              tokens={inputTokens}
+              customTheme={customTheme}
+              icon={icon}
+              aria-hidden
             />
-          </div>
+          )}
+          {errorIcon && (
+            <Icon
+              themeName={`${themeName}.errorIcon`}
+              tokens={inputTokens}
+              customTheme={customTheme}
+              icon={errorIcon}
+              aria-hidden
+            />
+          )}
         </div>
       </FocusRing>
       {errorMessage && (
@@ -78,18 +105,20 @@ const TextInputField = (props: TTextInputProps) => {
           {errorMessage}
         </Typography>
       )}
-    </div>
+    </Box>
   )
 }
 
 export const ReactHookFormInput = (props: TTextInputProps) => {
-  const { name, required, isRequired, minLength = 0, maxLength = 99999999, validation } = props
+  const { name, required: legacyRequired, isRequired, minLength = 0, maxLength = 99999999, validation } = props
   const { register, formState } = useFormContext()
   const error: Error = get(formState.errors, name)
   const errMsg = error?.message ?? undefined
   const { t } = useTranslation()
+  const required = isRequired ?? legacyRequired
+
   const { ref: refCallback, ...rest } = register(name, {
-    required: (required ?? isRequired) ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
+    ...(required ? { required: t('FORM.ERROR.REQUIRED') ?? 'required' } : {}),
     minLength: {
       value: minLength,
       message: t('FORM.ERROR.MIN_LENGTH', { length: minLength }),
