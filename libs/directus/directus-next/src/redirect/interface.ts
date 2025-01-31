@@ -17,7 +17,7 @@ export interface HandleRedirectOptions {
   /**
    * @default 2000
    */
-  limit: number
+  limit?: number
   /**
    * Gets spread into the second argument of fetch.
    * Allows passing options like `cache` or `next.revalidate`
