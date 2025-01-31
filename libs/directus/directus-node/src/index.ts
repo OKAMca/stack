@@ -1,5 +1,3 @@
 export * from './lib/redirection'
 export { default as graphqlCodegenConfig } from './lib/codegen'
 export { logger as DirectusNodeLogger } from './logger'
-export * from './lib/redirection/interface'
-export * from './lib/redirection/utils/validateRedirects'
