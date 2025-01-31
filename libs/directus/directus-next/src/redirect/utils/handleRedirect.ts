@@ -1,9 +1,10 @@
-import { normalize } from 'path'
+import { normalizePath } from '@okam/core-lib'
 import type { TRedirectData } from '@okam/directus-node'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import { capitalize } from 'radashi'
 import { log } from '../../logger'
 import type { DirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
-import type { MinimalNextRequest, MinimalNextResponse } from '../../types/next'
 import { getRedirectsRoute } from './getRedirectsRoute'
 
 function splitDestination(destination: string) {
@@ -23,18 +24,11 @@ function validateExternalRedirect(redirect: TRedirectData) {
 
 /**
  * Handles next redirection using directus redirects
- * @param {MinimalNextRequest} request
- * @returns {Promise<Response | undefined>}
  */
-export async function handleRedirect(
-  request: MinimalNextRequest,
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  NextResponse: MinimalNextResponse,
-  options?: DirectusRouteRedirectsModule,
-): Promise<MinimalNextResponse | null> {
+export async function handleRedirect(request: NextRequest, options: DirectusRouteRedirectsModule = {}) {
   const url = request.nextUrl.clone()
   const { pathname } = request.nextUrl
-  const normalizedPathname = normalize(pathname)
+  const normalizedPathname = normalizePath(pathname)
 
   const { redirects, rewrites } = await getRedirectsRoute(options)
   const redirect = redirects.find(({ source }) => source === normalizedPathname)

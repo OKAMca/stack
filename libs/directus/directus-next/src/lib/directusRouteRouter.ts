@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import { log } from '../logger'
 import { handleRedirect } from '../redirect/utils/handleRedirect'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
-import type { MinimalNextRequest, MinimalNextResponse } from '../types/next'
 
 interface PageSettingsTranslation {
   languages_code: {
@@ -77,15 +78,29 @@ async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsT
   }
 }
 
-export async function directusRouteRouter(
-  request: MinimalNextRequest,
+/**
+ * Handles routing for Directus.
+ *
+ * @param {NextRequest} request - The incoming request object.
+ * @param {DirectusRouteConfig} config - Configuration for routing.
+ * @returns {Promise<NextResponse>} The response object.
+ */
+export function directusRouteRouter(request: NextRequest, config: DirectusRouteConfig): Promise<NextResponse>
+
+/**
+ * @deprecated Use `directusRouteRouter(request, config)` instead. NextResponse is now directly imported in this file.
+ */
+export function directusRouteRouter(
+  request: NextRequest,
   config: DirectusRouteConfig,
-  NextResponse: MinimalNextResponse,
-): Promise<MinimalNextResponse> {
+  response: NextResponse,
+): Promise<NextResponse>
+
+export async function directusRouteRouter(request: NextRequest, config: DirectusRouteConfig): Promise<NextResponse> {
   const { pathname } = request.nextUrl
   log('Processing request for pathname:', pathname)
 
-  const redirect = await handleRedirect(request, NextResponse, config.modules?.redirects)
+  const redirect = await handleRedirect(request, config.modules?.redirects)
   if (redirect) {
     return redirect
   }
