@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { log } from '../logger'
-import { handleRedirect } from '../redirects/utils/handleRedirect'
+import { handleRedirect } from '../redirect/utils/handleRedirect'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 import type { MinimalNextRequest, MinimalNextResponse } from '../types/next'
 
