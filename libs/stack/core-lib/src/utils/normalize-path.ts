@@ -1,3 +1,12 @@
 export function normalizePath(path: string): string {
-  return path.toLowerCase().replace(/\/+$/, '')
+  const parts = path.split('/')
+
+  const trimmedParts = parts.reduceRight<string[]>((acc, part) => {
+    if (acc.length === 0 && part === '') {
+      return acc
+    }
+    return [part, ...acc]
+  }, [])
+
+  return trimmedParts.join('/')
 }
