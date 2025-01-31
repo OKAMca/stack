@@ -1,28 +1,8 @@
 import { writeFile, readFile } from 'node:fs/promises'
 import * as path from 'node:path'
-import { logger } from '../logger'
-
-interface TFetchRedirectsConfig {
-  graphqlEndpoint: string
-  graphqlApiKey: string
-  redirectsFilename?: string
-  rewritesFilename?: string
-  limit: number | undefined
-}
-
-interface TFetchRedirectsResponse {
-  redirects: unknown
-  rewrites: unknown
-}
-
-interface TRedirectData {
-  source: string
-  destination: string
-  permanent?: boolean
-  locale?: boolean
-}
-
-type TRedirectType = 'redirects' | 'rewrites'
+import { logger } from '../../logger'
+import type { TFetchRedirectsConfig, TFetchRedirectsResponse, TRedirectType, TRedirectData } from './interface'
+import { normalizeRedirects } from './utils/validateRedirects'
 
 export const redirectDefaultLimit = 2000
 
@@ -40,8 +20,20 @@ export function getDefaultConfig(): TFetchRedirectsConfig {
   }
 }
 
-export async function fetchRedirectsData(config: TFetchRedirectsConfig): Promise<TFetchRedirectsResponse> {
-  const { graphqlEndpoint, graphqlApiKey, limit } = config
+export async function fetchRedirectsData(
+  config: TFetchRedirectsConfig,
+  init?: Omit<RequestInit, 'body' | 'method' | 'headers'>,
+): Promise<TFetchRedirectsResponse> {
+  const {
+    graphqlApiKey: defaultGraphqlApiKey,
+    graphqlEndpoint: defaultGraphqlEndpoint,
+    limit: defaultLimit,
+  } = getDefaultConfig()
+  const {
+    graphqlEndpoint = defaultGraphqlEndpoint,
+    graphqlApiKey = defaultGraphqlApiKey,
+    limit = defaultLimit,
+  } = config
 
   if (!graphqlEndpoint) {
     throw new Error(
@@ -80,6 +72,7 @@ export async function fetchRedirectsData(config: TFetchRedirectsConfig): Promise
   try {
     // console.info(`Fetching redirects on ${graphqlEndpoint}`)
     const response = await fetch(graphqlEndpoint, {
+      ...init,
       method: 'POST',
       headers: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -89,11 +82,20 @@ export async function fetchRedirectsData(config: TFetchRedirectsConfig): Promise
       body: JSON.stringify(graphqlBody),
     })
     const { data } = await response.json()
+    const { redirects, rewrites } = data ?? {}
 
-    logger.log(`Fetch redirects count: ${data.redirects?.length || 0}, rewrites count: ${data.rewrites?.length || 0}`)
+    if (!redirects?.length && !rewrites?.length) {
+      logger.log('No redirects/rewrites found', 'warn')
+      return {
+        redirects: [],
+        rewrites: [],
+      }
+    }
+
+    logger.log(`Fetch redirects count: ${redirects?.length || 0}, rewrites count: ${rewrites?.length || 0}`)
     return {
-      redirects: data.redirects || [],
-      rewrites: data.rewrites || [],
+      redirects: normalizeRedirects(redirects),
+      rewrites: normalizeRedirects(rewrites),
     }
   } catch (e) {
     logger.log(`Error fetching redirects: ${(e as Error).message}`, 'error')
