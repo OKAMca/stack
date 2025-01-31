@@ -3,7 +3,7 @@ import { log } from '../../logger'
 import type { DirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
 import { getApiRouteUrlDefault, getRedirectSecretDefault } from '../env'
 
-const defaultApiRoute = '/api/redirects'
+const defaultApiRoute = '/api/redirect'
 
 /**
  * Gets a response from `options.apiRoute`
