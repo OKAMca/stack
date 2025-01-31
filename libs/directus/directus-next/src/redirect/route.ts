@@ -3,7 +3,7 @@ import { getJsonErrorResponse } from '../response'
 import { getRedirectSecretDefault } from './env'
 import type { HandleRedirectOptions } from './interface'
 
-function parseParams(url: string) {
+export function parseRedirectParams(url: string) {
   const { searchParams } = new URL(url)
   const secret = searchParams.get('secret') || ''
   return { secret }
@@ -21,7 +21,7 @@ export default async function handleRedirectsRoute({
   limit,
   init,
 }: HandleRedirectOptions): Promise<Response | undefined> {
-  const { secret } = parseParams(url)
+  const { secret } = parseRedirectParams(url)
 
   if (secret !== getRedirectSecret()) {
     return getJsonError({ error: 'Invalid argument' }, 401)
