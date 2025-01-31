@@ -4,7 +4,7 @@ export interface DirectusRouteRedirectsModule {
    */
   getRedirectSecret?: () => string
   /**
-   * @default process.env.NEXT_MIDDLEWARE_REDIRECT_URL ?? process.env.NEXT_SERVER_GRAPHQL_URL ?? 'http://localhost:3000'
+   * @default process.env.NEXT_MIDDLEWARE_REDIRECT_URL ?? `https://${process.env.VERCEL_URL}` ?? 'http://localhost:3000'
    */
   getApiRouteUrl?: () => string
   /**
