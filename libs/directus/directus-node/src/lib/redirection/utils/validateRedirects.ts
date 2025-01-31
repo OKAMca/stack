@@ -1,4 +1,4 @@
-import { normalize } from 'path'
+import { normalizePath } from '@okam/core-lib'
 import type { TRedirectData } from '../interface'
 
 export function isRedirect(redirect: unknown): boolean {
@@ -13,8 +13,8 @@ export function normalizeRedirects(redirects: (TRedirectData | null)[] | null): 
     return [
       {
         ...rest,
-        source: normalize(source),
-        destination: normalize(destination),
+        source: normalizePath(source),
+        destination: normalizePath(destination),
       },
     ]
   })
