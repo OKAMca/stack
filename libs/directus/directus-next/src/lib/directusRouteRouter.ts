@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { log } from '../logger'
+import { handleRedirect } from '../redirects/utils/handleRedirect'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
+import type { MinimalNextRequest, MinimalNextResponse } from '../types/next'
 
 interface PageSettingsTranslation {
   languages_code: {
@@ -75,22 +77,6 @@ async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsT
   }
 }
 
-// Minimal interfaces for Next.js types
-interface MinimalNextUrl {
-  pathname: string
-  clone: () => MinimalNextUrl
-}
-
-interface MinimalNextRequest {
-  nextUrl: MinimalNextUrl
-}
-
-interface MinimalNextResponse {
-  next: () => MinimalNextResponse
-  notFound: () => MinimalNextResponse
-  rewrite: (url: MinimalNextUrl | URL) => MinimalNextResponse
-}
-
 export async function directusRouteRouter(
   request: MinimalNextRequest,
   config: DirectusRouteConfig,
@@ -98,6 +84,11 @@ export async function directusRouteRouter(
 ): Promise<MinimalNextResponse> {
   const { pathname } = request.nextUrl
   log('Processing request for pathname:', pathname)
+
+  const redirect = await handleRedirect(request, NextResponse, config.modules?.redirects)
+  if (redirect) {
+    return redirect
+  }
 
   const translations = await fetchPageSettingsTranslation(pathname)
 
