@@ -124,3 +124,40 @@ These types ensure that the hook provides proper type inference and safety for d
 4. Investigate the potential for generating strongly-typed hooks based on the GraphQL schema to further improve developer experience.
 
 By implementing the `usePageSettings` hook in this manner, we provide a powerful and flexible tool for interacting with Directus page settings, while maintaining type safety and performance optimizations.
+
+## Example Query
+
+Here's an example of a GraphQL query that can be used with the `usePageSettings` hook:
+
+```graphql
+fragment PageSettings on page_settings {
+  id
+  belongs_to_collection
+  belongs_to_key
+  translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+    languages_code {
+      code
+    }
+    path
+    title
+    slug
+  }
+}
+
+fragment Page on pages {
+  translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+    name
+  }
+  page_settings(filter: { belongs_to_key: { _nnull: true } }) {
+    ...PageSettings
+  }
+}
+
+query PageById($id: ID!, $locale: String!) {
+  pages_by_id(id: $id) {
+    ...Page
+  }
+}
+```
+
+This query fetches page data along with its associated page settings, filtered by the provided locale. It demonstrates how to use fragments to structure the query and how to filter translations based on the locale.
