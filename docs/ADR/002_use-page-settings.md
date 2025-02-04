@@ -119,8 +119,7 @@ These types define the structure of the page settings and the query item. Note t
 
 1. Implement a strategy for handling stale cache data, possibly through a time-based invalidation or manual cache busting.
 2. Explore the possibility of integrating this hook with a global state management solution for more complex applications.
-3. Consider adding support for real-time updates if Directus implements such a feature in the future.
-4. Investigate the potential for generating strongly-typed hooks based on the GraphQL schema to further improve developer experience.
+3. Investigate the potential for generating strongly-typed hooks based on the GraphQL schema to further improve developer experience.
 
 By implementing the `usePageSettings` hook in this manner, we provide a powerful and flexible tool for interacting with Directus page settings, while maintaining type safety and performance optimizations.
 
