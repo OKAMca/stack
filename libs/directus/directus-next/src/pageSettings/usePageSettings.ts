@@ -62,7 +62,7 @@ export async function usePageSettings<Item, ItemKey extends string, QueryVariabl
   const { variables, config } = props ?? {}
   const directusVariables = getDirectusVariables(variables, config)
 
-  if (!props || !isEqual(getVariables(), directusVariables)) {
+  if (!props || isEqual(getVariables(), directusVariables)) {
     log('Using cached page settings')
     return getPageSettings() as TPageSettingsItem<Item>
   }
