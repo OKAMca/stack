@@ -64,27 +64,6 @@ export default async function Page(props: { params: { id: string; locale: string
 }
 ```
 
-## Benefits
-
-1. Improved type safety for different query structures.
-2. Efficient caching to reduce API calls and improve performance.
-3. Flexibility to handle both fragmented and non-fragmented queries.
-4. Support for custom locale mapping to align with project requirements.
-5. Consistent approach to fetching page settings across different components.
-
-## Challenges
-
-1. Ensuring proper type inference for various query structures.
-2. Balancing between caching and fresh data retrieval.
-3. Handling potential errors in the GraphQL query execution.
-
-## Next Steps
-
-1. Implement comprehensive unit tests for the `usePageSettings` hook.
-2. Create detailed documentation with usage examples for different scenarios.
-3. Gather feedback from developers using the hook in various projects.
-4. Consider implementing additional features such as prefetching or invalidation strategies.
-
 ## Notes
 
 - The `usePageSettings` hook is designed to work seamlessly with the Directus router implementation.
