@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { Variables } from 'graphql-request'
+import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 
 export type Fragmentize<FragmentData, FragmentName extends string = string> =
   | {
@@ -14,7 +15,7 @@ export type Fragmentize<FragmentData, FragmentName extends string = string> =
   | null
   | undefined
 
-export type IsQuerySingle<CollectionName extends string> = CollectionName extends `${string}_by_id` ? true : false
+export type IsQuerySingle<ItemKey extends string> = ItemKey extends `${string}_by_id` ? true : false
 
 export type SingleByIdOrArray<Item, IsSingle extends boolean> = IsSingle extends true ? Item : Item[]
 
@@ -42,29 +43,33 @@ export type TPageSettingsItem<Item> = Item & {
 
 export type TPageSettingsQueryVariables = { path: string } | { id: string; collection?: string; locale: string }
 
-export type TPageSettingsItemQuery<Item, CollectionName extends string> = { __typename?: 'Query' } & {
-  [CollectionKey in CollectionName]?: SingleByIdOrArray<
+export type TPageSettingsItemQuery<Item, ItemKey extends string> = { __typename?: 'Query' } & {
+  [CollectionKey in ItemKey]?: SingleByIdOrArray<
     Fragmentize<
       Item & {
         page_settings?: Fragmentize<TPageSettings, 'PageSettingsFragment'> | TPageSettings
       }
     >,
-    IsQuerySingle<CollectionName>
+    IsQuerySingle<ItemKey>
   >
 }
 
 export type TPageSettingsItemDocument<
   Item,
-  CollectionName extends string,
+  ItemKey extends string,
   QueryVariables extends Variables = Variables,
-> = TypedDocumentNode<TPageSettingsItemQuery<Item, CollectionName>, QueryVariables>
+> = TypedDocumentNode<TPageSettingsItemQuery<Item, ItemKey>, QueryVariables>
 
-export interface TUsePageSettingsProps<
-  Item,
-  CollectionName extends string,
-  QueryVariables extends Variables = Variables,
-> {
-  document: TPageSettingsItemDocument<Item, CollectionName, QueryVariables>
+export type TUsePageSettingsConfig = DirectusRouteConfig | Record<string, string>
+
+export interface TUsePageSettingsProps<Item, ItemKey extends string, QueryVariables extends Variables = Variables> {
+  document: TPageSettingsItemDocument<Item, ItemKey, QueryVariables>
+  /**
+   * `variables.locale` is a special value that will get mapped according to the config.
+   */
   variables?: QueryVariables
-  collection?: CollectionName
+  /**
+   * Either a directus route config or directly a locale map. Not passing a config while passing a document will result in direct usage of the `locale` variable.
+   */
+  config?: TUsePageSettingsConfig
 }
