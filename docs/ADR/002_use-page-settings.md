@@ -96,25 +96,24 @@ export default async function Page(props: { params: { id: string; locale: string
 ### Types and Interfaces
 
 ```typescript
-export type TUsePageSettingsProps<
-  Item extends TPageSettingsQueryItem,
-  ItemKey extends string,
-  QueryVariables extends Variables,
-> = {
-  document: TPageSettingsItemDocument<Item, ItemKey, QueryVariables>
-  variables?: QueryVariables
-  config?: TUsePageSettingsConfig
+export type TPageSettings = {
+  id: string
+  belongs_to_collection?: string | null
+  belongs_to_key?: string | null
+  translations?: Array<TPageSettingsTranslation | null> | null
+  route?: {
+    translations?: Array<{ route?: string | null } | null> | null
+  } | null
 }
 
-export type TUsePageSettingsReturn<Item extends TPageSettingsQueryItem> = Omit<Item, 'page_settings'> & {
-  page_settings?:
-    | Exclude<NonNullable<Item>['page_settings'], Fragmentize<TPageSettings, 'PageSettingsFragment'>>
-    | null
-    | undefined
+export type TPageSettingsItemQuery<Item extends TPageSettingsQueryItem, ItemKey extends string> = {
+  __typename?: 'Query'
+} & {
+  [Key in ItemKey]?: MaybeArray<Item> | MaybeArray<Fragmentize<Item>>
 }
 ```
 
-These types ensure that the hook provides proper type inference and safety for different query structures and return types.
+These types define the structure of the page settings and the query item. Note that the query item must have a `page_settings` field to be compatible with the `usePageSettings` hook.
 
 ## Future Considerations
 
