@@ -30,7 +30,6 @@
       "@okam/directus/directus-next": ["libs/directus/directus-next/src/index.ts"],
       "@okam/logger": ["libs/stack/logger/src/index.ts"],
       "@okam/next-component": ["libs/stack/next-component/src/index.ts"],
-      "@okam/next-component/server": ["libs/stack/next-component/src/server.ts"],
       "@okam/stack-ui": ["libs/stack/stack-ui/src/index.ts"]
     }
   },
