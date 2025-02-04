@@ -64,6 +64,28 @@ export default async function Page(props: { params: { id: string; locale: string
 }
 ```
 
+### Example Usage in a Deeply Nested Component
+
+In this example, we demonstrate how `usePageSettings` can be used in a deeply nested component without passing any props. This will return the cached value instead of triggering a new query.
+
+```typescript
+import { usePageSettings } from '@okam/directus-next/server'
+
+export function DeeplyNestedComponent() {
+  // This will return the cached value from the nearest ancestor that called usePageSettings with props
+  const cachedData = usePageSettings()
+
+  return (
+    <div>
+      <h2>Cached Page Settings</h2>
+      <pre>{JSON.stringify(cachedData, null, 2)}</pre>
+    </div>
+  )
+}
+```
+
+In this scenario, `DeeplyNestedComponent` doesn't pass any props to `usePageSettings`. As a result, the hook will return the cached value that was set by the nearest ancestor component that called `usePageSettings` with props. This approach is useful for accessing page settings data throughout your component tree without triggering additional queries.
+
 ## Notes
 
 - The `usePageSettings` hook is designed to work seamlessly with the Directus router implementation.
