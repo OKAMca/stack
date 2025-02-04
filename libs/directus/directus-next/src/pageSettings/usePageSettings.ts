@@ -6,7 +6,12 @@ import { get, invert, isEqual } from 'radashi'
 import { log } from '../logger'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 import { pageSettingsContext, pageSettingsVariablesContext } from './context'
-import type { TUsePageSettingsConfig, TPageSettingsItem, TUsePageSettingsProps } from './interface'
+import type {
+  TUsePageSettingsConfig,
+  TUsePageSettingsProps,
+  TPageSettingsQueryItem,
+  TUsePageSettingsReturn,
+} from './interface'
 
 const [getPageSettings, setPageSettings] = pageSettingsContext()
 const [getVariables, setVariables] = pageSettingsVariablesContext()
@@ -41,8 +46,8 @@ function getDirectusVariables<QueryVariables extends Variables>(
  * }
  * ```
  *
- * #### `collection` required
- * Otherwise the first root field will be used as the collection name automatically (not necessarily the correct one)
+ * #### `itemKey` required
+ * Otherwise the first root field will be used as the item key automatically (not necessarily the correct one)
  * ```graphql
  * query PageAndPostById($id: ID!) {
  *   pages_by_id(id: $id) {
@@ -53,18 +58,23 @@ function getDirectusVariables<QueryVariables extends Variables>(
  *   }
  * }
  * ```
- * @returns The new queried page settings item or the cached value if the variables have not changed.
+ * @returns The new queried page settings item or the cached value if the variables have not changed. If the query contains a fragment, the contents of the fragment will be returned.
  */
-export async function usePageSettings<Item, ItemKey extends string, QueryVariables extends Variables = Variables>(
+export async function usePageSettings<
+  Item extends TPageSettingsQueryItem,
+  ItemKey extends string,
+  QueryVariables extends Variables,
+>(
   props?: TUsePageSettingsProps<Item, ItemKey, QueryVariables>,
   itemKey?: Exclude<ItemKey, '__typename'>,
-): Promise<TPageSettingsItem<Item>> {
+): Promise<TUsePageSettingsReturn<Item>> {
   const { variables, config } = props ?? {}
   const directusVariables = getDirectusVariables(variables, config)
+  const defaultReturn = (getPageSettings() as TUsePageSettingsReturn<Item>) ?? {}
 
   if (!props || isEqual(getVariables(), directusVariables)) {
-    log('Using cached page settings')
-    return getPageSettings() as TPageSettingsItem<Item>
+    log('Using cached page settings', { path: defaultReturn.page_settings?.translations?.[0]?.path })
+    return defaultReturn
   }
 
   const { document } = props
@@ -74,16 +84,21 @@ export async function usePageSettings<Item, ItemKey extends string, QueryVariabl
   const result = await queryGql(document, directusVariables)
 
   const items = result?.[key]
-  const currentItem = (Array.isArray(items) ? items?.[0] : items) as TPageSettingsItem<Item>
+  const currentItem = (Array.isArray(items) ? items?.[0] : items) as TUsePageSettingsReturn<Item>
   const currentPageSettings = currentItem?.page_settings
   const currentPath = currentPageSettings?.translations?.[0]?.path
 
-  if (!currentPageSettings) {
-    log('Empty page settings. Falling back to cached page settings')
-    return getPageSettings() as TPageSettingsItem<Item>
+  if (!currentItem) {
+    log('No item found. Falling back to cached page settings', { path: currentPath }, 'warn')
+    return defaultReturn
   }
 
-  log('Caching new page settings with path', { path: currentPath })
+  if (!currentPageSettings) {
+    log('No page settings found. Falling back to cached page settings', { path: currentPath }, 'warn')
+    return defaultReturn
+  }
+
+  log('Caching new page settings', { path: currentPath })
   setPageSettings(currentItem)
   setVariables(variables)
 

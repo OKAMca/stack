@@ -13,12 +13,12 @@ fragment PageSettings on page_settings {
 }
 
 fragment Page on pages {
-    translations(filter: { languages_code: { code: { _eq: $locale } } }) {
-      name
-    }
-    page_settings(filter: { belongs_to_key: { _nnull: true } }) {
-      ...PageSettings
-    }
+  translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+    name
+  }
+  page_settings(filter: { belongs_to_key: { _nnull: true } }) {
+    ...PageSettings
+  }
 }
 
 query PageById($id: ID!, $locale: String!) {
@@ -26,3 +26,15 @@ query PageById($id: ID!, $locale: String!) {
     ...Page
   }
 }
+
+query PageByIdWithoutFragment($id: ID!, $locale: String!) {
+  pages_by_id(id: $id) {
+     translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+      name
+    }
+    page_settings(filter: { belongs_to_key: { _nnull: true } }) {
+      ...PageSettings
+    }
+  }
+}
+
