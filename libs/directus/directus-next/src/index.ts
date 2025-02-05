@@ -4,7 +4,6 @@ export { directusRouteRouter } from './lib/directusRouteRouter'
 export { getJsonErrorResponse } from './response'
 export type {
   TPageSettings,
-  TPageSettingsItem,
   TPageSettingsItemQuery,
   TPageSettingsItemDocument,
   TUsePageSettingsProps,
