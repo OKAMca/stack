@@ -1,28 +1,46 @@
 {/* Select.stories.mdx */}
 
 import { Canvas, Meta, Story } from '@storybook/blocks'
-import Select, { SelectStyled } from './Select'
-import SelectItem from '../SelectItem/SelectItem'
-import SelectContent from '../../../storybook/SelectField'
+import Select, { SelectStyled } from '.'
+import SelectItem from './components/SelectItem'
 import ChevronLeft from '../../icons/ChevronLeft'
-import * as SelectStories from './Select.stories';
+import * as SelectStories from './Select.stories'
+import { ArgTypes } from '@storybook/blocks'
 
 <Meta of={SelectStories} />
 
-export const Template = (args) => <SelectContent {...args} />
+export const Template = (args) => <Select {...args} />
 
 # Select
 
 Select Field component.
 
-<Canvas>
-  <Story of={SelectStories.Default} />
-</Canvas>
+## Props
 
-<Canvas>
-  <Story of={SelectStories.Disabled} />
-</Canvas>
+<ArgTypes exclude={['defaultValue', 'isError', 'disabled', 'required', 'placeholderLabel', 'value', 'options']} />
 
-<Canvas>
-  <Story of={SelectStories.Error} />
-</Canvas>
+## Showcase
+
+### Default
+
+<Canvas of={SelectStories.Default} />
+
+### Disabled
+
+<Canvas of={SelectStories.Disabled} />
+
+### Error
+
+<Canvas of={SelectStories.Error} />
+
+### Children Items
+
+Instead of using the `items` prop, you can pass multiple `<Item>` components as children directly.
+
+<Canvas of={SelectStories.ChildrenItems} />
+
+### Custom Children Render Function
+
+If passing items, the `children` prop can be used as a callback function iterating over each item in the array.
+
+<Canvas of={SelectStories.CustomChildrenRenderFunction} />
