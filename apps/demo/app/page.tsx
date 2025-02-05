@@ -16,6 +16,7 @@ import {
   TextArea,
   TextInputField,
   Select,
+  SelectItem,
 } from '@okam/stack-ui'
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
@@ -32,12 +33,18 @@ export default async function Index() {
           name="season"
           placeholder="Season"
           items={[
-            { key: 'summer', children: 'Summer' },
-            { key: 'fall', children: 'Fall' },
-            { key: 'winter', children: 'Winter' },
-            { key: 'spring', children: 'Spring' },
+            { itemKey: 'summer', children: 'Summer' },
+            { itemKey: 'fall', children: 'Fall' },
+            { itemKey: 'winter', children: 'Winter' },
+            { itemKey: 'spring', children: 'Spring' },
           ]}
         />
+        <Select id="season" label="Select a season" name="season" placeholder="Season">
+          <SelectItem itemKey="summer">Summer</SelectItem>
+          <SelectItem itemKey="fall">Fall</SelectItem>
+          <SelectItem itemKey="winter">Winter</SelectItem>
+          <SelectItem itemKey="spring">Spring</SelectItem>
+        </Select>
         <SelectSeason />
         <Box>
           <Typography tokens={{ size: 'h1' }}>This is a test of all available components</Typography>

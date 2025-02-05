@@ -1,5 +1,6 @@
 'use client'
 
+import type { CollectionChildren } from '@react-types/shared'
 import { isEmpty } from 'radashi'
 import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
@@ -15,6 +16,20 @@ import { ListBox } from './components/Listbox'
 import Popover from './components/Popover'
 import type { TSelectItemProps, TSelectProps } from './interface'
 
+function renderChildren<T extends TToken>(
+  children: TSelectProps<T>['children'],
+  itemsParam: TSelectProps<T>['items'],
+): { items: TSelectProps<T>['items']; children?: CollectionChildren<TSelectItemProps<T>> } {
+  if (!Array.isArray(children)) {
+    return { children: children as CollectionChildren<TSelectItemProps<T>>, items: itemsParam }
+  }
+
+  const items = children.map((child) => {
+    return child.props
+  })
+  return { items }
+}
+
 const Select = <T extends TToken>(props: TSelectProps<T>) => {
   const { isError, defaultValue, disabled, placeholderLabel, value, options, required } = props
   const {
@@ -27,16 +42,19 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
     label,
     icon,
     popoverMatchesWidth,
-    items = options,
+    items: itemsProp = options,
     selectedKey = value,
     isInvalid: propIsInvalid = isError,
     isDisabled = disabled,
     isRequired = required,
     placeholder = placeholderLabel,
     defaultSelectedKey = defaultValue,
-    children = ({ key, ...itemProps }: TSelectItemProps<T>) => <Item {...itemProps} key={key} />,
+    children: childrenProp,
     ...rest
   } = props
+
+  const { children = (itemProps: TSelectItemProps<T>) => <Item {...itemProps} key={itemProps.itemKey} />, items } =
+    renderChildren(childrenProp, itemsProp)
 
   const selectProps = {
     items,
