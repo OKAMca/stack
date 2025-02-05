@@ -37,10 +37,14 @@ Select Field component.
 
 Instead of using the `items` prop, you can pass multiple `<Item>` components as children directly.
 
+This works by creating the `items` prop from the children components and falling back to the default children `Item` component.
+
 <Canvas of={SelectStories.ChildrenItems} />
 
 ### Custom Children Render Function
 
 If passing items, the `children` prop can be used as a callback function iterating over each item in the array.
+
+This behavior is **not** supported in Next.js server components. To use it, you **must** call the component from a file with the `use client` directive.
 
 <Canvas of={SelectStories.CustomChildrenRenderFunction} />

@@ -1,6 +1,6 @@
-import type { CollectionChildren, ItemProps } from '@react-types/shared'
+import type { CollectionChildren, CollectionElement, ItemElement, ItemProps } from '@react-types/shared'
 import type React from 'react'
-import type { ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 import type { AriaSelectOptions } from 'react-aria'
 import type { RefCallBack } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
@@ -11,12 +11,14 @@ export type TFieldReactHookForm<T = TToken> = TReactHookForm & Omit<TDefaultComp
 export interface TSelectItemProps<T = TToken>
   extends Omit<TDefaultComponent<T>, 'children'>,
     ItemProps<TSelectItemProps> {
-  key: string
+  itemKey: string
   /**
    * @deprecated Use `children` instead
    */
   value?: string
 }
+
+type TSelectItemElement<T = TToken> = ReactElement<TSelectItemProps<T>>
 
 export interface TSelectProps<T = TToken>
   extends Omit<AriaSelectOptions<TSelectItemProps<T>>, 'errorMessage'>,
@@ -53,6 +55,6 @@ export interface TSelectProps<T = TToken>
   popoverMatchesWidth?: boolean
   hookFormRef?: RefCallBack
   name: string
-  children?: CollectionChildren<TSelectItemProps<T>>
+  children?: TSelectItemElement<T>[] | ((item: TSelectItemProps<T>) => TSelectItemElement<T>)
   errorMessage?: ReactNode
 }
