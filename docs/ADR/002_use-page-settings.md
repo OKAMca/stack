@@ -73,7 +73,8 @@ import { usePageSettings } from '@okam/directus-next/server'
 
 export function DeeplyNestedComponent() {
   // This will return the cached value from the nearest ancestor that called usePageSettings with props
-  const cachedData = usePageSettings()
+  // You can pass a single type parameter corresponding to the fragment of the query to type the cached data
+  const cachedData = usePageSettings<PageFragment>()
 
   return (
     <div>
@@ -85,6 +86,10 @@ export function DeeplyNestedComponent() {
 ```
 
 In this scenario, `DeeplyNestedComponent` doesn't pass any props to `usePageSettings`. As a result, the hook will return the cached value that was set by the nearest ancestor component that called `usePageSettings` with props. This approach is useful for accessing page settings data throughout your component tree without triggering additional queries.
+
+Note: When using `usePageSettings` without props in a deeply nested component, you can pass a single type parameter corresponding to the fragment of the query to type the cached data. However, be cautious when using this approach, as it can lead to a potential pitfall:
+
+Pitfall: Using the first type parameter to type the cached data can result in getting data of the wrong type if the type doesn't match the actual cached data structure. Always ensure that the type parameter you pass accurately represents the structure of the cached data you expect to receive.
 
 ## Notes
 
