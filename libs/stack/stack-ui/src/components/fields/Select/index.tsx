@@ -4,55 +4,75 @@ import { isEmpty } from 'radashi'
 import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
-import { useSelectState } from 'react-stately'
+import { Item, useSelectState } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
 import Box from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
 import Typography from '../../Typography'
-import SelectItem from '../SelectItem/SelectItem'
+import ErrorMessage from '../ErrorMessage'
 import { ListBox } from './components/Listbox'
 import Popover from './components/Popover'
-import type { TSelectProps } from './Select.interface'
+import type { TSelectItemProps, TSelectProps } from './interface'
 
 const Select = <T extends TToken>(props: TSelectProps<T>) => {
+  const { isError, defaultValue, disabled, placeholderLabel, value, options, required } = props
   const {
     name,
-    placeholderLabel,
-    disabled,
     hookFormRef,
-    isError = false,
     errorMessage,
     themeName = 'select',
     tokens,
     customTheme,
     label,
-    onSelectionChange,
-    defaultValue,
-    value,
     icon,
     popoverMatchesWidth,
-    options,
+    items = options,
+    selectedKey = value,
+    isInvalid: propIsInvalid = isError,
+    isDisabled = disabled,
+    isRequired = required,
+    placeholder = placeholderLabel,
+    defaultSelectedKey = defaultValue,
+    children = ({ key, ...itemProps }: TSelectItemProps<T>) => <Item {...itemProps} key={key} />,
     ...rest
   } = props
+
+  const selectProps = {
+    items,
+    isInvalid: propIsInvalid,
+    isDisabled,
+    placeholder,
+    defaultSelectedKey,
+    selectedKey,
+    label,
+    children,
+    isRequired,
+    ...rest,
+  }
+
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
 
-  const state = useSelectState({
-    ...rest,
-    children: SelectItem,
-    selectedKey: value,
-    defaultSelectedKey: defaultValue,
-    items: options,
-    onSelectionChange,
-  })
-
-  const { triggerProps, menuProps, labelProps } = useSelect({ ...rest, label }, state, fieldRef)
+  const state = useSelectState(selectProps)
+  const { triggerProps, menuProps, labelProps, errorMessageProps, validationErrors, isInvalid } = useSelect(
+    selectProps,
+    state,
+    fieldRef,
+  )
+  const selectTokens = {
+    ...tokens,
+    isOpen: state.isOpen,
+    isInvalid,
+    isError: isInvalid,
+    isDisabled: !!isDisabled,
+    isRequired: !!isRequired,
+  }
   const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
 
   return (
     <Box themeName={`${themeName}.wrapper`}>
       {label && (
-        <Typography {...labelProps} as="label" themeName={`${themeName}.label`}>
+        <Typography {...labelProps} as="label" themeName={`${themeName}.label`} tokens={selectTokens}>
           {label}
         </Typography>
       )}
@@ -67,27 +87,32 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
           ref={fieldRef}
           disabled={disabled}
           themeName={`${themeName}.button`}
-          tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
+          tokens={{ ...selectTokens, intent: isInvalid ? 'error' : 'default' }}
         >
-          {state.selectedItem ? state.selectedItem.rendered : placeholderLabel}
+          {state.selectedItem ? state.selectedItem.rendered : placeholder}
           <Icon icon={icon ?? 'ArrowDown'} />
         </ButtonWithForwardRef>
         {state.isOpen && fieldRef.current && (
           <Popover
-            tokens={tokens}
+            tokens={selectTokens}
             state={state}
             triggerRef={fieldRef}
             placement="bottom"
             themeName={`${themeName}.popover`}
             style={{ [`--${themeName}-container-width`]: `${fieldRef.current?.offsetWidth}px` } as React.CSSProperties}
           >
-            <ListBox {...menuProps} themeName={themeName} state={state} />
+            <ListBox {...menuProps} themeName={themeName} tokens={selectTokens} state={state} />
           </Popover>
         )}
-        {isError && (
-          <Typography tokens={{ ...tokens, isError }} themeName={`${themeName}.errorMessage`}>
+        {isInvalid && (
+          <ErrorMessage
+            themeName={`${themeName}.errorMessage`}
+            tokens={selectTokens}
+            {...errorMessageProps}
+            validationErrors={validationErrors}
+          >
             {errorMessage}
-          </Typography>
+          </ErrorMessage>
         )}
       </Box>
     </Box>
@@ -95,12 +120,13 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
 }
 
 export const ReactHookFormSelect = (props: TSelectProps) => {
-  const { name, required } = props
+  const { required } = props
+  const { name, isRequired = required } = props
   const { register, formState } = useFormContext()
   const errors = get(formState.errors, name)
   const errMsg = errors?.message ?? undefined
   const { ref } = register(name, {
-    required: required ? 'This is an error message' : false,
+    required: isRequired ? 'This is an error message' : false,
   })
 
   return <Select {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} hookFormRef={ref} />
