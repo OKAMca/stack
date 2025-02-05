@@ -62,8 +62,8 @@ function getDirectusVariables<QueryVariables extends Variables>(
  */
 export async function usePageSettings<
   Item extends TPageSettingsQueryItem,
-  ItemKey extends string,
-  QueryVariables extends Variables,
+  ItemKey extends string = string,
+  QueryVariables extends Variables = Variables,
 >(
   props?: TUsePageSettingsProps<Item, ItemKey, QueryVariables>,
   itemKey?: Exclude<ItemKey, '__typename'>,
