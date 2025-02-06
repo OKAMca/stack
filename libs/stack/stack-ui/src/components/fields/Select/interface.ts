@@ -52,6 +52,9 @@ export interface TSelectProps<T = TToken>
    * @deprecated Use `items` instead
    */
   options?: TSelectItemProps<T>[]
+  /**
+   * @deprecated Use the `--${themeName}-container-width` CSS variable instead
+   */
   popoverMatchesWidth?: boolean
   hookFormRef?: RefCallBack
   name: string

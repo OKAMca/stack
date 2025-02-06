@@ -107,14 +107,6 @@ export default {
         type: { summary: 'string | React.ReactNode' },
       },
     },
-    popoverMatchesWidth: {
-      description:
-        // eslint-disable-next-line no-template-curly-in-string
-        'Whether the popover should match the width of the select. The `--${themeName}-container-width` CSS variable will be set to the width of the select.',
-      table: {
-        type: { summary: 'boolean' },
-      },
-    },
     isInvalid: {
       table: {
         type: { summary: 'boolean' },
@@ -191,5 +183,17 @@ export const CustomChildrenRenderFunction = {
     id: 'season-custom-children',
     name: 'season-custom-children',
     children: (itemProps) => <Item {...itemProps} key={itemProps.key} />,
+  },
+}
+
+export const PopoverMatchesWidth = {
+  render: Template.bind({}),
+  name: 'Popover Matches Width',
+  args: {
+    id: 'season-popover-matches-width',
+    name: 'season-popover-matches-width',
+    tokens: {
+      width: 'matches',
+    },
   },
 }

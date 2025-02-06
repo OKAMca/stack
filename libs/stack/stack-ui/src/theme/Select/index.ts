@@ -18,7 +18,19 @@ const selectUl = tv({
 
 const selectPopover = tv({
   extend: button,
-  base: 'w-[var(--select-container-width)]',
+  variants: {
+    width: {
+      matches: 'w-[var(--select-container-width)]',
+      xs: 'w-24',
+      sm: 'w-32',
+      md: 'w-40',
+      lg: 'w-48',
+      xl: 'w-56',
+    },
+  },
+  defaultVariants: {
+    width: 'md',
+  },
 })
 
 const selectErrorMessage = tv({
