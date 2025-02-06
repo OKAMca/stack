@@ -17,7 +17,7 @@ Select Field component.
 
 ## Props
 
-<ArgTypes exclude={['defaultValue', 'isError', 'disabled', 'required', 'placeholderLabel', 'value', 'options']} />
+<ArgTypes exclude={['defaultValue', 'isError', 'disabled', 'required', 'placeholderLabel', 'value', 'options', 'popoverMatchesWidth']} />
 
 ## Showcase
 
@@ -48,3 +48,9 @@ If passing items, the `children` prop can be used as a callback function iterati
 This behavior is **not** supported in Next.js server components. To use it, you **must** call the component from a file with the `use client` directive.
 
 <Canvas of={SelectStories.CustomChildrenRenderFunction} />
+
+### Popover Matches Select Button Width
+
+You can use the `--${themeName}-container-width` CSS variable to set the width of the popover to match the width of the select button.
+
+<Canvas of={SelectStories.PopoverMatchesWidth} />
