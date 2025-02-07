@@ -55,6 +55,8 @@ export { SwiperControllerContextProvider, useSwiperController } from './provider
 export { TranslationContextProvider, useTranslation } from './providers/Translation'
 
 // types & interfaces
+export type { TSelectItemProps, TSelectItem } from './components/fields/Select/interface'
+export type { TSelectProps, TSelect } from './components/fields/Select/interface'
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
 export type { TTypographyProps } from './components/Typography/interface'
 export type {

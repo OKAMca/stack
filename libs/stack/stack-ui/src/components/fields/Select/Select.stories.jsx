@@ -167,10 +167,10 @@ export const ChildrenItems = {
     items: undefined,
     children: (
       <>
-        <Item key="1">Winter</Item>
-        <Item key="2">Spring</Item>
-        <Item key="3">Summer</Item>
-        <Item key="4">Autumn</Item>
+        <Item id="1">Winter</Item>
+        <Item id="2">Spring</Item>
+        <Item id="3">Summer</Item>
+        <Item id="4">Autumn</Item>
       </>
     ),
   },
@@ -182,7 +182,7 @@ export const CustomChildrenRenderFunction = {
   args: {
     id: 'season-custom-children',
     name: 'season-custom-children',
-    children: (itemProps) => <Item {...itemProps} key={itemProps.key} />,
+    children: (itemProps) => <Item {...itemProps} key={itemProps.id} />,
   },
 }
 
