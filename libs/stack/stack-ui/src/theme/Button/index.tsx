@@ -29,7 +29,7 @@ const button = tv({
             px-4
             py-2
             text-white
-            !bg-color-1-500 
+            !bg-color-1-500
             hover:!bg-color-1-400
             active:!bg-color-1-400
           `,
@@ -38,6 +38,7 @@ const button = tv({
             py-2
             bg-transparent
             !border-color-1-500
+            border-2
             text-color-1-500
             hover:bg-color-1-500
             hover:text-white
@@ -51,13 +52,13 @@ const button = tv({
             hover:border-b-color-1-500
             active:border-b-color-1-500
             focus:border-b-color-1-500
-    
+
           `,
     },
     intent: {
       error: `
-            !bg-error 
-            text-white 
+            !bg-error
+            text-white
             pointer-events-none
             !border-error
           `,
