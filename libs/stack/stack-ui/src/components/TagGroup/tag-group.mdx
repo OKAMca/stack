@@ -1,0 +1,28 @@
+{/* side-panel.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import TagGroup from './'
+import * as TagGroupStories from './tag-group.stories'
+import { ArgTypes } from '@storybook/blocks'
+
+<Meta of={TagGroupStories} />
+
+export const Template = (args) => <TagGroup {...args} />
+
+# Tag Group
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+
+### Default
+<Canvas of={TagGroupStories.Default} />
+
+### Disabled
+<Canvas of={TagGroupStories.Disabled} />
+
+### Error
+<Canvas of={TagGroupStories.Error} />

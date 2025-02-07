@@ -46,10 +46,12 @@ import {
   shareButtonLinksList,
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
+import tagGroupTheme from './TagGroup'
 import { textArea } from './TextArea'
 import typography from './Typography'
 
 const BaseTheme = makeTheme({
+  tagGroup: tagGroupTheme,
   main: (props) => main(props),
   gridItem: (props) => gridItem(props),
   grid: (props) => grid(props),
