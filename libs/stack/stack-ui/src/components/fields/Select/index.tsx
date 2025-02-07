@@ -53,7 +53,7 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
     ...rest
   } = props
 
-  const { children = (itemProps: TSelectItemProps<T>) => <Item {...itemProps} key={itemProps.itemKey} />, items } =
+  const { children = (itemProps: TSelectItemProps<T>) => <Item {...itemProps} key={itemProps.id} />, items } =
     renderChildren(childrenProp, itemsProp)
 
   const selectProps = {

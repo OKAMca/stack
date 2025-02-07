@@ -1,4 +1,4 @@
-import type { CollectionChildren, CollectionElement, ItemElement, ItemProps } from '@react-types/shared'
+import type { ItemProps } from '@react-types/shared'
 import type React from 'react'
 import type { ReactElement, ReactNode } from 'react'
 import type { AriaSelectOptions } from 'react-aria'
@@ -8,20 +8,26 @@ import type { TDefaultComponent, TReactHookForm } from '../../../types/component
 
 export type TFieldReactHookForm<T = TToken> = TReactHookForm & Omit<TDefaultComponent<T>, 'children'>
 
-export interface TSelectItemProps<T = TToken>
-  extends Omit<TDefaultComponent<T>, 'children'>,
-    ItemProps<TSelectItemProps> {
-  itemKey: string
+export interface TSelectItem extends ItemProps<never> {
+  id: string
+}
+
+export interface TSelectItemProps<T = TToken> extends Omit<TDefaultComponent<T>, 'children'>, TSelectItem {
   /**
    * @deprecated Use `children` instead
    */
   value?: string
 }
 
-type TSelectItemElement<T = TToken> = ReactElement<TSelectItemProps<T>>
+export interface TSelect<TItemProps extends TSelectItemProps<T> | TSelectItemProps, T = TToken>
+  extends Omit<AriaSelectOptions<TItemProps>, 'errorMessage'> {
+  name: string
+  children?: ReactElement<TItemProps>[] | ((item: TItemProps) => ReactElement<TItemProps>)
+  errorMessage?: ReactNode
+}
 
 export interface TSelectProps<T = TToken>
-  extends Omit<AriaSelectOptions<TSelectItemProps<T>>, 'errorMessage'>,
+  extends TSelect<TSelectItemProps<T>, T>,
     Omit<TDefaultComponent<T>, 'children'> {
   /**
    * @deprecated Use `defaultSelectedKey` instead
@@ -57,7 +63,4 @@ export interface TSelectProps<T = TToken>
    */
   popoverMatchesWidth?: boolean
   hookFormRef?: RefCallBack
-  name: string
-  children?: TSelectItemElement<T>[] | ((item: TSelectItemProps<T>) => TSelectItemElement<T>)
-  errorMessage?: ReactNode
 }
