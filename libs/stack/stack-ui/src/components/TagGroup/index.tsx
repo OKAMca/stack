@@ -3,7 +3,6 @@
 import React from 'react'
 import { useTagGroup } from 'react-aria'
 import { useListState } from 'react-stately'
-import useThemeContext from '../../providers/Theme/hooks'
 import Box, { BoxWithForwardRef } from '../Box'
 import Typography from '../Typography'
 import Tag from './components/Tag'
