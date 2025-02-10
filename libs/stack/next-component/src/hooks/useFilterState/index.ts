@@ -1,4 +1,7 @@
+'use client'
+
 import { useQueryState, parseAsArrayOf, parseAsString } from 'nuqs'
+import { useEffect } from 'react'
 import { useListState, type Selection } from 'react-stately'
 import type { TFilter } from './interface'
 
@@ -13,13 +16,15 @@ export function useFilterState(props: TFilter) {
     onSelectionChange,
     selectionMode = 'multiple',
     parser = parseAsArrayOf(parseAsString),
+    children,
+    items,
     ...rest
   } = props
 
   const defaultValue = Array.from(defaultSelectedKeys).map((key) => key.toString())
   const queryStateOptions = parser.withDefault(defaultValue).withOptions(props)
 
-  const [, setSelectedKeys] = useQueryState(id, queryStateOptions)
+  const [selectedKeys, setSelectedKeys] = useQueryState(id, queryStateOptions)
 
   const onSelectedKeysChange = (keys: Selection) => {
     onSelectionChange?.(keys)
@@ -29,10 +34,17 @@ export function useFilterState(props: TFilter) {
 
   const state = useListState({
     ...rest,
+    children,
+    items,
     selectionMode,
     defaultSelectedKeys,
     onSelectionChange: onSelectedKeysChange,
   })
 
-  return { ...state, onSelectionChange: onSelectedKeysChange, setSelectedKeys }
+  useEffect(() => {
+    const stringKeys = Array.from(state.selectionManager.selectedKeys).map((key) => key.toString())
+    setSelectedKeys(stringKeys)
+  }, [setSelectedKeys, state.selectionManager.selectedKeys])
+
+  return { ...state, onSelectionChange: onSelectedKeysChange, selectedKeys }
 }

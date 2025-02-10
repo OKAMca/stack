@@ -1,6 +1,6 @@
 import { Box, Popover, TagGroup, type TToken } from '@okam/stack-ui'
-import type { TFilterProps } from '../..'
 import { useFilterState } from '../../hooks/useFilterState'
+import type { TFilterProps } from './interface'
 
 const Filter = <T extends TToken = TToken>(props: TFilterProps<T>) => {
   const { label, children, themeName = 'filter', ...rest } = props
