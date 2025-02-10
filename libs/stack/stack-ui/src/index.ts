@@ -1,5 +1,7 @@
 export { default as ThemeProvider } from './theme'
 
+export { default as TagGroup } from './components/TagGroup'
+export { default as Tag } from './components/TagGroup/components/Tag'
 export { default as Typography } from './components/Typography'
 export { default as Accordion } from './components/Accordion'
 export { default as AccordionItem } from './components/Accordion/components/AccordionItem'
