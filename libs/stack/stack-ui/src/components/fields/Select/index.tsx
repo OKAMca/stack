@@ -2,7 +2,7 @@
 
 import type { CollectionChildren } from '@react-types/shared'
 import { isEmpty } from 'radashi'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
 import { Item, useSelectState } from 'react-stately'
@@ -10,10 +10,11 @@ import type { TToken } from '../../../providers/Theme/interface'
 import Box from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
+import { PopoverContent } from '../../Popover'
 import Typography from '../../Typography'
 import ErrorMessage from '../ErrorMessage'
 import { ListBox } from './components/Listbox'
-import Popover from './components/Popover'
+
 import type { TSelectItemProps, TSelectProps } from './interface'
 
 function renderChildren<T extends TToken>(
@@ -111,16 +112,15 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
           <Icon icon={icon ?? 'ArrowDown'} />
         </ButtonWithForwardRef>
         {state.isOpen && fieldRef.current && (
-          <Popover
-            tokens={selectTokens}
+          <PopoverContent
             state={state}
             triggerRef={fieldRef}
+            tokens={selectTokens}
             placement="bottom"
             themeName={`${themeName}.popover`}
-            style={{ [`--${themeName}-container-width`]: `${fieldRef.current?.offsetWidth}px` } as React.CSSProperties}
           >
             <ListBox {...menuProps} themeName={themeName} tokens={selectTokens} state={state} />
-          </Popover>
+          </PopoverContent>
         )}
         {isInvalid && (
           <ErrorMessage

@@ -1,20 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { OverlayProvider } from 'react-aria'
-import Popover from './index'
+import Popover from '.'
 
 const Template = (args) => (
   <div>
     <OverlayProvider>
       <Popover {...args}>
-        <a href="#" className="focus-ring-black">
-          Hello world!
-        </a>
-        <a href="#" className="focus-ring-black">
-          Hello world! 2
-        </a>
-        <a href="#" className="focus-ring-black">
-          Hello world! 3
-        </a>
+        <div>
+          <a href="#" className="focus-ring-black">
+            Hello world!
+          </a>
+          <a href="#" className="focus-ring-black">
+            Hello world! 2
+          </a>
+          <a href="#" className="focus-ring-black">
+            Hello world! 3
+          </a>
+        </div>
       </Popover>
     </OverlayProvider>
   </div>
@@ -26,10 +28,7 @@ export default {
 
   args: {
     as: 'span',
-
-    buttonProps: {
-      children: 'Open popover',
-    },
+    label: 'Open popover',
   },
 }
 
@@ -38,7 +37,6 @@ export const Default = {
   name: 'Default',
 
   args: {
-    variant: 'p',
     offset: 20,
   },
 }
@@ -48,7 +46,6 @@ export const ClosesWhenInteractingOutside = {
   name: 'Closes when inteacting outside',
 
   args: {
-    variant: 'p',
     offset: 20,
     isDismissable: true,
     shouldCloseOnBlur: true,
