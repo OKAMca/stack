@@ -1,7 +1,8 @@
+'use client'
+
 import { useRef } from 'react'
 import { useTag, useFocusRing } from 'react-aria'
 import type { TToken } from '../../../providers/Theme/interface'
-import Box, { BoxWithForwardRef } from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Typography from '../../Typography'
 import type { TTagProps } from '../interface'
@@ -11,7 +12,6 @@ const Tag = <Item, T = TToken>(props: TTagProps<Item, T>) => {
   const ref = useRef(null)
   const { focusProps, isFocusVisible } = useFocusRing({ within: true })
   const { rowProps, gridCellProps, isDisabled, isSelected, isPressed } = useTag(props, state, ref)
-  console.log(isSelected, item.key)
 
   const tagTokens = { isSelected, isDisabled, isPressed, ...tokens }
 
