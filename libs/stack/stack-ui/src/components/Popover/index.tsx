@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { DismissButton, Overlay, useOverlayTrigger, usePopover } from 'react-aria'
 import { useOverlayTriggerState } from 'react-stately'
