@@ -1,5 +1,7 @@
 export { default as ThemeProvider } from './theme'
 
+export { default as TagGroup } from './components/TagGroup'
+export { default as Tag } from './components/TagGroup/components/Tag'
 export { default as Typography } from './components/Typography'
 export { default as Accordion } from './components/Accordion'
 export { default as AccordionItem } from './components/Accordion/components/AccordionItem'
@@ -17,7 +19,7 @@ export {
 export { default as WysiwygBlock } from './components/WysiwygBlock'
 export { default as Icon } from './components/Icon'
 export { default as Date } from './components/Date'
-export { default as Select, ReactHookFormSelect } from './components/fields/Select/Select'
+export { default as Select, ReactHookFormSelect } from './components/fields/Select'
 export { default as Checkbox } from './components/fields/Checkbox'
 export { default as SearchField } from './components/fields/SearchField'
 export { default as CheckboxGroup } from './components/fields/CheckboxGroup'
@@ -38,7 +40,7 @@ export { default as MenuItems } from './components/Menu/components/MenuItems'
 export { default as TabContainer } from './components/Menu/components/TabContainer'
 export { default as Alerts } from './components/Alerts'
 export { default as AlertsItem } from './components/Alerts/components/AlertsItem'
-export { default as SelectItem } from './components/fields/SelectItem/SelectItem'
+export { default as SelectItem } from './components/fields/Select/components/SelectItem'
 export { default as Video } from './components/Video'
 export * from './components/icons'
 
@@ -55,6 +57,8 @@ export { SwiperControllerContextProvider, useSwiperController } from './provider
 export { TranslationContextProvider, useTranslation } from './providers/Translation'
 
 // types & interfaces
+export type { TSelectItemProps, TSelectItem } from './components/fields/Select/interface'
+export type { TSelectProps, TSelect } from './components/fields/Select/interface'
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
 export type { TTypographyProps } from './components/Typography/interface'
 export type {

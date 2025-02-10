@@ -16,9 +16,11 @@ import {
   TextArea,
   TextInputField,
   Select,
+  SelectItem,
 } from '@okam/stack-ui'
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
+import SelectSeason from './components/SelectSeason'
 import SidePanelControl from './components/SidePanelControl'
 
 export default async function Index() {
@@ -29,14 +31,21 @@ export default async function Index() {
           id="season"
           label="Select a season"
           name="season"
-          placeholderLabel="Season"
-          options={[
-            { key: 'summer', value: 'Summer' },
-            { key: 'fall', value: 'Fall' },
-            { key: 'winter', value: 'Winter' },
-            { key: 'spring', value: 'Spring' },
+          placeholder="Season"
+          items={[
+            { itemKey: 'summer', children: 'Summer' },
+            { itemKey: 'fall', children: 'Fall' },
+            { itemKey: 'winter', children: 'Winter' },
+            { itemKey: 'spring', children: 'Spring' },
           ]}
         />
+        <Select id="season" label="Select a season" name="season" placeholder="Season">
+          <SelectItem itemKey="summer">Summer</SelectItem>
+          <SelectItem itemKey="fall">Fall</SelectItem>
+          <SelectItem itemKey="winter">Winter</SelectItem>
+          <SelectItem itemKey="spring">Spring</SelectItem>
+        </Select>
+        <SelectSeason />
         <Box>
           <Typography tokens={{ size: 'h1' }}>This is a test of all available components</Typography>
         </Box>
