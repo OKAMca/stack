@@ -1,3 +1,5 @@
+'use client'
+
 import { createThemeProvider, makeTheme } from '@okam/stack-ui'
 import React from 'react'
 import buttonTheme from './Button'
