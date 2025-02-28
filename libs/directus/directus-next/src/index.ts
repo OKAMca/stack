@@ -9,3 +9,4 @@ export type {
   TPageSettingsItemDocument,
   TUsePageSettingsProps,
 } from './pageSettings/interface'
+export type { TFiles } from './files/interface'

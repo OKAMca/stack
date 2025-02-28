@@ -34,7 +34,6 @@
   "dependencies": {
     "@okam/logger": "1.1.0",
     "@okam/next-component": "0.4.1",
-    "@okam/directus-next": "0.4.1",
     "@okam/stack-ui": "1.31.1",
     "@react-spring/web": "^9.7.5",
     "next": "^14.1.1",

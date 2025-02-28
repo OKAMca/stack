@@ -36,7 +36,6 @@
     "next": "^14.1.1",
     "radashi": "^12.3.0",
     "@okam/directus-query": "1.4.1",
-    "@okam/directus-next-component": "1.5.1",
     "server-only": "0.0.1",
     "graphql-request": "7.1.2",
     "server-only-context": "0.1.0",
