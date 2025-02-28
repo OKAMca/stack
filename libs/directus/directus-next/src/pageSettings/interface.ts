@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { Variables } from 'graphql-request'
-import type { TDirectusFileProps } from 'libs/directus/directus-next-component/src/components/DirectusFile/interface'
+import type { TFiles } from '../files/interface'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 
 export type Fragmentize<FragmentData, FragmentName extends string = string> =
@@ -31,7 +31,7 @@ export type TPageSettingsTranslation = {
   meta_description?: string | null
   no_follow?: boolean | null
   no_index?: boolean | null
-  og_image?: TDirectusFileProps | null
+  og_image?: TFiles | null
 }
 
 /**
