@@ -25,6 +25,16 @@ export default async function Index() {
   return (
     <div>
       <div className="flex flex-col gap-16 p-8">
+        <Box themeName="container" tokens={{ padding: 'medium', background: 'grey', borderRadius: 'medium' }}>
+          <Typography tokens={{ size: 'h2' }}>AdminBar Demo</Typography>
+          <Typography tokens={{ size: 'sm' }}>Test the AdminBar component with draft mode support.</Typography>
+          <Box themeName="flex" tokens={{ marginTop: 'medium' }}>
+            <Button tokens={{ color: 'primary' }} as="a" href="/admin-bar-demo">
+              Go to AdminBar Demo
+            </Button>
+          </Box>
+        </Box>
+
         <Select
           id="season"
           label="Select a season"
