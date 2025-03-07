@@ -3,16 +3,11 @@ import type { TPageSettings, TPageSettingsTranslation } from '@okam/directus-nex
 import { useDirectusFile } from '@okam/directus-next-component/server'
 import type { Nullable } from '@okam/stack-ui'
 import type { Metadata } from 'next'
-import type { AlternateURLs } from 'next/dist/lib/metadata/types/alternative-urls-types'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { StaticImageData } from 'next/image'
 import { min } from 'radashi'
 import type { TDirectusFileProps } from '../components/DirectusFile/interface'
 import type { TMetadataOptions } from '../types/metadata'
-
-const openGraphTypes: Record<string, 'website' | 'article'> = {
-  posts: 'article',
-}
 
 function withFallbacks<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
@@ -61,7 +56,7 @@ function useOpenGraphImage(
       : null) ?? {}
 
   if (!src || !directusImage?.width) return null
-  const imgixImageHref = options?.imageLoader({
+  const imgHref = options?.imageLoader({
     ...image,
     src,
     width: limitedWidth,
@@ -73,16 +68,13 @@ function useOpenGraphImage(
     type: directusImage?.type ?? undefined,
     width: limitedWidth,
     height: limitedHeight,
-    url: imgixImageHref,
+    url: imgHref,
   }
 }
 
 export default async function useMetadata<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
-  options: TMetadataOptions & {
-    createAlternateUrls: (pageSettings: Nullable<TPageSettings>) => AlternateURLs
-    hostname: string
-  },
+  options: TMetadataOptions,
   defaultProps?: Partial<TPageSettingsTranslation>,
 ): Promise<Metadata> {
   const { title, image } = withFallbacks(pageProps, options)
@@ -96,14 +88,14 @@ export default async function useMetadata<TPageProps extends { pageSettings: TPa
   const directusImage = useDirectusFile(image)
   const openGraphImage =
     useOpenGraphImage(directusImage, options) ?? getOpenGraphImageFallback(options?.ogFallbackImage, options)
-  const openGraphType = openGraphTypes[pageSettings?.belongs_to_collection ?? ''] ?? 'website'
+  const openGraphType = options.openGraphTypeConfig[pageSettings?.belongs_to_collection ?? ''] ?? 'website'
 
   const alternates = options.createAlternateUrls(pageSettings)
   const { canonical } = alternates
 
   const metadata: Metadata = {
     title,
-    metadataBase: new URL(options.hostname),
+    metadataBase: URL.canParse(options.getHostname()) ? new URL(options.getHostname()) : undefined,
     description: metaDescription,
     openGraph: {
       title: title ?? undefined,

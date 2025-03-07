@@ -1,6 +1,7 @@
 import type { TPageSettings } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
 import type { AlternateURLs } from 'next/dist/lib/metadata/types/alternative-urls-types'
+import type { OpenGraphType } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { StaticImageData } from 'next/image'
 import type { TDirectusFileProps } from '../components/DirectusFile/interface'
 
@@ -42,6 +43,14 @@ export type TMetadataOptions = {
    * @returns The alternate URLs
    */
   createAlternateUrls: (pageSettings: Nullable<TPageSettings>) => AlternateURLs
+
+  /**
+   * The type config of Open Graph to use
+   * @param {string} key - The collection name
+   * @param {OpenGraphType} value - The og:type value
+   */
+  openGraphTypeConfig: Record<string, OpenGraphType>
+
   /**
    * Get the hostname
    * @returns The hostname
