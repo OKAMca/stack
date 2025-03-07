@@ -3,6 +3,7 @@
 import React from 'react'
 import { makeTheme, createThemeProvider } from '../providers/Theme'
 import { accordionTheme } from './Accordion'
+import { adminBarTheme } from './AdminBar'
 import alertsTheme from './Alerts'
 import { container, grid, gridItem, main } from './Box'
 import button from './Button'
@@ -54,6 +55,7 @@ const BaseTheme = makeTheme({
   grid: (props) => grid(props),
   container: (props) => container(props),
   accordion: accordionTheme,
+  adminBar: adminBarTheme,
   carousel: carouselTheme,
   calendar: {
     container: (props) => calendarContainer(props),

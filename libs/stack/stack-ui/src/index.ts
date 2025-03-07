@@ -43,6 +43,8 @@ export { default as Video } from './components/Video'
 export * from './components/icons'
 
 // providers
+export { DraftModeContextProvider, useDraftMode } from './providers/DraftMode'
+export { AdminBarContextProvider, useAdminBar } from './providers/AdminBar'
 export { makeTheme, createThemeProvider, useTheme, ThemeContextProvider } from './providers/Theme'
 export { default as useThemeContext } from './providers/Theme/hooks'
 export { useIsClient, IsClientContextProvider } from './providers/Client'

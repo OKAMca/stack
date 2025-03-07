@@ -11,7 +11,17 @@
       },
       "require": {
         "types": "./index.d.ts",
-        "default": "./index.js"
+        "default": "./index.mjs"
+      }
+    },
+    "./server": {
+      "import": {
+        "types": "./server.d.ts",
+        "default": "./server.mjs"
+      },
+      "require": {
+        "types": "./server.d.ts",
+        "default": "./server.mjs"
       }
     }
   },
