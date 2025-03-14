@@ -1,7 +1,8 @@
 'use client'
 
-import { Box, Typography } from '@okam/stack-ui'
 import { useAdminBar } from '../../../providers/AdminBar'
+import Box from '../../Box'
+import Typography from '../../Typography'
 
 const AdminBarError = () => {
   const { error } = useAdminBar()

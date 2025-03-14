@@ -1,5 +1,6 @@
-import type { TToken, TDefaultComponent } from '@okam/stack-ui'
 import type { ReactNode } from 'react'
+import type { TToken } from '../../providers/Theme/interface'
+import type { TDefaultComponent } from '../../types/components'
 
 /**
  * AdminBar Component Props

@@ -1,9 +1,12 @@
 'use client'
 
-import { Box, Button, type TDefaultComponent, type TToken } from '@okam/stack-ui'
 import { useEffect } from 'react'
 import { useAdminBar } from '../../../providers/AdminBar'
 import { useDraftMode } from '../../../providers/DraftMode'
+import type { TToken } from '../../../providers/Theme/interface'
+import type { TDefaultComponent } from '../../../types/components'
+import Box from '../../Box'
+import Button from '../../Button'
 
 interface DraftModeProps<T = TToken> extends TDefaultComponent<T> {
   buttonLabel?: string
