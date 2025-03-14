@@ -1,6 +1,6 @@
-import type { TDefaultComponent } from '@okam/stack-ui'
-import { useThemeContext } from '@okam/stack-ui'
 import type { DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import useThemeContext from '../../../providers/Theme/hooks'
+import type { TDefaultComponent } from '../../../types/components'
 
 const DatePicker = (
   props: TDefaultComponent & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
