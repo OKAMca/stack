@@ -53,7 +53,7 @@ export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion
 export { SearchBarProvider } from './providers/UserSearchQuery'
 export { SwiperControllerContextProvider, useSwiperController } from './providers/Swiper'
 export { TranslationContextProvider, useTranslation } from './providers/Translation'
-export { FormProvider, useForm } from 'react-hook-form'
+export * from 'react-hook-form'
 
 // types & interfaces
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
