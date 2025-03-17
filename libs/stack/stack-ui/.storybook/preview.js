@@ -5,6 +5,17 @@ import React, { Suspense } from 'react'
 import { I18nProvider, OverlayProvider } from 'react-aria'
 import BaseThemeProvider from '../src/theme'
 import { IsClientContextProvider } from '../src/providers/Client'
+import { FormProvider, useForm } from 'react-hook-form'
+import { TranslationContextProvider } from '../src'
+
+const useTranslationFunc = () => {
+  return {
+    t: (key) => key,
+    i18n: {
+      language: 'en',
+    },
+  }
+}
 
 export const parameters = {
   layout: 'centered',
@@ -27,6 +38,9 @@ export const parameters = {
 export const decorators = [
   (Story, context) => {
     const locale = context?.globals?.locale || 'en'
+    const methods = useForm({
+      defaultValues: context?.globals?.defaultValues || {},
+    })
     return (
       <>
         <style>
@@ -38,13 +52,17 @@ export const decorators = [
         </style>
         <BaseThemeProvider>
           <I18nProvider locale={locale}>
+          <TranslationContextProvider useTranslationFunc={useTranslationFunc}>
             <IsClientContextProvider>
               <OverlayProvider>
-                <Suspense fallback={<div>Loading... </div>}>
-                  <Story />
-                </Suspense>
-              </OverlayProvider>
-            </IsClientContextProvider>
+                <FormProvider {...methods}>
+                  <Suspense fallback={<div>Loading... </div>}>
+                    <Story />
+                  </Suspense>
+                </FormProvider>
+                </OverlayProvider>
+              </IsClientContextProvider>
+            </TranslationContextProvider>
           </I18nProvider>
         </BaseThemeProvider>
       </>

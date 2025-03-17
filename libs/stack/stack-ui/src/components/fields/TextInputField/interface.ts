@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes } from 'react'
 import type { AriaTextFieldOptions } from 'react-aria'
-import type { RefCallBack } from 'react-hook-form'
+import type { ControllerRenderProps, RefCallBack } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
 
@@ -12,6 +12,8 @@ export interface TTextInputProps<T = TToken>
   name: string
   ariaLabel?: string
   errorMessage?: string
+  field?: ControllerRenderProps
+  isInvalid?: boolean
   fieldRef?: RefCallBack
   /**
    * @deprecated use isRequired instead
