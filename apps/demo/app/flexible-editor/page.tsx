@@ -16,12 +16,15 @@ export default async function Index() {
   const relationBlocks: TBlockSerializerConfig = {
     components: {
       block_button: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         default: (props) => <Box as="span">Related Block Button</Box>,
       },
       related_block_faqs: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         default: (props) => <Box as="span">Related Block FAQ</Box>,
       },
       block_quote: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         default: (props) => <Box>Block Quotes</Box>,
       },
     },
