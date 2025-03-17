@@ -53,6 +53,7 @@ export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion
 export { SearchBarProvider } from './providers/UserSearchQuery'
 export { SwiperControllerContextProvider, useSwiperController } from './providers/Swiper'
 export { TranslationContextProvider, useTranslation } from './providers/Translation'
+export { FormProvider, useForm } from 'react-hook-form'
 
 // types & interfaces
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
@@ -68,6 +69,10 @@ export type {
 } from './providers/Theme/interface'
 export type { TMenuProps, TMenuItemProps } from './components/Menu/interface'
 export type { TDefaultComponent, Nullable } from './types/components'
+export type { TTextInputProps } from './components/fields/TextInputField/interface'
+export type { TBoxProps } from './components/Box/interface'
+export type { TDatePickerProps } from './components/fields/DatePicker/interface'
+export type { TDateProps } from './components/Date/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
