@@ -112,9 +112,16 @@ export const ReactHookFormInput = ({
   isRequired,
   onChange,
   onBlur,
+  children = null,
+  ...rest
 }: TTextInputProps & { rules: RegisterOptions }) => {
   const { control } = useFormContext()
   const { t } = useTranslation()
+
+  const getAriaFields = () => {
+    const ariaFields = Object.entries(rest).filter(([key, _value]) => key.startsWith('aria-'))
+    return Object.fromEntries(ariaFields)
+  }
 
   const ruleMerged = {
     required: (required ?? isRequired) ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
@@ -161,11 +168,12 @@ export const ReactHookFormInput = ({
           <TextInputField
             {...fieldProps}
             {...validityField}
+            {...getAriaFields()}
+            fieldRef={ref}
             name={name}
             placeholder={placeholder}
             themeName={themeName}
             label={label}
-            field={field}
             tokens={inputTokens}
             ariaLabel={ariaLabel}
             isDisabled={field.disabled}
@@ -180,7 +188,9 @@ export const ReactHookFormInput = ({
               field.onBlur()
               onBlur?.(e)
             }}
-          />
+          >
+            {children}
+          </TextInputField>
         )
       }}
     />

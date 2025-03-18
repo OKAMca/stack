@@ -12,7 +12,6 @@ export interface TTextInputProps<T = TToken>
   name: string
   ariaLabel?: string
   errorMessage?: string
-  field?: ControllerRenderProps
   isInvalid?: boolean
   fieldRef?: RefCallBack
   /**
