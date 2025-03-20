@@ -22,4 +22,5 @@ export interface TSelectProps<T = TToken> extends TFieldReactHookForm<T> {
   value?: Nullable<string>
   popoverMatchesWidth?: boolean
   options?: { key: string; value: string }[]
+  isInvalid?: boolean
 }

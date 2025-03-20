@@ -3,9 +3,11 @@
 import { isEmpty } from 'radashi'
 import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
-import { get, useFormContext } from 'react-hook-form'
+import type { RegisterOptions } from 'react-hook-form'
+import { useFormContext, Controller } from 'react-hook-form'
 import { useSelectState } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
+import { useTranslation } from '../../../providers/Translation'
 import Box from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
@@ -20,6 +22,8 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
     name,
     placeholderLabel,
     disabled,
+    required,
+    isInvalid,
     hookFormRef,
     isError = false,
     errorMessage,
@@ -44,9 +48,16 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
     defaultSelectedKey: defaultValue,
     items: options,
     onSelectionChange,
+    isDisabled: disabled,
+    isRequired: required,
+    isInvalid,
   })
 
-  const { triggerProps, menuProps, labelProps } = useSelect({ ...rest, label }, state, fieldRef)
+  const { triggerProps, menuProps, labelProps } = useSelect(
+    { ...rest, label, isDisabled: disabled, isRequired: required, isInvalid },
+    state,
+    fieldRef,
+  )
   const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
 
   return (
@@ -94,16 +105,88 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
   )
 }
 
-export const ReactHookFormSelect = (props: TSelectProps) => {
-  const { name, required } = props
-  const { register, formState } = useFormContext()
-  const errors = get(formState.errors, name)
-  const errMsg = errors?.message ?? undefined
-  const { ref } = register(name, {
-    required: required ? 'This is an error message' : false,
-  })
+export const ReactHookFormSelect = ({
+  id,
+  name,
+  label,
+  rules,
+  tokens,
+  defaultValue,
+  value,
+  themeName = 'select',
+  required,
+  onChange,
+  options,
+  placeholderLabel,
+  icon,
+  popoverMatchesWidth,
+  ...rest
+}: TSelectProps & { rules?: RegisterOptions }) => {
+  const { control } = useFormContext()
+  const { t } = useTranslation()
 
-  return <Select {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} hookFormRef={ref} />
+  const getAriaFields = () => {
+    const ariaFields = Object.entries(rest).filter(([key, _value]) => key.startsWith('aria-'))
+    return Object.fromEntries(ariaFields)
+  }
+
+  const ruleMerged = {
+    required: required ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
+    ...rules,
+  }
+
+  return (
+    <Controller
+      name={name}
+      control={control}
+      rules={ruleMerged}
+      disabled={rules?.disabled}
+      defaultValue={defaultValue}
+      render={({ field, fieldState }) => {
+        const { ref, ...fieldProps } = field
+        const isError = !isEmpty(fieldState.error)
+
+        const validityField = {
+          isDisabled: field.disabled ?? false,
+          isRequired: rules?.required === true || rules?.required === 'required',
+          isInvalid: fieldState.invalid,
+          isError,
+        }
+
+        const selectTokens = {
+          ...tokens,
+          ...validityField,
+        }
+
+        return (
+          <Select
+            {...fieldProps}
+            {...validityField}
+            {...getAriaFields()}
+            id={id}
+            hookFormRef={ref}
+            name={name}
+            themeName={themeName}
+            label={label}
+            tokens={selectTokens}
+            disabled={field.disabled}
+            required={rules?.required === true || rules?.required === 'required'}
+            isInvalid={fieldState.invalid}
+            errorMessage={fieldState.error?.message}
+            value={field.value}
+            options={options}
+            placeholderLabel={placeholderLabel}
+            icon={icon}
+            popoverMatchesWidth={popoverMatchesWidth}
+            onSelectionChange={(key) => {
+              field.onChange(key)
+              onChange?.(key)
+            }}
+          />
+        )
+      }}
+    />
+  )
 }
 
 export default Select
