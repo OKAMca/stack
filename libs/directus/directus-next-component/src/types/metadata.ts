@@ -12,7 +12,7 @@ export type TMetadataOptions = {
   /**
    * Default fallback image to use for Open Graph tags when no other image is specified
    */
-  ogFallbackImage: StaticImageData
+  ogFallbackImage?: StaticImageData
   /**
    * Maximum width allowed for Open Graph images
    */
