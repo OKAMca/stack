@@ -1,12 +1,9 @@
 'use client'
 
+import { Box, Button, type TDefaultComponent, type TToken } from '@okam/stack-ui'
 import { useEffect } from 'react'
 import { useAdminBar } from '../../../providers/AdminBar'
 import { useDraftMode } from '../../../providers/DraftMode'
-import type { TToken } from '../../../providers/Theme/interface'
-import type { TDefaultComponent } from '../../../types/components'
-import Box from '../../Box'
-import Button from '../../Button'
 
 interface DraftModeProps<T = TToken> extends TDefaultComponent<T> {
   buttonLabel?: string
@@ -30,15 +27,10 @@ const DraftMode = ({
   }, [error, isError, setError])
 
   return (
-    <Box themeName="flex" tokens={{ gap: 'medium', fullWidth: true, align: 'center', className: 'w-fit mx-0' }}>
+    <Box themeName={`${themeName}.draftMode`} tokens={tokens} customTheme={customTheme}>
       <Button
         themeName={`${themeName}.button`}
-        tokens={{
-          variant: 'primary',
-          size: 'medium',
-          width: 'fit',
-          ...tokens,
-        }}
+        tokens={tokens}
         customTheme={customTheme}
         handlePress={() => {
           mutate({ isEnabled: false })

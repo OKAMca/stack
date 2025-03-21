@@ -46,6 +46,3 @@ export function DraftModeContextProvider(props: TDraftModeProviderProps) {
 
   return <DraftModeProvider value={value}>{children}</DraftModeProvider>
 }
-
-// Export the handleDraftMode function for use in API routes
-export { handleDraftMode } from './utils/handleDraftMode'

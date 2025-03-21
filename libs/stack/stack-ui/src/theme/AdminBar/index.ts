@@ -101,10 +101,63 @@ export const adminBarStatus = tv({
   },
 })
 
+// Date picker styles specific to the AdminBar
+export const adminBarDatePicker = tv({
+  base: 'border rounded px-2 py-1 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500',
+  variants: {
+    size: {
+      small: 'text-xs px-2 py-0.5',
+      medium: 'text-sm px-3 py-1',
+      large: 'text-base px-4 py-2',
+    },
+  },
+  defaultVariants: {
+    size: 'medium',
+  },
+})
+
+// Error component styles specific to the AdminBar
+export const adminBarError = tv({
+  base: 'flex items-center justify-center bg-red-50 text-red-700 px-3 py-1 rounded-md text-sm',
+  variants: {
+    severity: {
+      low: 'bg-yellow-50 text-yellow-700',
+      medium: 'bg-red-50 text-red-700',
+      high: 'bg-red-100 text-red-800 font-bold',
+    },
+    hasBorder: {
+      true: 'border border-red-300',
+      false: '',
+    },
+  },
+  defaultVariants: {
+    severity: 'medium',
+    hasBorder: true,
+  },
+})
+
+// Typography style for error messages in the AdminBar
+export const adminBarErrorTypography = tv({
+  base: 'text-red-700 text-sm font-medium',
+  variants: {
+    severity: {
+      low: 'text-yellow-700',
+      medium: 'text-red-700',
+      high: 'text-red-800 font-bold',
+    },
+  },
+  defaultVariants: {
+    severity: 'medium',
+  },
+})
+
 // Export the theme components
 export const adminBarTheme = {
   container: adminBarContainer,
   content: adminBarContent,
   button: adminBarButton,
   status: adminBarStatus,
+  datePicker: adminBarDatePicker,
+  error: adminBarError,
+  errorTypography: adminBarErrorTypography,
 }

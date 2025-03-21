@@ -1,5 +1,5 @@
+import type { Nullable } from '@okam/stack-ui'
 import type { ReactNode } from 'react'
-import type { Nullable } from '../../types/components'
 
 export interface TAdminBarProviderProps {
   children: ReactNode

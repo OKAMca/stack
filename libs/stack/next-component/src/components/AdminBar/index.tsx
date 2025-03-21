@@ -1,8 +1,7 @@
 'use server'
 
+import { Box, type TToken } from '@okam/stack-ui'
 import { draftMode } from 'next/headers'
-import type { TToken } from '../../providers/Theme/interface'
-import Box from '../Box'
 import AdminBarError from './components/AdminBarError'
 import DraftMode from './components/DraftMode'
 import type { AdminBarProps } from './interface'

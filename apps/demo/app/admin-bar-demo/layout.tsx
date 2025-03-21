@@ -1,4 +1,4 @@
-import { DraftModeServerContextProvider } from '@okam/stack-ui/server'
+import { DraftModeServerContextProvider } from '@okam/next-component/server'
 import AdminBarProviders from './providers'
 
 export default async function AdminBarDemoLayout({ children }: { children: React.ReactNode }) {
