@@ -1,5 +1,5 @@
+import { AdminBar } from '@okam/next-component/server'
 import { Typography, Button, Box } from '@okam/stack-ui'
-import { AdminBar } from '@okam/stack-ui/server'
 import Link from 'next/link'
 import DraftModeButton from './DraftModeButton'
 
