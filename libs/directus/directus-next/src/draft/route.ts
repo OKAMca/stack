@@ -14,7 +14,7 @@ import { template } from 'radashi'
 import { getJsonErrorResponse } from '../response'
 import { getDraftSecretDefault } from './env'
 
-export function parseParams(url: string) {
+export function parseDraftParams(url: string) {
   const { searchParams } = new URL(url)
   const secret = searchParams.get('secret') || ''
   const languagesParam = searchParams.get('languages')
@@ -138,7 +138,7 @@ export default function handleDraftRoute({
 }: HandleDraftOptions): Response | undefined {
   const getSecretFunction = getDraftSecret || getDraftSecretDefault
   const getJsonErrorResponseFunction = getJsonError || getJsonErrorResponse
-  const { secret, languages, paths, routes, type, version } = parseParams(url)
+  const { secret, languages, paths, routes, type, version } = parseDraftParams(url)
 
   if (secret !== getSecretFunction()) {
     return getJsonErrorResponseFunction({ error: 'Invalid argument' }, 401)

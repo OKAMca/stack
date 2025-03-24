@@ -33,6 +33,22 @@ http://localhost:4200/api/draft?urls=%5B%22%2Fdirectus-block%22%5D&languages=%5B
 
 You should see a redirect to the page directus-block, and a cookie named "__prerender_bypass".
 
+### Testing redirect api
+
+#### Api route
+
+You can test the redirect api with this url:
+
+```
+http://localhost:4200/api/redirect?secret=123
+```
+
+You should get status 200 and a json response with the redirects and rewrites.
+
+#### Individual redirects
+
+Navigating to a redirect source should redirect to the destination.
+
 ## Running Build Mode
 
 After a npm install, run the build command.
