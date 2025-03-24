@@ -1,6 +1,6 @@
 export interface TFetchRedirectsConfig {
-  graphqlEndpoint: string | undefined
-  graphqlApiKey: string | undefined
+  graphqlEndpoint: string
+  graphqlApiKey: string
   redirectsFilename?: string
   rewritesFilename?: string
   limit: number | undefined
