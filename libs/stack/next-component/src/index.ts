@@ -5,4 +5,5 @@ export { default as Filter } from './components/Filter'
 export { useFilterState } from './hooks/useFilterState'
 
 export type { default as TImgProps } from './components/Img/interface'
-export type { TFilterProps } from './hooks/useFilterState/interface'
+export type { TFilter } from './hooks/useFilterState/interface'
+export type { TFilterProps } from './components/Filter/interface'

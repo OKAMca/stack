@@ -8,6 +8,9 @@ export type TFilterItem = ItemProps<never> & { key: string }
 
 export interface TFilter extends AriaTagGroupProps<TFilterItem>, Options {
   id: string
+  /**
+   * @default parseAsArrayOf(parseAsString)
+   */
   parser?: ParserBuilder<TFilterValue>
   defaultSelectedKeys?: Exclude<AriaTagGroupProps<object>['defaultSelectedKeys'], 'all'>
 }
