@@ -23,6 +23,15 @@ export type TSidePanelButtons = {
   openButtonRef: React.MutableRefObject<null>
 }
 
+/**
+ * @deprecated Use `TSidePanelButtons` instead
+ * @example
+ * ```tsx
+ * import type { TSidePanelButtons } from '@okam/stack-ui'
+ * ```
+ */
+export type TButtonProps = TSidePanelButtons
+
 export type TSidePanelContext = {
   defaultSelectedKey: string
   overlayState: OverlayTriggerState
