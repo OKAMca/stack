@@ -1,7 +1,8 @@
 import type { OverlayTriggerState } from '@react-stately/overlays'
 import type { DOMProps } from '@react-types/shared'
 import type React from 'react'
-import type { OverlayTriggerProps } from 'react-aria'
+import type { ButtonHTMLAttributes } from 'react'
+import type { AriaButtonProps, OverlayTriggerProps } from 'react-aria'
 
 export type TSidePanelProviderProps = Partial<OverlayTriggerProps> & {
   children: React.ReactNode
@@ -11,16 +12,29 @@ export type TSidePanelProviderProps = Partial<OverlayTriggerProps> & {
   onCloseCallback?: () => void
 }
 
-export type TButtonProps = {
-  closeButtonProps: React.ButtonHTMLAttributes<HTMLButtonElement>
+export type TSidePanelButtonProps = Omit<AriaButtonProps<'button'>, 'onPress'> & {
+  handlePress?: AriaButtonProps<'button'>['onPress']
+}
+
+export type TSidePanelButtons = {
+  closeButtonProps: TSidePanelButtonProps & ButtonHTMLAttributes<HTMLButtonElement>
   closeButtonRef: React.MutableRefObject<null>
-  openButtonProps: React.HTMLAttributes<HTMLDivElement>
+  openButtonProps: TSidePanelButtonProps & React.HTMLAttributes<HTMLDivElement>
   openButtonRef: React.MutableRefObject<null>
 }
+
+/**
+ * @deprecated Use `TSidePanelButtons` instead
+ * @example
+ * ```tsx
+ * import type { TSidePanelButtons } from '@okam/stack-ui'
+ * ```
+ */
+export type TButtonProps = TSidePanelButtons
 
 export type TSidePanelContext = {
   defaultSelectedKey: string
   overlayState: OverlayTriggerState
-  buttonProps: TButtonProps
+  buttonProps: TSidePanelButtons
   overlayProps: DOMProps
 }

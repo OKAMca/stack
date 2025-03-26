@@ -42,8 +42,10 @@ const SidePanel = <T extends TToken>(props: TSidePanelProps<T>) => {
           tokens={tokens}
           isVisible={overlayState.isOpen}
         >
-          <Box themeName={`${themeName}.container`}>
-            <Box themeName={`${themeName}.innerContainer`}>{children}</Box>
+          <Box themeName={`${themeName}.container`} tokens={tokens}>
+            <Box themeName={`${themeName}.innerContainer`} tokens={tokens}>
+              {children}
+            </Box>
           </Box>
         </TransitionAnimation>
       </Div100vh>
