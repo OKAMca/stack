@@ -8,7 +8,7 @@
     "url": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
-    "@okam/stack-ui": "1.31.1",
+    "@okam/stack-ui": "1.32.6",
     "next": "^14.1.1"
   }
 }
