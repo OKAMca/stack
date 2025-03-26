@@ -31,6 +31,7 @@ const TextArea = <T extends TToken>(props: TTextInputProps<T>) => {
     themeName = 'textarea',
     tokens,
     customTheme,
+    children,
   } = props
   const ref = useRef<HTMLTextAreaElement | null>(null)
   const { errorMessageProps, inputProps, labelProps } = useTextField<'textarea' | 'input'>(props, ref)
@@ -50,8 +51,9 @@ const TextArea = <T extends TToken>(props: TTextInputProps<T>) => {
             {label}
           </label>
         )}
-        <div className={container}>
-          <FocusRing focusRingClass="has-focus-ring">
+        <FocusRing focusRingClass="has-focus-ring">
+          <div className={container}>
+            {children}
             <textarea
               {...(inputProps as object)}
               ref={(e) => {
@@ -70,8 +72,8 @@ const TextArea = <T extends TToken>(props: TTextInputProps<T>) => {
               onBlur={onBlur}
               onChange={onChange}
             />
-          </FocusRing>
-        </div>
+          </div>
+        </FocusRing>
       </div>
       {errorMessage && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={inputTokens} {...errorMessageProps}>
