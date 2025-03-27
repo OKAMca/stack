@@ -1,56 +1,28 @@
 {/* Select.stories.mdx */}
 
 import { Canvas, Meta, Story } from '@storybook/blocks'
-import Select, { SelectStyled } from '.'
-import SelectItem from './components/SelectItem'
+import Select, { SelectStyled } from './Select'
+import SelectItem from '../SelectItem/SelectItem'
+import SelectContent from '../../../storybook/SelectField'
 import ChevronLeft from '../../icons/ChevronLeft'
-import * as SelectStories from './Select.stories'
-import { ArgTypes } from '@storybook/blocks'
+import * as SelectStories from './Select.stories';
 
 <Meta of={SelectStories} />
 
-export const Template = (args) => <Select {...args} />
+export const Template = (args) => <SelectContent {...args} />
 
 # Select
 
 Select Field component.
 
-## Props
+<Canvas>
+  <Story of={SelectStories.Default} />
+</Canvas>
 
-<ArgTypes exclude={['defaultValue', 'isError', 'disabled', 'required', 'placeholderLabel', 'value', 'options', 'popoverMatchesWidth']} />
+<Canvas>
+  <Story of={SelectStories.Disabled} />
+</Canvas>
 
-## Showcase
-
-### Default
-
-<Canvas of={SelectStories.Default} />
-
-### Disabled
-
-<Canvas of={SelectStories.Disabled} />
-
-### Error
-
-<Canvas of={SelectStories.Error} />
-
-### Children Items
-
-Instead of using the `items` prop, you can pass multiple `<Item>` components as children directly.
-
-This works by creating the `items` prop from the children components and falling back to the default children `Item` component.
-
-<Canvas of={SelectStories.ChildrenItems} />
-
-### Custom Children Render Function
-
-If passing items, the `children` prop can be used as a callback function iterating over each item in the array.
-
-This behavior is **not** supported in Next.js server components. To use it, you **must** call the component from a file with the `use client` directive.
-
-<Canvas of={SelectStories.CustomChildrenRenderFunction} />
-
-### Popover Matches Select Button Width
-
-You can use the `--${themeName}-container-width` CSS variable to set the width of the popover to match the width of the select button.
-
-<Canvas of={SelectStories.PopoverMatchesWidth} />
+<Canvas>
+  <Story of={SelectStories.Error} />
+</Canvas>
