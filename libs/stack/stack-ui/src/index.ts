@@ -1,5 +1,7 @@
 export { default as ThemeProvider } from './theme'
 
+export { default as TagGroup } from './components/TagGroup'
+export { default as Tag } from './components/TagGroup/components/Tag'
 export { default as Typography } from './components/Typography'
 export { default as Accordion } from './components/Accordion'
 export { default as AccordionItem } from './components/Accordion/components/AccordionItem'
@@ -59,6 +61,8 @@ export { TranslationContextProvider, useTranslation } from './providers/Translat
 export * as reactHookForm from 'react-hook-form'
 
 // types & interfaces
+export type { TSelectItemProps } from './components/fields/SelectItem/SelectItem.interface'
+export type { TSelectProps } from './components/fields/Select/Select.interface'
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
 export type { TTypographyProps } from './components/Typography/interface'
 export type {
@@ -74,7 +78,6 @@ export type { TMenuProps, TMenuItemProps } from './components/Menu/interface'
 export type { TDefaultComponent, Nullable } from './types/components'
 export type { TTextInputProps } from './components/fields/TextInputField/interface'
 export type { TCheckboxProps } from './components/fields/Checkbox/Checkbox.interface'
-export type { TSelectProps } from './components/fields/Select/Select.interface'
 export type { TBoxProps } from './components/Box/interface'
 export type { TDatePickerProps } from './components/fields/DatePicker/interface'
 export type { TDateProps } from './components/Date/interface'

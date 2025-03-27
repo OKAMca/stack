@@ -1,0 +1,45 @@
+import * as FilterStories from './filter.stories'
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { Controls } from '@storybook/blocks'
+
+<Meta of={FilterStories} />
+
+# Filter
+
+Filter component. Based on react-stately `useListState` wrapping `useQueryState`, it matches search params to the values selected in the `TagGroup`'s  `Popover`.
+
+## Props
+
+<Controls />
+
+## Usage
+
+### Default
+
+```tsx
+<Filter id="shape">
+  <Item key="circle">Circle</Item>
+  <Item key="square">Square</Item>
+  <Item key="triangle">Triangle</Item>
+</Filter>
+```
+
+### Controlled
+
+```tsx
+const [selectedKeys, setSelectedKeys] = useState<Key[]>([])
+
+<Filter id="shape" selectedKeys={selectedKeys} onSelectionChange={setSelectedKeys}>
+  <Item key="circle">Circle</Item>
+  <Item key="square">Square</Item>
+  <Item key="triangle">Triangle</Item>
+</Filter>
+```
+
+## Showcases
+
+Since Storybook doesn't support `useQueryState` editing the search params, they are displayed directly in the story instead.
+
+### Default
+
+<Canvas of={FilterStories.Default} />

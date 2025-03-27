@@ -1,7 +1,7 @@
 'use client'
 
 import { isEmpty } from 'radashi'
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import type { RegisterOptions } from 'react-hook-form'
 import { useFormContext, Controller } from 'react-hook-form'
@@ -11,10 +11,10 @@ import { useTranslation } from '../../../providers/Translation'
 import Box from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
+import { PopoverContent } from '../../Popover'
 import Typography from '../../Typography'
 import SelectItem from '../SelectItem/SelectItem'
 import { ListBox } from './components/Listbox'
-import Popover from './components/Popover'
 import type { TSelectProps } from './Select.interface'
 
 const Select = <T extends TToken>(props: TSelectProps<T>) => {
@@ -60,15 +60,24 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
   )
   const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
 
+  const selectTokens = {
+    ...tokens,
+    isOpen: state.isOpen,
+    isInvalid: !!isInvalid,
+    isError: !!isError,
+    isDisabled: !!disabled,
+    isRequired: !!required,
+  }
+
   return (
-    <Box themeName={`${themeName}.wrapper`}>
+    <Box themeName={`${themeName}.wrapper`} tokens={selectTokens}>
       {label && (
-        <Typography {...labelProps} as="label" themeName={`${themeName}.label`}>
+        <Typography {...labelProps} as="label" themeName={`${themeName}.label`} tokens={selectTokens}>
           {label}
         </Typography>
       )}
       <HiddenSelect {...hookFormRef} state={state} triggerRef={fieldRef} name={name} isDisabled />
-      <Box themeName={`${themeName}.container`}>
+      <Box themeName={`${themeName}.container`} tokens={selectTokens}>
         <ButtonWithForwardRef
           {...restofTriggerProps}
           handlePress={(event) => {
@@ -78,25 +87,24 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
           ref={fieldRef}
           disabled={disabled}
           themeName={`${themeName}.button`}
-          tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
+          tokens={selectTokens}
         >
           {state.selectedItem ? state.selectedItem.rendered : placeholderLabel}
-          <Icon icon={icon ?? 'ArrowDown'} />
+          <Icon icon={icon ?? 'ArrowDown'} tokens={selectTokens} />
         </ButtonWithForwardRef>
         {state.isOpen && fieldRef.current && (
-          <Popover
-            tokens={tokens}
-            state={state}
+          <PopoverContent
+            tokens={selectTokens}
             triggerRef={fieldRef}
             placement="bottom"
             themeName={`${themeName}.popover`}
-            style={{ [`--${themeName}-container-width`]: `${fieldRef.current?.offsetWidth}px` } as React.CSSProperties}
+            state={state}
           >
-            <ListBox {...menuProps} themeName={themeName} state={state} />
-          </Popover>
+            <ListBox {...menuProps} themeName={themeName} tokens={selectTokens} state={state} />
+          </PopoverContent>
         )}
         {isError && (
-          <Typography tokens={{ ...tokens, isError }} themeName={`${themeName}.errorMessage`}>
+          <Typography tokens={selectTokens} themeName={`${themeName}.errorMessage`}>
             {errorMessage}
           </Typography>
         )}

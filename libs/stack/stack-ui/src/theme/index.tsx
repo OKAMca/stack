@@ -36,6 +36,7 @@ import lightboxTheme from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
 import { searchIcon, searchInput } from './Search'
+import selectTheme from './Select'
 import {
   shareButton,
   shareButtonContainer,
@@ -45,10 +46,12 @@ import {
   shareButtonLinksList,
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
+import tagGroupTheme from './TagGroup'
 import { textArea } from './TextArea'
 import typography from './Typography'
 
 const BaseTheme = makeTheme({
+  tagGroup: tagGroupTheme,
   main: (props) => main(props),
   gridItem: (props) => gridItem(props),
   grid: (props) => grid(props),
@@ -121,19 +124,7 @@ const BaseTheme = makeTheme({
     checkboxGroupItemsGroup: (props) => checkboxGroupItemsGroup(props),
     errormessage: (props) => typography(props),
   },
-  select: {
-    button: (props) => button(props),
-    ul: (props) =>
-      typography({
-        ...props,
-        className: 'outline outline-2 outline-white outline-offset-2 p-2 my-4 rounded-md w-full flex flex-col gap-6',
-      }),
-    popover: (props) => button({ ...props, className: 'w-[var(--select-container-width)]' }),
-    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
-    wrapper: () => 'flex flex-col gap-4 relative',
-    container: () => 'flex flex-col gap-4',
-    li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
-  },
+  select: selectTheme,
   textarea: {
     wrapper: () => 'flex flex-col',
     container: () => 'flex items-center gap-4',
