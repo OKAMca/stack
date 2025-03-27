@@ -1,4 +1,4 @@
-import TextInputField from './index'
+import { ReactHookFormInput as TextInputField } from './index'
 
 const Template = (args) => {
   const { backgroundColor, ...rest } = args
