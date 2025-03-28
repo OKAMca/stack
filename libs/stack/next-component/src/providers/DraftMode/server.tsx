@@ -4,7 +4,7 @@ import { DraftModeContextProvider } from '.'
 
 const DraftModeServerContextProvider = async (props: TDraftModeProviderProps) => {
   const { children, defaultEnabled: propDefaultEnabled, cookieDuration: propCookieDuration } = props
-  const { isEnabled } = getDraftMode()
+  const { isEnabled } = await getDraftMode()
   const defaultEnabled = propDefaultEnabled ?? isEnabled
 
   return (

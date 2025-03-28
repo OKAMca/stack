@@ -2,6 +2,6 @@
 
 import { draftMode } from 'next/headers'
 
-export function getDraftMode() {
+export async function getDraftMode() {
   return draftMode()
 }

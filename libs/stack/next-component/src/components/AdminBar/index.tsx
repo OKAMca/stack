@@ -11,7 +11,7 @@ const AdminBar = async <T extends TToken>({
   customTheme,
   draftModeButtonLabel,
 }: AdminBarProps<T>) => {
-  const { isEnabled } = getDraftMode()
+  const { isEnabled } = await getDraftMode()
   if (!isEnabled) return null
   return (
     <Box themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
