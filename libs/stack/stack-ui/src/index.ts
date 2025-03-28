@@ -18,10 +18,13 @@ export { default as WysiwygBlock } from './components/WysiwygBlock'
 export { default as Icon } from './components/Icon'
 export { default as Date } from './components/Date'
 export { default as Select, ReactHookFormSelect } from './components/fields/Select/Select'
-export { default as Checkbox } from './components/fields/Checkbox'
+export { default as Checkbox, ReactHookFormCheckBox } from './components/fields/Checkbox'
 export { default as SearchField } from './components/fields/SearchField'
 export { default as CheckboxGroup } from './components/fields/CheckboxGroup'
-export { default as CheckboxGroupItem } from './components/fields/CheckboxGroup/components/CheckboxGroupItem'
+export {
+  default as CheckboxGroupItem,
+  ReactHookFormCheckboxItem,
+} from './components/fields/CheckboxGroup/components/CheckboxGroupItem'
 export { default as TextArea, ReactHookFormTextArea } from './components/fields/TextArea'
 export { default as TextInputField, ReactHookFormInput } from './components/fields/TextInputField'
 export { default as DatePicker } from './components/fields/DatePicker'
@@ -53,6 +56,7 @@ export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion
 export { SearchBarProvider } from './providers/UserSearchQuery'
 export { SwiperControllerContextProvider, useSwiperController } from './providers/Swiper'
 export { TranslationContextProvider, useTranslation } from './providers/Translation'
+export * as reactHookForm from 'react-hook-form'
 
 // types & interfaces
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
@@ -68,6 +72,12 @@ export type {
 } from './providers/Theme/interface'
 export type { TMenuProps, TMenuItemProps } from './components/Menu/interface'
 export type { TDefaultComponent, Nullable } from './types/components'
+export type { TTextInputProps } from './components/fields/TextInputField/interface'
+export type { TCheckboxProps } from './components/fields/Checkbox/Checkbox.interface'
+export type { TSelectProps } from './components/fields/Select/Select.interface'
+export type { TBoxProps } from './components/Box/interface'
+export type { TDatePickerProps } from './components/fields/DatePicker/interface'
+export type { TDateProps } from './components/Date/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'

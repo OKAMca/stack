@@ -1,7 +1,5 @@
-'use server'
-
 import { Box, type TToken } from '@okam/stack-ui'
-import { draftMode } from 'next/headers'
+import { getDraftMode } from '../../providers/DraftMode/utils/getDraftMode'
 import AdminBarError from './components/AdminBarError'
 import DraftMode from './components/DraftMode'
 import type { AdminBarProps } from './interface'
@@ -13,7 +11,7 @@ const AdminBar = async <T extends TToken>({
   customTheme,
   draftModeButtonLabel,
 }: AdminBarProps<T>) => {
-  const { isEnabled } = draftMode()
+  const { isEnabled } = getDraftMode()
   if (!isEnabled) return null
   return (
     <Box themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
