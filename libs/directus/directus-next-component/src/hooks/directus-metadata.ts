@@ -32,7 +32,9 @@ function limitOpenGraphImageDimensions(width: number, height: number, maxWidth: 
   }
 }
 
-function getOpenGraphImageFallback(fallbackImage: StaticImageData, options: TMetadataOptions) {
+function getOpenGraphImageFallback(fallbackImage: StaticImageData | undefined, options: TMetadataOptions) {
+  if (!fallbackImage) return null
+
   const { width, height, src } = fallbackImage
   const dimensions = limitOpenGraphImageDimensions(width, height, options?.ogImageMaxWidth, options?.ogImageMaxHeight)
 
@@ -100,13 +102,13 @@ export default async function useMetadata<TPageProps extends { pageSettings: TPa
     openGraph: {
       title: title ?? undefined,
       description: metaDescription ?? undefined,
-      images: openGraphImage,
+      images: openGraphImage ?? undefined,
       url: canonical?.toString(),
       type: openGraphType,
     },
     twitter: {
       title: title ?? undefined,
-      images: openGraphImage,
+      images: openGraphImage ?? undefined,
       description: metaDescription ?? undefined,
     },
     alternates,
