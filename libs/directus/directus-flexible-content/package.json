@@ -24,7 +24,7 @@
   "dependencies": {
     "@nx/vite": "20.2.2",
     "@okam/directus-block": "1.5.1",
-    "@okam/stack-ui": "1.31.1",
+    "@okam/stack-ui": "1.32.6",
     "@tiptap/core": "^2.10.3",
     "@tiptap/extension-blockquote": "^2.10.3",
     "@tiptap/extension-bold": "^2.10.3",

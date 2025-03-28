@@ -1,13 +1,11 @@
-'use server'
-
-import { draftMode } from 'next/headers'
 import type { TDraftModeProviderProps } from './interface'
+import { getDraftMode } from './utils/getDraftMode'
 import { DraftModeContextProvider } from '.'
 
 const DraftModeServerContextProvider = async (props: TDraftModeProviderProps) => {
   const { children, defaultEnabled: propDefaultEnabled, cookieDuration: propCookieDuration } = props
-  const draft = draftMode()
-  const defaultEnabled = propDefaultEnabled ?? draft.isEnabled
+  const { isEnabled } = getDraftMode()
+  const defaultEnabled = propDefaultEnabled ?? isEnabled
 
   return (
     <DraftModeContextProvider defaultEnabled={defaultEnabled} cookieDuration={propCookieDuration}>
