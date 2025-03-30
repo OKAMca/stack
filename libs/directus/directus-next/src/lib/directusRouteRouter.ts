@@ -75,7 +75,12 @@ async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsT
   }
 }
 
-// Minimal interfaces for Next.js types
+function removeLocaleFromPathname(pathname: string, config: DirectusRouteConfig) {
+  const currentLocale = Object.values(config.localeMap ?? {}).find((locale) => pathname.startsWith(`/${locale}/`))
+  return { locale: currentLocale, pathname: currentLocale ? pathname.replace(`/${currentLocale}/`, '/') : pathname }
+}
+
+//  Minimal interfaces for Next.js types
 interface MinimalNextUrl {
   pathname: string
   clone: () => MinimalNextUrl
@@ -96,8 +101,9 @@ export async function directusRouteRouter(
   config: DirectusRouteConfig,
   NextResponse: MinimalNextResponse,
 ): Promise<MinimalNextResponse> {
-  const { pathname } = request.nextUrl
-  log('Processing request for pathname:', pathname)
+  const { pathname: localizedPathname } = request.nextUrl
+  const { locale, pathname } = removeLocaleFromPathname(localizedPathname, config)
+  log('Processing request for pathname:', { locale, pathname })
 
   const translations = await fetchPageSettingsTranslation(pathname)
 
