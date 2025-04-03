@@ -29,6 +29,7 @@ export default {
 
   args: {
     label: 'This is a checkbox label',
+    'aria-label': 'checkbox-label',
     name: 'checkbox',
     ariaLabel: 'checkbox-label',
     onChange: (isSelected) => console.log(`isSelected: ${isSelected}`),
