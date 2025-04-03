@@ -45,9 +45,9 @@ const Checkbox = <T extends TToken>(props: TCheckboxProps<T>) => {
       <FocusRing focusRingClass="has-focus-ring" within>
         <label className={checkBoxContainerTheme} htmlFor={id} aria-label={ariaLabel} aria-disabled={isDisabled}>
           <VisuallyHidden>
-            <input type="checkbox" ref={ref} aria-labelledby={id} {...inputProps} {...focusProps} />
+            <input type="checkbox" ref={ref} {...inputProps} />
           </VisuallyHidden>
-          <div className={checkBoxTheme} aria-checked={isSelected} role="checkbox" aria-labelledby={id}>
+          <div className={checkBoxTheme} aria-checked={isSelected} role="checkbox" aria-labelledby={id} {...focusProps}>
             <div className={checkMarkTheme}>{icon && <Icon icon={icon} customTheme={checkMarkIconTheme} />}</div>
           </div>
           <Typography themeName={`${themeName}.label`} tokens={checkBoxTokens}>
