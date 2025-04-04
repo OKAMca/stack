@@ -6,7 +6,7 @@ export type NextLinkProps = {
   scroll?: boolean
   shallow?: boolean
   passHref?: boolean
-  prefetch?: boolean
+  prefetch?: boolean | null
   locale?: string | false
   legacyBehavior?: boolean
   onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
