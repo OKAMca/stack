@@ -78,7 +78,7 @@ export default function useMetadata<TPageProps extends { pageSettings: TPageSett
   pageProps: TPageProps,
   options: TMetadataOptions,
   defaultProps?: Partial<TPageSettingsTranslation>,
-): Promise<Metadata> {
+) {
   const { title, image } = withFallbacks(pageProps, options)
   const { pageSettings } = pageProps ?? {}
   const translation = pageSettings?.translations?.[0]
