@@ -1,4 +1,4 @@
-import type { TLinkOptions } from '@okam/next-component'
+import type { TLinkProps } from '@okam/next-component'
 import { Link } from '@okam/next-component'
 import { Box, Typography } from '@okam/stack-ui'
 
@@ -6,7 +6,7 @@ const ProductsLinks = (
   props: Parameters<typeof Page>[0] & {
     title: string
     description: string
-    scroll: TLinkOptions['scroll']
+    scroll: TLinkProps['scroll']
   },
 ) => {
   const { title, description, scroll, ...rest } = props
