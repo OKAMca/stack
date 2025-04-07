@@ -10,8 +10,8 @@ const ProductsLinks = (
   },
 ) => {
   const { title, description, scroll, ...rest } = props
-  const { id, locale } = rest.params
-  const route = `/${locale}/next-component/link/products`
+  const { id } = rest.params
+  const route = `/next-component/link/products`
   const nextId = Number.isNaN(parseInt(id, 10)) ? 1 : parseInt(id, 10) + 1
   const href = `${route}/${nextId}`
 
