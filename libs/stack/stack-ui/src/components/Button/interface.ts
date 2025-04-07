@@ -19,5 +19,8 @@ export interface TButtonProps<T = TToken> extends TDefaultComponent<T> {
 }
 
 export interface TAnchorProps<T = TToken> extends TButtonProps<T> {
+  /**
+   * @deprecated To render a themeable `next/link` component, use the `Link` component from `@okam/next-component`.
+   */
   nextLinkProps?: NextLinkProps
 }
