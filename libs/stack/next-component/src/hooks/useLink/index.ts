@@ -1,16 +1,41 @@
 'use client'
 
-import type { LinkProps as NextLinkProps } from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import type { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
+import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import { useHash } from '../useHash'
-import type { TLinkOptions } from './interface'
+import type { TLink, TUseLinkReturn } from './interface'
 
 function scrollToTop(behavior: ScrollBehavior) {
   window?.scrollTo?.({ top: 0, behavior })
 }
 
-export function useLink(props: TLinkOptions): NextLinkProps {
+function getParamsLocale(params: Params) {
+  const { locale } = params
+  if (Array.isArray(locale)) return locale[0]
+  return locale
+}
+
+/**
+ * Tries to get the locale, in order of priority:
+ * 1. The locale prop. Still has priority even when set to `false`
+ * 2. The locale from react-aria `useLocale`
+ * 3. The locale from next/navigation `useParams`
+ * @returns The best matched locale
+ */
+export function useLinkLocale(props: TLink) {
+  const { locale } = props
+  const params = useParams()
+  const paramsLocale = getParamsLocale(params)
+  if (locale === false) return false
+
+  return locale ?? paramsLocale ?? false
+}
+
+/**
+ * @params {props.locale} - The direct locale prop always gets priority. If no `locale` prop is provided, the prop will try to fall back to react-aria `useLocale` and then next/navigation `useParams`. If a locale is found, it will be automatically prepended to the href. Otherwise, href will be returned as is.
+ */
+export function useLink(props: TLink): TUseLinkReturn {
   const {
     scroll = true,
     onMouseEnter,
@@ -22,7 +47,6 @@ export function useLink(props: TLinkOptions): NextLinkProps {
     href,
     urlDecorator,
     replace,
-    locale,
     prefetch,
     shallow,
     passHref,
@@ -30,6 +54,8 @@ export function useLink(props: TLinkOptions): NextLinkProps {
     behavior = 'instant',
   } = props
 
+  const locale = useLinkLocale(props)
+  const localizedHref = locale ? `/${locale}${href}` : href
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const hash = useHash()
@@ -66,7 +92,7 @@ export function useLink(props: TLinkOptions): NextLinkProps {
   }, [onHashChange, hash])
 
   return {
-    href,
+    href: localizedHref.toString(),
     as: urlDecorator,
     replace,
     locale,
