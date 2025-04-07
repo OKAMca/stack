@@ -74,7 +74,7 @@ function useOpenGraphImage(
   }
 }
 
-export default async function useMetadata<TPageProps extends { pageSettings: TPageSettings }>(
+export default function useMetadata<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
   options: TMetadataOptions,
   defaultProps?: Partial<TPageSettingsTranslation>,
