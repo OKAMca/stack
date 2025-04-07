@@ -11,6 +11,7 @@
     "@okam/stack-ui": "1.32.6",
     "next": "^14.1.1",
     "react-use": "17.5.1",
-    "react": "18.3.1"
+    "react": "18.3.1",
+    "tailwind-variants": "^0.3.0"
   }
 }
