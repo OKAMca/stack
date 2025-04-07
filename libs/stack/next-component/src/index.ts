@@ -6,4 +6,4 @@ export { useHash } from './hooks/useHash'
 
 export type { default as TImgProps } from './components/Img/interface'
 export type { TLinkProps } from './components/Link/interface'
-export type { TLinkOptions, TLink } from './hooks/useLink/interface'
+export type { TLink } from './hooks/useLink/interface'
