@@ -34,6 +34,11 @@
   "dependencies": {
     "@okam/logger": "1.1.0",
     "next": "^14.1.1",
-    "radashi": "^12.3.0"
+    "radashi": "^12.3.0",
+    "@okam/directus-query": "1.4.1",
+    "server-only": "0.0.1",
+    "graphql-request": "7.1.2",
+    "server-only-context": "0.1.0",
+    "@graphql-typed-document-node/core": "3.2.0"
   }
 }
