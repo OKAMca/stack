@@ -12,4 +12,5 @@ export type NextLinkProps = {
   onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
   onTouchStart?: React.TouchEventHandler<HTMLAnchorElement>
   onClick?: React.MouseEventHandler<HTMLAnchorElement>
+  as?: string | UrlObject
 }
