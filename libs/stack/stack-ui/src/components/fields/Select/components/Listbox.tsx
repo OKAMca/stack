@@ -23,14 +23,20 @@ const Option = ({ item, state, themeName = 'li' }: TOptionProps) => {
 
 const ListBox = (props: TListBoxProps) => {
   const ref = React.useRef(null)
-  const { listBoxRef = ref, state, themeName = 'option' } = props
+  const { listBoxRef = ref, state, themeName = 'option', tokens } = props
   const { listBoxProps } = useListBox(props, state, listBoxRef)
 
   return (
     <FocusScope autoFocus restoreFocus contain>
-      <TypographyWithForwardRef {...listBoxProps} ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
+      <TypographyWithForwardRef
+        {...listBoxProps}
+        ref={listBoxRef}
+        as="ul"
+        themeName={`${themeName}.ul`}
+        tokens={tokens}
+      >
         {[...state.collection].map((item) => (
-          <Option themeName={`${themeName}.li`} key={item.key} item={item} state={state} />
+          <Option themeName={`${themeName}.li`} key={item.key} item={item} state={state} tokens={tokens} />
         ))}
       </TypographyWithForwardRef>
     </FocusScope>
