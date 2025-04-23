@@ -4,17 +4,31 @@
 import { useDateRangePicker } from '@react-aria/datepicker'
 import { useDateRangePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'
-import useThemeContext from '../../../providers/Theme/hooks'
 import Box from '../../Box'
-import Button from '../../Button'
 import RangeCalendar from '../../Calendar/RangeCalendar'
 import { Dialog } from '../../Dialog'
-import Icon from '../../Icon'
+import Typography from '../../Typography'
 import { CalendarPopover } from './components/CalendarPopover'
 import DateField from './components/DateField'
+import Wrapper from './components/Wrapper'
 import type { TDateRangePickerProps } from './interface'
 
 function DateRangePicker(props: TDateRangePickerProps) {
+  const {
+    buttonLabel,
+    description,
+    themeName = 'datePicker',
+    tokens,
+    customTheme,
+    popoverPlacement,
+    icon,
+    buttonContent,
+    innerDateFieldSeparator = ' - ',
+    outerDateFieldSeparator = ' - ',
+    children,
+    label,
+    ...rest
+  } = props
   const state = useDateRangePickerState(props)
   const ref = useRef(null)
   const {
@@ -28,48 +42,68 @@ function DateRangePicker(props: TDateRangePickerProps) {
     calendarProps,
   } = useDateRangePicker(props, state, ref)
 
-  const { label, buttonLabel, description, themeName = 'datePicker', tokens, popoverPlacement, icon } = props
-
-  const containerTheme = useThemeContext(`${themeName}.container`, tokens)
-  const dateFieldTheme = useThemeContext(`${themeName}.dateField`, tokens)
-  const labelTheme = useThemeContext(`${themeName}.label`, tokens)
-
   return (
-    <div className={containerTheme}>
-      {label && <span {...labelProps}>{label}</span>}
-      {description && <div {...descriptionProps}>{description}</div>}
-      <div {...groupProps} ref={ref}>
-        <Box themeName={`${themeName}.wrapper`} tokens={{ ...tokens }}>
-          {buttonLabel && <p className={labelTheme}>{buttonLabel}</p>}
-          <div className={dateFieldTheme}>
-            <DateField {...startFieldProps} /> -
-            <DateField {...endFieldProps} />
-            {state.isInvalid && '❌'}
-          </div>
-          <Button
-            themeName={`${themeName}.button`}
-            tokens={{ ...tokens }}
-            type="button"
-            {...buttonProps}
-            handlePress={buttonProps.onPress}
-          >
-            <Icon themeName={`${themeName}.icon`} tokens={{ ...tokens }} icon={icon ?? 'ArrowDown'} />
-          </Button>
+    <Box {...rest} themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
+      {label && (
+        <Typography as="span" themeName={`${themeName}.label`} tokens={tokens} {...labelProps}>
+          {label}
+        </Typography>
+      )}
+      {description && (
+        <Box as="div" themeName={`${themeName}.description`} tokens={tokens} {...descriptionProps}>
+          {description}
         </Box>
-      </div>
+      )}
+      <Wrapper
+        themeName={themeName}
+        tokens={tokens}
+        ref={ref}
+        groupProps={groupProps}
+        buttonProps={buttonProps}
+        buttonLabel={buttonLabel}
+        buttonContent={buttonContent}
+        icon={icon}
+      >
+        <DateField
+          themeName={themeName}
+          tokens={{ ...tokens, position: 'outer', range: 'start' }}
+          {...startFieldProps}
+        />
+        {outerDateFieldSeparator && (
+          <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={tokens}>
+            {outerDateFieldSeparator}
+          </Box>
+        )}
+        <DateField themeName={themeName} tokens={{ ...tokens, position: 'outer', range: 'end' }} {...endFieldProps} />
+        {state.isInvalid && '❌'}
+      </Wrapper>
       {state.isOpen && (
         <CalendarPopover triggerRef={ref} state={state} placement={popoverPlacement}>
-          <Dialog {...dialogProps}>
-            <div className={dateFieldTheme}>
-              <DateField {...startFieldProps} /> -
-              <DateField {...endFieldProps} />
+          <Dialog themeName={`${themeName}.dialog`} tokens={tokens} {...dialogProps}>
+            {children}
+            <Box themeName={`${themeName}.dateFieldContainer`} tokens={tokens}>
+              <DateField
+                themeName={themeName}
+                tokens={{ ...tokens, position: 'inner', range: 'start' }}
+                {...startFieldProps}
+              />
+              {innerDateFieldSeparator && (
+                <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={tokens}>
+                  {innerDateFieldSeparator}
+                </Box>
+              )}
+              <DateField
+                themeName={themeName}
+                tokens={{ ...tokens, position: 'inner', range: 'end' }}
+                {...endFieldProps}
+              />
               {state.isInvalid && '❌'}
-            </div>
+            </Box>
             <RangeCalendar {...calendarProps} />
           </Dialog>
         </CalendarPopover>
       )}
-    </div>
+    </Box>
   )
 }
 
