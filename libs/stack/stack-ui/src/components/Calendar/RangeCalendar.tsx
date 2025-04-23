@@ -4,14 +4,14 @@ import { useRangeCalendar } from '@react-aria/calendar'
 import { useLocale } from '@react-aria/i18n'
 import { useRangeCalendarState } from '@react-stately/calendar'
 import { useRef } from 'react'
-import useThemeContext from '../../providers/Theme/hooks'
-import Button from '../Button'
-import Icon from '../Icon'
+import Box, { BoxWithForwardRef } from '../Box'
 import Typography from '../Typography'
 import CalendarGrid from './components/CalendarGrid'
+import NavigationButtons from './components/NavigationButtons'
 import type { TRangeCalendarProps } from './interface'
 
-function RangeCalendar({ buttons, tokens, customTheme, themeName = 'calendar', ...rest }: TRangeCalendarProps) {
+function RangeCalendar(props: TRangeCalendarProps) {
+  const { buttons, tokens, customTheme, themeName = 'calendar', ...rest } = props
   const { locale } = useLocale()
   const state = useRangeCalendarState({
     ...rest,
@@ -22,39 +22,22 @@ function RangeCalendar({ buttons, tokens, customTheme, themeName = 'calendar', .
   const ref = useRef(null)
   const { calendarProps, prevButtonProps, nextButtonProps, title } = useRangeCalendar({ ...rest }, state, ref)
 
-  const containerTheme = useThemeContext(`${themeName}.container`, tokens)
-  const headerTheme = useThemeContext(`${themeName}.header`, tokens)
-  const navigationButtonsContainer = useThemeContext(`${themeName}.navigationButtonsContainer`, tokens)
-
   return (
-    <div {...calendarProps} ref={ref} className={containerTheme}>
-      <div className={headerTheme}>
-        <Typography as="p" tokens={{ size: 'h6' }}>
+    <BoxWithForwardRef {...calendarProps} ref={ref} themeName={`${themeName}.container`} tokens={tokens}>
+      <Box themeName={`${themeName}.header`} tokens={tokens}>
+        <Typography as="p" themeName={`${themeName}.title`} tokens={tokens}>
           {title}
         </Typography>
-        <div className={navigationButtonsContainer}>
-          <Button
-            themeName={`${themeName}.navigationButtons`}
-            tokens={{ ...tokens }}
-            type="button"
-            {...prevButtonProps}
-            handlePress={prevButtonProps?.onPress}
-          >
-            <Icon icon={buttons?.buttonPrev?.icon ?? 'ArrowLeft'} />
-          </Button>
-          <Button
-            themeName={`${themeName}.navigationButtons`}
-            tokens={{ ...tokens }}
-            type="button"
-            {...nextButtonProps}
-            handlePress={nextButtonProps?.onPress}
-          >
-            <Icon icon={buttons?.buttonNext?.icon ?? 'ArrowRight'} />
-          </Button>
-        </div>
-      </div>
+        <NavigationButtons
+          themeName={themeName}
+          tokens={tokens}
+          buttons={buttons}
+          prevButtonProps={prevButtonProps}
+          nextButtonProps={nextButtonProps}
+        />
+      </Box>
       <CalendarGrid state={state} />
-    </div>
+    </BoxWithForwardRef>
   )
 }
 

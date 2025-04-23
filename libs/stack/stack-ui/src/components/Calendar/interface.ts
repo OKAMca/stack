@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import type { CalendarDate, DateValue } from '@internationalized/date'
-import type { CalendarProps, RangeCalendarProps } from '@react-aria/calendar'
+import type { CalendarAria, CalendarProps, RangeCalendarProps } from '@react-aria/calendar'
 import type { CalendarState, RangeCalendarState } from '@react-stately/calendar'
 import type { AriaCalendarGridProps } from 'react-aria'
 import type { TToken } from '../../providers/Theme/interface'
@@ -36,3 +36,8 @@ export interface TCalendarCellProps extends TDefaultComponent {
   state: RangeCalendarState | CalendarState
   date: CalendarDate
 }
+
+export interface TCalendarNavigationButtonsProps
+  extends TDefaultComponent,
+    Pick<TCalendarProps, 'buttons'>,
+    Pick<CalendarAria, 'prevButtonProps' | 'nextButtonProps'> {}
