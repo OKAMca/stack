@@ -5,7 +5,7 @@ import { mergeProps } from '@react-aria/utils'
 import type { RangeCalendarState } from '@react-stately/calendar'
 import { useRef } from 'react'
 import { useLocale } from 'react-aria'
-import useThemeContext from '../../../providers/Theme/hooks'
+import Box, { BoxWithForwardRef } from '../../Box'
 import type { TCalendarCellProps } from '../interface'
 
 function CalendarCell({ themeName = 'calendar', tokens, state, date }: TCalendarCellProps) {
@@ -31,30 +31,29 @@ function CalendarCell({ themeName = 'calendar', tokens, state, date }: TCalendar
 
   const { focusProps, isFocusVisible } = useFocusRing()
 
-  const cellContainerTheme = useThemeContext(`${themeName}.cellContainer`, { ...tokens, isFocusVisible })
-  const cellTheme = useThemeContext(`${themeName}.cell`, {
-    ...tokens,
-    isSelected,
-    isInvalid,
-    isDisabled,
-    isRoundedLeft,
-    isRoundedRight,
-  })
-  const cellDate = useThemeContext(`${themeName}.cellDate`, {
-    ...tokens,
-    isSelected,
-    isInvalid,
-    isDisabled,
-    isSelectionStart,
-    isSelectionEnd,
-  })
-
   return (
-    <td {...cellProps} aria-disabled={false} className={cellContainerTheme}>
-      <div {...mergeProps(buttonProps, focusProps)} ref={ref} hidden={isOutsideVisibleRange} className={cellTheme}>
-        <div className={cellDate}>{formattedDate}</div>
-      </div>
-    </td>
+    <Box
+      as="td"
+      {...cellProps}
+      aria-disabled={false}
+      themeName={`${themeName}.cellContainer`}
+      tokens={{ ...tokens, isFocusVisible }}
+    >
+      <BoxWithForwardRef
+        {...mergeProps(buttonProps, focusProps)}
+        ref={ref}
+        aria-hidden={isOutsideVisibleRange}
+        themeName={`${themeName}.cell`}
+        tokens={{ ...tokens, isSelected, isInvalid, isDisabled, isRoundedLeft, isRoundedRight }}
+      >
+        <Box
+          themeName={`${themeName}.cellDate`}
+          tokens={{ ...tokens, isSelected, isInvalid, isDisabled, isSelectionStart, isSelectionEnd }}
+        >
+          {formattedDate}
+        </Box>
+      </BoxWithForwardRef>
+    </Box>
   )
 }
 

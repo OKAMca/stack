@@ -3,42 +3,50 @@
 import { getWeeksInMonth } from '@internationalized/date'
 import { useCalendarGrid } from '@react-aria/calendar'
 import { useLocale } from '@react-aria/i18n'
-import useThemeContext from '../../../providers/Theme/hooks'
+import Box from '../../Box'
 import type { TCalendarGridProps } from '../interface'
 import CalendarCell from './CalendarCell'
 
 function CalendarGrid({ themeName = 'calendar', customTheme, tokens, state, ...rest }: TCalendarGridProps) {
   const { locale } = useLocale()
   const { gridProps, headerProps } = useCalendarGrid({ ...rest }, state)
-  const weekDays = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+  const weekDays = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa']
 
   // Get the number of weeks in the month so we can render the proper number of rows.
   const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
 
-  const tableTheme = useThemeContext(`${themeName}.calendarTable`, tokens)
-  const dayLabelTheme = useThemeContext(`${themeName}.dayLabel`, tokens)
-
   return (
-    <table {...gridProps} cellPadding="0" className={tableTheme}>
-      <thead {...headerProps}>
-        <tr>
+    <Box as="table" {...gridProps} themeName={`${themeName}.calendarTable`} tokens={tokens}>
+      <Box as="thead" themeName={`${themeName}.calendarHeaderContainer`} {...headerProps} tokens={tokens}>
+        <Box as="tr" themeName={`${themeName}.calendarHeaderRow`} tokens={tokens}>
           {weekDays.map((day) => (
-            <th key={`day-${day}`} className={dayLabelTheme}>
+            <Box as="th" themeName={`${themeName}.calendarDayLabel`} key={`day-${day}`} tokens={tokens}>
               {day}
-            </th>
+            </Box>
           ))}
-        </tr>
-      </thead>
-      <tbody>
+        </Box>
+      </Box>
+      <Box as="tbody" themeName={`${themeName}.calendarBody`} tokens={tokens}>
         {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
-          <tr key={`week-${weekIndex}`}>
+          <Box as="tr" themeName={`${themeName}.calendarWeekRow`} key={`week-${weekIndex}`} tokens={tokens}>
             {state
               .getDatesInWeek(weekIndex)
-              .map((date, i) => (date ? <CalendarCell key={date?.day} state={state} date={date} /> : <td key={i} />))}
-          </tr>
+              .map((date, i) =>
+                date ? (
+                  <CalendarCell themeName={themeName} tokens={tokens} key={date?.day} state={state} date={date} />
+                ) : (
+                  <Box
+                    themeName={`${themeName}.calendarCellContainer`}
+                    tokens={{ isEmpty: true, ...tokens }}
+                    as="td"
+                    key={i}
+                  />
+                ),
+              )}
+          </Box>
         ))}
-      </tbody>
-    </table>
+      </Box>
+    </Box>
   )
 }
 

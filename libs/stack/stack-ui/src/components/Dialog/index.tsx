@@ -1,14 +1,16 @@
 import { useRef } from 'react'
 import { useDialog } from 'react-aria'
+import { BoxWithForwardRef } from '../Box'
 import type { TDialogProps } from './interface'
 
-export function Dialog({ title, children, ...props }: TDialogProps) {
+export function Dialog(props: TDialogProps) {
+  const { themeName = 'dialog', tokens, title, children, ...rest } = props
   const ref = useRef(null)
   const { dialogProps } = useDialog(props, ref)
 
   return (
-    <div {...dialogProps} ref={ref}>
+    <BoxWithForwardRef {...rest} themeName={themeName} tokens={tokens} {...dialogProps} ref={ref}>
       {children}
-    </div>
+    </BoxWithForwardRef>
   )
 }
