@@ -1,7 +1,13 @@
+import { today, getLocalTimeZone, isWeekend } from '@internationalized/date'
 import { useState } from 'react'
 import Box from '../../Box'
 import RangeCalendar from '../../Calendar/RangeCalendar'
 import DateRangePicker from './DateRangePicker'
+
+/**
+ * @typedef {import('@storybook/react').Meta<typeof DateRangePicker>} Meta
+ * @typedef {import('@storybook/react').StoryObj<typeof DateRangePicker>} Story
+ */
 
 const Template = (args) => (
   <div style={{ minHeight: '500px' }}>
@@ -35,7 +41,7 @@ const TemplateControlled = (args) => {
 }
 
 /**
- * @type {import('@storybook/react').Meta<typeof DateRangePicker>}
+ * @type {Meta}
  */
 const meta = {
   title: 'Form/Fields/DateRangePicker',
@@ -46,23 +52,6 @@ const meta = {
     onChange: (date) => console.log(date),
   },
   argTypes: {
-    popoverPlacement: {
-      description: 'The placement of the popover.',
-      table: {
-        defaultValue: {
-          summary: 'bottom start',
-        },
-      },
-    },
-    children: {
-      description:
-        'The children to render inside the popover. Children are rendered inside the dialog, right before the inner date fields.',
-      table: {
-        type: {
-          summary: 'ReactNode',
-        },
-      },
-    },
     innerDateFieldSeparator: {
       description: 'The separator to render between the start and end date fields that are inside the popover.',
       table: {
@@ -85,38 +74,14 @@ const meta = {
         },
       },
     },
-    buttonContent: {
-      description: 'The content of the button. Renders alongside the icon.',
-      table: {
-        type: {
-          summary: 'ReactNode',
-        },
-      },
-    },
-    icon: {
-      description: 'The icon to render inside the button.',
-      table: {
-        defaultValue: {
-          summary: 'ArrowDown',
-        },
-        type: {
-          summary: 'ReactNode',
-        },
-      },
-    },
-    buttonLabel: {
-      description: 'The label of the button. Renders before the actual open button.',
-      table: {
-        type: {
-          summary: 'string',
-        },
-      },
-    },
   },
 }
 
 export default meta
 
+/**
+ * @type {Story}
+ */
 export const Default = {
   render: Template.bind({}),
   args: {
@@ -125,11 +90,17 @@ export const Default = {
   name: 'Default',
 }
 
+/**
+ * @type {Story}
+ */
 export const DateFieldAndIcon = {
   render: Template.bind({}),
   name: 'Date Field and Icon',
 }
 
+/**
+ * @type {Story}
+ */
 export const OnlyIcon = {
   render: Template.bind({}),
   args: {
@@ -140,7 +111,33 @@ export const OnlyIcon = {
   name: 'Only Icon',
 }
 
+/**
+ * @type {Story}
+ */
 export const Controlled = {
   render: TemplateControlled.bind({}),
   name: 'Controlled',
+}
+
+/**
+ * @type {Story}
+ */
+export const UnavailableDates = {
+  render: Template.bind({}),
+  name: 'Unavailable Dates',
+  args: {
+    minValue: today(getLocalTimeZone()),
+    isDateUnavailable: (date) => {
+      const now = today(getLocalTimeZone())
+      const disabledRanges = [
+        [now, now.add({ days: 5 })],
+        [now.add({ days: 14 }), now.add({ days: 16 })],
+        [now.add({ days: 23 }), now.add({ days: 24 })],
+      ]
+      const isUnavailable =
+        isWeekend(date, 'en-CA') ||
+        disabledRanges.some((interval) => date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0)
+      return isUnavailable
+    },
+  },
 }

@@ -20,6 +20,10 @@ export const datePickerButton = tv({
       true: 'w-full',
       false: 'w-fit',
     },
+    isInvalid: {
+      true: 'bg-red-100 border-red-500',
+      false: 'bg-gray-100 border-color-1-500',
+    },
   },
   defaultVariants: {
     dateFieldShown: true,
@@ -69,7 +73,8 @@ export const datePickerDateField = tv({
 
 export const datePickerDateSegment = tv({
   extend: focusable,
-  base: `rounded-sm p-1 focus:bg-color-1-400 focus:text-white`,
+  base: `rounded-sm p-1 focus:bg-color-1-400 focus:text-white
+  `,
 })
 
 export const datePickerTheme = {

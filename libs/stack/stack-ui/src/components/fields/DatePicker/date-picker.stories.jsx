@@ -1,19 +1,25 @@
+import { today, getLocalTimeZone, isWeekend } from '@internationalized/date'
 import { useState } from 'react'
 import Box from '../../Box'
 import Calendar from '../../Calendar'
 import DatePicker from '.'
 
+/**
+ * @typedef {import('@storybook/react').Meta<typeof DatePicker>} Meta
+ * @typedef {import('@storybook/react').StoryObj<typeof DatePicker>} Story
+ */
+
 const Template = (args) => (
-  <div style={{ minHeight: '500px' }}>
+  <Box customTheme="min-h-[500px]">
     <DatePicker {...args} />
-  </div>
+  </Box>
 )
 
 const TemplateControlled = (args) => {
   const { defaultValue, onChange, ...rest } = args
   const [value, setValue] = useState(defaultValue)
   return (
-    <Box>
+    <Box customTheme="min-h-[500px]">
       <Calendar
         {...rest}
         value={value}
@@ -35,7 +41,7 @@ const TemplateControlled = (args) => {
 }
 
 /**
- * @type {import('@storybook/react').Meta<typeof DatePicker>}
+ * @type {Meta}
  */
 const meta = {
   title: 'Form/Fields/DatePicker',
@@ -45,12 +51,54 @@ const meta = {
     onChange: (date) => console.log(date),
   },
   argTypes: {
+    isInvalidIndicator: {
+      description:
+        'The indicator to render when the date, or one of the dates in the date range (if applicable), is invalid.',
+      table: {
+        type: {
+          summary: 'ReactNode',
+        },
+        defaultValue: {
+          summary: '❌',
+        },
+      },
+    },
+    label: {
+      description: 'The label of the date picker.',
+      table: {
+        type: {
+          summary: 'string',
+        },
+        category: 'react-aria',
+      },
+    },
+    isDateUnavailable: {
+      description:
+        'Callback function taking a single `date` argument and returning a boolean indicating if the date is unavailable.',
+      table: {
+        type: {
+          summary: '(date: DateValue) => boolean',
+        },
+        category: 'react-aria',
+      },
+    },
+    granularity: {
+      description:
+        'Determines the smallest unit that is displayed in the date picker. By default, this is `day` for dates, and `minute` for times.',
+      table: {
+        defaultValue: {
+          summary: 'day',
+        },
+        category: 'react-aria',
+      },
+    },
     placeholderValue: {
       description: 'The placeholder value to render in the date field.',
       table: {
         type: {
           summary: 'string',
         },
+        category: 'react-aria',
       },
     },
     popoverPlacement: {
@@ -59,6 +107,7 @@ const meta = {
         defaultValue: {
           summary: 'bottom start',
         },
+        category: 'react-aria',
       },
     },
     children: {
@@ -102,6 +151,9 @@ const meta = {
 
 export default meta
 
+/**
+ * @type {Story}
+ */
 export const Default = {
   render: Template.bind({}),
   args: {
@@ -111,11 +163,17 @@ export const Default = {
   name: 'Default',
 }
 
+/**
+ * @type {Story}
+ */
 export const DateFieldAndIcon = {
   render: Template.bind({}),
   name: 'Date Field and Icon',
 }
 
+/**
+ * @type {Story}
+ */
 export const OnlyIcon = {
   render: Template.bind({}),
   args: {
@@ -126,8 +184,33 @@ export const OnlyIcon = {
   name: 'Only Icon',
 }
 
+/**
+ * @type {Story}
+ */
 export const Controlled = {
   render: TemplateControlled.bind({}),
-  args: {},
   name: 'Controlled',
+}
+
+/**
+ * @type {Story}
+ */
+export const UnavailableDates = {
+  render: Template.bind({}),
+  name: 'Unavailable Dates',
+  args: {
+    minValue: today(getLocalTimeZone()),
+    isDateUnavailable: (date) => {
+      const now = today(getLocalTimeZone())
+      const disabledRanges = [
+        [now, now.add({ days: 5 })],
+        [now.add({ days: 14 }), now.add({ days: 16 })],
+        [now.add({ days: 23 }), now.add({ days: 24 })],
+      ]
+      const isUnavailable =
+        isWeekend(date, 'en-CA') ||
+        disabledRanges.some((interval) => date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0)
+      return isUnavailable
+    },
+  },
 }
