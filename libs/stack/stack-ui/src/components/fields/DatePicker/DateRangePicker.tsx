@@ -25,9 +25,9 @@ function DateRangePicker(props: TDateRangePickerProps) {
     buttonContent,
     innerDateFieldSeparator = ' - ',
     outerDateFieldSeparator = ' - ',
+    isInvalidIndicator = '❌',
     children,
     label,
-    ...rest
   } = props
   const state = useDateRangePickerState(props)
   const ref = useRef(null)
@@ -42,21 +42,26 @@ function DateRangePicker(props: TDateRangePickerProps) {
     calendarProps,
   } = useDateRangePicker(props, state, ref)
 
+  const datePickerTokens = {
+    ...tokens,
+    isInvalid: state.isInvalid,
+  }
+
   return (
-    <Box {...rest} themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
+    <Box themeName={`${themeName}.container`} tokens={datePickerTokens} customTheme={customTheme}>
       {label && (
-        <Typography as="span" themeName={`${themeName}.label`} tokens={tokens} {...labelProps}>
+        <Typography as="span" themeName={`${themeName}.label`} tokens={datePickerTokens} {...labelProps}>
           {label}
         </Typography>
       )}
       {description && (
-        <Box as="div" themeName={`${themeName}.description`} tokens={tokens} {...descriptionProps}>
+        <Box as="div" themeName={`${themeName}.description`} tokens={datePickerTokens} {...descriptionProps}>
           {description}
         </Box>
       )}
       <Wrapper
         themeName={themeName}
-        tokens={tokens}
+        tokens={datePickerTokens}
         ref={ref}
         groupProps={groupProps}
         buttonProps={buttonProps}
@@ -66,38 +71,48 @@ function DateRangePicker(props: TDateRangePickerProps) {
       >
         <DateField
           themeName={themeName}
-          tokens={{ ...tokens, position: 'outer', range: 'start' }}
+          tokens={{ ...datePickerTokens, position: 'outer', range: 'start' }}
           {...startFieldProps}
         />
         {outerDateFieldSeparator && (
-          <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={tokens}>
+          <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={datePickerTokens}>
             {outerDateFieldSeparator}
           </Box>
         )}
-        <DateField themeName={themeName} tokens={{ ...tokens, position: 'outer', range: 'end' }} {...endFieldProps} />
-        {state.isInvalid && '❌'}
+        <DateField
+          themeName={themeName}
+          tokens={{ ...datePickerTokens, position: 'outer', range: 'end' }}
+          {...endFieldProps}
+        />
+        {state.isInvalid && isInvalidIndicator}
       </Wrapper>
       {state.isOpen && (
-        <CalendarPopover triggerRef={ref} state={state} placement={popoverPlacement}>
-          <Dialog themeName={`${themeName}.dialog`} tokens={tokens} {...dialogProps}>
+        <CalendarPopover
+          themeName={themeName}
+          tokens={datePickerTokens}
+          triggerRef={ref}
+          state={state}
+          placement={popoverPlacement}
+        >
+          <Dialog themeName={`${themeName}.dialog`} tokens={datePickerTokens} {...dialogProps}>
             {children}
-            <Box themeName={`${themeName}.dateFieldContainer`} tokens={tokens}>
+            <Box themeName={`${themeName}.dateFieldContainer`} tokens={datePickerTokens}>
               <DateField
                 themeName={themeName}
-                tokens={{ ...tokens, position: 'inner', range: 'start' }}
+                tokens={{ ...datePickerTokens, position: 'inner', range: 'start' }}
                 {...startFieldProps}
               />
               {innerDateFieldSeparator && (
-                <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={tokens}>
+                <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={datePickerTokens}>
                   {innerDateFieldSeparator}
                 </Box>
               )}
               <DateField
                 themeName={themeName}
-                tokens={{ ...tokens, position: 'inner', range: 'end' }}
+                tokens={{ ...datePickerTokens, position: 'inner', range: 'end' }}
                 {...endFieldProps}
               />
-              {state.isInvalid && '❌'}
+              {state.isInvalid && isInvalidIndicator}
             </Box>
             <RangeCalendar {...calendarProps} />
           </Dialog>

@@ -8,10 +8,19 @@ import { useLocale } from 'react-aria'
 import Box, { BoxWithForwardRef } from '../../Box'
 import type { TCalendarCellProps } from '../interface'
 
-function CalendarCell({ themeName = 'calendar', tokens, state, date }: TCalendarCellProps) {
+function CalendarCell(props: TCalendarCellProps) {
+  const { themeName = 'calendar', tokens, state, date } = props
   const ref = useRef(null)
-  const { cellProps, buttonProps, isSelected, isOutsideVisibleRange, isDisabled, formattedDate, isInvalid } =
-    useCalendarCell({ date }, state, ref)
+  const {
+    isUnavailable,
+    cellProps,
+    buttonProps,
+    isSelected,
+    isOutsideVisibleRange,
+    isDisabled,
+    formattedDate,
+    isInvalid,
+  } = useCalendarCell(props, state, ref)
 
   // The start and end date of the selected range will have
   // an emphasized appearance.
@@ -31,25 +40,31 @@ function CalendarCell({ themeName = 'calendar', tokens, state, date }: TCalendar
 
   const { focusProps, isFocusVisible } = useFocusRing()
 
+  const calendarCellTokens = {
+    ...tokens,
+    isInvalid,
+    isDisabled,
+    isUnavailable,
+    isSelected,
+    isFocusVisible,
+  }
+
   return (
     <Box
       as="td"
       {...cellProps}
       aria-disabled={false}
       themeName={`${themeName}.cellContainer`}
-      tokens={{ ...tokens, isFocusVisible }}
+      tokens={calendarCellTokens}
     >
       <BoxWithForwardRef
         {...mergeProps(buttonProps, focusProps)}
         ref={ref}
         aria-hidden={isOutsideVisibleRange}
         themeName={`${themeName}.cell`}
-        tokens={{ ...tokens, isSelected, isInvalid, isDisabled, isRoundedLeft, isRoundedRight }}
+        tokens={{ ...calendarCellTokens, isRoundedLeft, isRoundedRight }}
       >
-        <Box
-          themeName={`${themeName}.cellDate`}
-          tokens={{ ...tokens, isSelected, isInvalid, isDisabled, isSelectionStart, isSelectionEnd }}
-        >
+        <Box themeName={`${themeName}.cellDate`} tokens={{ ...calendarCellTokens, isSelectionStart, isSelectionEnd }}>
           {formattedDate}
         </Box>
       </BoxWithForwardRef>

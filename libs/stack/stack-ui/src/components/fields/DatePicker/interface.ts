@@ -50,6 +50,10 @@ interface TDatePickerBase {
   icon?: ReactNode
   buttonLabel?: ReactNode
   buttonContent?: ReactNode
+  /**
+   * @default '❌'
+   */
+  isInvalidIndicator?: ReactNode
 }
 
 export interface TDatePickerProps<T = TToken>
