@@ -25,28 +25,33 @@ function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
     buttonContent,
     label,
     children,
-    ...rest
+    isInvalidIndicator = '❌',
   } = props
   const state = useDatePickerState(props)
   const ref = useRef(null)
   const { groupProps, fieldProps, labelProps, descriptionProps, buttonProps, dialogProps, calendarProps } =
     useDatePicker(props, state, ref)
 
+  const datePickerTokens = {
+    ...tokens,
+    isInvalid: state.isInvalid,
+  }
+
   return (
-    <Box {...rest} themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
+    <Box themeName={`${themeName}.container`} tokens={datePickerTokens} customTheme={customTheme}>
       {label && (
-        <Typography as="span" themeName={`${themeName}.label`} tokens={tokens} {...labelProps}>
+        <Typography as="span" themeName={`${themeName}.label`} tokens={datePickerTokens} {...labelProps}>
           {label}
         </Typography>
       )}
       {description && (
-        <Box as="div" themeName={`${themeName}.description`} tokens={tokens} {...descriptionProps}>
+        <Box as="div" themeName={`${themeName}.description`} tokens={datePickerTokens} {...descriptionProps}>
           {description}
         </Box>
       )}
       <Wrapper
         themeName={themeName}
-        tokens={tokens}
+        tokens={datePickerTokens}
         ref={ref}
         groupProps={groupProps}
         buttonProps={buttonProps}
@@ -54,17 +59,23 @@ function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
         buttonContent={buttonContent}
         icon={icon}
       >
-        <DateField themeName={themeName} tokens={{ ...tokens, position: 'outer' }} {...fieldProps} />
+        <DateField themeName={themeName} tokens={{ ...datePickerTokens, position: 'outer' }} {...fieldProps} />
       </Wrapper>
       {state.isOpen && (
-        <CalendarPopover triggerRef={ref} state={state} placement={popoverPlacement}>
-          <Dialog themeName={`${themeName}.dialog`} tokens={tokens} {...dialogProps}>
+        <CalendarPopover
+          themeName={themeName}
+          tokens={datePickerTokens}
+          triggerRef={ref}
+          state={state}
+          placement={popoverPlacement}
+        >
+          <Dialog themeName={`${themeName}.dialog`} tokens={datePickerTokens} {...dialogProps}>
             {children}
-            <Box themeName={`${themeName}.dateFieldContainer`} tokens={tokens}>
-              <DateField themeName={themeName} tokens={{ ...tokens, position: 'inner' }} {...fieldProps} />
-              {state.isInvalid && '❌'}
+            <Box themeName={`${themeName}.dateFieldContainer`} tokens={datePickerTokens}>
+              <DateField themeName={themeName} tokens={{ ...datePickerTokens, position: 'inner' }} {...fieldProps} />
+              {state.isInvalid && isInvalidIndicator}
             </Box>
-            <Calendar {...calendarProps} />
+            <Calendar {...calendarProps} tokens={datePickerTokens} />
           </Dialog>
         </CalendarPopover>
       )}
