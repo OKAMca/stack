@@ -76,7 +76,11 @@ export const calendarCell = tv({
       false: '',
     },
     isDisabled: {
-      true: 'disabled',
+      true: 'disabled pointer-events-none',
+      false: '',
+    },
+    isUnavailable: {
+      true: 'pointer-events-none',
       false: '',
     },
     isRoundedLeft: {
@@ -130,6 +134,10 @@ export const calendarCellDate = tv({
       fasle: '',
     },
     isDisabled: {
+      true: 'opacity-50 pointer-events-none',
+      false: '',
+    },
+    isUnavailable: {
       true: 'opacity-50 pointer-events-none',
       false: '',
     },

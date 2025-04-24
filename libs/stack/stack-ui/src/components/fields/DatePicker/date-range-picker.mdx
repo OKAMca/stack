@@ -14,14 +14,31 @@ For props that are shared with the `DatePicker` component, see the [DatePicker d
 
 <ArgTypes
   of={DateRangePickerStories  .Default}
-  exclude={['onChange', 'as', 'children', 'popoverPlacement', 'label', 'description', 'buttonLabel', 'buttonContent', 'icon']}
+  exclude={['onChange', 'as', 'children', 'popoverPlacement', 'label', 'description', 'buttonLabel', 'buttonContent', 'icon', 'isInvalidIndicator']}
  />
 
 ## Showcase
 
+### Style variations
+
+#### Default
+
 <Canvas of={DateRangePickerStories.Default} />
+
+#### Date field and icon
 
 <Canvas of={DateRangePickerStories.DateFieldAndIcon} />
 
+#### Only icon
+
 <Canvas of={DateRangePickerStories.OnlyIcon} />
 
+### Modified behaviors
+
+#### Unavailable dates
+
+<Canvas of={DateRangePickerStories.UnavailableDates} />
+
+#### Controlled
+
+<Canvas of={DateRangePickerStories.Controlled} />
