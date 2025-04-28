@@ -99,7 +99,15 @@ function DateRangePicker(props: TDateRangePickerProps) {
           tokens={{ ...datePickerTokens, position: 'outer', range: 'end' }}
           {...endFieldProps}
         />
-        {state.isInvalid && invalidIndicator}
+        {state.isInvalid && (
+          <Box
+            as="span"
+            themeName={`${themeName}.invalidIndicator`}
+            tokens={{ ...datePickerTokens, position: 'outer' }}
+          >
+            {invalidIndicator}
+          </Box>
+        )}
       </Wrapper>
       {state.isOpen && (
         <CalendarPopover
@@ -136,7 +144,15 @@ function DateRangePicker(props: TDateRangePickerProps) {
                 tokens={{ ...datePickerTokens, position: 'inner', range: 'end' }}
                 {...endFieldProps}
               />
-              {state.isInvalid && invalidIndicator}
+              {state.isInvalid && (
+                <Box
+                  as="span"
+                  themeName={`${themeName}.invalidIndicator`}
+                  tokens={{ ...datePickerTokens, position: 'inner' }}
+                >
+                  {invalidIndicator}
+                </Box>
+              )}
             </Box>
             {/* Don't pass state tokens to calendar as they might override the calendar's own state tokens */}
             <RangeCalendar {...calendarProps} tokens={tokens} />

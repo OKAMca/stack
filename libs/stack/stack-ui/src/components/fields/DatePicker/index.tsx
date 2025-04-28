@@ -81,6 +81,15 @@ function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
         icon={icon}
       >
         <DateField themeName={themeName} tokens={{ ...datePickerTokens, position: 'outer' }} {...fieldProps} />
+        {state.isInvalid && (
+          <Box
+            as="span"
+            themeName={`${themeName}.invalidIndicator`}
+            tokens={{ ...datePickerTokens, position: 'outer' }}
+          >
+            {invalidIndicator}
+          </Box>
+        )}
       </Wrapper>
       {state.isOpen && (
         <CalendarPopover
@@ -103,7 +112,15 @@ function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
             {children}
             <Box themeName={`${themeName}.dateFieldContainer`} tokens={datePickerTokens}>
               <DateField themeName={themeName} tokens={{ ...datePickerTokens, position: 'inner' }} {...fieldProps} />
-              {state.isInvalid && invalidIndicator}
+              {state.isInvalid && (
+                <Box
+                  as="span"
+                  themeName={`${themeName}.invalidIndicator`}
+                  tokens={{ ...datePickerTokens, position: 'inner' }}
+                >
+                  {invalidIndicator}
+                </Box>
+              )}
             </Box>
             {/* Don't pass state tokens to calendar as they might override the calendar's own state tokens */}
             <Calendar {...calendarProps} tokens={tokens} />
