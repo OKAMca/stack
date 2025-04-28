@@ -31,7 +31,7 @@ const InnerListBox = (props: {
   const { children, listBoxRef, themeName } = props
   return (
     <FocusScope autoFocus restoreFocus contain>
-      <BoxWithForwardRef {...props} ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
+      <BoxWithForwardRef ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
         {children}
       </BoxWithForwardRef>
     </FocusScope>
@@ -42,7 +42,7 @@ const ListBox = (props: TListBoxProps) => {
   const ref = React.useRef(null)
   const { listBoxRef = ref, state, themeName = 'option' } = props
   const { listBoxProps } = useListBox(props, state, listBoxRef)
-  const collection = [...state.collection] as { key: string; rendered: string }[]
+  const collection = Array.from(state.collection) as { key: string; rendered: string }[]
 
   const sections = useListboxSections(collection)
   const hasHeaders = sections.some((section) => section.header?.key != null)
@@ -50,7 +50,7 @@ const ListBox = (props: TListBoxProps) => {
   if (!hasHeaders) {
     return (
       <InnerListBox {...listBoxProps} listBoxRef={listBoxRef} themeName={themeName}>
-        {[...state.collection].map((item) => (
+        {collection.map((item) => (
           <Option themeName={`${themeName}.li`} key={item.key} item={item} state={state} />
         ))}
       </InnerListBox>
@@ -74,7 +74,7 @@ const ListBox = (props: TListBoxProps) => {
               )}
               <Box as="ul" themeName={`${themeName}.list`}>
                 {section.items.map((item) => (
-                  <Option themeName={`${themeName}.li`} key={item.key} item={item} state={state} />
+                  <Option themeName={`${themeName}.li`} key={item.key?.toString()} item={item} state={state} />
                 ))}
               </Box>
             </Box>

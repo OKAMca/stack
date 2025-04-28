@@ -15,7 +15,7 @@ export interface TOptionProps extends AriaOptionProps, TDefaultComponent {
 }
 
 export type Item = {
-  key: string
+  key: React.Key
   rendered: string
 }
 
