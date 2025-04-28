@@ -8,7 +8,7 @@ import type {
 } from '@react-stately/datepicker'
 import type React from 'react'
 import type { ReactNode } from 'react'
-import type { AriaDatePickerProps, AriaPopoverProps, DatePickerAria, DateRangePickerAria } from 'react-aria'
+import type { AriaDatePickerProps, AriaPopoverProps, DatePickerAria, DateRangePickerAria, Placement } from 'react-aria'
 import type { OverlayTriggerState } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../../types/components'
@@ -18,32 +18,12 @@ export interface TDateSegmentProps extends TDefaultComponent {
   state: DateFieldState
 }
 
-type PopoverPlacement =
-  | 'bottom'
-  | 'bottom left'
-  | 'bottom right'
-  | 'bottom start'
-  | 'bottom end'
-  | 'top'
-  | 'top left'
-  | 'top right'
-  | 'top start'
-  | 'top end'
-  | 'left'
-  | 'left top'
-  | 'left bottom'
-  | 'start'
-  | 'start top'
-  | 'start bottom'
-  | 'right'
-  | 'right top'
-  | 'right bottom'
-  | 'end'
-  | 'end top'
-  | 'end bottom'
-
-interface TDatePickerBase {
-  popoverPlacement?: PopoverPlacement
+interface TDatePickerBase extends Omit<AriaPopoverProps, 'popoverRef' | 'triggerRef' | 'targetRef' | 'overlayRef'> {
+  /**
+   * @deprecated Use `placement` instead.
+   * @default 'bottom start'
+   */
+  popoverPlacement?: Placement
   /**
    * @default 'ArrowDown'
    */
@@ -53,7 +33,7 @@ interface TDatePickerBase {
   /**
    * @default '❌'
    */
-  isInvalidIndicator?: ReactNode
+  invalidIndicator?: ReactNode
 }
 
 export interface TDatePickerProps<T = TToken>

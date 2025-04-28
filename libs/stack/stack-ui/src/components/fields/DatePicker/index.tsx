@@ -15,7 +15,8 @@ import type { TDatePickerProps } from './interface'
 
 function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
   const {
-    popoverPlacement = 'bottom start',
+    popoverPlacement: legacyPopoverPlacement = 'bottom start',
+    placement: propPlacement = 'bottom start',
     tokens,
     customTheme,
     themeName = 'datePicker',
@@ -25,16 +26,36 @@ function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
     buttonContent,
     label,
     children,
-    isInvalidIndicator = '❌',
+    invalidIndicator = '❌',
+    isDisabled = false,
+    isReadOnly = false,
+    isRequired = false,
+    containerPadding,
+    shouldCloseOnInteractOutside,
+    arrowBoundaryOffset,
+    isNonModal,
+    isKeyboardDismissDisabled,
+    arrowSize,
+    boundaryElement,
+    maxHeight,
+    shouldUpdatePosition,
   } = props
+
+  const placement = propPlacement ?? legacyPopoverPlacement
   const state = useDatePickerState(props)
+  const { isInvalid, isOpen, hasTime } = state
   const ref = useRef(null)
   const { groupProps, fieldProps, labelProps, descriptionProps, buttonProps, dialogProps, calendarProps } =
     useDatePicker(props, state, ref)
 
   const datePickerTokens = {
+    isInvalid,
+    isOpen,
+    hasTime,
+    isDisabled,
+    isReadOnly,
+    isRequired,
     ...tokens,
-    isInvalid: state.isInvalid,
   }
 
   return (
@@ -64,18 +85,28 @@ function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
       {state.isOpen && (
         <CalendarPopover
           themeName={themeName}
-          tokens={datePickerTokens}
+          tokens={{ ...tokens, isInvalid }}
           triggerRef={ref}
           state={state}
-          placement={popoverPlacement}
+          placement={placement}
+          containerPadding={containerPadding}
+          shouldCloseOnInteractOutside={shouldCloseOnInteractOutside}
+          arrowBoundaryOffset={arrowBoundaryOffset}
+          isNonModal={isNonModal}
+          isKeyboardDismissDisabled={isKeyboardDismissDisabled}
+          arrowSize={arrowSize}
+          boundaryElement={boundaryElement}
+          maxHeight={maxHeight}
+          shouldUpdatePosition={shouldUpdatePosition}
         >
           <Dialog themeName={`${themeName}.dialog`} tokens={datePickerTokens} {...dialogProps}>
             {children}
             <Box themeName={`${themeName}.dateFieldContainer`} tokens={datePickerTokens}>
               <DateField themeName={themeName} tokens={{ ...datePickerTokens, position: 'inner' }} {...fieldProps} />
-              {state.isInvalid && isInvalidIndicator}
+              {state.isInvalid && invalidIndicator}
             </Box>
-            <Calendar {...calendarProps} tokens={datePickerTokens} />
+            {/* Don't pass state tokens to calendar as they might override the calendar's own state tokens */}
+            <Calendar {...calendarProps} tokens={tokens} />
           </Dialog>
         </CalendarPopover>
       )}

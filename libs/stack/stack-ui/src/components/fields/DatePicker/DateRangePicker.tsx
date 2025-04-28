@@ -15,21 +15,34 @@ import type { TDateRangePickerProps } from './interface'
 
 function DateRangePicker(props: TDateRangePickerProps) {
   const {
+    popoverPlacement: legacyPopoverPlacement = 'bottom start',
+    placement: propPlacement = 'bottom start',
     buttonLabel,
     description,
     themeName = 'datePicker',
     tokens,
     customTheme,
-    popoverPlacement,
     icon,
     buttonContent,
     innerDateFieldSeparator = ' - ',
     outerDateFieldSeparator = ' - ',
-    isInvalidIndicator = '❌',
+    invalidIndicator = '❌',
     children,
     label,
+    containerPadding,
+    shouldCloseOnInteractOutside,
+    arrowBoundaryOffset,
+    isNonModal,
+    isKeyboardDismissDisabled,
+    arrowSize,
+    boundaryElement,
+    maxHeight,
+    shouldUpdatePosition,
   } = props
+
+  const placement = propPlacement ?? legacyPopoverPlacement
   const state = useDateRangePickerState(props)
+  const { isInvalid, isOpen, hasTime } = state
   const ref = useRef(null)
   const {
     labelProps,
@@ -44,7 +57,9 @@ function DateRangePicker(props: TDateRangePickerProps) {
 
   const datePickerTokens = {
     ...tokens,
-    isInvalid: state.isInvalid,
+    isInvalid,
+    isOpen,
+    hasTime,
   }
 
   return (
@@ -84,7 +99,7 @@ function DateRangePicker(props: TDateRangePickerProps) {
           tokens={{ ...datePickerTokens, position: 'outer', range: 'end' }}
           {...endFieldProps}
         />
-        {state.isInvalid && isInvalidIndicator}
+        {state.isInvalid && invalidIndicator}
       </Wrapper>
       {state.isOpen && (
         <CalendarPopover
@@ -92,7 +107,16 @@ function DateRangePicker(props: TDateRangePickerProps) {
           tokens={datePickerTokens}
           triggerRef={ref}
           state={state}
-          placement={popoverPlacement}
+          placement={placement}
+          containerPadding={containerPadding}
+          shouldCloseOnInteractOutside={shouldCloseOnInteractOutside}
+          arrowBoundaryOffset={arrowBoundaryOffset}
+          isNonModal={isNonModal}
+          isKeyboardDismissDisabled={isKeyboardDismissDisabled}
+          arrowSize={arrowSize}
+          boundaryElement={boundaryElement}
+          maxHeight={maxHeight}
+          shouldUpdatePosition={shouldUpdatePosition}
         >
           <Dialog themeName={`${themeName}.dialog`} tokens={datePickerTokens} {...dialogProps}>
             {children}
@@ -112,9 +136,10 @@ function DateRangePicker(props: TDateRangePickerProps) {
                 tokens={{ ...datePickerTokens, position: 'inner', range: 'end' }}
                 {...endFieldProps}
               />
-              {state.isInvalid && isInvalidIndicator}
+              {state.isInvalid && invalidIndicator}
             </Box>
-            <RangeCalendar {...calendarProps} />
+            {/* Don't pass state tokens to calendar as they might override the calendar's own state tokens */}
+            <RangeCalendar {...calendarProps} tokens={tokens} />
           </Dialog>
         </CalendarPopover>
       )}

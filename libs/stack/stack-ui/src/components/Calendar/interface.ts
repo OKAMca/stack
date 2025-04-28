@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 import type { CalendarDate, DateValue } from '@internationalized/date'
-import type { CalendarAria, CalendarProps, RangeCalendarProps } from '@react-aria/calendar'
-import type { CalendarState, RangeCalendarState } from '@react-stately/calendar'
-import type { AriaCalendarGridProps } from 'react-aria'
+import type { AriaCalendarGridProps, CalendarAria, CalendarProps, RangeCalendarProps } from 'react-aria'
+import type { RangeCalendarState, CalendarState } from 'react-stately'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 
