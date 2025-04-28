@@ -60,20 +60,30 @@ function DateField(props: TDateFieldProps) {
     createCalendar,
   })
 
+  const { isDisabled, isReadOnly, isRequired } = state
+
   const ref = useRef(null)
   const { fieldProps, isInvalid } = useDateField(props, state, ref)
+
+  const dateFieldTokens = {
+    isInvalid,
+    isDisabled,
+    isReadOnly,
+    isRequired,
+    ...tokens,
+  }
 
   return (
     <BoxWithForwardRef
       {...fieldProps}
       ref={ref}
       themeName={`${themeName}.dateField`}
-      tokens={{ ...tokens, isInvalid }}
+      tokens={dateFieldTokens}
       customTheme={customTheme}
     >
       {state.segments.map((segment, i) => (
         // eslint-disable-next-line react/no-array-index-key
-        <DateSegment themeName={themeName} tokens={{ ...tokens, isInvalid }} key={i} segment={segment} state={state} />
+        <DateSegment themeName={themeName} tokens={dateFieldTokens} key={i} segment={segment} state={state} />
       ))}
     </BoxWithForwardRef>
   )

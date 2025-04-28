@@ -2,9 +2,9 @@ import { isSameDay, getDayOfWeek } from '@internationalized/date'
 import { useCalendarCell } from '@react-aria/calendar'
 import { useFocusRing } from '@react-aria/focus'
 import { mergeProps } from '@react-aria/utils'
-import type { RangeCalendarState } from '@react-stately/calendar'
 import { useRef } from 'react'
 import { useLocale } from 'react-aria'
+import type { RangeCalendarState } from 'react-stately'
 import Box, { BoxWithForwardRef } from '../../Box'
 import type { TCalendarCellProps } from '../interface'
 
@@ -41,12 +41,12 @@ function CalendarCell(props: TCalendarCellProps) {
   const { focusProps, isFocusVisible } = useFocusRing()
 
   const calendarCellTokens = {
-    ...tokens,
     isInvalid,
     isDisabled,
     isUnavailable,
     isSelected,
     isFocusVisible,
+    ...tokens,
   }
 
   return (
