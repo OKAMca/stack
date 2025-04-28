@@ -47,11 +47,21 @@ export const calendarNavigationButtons = tv({
 })
 
 export const calendarTable = tv({
-  base: 'test',
+  base: `
+    border-spacing-2
+    border-separate
+  `,
 })
 
 export const calendarDayLabel = tv({
-  base: 'text-center capitalize',
+  base: `
+    text-center
+    capitalize
+    rounded-lg
+    p-2
+    mx-2
+    bg-color-1-300
+  `,
 })
 
 export const calendarCellContainer = tv({
@@ -80,6 +90,10 @@ export const calendarCell = tv({
       false: '',
     },
     isUnavailable: {
+      true: 'pointer-events-none',
+      false: '',
+    },
+    isOutsideRange: {
       true: 'pointer-events-none',
       false: '',
     },
@@ -138,7 +152,11 @@ export const calendarCellDate = tv({
       false: '',
     },
     isUnavailable: {
-      true: 'opacity-50 pointer-events-none',
+      true: 'text-gray-200 pointer-events-none',
+      false: '',
+    },
+    isOutsideRange: {
+      true: 'text-gray-400 pointer-events-none',
       false: '',
     },
     isFocusVisible: {
@@ -159,6 +177,8 @@ export const calendarCellDate = tv({
       isSelectionStart: [true, false],
       isSelectionEnd: [true, false],
       isDisabled: false,
+      isOutsideRange: false,
+      isUnavailable: false,
       isInvalid: true,
       class: `
         bg-error-400
@@ -194,7 +214,7 @@ export const calendarTheme = {
   navigationButtonsContainer: calendarNavigationButtonsContainer,
   navigationButtons: calendarNavigationButtons,
   calendarTable,
-  dayLabel: calendarDayLabel,
+  calendarDayLabel,
   cellContainer: calendarCellContainer,
   cell: calendarCell,
   cellDate: calendarCellDate,

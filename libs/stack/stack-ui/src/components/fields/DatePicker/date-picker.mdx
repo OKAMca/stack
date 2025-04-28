@@ -10,6 +10,8 @@ import * as DatePickerStories from './date-picker.stories';
 
 Date Picker component.
 
+Calculations for this component are done with the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) library.
+
 ## Props
 
 <ArgTypes of={DatePickerStories.Default} />
@@ -33,6 +35,10 @@ Date Picker component.
 ### Modified behaviors
 
 #### Unavailable dates
+
+In this example, unavailable dates will be rendered as disabled, making the user unable to select them. However, they are still technically selectable via the date field.
+
+If the user attempts to select an unavailable date via the date field, the `isInvalid` state will be applied to the whole component as a token.
 
 <Canvas of={DatePickerStories.UnavailableDates} />
 

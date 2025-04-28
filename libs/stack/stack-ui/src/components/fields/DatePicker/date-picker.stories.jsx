@@ -51,7 +51,80 @@ const meta = {
     onChange: (date) => console.log(date),
   },
   argTypes: {
-    isInvalidIndicator: {
+    themeName: {
+      table: {
+        defaultValue: { summary: 'datePicker' },
+      },
+    },
+    value: {
+      description: 'For controlled usage only. Use in conjonction with `onChange` to control the date picker.',
+      table: {
+        category: 'react-aria',
+      },
+    },
+    onChange: {
+      description: 'For controlled usage only. Use in conjonction with `value` to control the date picker.',
+      table: {
+        type: { summary: '(value: DateValue | null) => void' },
+        category: 'react-aria',
+      },
+    },
+    isInvalid: {
+      description: 'For controlled usage. In controlled and uncontrolled use cases, `isInvalid` is passed to tokens.',
+      table: {
+        defaultValue: {
+          summary: 'false',
+        },
+        category: 'react-aria',
+        subcategory: 'State',
+        type: { summary: 'boolean' },
+      },
+    },
+    isDisabled: {
+      description: 'For controlled usage. In controlled and uncontrolled use cases, `isDisabled` is passed to tokens.',
+      table: {
+        defaultValue: {
+          summary: 'false',
+        },
+        category: 'react-aria',
+        subcategory: 'State',
+        type: { summary: 'boolean' },
+      },
+    },
+    isReadOnly: {
+      description: 'For controlled usage. In controlled and uncontrolled use cases, `isReadOnly` is passed to tokens.',
+      table: {
+        defaultValue: {
+          summary: 'false',
+        },
+        category: 'react-aria',
+        subcategory: 'State',
+        type: { summary: 'boolean' },
+      },
+    },
+    isOpen: {
+      description: 'For controlled usage. In controlled and uncontrolled use cases, `isOpen` is passed to tokens.',
+      table: {
+        defaultValue: {
+          summary: 'false',
+        },
+        category: 'react-aria',
+        subcategory: 'State',
+        type: { summary: 'boolean' },
+      },
+    },
+    isRequired: {
+      description: 'For controlled usage. In controlled and uncontrolled use cases, `isRequired` is passed to tokens.',
+      table: {
+        defaultValue: {
+          summary: 'false',
+        },
+        category: 'react-aria',
+        subcategory: 'State',
+        type: { summary: 'boolean' },
+      },
+    },
+    invalidIndicator: {
       description:
         'The indicator to render when the date, or one of the dates in the date range (if applicable), is invalid.',
       table: {
@@ -102,12 +175,22 @@ const meta = {
       },
     },
     popoverPlacement: {
+      table: {
+        defaultValue: {
+          summary: 'bottom start',
+        },
+        category: 'react-aria',
+        subcategory: 'Popover',
+      },
+    },
+    placement: {
       description: 'The placement of the popover.',
       table: {
         defaultValue: {
           summary: 'bottom start',
         },
         category: 'react-aria',
+        subcategory: 'Popover',
       },
     },
     children: {
@@ -199,11 +282,12 @@ export const UnavailableDates = {
   render: Template.bind({}),
   name: 'Unavailable Dates',
   args: {
+    buttonContent: 'Select Date',
     minValue: today(getLocalTimeZone()),
     isDateUnavailable: (date) => {
       const now = today(getLocalTimeZone())
       const disabledRanges = [
-        [now, now.add({ days: 5 })],
+        [now, now.subtract({ days: 5 })],
         [now.add({ days: 14 }), now.add({ days: 16 })],
         [now.add({ days: 23 }), now.add({ days: 24 })],
       ]
