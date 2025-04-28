@@ -52,6 +52,7 @@ const meta = {
     onChange: (date) => console.log(date),
     innerDateFieldSeparator: ' to ',
     outerDateFieldSeparator: ' to ',
+    invalidIndicator: 'Invalid date',
   },
   argTypes: {
     innerDateFieldSeparator: {

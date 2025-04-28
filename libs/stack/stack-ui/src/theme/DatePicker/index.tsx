@@ -73,8 +73,17 @@ export const datePickerDateField = tv({
 
 export const datePickerDateSegment = tv({
   extend: focusable,
-  base: `rounded-sm p-1 focus:bg-color-1-400 focus:text-white
-  `,
+  base: `rounded-sm p-1 focus:bg-color-1-400 focus:text-white`,
+})
+
+export const datePickerInvalidIndicator = tv({
+  base: 'rounded-lg p-2 border-2 border-red-500',
+  variants: {
+    position: {
+      inner: 'text-red-500 bg-white',
+      outer: 'text-black bg-red-100',
+    },
+  },
 })
 
 export const datePickerTheme = {
@@ -89,4 +98,5 @@ export const datePickerTheme = {
   calendarUnderlay: datePickerCalendarPopoverUnderlay,
   dialog: datePickerDialog,
   dateFieldContainer: datePickerDateFieldContainer,
+  invalidIndicator: datePickerInvalidIndicator,
 }
