@@ -15,11 +15,13 @@ export function useListboxSections(collection: Item[]) {
       // When we find a header, start a new section
       if (isHeader) {
         // Complete the previous section if it exists
-        const updatedSections = acc.currentSection ? [...acc.sections, acc.currentSection] : acc.sections
+        if (acc.currentSection) {
+          acc.sections.push(acc.currentSection)
+        }
 
         // Return with a new current section
         return {
-          sections: updatedSections,
+          sections: acc.sections,
           currentSection: { header: item, items: [] },
           orphanedItems: acc.orphanedItems,
         }
@@ -27,21 +29,14 @@ export function useListboxSections(collection: Item[]) {
 
       // For non-header items
       if (acc.currentSection) {
-        // Add to current section
-        return {
-          ...acc,
-          currentSection: {
-            ...acc.currentSection,
-            items: [...acc.currentSection.items, item],
-          },
-        }
+        // Add to current section - use push instead of spread
+        acc.currentSection.items.push(item)
+        return acc
       }
 
-      // No current section, add to orphaned items
-      return {
-        ...acc,
-        orphanedItems: [...acc.orphanedItems, item],
-      }
+      // No current section, add to orphaned items - use push instead of spread
+      acc.orphanedItems.push(item)
+      return acc
     },
     {
       sections: [] as Section[],
@@ -51,17 +46,16 @@ export function useListboxSections(collection: Item[]) {
   )
 
   // Combine all sections
-  const allSections = currentSection ? [...sections, currentSection] : sections
+  const allSections = [...sections]
+  if (currentSection) {
+    allSections.push(currentSection)
+  }
 
-  // If we have orphaned items, create a new array with the orphaned items section added
-  // instead of mutating allSections
+  // If we have orphaned items, add them as a section
   if (orphanedItems.length > 0) {
-    return [
-      ...allSections,
-      {
-        items: orphanedItems,
-      },
-    ]
+    allSections.push({
+      items: orphanedItems,
+    })
   }
 
   return allSections
