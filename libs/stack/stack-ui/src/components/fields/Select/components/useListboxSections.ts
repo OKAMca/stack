@@ -9,8 +9,11 @@ export function useListboxSections(collection: Item[]) {
   // Process the collection
   const { sections, currentSection, orphanedItems } = collection.reduce(
     (acc, item) => {
+      // Check if the item is a header by looking for 'header' or 'header-' prefix
+      const isHeader = item.key === 'header' || item.key?.toString().startsWith('header-')
+
       // When we find a header, start a new section
-      if (item.key === 'header') {
+      if (isHeader) {
         // Complete the previous section if it exists
         const updatedSections = acc.currentSection ? [...acc.sections, acc.currentSection] : acc.sections
 
@@ -50,11 +53,15 @@ export function useListboxSections(collection: Item[]) {
   // Combine all sections
   const allSections = currentSection ? [...sections, currentSection] : sections
 
-  // If we have orphaned items, add them to a section without a header
+  // If we have orphaned items, create a new array with the orphaned items section added
+  // instead of mutating allSections
   if (orphanedItems.length > 0) {
-    allSections.push({
-      items: orphanedItems,
-    })
+    return [
+      ...allSections,
+      {
+        items: orphanedItems,
+      },
+    ]
   }
 
   return allSections
