@@ -6,7 +6,7 @@ import * as DateRangePickerStories from './date-range-picker.stories';
 
 # Date Range Picker
 
-Date Range Picker component.
+Date Range Picker component. As opposed to the `DatePicker` component, this component allows the user to select a range two dates.
 
 ## Props
 
@@ -14,7 +14,7 @@ For props that are shared with the `DatePicker` component, see the [DatePicker d
 
 <ArgTypes
   of={DateRangePickerStories  .Default}
-  exclude={['onChange', 'as', 'children', 'popoverPlacement', 'label', 'description', 'buttonLabel', 'buttonContent', 'icon', 'isInvalidIndicator']}
+  exclude={['themeName', 'tokens', 'customTheme', 'onChange', 'as', 'children', 'popoverPlacement', 'label', 'description', 'buttonLabel', 'buttonContent', 'icon', 'invalidIndicator']}
  />
 
 ## Showcase
@@ -36,6 +36,10 @@ For props that are shared with the `DatePicker` component, see the [DatePicker d
 ### Modified behaviors
 
 #### Unavailable dates
+
+In this example, unavailable dates will be rendered as disabled, making the user unable to select them. However, they are still technically selectable via the date field.
+
+If the user attempts to select an unavailable date via the date field, the `isInvalid` state will be applied to the whole component as a token.
 
 <Canvas of={DateRangePickerStories.UnavailableDates} />
 

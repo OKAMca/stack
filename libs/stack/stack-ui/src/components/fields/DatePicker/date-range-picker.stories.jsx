@@ -50,6 +50,8 @@ const meta = {
     buttonContent: 'Select Date',
     label: 'Filter by date',
     onChange: (date) => console.log(date),
+    innerDateFieldSeparator: ' to ',
+    outerDateFieldSeparator: ' to ',
   },
   argTypes: {
     innerDateFieldSeparator: {
@@ -130,7 +132,7 @@ export const UnavailableDates = {
     isDateUnavailable: (date) => {
       const now = today(getLocalTimeZone())
       const disabledRanges = [
-        [now, now.add({ days: 5 })],
+        [now, now.subtract({ days: 5 })],
         [now.add({ days: 14 }), now.add({ days: 16 })],
         [now.add({ days: 23 }), now.add({ days: 24 })],
       ]
