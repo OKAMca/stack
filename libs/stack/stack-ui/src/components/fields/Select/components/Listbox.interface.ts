@@ -13,3 +13,13 @@ export interface TOptionProps extends AriaOptionProps, TDefaultComponent {
   item: any
   state: ListState<unknown>
 }
+
+export type Item = {
+  key: string
+  rendered: string
+}
+
+export type Section = {
+  header?: Item
+  items: Item[]
+}
