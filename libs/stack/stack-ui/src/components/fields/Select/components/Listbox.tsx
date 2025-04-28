@@ -76,7 +76,7 @@ const ListBox = (props: TListBoxProps) => {
               )}
               <Box as="ul" themeName={`${themeName}.list`}>
                 {section.items.map((item) => (
-                  <Option themeName={`${themeName}.li`} key={item.key?.toString()} item={item} state={state} />
+                  <Option themeName={`${themeName}.li`} key={String(item.key)} item={item} state={state} />
                 ))}
               </Box>
             </Box>

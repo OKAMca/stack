@@ -42,9 +42,9 @@ export const Disabled = {
   },
 }
 
-export const Error = {
+export const WithError = {
   render: Template.bind({}),
-  name: 'Error',
+  name: 'With Error',
   args: {
     name: 'season-error',
     isError: true,
@@ -68,6 +68,26 @@ export const WithSections = {
       { key: '5', value: 'Option 5' },
       { key: '6', value: 'Option 6' },
       { key: '7', value: 'Option 7' },
+    ],
+  },
+}
+
+export const MixedContent = {
+  render: Template.bind({}),
+  name: 'Mixed Content',
+  args: {
+    name: 'season-mixed',
+    options: [
+      { key: '1', value: 'Orphaned Option 1' }, // Item before any header
+      { key: '2', value: 'Orphaned Option 2' }, // Item before any header
+      { key: 'header-1', value: 'Section 1' },
+      { key: '3', value: 'Option 3' },
+      { key: 'header-2', value: 'Section 2' },
+      { key: '4', value: 'Option 4' },
+      { key: '5', value: 'Option 5' },
+      { key: 'header-3', value: 'Empty Section' }, // Header with no items
+      { key: 'header-4', value: 'Section 4' },
+      { key: '6', value: 'Option 6' },
     ],
   },
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import type { Item, Section } from './Listbox.interface'
 
 /**
@@ -6,57 +7,38 @@ import type { Item, Section } from './Listbox.interface'
  * If no headers are found, all items are placed in a section without a header.
  */
 export function useListboxSections(collection: Item[]) {
-  // Process the collection
-  const { sections, currentSection, orphanedItems } = collection.reduce(
-    (acc, item) => {
-      // Check if the item is a header by looking for 'header' or 'header-' prefix
-      const isHeader = item.key === 'header' || item.key?.toString().startsWith('header-')
+  const sections: Section[] = []
+  let currentSection: Section | null = null
+  const orphanedItems: Item[] = []
 
-      // When we find a header, start a new section
-      if (isHeader) {
-        // Complete the previous section if it exists
-        if (acc.currentSection) {
-          acc.sections.push(acc.currentSection)
-        }
+  // Process each item in the collection
+  for (const item of collection) {
+    // Check if the item is a header by looking for 'header' or 'header-' prefix
+    const isHeader = item.key === 'header' || item.key?.toString().startsWith('header-')
 
-        // Return with a new current section
-        return {
-          sections: acc.sections,
-          currentSection: { header: item, items: [] },
-          orphanedItems: acc.orphanedItems,
-        }
+    if (isHeader) {
+      // When we find a header, complete previous section if it exists
+      if (currentSection) {
+        sections.push(currentSection)
       }
+      // Start a new section with this header
+      currentSection = { header: item, items: [] }
+    } else if (currentSection) {
+      // Add to current section
+      currentSection.items.push(item)
+    } else {
+      // No current section, add to orphaned items
+      orphanedItems.push(item)
+    }
+  }
 
-      // For non-header items
-      if (acc.currentSection) {
-        // Add to current section - use push instead of spread
-        acc.currentSection.items.push(item)
-        return acc
-      }
-
-      // No current section, add to orphaned items - use push instead of spread
-      acc.orphanedItems.push(item)
-      return acc
-    },
-    {
-      sections: [] as Section[],
-      currentSection: null as Section | null,
-      orphanedItems: [] as Item[],
-    },
-  )
-
-  // Combine all sections
-  const allSections = [...sections]
+  // Add the final section if it exists
   if (currentSection) {
-    allSections.push(currentSection)
+    sections.push(currentSection)
   }
 
-  // If we have orphaned items, add them as a section
-  if (orphanedItems.length > 0) {
-    allSections.push({
-      items: orphanedItems,
-    })
-  }
+  // Create the final array, placing orphaned items at the beginning to preserve original order
+  const allSections = [...(orphanedItems.length > 0 ? [{ items: orphanedItems }] : []), ...sections]
 
   return allSections
 }
