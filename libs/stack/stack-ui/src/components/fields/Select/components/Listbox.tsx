@@ -23,15 +23,17 @@ const Option = ({ item, state, themeName = 'li' }: TOptionProps) => {
   )
 }
 
-const InnerListBox = (props: {
+interface InnerListBoxProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode
   listBoxRef: React.RefObject<HTMLUListElement>
   themeName: string | null
-}) => {
-  const { children, listBoxRef, themeName } = props
+}
+
+const InnerListBox = (props: InnerListBoxProps) => {
+  const { children, listBoxRef, themeName, ...domSafeProps } = props
   return (
     <FocusScope autoFocus restoreFocus contain>
-      <BoxWithForwardRef ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
+      <BoxWithForwardRef {...domSafeProps} ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
         {children}
       </BoxWithForwardRef>
     </FocusScope>
