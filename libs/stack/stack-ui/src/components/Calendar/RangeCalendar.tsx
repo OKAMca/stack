@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { createCalendar } from '@internationalized/date'
-import { useRangeCalendar } from '@react-aria/calendar'
 import { useLocale } from '@react-aria/i18n'
-import { useRangeCalendarState } from '@react-stately/calendar'
 import { useRef } from 'react'
+import { useRangeCalendar } from 'react-aria'
+import { useRangeCalendarState } from 'react-stately'
 import Box, { BoxWithForwardRef } from '../Box'
 import Typography from '../Typography'
 import CalendarGrid from './components/CalendarGrid'
@@ -19,24 +19,34 @@ function RangeCalendar(props: TRangeCalendarProps) {
     createCalendar,
   })
 
+  const { isDisabled, isReadOnly, isValueInvalid, isFocused } = state
+
   const ref = useRef(null)
   const { calendarProps, prevButtonProps, nextButtonProps, title } = useRangeCalendar({ ...rest }, state, ref)
 
+  const calendarTokens = {
+    isDisabled,
+    isReadOnly,
+    isValueInvalid,
+    isFocused,
+    ...tokens,
+  }
+
   return (
-    <BoxWithForwardRef {...calendarProps} ref={ref} themeName={`${themeName}.container`} tokens={tokens}>
-      <Box themeName={`${themeName}.header`} tokens={tokens}>
-        <Typography as="p" themeName={`${themeName}.title`} tokens={tokens}>
+    <BoxWithForwardRef {...calendarProps} ref={ref} themeName={`${themeName}.container`} tokens={calendarTokens}>
+      <Box themeName={`${themeName}.header`} tokens={calendarTokens}>
+        <Typography as="p" themeName={`${themeName}.title`} tokens={calendarTokens}>
           {title}
         </Typography>
         <NavigationButtons
           themeName={themeName}
-          tokens={tokens}
+          tokens={calendarTokens}
           buttons={buttons}
           prevButtonProps={prevButtonProps}
           nextButtonProps={nextButtonProps}
         />
       </Box>
-      <CalendarGrid state={state} />
+      <CalendarGrid state={state} themeName={themeName} tokens={calendarTokens} />
     </BoxWithForwardRef>
   )
 }
