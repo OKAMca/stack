@@ -4,6 +4,11 @@ import Box from '../../Box'
 import Calendar from '../../Calendar'
 import DatePicker from '.'
 
+/**
+ * @typedef {import('@storybook/react').Meta<typeof DatePicker>} Meta
+ * @typedef {import('@storybook/react').StoryObj<typeof DatePicker>} Story
+ */
+
 const Template = (args) => (
   <Box customTheme="min-h-[500px]">
     <DatePicker {...args} />

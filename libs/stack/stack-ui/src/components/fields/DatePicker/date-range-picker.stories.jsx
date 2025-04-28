@@ -4,6 +4,11 @@ import Box from '../../Box'
 import RangeCalendar from '../../Calendar/RangeCalendar'
 import DateRangePicker from './DateRangePicker'
 
+/**
+ * @typedef {import('@storybook/react').Meta<typeof DateRangePicker>} Meta
+ * @typedef {import('@storybook/react').StoryObj<typeof DateRangePicker>} Story
+ */
+
 const Template = (args) => (
   <div style={{ minHeight: '500px' }}>
     <DateRangePicker {...args} />
