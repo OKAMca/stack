@@ -92,7 +92,10 @@ const BaseTheme = makeTheme({
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
     wrapper: () => 'flex flex-col gap-4 relative',
     container: () => 'flex flex-col gap-4',
+    list: () => 'flex flex-col gap-4',
     li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
+    headerText: () => 'text-gray-300',
+    section: () => 'flex flex-col gap-4',
   },
   textarea: {
     wrapper: () => 'flex flex-col',
