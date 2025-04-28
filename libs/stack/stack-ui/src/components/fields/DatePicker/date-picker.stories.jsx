@@ -49,6 +49,7 @@ const meta = {
   args: {
     label: 'Filter by date',
     onChange: (date) => console.log(date),
+    invalidIndicator: 'Invalid date',
   },
   argTypes: {
     themeName: {
