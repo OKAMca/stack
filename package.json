@@ -102,7 +102,6 @@
     "@storybook/core-server": "8.4.7",
     "@storybook/nextjs": "^8.4.7",
     "@storybook/react-webpack5": "8.4.7",
-    "@storybook/react": "8.4.7",
     "@svgr/rollup": "^8.1.0",
     "@swc-node/register": "1.10.9",
     "@swc/cli": "0.5.2",
