@@ -1,3 +1,5 @@
+'use client'
+
 import { isSameDay, getDayOfWeek } from '@internationalized/date'
 import { useFocusRing } from '@react-aria/focus'
 import { mergeProps } from '@react-aria/utils'

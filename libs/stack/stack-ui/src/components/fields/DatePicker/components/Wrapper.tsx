@@ -1,3 +1,5 @@
+'use client'
+
 import { forwardRef } from 'react'
 import Box, { BoxWithForwardRef } from '../../../Box'
 import Button from '../../../Button'
