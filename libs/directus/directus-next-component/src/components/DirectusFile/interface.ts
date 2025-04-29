@@ -1,5 +1,5 @@
+import type { TFiles } from '@okam/directus-next'
 import type { TDefaultComponent } from '@okam/stack-ui'
-import type { TFiles } from '../../types/files'
 
 export interface TDirectusFileProps extends TFiles, TDefaultComponent {
   /**
