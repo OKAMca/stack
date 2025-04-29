@@ -43,6 +43,7 @@ const BaseTheme = makeTheme({
   },
   typography: (props) => typography(props),
   button: (props) => button(props),
+  link: button,
   sidePanel: {
     wrapper: (props) => sidePanelWrapper(props),
     container: (props) => sidePanelContainer(props),
