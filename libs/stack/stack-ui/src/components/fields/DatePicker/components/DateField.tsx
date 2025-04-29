@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
+'use client'
+
 import { createCalendar } from '@internationalized/date'
-import { useDateField, useDateSegment } from '@react-aria/datepicker'
 import { useLocale } from '@react-aria/i18n'
-import { useDateFieldState } from '@react-stately/datepicker'
 import { useRef } from 'react'
-import { FocusRing, useFocusRing } from 'react-aria'
+import { FocusRing, useDateField, useDateSegment, useFocusRing } from 'react-aria'
+import { useDateFieldState } from 'react-stately'
 import useThemeContext from '../../../../providers/Theme/hooks'
 import { BoxWithForwardRef } from '../../../Box'
 import type { TDateFieldProps, TDateSegmentProps } from '../interface'

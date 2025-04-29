@@ -1,5 +1,5 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-unused-vars */
+'use client'
+
 import { getWeeksInMonth } from '@internationalized/date'
 import { useLocale } from '@react-aria/i18n'
 import { useCalendarGrid } from 'react-aria'
@@ -37,6 +37,7 @@ function CalendarGrid({ themeName = 'calendar', customTheme, tokens, state, ...r
                     themeName={`${themeName}.calendarCellContainer`}
                     tokens={{ isEmpty: true, ...tokens }}
                     as="td"
+                    // eslint-disable-next-line react/no-array-index-key
                     key={i}
                   />
                 )

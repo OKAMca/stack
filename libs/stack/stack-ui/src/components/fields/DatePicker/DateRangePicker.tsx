@@ -1,6 +1,5 @@
 'use client'
 
-/* eslint-disable react/require-default-props */
 import { useDateRangePicker } from '@react-aria/datepicker'
 import { useDateRangePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'

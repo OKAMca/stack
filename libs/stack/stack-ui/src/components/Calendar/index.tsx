@@ -1,6 +1,5 @@
 'use client'
 
-/* eslint-disable no-unused-vars */
 import { createCalendar } from '@internationalized/date'
 import { useLocale } from '@react-aria/i18n'
 import { useRef } from 'react'
