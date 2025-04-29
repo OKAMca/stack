@@ -1,8 +1,8 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/naming-convention */
+import type { TFiles } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
 import { logger } from '../logger'
-import type { TFiles } from '../types/files'
 
 const IMG_DOMAIN = process.env.NEXT_PUBLIC_IMG_DOMAIN
 const IMG_PORT = process.env.NEXT_PUBLIC_IMG_PORT
