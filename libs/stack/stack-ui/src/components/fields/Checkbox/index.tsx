@@ -2,6 +2,7 @@
 
 import { useCheckbox } from '@react-aria/checkbox'
 import { FocusRing, useFocusRing } from '@react-aria/focus'
+import { mergeProps } from '@react-aria/utils'
 import { VisuallyHidden } from '@react-aria/visually-hidden'
 import { useToggleState } from '@react-stately/toggle'
 import { isEmpty } from 'radashi'
@@ -30,7 +31,7 @@ const Checkbox = <T extends TToken>(props: TCheckboxProps<T>) => {
   } = props
   const state = useToggleState(props)
   const ref = useRef<HTMLInputElement | null>(null)
-  const { inputProps } = useCheckbox(props, state, ref)
+  const { inputProps, labelProps } = useCheckbox(props, state, ref)
   const { isSelected } = state
   const { focusProps, isFocusVisible } = useFocusRing()
 
@@ -43,11 +44,17 @@ const Checkbox = <T extends TToken>(props: TCheckboxProps<T>) => {
   return (
     <div>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <label className={checkBoxContainerTheme} htmlFor={id} aria-label={ariaLabel} aria-disabled={isDisabled}>
+        <label
+          className={checkBoxContainerTheme}
+          htmlFor={id}
+          aria-label={ariaLabel}
+          aria-disabled={isDisabled}
+          {...labelProps}
+        >
           <VisuallyHidden>
-            <input type="checkbox" ref={ref} aria-labelledby={id} {...inputProps} {...focusProps} />
+            <input type="checkbox" ref={ref} {...mergeProps(inputProps, focusProps)} />
           </VisuallyHidden>
-          <div className={checkBoxTheme} aria-checked={isSelected} role="checkbox" aria-labelledby={id}>
+          <div className={checkBoxTheme}>
             <div className={checkMarkTheme}>{icon && <Icon icon={icon} customTheme={checkMarkIconTheme} />}</div>
           </div>
           <Typography themeName={`${themeName}.label`} tokens={checkBoxTokens}>
