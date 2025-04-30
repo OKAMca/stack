@@ -1,26 +1,40 @@
-/* eslint-disable no-unused-vars */
-import type { DateValue } from '@internationalized/date'
-import { createCalendar } from '@internationalized/date'
-import type { AriaDatePickerProps } from '@react-aria/datepicker'
-import { useDateField, useDateSegment } from '@react-aria/datepicker'
-import { useLocale } from '@react-aria/i18n'
-import { useDateFieldState } from '@react-stately/datepicker'
-import { useRef } from 'react'
-import { FocusRing } from 'react-aria'
-import useThemeContext from '../../../../providers/Theme/hooks'
-import type { TDateSegmentProps } from '../interface'
+'use client'
 
-function DateSegment({ segment, state }: TDateSegmentProps) {
+import { createCalendar } from '@internationalized/date'
+import { useLocale } from '@react-aria/i18n'
+import { useRef } from 'react'
+import { FocusRing, useDateField, useDateSegment, useFocusRing } from 'react-aria'
+import { useDateFieldState } from 'react-stately'
+import useThemeContext from '../../../../providers/Theme/hooks'
+import { BoxWithForwardRef } from '../../../Box'
+import type { TDateFieldProps, TDateSegmentProps } from '../interface'
+
+function DateSegment(props: TDateSegmentProps) {
+  const { themeName = 'datePicker', tokens, customTheme, segment, state } = props
   const ref = useRef(null)
   const { segmentProps } = useDateSegment(segment, state, ref)
 
-  const theme = useThemeContext('datePicker.dateSegment')
+  const dateSegmentPlaceholderTheme = useThemeContext(`${themeName}.dateSegmentPlaceholder`)
+
+  const { focusProps, isFocusVisible } = useFocusRing()
 
   return (
-    <FocusRing focusRingClass="has-focus-ring">
-      <div {...segmentProps} ref={ref} className={theme}>
+    <FocusRing within focusRingClass="has-focus-ring">
+      <BoxWithForwardRef
+        {...segmentProps}
+        {...focusProps}
+        ref={ref}
+        themeName={`${themeName}.dateSegment`}
+        tokens={{
+          ...tokens,
+          // Hack since has-focus-ring is not getting applied
+          className: isFocusVisible ? `has-focus-ring ${tokens?.className}` : (tokens?.className ?? ''),
+        }}
+        customTheme={customTheme}
+      >
         {/* Always reserve space for the placeholder, to prevent layout shift when editing. */}
         <span
+          className={dateSegmentPlaceholderTheme}
           aria-hidden="true"
           style={{
             visibility: segment.isPlaceholder ? 'visible' : 'hidden',
@@ -32,12 +46,13 @@ function DateSegment({ segment, state }: TDateSegmentProps) {
           {segment.placeholder}
         </span>
         {segment.isPlaceholder ? '' : segment.text}
-      </div>
+      </BoxWithForwardRef>
     </FocusRing>
   )
 }
 
-function DateField(props: AriaDatePickerProps<DateValue>) {
+function DateField(props: TDateFieldProps) {
+  const { themeName = 'datePicker', tokens, customTheme } = props
   const { locale } = useLocale()
   const state = useDateFieldState({
     ...props,
@@ -45,16 +60,32 @@ function DateField(props: AriaDatePickerProps<DateValue>) {
     createCalendar,
   })
 
+  const { isDisabled, isReadOnly, isRequired } = state
+
   const ref = useRef(null)
-  const { fieldProps } = useDateField(props, state, ref)
+  const { fieldProps, isInvalid } = useDateField(props, state, ref)
+
+  const dateFieldTokens = {
+    isInvalid,
+    isDisabled,
+    isReadOnly,
+    isRequired,
+    ...tokens,
+  }
 
   return (
-    <div {...fieldProps} ref={ref} className="flex">
+    <BoxWithForwardRef
+      {...fieldProps}
+      ref={ref}
+      themeName={`${themeName}.dateField`}
+      tokens={dateFieldTokens}
+      customTheme={customTheme}
+    >
       {state.segments.map((segment, i) => (
         // eslint-disable-next-line react/no-array-index-key
-        <DateSegment key={i} segment={segment} state={state} />
+        <DateSegment themeName={themeName} tokens={dateFieldTokens} key={i} segment={segment} state={state} />
       ))}
-    </div>
+    </BoxWithForwardRef>
   )
 }
 

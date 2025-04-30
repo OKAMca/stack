@@ -6,31 +6,11 @@ import { accordionTheme } from './Accordion'
 import alertsTheme from './Alerts'
 import { container, grid, gridItem, main } from './Box'
 import button from './Button'
-import {
-  calendarCell,
-  calendarCellContainer,
-  calendarCellFormattedDate,
-  calendarContainer,
-  calendarDayLabel,
-  calendarHeaderContainer,
-  calendarNavigationButtons,
-  calendarNavigationButtonsContainer,
-  calendarTable,
-} from './Calendar'
+import { calendarTheme } from './Calendar'
 import carouselTheme from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
 import { checkboxGroup, checkboxGroupItemsGroup } from './CheckboxGroup'
-import {
-  datePickerButton,
-  datePickerCalendarPopoverContainer,
-  datePickerCalendarPopoverUnderlay,
-  datePickerContainer,
-  datePickerDateField,
-  datePickerDateSegment,
-  datePickerIcon,
-  datePickerLabel,
-  datePickerWrapper,
-} from './DatePicker'
+import { datePickerTheme } from './DatePicker'
 import { imgTheme } from './Image'
 import lightboxTheme from './LightBox'
 import { radio, radioLabel, selectedMark } from './Radio'
@@ -55,28 +35,8 @@ const BaseTheme = makeTheme({
   container: (props) => container(props),
   accordion: accordionTheme,
   carousel: carouselTheme,
-  calendar: {
-    container: (props) => calendarContainer(props),
-    header: (props) => calendarHeaderContainer(props),
-    navigationButtonsContainer: (props) => calendarNavigationButtonsContainer(props),
-    navigationButtons: (props) => calendarNavigationButtons(props),
-    table: (props) => calendarTable(props),
-    dayLabel: (props) => calendarDayLabel(props),
-    cellContainer: (props) => calendarCellContainer(props),
-    cell: (props) => calendarCell(props),
-    cellDate: (props) => calendarCellFormattedDate(props),
-  },
-  datePicker: {
-    container: (props) => datePickerContainer(props),
-    button: (props) => datePickerButton(props),
-    wrapper: (props) => datePickerWrapper(props),
-    icon: (props) => datePickerIcon(props),
-    dateField: (props) => datePickerDateField(props),
-    dateSegment: (props) => datePickerDateSegment(props),
-    label: (props) => datePickerLabel(props),
-    calendarPopover: (props) => datePickerCalendarPopoverContainer(props),
-    calendarUnderlay: (props) => datePickerCalendarPopoverUnderlay(props),
-  },
+  calendar: calendarTheme,
+  datePicker: datePickerTheme,
   popover: {
     button: (props) => button(props),
     popover: () => 'border-2 text-black p-4 bg-gray-300',
