@@ -2,6 +2,7 @@ import { today, getLocalTimeZone, isWeekend } from '@internationalized/date'
 import { useState } from 'react'
 import Box from '../../Box'
 import Calendar from '../../Calendar'
+import { CalendarPopover } from './components/CalendarPopover'
 import DatePicker from '.'
 
 /**
@@ -46,6 +47,10 @@ const TemplateControlled = (args) => {
 const meta = {
   title: 'Form/Fields/DatePicker',
   component: DatePicker,
+  subcomponents: {
+    Calendar,
+    CalendarPopover,
+  },
   parameters: {
     layout: 'fullscreen',
   },
@@ -73,17 +78,6 @@ const meta = {
         category: 'react-aria',
       },
     },
-    isInvalid: {
-      description: 'For controlled usage. In controlled and uncontrolled use cases, `isInvalid` is passed to tokens.',
-      table: {
-        defaultValue: {
-          summary: 'false',
-        },
-        category: 'react-aria',
-        subcategory: 'State',
-        type: { summary: 'boolean' },
-      },
-    },
     isDisabled: {
       description: 'For controlled usage. In controlled and uncontrolled use cases, `isDisabled` is passed to tokens.',
       table: {
@@ -91,18 +85,6 @@ const meta = {
           summary: 'false',
         },
         category: 'react-aria',
-        subcategory: 'State',
-        type: { summary: 'boolean' },
-      },
-    },
-    isReadOnly: {
-      description: 'For controlled usage. In controlled and uncontrolled use cases, `isReadOnly` is passed to tokens.',
-      table: {
-        defaultValue: {
-          summary: 'false',
-        },
-        category: 'react-aria',
-        subcategory: 'State',
         type: { summary: 'boolean' },
       },
     },
@@ -113,7 +95,6 @@ const meta = {
           summary: 'false',
         },
         category: 'react-aria',
-        subcategory: 'State',
         type: { summary: 'boolean' },
       },
     },
@@ -124,7 +105,6 @@ const meta = {
           summary: 'false',
         },
         category: 'react-aria',
-        subcategory: 'State',
         type: { summary: 'boolean' },
       },
     },
@@ -145,16 +125,6 @@ const meta = {
       table: {
         type: {
           summary: 'string',
-        },
-        category: 'react-aria',
-      },
-    },
-    isDateUnavailable: {
-      description:
-        'Callback function taking a single `date` argument and returning a boolean indicating if the date is unavailable.',
-      table: {
-        type: {
-          summary: '(date: DateValue) => boolean',
         },
         category: 'react-aria',
       },
@@ -184,7 +154,6 @@ const meta = {
           summary: 'bottom start',
         },
         category: 'react-aria',
-        subcategory: 'Popover',
       },
     },
     placement: {
@@ -194,7 +163,6 @@ const meta = {
           summary: 'bottom start',
         },
         category: 'react-aria',
-        subcategory: 'Popover',
       },
     },
     children: {
