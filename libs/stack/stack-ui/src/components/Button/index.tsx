@@ -7,6 +7,7 @@ import React, { useRef } from 'react'
 import { FocusRing, useButton, useLink } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
 import type { TToken } from '../../providers/Theme/interface'
+import type { NextLinkProps } from '../../types/next-link'
 import type { TAnchorProps, TButtonProps } from './interface'
 
 export const Anchor = React.forwardRef(
@@ -19,14 +20,22 @@ export const Anchor = React.forwardRef(
       customTheme,
       tokens,
       themeName = 'button',
-      nextLinkProps,
+      nextLinkProps: { onClick, ...nextLinkProps } = {} as NextLinkProps,
       ...rest
     } = props
 
     const ref = forwardRef
     const { linkProps } = useLink(
       {
-        ...{ ...props, ...nextLinkProps },
+        ...props,
+        ...nextLinkProps,
+        onClick: ({ currentTarget, ...e }) => {
+          onClick?.({
+            ...e,
+            // @ts-expect-error Mismatch between react-aria and next/link. Happens since react-aria >3.36
+            currentTarget,
+          })
+        },
         href: props.href ?? nextLinkProps?.href?.toString(),
         elementType: as?.toString(),
         onPress: handlePress,
