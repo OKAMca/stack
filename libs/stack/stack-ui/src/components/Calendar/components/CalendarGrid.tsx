@@ -1,20 +1,45 @@
 'use client'
 
-import { getWeeksInMonth } from '@internationalized/date'
-import { useLocale } from '@react-aria/i18n'
 import { useCalendarGrid } from 'react-aria'
 import Box from '../../Box'
-import type { TCalendarGridProps } from '../interface'
+import type { AriaWeekdayStyle, TCalendarGridProps, TWeekdayStyle } from '../interface'
 import { getIsDateOutsideRange } from '../utils/getIsDateOutsideRange'
 import CalendarCell from './CalendarCell'
 
-function CalendarGrid({ themeName = 'calendar', customTheme, tokens, state, ...rest }: TCalendarGridProps) {
-  const { locale } = useLocale()
-  const { gridProps, headerProps } = useCalendarGrid({ ...rest }, state)
-  const weekDays = ['su', 'mo', 'tu', 'we', 'th', 'fr', 'sa']
+const weekdayStyleMap: Record<
+  TWeekdayStyle,
+  {
+    value: AriaWeekdayStyle
+    transform?: (weekdays: string[]) => string[]
+  }
+> = {
+  narrow: {
+    value: 'narrow',
+  },
+  abbreviated: {
+    value: 'short',
+    transform: (weekdays) => weekdays.map((day) => day.slice(0, 2)),
+  },
+  short: {
+    value: 'short',
+  },
+  long: {
+    value: 'long',
+  },
+}
 
-  // Get the number of weeks in the month so we can render the proper number of rows.
-  const weeksInMonth = getWeeksInMonth(state.visibleRange.start, locale)
+function CalendarGrid({
+  themeName = 'calendar',
+  customTheme,
+  tokens,
+  state,
+  weekdayStyle: weekdayStyleProp = 'abbreviated',
+  ...rest
+}: TCalendarGridProps) {
+  const { value: weekdayStyleAria, transform } = weekdayStyleMap[weekdayStyleProp]
+  const calendarGridProps = useCalendarGrid({ ...rest, weekdayStyle: weekdayStyleAria }, state)
+  const { gridProps, headerProps, weeksInMonth } = calendarGridProps
+  const weekDays = transform?.(calendarGridProps.weekDays) ?? calendarGridProps.weekDays
 
   return (
     <Box as="table" {...gridProps} themeName={`${themeName}.calendarTable`} tokens={tokens}>
@@ -45,7 +70,7 @@ function CalendarGrid({ themeName = 'calendar', customTheme, tokens, state, ...r
               return (
                 <CalendarCell
                   themeName={themeName}
-                  tokens={{ isOutsideRange, ...tokens }}
+                  tokens={{ isOutsideRange, isEmpty: false, ...tokens }}
                   key={date?.day}
                   state={state}
                   date={date}
