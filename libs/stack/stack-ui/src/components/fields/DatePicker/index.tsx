@@ -1,8 +1,8 @@
 'use client'
 
-import { useDatePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'
 import { useDatePicker } from 'react-aria'
+import { useDatePickerState } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
 import Box from '../../Box'
 import Calendar from '../../Calendar'

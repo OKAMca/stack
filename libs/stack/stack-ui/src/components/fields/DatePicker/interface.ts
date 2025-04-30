@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import type { DateValue } from '@internationalized/date'
-import type {
-  DateFieldState,
-  DateSegment,
-  DatePickerStateOptions,
-  DateRangePickerStateOptions,
-} from '@react-stately/datepicker'
 import type React from 'react'
 import type { ReactNode } from 'react'
 import type { AriaDatePickerProps, AriaPopoverProps, DatePickerAria, DateRangePickerAria, Placement } from 'react-aria'
-import type { OverlayTriggerState } from 'react-stately'
+import type {
+  DateFieldState,
+  DatePickerStateOptions,
+  DateRangePickerStateOptions,
+  DateSegment,
+  OverlayTriggerState,
+} from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../../types/components'
 

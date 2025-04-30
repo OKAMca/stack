@@ -1,8 +1,8 @@
 'use client'
 
-import { useDateRangePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'
 import { useDateRangePicker } from 'react-aria'
+import { useDateRangePickerState } from 'react-stately'
 import Box from '../../Box'
 import RangeCalendar from '../../Calendar/RangeCalendar'
 import { Dialog } from '../../Dialog'
