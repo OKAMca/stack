@@ -22,6 +22,7 @@ function CalendarCell(props: TCalendarCellProps) {
     formattedDate,
     isInvalid,
   } = useCalendarCell(props, state, ref)
+  console.log(date, useCalendarCell(props, state, ref))
 
   // The start and end date of the selected range will have
   // an emphasized appearance.
@@ -47,6 +48,7 @@ function CalendarCell(props: TCalendarCellProps) {
     isUnavailable,
     isSelected,
     isFocusVisible,
+    isOutsideVisibleRange,
     ...tokens,
   }
 

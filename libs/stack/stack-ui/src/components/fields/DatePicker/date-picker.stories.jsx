@@ -10,7 +10,7 @@ import DatePicker from '.'
  */
 
 const Template = (args) => (
-  <Box customTheme="min-h-[500px]">
+  <Box customTheme="min-h-[500px] flex justify-center w-full">
     <DatePicker {...args} />
   </Box>
 )
@@ -19,7 +19,7 @@ const TemplateControlled = (args) => {
   const { defaultValue, onChange, ...rest } = args
   const [value, setValue] = useState(defaultValue)
   return (
-    <Box customTheme="min-h-[500px]">
+    <Box customTheme="min-h-[500px] flex justify-center w-full">
       <Calendar
         {...rest}
         value={value}
@@ -46,6 +46,9 @@ const TemplateControlled = (args) => {
 const meta = {
   title: 'Form/Fields/DatePicker',
   component: DatePicker,
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: {
     label: 'Filter by date',
     onChange: (date) => console.log(date),

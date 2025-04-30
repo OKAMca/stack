@@ -97,6 +97,10 @@ export const calendarCell = tv({
       true: 'pointer-events-none',
       false: '',
     },
+    isOutsideVisibleRange: {
+      true: 'pointer-events-none',
+      false: '',
+    },
     isRoundedLeft: {
       true: 'rounded-l-full',
       false: '',
@@ -129,6 +133,7 @@ export const calendarCellDate = tv({
     transition-all
     duration-100
     ease-in-out
+    relative
   `,
   variants: {
     isSelected: {
@@ -148,15 +153,30 @@ export const calendarCellDate = tv({
       fasle: '',
     },
     isDisabled: {
-      true: 'opacity-50 pointer-events-none',
+      true: 'opacity-50',
       false: '',
     },
     isUnavailable: {
-      true: 'text-gray-200 pointer-events-none',
+      true: 'text-gray-200',
       false: '',
     },
     isOutsideRange: {
-      true: 'text-gray-400 pointer-events-none',
+      true: `
+        text-black
+        before:content-['/']
+        before:text-gray-400
+        before:[font-weight:100]
+        before:text-4xl
+        before:absolute
+        before:inset-0
+        before:flex
+        before:items-center
+        before:justify-center
+      `,
+      false: '',
+    },
+    isOutsideVisibleRange: {
+      true: `text-gray-400`,
       false: '',
     },
     isFocusVisible: {

@@ -10,16 +10,16 @@ import DateRangePicker from './DateRangePicker'
  */
 
 const Template = (args) => (
-  <div style={{ minHeight: '500px' }}>
+  <Box customTheme="min-h-[500px] flex justify-center w-full">
     <DateRangePicker {...args} />
-  </div>
+  </Box>
 )
 
 const TemplateControlled = (args) => {
   const { defaultValue, onChange, ...rest } = args
   const [value, setValue] = useState(defaultValue)
   return (
-    <Box>
+    <Box customTheme="min-h-[500px] flex justify-center w-full">
       <RangeCalendar
         {...rest}
         value={value}
@@ -46,6 +46,9 @@ const TemplateControlled = (args) => {
 const meta = {
   title: 'Form/Fields/DateRangePicker',
   component: DateRangePicker,
+  parameters: {
+    layout: 'fullscreen',
+  },
   args: {
     buttonContent: 'Select Date',
     label: 'Filter by date',

@@ -18,7 +18,8 @@ export interface TDateSegmentProps extends TDefaultComponent {
   state: DateFieldState
 }
 
-interface TDatePickerBase extends Omit<AriaPopoverProps, 'popoverRef' | 'triggerRef' | 'targetRef' | 'overlayRef'> {
+interface TDatePickerBase
+  extends Omit<AriaPopoverProps, 'popoverRef' | 'triggerRef' | 'targetRef' | 'overlayRef' | 'groupRef'> {
   /**
    * @deprecated Use `placement` instead.
    * @default 'bottom start'
