@@ -5,30 +5,38 @@ import type { RangeCalendarState, CalendarState } from 'react-stately'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 
-export interface TCalendarProps<T = TToken> extends CalendarProps<DateValue>, TDefaultComponent<T> {
-  buttons?: {
-    buttonPrev?: {
-      icon?: string
-    }
-    buttonNext?: {
-      icon?: string
-    }
+type TCalendarButtons = {
+  buttonPrev?: {
+    icon?: string
+  }
+  buttonNext?: {
+    icon?: string
   }
 }
 
-export interface TRangeCalendarProps extends RangeCalendarProps<DateValue>, TDefaultComponent {
-  buttons?: {
-    buttonPrev?: {
-      icon?: string
-    }
-    buttonNext?: {
-      icon?: string
-    }
-  }
+interface TBaseCalendarProps<T = TToken> extends TDefaultComponent<T> {
+  buttons?: TCalendarButtons
+  gridProps?: Omit<TCalendarGridProps, 'state' | keyof TDefaultComponent>
 }
+export interface TCalendarProps<T = TToken> extends TBaseCalendarProps<T>, CalendarProps<DateValue> {}
 
-export interface TCalendarGridProps extends AriaCalendarGridProps, TDefaultComponent {
+export interface TRangeCalendarProps<T = TToken> extends TBaseCalendarProps<T>, RangeCalendarProps<DateValue> {}
+
+export type AriaWeekdayStyle = NonNullable<AriaCalendarGridProps['weekdayStyle']>
+
+export type TWeekdayStyle = AriaWeekdayStyle | 'abbreviated'
+
+export interface TCalendarGridProps extends Omit<AriaCalendarGridProps, 'weekdayStyle'>, TDefaultComponent {
   state: RangeCalendarState | CalendarState
+  /**
+   * @default 'abbreviated'
+   *
+   * - narrow: First letter of the weekday
+   * - abbreviated: First two letters of the weekday
+   * - short: First three letters of the weekday
+   * - long: Full weekday name
+   */
+  weekdayStyle?: TWeekdayStyle
 }
 
 export interface TCalendarCellProps extends TDefaultComponent {

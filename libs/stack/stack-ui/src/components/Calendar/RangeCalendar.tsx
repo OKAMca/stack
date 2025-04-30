@@ -12,7 +12,7 @@ import NavigationButtons from './components/NavigationButtons'
 import type { TRangeCalendarProps } from './interface'
 
 function RangeCalendar(props: TRangeCalendarProps) {
-  const { buttons, tokens, customTheme, themeName = 'calendar', ...rest } = props
+  const { buttons, tokens, customTheme, themeName = 'calendar', gridProps, ...rest } = props
   const { locale } = useLocale()
   const state = useRangeCalendarState({
     ...rest,
@@ -34,7 +34,13 @@ function RangeCalendar(props: TRangeCalendarProps) {
   }
 
   return (
-    <BoxWithForwardRef {...calendarProps} ref={ref} themeName={`${themeName}.container`} tokens={calendarTokens}>
+    <BoxWithForwardRef
+      {...calendarProps}
+      ref={ref}
+      themeName={`${themeName}.container`}
+      tokens={calendarTokens}
+      customTheme={customTheme}
+    >
       <Box themeName={`${themeName}.header`} tokens={calendarTokens}>
         <Typography as="p" themeName={`${themeName}.title`} tokens={calendarTokens}>
           {title}
@@ -47,7 +53,7 @@ function RangeCalendar(props: TRangeCalendarProps) {
           nextButtonProps={nextButtonProps}
         />
       </Box>
-      <CalendarGrid state={state} themeName={themeName} tokens={calendarTokens} />
+      <CalendarGrid {...gridProps} state={state} themeName={themeName} tokens={calendarTokens} />
     </BoxWithForwardRef>
   )
 }

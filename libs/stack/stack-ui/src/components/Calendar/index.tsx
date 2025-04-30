@@ -17,18 +17,22 @@ function Calendar<T extends TToken>({
   tokens,
   customTheme,
   themeName = 'calendar',
+  gridProps,
+  value,
   ...rest
 }: TCalendarProps<T>) {
   const { locale } = useLocale()
   const state = useCalendarState({
     ...rest,
     locale,
+    value,
     createCalendar,
   })
+
   const { isDisabled, isReadOnly, isValueInvalid, isFocused } = state
 
   const ref = useRef(null)
-  const { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar({ ...rest }, state)
+  const { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar({ ...rest, value }, state)
 
   const calendarTokens = {
     isDisabled,
@@ -39,7 +43,13 @@ function Calendar<T extends TToken>({
   }
 
   return (
-    <BoxWithForwardRef {...calendarProps} ref={ref} themeName={`${themeName}.container`} tokens={calendarTokens}>
+    <BoxWithForwardRef
+      {...calendarProps}
+      ref={ref}
+      themeName={`${themeName}.container`}
+      tokens={calendarTokens}
+      customTheme={customTheme}
+    >
       <Box themeName={`${themeName}.header`} tokens={calendarTokens}>
         <Typography as="p" themeName={`${themeName}.title`} tokens={calendarTokens}>
           {title}
@@ -52,7 +62,7 @@ function Calendar<T extends TToken>({
           nextButtonProps={nextButtonProps}
         />
       </Box>
-      <CalendarGrid themeName={themeName} state={state} tokens={calendarTokens} />
+      <CalendarGrid {...gridProps} themeName={themeName} state={state} tokens={calendarTokens} />
     </BoxWithForwardRef>
   )
 }
