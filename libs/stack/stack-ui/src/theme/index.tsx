@@ -45,6 +45,7 @@ import {
   shareButtonLinksList,
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
+import tagGroupTheme from './TagGroup'
 import { textArea } from './TextArea'
 import typography from './Typography'
 
@@ -178,6 +179,7 @@ const BaseTheme = makeTheme({
   },
   img: imgTheme,
   alerts: alertsTheme,
+  tagGroup: tagGroupTheme,
 })
 
 export default React.memo(createThemeProvider(BaseTheme))
