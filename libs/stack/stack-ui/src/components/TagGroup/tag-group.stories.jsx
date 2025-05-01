@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useListData } from 'react-stately'
 import Box from '../Box'
 import Typography from '../Typography'
@@ -16,25 +16,32 @@ const TemplateRemovable = (args) => {
   return <TagGroup {...rest} items={list.items} onRemove={(keys) => list.remove(...keys)} />
 }
 
-const TemplateMaximalProps = (args) => {
+/**
+ *
+ * @param {import('./interface').TTagGroupProps} args
+ * @returns
+ */
+function TemplateMaximalProps(args) {
   const { items, defaultSelectedKeys, ...rest } = args
   const list = useListData({ initialItems: items, initialSelectedKeys: defaultSelectedKeys })
+  const selectedKeysRender = useMemo(() => {
+    return Array.from(list.selectedKeys?.keys?.() ?? []).map((key) => (
+      <Box customTheme="rounded-full bg-color-1-800 text-white px-2 py-1" key={key}>
+        {list.getItem(key)?.children}
+      </Box>
+    ))
+  }, [list])
   return (
     <Box>
       <Typography tokens={{ size: 'h3' }}>Current selection</Typography>
-      <Box customTheme="flex flex-wrap gap-2">
-        {Array.from(list.selectedKeys).map((key) => (
-          <Box customTheme="rounded-full bg-color-1-800 text-white px-2 py-1" key={key}>
-            {list.getItem(key)?.children}
-          </Box>
-        ))}
-      </Box>
+      <Box customTheme="flex flex-wrap gap-2">{selectedKeysRender}</Box>
       <TagGroup
         {...rest}
         defaultSelectedKeys={defaultSelectedKeys}
         items={list.items}
-        onSelectionChange={(keys) => list.setSelectedKeys(keys)}
-        onRemove={(keys) => list.remove(...keys)}
+        selectedKeys={list.selectedKeys}
+        onSelectionChange={list.setSelectedKeys}
+        onRemove={list.remove}
       />
     </Box>
   )
@@ -71,8 +78,14 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
+    label: {
+      description: 'Label of the tag group. Gets rendered before the tags.',
+    },
+    description: {
+      description: 'Description of the tag group. Gets rendered after the tags.',
+    },
     removeButtonProps: {
-      control: 'none',
+      control: false,
       description:
         'Acts as a default for the remove button of all tags. Individual tags `props.item.props.removeButtonProps` take precedence.',
       table: {
@@ -119,12 +132,14 @@ const meta = {
       table: {
         type: { summary: '(keys: Set<Key>) => void' },
       },
+      control: false,
     },
     onSelectionChange: {
       description: 'Callback when a tag is selected.',
       table: {
         type: { summary: '(keys: "all" | Set<Key>) => void' },
       },
+      control: false,
     },
     errorMessage: {
       description:
@@ -139,6 +154,7 @@ const meta = {
         type: { summary: 'boolean' },
         defaultValue: { summary: 'false' },
       },
+      control: { type: 'boolean' },
     },
     selectedKeys: {
       description: 'The keys of the selected tags. Use for controlled selection along with `onSelectionChange`.',
