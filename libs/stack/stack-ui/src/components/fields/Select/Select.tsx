@@ -41,12 +41,14 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
   } = props
   const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
 
+  const filteredOptions = options?.filter((option) => !option.key?.includes('header-'))
+
   const state = useSelectState({
     ...rest,
     children: SelectItem,
     selectedKey: value,
     defaultSelectedKey: defaultValue,
-    items: options,
+    items: filteredOptions,
     onSelectionChange,
     isDisabled: disabled,
     isRequired: required,
@@ -92,7 +94,7 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
             themeName={`${themeName}.popover`}
             style={{ [`--${themeName}-container-width`]: `${fieldRef.current?.offsetWidth}px` } as React.CSSProperties}
           >
-            <ListBox {...menuProps} themeName={themeName} state={state} />
+            <ListBox {...menuProps} themeName={themeName} state={state} optionsWithHeaders={options ?? []} />
           </Popover>
         )}
         {isError && (
