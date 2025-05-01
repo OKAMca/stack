@@ -1,3 +1,37 @@
+## 1.31.0 (2025-05-01)
+
+### 🚀 Features
+
+- **next-component:** next link wrapper component + hook ([ed654da](https://github.com/OKAMca/stack/commit/ed654da))
+- add header option to select component ([0338ebc](https://github.com/OKAMca/stack/commit/0338ebc))
+- **stack-ui:** added wysiwyg allowed attribute and tags control ([8e7138f](https://github.com/OKAMca/stack/commit/8e7138f))
+- bump versions to force publish ([6e3eb60](https://github.com/OKAMca/stack/commit/6e3eb60))
+- project cleanup ([a5dde9d](https://github.com/OKAMca/stack/commit/a5dde9d))
+- add factory for Logger ([#214](https://github.com/OKAMca/stack/pull/214))
+
+### 🩹 Fixes
+
+- issue where select header was selectable with arrow ([#279](https://github.com/OKAMca/stack/pull/279))
+- **stack-ui:** side panel context buttonProps typing ([e1d7a94](https://github.com/OKAMca/stack/commit/e1d7a94))
+- lint ([89ece66](https://github.com/OKAMca/stack/commit/89ece66))
+- checkbox a11y issue ([3340653](https://github.com/OKAMca/stack/commit/3340653))
+- bump package ([b6259d1](https://github.com/OKAMca/stack/commit/b6259d1))
+- rhf wrapper ([f03c080](https://github.com/OKAMca/stack/commit/f03c080))
+- missing chuldren prop for TextInput field ([c03f035](https://github.com/OKAMca/stack/commit/c03f035))
+- missing export ([8c9ab9c](https://github.com/OKAMca/stack/commit/8c9ab9c))
+- missing export ([690e7ae](https://github.com/OKAMca/stack/commit/690e7ae))
+- missing export ([bec9b4d](https://github.com/OKAMca/stack/commit/bec9b4d))
+- types ([610a5be](https://github.com/OKAMca/stack/commit/610a5be))
+- missing exports ([5c1f130](https://github.com/OKAMca/stack/commit/5c1f130))
+- issue with react hook form and react aria ([#255](https://github.com/OKAMca/stack/pull/255))
+- issue with typing not resolving correctly when installing package ([bc4c81d](https://github.com/OKAMca/stack/commit/bc4c81d))
+
+### ❤️ Thank You
+
+- Jerome Trottier
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.30.1 (2024-11-05)
 
 

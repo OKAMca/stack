@@ -1,6 +1,6 @@
 {
   "name": "@okam/next-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publishConfig": {
     "access": "public"
   },
@@ -12,6 +12,6 @@
     "react-use": "17.5.1",
     "react": "18.3.1",
     "tailwind-variants": "^0.3.0",
-    "@okam/stack-ui": "1.34.0"
+    "@okam/stack-ui": "1.31.0"
   }
 }
