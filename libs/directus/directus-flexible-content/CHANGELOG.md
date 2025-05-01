@@ -1,3 +1,25 @@
+## 1.2.2 (2025-05-01)
+
+### 🚀 Features
+
+- add header option to select component ([0338ebc](https://github.com/OKAMca/stack/commit/0338ebc))
+- bump versions to force publish ([6e3eb60](https://github.com/OKAMca/stack/commit/6e3eb60))
+- project cleanup ([a5dde9d](https://github.com/OKAMca/stack/commit/a5dde9d))
+
+### 🩹 Fixes
+
+- bump package ([b6259d1](https://github.com/OKAMca/stack/commit/b6259d1))
+- issue with typing not resolving correctly when installing package ([bc4c81d](https://github.com/OKAMca/stack/commit/bc4c81d))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.31.0
+- Updated directus-block to 1.5.2
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 1.1.0 (2024-10-04)
 
 

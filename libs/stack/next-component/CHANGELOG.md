@@ -1,3 +1,26 @@
+## 1.0.1 (2025-05-01)
+
+### 🚀 Features
+
+- **next-component:** next link wrapper component + hook ([ed654da](https://github.com/OKAMca/stack/commit/ed654da))
+- add header option to select component ([0338ebc](https://github.com/OKAMca/stack/commit/0338ebc))
+- bump versions to force publish ([6e3eb60](https://github.com/OKAMca/stack/commit/6e3eb60))
+- project cleanup ([a5dde9d](https://github.com/OKAMca/stack/commit/a5dde9d))
+
+### 🩹 Fixes
+
+- bump package ([b6259d1](https://github.com/OKAMca/stack/commit/b6259d1))
+- issue with typing not resolving correctly when installing package ([bc4c81d](https://github.com/OKAMca/stack/commit/bc4c81d))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.31.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 0.3.0 (2024-10-04)
 
 
