@@ -14,7 +14,7 @@ export function useListboxSections(collection: Item[], optionsWithHeaders: { key
   // Process each item in the collection
   for (const item of optionsWithHeaders) {
     // Check if the item is a header by looking for 'header' or 'header-' prefix
-    const isHeader = item.key === 'header' || item.key?.toString().startsWith('header-')
+    const isHeader = item.key === 'header' || item.key?.toString().includes('header-')
     const itemInCollection = collection.find((x) => x.rendered === item.value)
 
     if (isHeader) {
