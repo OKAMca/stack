@@ -1,6 +1,7 @@
 'use client'
 
 import { isEmpty } from 'radashi'
+import type { RefObject } from 'react'
 import React, { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import type { RegisterOptions } from 'react-hook-form'
@@ -39,7 +40,16 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
     options,
     ...rest
   } = props
-  const fieldRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
+
+  const inputRef = useRef<HTMLElement>()
+  const buttonRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
+
+  const mergeRefs = (ref: HTMLElement) => {
+    if (ref) {
+      hookFormRef?.(ref)
+      inputRef.current = ref
+    }
+  }
 
   const filteredOptions = options?.filter((option) => !option.key?.includes('header-'))
 
@@ -55,11 +65,12 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
     isInvalid,
   })
 
-  const { triggerProps, menuProps, labelProps } = useSelect(
+  const { triggerProps, menuProps, labelProps, valueProps } = useSelect(
     { ...rest, label, isDisabled: disabled, isRequired: required, isInvalid },
     state,
-    fieldRef,
+    mergeRefs as unknown as RefObject<HTMLElement | null>,
   )
+
   const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
 
   return (
@@ -69,7 +80,7 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
           {label}
         </Typography>
       )}
-      <HiddenSelect {...hookFormRef} state={state} triggerRef={fieldRef} name={name} isDisabled />
+      <HiddenSelect state={state} triggerRef={buttonRef} name={name} isDisabled />
       <Box themeName={`${themeName}.container`}>
         <ButtonWithForwardRef
           {...restofTriggerProps}
@@ -77,22 +88,22 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
             onPress?.(event)
             onPressStart?.(event)
           }}
-          ref={fieldRef}
+          ref={buttonRef}
           disabled={disabled}
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
         >
-          {state.selectedItem ? state.selectedItem.rendered : placeholderLabel}
+          <span {...valueProps}>{state.selectedItem ? state.selectedItem.rendered : placeholderLabel}</span>
           <Icon icon={icon ?? 'ArrowDown'} />
         </ButtonWithForwardRef>
-        {state.isOpen && fieldRef.current && (
+        {state.isOpen && buttonRef.current && (
           <Popover
             tokens={tokens}
             state={state}
-            triggerRef={fieldRef}
+            triggerRef={buttonRef}
             placement="bottom"
             themeName={`${themeName}.popover`}
-            style={{ [`--${themeName}-container-width`]: `${fieldRef.current?.offsetWidth}px` } as React.CSSProperties}
+            style={{ [`--${themeName}-container-width`]: `${buttonRef.current?.offsetWidth}px` } as React.CSSProperties}
           >
             <ListBox {...menuProps} themeName={themeName} state={state} optionsWithHeaders={options ?? []} />
           </Popover>
@@ -114,7 +125,6 @@ export const ReactHookFormSelect = ({
   rules,
   tokens,
   defaultValue,
-  value,
   themeName = 'select',
   required,
   onChange,
@@ -122,6 +132,7 @@ export const ReactHookFormSelect = ({
   placeholderLabel,
   icon,
   popoverMatchesWidth,
+  value,
   ...rest
 }: TSelectProps & { rules?: RegisterOptions }) => {
   const { control } = useFormContext()
@@ -143,7 +154,7 @@ export const ReactHookFormSelect = ({
       control={control}
       rules={ruleMerged}
       disabled={rules?.disabled}
-      defaultValue={defaultValue}
+      defaultValue={defaultValue ?? value}
       render={({ field, fieldState }) => {
         const { ref, ...fieldProps } = field
         const isError = !isEmpty(fieldState.error)
