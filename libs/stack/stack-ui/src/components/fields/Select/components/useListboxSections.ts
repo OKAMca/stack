@@ -6,15 +6,16 @@ import type { Item, Section } from './Listbox.interface'
  * and each following option is a child of the section.
  * If no headers are found, all items are placed in a section without a header.
  */
-export function useListboxSections(collection: Item[]) {
+export function useListboxSections(collection: Item[], optionsWithHeaders: { key: string; value: string }[]) {
   const sections: Section[] = []
   let currentSection: Section | null = null
   const orphanedItems: Item[] = []
 
   // Process each item in the collection
-  for (const item of collection) {
+  for (const item of optionsWithHeaders) {
     // Check if the item is a header by looking for 'header' or 'header-' prefix
     const isHeader = item.key === 'header' || item.key?.toString().startsWith('header-')
+    const itemInCollection = collection.find((x) => x.rendered === item.value)
 
     if (isHeader) {
       // When we find a header, complete previous section if it exists
@@ -22,13 +23,15 @@ export function useListboxSections(collection: Item[]) {
         sections.push(currentSection)
       }
       // Start a new section with this header
-      currentSection = { header: item, items: [] }
+      currentSection = { header: { key: item.key, rendered: item.value }, items: [] }
     } else if (currentSection) {
       // Add to current section
-      currentSection.items.push(item)
-    } else {
+      if (itemInCollection) {
+        currentSection.items.push(itemInCollection)
+      }
+    } else if (itemInCollection) {
       // No current section, add to orphaned items
-      orphanedItems.push(item)
+      orphanedItems.push(itemInCollection)
     }
   }
 
