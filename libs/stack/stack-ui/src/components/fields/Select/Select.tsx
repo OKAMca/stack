@@ -100,7 +100,9 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
         >
-          <span {...valueProps}>{state.selectedItem ? state.selectedItem.rendered : placeholderLabel}</span>
+          <Typography as="span" {...valueProps} themeName={`${themeName}.selectedItem`}>
+            {state.selectedItem ? state.selectedItem.rendered : placeholderLabel}
+          </Typography>
           <Icon icon={icon ?? 'ArrowDown'} />
         </ButtonWithForwardRef>
         {state.isOpen && buttonRef.current && (
