@@ -3,7 +3,7 @@
 import { isEmpty } from 'radashi'
 import type { RefObject } from 'react'
 import React, { useRef } from 'react'
-import { HiddenSelect, useSelect } from 'react-aria'
+import { useSelect } from 'react-aria'
 import type { RegisterOptions } from 'react-hook-form'
 import { useFormContext, Controller } from 'react-hook-form'
 import { useSelectState } from 'react-stately'
@@ -14,6 +14,7 @@ import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
 import Typography from '../../Typography'
 import SelectItem from '../SelectItem/SelectItem'
+import HiddenSelect from './components/HiddenSelect'
 import { ListBox } from './components/Listbox'
 import Popover from './components/Popover'
 import type { TSelectProps } from './Select.interface'
@@ -41,10 +42,10 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
     ...rest
   } = props
 
-  const inputRef = useRef<HTMLElement>()
+  const inputRef = useRef<HTMLSelectElement>()
   const buttonRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
 
-  const mergeRefs = (ref: HTMLElement) => {
+  const mergeRefs = (ref: HTMLSelectElement) => {
     if (ref) {
       hookFormRef?.(ref)
       inputRef.current = ref
@@ -68,7 +69,7 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
   const { triggerProps, menuProps, labelProps, valueProps } = useSelect(
     { ...rest, label, isDisabled: disabled, isRequired: required, isInvalid },
     state,
-    mergeRefs as unknown as RefObject<HTMLElement | null>,
+    buttonRef,
   )
 
   const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
@@ -80,7 +81,13 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
           {label}
         </Typography>
       )}
-      <HiddenSelect state={state} triggerRef={buttonRef} name={name} isDisabled />
+      <HiddenSelect
+        state={state}
+        selectRef={mergeRefs as unknown as RefObject<HTMLSelectElement>}
+        triggerRef={buttonRef}
+        name={name}
+        isDisabled
+      />
       <Box themeName={`${themeName}.container`}>
         <ButtonWithForwardRef
           {...restofTriggerProps}
