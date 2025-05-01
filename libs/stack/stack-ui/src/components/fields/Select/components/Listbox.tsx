@@ -42,12 +42,12 @@ const InnerListBox = (props: InnerListBoxProps) => {
 
 const ListBox = (props: TListBoxProps) => {
   const ref = React.useRef(null)
-  const { listBoxRef = ref, state, themeName = 'option' } = props
+  const { listBoxRef = ref, state, themeName = 'option', optionsWithHeaders } = props
   const { listBoxProps } = useListBox(props, state, listBoxRef)
   const collection = Array.from(state.collection) as { key: string; rendered: string }[]
 
-  const sections = useListboxSections(collection)
-  const hasHeaders = sections.some((section) => section.header?.key != null)
+  const sections = useListboxSections(collection, optionsWithHeaders || [])
+  const hasHeaders = optionsWithHeaders?.some((option) => option.key?.includes('header-'))
 
   if (!hasHeaders) {
     return (
