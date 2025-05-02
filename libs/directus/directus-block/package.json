@@ -33,6 +33,6 @@
   },
   "dependencies": {
     "@okam/directus-query": "1.4.1",
-    "@okam/stack-ui": "1.35.2"
+    "@okam/stack-ui": "1.35.3"
   }
 }
