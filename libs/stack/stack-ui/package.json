@@ -1,7 +1,7 @@
 {
   "name": "@okam/stack-ui",
   "main": "./index.js",
-  "version": "1.35.1",
+  "version": "1.35.2",
   "types": "./index.d.ts",
   "exports": {
     ".": {
@@ -22,37 +22,10 @@
     "url": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
-    "@internationalized/date": "3.8.0",
     "@okam/core-lib": "1.16.0",
     "@okam/logger": "1.1.0",
-    "@react-aria/accordion": "^3.0.0-alpha.36",
-    "@react-aria/checkbox": "3.15.4",
-    "@react-aria/focus": "^3.19.0",
-    "@react-aria/i18n": "^3.12.4",
-    "@react-aria/overlays": "3.27.0",
-    "@react-aria/tabs": "3.10.2",
-    "@react-aria/utils": "3.28.2",
-    "@react-aria/visually-hidden": "3.8.22",
-    "@react-spring/web": "^9.7.5",
-    "@react-stately/checkbox": "3.6.13",
-    "@react-stately/collections": "3.12.3",
-    "@react-stately/overlays": "3.6.15",
-    "@react-stately/radio": "3.10.12",
-    "@react-stately/tabs": "3.8.1",
-    "@react-stately/toggle": "3.8.3",
-    "@react-types/radio": "3.8.8",
-    "@react-types/shared": "^3.26.0",
-    "@react-types/tabs": "3.3.14",
-    "radashi": "^12.3.0",
     "react": "18.3.1",
     "react-aria": "^3.39.0",
-    "react-div-100vh": "0.7.0",
-    "react-hook-form": "7.54.0",
-    "react-stately": "^3.37.0",
-    "react-use": "17.5.1",
-    "sanitize-html": "^2.13.1",
-    "swiper": "11.1.15",
-    "tailwind-variants": "^0.3.0",
-    "usehooks-ts": "^3.1.0"
+    "react-stately": "^3.37.0"
   }
 }

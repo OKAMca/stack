@@ -14,7 +14,7 @@ import type TSearchProps from './interface'
 
 const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
   const { setUserSearchQuery } = useUserQueryValHook()
-  const { label, themeName = 'search', tokens, customTheme, disabled, errorMessage, placeholder } = props
+  const { label, themeName = 'search', tokens, customTheme, disabled, errorMessage, placeholder, icon } = props
   const state = useSearchFieldState(props)
   setUserSearchQuery(state.value)
   const ref = React.useRef(null)
@@ -44,7 +44,7 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
             themeName={`${themeName}.icon`}
             aria-label="clear"
           >
-            {state.value === '' ? <Search width="16" height="16" /> : <Close width="16" height="16" />}
+            {icon ?? (state.value === '' ? <Search width="16" height="16" /> : <Close width="16" height="16" />)}
           </Button>
         </FocusRing>
       </div>
