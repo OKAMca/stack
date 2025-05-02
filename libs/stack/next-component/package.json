@@ -8,6 +8,6 @@
     "url": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
-    "@okam/stack-ui": "1.35.2"
+    "@okam/stack-ui": "1.35.3"
   }
 }

@@ -82,6 +82,7 @@ export type { TBoxProps } from './components/Box/interface'
 export type { TDatePickerProps } from './components/fields/DatePicker/interface'
 export type { TDateProps } from './components/Date/interface'
 export type { TSidePanelButtons, TSidePanelButtonProps, TSidePanelContext } from './providers/SidePanel/interface'
+export type { default as TSearchProps } from './components/fields/SearchField/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'

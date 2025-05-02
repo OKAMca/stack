@@ -34,7 +34,7 @@
   "dependencies": {
     "@okam/logger": "1.1.0",
     "@okam/next-component": "1.0.2",
-    "@okam/stack-ui": "1.35.2",
+    "@okam/stack-ui": "1.35.3",
     "@okam/directus-next": "1.1.0"
   }
 }
