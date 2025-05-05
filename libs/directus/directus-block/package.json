@@ -32,7 +32,12 @@
     "url": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
+    "@graphql-typed-document-node/core": "3.2.0",
     "@okam/directus-query": "1.4.1",
-    "@okam/stack-ui": "1.35.3"
+    "@okam/stack-ui": "1.35.4",
+    "graphql": "^16.9.0",
+    "graphql-request": "^7.1.2",
+    "radashi": "^12.3.0",
+    "react": "18.3.1"
   }
 }
