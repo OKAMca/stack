@@ -46,6 +46,8 @@ export { default as Alerts } from './components/Alerts'
 export { default as AlertsItem } from './components/Alerts/components/AlertsItem'
 export { default as SelectItem } from './components/fields/SelectItem/SelectItem'
 export { default as Video } from './components/Video'
+export { default as TagGroup } from './components/TagGroup'
+export { TagItem } from './components/TagGroup/components/TagItem'
 export * from './components/icons'
 
 // providers
