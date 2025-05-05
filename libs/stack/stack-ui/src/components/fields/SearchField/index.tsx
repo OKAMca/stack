@@ -26,12 +26,13 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
     icon,
     isDisabled,
   } = props
-  const state = useSearchFieldState(props)
+  const internalIsDisabled = isDisabled || disabled
+  const internalProps = { ...props, isDisabled: internalIsDisabled }
+  const state = useSearchFieldState(internalProps)
   setUserSearchQuery(state.value)
   const ref = React.useRef(null)
-  const { labelProps, inputProps, errorMessageProps, clearButtonProps } = useSearchField(props, state, ref)
+  const { labelProps, inputProps, errorMessageProps, clearButtonProps } = useSearchField(internalProps, state, ref)
 
-  const internalIsDisabled = isDisabled || disabled
   const isError = errorMessage != null
 
   const searchTokens = { ...tokens, isError, isDisabled: internalIsDisabled ?? false }
@@ -47,7 +48,13 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
         </Box>
       )}
       <Box themeName={`${themeName}.container`} tokens={searchTokens}>
-        <input ref={ref} {...inputProps} placeholder={placeholder} className={inputTheme} disabled={disabled} />
+        <input
+          ref={ref}
+          {...inputProps}
+          placeholder={placeholder}
+          className={inputTheme}
+          disabled={internalIsDisabled}
+        />
         <FocusRing focusRingClass="has-focus-ring">
           <Button
             isDisabled={internalIsDisabled}
