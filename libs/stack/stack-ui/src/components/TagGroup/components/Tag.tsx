@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef } from 'react'
 import { FocusRing, useTag } from 'react-aria'
 import type { TToken } from '../../../providers/Theme/interface'

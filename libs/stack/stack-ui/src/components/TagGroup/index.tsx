@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef } from 'react'
 import { useTagGroup } from 'react-aria'
 import { useListState } from 'react-stately'
