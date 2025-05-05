@@ -46,6 +46,8 @@ export { default as Alerts } from './components/Alerts'
 export { default as AlertsItem } from './components/Alerts/components/AlertsItem'
 export { default as SelectItem } from './components/fields/SelectItem/SelectItem'
 export { default as Video } from './components/Video'
+export { default as TagGroup } from './components/TagGroup'
+export { TagItem } from './components/TagGroup/components/TagItem'
 export * from './components/icons'
 
 // providers
@@ -83,6 +85,7 @@ export type { TDatePickerProps } from './components/fields/DatePicker/interface'
 export type { TDateProps } from './components/Date/interface'
 export type { TSidePanelButtons, TSidePanelButtonProps, TSidePanelContext } from './providers/SidePanel/interface'
 export type { default as TSearchProps } from './components/fields/SearchField/interface'
+export type { TTagGroupProps, TTagItemProps, TTagProps } from './components/TagGroup/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
