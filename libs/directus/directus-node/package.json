@@ -10,6 +10,7 @@
     "url": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
+    "@graphql-codegen/cli": "^5.0.3",
     "@okam/logger": "1.1.0",
     "tslib": "^2.8.1"
   }
