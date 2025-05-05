@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@okam/stack-ui'
 import React from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
@@ -14,46 +15,57 @@ import type TSearchProps from './interface'
 
 const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
   const { setUserSearchQuery } = useUserQueryValHook()
-  const { label, themeName = 'search', tokens, customTheme, disabled, errorMessage, placeholder, icon } = props
+  const {
+    label,
+    themeName = 'search',
+    tokens,
+    customTheme,
+    disabled,
+    errorMessage,
+    placeholder,
+    icon,
+    isDisabled,
+  } = props
   const state = useSearchFieldState(props)
   setUserSearchQuery(state.value)
   const ref = React.useRef(null)
   const { labelProps, inputProps, errorMessageProps, clearButtonProps } = useSearchField(props, state, ref)
 
-  const searchTokens = { ...tokens, isError: errorMessage != null }
+  const internalIsDisabled = isDisabled || disabled
+  const isError = errorMessage != null
 
-  const wrapperTheme = useThemeContext(`${themeName}.wrapper`, searchTokens, customTheme)
+  const searchTokens = { ...tokens, isError, isDisabled: internalIsDisabled ?? false }
+
   const inputTheme = useThemeContext(`${themeName}.input`, searchTokens, customTheme)
-  const labelTheme = useThemeContext(`${themeName}.label`, searchTokens, customTheme)
-  const containerTheme = useThemeContext(`${themeName}.container`, searchTokens, customTheme)
 
   return (
-    <div className={wrapperTheme} aria-disabled={disabled}>
+    <Box themeName={`${themeName}.wrapper`} tokens={searchTokens} aria-disabled={internalIsDisabled ?? false}>
       {label && (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label {...labelProps} className={labelTheme}>
+        <Box {...labelProps} as="label" themeName={`${themeName}.label`} tokens={searchTokens}>
           {label}
-        </label>
+        </Box>
       )}
-      <div className={containerTheme}>
+      <Box themeName={`${themeName}.container`} tokens={searchTokens}>
         <input ref={ref} {...inputProps} placeholder={placeholder} className={inputTheme} disabled={disabled} />
         <FocusRing focusRingClass="has-focus-ring">
           <Button
+            isDisabled={internalIsDisabled}
             handlePress={clearButtonProps.onPress}
-            tokens={{ isIconOnly: true, buttonStyle: 'hollow' }}
+            tokens={{ isIconOnly: true, buttonStyle: 'hollow', isDisabled: internalIsDisabled ?? false }}
             themeName={`${themeName}.icon`}
             aria-label="clear"
           >
             {icon ?? (state.value === '' ? <Search width="16" height="16" /> : <Close width="16" height="16" />)}
           </Button>
         </FocusRing>
-      </div>
+      </Box>
       {errorMessage && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={searchTokens} {...errorMessageProps}>
           {errorMessage}
         </Typography>
       )}
-    </div>
+    </Box>
   )
 }
 
