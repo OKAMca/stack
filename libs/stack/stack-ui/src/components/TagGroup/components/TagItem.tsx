@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { PartialNode } from '@react-stately/collections'
 import type { ItemProps } from '@react-types/shared'
