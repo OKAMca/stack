@@ -1,7 +1,7 @@
 'use client'
 
 import { Box } from '@okam/stack-ui'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
@@ -29,9 +29,16 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
   const internalIsDisabled = isDisabled || disabled
   const internalProps = { ...props, isDisabled: internalIsDisabled }
   const state = useSearchFieldState(internalProps)
-  setUserSearchQuery(state.value)
   const ref = React.useRef(null)
   const { labelProps, inputProps, errorMessageProps, clearButtonProps } = useSearchField(internalProps, state, ref)
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setUserSearchQuery(state.value)
+      inputProps.onChange?.(e)
+    },
+    [setUserSearchQuery, state.value, inputProps],
+  )
 
   const isError = errorMessage != null
 
@@ -51,6 +58,7 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
         <input
           ref={ref}
           {...inputProps}
+          onChange={handleChange}
           placeholder={placeholder}
           className={inputTheme}
           disabled={internalIsDisabled}
