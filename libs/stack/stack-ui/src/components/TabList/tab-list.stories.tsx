@@ -172,7 +172,7 @@ export const Controlled: Story = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [selectedKey, setSelectedKey] = useState<Key | undefined>(defaultSelectedKey)
     return (
-      <Box customTheme="flex flex-col gaap-4">
+      <Box customTheme="flex flex-col gap-4">
         <Box customTheme="flex gap-2">
           {Array.from(items ?? []).map((item) => (
             <Button key={`button-${item.key}`} handlePress={() => setSelectedKey(item.key)}>
