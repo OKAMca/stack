@@ -1,9 +1,8 @@
 /* eslint-disable import/no-unresolved */
-import type { ComponentType } from '@react-spring/web'
 import type { TabListState } from '@react-stately/tabs'
 import type { AriaTabListProps, AriaTabPanelProps, AriaTabProps } from '@react-types/tabs'
+import type { ComponentType, ReactElement } from 'react'
 import type React from 'react'
-import type { ReactElement } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent, TTransition } from '../../types/components'
 import type { TDefaultItemComponent, TDefaultNode } from '../../types/react-stately'
@@ -25,7 +24,7 @@ export interface TTabPanelProps<I extends object, T extends TToken = TToken>
 }
 
 export interface TTabListProps<I extends object, T extends TToken = TToken>
-  extends AriaTabListProps<I & TDefaultItemComponent>,
+  extends AriaTabListProps<I & TDefaultItemComponent<I, T>>,
     Omit<TDefaultComponent<T>, 'children'> {
   label?: React.ReactNode
   panelTransition?: ComponentType<TTransition>
