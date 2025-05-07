@@ -6,7 +6,7 @@ export interface TDefaultNode<I extends object> extends Omit<Node<I>, 'props'> {
   props?: TDefaultComponent & I
 }
 
-export interface TDefaultItemComponent<I extends object = object, T = TToken>
+export interface TDefaultItemComponent<I extends object = object, T extends TToken = TToken>
   extends Omit<TDefaultComponent<T>, 'children'>,
     ItemProps<I> {
   key: Key
