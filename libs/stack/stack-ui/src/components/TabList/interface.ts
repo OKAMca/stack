@@ -8,26 +8,23 @@ import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent, TTransition } from '../../types/components'
 import type { TDefaultItemComponent, TDefaultNode } from '../../types/react-stately'
 
-export interface TTabItemProps<I extends object = object, T extends TToken = TToken>
-  extends TDefaultItemComponent<I, T> {}
+export interface TTabItemProps<I extends object = object> extends TDefaultItemComponent<I> {}
 
 export type TTabElement<I extends object = object> = ReactElement<TTabItemProps<I>>
 
-export interface TTabProps<I extends object = object, T extends TToken = TToken>
-  extends AriaTabProps,
-    TDefaultComponent<T> {
+export interface TTabProps<I extends object = object> extends AriaTabProps, TDefaultComponent {
   item: TDefaultNode<I>
-  state: TabListState<I & TDefaultItemComponent>
+  state: TabListState<I>
 }
 
-export interface TTabPanelProps<I extends object = object, T extends TToken = TToken>
+export interface TTabPanelProps<I extends object, T extends TToken = TToken>
   extends AriaTabPanelProps,
     TDefaultComponent<T> {
-  state: TabListState<I & TDefaultItemComponent>
+  state: TabListState<I>
   panelTransition?: ComponentType<TTransition>
 }
 
-export interface TTabListProps<I extends object = object, T extends TToken = TToken>
+export interface TTabListProps<I extends object, T extends TToken = TToken>
   extends AriaTabListProps<I & TDefaultItemComponent>,
     Omit<TDefaultComponent<T>, 'children'> {
   label?: React.ReactNode
