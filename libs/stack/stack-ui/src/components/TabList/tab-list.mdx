@@ -1,0 +1,47 @@
+import * as TabListStories from './tab-list.stories'
+import { Meta, ArgTypes, Canvas } from '@storybook/blocks'
+
+<Meta of={TabListStories} />
+
+# TabList
+
+Tab list component that provides a way to organize content into separate views where only one view is visible at a time. Each tab has an associated panel that contains the content to be displayed when that tab is selected.
+
+## Props
+
+<ArgTypes />
+
+### Tokens
+
+The following tokens are available on the `TabList` component:
+
+- orientation (`'horizontal' | 'vertical'`) - The orientation of the tab list.
+- isDisabled (`boolean`) - Whether the tab list is disabled.
+
+## Showcase
+
+### Default
+
+<Canvas of={TabListStories.Default} />
+
+### Focusable Content
+
+<Canvas of={TabListStories.FocusableContent} />
+
+### Vertical Orientation
+
+<Canvas of={TabListStories.VerticalOrientation} />
+
+### Disabled
+
+<Canvas of={TabListStories.DisabledKeys} />
+
+### Children Render Function
+
+You can either pass an array of `TabItem` components or a render function that returns a `TabItem` component, as well as an `items` prop.
+
+<Canvas of={TabListStories.ChildrenRenderFunction} />
+
+### Controlled
+
+<Canvas of={TabListStories.Controlled} />
