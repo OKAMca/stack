@@ -1,3 +1,5 @@
+'use client'
+
 import { useTabPanel } from '@react-aria/tabs'
 import { useRef } from 'react'
 import type { TToken } from '../../../providers/Theme/interface'

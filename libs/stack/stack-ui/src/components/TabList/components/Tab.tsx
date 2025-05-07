@@ -1,13 +1,15 @@
+'use client'
+
 import { useTab } from '@react-aria/tabs'
 import { useRef } from 'react'
 import { FocusRing } from 'react-aria'
 import { mergeDefaultComponentProps } from '../../../helpers/mergeDefaultComponentProps'
-import type { TToken } from '../../../providers/Theme/interface'
+import type { TDefaultItemComponent } from '../../../types/react-stately'
 import { BoxWithForwardRef } from '../../Box'
 import Button from '../../Button'
 import type { TTabProps } from '../interface'
 
-const Tab = <I extends object, T extends TToken = TToken>({ item, state, ...props }: TTabProps<I, T>) => {
+const Tab = <I extends TDefaultItemComponent>({ item, state, ...props }: TTabProps<I>) => {
   const { key, rendered } = item
   const {
     themeName = 'tabList.tab',
