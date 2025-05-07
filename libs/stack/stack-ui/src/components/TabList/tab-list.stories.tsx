@@ -180,7 +180,13 @@ export const Controlled: Story = {
             </Button>
           ))}
         </Box>
-        <TabList {...rest} selectedKey={selectedKey} onSelectionChange={setSelectedKey} />
+        <TabList
+          {...rest}
+          defaultSelectedKey={defaultSelectedKey}
+          items={items}
+          selectedKey={selectedKey}
+          onSelectionChange={setSelectedKey}
+        />
       </Box>
     )
   },
