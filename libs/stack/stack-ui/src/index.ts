@@ -48,6 +48,10 @@ export { default as SelectItem } from './components/fields/SelectItem/SelectItem
 export { default as Video } from './components/Video'
 export { default as TagGroup } from './components/TagGroup'
 export { TagItem } from './components/TagGroup/components/TagItem'
+export { default as TabList } from './components/TabList'
+export { TabItem } from './components/TabList/components/TabItem'
+export { default as TabPanel } from './components/TabList/components/TabPanel'
+export { default as Tab } from './components/TabList/components/Tab'
 export * from './components/icons'
 
 // providers
@@ -86,7 +90,8 @@ export type { TDateProps } from './components/Date/interface'
 export type { TSidePanelButtons, TSidePanelButtonProps, TSidePanelContext } from './providers/SidePanel/interface'
 export type { default as TSearchProps } from './components/fields/SearchField/interface'
 export type { TTagGroupProps, TTagItemProps, TTagProps } from './components/TagGroup/interface'
-
+export type { TTabListProps, TTabProps, TTabPanelProps } from './components/TabList/interface'
+export type { TDefaultNode, TDefaultItemComponent } from './types/react-stately'
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
 export { default as useWindow } from './components/ShareButton/utils/useWindow'
@@ -94,6 +99,7 @@ export { default as useFacebookShareUrl } from './components/ShareButton/utils/u
 export { default as useMailToShareUrl } from './components/ShareButton/utils/useMailToShareUrl'
 export { default as useTwitterShareUrl } from './components/ShareButton/utils/useTwitterShareUrl'
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
+export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
 
 // dev tools
 export { logger as StackUILogger } from './logger'
