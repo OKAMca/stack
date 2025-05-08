@@ -38,7 +38,7 @@ TabItem.getCollectionNode = function* getCollectionNode<T extends object>(
   const rendered = props.title || props.children
   const textValue = props.textValue || (typeof rendered === 'string' ? rendered : '') || props['aria-label'] || ''
 
-  if (!textValue && !context?.suppressTextValueWarning && process.env.NODE_ENV !== 'production') {
+  if (!textValue && !context?.suppressTextValueWarning) {
     log(
       '<Item> with non-plain text contents is unsupported by type to select for accessibility. Please add a `textValue` prop.',
       'warn',
