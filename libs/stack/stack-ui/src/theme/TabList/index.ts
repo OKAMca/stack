@@ -66,9 +66,10 @@ const tabListTabPanelContainer = tv({
   `,
 })
 
-const tabListTabContainer = tv({
+const tabListTab = tv({
+  extend: typography,
   base: `
-  focus-ring-black
+    focus-ring-black
     transition-all
     duration-200
     px-4
@@ -101,10 +102,6 @@ const tabListTabContainer = tv({
       true: `has-focus-ring`,
     },
   },
-})
-
-const tabListTabButton = tv({
-  extend: typography,
   defaultVariants: {
     size: 'h6',
   },
@@ -119,10 +116,7 @@ const tabListTheme = {
     transition: tabListTabPanelTransition,
     container: tabListTabPanelContainer,
   },
-  tab: {
-    container: tabListTabContainer,
-    button: tabListTabButton,
-  },
+  tab: tabListTab,
 }
 
 export default tabListTheme

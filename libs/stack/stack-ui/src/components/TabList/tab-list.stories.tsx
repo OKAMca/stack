@@ -121,16 +121,16 @@ export const FocusableContent: Story = {
         </Box>
       </TabItem>,
       <TabItem key="2" title="Technology">
-        Technology
+        Technology content
       </TabItem>,
       <TabItem key="3" title="Science">
-        Science
+        Science content
       </TabItem>,
       <TabItem key="4" title="Math">
-        Math
+        Math content
       </TabItem>,
       <TabItem key="5" title="English">
-        English
+        English content
       </TabItem>,
     ],
   },
