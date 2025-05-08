@@ -18,6 +18,16 @@ const meta: Meta<typeof TabList> = {
     TabPanel: TabPanel as ComponentType<unknown>,
   },
   argTypes: {
+    keyboardActivation: {
+      control: 'select',
+      options: ['automatic', 'manual'],
+      description:
+        'Automatic means that tab will activate when navigated to with the arrow keys, manual means that tab will activate on focus.',
+      table: {
+        defaultValue: { summary: 'automatic' },
+        type: { summary: 'automatic | manual' },
+      },
+    },
     label: {
       description: 'Label of the tab list. Gets rendered before the tabs.',
       table: {

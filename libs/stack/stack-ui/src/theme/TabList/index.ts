@@ -66,12 +66,9 @@ const tabListTabPanelContainer = tv({
   `,
 })
 
-const tabListTabContainer = tv({})
-
-const tabListTabButton = tv({
-  extend: typography,
+const tabListTabContainer = tv({
   base: `
-    focus-ring-black
+  focus-ring-black
     transition-all
     duration-200
     px-4
@@ -100,7 +97,14 @@ const tabListTabButton = tv({
         pointer-events-none
       `,
     },
+    isFocusVisible: {
+      true: `has-focus-ring`,
+    },
   },
+})
+
+const tabListTabButton = tv({
+  extend: typography,
   defaultVariants: {
     size: 'h6',
   },
