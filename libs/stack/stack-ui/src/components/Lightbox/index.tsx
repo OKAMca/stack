@@ -48,7 +48,7 @@ const Lightbox = <T extends TToken>(props: TLightboxProps<T>) => {
         <FocusRing focusRingClass="has-focus-ring" within>
           <Button themeName={`${themeName}.wrapper`} tokens={tokens} {...openTriggerProps}>
             {label && (
-              <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }} {...labelProps}>
+              <Typography themeName={`${themeName}.label`} tokens={tokens} {...labelProps}>
                 {label}
               </Typography>
             )}
