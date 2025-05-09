@@ -43,3 +43,42 @@ export const TemplateControlledState = (args) => {
 <Canvas>
   <Story of={LightboxStories.ControlledState} />
 </Canvas>
+
+### With hidden buttons in controlled state
+
+<Canvas>
+  <Story of={LightboxStories.ControlledStateHiddenButtons} />
+</Canvas>
+
+## Conditional Rendering
+
+The Lightbox component supports conditional rendering of trigger and close buttons through the `showTriggerButton` and `showCloseButton` props. These features are particularly useful in controlled state scenarios.
+
+### Examples:
+
+- Hide trigger button: `<Lightbox showTriggerButton={false} />`  
+  Use when you want to provide your own custom trigger mechanism.
+
+- Hide close button: `<Lightbox showCloseButton={false} />`  
+  Use when you want to implement your own close mechanism or need a modal without a close button.
+
+- Controlled state with hidden buttons:
+```jsx
+const [isOpen, setOpen] = useState(false);
+
+return (
+  <>
+    <Button handlePress={() => setOpen(true)}>Custom Trigger</Button>
+    <Lightbox 
+      isOpen={isOpen} 
+      onOpenChange={setOpen}
+      showTriggerButton={false} 
+      showCloseButton={false}
+      // ...other props
+    >
+      {content}
+      <Button handlePress={() => setOpen(false)}>Custom Close</Button>
+    </Lightbox>
+  </>
+)
+```

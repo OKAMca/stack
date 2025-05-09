@@ -19,6 +19,8 @@ export interface LightboxProps<T = TToken>
   setOpen?: Dispatch<SetStateAction<boolean>>
   closeButton?: TCloseButtonProps
   transitionComponent?: FunctionComponent<TTransition>
+  showTriggerButton?: boolean
+  showCloseButton?: boolean
 }
 
 export interface TLightboxProps<T = TToken> extends LightboxProps<T> {
