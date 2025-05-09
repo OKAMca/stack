@@ -13,6 +13,14 @@ import Search from '../../icons/Search'
 import Typography from '../../Typography'
 import type TSearchProps from './interface'
 
+const BuiltinIcon = ({ value }: { value: string }) => {
+  if (value === '') {
+    return <Search width="16" height="16" />
+  }
+
+  return <Close width="16" height="16" />
+}
+
 const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
   const { setUserSearchQuery } = useUserQueryValHook()
   const {
@@ -71,7 +79,8 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
             themeName={`${themeName}.icon`}
             aria-label="clear"
           >
-            {icon ?? (state.value === '' ? <Search width="16" height="16" /> : <Close width="16" height="16" />)}
+            {icon == null && <BuiltinIcon value={state.value} />}
+            {icon != null && icon}
           </Button>
         </FocusRing>
       </Box>
