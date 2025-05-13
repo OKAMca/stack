@@ -31,6 +31,8 @@ const Lightbox = <T extends TToken>(props: TLightboxProps<T>) => {
     closeButton: CloseButton = LightboxCloseButton,
     closeButtonAriaLabel,
     transitionComponent,
+    showTriggerButton = true,
+    showCloseButton = true,
   } = props
 
   const state = useOverlayTriggerState(props)
@@ -42,16 +44,18 @@ const Lightbox = <T extends TToken>(props: TLightboxProps<T>) => {
 
   return (
     <>
-      <FocusRing focusRingClass="has-focus-ring" within>
-        <Button themeName={`${themeName}.wrapper`} tokens={tokens} {...openTriggerProps}>
-          {label && (
-            <Typography themeName={`${themeName}.label`} tokens={{ size: 'footnotes' }} {...labelProps}>
-              {label}
-            </Typography>
-          )}
-          {thumbnailContent}
-        </Button>
-      </FocusRing>
+      {showTriggerButton && (
+        <FocusRing focusRingClass="has-focus-ring" within>
+          <Button themeName={`${themeName}.wrapper`} tokens={tokens} {...openTriggerProps}>
+            {label && (
+              <Typography themeName={`${themeName}.label`} tokens={tokens} {...labelProps}>
+                {label}
+              </Typography>
+            )}
+            {thumbnailContent}
+          </Button>
+        </FocusRing>
+      )}
       <Modal
         themeName={`${themeName}.modal`}
         tokens={tokens}
@@ -59,12 +63,14 @@ const Lightbox = <T extends TToken>(props: TLightboxProps<T>) => {
         {...overlayProps}
         transitionComponent={transitionComponent}
       >
-        <CloseButton
-          themeName={`${themeName}.closeBtn`}
-          tokens={tokens}
-          aria-label={closeButtonAriaLabel}
-          {...triggerProps}
-        />
+        {showCloseButton && (
+          <CloseButton
+            themeName={`${themeName}.closeBtn`}
+            tokens={tokens}
+            aria-label={closeButtonAriaLabel}
+            {...triggerProps}
+          />
+        )}
         <Box themeName={`${themeName}.container`} tokens={tokens}>
           {children}
         </Box>
