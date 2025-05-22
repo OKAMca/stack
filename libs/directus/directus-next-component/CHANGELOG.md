@@ -1,3 +1,13 @@
+## 1.7.1 (2025-05-22)
+
+### 🩹 Fixes
+
+- **directus-next-component:** missing external deps ([458b393](https://github.com/OKAMca/stack/commit/458b393))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.7.0 (2025-05-22)
 
 ### 🚀 Features
