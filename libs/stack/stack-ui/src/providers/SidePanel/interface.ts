@@ -4,7 +4,7 @@ import type React from 'react'
 import type { ButtonHTMLAttributes } from 'react'
 import type { OverlayTriggerProps as OverlayTriggerPropsAria, AriaButtonProps } from 'react-aria'
 
-export interface TSidePanelProviderProps extends OverlayTriggerProps, OverlayTriggerPropsAria {
+export interface TSidePanelProviderProps extends OverlayTriggerProps, Partial<OverlayTriggerPropsAria> {
   children: React.ReactNode
   defaultSelectedKey: string
   /**
