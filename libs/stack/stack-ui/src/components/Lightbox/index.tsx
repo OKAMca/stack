@@ -2,6 +2,7 @@
 
 import { FocusRing } from '@react-aria/focus'
 import { useOverlayTriggerState } from 'react-stately'
+import useLabelledOverlay from '../../hooks/useLabelledOverlay'
 import type { TToken } from '../../providers/Theme/interface'
 import Box from '../Box'
 import Button from '../Button'
@@ -9,7 +10,6 @@ import type { TButtonProps } from '../Button/interface'
 import Icon from '../Icon'
 import Modal from '../Modal'
 import Typography from '../Typography'
-import useOverlayHook from './hooks/overlay'
 import type { TLightboxProps } from './interface'
 
 const LightboxCloseButton = (props: TButtonProps) => {
@@ -37,7 +37,7 @@ const Lightbox = <T extends TToken>(props: TLightboxProps<T>) => {
 
   const state = useOverlayTriggerState(props)
 
-  const { openTriggerProps, triggerProps, overlayProps, labelProps } = useOverlayHook(
+  const { openTriggerProps, triggerProps, overlayProps, labelProps } = useLabelledOverlay(
     { ...props, type: 'dialog' },
     state,
   )
