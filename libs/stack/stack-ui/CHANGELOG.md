@@ -1,3 +1,20 @@
+## 1.37.0 (2025-05-22)
+
+### 🚀 Features
+
+- **stack-ui:** add conditional rendering for trigger and close buttons in Lightbox component ([313716e](https://github.com/OKAMca/stack/commit/313716e))
+
+### 🩹 Fixes
+
+- **stack-ui:** side panel type prop optional, with default value ([edec9e5](https://github.com/OKAMca/stack/commit/edec9e5))
+- **stack-ui:** sidepanel components pass dialog title, use new props from useLabelledOverlay ([a95f407](https://github.com/OKAMca/stack/commit/a95f407))
+- **stack-ui:** remove hardcoded tokens in Lightbox component ([99cdfbf](https://github.com/OKAMca/stack/commit/99cdfbf))
+
+### ❤️ Thank You
+
+- Jerome Trottier
+- poclerson
+
 ## 1.31.0 (2025-05-01)
 
 ### 🚀 Features
