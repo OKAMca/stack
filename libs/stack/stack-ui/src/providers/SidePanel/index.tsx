@@ -3,7 +3,7 @@
 import { createCtx } from '@okam/core-lib'
 import { useMemo, useRef } from 'react'
 import { useOverlayTriggerState } from 'react-stately'
-import useOverlayHook from '../../components/Lightbox/hooks/overlay'
+import useLabelledOverlay from '../../hooks/useLabelledOverlay'
 import type { TSidePanelContext, TSidePanelProviderProps } from './interface'
 
 const [useSidePanel, SidePanelProvider] = createCtx<TSidePanelContext>()
@@ -16,16 +16,23 @@ export function SidePanelContextProvider(props: TSidePanelProviderProps) {
     defaultSelectedKey,
     onOpenCallback,
     onCloseCallback,
-    defaultIsOpen = false,
+    defaultIsOpen: legacyDefaultOpen = false,
+    onOpenChange,
+    isOpen: isOpenProp,
+    defaultOpen: defaultOpenProp,
     type = 'dialog',
   } = props
+
+  const defaultOpen = defaultOpenProp ?? legacyDefaultOpen
 
   const openButtonRef = useRef(null)
   const closeButtonRef = useRef(null)
 
   const overlayState = useOverlayTriggerState({
-    defaultOpen: defaultIsOpen,
+    isOpen: isOpenProp,
+    defaultOpen,
     onOpenChange(isOpen) {
+      onOpenChange?.(isOpen)
       if (!isOpen) {
         onCloseCallback?.()
         return
@@ -34,10 +41,11 @@ export function SidePanelContextProvider(props: TSidePanelProviderProps) {
     },
   })
 
-  const { triggerProps, overlayProps } = useOverlayHook({ type }, overlayState)
+  const { triggerProps, overlayProps, labelProps } = useLabelledOverlay({ type }, overlayState)
 
   const value = useMemo<TSidePanelContext>(
     () => ({
+      labelProps,
       overlayProps,
       defaultSelectedKey,
       overlayState,
@@ -48,7 +56,7 @@ export function SidePanelContextProvider(props: TSidePanelProviderProps) {
         openButtonRef,
       },
     }),
-    [overlayState, defaultSelectedKey, triggerProps, overlayProps],
+    [labelProps, overlayProps, defaultSelectedKey, overlayState, triggerProps],
   )
 
   return <SidePanelProvider value={value}>{children}</SidePanelProvider>

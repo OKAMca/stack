@@ -6,4 +6,4 @@ export const sidePanelWrapper = tv({
 
 export const sidePanelContainer = tv({ base: 'h-full w-full flex justify-end' })
 
-export const sidePanelInnerContainer = tv({ base: 'bg-black h-full w-full overflow-y-auto' })
+export const sidePanelInnerContainer = tv({ base: 'bg-gray-300 h-full w-full overflow-y-auto' })

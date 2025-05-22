@@ -1,30 +1,18 @@
-import React from 'react'
-import { FocusRing, FocusScope, useDialog } from 'react-aria'
-import { BoxWithForwardRef } from '../../Box'
+import { FocusRing, FocusScope } from 'react-aria'
+import { Dialog } from '../../Dialog'
 import type { TModalDialogProps } from '../interface'
 
 const ModalDialog = (props: TModalDialogProps) => {
-  const { children, themeName, tokens, customTheme } = props
-
-  const ref = React.useRef(null)
-
-  const { dialogProps } = useDialog(props, ref)
+  const { children, themeName, tokens, customTheme, title, ...rest } = props
 
   return (
-    <BoxWithForwardRef
-      themeName={`${themeName}.dialog`}
-      tokens={tokens}
-      customTheme={customTheme}
-      ref={ref}
-      aria-modal
-      {...dialogProps}
-    >
+    <Dialog themeName={`${themeName}.dialog`} tokens={tokens} customTheme={customTheme} title={title} {...rest}>
       <FocusRing focusRingClass="has-focus-ring" within autoFocus>
         <FocusScope contain restoreFocus autoFocus>
           {children}
         </FocusScope>
       </FocusRing>
-    </BoxWithForwardRef>
+    </Dialog>
   )
 }
 

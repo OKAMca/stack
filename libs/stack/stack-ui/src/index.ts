@@ -80,7 +80,7 @@ export type {
   TStyleValue,
 } from './providers/Theme/interface'
 export type { TMenuProps, TMenuItemProps } from './components/Menu/interface'
-export type { TDefaultComponent, Nullable } from './types/components'
+export type { TDefaultComponent, Nullable, TTransition, TReactHookForm } from './types/components'
 export type { TTextInputProps } from './components/fields/TextInputField/interface'
 export type { TCheckboxProps } from './components/fields/Checkbox/Checkbox.interface'
 export type { TSelectProps } from './components/fields/Select/Select.interface'
@@ -92,6 +92,7 @@ export type { default as TSearchProps } from './components/fields/SearchField/in
 export type { TTagGroupProps, TTagItemProps, TTagProps } from './components/TagGroup/interface'
 export type { TTabListProps, TTabProps, TTabPanelProps } from './components/TabList/interface'
 export type { TDefaultNode, TDefaultItemComponent } from './types/react-stately'
+
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
 export { default as useWindow } from './components/ShareButton/utils/useWindow'
@@ -100,6 +101,6 @@ export { default as useMailToShareUrl } from './components/ShareButton/utils/use
 export { default as useTwitterShareUrl } from './components/ShareButton/utils/useTwitterShareUrl'
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
 export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
-
+export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
 // dev tools
 export { logger as StackUILogger } from './logger'

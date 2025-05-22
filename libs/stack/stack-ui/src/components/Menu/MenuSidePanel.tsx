@@ -27,8 +27,10 @@ const MenuSidePanel = (props: TMenuSidePanelProps) => {
       id={id}
       TransitionAnimation={TransitionAnimation}
       PanelTransition={PanelTransition}
-      onCloseCallBack={() => {
-        tabState?.setSelectedKey(defaultSelectedKey)
+      onOpenChange={(isOpen) => {
+        if (!isOpen) {
+          tabState?.setSelectedKey(defaultSelectedKey)
+        }
       }}
     >
       <InnerContent id={id} themeName={themeName} tokens={tokens} customTheme={customTheme} {...rest}>
