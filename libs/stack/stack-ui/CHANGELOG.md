@@ -1,3 +1,17 @@
+## 1.37.0 (2025-05-22)
+
+### 🚀 Features
+
+- **stack-ui:** add conditional rendering for trigger and close buttons in Lightbox component ([313716e](https://github.com/OKAMca/stack/commit/313716e))
+
+### 🩹 Fixes
+
+- **stack-ui:** remove hardcoded tokens in Lightbox component ([99cdfbf](https://github.com/OKAMca/stack/commit/99cdfbf))
+
+### ❤️ Thank You
+
+- Jerome Trottier
+
 ## 1.31.0 (2025-05-01)
 
 ### 🚀 Features
