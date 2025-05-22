@@ -24,7 +24,7 @@
   "dependencies": {
     "@nx/vite": "20.2.2",
     "@okam/directus-block": "1.5.3",
-    "@okam/stack-ui": "1.36.0",
+    "@okam/stack-ui": "1.36.1",
     "@vitejs/plugin-react": "4.3.4",
     "vite": "^5.0.13",
     "vite-plugin-dts": "~2.3.0",
