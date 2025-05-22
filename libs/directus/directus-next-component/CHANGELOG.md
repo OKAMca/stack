@@ -1,3 +1,20 @@
+## 1.7.0 (2025-05-22)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 1.6.3 (2025-05-22)
 
 ### 🚀 Features
