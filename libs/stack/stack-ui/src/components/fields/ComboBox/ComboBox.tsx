@@ -5,15 +5,17 @@ import { useComboBoxState } from '@react-stately/combobox'
 import type { RefObject } from 'react'
 import { useRef, useEffect, useState } from 'react'
 import { useComboBox, useFilter } from 'react-aria'
-import tw, { styled } from 'twin.macro'
 import { ButtonWithForwardRef } from '../../Button'
+import Icon from '../../Icon'
 import type { TComboBoxProps, TComboBoxWrapperProps } from './ComboBox.interface'
-import { getBgVariant } from './ComboBox.styles'
 import ListBox from './components/Listbox'
 import Popover from './components/Popover'
 import { buttonIcon } from './utilities/Icon'
 
-const StyledComboBox = styled.div(() => [tw`relative inline-flex flex-col text-left`])
+// Utility function to combine class names conditionally
+const cn = (...classes: (string | false | undefined | null)[]): string => {
+  return classes.filter(Boolean).join(' ')
+}
 
 // removed attributes
 // selectedKey,
@@ -78,23 +80,23 @@ export const ComboBoxWrapper = ({
   return (
     <div>
       {label && (
-        <span tw="sr-only" {...labelProps}>
+        <span className="sr-only" {...labelProps}>
           {label}
         </span>
       )}
       {description && (
-        <div tw="sr-only" {...descriptionProps}>
+        <div className="sr-only" {...descriptionProps}>
           {description}
         </div>
       )}
       <div
-        tw="flex flex-row rounded-full border border-gray-1 transition duration-300 ease-in-out"
-        css={[
-          getBgVariant(variant),
+        className={cn(
+          'flex flex-row rounded-full border border-gray-1 transition duration-300 ease-in-out',
+          variant === 'primary' && 'bg-brand-color-1-3',
           variant === 'gray' &&
-            tw`focus-within:border-white hover:bg-gray-1 hover:border-white hover:text-white justify-between`,
-          isDisabled && tw`opacity-50 pointer-events-none`,
-        ]}
+            'bg-gray-1 focus-within:border-white hover:bg-gray-1 hover:border-white hover:text-white justify-between',
+          isDisabled && 'opacity-50 pointer-events-none',
+        )}
       >
         <input
           {...newInputProps}
@@ -104,32 +106,35 @@ export const ComboBoxWrapper = ({
           }}
           ref={inputRef}
           placeholder={placeholder}
-          tw="text-white bg-transparent outline-none pl-5 text-paragraph lg:pl-7 sm:w-[280px] w-full"
+          className="text-white bg-transparent outline-none pl-5 text-paragraph lg:pl-7 sm:w-[280px] w-full"
         />
-        <ButtonWithForwardRef
-          {...newButtonProps}
-          ref={buttonRef}
-          type="button"
-          icon={buttonIcon(state.inputValue)}
-          handlePress={
-            state.inputValue === ''
-              ? onPressStart
-              : () => {
-                  state.setInputValue('')
-                  setIsTyping(false)
-                  state.setOpen(false)
-                }
-          }
-          tw="text-gray-2 border-2 border-gray-1 !px-0 lg:!min-h-[3.25rem] lg:!min-w-[3.25rem]"
-          css={[
-            getBgVariant(variant),
-            variant === 'gray' && tw`hover:bg-gray-1 hover:text-white`,
-            state.inputValue !== '' && tw`[& svg]:w-[40px] [& svg]:h-[40px]`,
-            state.inputValue !== '' && tw`p-0`,
-            state.inputValue === '' && tw`opacity-[0%] md:opacity-[100%]`,
-            isDisabled && tw`md:opacity-50 pointer-events-none`,
-          ]}
-        />
+        <div
+          className={cn(
+            'text-gray-2 border-2 border-gray-1 px-0 lg:min-h-[3.25rem] lg:min-w-[3.25rem] flex items-center justify-center rounded-full',
+            variant === 'primary' && 'bg-brand-color-1-3',
+            variant === 'gray' && 'bg-gray-1 hover:bg-gray-1 hover:text-white',
+            state.inputValue !== '' && '[&_svg]:w-[40px] [&_svg]:h-[40px] p-0',
+            state.inputValue === '' && 'opacity-0 md:opacity-100',
+            isDisabled && 'md:opacity-50 pointer-events-none',
+          )}
+        >
+          <ButtonWithForwardRef
+            {...newButtonProps}
+            ref={buttonRef}
+            handlePress={
+              state.inputValue === ''
+                ? onPressStart
+                : () => {
+                    state.setInputValue('')
+                    setIsTyping(false)
+                    state.setOpen(false)
+                  }
+            }
+            customTheme="w-full h-full flex items-center justify-center bg-transparent border-0 p-0"
+          >
+            <Icon icon={buttonIcon(state.inputValue)} />
+          </ButtonWithForwardRef>
+        </div>
       </div>
       {state.isOpen && (
         <Popover
@@ -157,11 +162,11 @@ export const ComboBox = (props: TComboBoxProps) => {
   const { children, ...rest } = props
 
   return (
-    <StyledComboBox>
+    <div className="relative inline-flex flex-col text-left">
       <ComboBoxWrapper {...rest} allowsCustomValue>
         {children}
       </ComboBoxWrapper>
-    </StyledComboBox>
+    </div>
   )
 }
 

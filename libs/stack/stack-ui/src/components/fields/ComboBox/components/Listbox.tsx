@@ -2,8 +2,12 @@
 
 import { useRef } from 'react'
 import { useListBox, useOption } from 'react-aria'
-import tw from 'twin.macro'
 import type { TListBoxProps, TOptionProps } from '../ComboBox.interface'
+
+// Utility function to combine class names conditionally
+const cn = (...classes: (string | false | undefined | null)[]): string => {
+  return classes.filter(Boolean).join(' ')
+}
 
 function Option({ item, state }: TOptionProps) {
   const ref = useRef(null)
@@ -13,8 +17,10 @@ function Option({ item, state }: TOptionProps) {
     <li
       {...optionProps}
       ref={ref}
-      css={isFocused ? tw`bg-gray-5` : ''}
-      tw="text-white text-lg last:rounded-b-2xl py-4 cursor-pointer px-5 lg:px-7 m-0"
+      className={cn(
+        'text-white text-lg last:rounded-b-2xl py-4 cursor-pointer px-5 lg:px-7 m-0',
+        isFocused && 'bg-gray-5',
+      )}
     >
       {item.rendered}
     </li>
@@ -28,7 +34,7 @@ export default function ListBox(props: TListBoxProps) {
 
   return (
     <>
-      <p tw="px-5 lg:px-7 pt-3 pb-2 text-white text-sm">{listLabel}</p>
+      <p className="px-5 lg:px-7 pt-3 pb-2 text-white text-sm">{listLabel}</p>
       <ul
         {...listBoxProps}
         ref={listBoxRef}

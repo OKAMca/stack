@@ -1,0 +1,23 @@
+{/* ComboBox.stories.mdx */}
+
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import ComboBox from './ComboBox'
+import { OverlayContainer } from '@react-aria/overlays'
+import * as ComboBoxStories from './ComboBox.stories';
+
+<Meta of={ComboBoxStories} />
+
+export const Template = args => (
+  <OverlayContainer style={{width: '100%'}}>
+    <ComboBox {...args}>
+    </ComboBox>
+  </OverlayContainer>
+)
+
+# ComboBox
+
+Combo Box Component.
+
+<Canvas>
+  <Story of={ComboBoxStories.Default} />
+</Canvas>

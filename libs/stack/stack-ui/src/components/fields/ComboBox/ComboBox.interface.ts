@@ -4,12 +4,11 @@ import type { AriaListBoxOptions } from '@react-aria/listbox'
 import type { ComboBoxState } from '@react-stately/combobox'
 import type { ComboBoxProps } from '@react-types/combobox'
 import type { AriaDialogProps } from '@react-types/dialog'
-import type { LoadingState, Node } from '@react-types/shared'
+import type { LoadingState, Node, CollectionChildren } from '@react-types/shared'
 import type React from 'react'
-import 'twin.macro'
 import type { SEARCH_POST_TYPE_FILTER } from '../../../searchQuery/searchQuery.interface'
 
-export type ComboBoxVariant = 'gray'
+export type ComboBoxVariant = 'primary' | 'gray'
 export type PopoverOrientation = 'left' | 'right'
 
 export interface TItemsElementsProps {
@@ -36,8 +35,9 @@ export interface TComboBoxWrapperProps extends ComboBoxProps<object> {
   onCollectionChange?: (e: ComboBoxState<object>) => void
 }
 
-export interface TComboBoxProps extends Omit<TComboBoxWrapperProps, 'children'>, TDefaultComponent {
+export interface TComboBoxProps extends Omit<TComboBoxWrapperProps, 'children'>, Omit<TDefaultComponent, 'children'> {
   isDisabled?: boolean
+  children: CollectionChildren<object>
 }
 
 export interface TComboBoxSelectProps {

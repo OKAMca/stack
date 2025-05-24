@@ -6,7 +6,11 @@ import { useOverlay, useModal, DismissButton } from '@react-aria/overlays'
 import { mergeProps } from '@react-aria/utils'
 import type { RefObject } from 'react'
 import type { TPopoverProps } from '../ComboBox.interface'
-import { getBgVariant, getPopOrientation, popoverStyles } from '../ComboBox.styles'
+
+// Utility function to combine class names conditionally
+const cn = (...classes: (string | false | undefined | null)[]): string => {
+  return classes.filter(Boolean).join(' ')
+}
 
 function Popover(props: TPopoverProps) {
   const {
@@ -44,7 +48,13 @@ function Popover(props: TPopoverProps) {
       <div
         {...mergeProps(overlayProps, modalProps, dialogProps)}
         ref={popoverRef}
-        css={[popoverStyles, getBgVariant(variant), getPopOrientation(orientation)]}
+        className={cn(
+          'absolute top-full mt-2 text-white rounded-2xl px-0 py-0 z-30 w-[100%] md:w-[20rem] md:max-w-[50vw] max-h-[50vh] overflow-x-auto',
+          variant === 'primary' && 'bg-brand-color-1-3',
+          variant === 'gray' && 'bg-gray-1',
+          orientation === 'left' && 'left-0',
+          orientation === 'right' && 'right-0',
+        )}
       >
         {children}
         <DismissButton onDismiss={onClose} />
