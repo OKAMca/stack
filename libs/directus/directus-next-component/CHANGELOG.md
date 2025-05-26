@@ -1,3 +1,10 @@
+## 1.7.3 (2025-05-26)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.37.0
+- Updated next-component to 1.0.5
+
 ## 1.7.2 (2025-05-26)
 
 ### 🧱 Updated Dependencies
