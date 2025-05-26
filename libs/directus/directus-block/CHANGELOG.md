@@ -1,3 +1,23 @@
+## 1.5.4 (2025-05-22)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.37.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+
 ## 1.5.2 (2025-05-01)
 
 ### 🚀 Features
