@@ -1,14 +1,23 @@
-import type { OverlayTriggerState } from '@react-stately/overlays'
+import type { OverlayTriggerProps, OverlayTriggerState } from '@react-stately/overlays'
 import type { DOMProps } from '@react-types/shared'
 import type React from 'react'
 import type { ButtonHTMLAttributes } from 'react'
-import type { AriaButtonProps, OverlayTriggerProps } from 'react-aria'
+import type { OverlayTriggerProps as OverlayTriggerPropsAria, AriaButtonProps } from 'react-aria'
 
-export type TSidePanelProviderProps = Partial<OverlayTriggerProps> & {
+export interface TSidePanelProviderProps extends OverlayTriggerProps, Partial<OverlayTriggerPropsAria> {
   children: React.ReactNode
   defaultSelectedKey: string
+  /**
+   * @deprecated Use `defaultOpen` instead
+   */
   defaultIsOpen?: boolean
+  /**
+   * @deprecated Use `onOpenChange` instead
+   */
   onOpenCallback?: () => void
+  /**
+   * @deprecated Use `onOpenChange` instead
+   */
   onCloseCallback?: () => void
 }
 
