@@ -46,7 +46,7 @@ const Alerts = <T extends TToken>(props: TAlertsProps<T>) => {
         aria-label={closeButtonAriaLabel}
         {...triggerProps}
       />
-      <Carousel themeName={themeName} tokens={tokens} {...rest}>
+      <Carousel themeName={themeName} tokens={tokens} {...rest} legacyBehavior>
         {children}
       </Carousel>
     </TransitionComponent>
