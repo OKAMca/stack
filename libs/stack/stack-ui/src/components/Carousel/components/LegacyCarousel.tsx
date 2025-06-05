@@ -1,8 +1,8 @@
 'use client'
 
 import { useRef } from 'react'
+import Carousel from '..'
 import { useCarousel } from '../../../providers/Carousel'
-import CarouselA11yAnnouncer from '../a11y/CarouselA11yAnnouncer'
 import type { TLegacyCarouselProps } from '../interface'
 import {
   LegacyCarouselPrevNavigationButton,
@@ -13,7 +13,7 @@ import CarouselPaginationBullet from '../pagination/CarouselPaginationBullet'
 import CarouselSlide from '../swiper/CarouselSlide'
 import CarouselSwiper from '../swiper/CarouselSwiper'
 
-const LegacyCarousel = (props: TLegacyCarouselProps) => {
+const InnerLegacyCarousel = (props: TLegacyCarouselProps) => {
   const {
     id,
     themeName = 'carousel',
@@ -86,8 +86,19 @@ const LegacyCarousel = (props: TLegacyCarouselProps) => {
           ))}
         </CarouselPagination>
       )}
-      <CarouselA11yAnnouncer />
     </>
+  )
+}
+
+/**
+ * @deprecated Use Carousel instead
+ */
+const LegacyCarousel = (props: TLegacyCarouselProps) => {
+  const { children, ...rest } = props
+  return (
+    <Carousel {...rest}>
+      <InnerLegacyCarousel {...rest}>{children}</InnerLegacyCarousel>
+    </Carousel>
   )
 }
 

@@ -25,13 +25,12 @@ export interface TLegacyCarouselProps<TSlideProps extends TCarouselSlideProps = 
    * @deprecated Call the button in children instead
    */
   nextButton?: TCarouselNavigationButtonComponent
-  legacyBehavior: true
 }
 
 export interface TCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
   extends Omit<TSwiperProps, 'children' | 'modules' | 'controller'>,
     Omit<TDefaultComponent, 'children'> {
-  children: ReactNode | ((props: TSlideProps) => ReactNode)
+  children: ReactNode
   modules?: TSwiperModule[]
   slides: TSlideProps[]
 }
