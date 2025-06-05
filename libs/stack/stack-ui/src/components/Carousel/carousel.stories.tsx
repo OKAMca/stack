@@ -181,7 +181,7 @@ export const PaginationBullets: Story = {
       <CarouselPagination>
         {(swiper) =>
           // eslint-disable-next-line react/no-array-index-key
-          swiper?.slides?.map((slide, index) => <CarouselPaginationBullet key={`bullet-${slide.id}`} index={index} />)
+          swiper?.slides?.map((slide, index) => <CarouselPaginationBullet key={`bullet-${index}`} index={index} />)
         }
       </CarouselPagination>
     </Carousel>
