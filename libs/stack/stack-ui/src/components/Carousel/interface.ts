@@ -1,54 +1,37 @@
-import type React from 'react'
+/* eslint-disable @typescript-eslint/naming-convention */
+import type { ReactNode } from 'react'
 import type * as SwiperModules from 'swiper/modules'
 import type { SwiperProps } from 'swiper/react'
-import type { A11yOptions } from 'swiper/types'
 import type { TDefaultComponent } from '../../types/components'
-import type { TButtonProps } from '../Button/interface'
+import type { TCustomA11yOptions } from './a11y/interface'
+import type { TCarouselNavigationButtonComponent } from './navigation/interface'
+import type { TCarouselSlideProps } from './swiper/interface'
 
-type TCarouselNavigationButtonComponent = React.ForwardRefExoticComponent<
-  TButtonProps & React.RefAttributes<HTMLButtonElement & HTMLAnchorElement>
->
-
-export type TCarouselNavigationButtonProps = TButtonProps & {
-  onSubmit?: () => void
-}
-
-export interface TCarouselSlideProps extends TDefaultComponent {
-  id: string
-  title?: string
-  ariaLabel?: string
-  children?: React.ReactNode
-}
-
-export interface TCarouselPaginationProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends TDefaultComponent {
-  activeIndex: number
-  slides: TSlideProps[]
-  paginationGroupLabel?: string
-}
-
-export interface TCarouselPaginationBulletProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends TDefaultComponent {
-  activeIndex: number
-  slides: TSlideProps[]
-  index: number
-}
-interface TCustomA11yOptions extends A11yOptions {
-  paginationGroupLabel?: string
-}
-
-export interface TCarouselComponentProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends Omit<TDefaultComponent, 'children'>,
-    Omit<SwiperProps, 'children' | 'modules' | 'a11y'> {
+export interface TSwiperProps extends Omit<SwiperProps, 'a11y'> {
   a11y?: TCustomA11yOptions
-  slides: TSlideProps[]
-  children?: (props: TSlideProps) => React.ReactNode
   id: string
-  modules?: (keyof typeof SwiperModules)[]
+}
+
+export type TSwiperModule = keyof typeof SwiperModules
+
+export interface TLegacyCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
+  extends Omit<TCarouselProps, 'children'> {
+  children: (props: TSlideProps) => ReactNode
+  /**
+   * @deprecated Call the button in children instead
+   */
+  prevButton?: TCarouselNavigationButtonComponent
+  /**
+   * @deprecated Call the button in children instead
+   */
+  nextButton?: TCarouselNavigationButtonComponent
+  legacyBehavior: true
 }
 
 export interface TCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends TCarouselComponentProps<TSlideProps> {
-  prevButton?: TCarouselNavigationButtonComponent
-  nextButton?: TCarouselNavigationButtonComponent
+  extends Omit<TSwiperProps, 'children' | 'modules' | 'controller'>,
+    Omit<TDefaultComponent, 'children'> {
+  children: ReactNode | ((props: TSlideProps) => ReactNode)
+  modules?: TSwiperModule[]
+  slides: TSlideProps[]
 }
