@@ -1,3 +1,5 @@
+'use client'
+
 import { ButtonWithForwardRef } from '../../Button'
 import type { TButtonProps } from '../../Button/interface'
 import { useCarouselPrevNavigation } from './useCarouselPrevNavigation'

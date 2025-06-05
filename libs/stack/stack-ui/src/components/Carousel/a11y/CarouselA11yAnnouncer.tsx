@@ -1,3 +1,5 @@
+'use client'
+
 import { VisuallyHidden } from 'react-aria'
 import type { TCarouselA11yAnnouncerProps } from './interface'
 import { useCarouselA11yAnnouncer } from './useCarouselA11yAnnouncer'

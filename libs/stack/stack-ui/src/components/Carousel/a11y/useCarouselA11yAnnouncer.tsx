@@ -1,3 +1,5 @@
+'use client'
+
 import { mergeProps } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
 import type { TCarouselA11yAnnouncerProps } from './interface'

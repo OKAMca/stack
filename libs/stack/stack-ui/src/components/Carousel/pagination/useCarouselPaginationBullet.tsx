@@ -1,3 +1,5 @@
+'use client'
+
 import { get, isEmpty } from 'radashi'
 import { mergeProps, useFocusManager, useKeyboard, usePress } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'

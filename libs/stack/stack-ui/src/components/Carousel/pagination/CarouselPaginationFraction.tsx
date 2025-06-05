@@ -1,3 +1,5 @@
+'use client'
+
 import Box from '../../Box'
 import Typography from '../../Typography'
 import type { TCarouselPaginationFractionProps } from './interface'

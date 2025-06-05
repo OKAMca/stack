@@ -1,3 +1,5 @@
+'use client'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import useThemeContext from '../../../providers/Theme/hooks'
 import CarouselSlide from './CarouselSlide'
