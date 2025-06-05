@@ -9,6 +9,7 @@ export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
 export { default as Popover } from './components/Popover'
 export { default as Carousel } from './components/Carousel'
+export { default as LegacyCarousel } from './components/Carousel/components/LegacyCarousel'
 export {
   LegacyCarouselNextNavigationButton as CarouselNextNavigationButton,
   LegacyCarouselPrevNavigationButton as CarouselPrevNavigationButton,
