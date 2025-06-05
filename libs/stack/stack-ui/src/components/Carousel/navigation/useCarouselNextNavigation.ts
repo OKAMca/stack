@@ -29,7 +29,7 @@ export function useCarouselNextNavigation(props: TButtonProps): TCarouselNavigat
       {
         'aria-disabled': isDisabled,
         'aria-controls': id,
-        'aria-label': a11y?.prevSlideMessage,
+        'aria-label': a11y?.nextSlideMessage,
       },
       rest,
     ),
