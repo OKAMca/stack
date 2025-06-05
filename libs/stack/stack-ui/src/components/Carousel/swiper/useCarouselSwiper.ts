@@ -1,6 +1,8 @@
 'use client'
 
 /* eslint-disable @typescript-eslint/naming-convention */
+import { filterDOMProps } from '@react-aria/utils'
+import type { DOMProps } from '@react-types/shared'
 import { mergeProps } from 'react-aria'
 import * as swiperModules from 'swiper/modules'
 import { useCarousel } from '../../../providers/Carousel'
@@ -60,7 +62,7 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
   }
 
   return {
-    swiperProps: mergeProps(contextSwiperProps, swiperProps, rest),
+    swiperProps: mergeProps(contextSwiperProps, swiperProps, filterDOMProps(rest as DOMProps)),
     slides,
     ref: swiperRef,
   }
