@@ -1,16 +1,21 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { VisuallyHidden } from 'react-aria'
-import type { SwiperClass } from 'swiper/react'
-import { SwiperControllerContextProvider } from '../../providers/Swiper'
+import { CarouselContextProvider } from '../../providers/Carousel'
 import Box from '../Box'
-import { CarouselNextNavigationButton, CarouselPrevNavigationButton } from './components/CarouselNavigationButton'
-import CarouselSwiper from './components/CarouselSwiper'
-import CarouselPagination from './components/pagination/CarouselPagination'
-import type { TCarouselProps } from './interface'
+import CarouselA11yAnnouncer from './a11y/CarouselA11yAnnouncer'
+import LegacyCarousel from './components/LegacyCarousel'
+import type { TCarouselProps, TLegacyCarouselProps } from './interface'
+import CarouselSlide from './swiper/CarouselSlide'
+import type { TCarouselSlideProps } from './swiper/interface'
 
-const Carousel = (props: TCarouselProps) => {
+function isLegacy(props: TCarouselProps | TLegacyCarouselProps): props is TLegacyCarouselProps {
+  const { children } = props
+  return !!('legacyBehavior' in props && props.legacyBehavior && children && typeof children === 'function')
+}
+
+function Carousel(props: TCarouselProps & TLegacyCarouselProps): JSX.Element
+function Carousel(props: TCarouselProps): JSX.Element
+function Carousel(props: TCarouselProps | TLegacyCarouselProps): JSX.Element {
   const {
     id,
     themeName = 'carousel',
@@ -19,83 +24,30 @@ const Carousel = (props: TCarouselProps) => {
     slides,
     a11y,
     modules,
-    prevButton: PrevButton = CarouselPrevNavigationButton,
-    nextButton: NextButton = CarouselNextNavigationButton,
-    onSwiper,
-    onSlideChange,
+    children = (slideProps: TCarouselSlideProps) => <CarouselSlide {...slideProps} />,
     ...rest
   } = props
-  const prevButtonRef = useRef(null)
-  const nextButtonRef = useRef(null)
 
-  const { enabled: a11yEnabled = true, paginationGroupLabel = 'pagination', ...restOfA11y } = a11y ?? {}
+  const carouselRender = () => {
+    if (isLegacy(props)) {
+      const { children: legacyChildren, ...restProps } = props
+      return (
+        <LegacyCarousel {...restProps} themeName={themeName} legacyBehavior>
+          {legacyChildren}
+        </LegacyCarousel>
+      )
+    }
 
-  const hasNavigation = modules?.includes('Navigation')
-  const hasPagination = modules?.includes('Pagination')
-
-  const [controller, setController] = useState<SwiperClass>()
-  const [activeIndex, setActiveIndex] = useState<number>(0)
-
-  const slidesWithFallbacks = slides.map((slide, index) => ({
-    ...slide,
-    ariaLabel: slide.ariaLabel ?? `${index + 1} / ${slides.length}`,
-  }))
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    return <>{children}</>
+  }
 
   return (
     <Box themeName={`${themeName}.carouselWrapper`} tokens={tokens}>
-      <SwiperControllerContextProvider controller={controller}>
-        {hasNavigation && (
-          <PrevButton
-            themeName={`${themeName}.navigation.button`}
-            tokens={{ ...tokens, order: 'prev' }}
-            ref={prevButtonRef}
-            aria-label={a11y?.prevSlideMessage}
-            aria-controls={id}
-          />
-        )}
-        <CarouselSwiper
-          themeName={themeName}
-          tokens={tokens}
-          id={id}
-          slides={slidesWithFallbacks}
-          onSwiper={(c) => {
-            setController(c)
-            onSwiper?.(c)
-          }}
-          onSlideChange={(c) => {
-            setActiveIndex(c.activeIndex)
-            onSlideChange?.(c)
-          }}
-          a11y={restOfA11y}
-          modules={modules}
-          {...rest}
-        />
-        {hasNavigation && (
-          <NextButton
-            themeName={`${themeName}.navigation.button`}
-            tokens={{ ...tokens, order: 'next' }}
-            ref={nextButtonRef}
-            aria-label={a11y?.nextSlideMessage}
-            aria-controls={id}
-          />
-        )}
-        {hasPagination && (
-          <CarouselPagination
-            themeName={`${themeName}.pagination`}
-            tokens={tokens}
-            activeIndex={activeIndex}
-            slides={slidesWithFallbacks}
-            paginationGroupLabel={paginationGroupLabel}
-          />
-        )}
-        {a11yEnabled && (
-          <VisuallyHidden>
-            <div aria-live="polite">
-              {slidesWithFallbacks[activeIndex].title ?? slidesWithFallbacks[activeIndex].ariaLabel}
-            </div>
-          </VisuallyHidden>
-        )}
-      </SwiperControllerContextProvider>
+      <CarouselContextProvider id={id} modules={modules} slides={slides} {...rest}>
+        {carouselRender()}
+        <CarouselA11yAnnouncer />
+      </CarouselContextProvider>
     </Box>
   )
 }
