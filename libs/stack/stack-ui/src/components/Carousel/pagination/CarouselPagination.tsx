@@ -1,3 +1,5 @@
+'use client'
+
 import { FocusScope } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
 import { BoxWithForwardRef } from '../../Box'

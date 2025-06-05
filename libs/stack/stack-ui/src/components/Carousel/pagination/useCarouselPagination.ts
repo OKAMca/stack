@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable @typescript-eslint/naming-convention */
 import { get } from 'radashi'
 import { useCarousel } from '../../../providers/Carousel'

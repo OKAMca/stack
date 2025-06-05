@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable @typescript-eslint/naming-convention */
 import { mergeProps } from 'react-aria'
 import * as swiperModules from 'swiper/modules'

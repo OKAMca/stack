@@ -1,3 +1,5 @@
+'use client'
+
 import Button from '../../Button'
 import type { TCarouselPaginationBulletProps } from './interface'
 import { useCarouselPaginationBullet } from './useCarouselPaginationBullet'
