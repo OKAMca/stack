@@ -112,5 +112,14 @@ export { default as useTwitterShareUrl } from './components/ShareButton/utils/us
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
 export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
 export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
+export { useCarouselSwiper } from './components/Carousel/swiper/useCarouselSwiper'
+export { useCarouselSlide } from './components/Carousel/swiper/useCarouselSlide'
+export { useCarouselPagination } from './components/Carousel/pagination/useCarouselPagination'
+export { useCarouselPaginationBullet } from './components/Carousel/pagination/useCarouselPaginationBullet'
+export { useCarouselPaginationFraction } from './components/Carousel/pagination/useCarouselPaginationFraction'
+export { useCarouselNextNavigation } from './components/Carousel/navigation/useCarouselNextNavigation'
+export { useCarouselPrevNavigation } from './components/Carousel/navigation/useCarouselPrevNavigation'
+export { useCarouselA11yAnnouncer } from './components/Carousel/a11y/useCarouselA11yAnnouncer'
+
 // dev tools
 export { logger as StackUILogger } from './logger'
