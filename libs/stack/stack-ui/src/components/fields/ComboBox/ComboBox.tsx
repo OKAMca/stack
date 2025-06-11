@@ -90,10 +90,12 @@ const ComboBox = <T extends TToken>(props: TComboBoxProps<T>) => {
 
   // Filter items based on debounced input for better performance
   const filteredItems = useMemo(() => {
-    const baseItems = comboBoxItems?.filter((option) => !option.key?.includes('header-'))
     if (!debouncedInputValue || debouncedInputValue.length === 0) {
-      return baseItems
+      // When no search input, return all items including headers for sections
+      return comboBoxItems
     }
+    // When searching, filter out headers and apply search filter
+    const baseItems = comboBoxItems?.filter((option) => !option.key?.includes('header-'))
     return baseItems?.filter((item) => filterFunction(item.value.toLowerCase(), debouncedInputValue.toLowerCase()))
   }, [comboBoxItems, debouncedInputValue, filterFunction])
 

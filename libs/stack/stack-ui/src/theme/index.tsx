@@ -107,11 +107,8 @@ const BaseTheme = makeTheme({
     inputWrapper: () =>
       'relative flex items-center outline outline-2 outline-gray-300 focus-within:outline focus-within:outline-black focus-within:outline-2 [&>input]:flex-1 [&>input]:min-w-0 [&>input]:pr-10 [&>input]:border-0 [&>input]:outline-0 [&>input]:bg-transparent [&>input]:text-ellipsis [&>input]:whitespace-nowrap [&>input]:overflow-hidden',
     button: (props) => button(props),
-    popover: (props) =>
-      button({
-        ...props,
-        className: 'w-[var(--comboBox-container-width)] max-h-[300px] overflow-y-auto overflow-x-hidden',
-      }),
+    popover: () =>
+      'w-[var(--comboBox-container-width)] max-h-[300px] overflow-y-auto overflow-x-hidden text-white !bg-color-1-500 rounded-md p-2',
     listContainer: (props) =>
       typography({
         ...props,
