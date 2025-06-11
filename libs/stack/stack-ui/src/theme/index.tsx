@@ -100,6 +100,38 @@ const BaseTheme = makeTheme({
     headerText: () => 'text-gray-300',
     section: () => 'flex flex-col gap-4',
   },
+  comboBox: {
+    wrapper: () => 'flex flex-col gap-4 relative',
+    label: (props) => typography({ ...props, className: 'text-gray-3' }),
+    container: () => 'flex flex-col gap-4',
+    inputWrapper: () =>
+      'relative flex items-center outline outline-2 outline-gray-300 focus-within:outline focus-within:outline-black focus-within:outline-2 [&>input]:flex-1 [&>input]:min-w-0 [&>input]:pr-10 [&>input]:border-0 [&>input]:outline-0 [&>input]:bg-transparent [&>input]:text-ellipsis [&>input]:whitespace-nowrap [&>input]:overflow-hidden',
+    button: (props) => button(props),
+    popover: (props) =>
+      button({
+        ...props,
+        className: 'w-[var(--comboBox-container-width)] max-h-[300px] overflow-y-auto overflow-x-hidden',
+      }),
+    listContainer: (props) =>
+      typography({
+        ...props,
+        className:
+          'outline outline-2 outline-white outline-offset-2 p-2 my-4 rounded-md w-full flex flex-col gap-6 max-h-[300px] overflow-y-auto overflow-x-hidden',
+      }),
+    ul: (props) =>
+      typography({
+        ...props,
+        className: 'w-full flex flex-col gap-6',
+      }),
+    li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
+    group: () => 'flex flex-col gap-4',
+    section: () => 'flex flex-col gap-4',
+    list: () => 'flex flex-col gap-4',
+    headerText: () => 'text-gray-300',
+    noResults: () => 'p-4 text-center',
+    noResultsText: (props) => typography({ ...props, className: 'text-gray-400' }),
+    errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
+  },
   textarea: {
     wrapper: () => 'flex flex-col',
     container: () => 'flex items-center gap-4',
