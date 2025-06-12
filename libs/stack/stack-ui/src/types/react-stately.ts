@@ -29,6 +29,6 @@ export interface TDefaultSectionComponent<I extends object = object, T extends T
   key: Key
 }
 
-export type TDefaultCollectionChildComponent<I extends object = object, T extends TToken = TToken> =
+export type TDefaultNodeComponent<I extends object = object, T extends TToken = TToken> =
   | TDefaultItemComponent<I, T>
   | TDefaultSectionComponent<TDefaultItemComponent<I, T>, T>
