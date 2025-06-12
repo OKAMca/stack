@@ -1,5 +1,5 @@
-import type { ElementType } from 'react'
-import { useRef } from 'react'
+import type { ElementType, RefObject } from 'react'
+import { forwardRef, useRef } from 'react'
 import { useListBox } from 'react-aria'
 import { useListState } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
@@ -8,14 +8,14 @@ import { Anchor } from '../../Button'
 import Typography from '../../Typography'
 import Option from '../Option'
 import ListBoxSection from './components/ListBoxSection'
-import type { TListBoxProps } from './interface'
+import type { TControlledListBoxProps, TListBoxProps } from './interface'
 
 const itemComponents: Record<string, ElementType> = {
   item: Option,
   section: ListBoxSection,
 }
 
-const ListBox = <I extends object = object, T extends TToken = TToken>(props: TListBoxProps<I, T>) => {
+export const ControlledListBox = forwardRef<HTMLElement, TControlledListBoxProps<object, TToken>>((props, ref) => {
   const {
     themeName = 'listBox',
     tokens,
@@ -23,10 +23,11 @@ const ListBox = <I extends object = object, T extends TToken = TToken>(props: TL
     label,
     escapeKeyBehavior = 'clearSelection',
     linkElementType = Anchor,
+    state,
+    as,
     ...rest
   } = props
-  const state = useListState(props)
-  const ref = useRef(null)
+
   const { listBoxProps, labelProps } = useListBox(
     {
       ...rest,
@@ -34,10 +35,11 @@ const ListBox = <I extends object = object, T extends TToken = TToken>(props: TL
       label,
     },
     state,
-    ref,
+    ref as RefObject<HTMLElement>,
   )
+  console.log([...state.collection])
   return (
-    <Box themeName={`${themeName}.wrapper`} tokens={tokens} customTheme={customTheme}>
+    <Box themeName={`${themeName}.wrapper`} tokens={tokens} customTheme={customTheme} as={as}>
       {label && (
         <Typography {...labelProps} themeName={`${themeName}.label`} tokens={tokens}>
           {label}
@@ -45,14 +47,16 @@ const ListBox = <I extends object = object, T extends TToken = TToken>(props: TL
       )}
       <BoxWithForwardRef ref={ref} as="ul" {...listBoxProps} themeName={`${themeName}.list`} tokens={tokens}>
         {[...state.collection].map((item) => {
-          const { type, key } = item
+          const { key, hasChildNodes } = item
+          console.log(hasChildNodes, key)
+          const type = item.type ?? 'item'
           const Component = itemComponents[type]
           return (
             <Component
               key={key}
               {...{ [type]: item }}
               state={state}
-              tokens={tokens}
+              tokens={{ ...tokens, type }}
               themeName={`${themeName}.${type}`}
               linkElementType={linkElementType}
             />
@@ -61,6 +65,14 @@ const ListBox = <I extends object = object, T extends TToken = TToken>(props: TL
       </BoxWithForwardRef>
     </Box>
   )
+})
+
+ControlledListBox.displayName = 'ControlledListBox'
+
+const ListBox = (props: TListBoxProps<object, TToken>) => {
+  const state = useListState(props)
+  const ref = useRef<HTMLElement>(null)
+  return <ControlledListBox {...props} state={state} ref={ref} />
 }
 
 export default ListBox
