@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type PartialNode } from '@react-stately/collections'
