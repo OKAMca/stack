@@ -1,3 +1,5 @@
+'use client'
+
 import type { ElementType, RefObject } from 'react'
 import { forwardRef, useRef } from 'react'
 import { useListBox } from 'react-aria'
@@ -47,8 +49,7 @@ export const ControlledListBox = forwardRef<HTMLElement, TControlledListBoxProps
       )}
       <BoxWithForwardRef ref={ref} as="ul" {...listBoxProps} themeName={`${themeName}.list`} tokens={tokens}>
         {[...state.collection].map((item) => {
-          const { key, hasChildNodes } = item
-          console.log(hasChildNodes, key)
+          const { key } = item
           const type = item.type ?? 'item'
           const Component = itemComponents[type]
           return (
