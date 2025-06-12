@@ -1,13 +1,59 @@
-import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ArgTypes, Canvas, Meta, Story } from '@storybook/blocks'
 import ComboBox from './index'
 import * as ComboBoxStories from './combo-box.stories';
+import * as ListBoxStories from '../ListBox/list-box.stories';
 
 <Meta of={ComboBoxStories} />
 
 # ComboBox
 
-ComboBox Component with autocomplete functionality.
+## Props
 
-<Canvas>
-  <Story of={ComboBoxStories.Default} />
-</Canvas>
+<ArgTypes />
+
+## Subcomponents
+
+### ListBox
+
+The component managing the list of items and the selection relative to that list. In the case of a ComboBox, the list is the list of items get filtered to match the input value.
+
+The combo box's list box component only appears when the popover is open.
+
+Documentation about the ListBox component can be found [here](?path=/docs/form-fields-listbox--docs).
+
+### Popover
+
+The component wrapping the list box and deciding when to open or close itself.
+
+Documentation about the Popover component can be found [here](?path=/docs/base-components-popover--docs).
+
+## Showcase
+
+### Default
+
+<Canvas of={ComboBoxStories.Default} />
+
+### Disabled
+
+<Canvas of={ComboBoxStories.Disabled} />
+
+### With Error
+
+<Canvas of={ComboBoxStories.WithError} />
+
+### With Sections
+
+<Canvas of={ComboBoxStories.WithSections} />
+
+### Allows Custom Value
+
+<Canvas of={ComboBoxStories.AllowsCustomValue} />
+
+### Manual Trigger
+
+<Canvas of={ComboBoxStories.ManualTrigger} />
+
+### Children Rendering Function
+
+<Canvas of={ComboBoxStories.ChildrenRenderingFunction} />
+
