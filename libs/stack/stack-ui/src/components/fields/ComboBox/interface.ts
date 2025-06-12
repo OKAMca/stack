@@ -21,5 +21,9 @@ export interface TComboBoxProps<I extends object = object, T extends TToken = TT
   buttonRef?: RefObject<HTMLButtonElement & HTMLAnchorElement>
   popoverRef?: RefObject<HTMLElement>
   listBoxRef?: RefObject<HTMLElement>
+  /**
+   * @description Defines in milliseconds the amount of time the items in the listbox have to wait before being updated.
+   * @default 200
+   */
   debounceDelay?: number
 }
