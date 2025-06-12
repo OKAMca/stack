@@ -1,7 +1,6 @@
 'use client'
 
 import { isEmpty } from 'radashi'
-import type { ChangeEvent } from 'react'
 import React, { useRef, useCallback, useMemo } from 'react'
 import { useComboBox, useFilter } from 'react-aria'
 import type { RegisterOptions } from 'react-hook-form'
@@ -37,6 +36,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
     buttonRef: buttonRefProp,
     popoverRef: popoverRefProp,
     listBoxRef: listBoxRefProp,
+    debounceDelay = 200,
   } = props
 
   const innerInputRef = useRef<HTMLInputElement>(null)
@@ -62,11 +62,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
     state,
   )
 
-  const debouncedValue = useDebounce((e: ChangeEvent<HTMLInputElement>) => {
-    console.log('trigger', e.target.value)
-    inputProps.onChange?.(e)
-    state.setInputValue(e.target.value)
-  }, 1000)
+  const debouncedState = useDebounce(state, debounceDelay)
 
   const { onPress, ...restOfButtonProps } = buttonProps
 
@@ -139,7 +135,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
               {...listBoxProps}
               themeName={`${themeName}.list`}
               tokens={comboBoxTokens}
-              state={state}
+              state={debouncedState}
               ref={listBoxRef}
             >
               {children}
