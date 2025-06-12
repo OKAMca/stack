@@ -52,6 +52,9 @@ export { default as TabList } from './components/TabList'
 export { TabItem } from './components/TabList/components/TabItem'
 export { default as TabPanel } from './components/TabList/components/TabPanel'
 export { default as Tab } from './components/TabList/components/Tab'
+export { default as ComboBox } from './components/fields/ComboBox'
+export { default as ListBox } from './components/fields/ListBox'
+export { Node } from './components/Node'
 export * from './components/icons'
 
 // providers
@@ -91,7 +94,12 @@ export type { TSidePanelButtons, TSidePanelButtonProps, TSidePanelContext } from
 export type { default as TSearchProps } from './components/fields/SearchField/interface'
 export type { TTagGroupProps, TTagItemProps, TTagProps } from './components/TagGroup/interface'
 export type { TTabListProps, TTabProps, TTabPanelProps } from './components/TabList/interface'
-export type { TDefaultNode, TDefaultItemComponent } from './types/react-stately'
+export type {
+  TDefaultNode,
+  TDefaultItemComponent,
+  TDefaultNodeComponent,
+  TDefaultSectionComponent,
+} from './types/react-stately'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
@@ -102,5 +110,7 @@ export { default as useTwitterShareUrl } from './components/ShareButton/utils/us
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
 export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
 export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
+export { useDebounce } from './hooks/useDebounce'
+
 // dev tools
 export { logger as StackUILogger } from './logger'
