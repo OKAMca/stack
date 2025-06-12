@@ -37,7 +37,7 @@ export const ControlledListBox = forwardRef<HTMLElement, TControlledListBoxProps
     state,
     ref as RefObject<HTMLElement>,
   )
-  console.log([...state.collection])
+
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={tokens} customTheme={customTheme} as={as}>
       {label && (
