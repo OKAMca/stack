@@ -5,6 +5,8 @@
   "scripts": {
     "codegen": "graphql-codegen --config ./codegen.ts",
     "g:lint": "nx run-many --all --target=lint",
+    "g:lint:fix": "nx run-many --all --target=lint --fix",
+    "g:build": "nx run-many --all --target=build",
     "storybook": "nx run stack-ui:storybook",
     "storybook-next-component": "nx run next-component:storybook",
     "build-storybook": "nx run stack-ui:build-storybook",
