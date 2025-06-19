@@ -1,4 +1,4 @@
-import type { ItemProps, Node, Key } from 'react-stately'
+import type { ItemProps, Node, Key, SectionProps } from 'react-stately'
 import type { TToken } from '../providers/Theme/interface'
 import type { TDefaultComponent } from './components'
 
@@ -19,3 +19,16 @@ export interface TDefaultItemComponent<I extends object = object, T extends TTok
     ItemProps<I> {
   key: Key
 }
+
+/**
+ * Overrides the `SectionProps` type from `react-stately` for sections with theming support.
+ */
+export interface TDefaultSectionComponent<I extends object = object, T extends TToken = TToken>
+  extends Omit<TDefaultComponent<T>, 'children'>,
+    SectionProps<I> {
+  key: Key
+}
+
+export type TDefaultNodeComponent<I extends object = object, T extends TToken = TToken> =
+  | TDefaultItemComponent<I, T>
+  | TDefaultSectionComponent<TDefaultItemComponent<I, T>, T>
