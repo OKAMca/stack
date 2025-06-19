@@ -1,0 +1,49 @@
+import { Canvas, Meta, Story, ArgTypes } from '@storybook/blocks'
+import ListBox from '.'
+import * as ListBoxStories from './list-box.stories';
+
+<Meta of={ListBoxStories} />
+
+# ListBox
+
+ListBox component. This component does not do much on its own, but can be used as a part of `Select` or `Combobox` components. A listbox only represents a series of options, with possible sections. Listboxes can also be purely decorative, without any interaction.
+
+## Props
+
+<ArgTypes of={ListBoxStories.Default} />
+
+## Showcase
+
+### Default
+
+<Canvas of={ListBoxStories.Default} />
+
+### With sections
+
+<Canvas of={ListBoxStories.Sections} />
+
+### Complex options
+
+Passing two children to the `Item` component in a listbox will automatically render a label and description with the right props from `useOption`.
+
+<Canvas of={ListBoxStories.ComplexOptions} />
+
+### Disabled
+
+<Canvas of={ListBoxStories.Disabled} />
+
+### Children rendering function
+
+<Canvas of={ListBoxStories.ChildrenRenderingFunction} />
+
+### Selectable
+
+<Canvas of={ListBoxStories.Selectable} />
+
+### Controlled
+
+<Canvas of={ListBoxStories.Controlled} />
+
+### Link options
+
+<Canvas of={ListBoxStories.LinkOptions} />
