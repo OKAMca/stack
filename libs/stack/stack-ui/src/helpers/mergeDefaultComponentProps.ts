@@ -14,10 +14,10 @@ import type { Nullable, TDefaultComponent } from '../types/components'
  * @returns A merged props object
  */
 export function mergeDefaultComponentProps<T extends TDefaultComponent, S>(
-  requiredArg: Nullable<Partial<T>>,
+  firstArg: Nullable<Partial<T>>,
   ...args: Nullable<Partial<S>>[]
 ): T & S {
-  const allArgs = [requiredArg, ...args]
+  const allArgs = [firstArg, ...args]
   const mergedTokens = allArgs.reduce<TToken>(
     (acc, curr) => (curr && 'tokens' in curr ? Object.assign(acc, curr?.tokens) : acc),
     {},

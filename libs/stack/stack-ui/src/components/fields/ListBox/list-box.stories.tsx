@@ -65,7 +65,7 @@ const meta: Meta<typeof ListBox> = {
     },
     disallowEmptySelection: {
       control: {
-        type: 'check',
+        type: 'radio',
       },
       options: [true, false],
       table: {
