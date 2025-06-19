@@ -1,3 +1,5 @@
+'use client'
+
 import { cloneElement, useRef } from 'react'
 import { useOverlayTrigger, useOverlayPosition, OverlayContainer, mergeProps } from 'react-aria'
 import { useOverlayTriggerState } from 'react-stately'
