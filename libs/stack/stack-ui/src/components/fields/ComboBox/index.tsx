@@ -64,7 +64,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
 
   const debouncedState = useDebounce(state, debounceDelay)
 
-  const { onPress, ...restOfButtonProps } = buttonProps
+  const { onPress, onPressStart, preventFocusOnPress, ...restOfButtonProps } = buttonProps
 
   const { isOpen, selectedItem, selectionManager } = state
   const { isFocused, isSelectAll, isEmpty: isEmptySelection } = selectionManager

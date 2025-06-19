@@ -8,6 +8,7 @@ export { default as ShareButton } from './components/ShareButton'
 export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
 export { default as Popover } from './components/Popover'
+export { default as PopoverButton } from './components/Popover/components/Button'
 export { default as Carousel } from './components/Carousel'
 export {
   CarouselNextNavigationButton,
