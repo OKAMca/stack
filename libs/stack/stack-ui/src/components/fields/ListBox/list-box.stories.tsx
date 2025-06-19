@@ -1,11 +1,11 @@
 import { Anchor, Button } from '@okam/stack-ui'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentType } from 'react'
-import { useState } from 'react'
+import { isValidElement, useState } from 'react'
 import type { Key, Selection } from 'react-stately'
 import { Item, Section } from 'react-stately'
 import Box from '../../Box'
-import Option from '../Option'
+import { Node } from '../../Node'
 import ListBoxSection from './components/ListBoxSection'
 import ListBox from '.'
 
@@ -13,6 +13,7 @@ const meta: Meta<typeof ListBox> = {
   title: 'Form/Fields/ListBox',
   component: ListBox,
   subcomponents: {
+    Node: Node as unknown as ComponentType<unknown>,
     Item: Option as unknown as ComponentType<unknown>,
     Section: ListBoxSection as unknown as ComponentType<unknown>,
   },
@@ -170,7 +171,33 @@ export const ChildrenRenderingFunction: Story = {
       { key: 'apple', children: 'Apple' },
       { key: 'orange', children: 'Orange' },
     ],
-    children: (item) => <Item key={item.key}>{item.children}</Item>,
+    children: ({ key, children, ...item }) => (
+      <Node key={key} {...item}>
+        {children}
+      </Node>
+    ),
+  },
+}
+
+export const ChildrenRenderingFunctionWithSections: Story = {
+  args: {
+    items: [
+      {
+        key: 'fruits',
+        title: 'Fruits',
+        children: (item) => <Item key={item.key}>{item.children}</Item>,
+        items: [
+          { key: 'banana', children: 'Banana' },
+          { key: 'apple', children: 'Apple' },
+          { key: 'orange', children: 'Orange' },
+        ],
+      },
+    ],
+    children: ({ key, children, ...item }) => (
+      <Node key={key} {...item}>
+        {children}
+      </Node>
+    ),
   },
 }
 
@@ -203,11 +230,14 @@ export const Controlled: Story = {
     return (
       <Box>
         <Box customTheme="m-4 flex flex-wrap gap-2">
-          {[...(items ?? [])].map((item) => (
-            <Button key={item.key} handlePress={() => handleButtonPress(item.key)}>
-              {item.children}
-            </Button>
-          ))}
+          {[...(items ?? [])].map(
+            (item) =>
+              isValidElement(item.children) && (
+                <Button key={item.key} handlePress={() => handleButtonPress(item.key)}>
+                  {item.children}
+                </Button>
+              ),
+          )}
         </Box>
         <ListBox
           {...rest}
@@ -229,7 +259,11 @@ export const Controlled: Story = {
       { key: 'apple', children: 'Apple' },
       { key: 'orange', children: 'Orange' },
     ],
-    children: (item) => <Item key={item.key}>{item.children}</Item>,
+    children: ({ key, children, ...item }) => (
+      <Node key={key} {...item}>
+        {children}
+      </Node>
+    ),
     selectionMode: 'multiple',
     defaultSelectedKeys: ['banana', 'apple'],
     onSelectionChange: (keys) => {
