@@ -8,54 +8,52 @@ import { FocusRing, useButton, useLink } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
 import type { TToken } from '../../providers/Theme/interface'
 import type { NextLinkProps } from '../../types/next-link'
-import type { TAnchorProps, TButtonProps } from './interface'
+import type { TAnchorProps, TAnchorRef, TButtonProps, TButtonRef } from './interface'
 
-export const Anchor = React.forwardRef(
-  (props: TAnchorProps, forwardRef: React.Ref<HTMLButtonElement & HTMLAnchorElement>) => {
-    const {
-      as: Component = 'a',
-      handlePress,
-      children,
-      as,
-      customTheme,
-      tokens,
-      themeName = 'button',
-      nextLinkProps: { onClick, ...nextLinkProps } = {} as NextLinkProps,
-      ...rest
-    } = props
+export const Anchor = React.forwardRef((props: TAnchorProps, forwardRef: TAnchorRef) => {
+  const {
+    as: Component = 'a',
+    handlePress,
+    children,
+    as,
+    customTheme,
+    tokens,
+    themeName = 'button',
+    nextLinkProps: { onClick, ...nextLinkProps } = {} as NextLinkProps,
+    ...rest
+  } = props
 
-    const ref = forwardRef
-    const { linkProps } = useLink(
-      {
-        ...props,
-        ...nextLinkProps,
-        onClick: ({ currentTarget, ...e }) => {
-          onClick?.({
-            ...e,
-            // @ts-expect-error Mismatch between react-aria and next/link. Happens since react-aria >3.36
-            currentTarget,
-          })
-        },
-        href: props.href ?? nextLinkProps?.href?.toString(),
-        elementType: as?.toString(),
-        onPress: handlePress,
+  const ref = forwardRef
+  const { linkProps } = useLink(
+    {
+      ...props,
+      ...nextLinkProps,
+      onClick: ({ currentTarget, ...e }) => {
+        onClick?.({
+          ...e,
+          // @ts-expect-error Mismatch between react-aria and next/link. Happens since react-aria >3.36
+          currentTarget,
+        })
       },
-      (forwardRef as RefObject<HTMLElement>) ?? ref,
-    )
+      href: props.href ?? nextLinkProps?.href?.toString(),
+      elementType: as?.toString(),
+      onPress: handlePress,
+    },
+    (forwardRef as RefObject<HTMLElement>) ?? ref,
+  )
 
-    const theme = useThemeContext(themeName, tokens, customTheme)
+  const theme = useThemeContext(themeName, tokens, customTheme)
 
-    return (
-      <FocusRing focusRingClass="has-focus-ring">
-        <Component ref={ref} {...linkProps} {...nextLinkProps} {...rest} className={theme}>
-          {children}
-        </Component>
-      </FocusRing>
-    )
-  },
-)
+  return (
+    <FocusRing focusRingClass="has-focus-ring">
+      <Component ref={ref} {...linkProps} {...nextLinkProps} {...rest} className={theme}>
+        {children}
+      </Component>
+    </FocusRing>
+  )
+})
 
-const Button = React.forwardRef((props: TButtonProps, forwardRef: React.Ref<HTMLButtonElement & HTMLAnchorElement>) => {
+const Button = React.forwardRef((props: TButtonProps, forwardRef: TButtonRef) => {
   const {
     as: Component = 'button',
     handlePress,

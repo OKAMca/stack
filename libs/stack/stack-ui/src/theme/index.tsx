@@ -13,6 +13,7 @@ import { checkboxGroup, checkboxGroupItemsGroup } from './CheckboxGroup'
 import { datePickerTheme } from './DatePicker'
 import { imgTheme } from './Image'
 import lightboxTheme from './LightBox'
+import listBoxTheme from './ListBox'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
 import { searchIcon, searchInput } from './Search'
@@ -172,6 +173,7 @@ const BaseTheme = makeTheme({
   alerts: alertsTheme,
   tagGroup: tagGroupTheme,
   tabList: tabListTheme,
+  listBox: listBoxTheme,
 })
 
 export default React.memo(createThemeProvider(BaseTheme))
