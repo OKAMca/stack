@@ -44,7 +44,7 @@ const ListBoxSection = <I extends object = object, T extends TToken = TToken>({
       )}
       <Box as="ul" themeName={`${themeName}.group`} tokens={sectionTokens} {...groupProps}>
         {[...(state.collection.getChildren?.(key) ?? [])].map((item) => (
-          <Option key={item.key} item={item} state={state} tokens={tokens} themeName={`${themeName}.option`} />
+          <Option key={item.key} item={item} state={state} tokens={tokens} themeName={`${themeName}.item`} />
         ))}
       </Box>
     </Box>

@@ -27,6 +27,10 @@ const listBoxSectionHeading = tv({
   },
 })
 
+const listBoxSectionGroup = tv({
+  base: 'flex flex-col gap-2',
+})
+
 const listBoxOptionOption = tv({
   extend: typography,
   base: 'p-1 rounded-md',
@@ -85,6 +89,12 @@ const listBoxOptionDescription = tv({
   },
 })
 
+const itemTheme = {
+  option: listBoxOptionOption,
+  label: listBoxOptionLabel,
+  description: listBoxOptionDescription,
+}
+
 const listBoxTheme = {
   wrapper: listBoxWrapper,
   label: listBoxLabel,
@@ -92,12 +102,10 @@ const listBoxTheme = {
   section: {
     wrapper: listBoxSectionWrapper,
     heading: listBoxSectionHeading,
+    group: listBoxSectionGroup,
+    item: itemTheme,
   },
-  item: {
-    option: listBoxOptionOption,
-    label: listBoxOptionLabel,
-    description: listBoxOptionDescription,
-  },
+  item: itemTheme,
 }
 
 export default listBoxTheme
