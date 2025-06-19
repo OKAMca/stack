@@ -35,7 +35,7 @@ const Option = <I extends object = object, T extends TToken = TToken>({
     hasAction,
   } = useOption({ key }, state, ref)
   const isLink = state.selectionManager.isLink(key)
-  const isSelectable = true
+  const isSelectable = state.selectionManager.canSelectItem(key)
 
   const optionTokens = {
     ...tokens,
