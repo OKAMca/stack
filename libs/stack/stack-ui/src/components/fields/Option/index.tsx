@@ -35,7 +35,7 @@ const Option = <I extends object = object, T extends TToken = TToken>({
     hasAction,
   } = useOption({ key }, state, ref)
   const isLink = state.selectionManager.isLink(key)
-  const isSelectable = true
+  const isSelectable = state.selectionManager.canSelectItem(key)
 
   const optionTokens = {
     ...tokens,
@@ -57,14 +57,21 @@ const Option = <I extends object = object, T extends TToken = TToken>({
   const renderChildren = () => {
     if (Children.count(rendered) > 1) {
       const [label, description] = Children.toArray(rendered)
+      const isLabelValid = isValidElement(label)
+      const isDescriptionValid = isValidElement(description)
+
+      if (!isLabelValid && !isDescriptionValid) {
+        return rendered
+      }
+
       return (
         <>
-          {isValidElement(label) && (
+          {isLabelValid && (
             <Box {...labelProps} themeName={`${themeName}.label`} tokens={optionTokens}>
               {cloneElement(label, labelProps)}
             </Box>
           )}
-          {isValidElement(description) && (
+          {isDescriptionValid && (
             <Box {...descriptionProps} themeName={`${themeName}.description`} tokens={optionTokens}>
               {cloneElement(description, descriptionProps)}
             </Box>
