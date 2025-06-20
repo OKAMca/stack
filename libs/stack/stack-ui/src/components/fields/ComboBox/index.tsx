@@ -1,5 +1,6 @@
 'use client'
 
+import type { PressEvent } from '@react-types/shared'
 import { isEmpty } from 'radashi'
 import React, { useRef, useCallback, useMemo } from 'react'
 import { useComboBox, useFilter } from 'react-aria'
@@ -12,6 +13,8 @@ import { useTranslation } from '../../../providers/Translation'
 import Box, { BoxWithForwardRef } from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
+import ArrowDown from '../../icons/ArrowDown'
+import CloseBtn from '../../icons/CloseBtn'
 import Popover from '../../Popover'
 import Typography from '../../Typography'
 import { ControlledListBox } from '../ListBox'
@@ -26,8 +29,8 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
     tokens,
     customTheme,
     label,
-    icon = 'ArrowDown',
-    closeIcon = 'CloseBtn',
+    icon = <ArrowDown />,
+    closeIcon = <CloseBtn />,
     isDisabled = false,
     isRequired = false,
     isReadOnly = false,
@@ -84,6 +87,25 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
     isRequired,
   }
 
+  const handleButtonPress = useCallback(
+    (e: PressEvent) => {
+      if (hasValue) {
+        // Clear functionality: clear both input value and selection
+        state.setInputValue('')
+        state.selectionManager.clearSelection()
+        // Focus back to the input after clearing
+        if (inputRef.current) {
+          inputRef.current.focus()
+        }
+      } else {
+        // Default dropdown toggle functionality - call both handlers like Select does
+        onPress?.(e)
+        onPressStart?.(e)
+      }
+    },
+    [hasValue, state, onPress, onPressStart, inputRef],
+  )
+
   const handleInputRef = useCallback(
     (ref: HTMLInputElement | null) => {
       if (ref) {
@@ -100,6 +122,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
     }
     return state.inputValue
   }, [selectedItem, state.inputValue, isOpen])
+
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={comboBoxTokens} customTheme={customTheme}>
       {label && (
@@ -115,12 +138,12 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
             tokens={comboBoxTokens}
             {...restOfButtonProps}
             ref={buttonRef}
-            handlePress={onPress}
+            handlePress={handleButtonPress}
           >
             <Icon themeName={`${themeName}.icon`} tokens={comboBoxTokens} icon={hasValue ? closeIcon : icon} />
           </ButtonWithForwardRef>
         </BoxWithForwardRef>
-        {isOpen && inputWrapperRef.current && (
+        {isOpen && inputWrapperRef.current && debouncedState.collection.size > 0 && (
           <Popover
             themeName={`${themeName}.popover`}
             tokens={comboBoxTokens}
