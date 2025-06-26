@@ -1,3 +1,5 @@
+'use client'
+
 import { filterDOMProps, mergeProps } from '@react-aria/utils'
 import type { Selection } from '@react-types/shared'
 import { isEmpty } from 'radashi'
