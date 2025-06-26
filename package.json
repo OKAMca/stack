@@ -5,6 +5,8 @@
   "scripts": {
     "codegen": "graphql-codegen --config ./codegen.ts",
     "g:lint": "nx run-many --all --target=lint",
+    "g:lint:fix": "nx run-many --all --target=lint --fix",
+    "g:build": "nx run-many --all --target=build",
     "storybook": "nx run stack-ui:storybook",
     "storybook-next-component": "nx run next-component:storybook",
     "build-storybook": "nx run stack-ui:build-storybook",
@@ -102,8 +104,8 @@
     "@storybook/blocks": "^8.4.7",
     "@storybook/core-server": "8.4.7",
     "@storybook/nextjs": "^8.4.7",
-    "@storybook/react-webpack5": "8.4.7",
     "@storybook/react": "8.4.7",
+    "@storybook/react-webpack5": "8.4.7",
     "@svgr/rollup": "^8.1.0",
     "@swc-node/register": "1.10.9",
     "@swc/cli": "0.5.2",
@@ -165,7 +167,7 @@
     "typescript": "5.7.2",
     "verdaccio": "^5.29.0",
     "vite": "^5.0.13",
-    "vite-plugin-dts": "~2.3.0",
+    "vite-plugin-dts": "^3.0.0",
     "vite-tsconfig-paths": "^4.2.2",
     "vitest": "1.6.0"
   },
