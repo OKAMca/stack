@@ -122,7 +122,7 @@ export const ReactHookFormListBox = (props: TReactHookFormListBoxProps) => {
 
   return (
     <Controller
-      {...filterDOMProps(rest)}
+      {...rest}
       defaultValue={defaultSelectedKeys}
       name={name}
       control={control}
