@@ -1,3 +1,5 @@
+'use client'
+
 import { Children, cloneElement, isValidElement, useRef } from 'react'
 import { FocusRing, mergeProps, useOption } from 'react-aria'
 import { mergeDefaultComponentProps } from '../../../helpers/mergeDefaultComponentProps'
