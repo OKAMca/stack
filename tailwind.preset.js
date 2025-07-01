@@ -43,6 +43,15 @@ module.exports = {
           800: '#42474C',
           900: '#363A3E',
         },
+        danger: {
+          100: '#FFE3E0',
+          200: '#FFBDBA',
+          300: '#FF9792',
+          400: '#FF4D42',
+          500: '#E0311A',
+          600: '#C82B17',
+          700: '#A82413',
+        },
         white: '#FEFFFF',
         black: '#0A1418',
         success: '#3A8230',
@@ -158,10 +167,9 @@ module.exports = {
               outline: `2px solid ${color ?? theme('colors[black]')}`,
             },
           })
-        }, { 
+        }, {
           values: theme('colors')
         })
       }),
     ],
   }
-  

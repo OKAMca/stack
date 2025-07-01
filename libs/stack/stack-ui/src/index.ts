@@ -52,6 +52,7 @@ export { default as TabList } from './components/TabList'
 export { TabItem } from './components/TabList/components/TabItem'
 export { default as TabPanel } from './components/TabList/components/TabPanel'
 export { default as Tab } from './components/TabList/components/Tab'
+export { default as ListBox, ReactHookFormListBox } from './components/fields/ListBox'
 export * from './components/icons'
 
 // providers

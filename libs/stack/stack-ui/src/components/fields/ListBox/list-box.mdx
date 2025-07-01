@@ -47,3 +47,25 @@ Passing two children to the `Item` component in a listbox will automatically ren
 ### Link options
 
 <Canvas of={ListBoxStories.LinkOptions} />
+
+### React Hook Form
+
+A base list box wrapper with react hook form integration.
+
+#### Automatic error handling
+
+Return an error message if the value is not valid via the `validate` prop which passes a `Set<Key>` as the value. This is overridable by the `errorMessage` prop.
+
+Note that the `ReactHookFormListBox` will automatically set the `isError` prop to `true` if the field has errors.
+
+```tsx
+<ReactHookFormListBox
+  validate={(value) => {
+    if (value.size > 3) {
+      return 'You can only select up to 3 fruits'
+    }
+    return true
+  }}
+/>
+```
+<Canvas of={ListBoxStories.ReactHookForm} />
