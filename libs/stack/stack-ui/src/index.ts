@@ -55,6 +55,8 @@ export { default as TabPanel } from './components/TabList/components/TabPanel'
 export { default as Tab } from './components/TabList/components/Tab'
 export { default as ComboBox } from './components/fields/ComboBox'
 export { default as ListBox } from './components/fields/ListBox'
+export { default as ListBoxSection } from './components/fields/ListBox/components/ListBoxSection'
+export { default as Option } from './components/fields/Option'
 export { Node } from './components/Node'
 export * from './components/icons'
 
@@ -101,6 +103,8 @@ export type {
   TDefaultNodeComponent,
   TDefaultSectionComponent,
 } from './types/react-stately'
+export type { TListBoxProps, TListBoxSectionProps } from './components/fields/ListBox/interface'
+export type { TOptionProps } from './components/fields/Option/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'

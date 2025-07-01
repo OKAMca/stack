@@ -1,16 +1,17 @@
-/// <reference types='vitest' />
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import dts from 'vite-plugin-dts';
-import * as path from 'path';
+/* eslint-disable import/no-relative-packages */
+/// <reference types="vitest" />
+import * as path from 'path'
+import react from '@vitejs/plugin-react'
+import preserveDirectives from 'rollup-plugin-preserve-directives'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
 import externalDeps from '../../../config/external-deps'
 
-
 export default defineConfig({
+  cacheDir: '../../../node_modules/.vite/next-component',
   root: __dirname,
-  cacheDir: '../../../node_modules/.vite/logger',
   plugins: [
     react(),
     nxViteTsPaths(),
@@ -33,16 +34,10 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: '../../../dist/libs/logger',
-    emptyOutDir: true,
-    reportCompressedSize: true,
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
-      name: 'logger',
+      name: 'next-component',
       fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
@@ -50,7 +45,17 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: externalDeps,
+      output: {
+        preserveModules: true,
+      },
+      external: [...externalDeps, '@okam/stack-ui', '@okam/logger', '@okam/core-lib'],
+      onwarn(warning, warn) {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+          return
+        }
+        warn(warning)
+      },
+      plugins: [preserveDirectives()],
     },
   },
 })
