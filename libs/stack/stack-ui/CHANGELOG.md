@@ -1,3 +1,23 @@
+## 1.38.0 (2025-07-01)
+
+### 🚀 Features
+
+- **stack-ui:** shared option list component ([bbf5c5b](https://github.com/OKAMca/stack/commit/bbf5c5b))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- **stack-ui:** listbox section items correrct theme name ([8acb1b5](https://github.com/OKAMca/stack/commit/8acb1b5))
+- **stack-ui:** safer option render ([5b26401](https://github.com/OKAMca/stack/commit/5b26401))
+- **stack-ui:** option component isSelectable token correct value ([6883551](https://github.com/OKAMca/stack/commit/6883551))
+- **stack-ui:** listbox interface ([eef614d](https://github.com/OKAMca/stack/commit/eef614d))
+- **stack-ui:** listbox fully accessible, supports link options ([4a43bde](https://github.com/OKAMca/stack/commit/4a43bde))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.37.0 (2025-05-22)
 
 ### 🚀 Features
