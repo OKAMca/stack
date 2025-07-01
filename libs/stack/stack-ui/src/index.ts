@@ -52,6 +52,9 @@ export { default as TabList } from './components/TabList'
 export { TabItem } from './components/TabList/components/TabItem'
 export { default as TabPanel } from './components/TabList/components/TabPanel'
 export { default as Tab } from './components/TabList/components/Tab'
+export { default as ListBox } from './components/fields/ListBox'
+export { default as ListBoxSection } from './components/fields/ListBox/components/ListBoxSection'
+export { default as Option } from './components/fields/Option'
 export * from './components/icons'
 
 // providers
@@ -92,6 +95,8 @@ export type { default as TSearchProps } from './components/fields/SearchField/in
 export type { TTagGroupProps, TTagItemProps, TTagProps } from './components/TagGroup/interface'
 export type { TTabListProps, TTabProps, TTabPanelProps } from './components/TabList/interface'
 export type { TDefaultNode, TDefaultItemComponent } from './types/react-stately'
+export type { TListBoxProps, TListBoxSectionProps } from './components/fields/ListBox/interface'
+export type { TOptionProps } from './components/fields/Option/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'

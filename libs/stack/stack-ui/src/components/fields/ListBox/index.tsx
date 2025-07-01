@@ -1,3 +1,5 @@
+'use client'
+
 import type { ElementType } from 'react'
 import { useRef } from 'react'
 import { useListBox } from 'react-aria'

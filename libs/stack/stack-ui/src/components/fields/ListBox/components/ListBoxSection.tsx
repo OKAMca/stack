@@ -1,3 +1,5 @@
+'use client'
+
 import { filterDOMProps } from '@react-aria/utils'
 import { mergeProps, useListBoxSection } from 'react-aria'
 import { mergeDefaultComponentProps } from '../../../../helpers/mergeDefaultComponentProps'
