@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-flexible-content",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -23,8 +23,8 @@
   },
   "dependencies": {
     "@nx/vite": "20.2.2",
-    "@okam/directus-block": "1.5.6",
-    "@okam/stack-ui": "1.37.1",
+    "@okam/directus-block": "1.5.7",
+    "@okam/stack-ui": "1.38.0",
     "@vitejs/plugin-react": "4.3.4",
     "vite": "^5.0.13",
     "vite-plugin-dts": "~2.3.0",
