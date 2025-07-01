@@ -3,13 +3,16 @@
 import type { Ref } from 'react'
 import { forwardRef } from 'react'
 import { FocusRing, usePress } from 'react-aria'
-import { useSwiperController } from '../../../providers/Swiper'
+import { useCarousel } from '../../../providers/Carousel'
 import { ButtonWithForwardRef } from '../../Button'
 import type { TButtonProps } from '../../Button/interface'
 import Icon from '../../Icon'
-import type { TCarouselNavigationButtonProps } from '../interface'
+import type { TCarouselNavigationButtonProps } from './interface'
 
-export const CarouselNavigationButton = forwardRef(
+/**
+ * @deprecated Use CarouselNextNavigation/CarouselPrevNavigation instead
+ */
+export const LegacyCarouselNavigationButton = forwardRef(
   (props: TCarouselNavigationButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const { themeName, tokens, customTheme, children, onSubmit, ...rest } = props
     const { isDisabled } = rest
@@ -35,10 +38,13 @@ export const CarouselNavigationButton = forwardRef(
   },
 )
 
-export const CarouselNextNavigationButton = forwardRef(
+/**
+ * @deprecated Use CarouselNextNavigation instead
+ */
+export const LegacyCarouselNextNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const { children, ...rest } = props
-    const { controller } = useSwiperController()
+    const { controller } = useCarousel()
     const { params, activeIndex = 1, slides } = controller ?? {}
     const { slidesPerView = 1, loop } = params ?? {}
 
@@ -54,17 +60,25 @@ export const CarouselNextNavigationButton = forwardRef(
     const disabled = !loop && !allowNavigateNext
 
     return (
-      <CarouselNavigationButton onSubmit={() => controller?.slideNext()} {...rest} ref={ref} isDisabled={disabled}>
+      <LegacyCarouselNavigationButton
+        onSubmit={() => controller?.slideNext()}
+        {...rest}
+        ref={ref}
+        isDisabled={disabled}
+      >
         {children || <Icon icon="ArrowRight" />}
-      </CarouselNavigationButton>
+      </LegacyCarouselNavigationButton>
     )
   },
 )
 
-export const CarouselPrevNavigationButton = forwardRef(
+/**
+ * @deprecated Use CarouselPrevNavigation instead
+ */
+export const LegacyCarouselPrevNavigationButton = forwardRef(
   (props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
     const { children, ...rest } = props
-    const { controller } = useSwiperController()
+    const { controller } = useCarousel()
     const { params, activeIndex = 1 } = controller ?? {}
     const { loop } = params ?? {}
 
@@ -73,15 +87,20 @@ export const CarouselPrevNavigationButton = forwardRef(
     const disabled = !loop && !allowNavigatePrev
 
     return (
-      <CarouselNavigationButton onSubmit={() => controller?.slidePrev()} {...rest} ref={ref} isDisabled={disabled}>
+      <LegacyCarouselNavigationButton
+        onSubmit={() => controller?.slidePrev()}
+        {...rest}
+        ref={ref}
+        isDisabled={disabled}
+      >
         {children || <Icon icon="ArrowLeft" />}
-      </CarouselNavigationButton>
+      </LegacyCarouselNavigationButton>
     )
   },
 )
 
-CarouselNavigationButton.displayName = 'CarouselNavigationButton'
-CarouselNextNavigationButton.displayName = 'CarouselNextNavigationButton'
-CarouselPrevNavigationButton.displayName = 'CarouselPrevNavigationButton'
+LegacyCarouselNavigationButton.displayName = 'LegacyCarouselNavigationButton'
+LegacyCarouselNextNavigationButton.displayName = 'LegacyCarouselNextNavigationButton'
+LegacyCarouselPrevNavigationButton.displayName = 'LegacyCarouselPrevNavigationButton'
 
-export default CarouselNavigationButton
+export default LegacyCarouselNavigationButton

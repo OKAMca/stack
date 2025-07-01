@@ -6,7 +6,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
-import { CarouselNextNavigationButton, CarouselPrevNavigationButton } from './components/CarouselNavigationButton'
+import { CarouselNextNavigationButton, CarouselPrevNavigationButton } from './navigation/LegacyCarouselNavigationButton'
 import { forwardRef } from 'react'
 import * as CarouselStories from './carousel.stories';
 
@@ -32,58 +32,48 @@ import 'swiper/css/keyboard'
 
 ## Props
 
-<ArgTypes
-  include={[
-    'slides',
-    'a11y',
-    'nextButton',
-    'prevButton',
-    'themeName',
-    'tokens',
-    'customTheme',
-    'as',
-    'onSwiper',
-    'onNavigationPrev',
-    'onNavigationNext',
-    'children',
-    'modules',
-  ]}
-/>
+<ArgTypes />
 
 ## Showcase
 
 ### Multiple slides per view
 
-<Canvas>
-  <Story of={CarouselStories.MultipleSlidesPerView} />
+<Canvas of={CarouselStories.MultipleSlidesPerView}>
+  <Story />
 </Canvas>
 
 ### Autoplay
 
-<Canvas>
-  <Story of={CarouselStories.Autoplay} />
+<Canvas of={CarouselStories.Autoplay}>
+  <Story />
 </Canvas>
 
 ### Focusable content
 
-<Canvas>
-  <Story of={CarouselStories.FocusableContent} />
+<Canvas of={CarouselStories.FocusableContent}>
+  <Story />
 </Canvas>
 
 ### Infinite looping
 
-<Canvas>
-  <Story of={CarouselStories.InfiniteLooping} />
+<Canvas of={CarouselStories.InfiniteLooping}>
+  <Story />
 </Canvas>
 
-### Pagination
+### Pagination Bullets
 
-<Canvas>
-  <Story of={CarouselStories.Pagination} />
+<Canvas of={CarouselStories.PaginationBullets}>
+  <Story />
 </Canvas>
 
-### Carousel with custom navigation
+### Pagination Fraction
 
-<Canvas>
-  <Story of={CarouselStories.CarouselCustomNavigation} />
+<Canvas of={CarouselStories.PaginationFraction}>
+  <Story />
+</Canvas>
+
+### Legacy Carousel
+
+<Canvas of={CarouselStories.Legacy}>
+  <Story />
 </Canvas>
