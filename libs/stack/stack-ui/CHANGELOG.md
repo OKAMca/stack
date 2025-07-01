@@ -1,3 +1,14 @@
+## 1.38.1 (2025-07-01)
+
+### 🩹 Fixes
+
+- **stack-ui:** missing use client directives ([84148f7](https://github.com/OKAMca/stack/commit/84148f7))
+- **stack-ui:** export listbox components/types ([e2a8338](https://github.com/OKAMca/stack/commit/e2a8338))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.38.0 (2025-07-01)
 
 ### 🚀 Features
