@@ -134,7 +134,7 @@ export const ReactHookFormListBox = (props: TReactHookFormListBoxProps) => {
 
         const validityField = {
           isDisabled: field.disabled ?? false,
-          isRequired: rules?.required === true || rules?.required === 'required',
+          isRequired: mergedRules?.required === true || mergedRules?.required === 'required',
           isInvalid: fieldState.invalid,
           isError,
         }
