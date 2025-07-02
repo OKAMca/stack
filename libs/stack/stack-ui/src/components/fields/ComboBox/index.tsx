@@ -225,9 +225,10 @@ export const ReactHookFormComboBox = ({
           isError,
         }
 
-        const comboBoxTokens = {
+        const baseTokens = {
           ...tokens,
-          ...validityField,
+          isDisabled: field.disabled ?? false,
+          isRequired: rules?.required === true || rules?.required === 'required',
         }
 
         return (
@@ -235,23 +236,24 @@ export const ReactHookFormComboBox = ({
             {...fieldProps}
             {...validityField}
             {...getAriaFields()}
+            {...rest}
             id={id}
             hookFormRef={ref}
             name={name}
             themeName={themeName}
             label={label}
-            tokens={comboBoxTokens}
+            tokens={baseTokens}
             isDisabled={field.disabled}
             isRequired={rules?.required === true || rules?.required === 'required'}
             isInvalid={fieldState.invalid}
             errorMessage={fieldState.error?.message}
-            inputValue={field.value}
             defaultInputValue={defaultInputValue}
             items={items}
             placeholder={placeholder}
             icon={icon}
             allowsCustomValue={allowsCustomValue}
             menuTrigger={menuTrigger}
+            selectedKey={field.value}
             onSelectionChange={(key) => {
               field.onChange(key)
               onChange?.(key)
