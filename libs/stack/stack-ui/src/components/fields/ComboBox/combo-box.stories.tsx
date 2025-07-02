@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentType } from 'react'
+import React from 'react'
 import { Item, Section } from 'react-stately'
 import { Node } from '../../Node'
 import Popover from '../../Popover'
 import ListBox from '../ListBox'
+import { useComboBoxFiltering, transformSectionsWithRenderFunctions } from './hooks/useComboBoxFiltering'
 import ComboBox from '.'
 
 const meta: Meta<typeof ComboBox> = {
@@ -199,70 +201,93 @@ export const ChildrenRenderingFunction: Story = {
   name: 'Children Rendering Function',
   args: {
     name: 'brand-children-rendering-function',
-    items: [
-      {
-        key: 'section-1',
-        title: 'CTV',
-        children: ({ key, children, ...item }) => (
+  },
+  render(args) {
+    const metaChildren = meta.args?.children as React.ReactElement[]
+    const items =
+      metaChildren?.map((child) => ({
+        key: child.key as string,
+        children: child.props.children,
+      })) || []
+
+    // Apply filtering hook for search functionality
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { inputValue, onInputChange, items: filteredItems } = useComboBoxFiltering(items)
+
+    return (
+      <ComboBox
+        {...args}
+        name="brand-children-rendering-function"
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        items={filteredItems as any}
+      >
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {({ key, children, ...item }: any) => (
           <Node key={key} {...item}>
             {children}
           </Node>
-        ),
+        )}
+      </ComboBox>
+    )
+  },
+}
+
+
+export const ChildrenRenderingFunctionWithSections: Story = {
+  name: 'Children Rendering Function With Sections',
+  args: {
+    name: 'brand-children-rendering-function-with-sections',
+  },
+  render(args) {
+    const sections = [
+      {
+        key: 'section-1',
+        title: 'CTV',
         items: [
-          {
-            key: '1',
-            children: 'CTV',
-          },
-          {
-            key: '2',
-            children: 'TSN',
-          },
-          {
-            key: '3',
-            children: 'Crave',
-          },
-          {
-            key: '4',
-            children: 'CTV Comedy',
-          },
-          {
-            key: '5',
-            children: 'CTV Sci-fi',
-          },
-          {
-            key: '6',
-            children: 'CTV Drama',
-          },
+          { key: '1', children: 'CTV' },
+          { key: '2', children: 'TSN' },
+          { key: '3', children: 'Crave' },
+          { key: '4', children: 'CTV Comedy' },
+          { key: '5', children: 'CTV Sci-fi' },
+          { key: '6', children: 'CTV Drama' },
         ],
       },
       {
         key: 'section-2',
         title: 'Bell',
-        children: ({ key, children, ...item }) => (
+        items: [
+          { key: '7', children: 'Bell' },
+          { key: '8', children: 'Bell Sports' },
+          { key: '9', children: 'Bell Kids' },
+        ],
+      },
+    ]
+
+    // Transform simple data to complex structure with render functions
+    const transformedSections = transformSectionsWithRenderFunctions(sections)
+
+    // Apply filtering hook
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, react-hooks/rules-of-hooks
+    const { inputValue, onInputChange, items } = useComboBoxFiltering(transformedSections as any)
+
+    return (
+      <ComboBox
+        {...args}
+        name="brand-children-rendering-function-with-sections"
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        items={items as any}
+      >
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {({ key, children, ...item }: any) => (
           <Node key={key} {...item}>
             {children}
           </Node>
-        ),
-        items: [
-          {
-            key: '7',
-            children: 'Bell',
-          },
-          {
-            key: '8',
-            children: 'Bell Sports',
-          },
-          {
-            key: '9',
-            children: 'Bell Kids',
-          },
-        ],
-      },
-    ],
-    children: ({ key, children, ...item }) => (
-      <Node key={key} {...item}>
-        {children}
-      </Node>
-    ),
+        )}
+      </ComboBox>
+    )
   },
 }
