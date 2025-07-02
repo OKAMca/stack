@@ -1,12 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentType } from 'react'
 import React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { Item, Section } from 'react-stately'
+import Box from '../../Box'
+import Button from '../../Button'
 import { Node } from '../../Node'
 import Popover from '../../Popover'
 import ListBox from '../ListBox'
 import { useComboBoxFiltering, transformSectionsWithRenderFunctions } from './hooks/useComboBoxFiltering'
-import ComboBox from '.'
+import ComboBox, { ReactHookFormComboBox } from '.'
 
 const meta: Meta<typeof ComboBox> = {
   title: 'Form/Fields/ComboBox',
@@ -234,7 +237,6 @@ export const ChildrenRenderingFunction: Story = {
   },
 }
 
-
 export const ChildrenRenderingFunctionWithSections: Story = {
   name: 'Children Rendering Function With Sections',
   args: {
@@ -288,6 +290,35 @@ export const ChildrenRenderingFunctionWithSections: Story = {
           </Node>
         )}
       </ComboBox>
+    )
+  },
+}
+
+export const ReactHookForm: Story = {
+  render() {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const methods = useForm<{ brand: string }>()
+    const children = meta.args?.children as React.ReactElement[]
+
+    return (
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(() => null)}>
+          <Box customTheme="flex flex-col gap-4">
+            <ReactHookFormComboBox
+              label="Brand"
+              name="brand"
+              placeholder="Select a brand"
+              isRequired
+              rules={{
+                required: 'Please select a brand',
+              }}
+            >
+              {children}
+            </ReactHookFormComboBox>
+            <Button {...({ type: 'submit' } as React.ButtonHTMLAttributes<HTMLButtonElement>)}>Submit</Button>
+          </Box>
+        </form>
+      </FormProvider>
     )
   },
 }
