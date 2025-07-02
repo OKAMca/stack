@@ -295,6 +295,10 @@ export const ChildrenRenderingFunctionWithSections: Story = {
 }
 
 export const ReactHookForm: Story = {
+  name: 'React Hook Form',
+  args: {
+    name: 'brand-react-hook-form',
+  },
   render() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const methods = useForm<{ brand: string }>()
@@ -306,7 +310,7 @@ export const ReactHookForm: Story = {
           <Box customTheme="flex flex-col gap-4">
             <ReactHookFormComboBox
               label="Brand"
-              name="brand"
+              name="brand-react-hook-form"
               placeholder="Select a brand"
               isRequired
               rules={{
