@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useMemo, useState } from 'react'
 import type { TDefaultSectionComponent, TDefaultItemComponent } from '../../../../types/react-stately'
 import { Node } from '../../../Node'
