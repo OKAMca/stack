@@ -267,8 +267,8 @@ export const ChildrenRenderingFunctionWithSections: Story = {
     ]
 
     // Apply filtering hook
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, react-hooks/rules-of-hooks
-    const { inputValue, onInputChange, items } = useComboBoxFiltering(sections as any)
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { inputValue, onInputChange, items } = useComboBoxFiltering(sections)
 
     return (
       <ComboBox
