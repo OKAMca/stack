@@ -230,7 +230,7 @@ export const ReactHookFormComboBox = ({
 
         const validityField = {
           isDisabled: field.disabled ?? false,
-          isRequired: rules?.required === true || rules?.required === 'required',
+          isRequired: isRequired || Boolean(rules?.required),
           isInvalid: fieldState.invalid,
           isError,
         }
@@ -238,7 +238,7 @@ export const ReactHookFormComboBox = ({
         const baseTokens = {
           ...tokens,
           isDisabled: field.disabled ?? false,
-          isRequired: rules?.required === true || rules?.required === 'required',
+          isRequired: isRequired || Boolean(rules?.required),
         }
 
         return (
