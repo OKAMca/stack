@@ -65,7 +65,17 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
     state,
   )
 
-  const debouncedState = useDebounce(state, debounceDelay)
+  // Only debounce the collection to avoid infinite re-renders
+  const debouncedCollection = useDebounce(state.collection, debounceDelay)
+
+  // Create a debounced state object that keeps all state properties but uses debounced collection
+  const debouncedState = useMemo(
+    () => ({
+      ...state,
+      collection: debouncedCollection,
+    }),
+    [state, debouncedCollection],
+  )
 
   const { onPress, onPressStart, preventFocusOnPress, ...restOfButtonProps } = buttonProps
 
@@ -194,8 +204,31 @@ export const ReactHookFormComboBox = ({
   menuTrigger,
   ...rest
 }: TComboBoxProps & { rules?: RegisterOptions }) => {
-  const { control } = useFormContext()
+  const { control, formState } = useFormContext()
   const { t } = useTranslation()
+
+  // Track form submission lifecycle using React Hook Form's built-in state
+  const [wasSubmitting, setWasSubmitting] = React.useState(false)
+  const [suppressFocusTrigger, setSuppressFocusTrigger] = React.useState(false)
+
+  React.useEffect(() => {
+    // When submission starts
+    if (formState.isSubmitting && !wasSubmitting) {
+      setSuppressFocusTrigger(true)
+      setWasSubmitting(true)
+    }
+
+    // When submission completes
+    if (!formState.isSubmitting && wasSubmitting) {
+      setWasSubmitting(false)
+      // Keep suppression active briefly to allow validation focus to complete
+      setTimeout(() => {
+        setSuppressFocusTrigger(false)
+      }, 50) // Much shorter delay just for validation focus
+    }
+  }, [formState.isSubmitting, wasSubmitting])
+
+  const comboBoxRef = React.useRef<HTMLDivElement>(null)
 
   const getAriaFields = () => {
     const ariaFields = Object.entries(rest).filter(([key, _value]) => key.startsWith('aria-'))
@@ -232,36 +265,39 @@ export const ReactHookFormComboBox = ({
         }
 
         return (
-          <ComboBox
-            {...fieldProps}
-            {...validityField}
-            {...getAriaFields()}
-            {...rest}
-            id={id}
-            hookFormRef={ref}
-            name={name}
-            themeName={themeName}
-            label={label}
-            tokens={baseTokens}
-            isDisabled={field.disabled}
-            isRequired={rules?.required === true || rules?.required === 'required'}
-            isInvalid={fieldState.invalid}
-            errorMessage={fieldState.error?.message}
-            defaultInputValue={defaultInputValue}
-            items={items}
-            placeholder={placeholder}
-            icon={icon}
-            allowsCustomValue={allowsCustomValue}
-            menuTrigger={menuTrigger}
-            selectedKey={field.value}
-            onSelectionChange={(key) => {
-              field.onChange(key)
-              onChange?.(key)
-            }}
-            onInputChange={(val) => {
-              onInputChange?.(val)
-            }}
-          />
+          <div ref={comboBoxRef}>
+            <ComboBox
+              {...fieldProps}
+              {...validityField}
+              {...getAriaFields()}
+              {...rest}
+              id={id}
+              hookFormRef={ref}
+              name={name}
+              themeName={themeName}
+              label={label}
+              tokens={baseTokens}
+              isDisabled={field.disabled}
+              isRequired={rules?.required === true || rules?.required === 'required'}
+              isInvalid={fieldState.invalid}
+              errorMessage={fieldState.error?.message}
+              defaultInputValue={defaultInputValue}
+              items={items}
+              placeholder={placeholder}
+              icon={icon}
+              allowsCustomValue={allowsCustomValue}
+              // Temporarily disable focus trigger during form submission
+              menuTrigger={suppressFocusTrigger ? 'manual' : menuTrigger}
+              selectedKey={field.value}
+              onSelectionChange={(key) => {
+                field.onChange(key)
+                onChange?.(key)
+              }}
+              onInputChange={(val) => {
+                onInputChange?.(val)
+              }}
+            />
+          </div>
         )
       }}
     />

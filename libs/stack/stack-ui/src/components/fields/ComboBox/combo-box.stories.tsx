@@ -8,7 +8,7 @@ import Button from '../../Button'
 import { Node } from '../../Node'
 import Popover from '../../Popover'
 import ListBox from '../ListBox'
-import { useComboBoxFiltering, transformSectionsWithRenderFunctions } from './hooks/useComboBoxFiltering'
+import { useComboBoxFiltering } from './hooks/useComboBoxFiltering'
 import ComboBox, { ReactHookFormComboBox } from '.'
 
 const meta: Meta<typeof ComboBox> = {
@@ -226,8 +226,7 @@ export const ChildrenRenderingFunction: Story = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         items={filteredItems as any}
       >
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        {({ key, children, ...item }: any) => (
+        {({ key, children, ...item }) => (
           <Node key={key} {...item}>
             {children}
           </Node>
@@ -267,12 +266,9 @@ export const ChildrenRenderingFunctionWithSections: Story = {
       },
     ]
 
-    // Transform simple data to complex structure with render functions
-    const transformedSections = transformSectionsWithRenderFunctions(sections)
-
     // Apply filtering hook
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, react-hooks/rules-of-hooks
-    const { inputValue, onInputChange, items } = useComboBoxFiltering(transformedSections as any)
+    const { inputValue, onInputChange, items } = useComboBoxFiltering(sections as any)
 
     return (
       <ComboBox
@@ -283,8 +279,7 @@ export const ChildrenRenderingFunctionWithSections: Story = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         items={items as any}
       >
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-        {({ key, children, ...item }: any) => (
+        {({ key, children, ...item }) => (
           <Node key={key} {...item}>
             {children}
           </Node>

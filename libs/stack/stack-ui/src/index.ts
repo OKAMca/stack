@@ -117,6 +117,7 @@ export { default as useAccordionState } from './components/Accordion/hooks/useAc
 export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
 export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
 export { useDebounce } from './hooks/useDebounce'
+export { useComboBoxFiltering } from './components/fields/ComboBox/hooks/useComboBoxFiltering'
 
 // dev tools
 export { logger as StackUILogger } from './logger'
