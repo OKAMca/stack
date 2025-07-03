@@ -1,31 +1,29 @@
 import React, { useMemo, useState } from 'react'
-import type { TDefaultItemComponent } from '../../../../types/react-stately'
+import type { TDefaultSectionComponent, TDefaultItemComponent } from '../../../../types/react-stately'
 import { Node } from '../../../Node'
 
-// Use built-in types directly - following Node component pattern
-interface SectionWithItems<T extends object = object> {
+// Simple input type for sections without render functions
+interface SimpleSectionData<I extends object = object> {
   key: string
   title?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  children?: (props: any) => React.ReactElement
-  items?: Array<TDefaultItemComponent<T>>
+  items: Array<TDefaultItemComponent<I>>
 }
 
-interface SimpleSectionData<T extends object = object> {
-  key: string
-  title?: string
-  items: Array<TDefaultItemComponent<T>>
+// Complex type for sections with render functions (after transformation)
+type SectionWithItems<I extends object = object> = TDefaultSectionComponent<I> & {
+  items?: Array<TDefaultItemComponent<I>>
+  children?: (props: TDefaultItemComponent<I>) => React.ReactElement
 }
 
-type FilterableData<T extends object = object> = TDefaultItemComponent<T> | SectionWithItems<T> | SimpleSectionData<T>
+type FlatListItem<I extends object = object> = TDefaultItemComponent<I>
 
 /**
  * Hook for handling automatic filtering of ComboBox structures
  * Supports both flat lists and sections with rendering functions
  * Automatically transforms simple section data into complex structures
  */
-export function useComboBoxFiltering<T extends object = object>(
-  items: Array<FilterableData<T>> | undefined,
+export function useComboBoxFiltering<I extends object = object>(
+  items: Array<SimpleSectionData<I> | FlatListItem<I>> | undefined,
   controlledInputValue?: string,
   controlledOnInputChange?: (value: string) => void,
 ) {
@@ -44,7 +42,7 @@ export function useComboBoxFiltering<T extends object = object>(
 
     if (hasSimpleSections) {
       // Transform simple sections to complex sections with render functions
-      return (items as SimpleSectionData<T>[]).map((section) => ({
+      return (items as SimpleSectionData<I>[]).map((section) => ({
         ...section,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         children: ({ key, children, ...item }: any) => React.createElement(Node, { key, ...item }, children),
@@ -91,7 +89,7 @@ export function useComboBoxFiltering<T extends object = object>(
 
     if (structureType === 'sections') {
       // Filter sections
-      return (processedItems as SectionWithItems<T>[])
+      return (processedItems as SectionWithItems<I>[])
         .map((section) => ({
           ...section,
           items: section.items?.filter(
@@ -106,7 +104,7 @@ export function useComboBoxFiltering<T extends object = object>(
 
     if (structureType === 'flatList') {
       // Filter flat list items directly
-      return Array.from(processedItems as TDefaultItemComponent<T>[]).filter(
+      return Array.from(processedItems as TDefaultItemComponent<I>[]).filter(
         (item) =>
           'children' in item &&
           typeof item.children === 'string' &&
