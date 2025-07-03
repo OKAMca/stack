@@ -254,7 +254,7 @@ export const ReactHookFormComboBox = ({
             label={label}
             tokens={baseTokens}
             isDisabled={field.disabled}
-            isRequired={rules?.required === true || rules?.required === 'required'}
+            isRequired={isRequired}
             isInvalid={fieldState.invalid}
             errorMessage={fieldState.error?.message}
             defaultInputValue={defaultInputValue}
