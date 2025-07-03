@@ -26,8 +26,6 @@ const meta: Meta<typeof ComboBox> = {
     placeholder: 'Select a brand',
     allowsCustomValue: true,
     menuTrigger: 'focus',
-    onSelectionChange: () => console.log('selection changed'),
-    onInputChange: () => console.log('input changed'),
     children: [
       <Item key="1">CTV</Item>,
       <Item key="2">TSN</Item>,
