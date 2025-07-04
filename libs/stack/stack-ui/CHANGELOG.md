@@ -1,3 +1,20 @@
+## 1.39.0 (2025-07-04)
+
+### 🚀 Features
+
+- **stack-ui:** node item/section dispatcher component ([16f1dfa](https://github.com/OKAMca/stack/commit/16f1dfa))
+
+### 🩹 Fixes
+
+- **stack-ui:** listbox missing use client directive ([937f395](https://github.com/OKAMca/stack/commit/937f395))
+- **stack-ui:** missing exports ([54334dc](https://github.com/OKAMca/stack/commit/54334dc))
+- **stack-ui:** combobox debounces its listbox items display ([56c14b6](https://github.com/OKAMca/stack/commit/56c14b6))
+- **stack-ui:** accept DOMAttrributes on Box ([ede7e77](https://github.com/OKAMca/stack/commit/ede7e77))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.38.1 (2025-07-01)
 
 ### 🩹 Fixes

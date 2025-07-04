@@ -1,3 +1,18 @@
+## 1.7.6 (2025-07-04)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.39.0
+- Updated next-component to 1.0.8
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.7.5 (2025-07-01)
 
 ### 🩹 Fixes
