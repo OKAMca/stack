@@ -8,6 +8,7 @@ export { default as ShareButton } from './components/ShareButton'
 export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
 export { default as Popover } from './components/Popover'
+export { default as PopoverButton } from './components/Popover/components/Button'
 export { default as Carousel } from './components/Carousel'
 export {
   CarouselNextNavigationButton,
@@ -52,9 +53,12 @@ export { default as TabList } from './components/TabList'
 export { TabItem } from './components/TabList/components/TabItem'
 export { default as TabPanel } from './components/TabList/components/TabPanel'
 export { default as Tab } from './components/TabList/components/Tab'
+export { default as ComboBox } from './components/fields/ComboBox'
+export { default as ReactHookFormComboBox } from './components/fields/ComboBox'
 export { default as ListBox } from './components/fields/ListBox'
 export { default as ListBoxSection } from './components/fields/ListBox/components/ListBoxSection'
 export { default as Option } from './components/fields/Option'
+export { Node } from './components/Node'
 export * from './components/icons'
 
 // providers
@@ -94,7 +98,12 @@ export type { TSidePanelButtons, TSidePanelButtonProps, TSidePanelContext } from
 export type { default as TSearchProps } from './components/fields/SearchField/interface'
 export type { TTagGroupProps, TTagItemProps, TTagProps } from './components/TagGroup/interface'
 export type { TTabListProps, TTabProps, TTabPanelProps } from './components/TabList/interface'
-export type { TDefaultNode, TDefaultItemComponent } from './types/react-stately'
+export type {
+  TDefaultNode,
+  TDefaultItemComponent,
+  TDefaultNodeComponent,
+  TDefaultSectionComponent,
+} from './types/react-stately'
 export type { TListBoxProps, TListBoxSectionProps } from './components/fields/ListBox/interface'
 export type { TOptionProps } from './components/fields/Option/interface'
 
@@ -107,5 +116,8 @@ export { default as useTwitterShareUrl } from './components/ShareButton/utils/us
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
 export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
 export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
+export { useDebounce } from './hooks/useDebounce'
+export { useComboBoxFiltering } from './components/fields/ComboBox/hooks/useComboBoxFiltering'
+
 // dev tools
 export { logger as StackUILogger } from './logger'
