@@ -1,3 +1,99 @@
+## 1.39.0 (2025-07-04)
+
+### 🚀 Features
+
+- **stack-ui:** node item/section dispatcher component ([16f1dfa](https://github.com/OKAMca/stack/commit/16f1dfa))
+
+### 🩹 Fixes
+
+- **stack-ui:** listbox missing use client directive ([937f395](https://github.com/OKAMca/stack/commit/937f395))
+- **stack-ui:** missing exports ([54334dc](https://github.com/OKAMca/stack/commit/54334dc))
+- **stack-ui:** combobox debounces its listbox items display ([56c14b6](https://github.com/OKAMca/stack/commit/56c14b6))
+- **stack-ui:** accept DOMAttrributes on Box ([ede7e77](https://github.com/OKAMca/stack/commit/ede7e77))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.38.1 (2025-07-01)
+
+### 🩹 Fixes
+
+- **stack-ui:** missing use client directives ([84148f7](https://github.com/OKAMca/stack/commit/84148f7))
+- **stack-ui:** export listbox components/types ([e2a8338](https://github.com/OKAMca/stack/commit/e2a8338))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.38.0 (2025-07-01)
+
+### 🚀 Features
+
+- **stack-ui:** shared option list component ([bbf5c5b](https://github.com/OKAMca/stack/commit/bbf5c5b))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- **stack-ui:** listbox section items correrct theme name ([8acb1b5](https://github.com/OKAMca/stack/commit/8acb1b5))
+- **stack-ui:** safer option render ([5b26401](https://github.com/OKAMca/stack/commit/5b26401))
+- **stack-ui:** option component isSelectable token correct value ([6883551](https://github.com/OKAMca/stack/commit/6883551))
+- **stack-ui:** listbox interface ([eef614d](https://github.com/OKAMca/stack/commit/eef614d))
+- **stack-ui:** listbox fully accessible, supports link options ([4a43bde](https://github.com/OKAMca/stack/commit/4a43bde))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.37.0 (2025-05-22)
+
+### 🚀 Features
+
+- **stack-ui:** add conditional rendering for trigger and close buttons in Lightbox component ([313716e](https://github.com/OKAMca/stack/commit/313716e))
+
+### 🩹 Fixes
+
+- **stack-ui:** remove hardcoded tokens in Lightbox component ([99cdfbf](https://github.com/OKAMca/stack/commit/99cdfbf))
+
+### ❤️ Thank You
+
+- Jerome Trottier
+
+## 1.31.0 (2025-05-01)
+
+### 🚀 Features
+
+- **next-component:** next link wrapper component + hook ([ed654da](https://github.com/OKAMca/stack/commit/ed654da))
+- add header option to select component ([0338ebc](https://github.com/OKAMca/stack/commit/0338ebc))
+- **stack-ui:** added wysiwyg allowed attribute and tags control ([8e7138f](https://github.com/OKAMca/stack/commit/8e7138f))
+- bump versions to force publish ([6e3eb60](https://github.com/OKAMca/stack/commit/6e3eb60))
+- project cleanup ([a5dde9d](https://github.com/OKAMca/stack/commit/a5dde9d))
+- add factory for Logger ([#214](https://github.com/OKAMca/stack/pull/214))
+
+### 🩹 Fixes
+
+- issue where select header was selectable with arrow ([#279](https://github.com/OKAMca/stack/pull/279))
+- **stack-ui:** side panel context buttonProps typing ([e1d7a94](https://github.com/OKAMca/stack/commit/e1d7a94))
+- lint ([89ece66](https://github.com/OKAMca/stack/commit/89ece66))
+- checkbox a11y issue ([3340653](https://github.com/OKAMca/stack/commit/3340653))
+- bump package ([b6259d1](https://github.com/OKAMca/stack/commit/b6259d1))
+- rhf wrapper ([f03c080](https://github.com/OKAMca/stack/commit/f03c080))
+- missing chuldren prop for TextInput field ([c03f035](https://github.com/OKAMca/stack/commit/c03f035))
+- missing export ([8c9ab9c](https://github.com/OKAMca/stack/commit/8c9ab9c))
+- missing export ([690e7ae](https://github.com/OKAMca/stack/commit/690e7ae))
+- missing export ([bec9b4d](https://github.com/OKAMca/stack/commit/bec9b4d))
+- types ([610a5be](https://github.com/OKAMca/stack/commit/610a5be))
+- missing exports ([5c1f130](https://github.com/OKAMca/stack/commit/5c1f130))
+- issue with react hook form and react aria ([#255](https://github.com/OKAMca/stack/pull/255))
+- issue with typing not resolving correctly when installing package ([bc4c81d](https://github.com/OKAMca/stack/commit/bc4c81d))
+
+### ❤️ Thank You
+
+- Jerome Trottier
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.30.1 (2024-11-05)
 
 

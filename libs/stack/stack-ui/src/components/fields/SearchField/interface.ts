@@ -8,4 +8,5 @@ export default interface TSearchProps<T = TToken> extends AriaSearchFieldProps, 
   placeholder?: string
   ariaLabel?: string
   errorMessage?: React.ReactNode
+  icon?: React.ReactNode
 }

@@ -1,3 +1,14 @@
+## 0.5.0 (2025-01-30)
+
+### 🚀 Features
+
+- **redirection:** use new variable for redirection ([0c21683](https://github.com/OKAMca/stack/commit/0c21683))
+- **directus-node:** adding unit test, fix logger and adding read/write functions for redirections ([6d68bb4](https://github.com/OKAMca/stack/commit/6d68bb4))
+
+### ❤️ Thank You
+
+- Yan Morin
+
 ## 0.3.0 (2024-09-11)
 
 

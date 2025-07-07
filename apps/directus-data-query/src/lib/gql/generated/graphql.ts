@@ -30,48 +30,12 @@ export enum EventEnum {
   Update = 'update'
 }
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  create_form_entry_item?: Maybe<Scalars['Boolean']['output']>;
-  create_form_entry_items?: Maybe<Scalars['Boolean']['output']>;
-  create_help_feedback_item?: Maybe<Scalars['Boolean']['output']>;
-  create_help_feedback_items?: Maybe<Scalars['Boolean']['output']>;
-  create_inbox_item?: Maybe<Scalars['Boolean']['output']>;
-  create_inbox_items?: Maybe<Scalars['Boolean']['output']>;
-};
-
-
-export type MutationCreate_Form_Entry_ItemArgs = {
-  data: Create_Form_Entry_Input;
-};
-
-
-export type MutationCreate_Form_Entry_ItemsArgs = {
-  data?: InputMaybe<Array<Create_Form_Entry_Input>>;
-};
-
-
-export type MutationCreate_Help_Feedback_ItemArgs = {
-  data: Create_Help_Feedback_Input;
-};
-
-
-export type MutationCreate_Help_Feedback_ItemsArgs = {
-  data?: InputMaybe<Array<Create_Help_Feedback_Input>>;
-};
-
-
-export type MutationCreate_Inbox_ItemArgs = {
-  data: Create_Inbox_Input;
-};
-
-
-export type MutationCreate_Inbox_ItemsArgs = {
-  data?: InputMaybe<Array<Create_Inbox_Input>>;
-};
-
 export type Query = {
   __typename?: 'Query';
+  activites: Array<Activites>;
+  activites_aggregated: Array<Activites_Aggregated>;
+  activites_by_id?: Maybe<Activites>;
+  activites_by_version?: Maybe<Version_Activites>;
   block_button: Array<Block_Button>;
   block_button_aggregated: Array<Block_Button_Aggregated>;
   block_button_by_id?: Maybe<Block_Button>;
@@ -144,6 +108,10 @@ export type Query = {
   block_richtext_aggregated: Array<Block_Richtext_Aggregated>;
   block_richtext_by_id?: Maybe<Block_Richtext>;
   block_richtext_by_version?: Maybe<Version_Block_Richtext>;
+  block_settings: Array<Block_Settings>;
+  block_settings_aggregated: Array<Block_Settings_Aggregated>;
+  block_settings_by_id?: Maybe<Block_Settings>;
+  block_settings_by_version?: Maybe<Version_Block_Settings>;
   block_step_items: Array<Block_Step_Items>;
   block_step_items_aggregated: Array<Block_Step_Items_Aggregated>;
   block_step_items_by_id?: Maybe<Block_Step_Items>;
@@ -168,24 +136,62 @@ export type Query = {
   block_video_aggregated: Array<Block_Video_Aggregated>;
   block_video_by_id?: Maybe<Block_Video>;
   block_video_by_version?: Maybe<Version_Block_Video>;
+  block_wysiwygs: Array<Block_Wysiwygs>;
+  block_wysiwygs_aggregated: Array<Block_Wysiwygs_Aggregated>;
+  block_wysiwygs_by_id?: Maybe<Block_Wysiwygs>;
+  block_wysiwygs_by_version?: Maybe<Version_Block_Wysiwygs>;
   categories: Array<Categories>;
   categories_aggregated: Array<Categories_Aggregated>;
   categories_by_id?: Maybe<Categories>;
   categories_by_version?: Maybe<Version_Categories>;
+  contacts: Array<Contacts>;
+  contacts_aggregated: Array<Contacts_Aggregated>;
+  contacts_by_id?: Maybe<Contacts>;
+  contacts_by_version?: Maybe<Version_Contacts>;
+  form_builder: Array<Form_Builder>;
+  form_builder_aggregated: Array<Form_Builder_Aggregated>;
+  form_builder_by_id?: Maybe<Form_Builder>;
+  form_builder_by_version?: Maybe<Version_Form_Builder>;
+  form_builder_schema: Array<Form_Builder_Schema>;
+  form_builder_schema_aggregated: Array<Form_Builder_Schema_Aggregated>;
+  form_builder_schema_by_id?: Maybe<Form_Builder_Schema>;
+  form_builder_schema_by_version?: Maybe<Version_Form_Builder_Schema>;
+  form_builder_translations: Array<Form_Builder_Translations>;
+  form_builder_translations_aggregated: Array<Form_Builder_Translations_Aggregated>;
+  form_builder_translations_by_id?: Maybe<Form_Builder_Translations>;
+  form_builder_translations_by_version?: Maybe<Version_Form_Builder_Translations>;
+  form_configs: Array<Form_Configs>;
+  form_configs_aggregated: Array<Form_Configs_Aggregated>;
+  form_configs_by_id?: Maybe<Form_Configs>;
+  form_configs_by_version?: Maybe<Version_Form_Configs>;
+  form_entry: Array<Form_Entry>;
+  form_entry_aggregated: Array<Form_Entry_Aggregated>;
+  form_entry_by_id?: Maybe<Form_Entry>;
+  form_entry_by_version?: Maybe<Version_Form_Entry>;
+  form_field_settings: Array<Form_Field_Settings>;
+  form_field_settings_aggregated: Array<Form_Field_Settings_Aggregated>;
+  form_field_settings_by_id?: Maybe<Form_Field_Settings>;
+  form_field_settings_by_version?: Maybe<Version_Form_Field_Settings>;
+  form_field_text: Array<Form_Field_Text>;
+  form_field_text_aggregated: Array<Form_Field_Text_Aggregated>;
+  form_field_text_by_id?: Maybe<Form_Field_Text>;
+  form_field_text_by_version?: Maybe<Version_Form_Field_Text>;
+  form_field_text_settings: Array<Form_Field_Text_Settings>;
+  form_field_text_settings_aggregated: Array<Form_Field_Text_Settings_Aggregated>;
+  form_field_text_settings_by_id?: Maybe<Form_Field_Text_Settings>;
+  form_field_text_settings_by_version?: Maybe<Version_Form_Field_Text_Settings>;
   forms: Array<Forms>;
   forms_aggregated: Array<Forms_Aggregated>;
   forms_by_id?: Maybe<Forms>;
   forms_by_version?: Maybe<Version_Forms>;
-  globals?: Maybe<Globals>;
-  globals_by_version?: Maybe<Version_Globals>;
   help_articles: Array<Help_Articles>;
   help_articles_aggregated: Array<Help_Articles_Aggregated>;
   help_articles_by_id?: Maybe<Help_Articles>;
   help_articles_by_version?: Maybe<Version_Help_Articles>;
-  help_collections: Array<Help_Collections>;
-  help_collections_aggregated: Array<Help_Collections_Aggregated>;
-  help_collections_by_id?: Maybe<Help_Collections>;
-  help_collections_by_version?: Maybe<Version_Help_Collections>;
+  inbox: Array<Inbox>;
+  inbox_aggregated: Array<Inbox_Aggregated>;
+  inbox_by_id?: Maybe<Inbox>;
+  inbox_by_version?: Maybe<Version_Inbox>;
   languages: Array<Languages>;
   languages_aggregated: Array<Languages_Aggregated>;
   languages_by_id?: Maybe<Languages>;
@@ -194,6 +200,10 @@ export type Query = {
   links_aggregated: Array<Links_Aggregated>;
   links_by_id?: Maybe<Links>;
   links_by_version?: Maybe<Version_Links>;
+  messages: Array<Messages>;
+  messages_aggregated: Array<Messages_Aggregated>;
+  messages_by_id?: Maybe<Messages>;
+  messages_by_version?: Maybe<Version_Messages>;
   navigation: Array<Navigation>;
   navigation_aggregated: Array<Navigation_Aggregated>;
   navigation_by_id?: Maybe<Navigation>;
@@ -210,6 +220,14 @@ export type Query = {
   page_editor_nodes_aggregated: Array<Page_Editor_Nodes_Aggregated>;
   page_editor_nodes_by_id?: Maybe<Page_Editor_Nodes>;
   page_editor_nodes_by_version?: Maybe<Version_Page_Editor_Nodes>;
+  page_settings: Array<Page_Settings>;
+  page_settings_aggregated: Array<Page_Settings_Aggregated>;
+  page_settings_by_id?: Maybe<Page_Settings>;
+  page_settings_by_version?: Maybe<Version_Page_Settings>;
+  page_settings_translations: Array<Page_Settings_Translations>;
+  page_settings_translations_aggregated: Array<Page_Settings_Translations_Aggregated>;
+  page_settings_translations_by_id?: Maybe<Page_Settings_Translations>;
+  page_settings_translations_by_version?: Maybe<Version_Page_Settings_Translations>;
   pages: Array<Pages>;
   pages_aggregated: Array<Pages_Aggregated>;
   pages_blog?: Maybe<Pages_Blog>;
@@ -242,22 +260,51 @@ export type Query = {
   related_block_faqs_block_faqs_by_version?: Maybe<Version_Related_Block_Faqs_Block_Faqs>;
   related_block_faqs_by_id?: Maybe<Related_Block_Faqs>;
   related_block_faqs_by_version?: Maybe<Version_Related_Block_Faqs>;
-  seo: Array<Seo>;
-  seo_aggregated: Array<Seo_Aggregated>;
-  seo_by_id?: Maybe<Seo>;
-  seo_by_version?: Maybe<Version_Seo>;
-  team: Array<Team>;
-  team_aggregated: Array<Team_Aggregated>;
-  team_by_id?: Maybe<Team>;
-  team_by_version?: Maybe<Version_Team>;
-  testimonials: Array<Testimonials>;
-  testimonials_aggregated: Array<Testimonials_Aggregated>;
-  testimonials_by_id?: Maybe<Testimonials>;
-  testimonials_by_version?: Maybe<Version_Testimonials>;
+  routes: Array<Routes>;
+  routes_aggregated: Array<Routes_Aggregated>;
+  routes_by_id?: Maybe<Routes>;
+  routes_by_version?: Maybe<Version_Routes>;
+  routes_translations: Array<Routes_Translations>;
+  routes_translations_aggregated: Array<Routes_Translations_Aggregated>;
+  routes_translations_by_id?: Maybe<Routes_Translations>;
+  routes_translations_by_version?: Maybe<Version_Routes_Translations>;
   versioning_example: Array<Versioning_Example>;
   versioning_example_aggregated: Array<Versioning_Example_Aggregated>;
   versioning_example_by_id?: Maybe<Versioning_Example>;
   versioning_example_by_version?: Maybe<Version_Versioning_Example>;
+};
+
+
+export type QueryActivitesArgs = {
+  filter?: InputMaybe<Activites_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryActivites_AggregatedArgs = {
+  filter?: InputMaybe<Activites_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryActivites_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryActivites_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
 };
 
 
@@ -855,6 +902,39 @@ export type QueryBlock_Richtext_By_VersionArgs = {
 };
 
 
+export type QueryBlock_SettingsArgs = {
+  filter?: InputMaybe<Block_Settings_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryBlock_Settings_AggregatedArgs = {
+  filter?: InputMaybe<Block_Settings_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryBlock_Settings_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryBlock_Settings_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
 export type QueryBlock_Step_ItemsArgs = {
   filter?: InputMaybe<Block_Step_Items_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -1053,6 +1133,39 @@ export type QueryBlock_Video_By_VersionArgs = {
 };
 
 
+export type QueryBlock_WysiwygsArgs = {
+  filter?: InputMaybe<Block_Wysiwygs_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryBlock_Wysiwygs_AggregatedArgs = {
+  filter?: InputMaybe<Block_Wysiwygs_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryBlock_Wysiwygs_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryBlock_Wysiwygs_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
 export type QueryCategoriesArgs = {
   filter?: InputMaybe<Categories_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -1081,6 +1194,303 @@ export type QueryCategories_By_IdArgs = {
 
 
 export type QueryCategories_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryContactsArgs = {
+  filter?: InputMaybe<Contacts_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryContacts_AggregatedArgs = {
+  filter?: InputMaybe<Contacts_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryContacts_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryContacts_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryForm_BuilderArgs = {
+  filter?: InputMaybe<Form_Builder_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Builder_AggregatedArgs = {
+  filter?: InputMaybe<Form_Builder_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Builder_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForm_Builder_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryForm_Builder_SchemaArgs = {
+  filter?: InputMaybe<Form_Builder_Schema_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Builder_Schema_AggregatedArgs = {
+  filter?: InputMaybe<Form_Builder_Schema_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Builder_Schema_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForm_Builder_Schema_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryForm_Builder_TranslationsArgs = {
+  filter?: InputMaybe<Form_Builder_Translations_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Builder_Translations_AggregatedArgs = {
+  filter?: InputMaybe<Form_Builder_Translations_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Builder_Translations_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForm_Builder_Translations_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryForm_ConfigsArgs = {
+  filter?: InputMaybe<Form_Configs_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Configs_AggregatedArgs = {
+  filter?: InputMaybe<Form_Configs_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Configs_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForm_Configs_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryForm_EntryArgs = {
+  filter?: InputMaybe<Form_Entry_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Entry_AggregatedArgs = {
+  filter?: InputMaybe<Form_Entry_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Entry_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForm_Entry_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryForm_Field_SettingsArgs = {
+  filter?: InputMaybe<Form_Field_Settings_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Field_Settings_AggregatedArgs = {
+  filter?: InputMaybe<Form_Field_Settings_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Field_Settings_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForm_Field_Settings_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryForm_Field_TextArgs = {
+  filter?: InputMaybe<Form_Field_Text_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Field_Text_AggregatedArgs = {
+  filter?: InputMaybe<Form_Field_Text_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Field_Text_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForm_Field_Text_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryForm_Field_Text_SettingsArgs = {
+  filter?: InputMaybe<Form_Field_Text_Settings_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Field_Text_Settings_AggregatedArgs = {
+  filter?: InputMaybe<Form_Field_Text_Settings_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryForm_Field_Text_Settings_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryForm_Field_Text_Settings_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
@@ -1119,16 +1529,6 @@ export type QueryForms_By_VersionArgs = {
 };
 
 
-export type QueryGlobalsArgs = {
-  version?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryGlobals_By_VersionArgs = {
-  version: Scalars['String']['input'];
-};
-
-
 export type QueryHelp_ArticlesArgs = {
   filter?: InputMaybe<Help_Articles_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -1162,8 +1562,8 @@ export type QueryHelp_Articles_By_VersionArgs = {
 };
 
 
-export type QueryHelp_CollectionsArgs = {
-  filter?: InputMaybe<Help_Collections_Filter>;
+export type QueryInboxArgs = {
+  filter?: InputMaybe<Inbox_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -1172,8 +1572,8 @@ export type QueryHelp_CollectionsArgs = {
 };
 
 
-export type QueryHelp_Collections_AggregatedArgs = {
-  filter?: InputMaybe<Help_Collections_Filter>;
+export type QueryInbox_AggregatedArgs = {
+  filter?: InputMaybe<Inbox_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -1183,13 +1583,13 @@ export type QueryHelp_Collections_AggregatedArgs = {
 };
 
 
-export type QueryHelp_Collections_By_IdArgs = {
+export type QueryInbox_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryHelp_Collections_By_VersionArgs = {
+export type QueryInbox_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
@@ -1256,6 +1656,39 @@ export type QueryLinks_By_IdArgs = {
 
 
 export type QueryLinks_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryMessagesArgs = {
+  filter?: InputMaybe<Messages_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryMessages_AggregatedArgs = {
+  filter?: InputMaybe<Messages_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryMessages_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryMessages_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
@@ -1388,6 +1821,72 @@ export type QueryPage_Editor_Nodes_By_IdArgs = {
 
 
 export type QueryPage_Editor_Nodes_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryPage_SettingsArgs = {
+  filter?: InputMaybe<Page_Settings_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryPage_Settings_AggregatedArgs = {
+  filter?: InputMaybe<Page_Settings_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryPage_Settings_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPage_Settings_By_VersionArgs = {
+  id: Scalars['ID']['input'];
+  version: Scalars['String']['input'];
+};
+
+
+export type QueryPage_Settings_TranslationsArgs = {
+  filter?: InputMaybe<Page_Settings_Translations_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryPage_Settings_Translations_AggregatedArgs = {
+  filter?: InputMaybe<Page_Settings_Translations_Filter>;
+  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type QueryPage_Settings_Translations_By_IdArgs = {
+  id: Scalars['ID']['input'];
+  version?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPage_Settings_Translations_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
@@ -1644,8 +2143,8 @@ export type QueryRelated_Block_Faqs_By_VersionArgs = {
 };
 
 
-export type QuerySeoArgs = {
-  filter?: InputMaybe<Seo_Filter>;
+export type QueryRoutesArgs = {
+  filter?: InputMaybe<Routes_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -1654,8 +2153,8 @@ export type QuerySeoArgs = {
 };
 
 
-export type QuerySeo_AggregatedArgs = {
-  filter?: InputMaybe<Seo_Filter>;
+export type QueryRoutes_AggregatedArgs = {
+  filter?: InputMaybe<Routes_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -1665,20 +2164,20 @@ export type QuerySeo_AggregatedArgs = {
 };
 
 
-export type QuerySeo_By_IdArgs = {
+export type QueryRoutes_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QuerySeo_By_VersionArgs = {
+export type QueryRoutes_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
 
 
-export type QueryTeamArgs = {
-  filter?: InputMaybe<Team_Filter>;
+export type QueryRoutes_TranslationsArgs = {
+  filter?: InputMaybe<Routes_Translations_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -1687,8 +2186,8 @@ export type QueryTeamArgs = {
 };
 
 
-export type QueryTeam_AggregatedArgs = {
-  filter?: InputMaybe<Team_Filter>;
+export type QueryRoutes_Translations_AggregatedArgs = {
+  filter?: InputMaybe<Routes_Translations_Filter>;
   groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
@@ -1698,46 +2197,13 @@ export type QueryTeam_AggregatedArgs = {
 };
 
 
-export type QueryTeam_By_IdArgs = {
+export type QueryRoutes_Translations_By_IdArgs = {
   id: Scalars['ID']['input'];
   version?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryTeam_By_VersionArgs = {
-  id: Scalars['ID']['input'];
-  version: Scalars['String']['input'];
-};
-
-
-export type QueryTestimonialsArgs = {
-  filter?: InputMaybe<Testimonials_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type QueryTestimonials_AggregatedArgs = {
-  filter?: InputMaybe<Testimonials_Filter>;
-  groupBy?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type QueryTestimonials_By_IdArgs = {
-  id: Scalars['ID']['input'];
-  version?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryTestimonials_By_VersionArgs = {
+export type QueryRoutes_Translations_By_VersionArgs = {
   id: Scalars['ID']['input'];
   version: Scalars['String']['input'];
 };
@@ -1777,6 +2243,7 @@ export type QueryVersioning_Example_By_VersionArgs = {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  activites_mutated?: Maybe<Activites_Mutated>;
   block_button_group_mutated?: Maybe<Block_Button_Group_Mutated>;
   block_button_mutated?: Maybe<Block_Button_Mutated>;
   block_columns_mutated?: Maybe<Block_Columns_Mutated>;
@@ -1795,26 +2262,37 @@ export type Subscription = {
   block_logocloud_mutated?: Maybe<Block_Logocloud_Mutated>;
   block_quote_mutated?: Maybe<Block_Quote_Mutated>;
   block_richtext_mutated?: Maybe<Block_Richtext_Mutated>;
+  block_settings_mutated?: Maybe<Block_Settings_Mutated>;
   block_step_items_mutated?: Maybe<Block_Step_Items_Mutated>;
   block_steps_mutated?: Maybe<Block_Steps_Mutated>;
   block_team_mutated?: Maybe<Block_Team_Mutated>;
   block_testimonial_slider_items_mutated?: Maybe<Block_Testimonial_Slider_Items_Mutated>;
   block_testimonials_mutated?: Maybe<Block_Testimonials_Mutated>;
   block_video_mutated?: Maybe<Block_Video_Mutated>;
+  block_wysiwygs_mutated?: Maybe<Block_Wysiwygs_Mutated>;
   categories_mutated?: Maybe<Categories_Mutated>;
+  contacts_mutated?: Maybe<Contacts_Mutated>;
   directus_files_mutated?: Maybe<Directus_Files_Mutated>;
-  directus_revisions_mutated?: Maybe<Directus_Revisions_Mutated>;
-  directus_versions_mutated?: Maybe<Directus_Versions_Mutated>;
+  form_builder_mutated?: Maybe<Form_Builder_Mutated>;
+  form_builder_schema_mutated?: Maybe<Form_Builder_Schema_Mutated>;
+  form_builder_translations_mutated?: Maybe<Form_Builder_Translations_Mutated>;
+  form_configs_mutated?: Maybe<Form_Configs_Mutated>;
+  form_entry_mutated?: Maybe<Form_Entry_Mutated>;
+  form_field_settings_mutated?: Maybe<Form_Field_Settings_Mutated>;
+  form_field_text_mutated?: Maybe<Form_Field_Text_Mutated>;
+  form_field_text_settings_mutated?: Maybe<Form_Field_Text_Settings_Mutated>;
   forms_mutated?: Maybe<Forms_Mutated>;
-  globals_mutated?: Maybe<Globals_Mutated>;
   help_articles_mutated?: Maybe<Help_Articles_Mutated>;
-  help_collections_mutated?: Maybe<Help_Collections_Mutated>;
+  inbox_mutated?: Maybe<Inbox_Mutated>;
   languages_mutated?: Maybe<Languages_Mutated>;
   links_mutated?: Maybe<Links_Mutated>;
+  messages_mutated?: Maybe<Messages_Mutated>;
   navigation_items_mutated?: Maybe<Navigation_Items_Mutated>;
   navigation_mutated?: Maybe<Navigation_Mutated>;
   page_blocks_mutated?: Maybe<Page_Blocks_Mutated>;
   page_editor_nodes_mutated?: Maybe<Page_Editor_Nodes_Mutated>;
+  page_settings_mutated?: Maybe<Page_Settings_Mutated>;
+  page_settings_translations_mutated?: Maybe<Page_Settings_Translations_Mutated>;
   pages_blog_mutated?: Maybe<Pages_Blog_Mutated>;
   pages_mutated?: Maybe<Pages_Mutated>;
   pages_projects_mutated?: Maybe<Pages_Projects_Mutated>;
@@ -1824,10 +2302,14 @@ export type Subscription = {
   redirects_mutated?: Maybe<Redirects_Mutated>;
   related_block_faqs_block_faqs_mutated?: Maybe<Related_Block_Faqs_Block_Faqs_Mutated>;
   related_block_faqs_mutated?: Maybe<Related_Block_Faqs_Mutated>;
-  seo_mutated?: Maybe<Seo_Mutated>;
-  team_mutated?: Maybe<Team_Mutated>;
-  testimonials_mutated?: Maybe<Testimonials_Mutated>;
+  routes_mutated?: Maybe<Routes_Mutated>;
+  routes_translations_mutated?: Maybe<Routes_Translations_Mutated>;
   versioning_example_mutated?: Maybe<Versioning_Example_Mutated>;
+};
+
+
+export type SubscriptionActivites_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
 };
 
 
@@ -1921,6 +2403,11 @@ export type SubscriptionBlock_Richtext_MutatedArgs = {
 };
 
 
+export type SubscriptionBlock_Settings_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
 export type SubscriptionBlock_Step_Items_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
@@ -1951,7 +2438,17 @@ export type SubscriptionBlock_Video_MutatedArgs = {
 };
 
 
+export type SubscriptionBlock_Wysiwygs_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
 export type SubscriptionCategories_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionContacts_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -1961,12 +2458,42 @@ export type SubscriptionDirectus_Files_MutatedArgs = {
 };
 
 
-export type SubscriptionDirectus_Revisions_MutatedArgs = {
+export type SubscriptionForm_Builder_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
 
-export type SubscriptionDirectus_Versions_MutatedArgs = {
+export type SubscriptionForm_Builder_Schema_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionForm_Builder_Translations_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionForm_Configs_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionForm_Entry_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionForm_Field_Settings_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionForm_Field_Text_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionForm_Field_Text_Settings_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -1976,17 +2503,12 @@ export type SubscriptionForms_MutatedArgs = {
 };
 
 
-export type SubscriptionGlobals_MutatedArgs = {
-  event?: InputMaybe<EventEnum>;
-};
-
-
 export type SubscriptionHelp_Articles_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
 
-export type SubscriptionHelp_Collections_MutatedArgs = {
+export type SubscriptionInbox_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -1997,6 +2519,11 @@ export type SubscriptionLanguages_MutatedArgs = {
 
 
 export type SubscriptionLinks_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionMessages_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -2017,6 +2544,16 @@ export type SubscriptionPage_Blocks_MutatedArgs = {
 
 
 export type SubscriptionPage_Editor_Nodes_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionPage_Settings_MutatedArgs = {
+  event?: InputMaybe<EventEnum>;
+};
+
+
+export type SubscriptionPage_Settings_Translations_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
@@ -2066,23 +2603,82 @@ export type SubscriptionRelated_Block_Faqs_MutatedArgs = {
 };
 
 
-export type SubscriptionSeo_MutatedArgs = {
+export type SubscriptionRoutes_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
 
-export type SubscriptionTeam_MutatedArgs = {
-  event?: InputMaybe<EventEnum>;
-};
-
-
-export type SubscriptionTestimonials_MutatedArgs = {
+export type SubscriptionRoutes_Translations_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
 };
 
 
 export type SubscriptionVersioning_Example_MutatedArgs = {
   event?: InputMaybe<EventEnum>;
+};
+
+export type Activites = {
+  __typename?: 'activites';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Activites_Aggregated = {
+  __typename?: 'activites_aggregated';
+  avg?: Maybe<Activites_Aggregated_Fields>;
+  avgDistinct?: Maybe<Activites_Aggregated_Fields>;
+  count?: Maybe<Activites_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Activites_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Activites_Aggregated_Fields>;
+  min?: Maybe<Activites_Aggregated_Fields>;
+  sum?: Maybe<Activites_Aggregated_Fields>;
+  sumDistinct?: Maybe<Activites_Aggregated_Fields>;
+};
+
+export type Activites_Aggregated_Count = {
+  __typename?: 'activites_aggregated_count';
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Activites_Aggregated_Fields = {
+  __typename?: 'activites_aggregated_fields';
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Activites_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Activites_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Activites_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  sort?: InputMaybe<Number_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Activites_Mutated = {
+  __typename?: 'activites_mutated';
+  data?: Maybe<Activites>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
 };
 
 export type Big_Int_Filter_Operators = {
@@ -3235,6 +3831,81 @@ export type Block_Richtext_Mutated = {
   key: Scalars['ID']['output'];
 };
 
+export type Block_Settings = {
+  __typename?: 'block_settings';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  tokens?: Maybe<Scalars['JSON']['output']>;
+  tokens_func?: Maybe<Count_Functions>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type Block_Settings_Aggregated = {
+  __typename?: 'block_settings_aggregated';
+  avg?: Maybe<Block_Settings_Aggregated_Fields>;
+  avgDistinct?: Maybe<Block_Settings_Aggregated_Fields>;
+  count?: Maybe<Block_Settings_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Block_Settings_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Block_Settings_Aggregated_Fields>;
+  min?: Maybe<Block_Settings_Aggregated_Fields>;
+  sum?: Maybe<Block_Settings_Aggregated_Fields>;
+  sumDistinct?: Maybe<Block_Settings_Aggregated_Fields>;
+};
+
+export type Block_Settings_Aggregated_Count = {
+  __typename?: 'block_settings_aggregated_count';
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  description?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  tokens?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+  variant?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Block_Settings_Aggregated_Fields = {
+  __typename?: 'block_settings_aggregated_fields';
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Block_Settings_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Block_Settings_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Block_Settings_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  description?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  sort?: InputMaybe<Number_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  tokens?: InputMaybe<String_Filter_Operators>;
+  tokens_func?: InputMaybe<Count_Function_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+  variant?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Block_Settings_Mutated = {
+  __typename?: 'block_settings_mutated';
+  data?: Maybe<Block_Settings>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type Block_Step_Items = {
   __typename?: 'block_step_items';
   block_steps?: Maybe<Block_Steps>;
@@ -3436,7 +4107,7 @@ export type Block_Testimonial_Slider_Items = {
   date_updated_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
   sort?: Maybe<Scalars['Int']['output']>;
-  testimonials_id?: Maybe<Testimonials>;
+  testimonials_id?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
 };
@@ -3444,16 +4115,6 @@ export type Block_Testimonial_Slider_Items = {
 
 export type Block_Testimonial_Slider_ItemsBlock_Testimonial_Slider_IdArgs = {
   filter?: InputMaybe<Block_Testimonials_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type Block_Testimonial_Slider_ItemsTestimonials_IdArgs = {
-  filter?: InputMaybe<Testimonials_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -3502,7 +4163,7 @@ export type Block_Testimonial_Slider_Items_Filter = {
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
   sort?: InputMaybe<Number_Filter_Operators>;
-  testimonials_id?: InputMaybe<Testimonials_Filter>;
+  testimonials_id?: InputMaybe<String_Filter_Operators>;
   user_created?: InputMaybe<String_Filter_Operators>;
   user_updated?: InputMaybe<String_Filter_Operators>;
 };
@@ -3622,6 +4283,86 @@ export type Block_Video_Mutated = {
   key: Scalars['ID']['output'];
 };
 
+export type Block_Wysiwygs = {
+  __typename?: 'block_wysiwygs';
+  content?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  settings?: Maybe<Block_Settings>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type Block_WysiwygsSettingsArgs = {
+  filter?: InputMaybe<Block_Settings_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Block_Wysiwygs_Aggregated = {
+  __typename?: 'block_wysiwygs_aggregated';
+  avg?: Maybe<Block_Wysiwygs_Aggregated_Fields>;
+  avgDistinct?: Maybe<Block_Wysiwygs_Aggregated_Fields>;
+  count?: Maybe<Block_Wysiwygs_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Block_Wysiwygs_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Block_Wysiwygs_Aggregated_Fields>;
+  min?: Maybe<Block_Wysiwygs_Aggregated_Fields>;
+  sum?: Maybe<Block_Wysiwygs_Aggregated_Fields>;
+  sumDistinct?: Maybe<Block_Wysiwygs_Aggregated_Fields>;
+};
+
+export type Block_Wysiwygs_Aggregated_Count = {
+  __typename?: 'block_wysiwygs_aggregated_count';
+  content?: Maybe<Scalars['Int']['output']>;
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  settings?: Maybe<Scalars['Int']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Block_Wysiwygs_Aggregated_Fields = {
+  __typename?: 'block_wysiwygs_aggregated_fields';
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Block_Wysiwygs_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Block_Wysiwygs_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Block_Wysiwygs_Filter>>>;
+  content?: InputMaybe<String_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  settings?: InputMaybe<Block_Settings_Filter>;
+  sort?: InputMaybe<Number_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Block_Wysiwygs_Mutated = {
+  __typename?: 'block_wysiwygs_mutated';
+  data?: Maybe<Block_Wysiwygs>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type Boolean_Filter_Operators = {
   _eq?: InputMaybe<Scalars['Boolean']['input']>;
   _neq?: InputMaybe<Scalars['Boolean']['input']>;
@@ -3634,20 +4375,10 @@ export type Categories = {
   color?: Maybe<Scalars['String']['output']>;
   headline?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  seo?: Maybe<Seo>;
+  seo?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type CategoriesSeoArgs = {
-  filter?: InputMaybe<Seo_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type Categories_Aggregated = {
@@ -3686,7 +4417,7 @@ export type Categories_Filter = {
   color?: InputMaybe<String_Filter_Operators>;
   headline?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
-  seo?: InputMaybe<Seo_Filter>;
+  seo?: InputMaybe<String_Filter_Operators>;
   slug?: InputMaybe<String_Filter_Operators>;
   sort?: InputMaybe<Number_Filter_Operators>;
   title?: InputMaybe<String_Filter_Operators>;
@@ -3699,6 +4430,83 @@ export type Categories_Mutated = {
   key: Scalars['ID']['output'];
 };
 
+export type Contacts = {
+  __typename?: 'contacts';
+  /** Notes about this contact. Never visible to this person or their organization. */
+  contact_notes?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  email?: Maybe<Scalars['String']['output']>;
+  first_name?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  job_title?: Maybe<Scalars['String']['output']>;
+  last_name?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  /** Is this an active contact? */
+  status?: Maybe<Scalars['String']['output']>;
+  /** Not every contact will have a login to the portal. This is the linked user account for this contact. */
+  user?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Contacts_Aggregated = {
+  __typename?: 'contacts_aggregated';
+  count?: Maybe<Contacts_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Contacts_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type Contacts_Aggregated_Count = {
+  __typename?: 'contacts_aggregated_count';
+  /** Notes about this contact. Never visible to this person or their organization. */
+  contact_notes?: Maybe<Scalars['Int']['output']>;
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  email?: Maybe<Scalars['Int']['output']>;
+  first_name?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  job_title?: Maybe<Scalars['Int']['output']>;
+  last_name?: Maybe<Scalars['Int']['output']>;
+  phone?: Maybe<Scalars['Int']['output']>;
+  /** Is this an active contact? */
+  status?: Maybe<Scalars['Int']['output']>;
+  /** Not every contact will have a login to the portal. This is the linked user account for this contact. */
+  user?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Contacts_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Contacts_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Contacts_Filter>>>;
+  contact_notes?: InputMaybe<String_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  email?: InputMaybe<String_Filter_Operators>;
+  first_name?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  job_title?: InputMaybe<String_Filter_Operators>;
+  last_name?: InputMaybe<String_Filter_Operators>;
+  phone?: InputMaybe<String_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  user?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Contacts_Mutated = {
+  __typename?: 'contacts_mutated';
+  data?: Maybe<Contacts>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type Count_Function_Filter_Operators = {
   count?: InputMaybe<Number_Filter_Operators>;
 };
@@ -3706,47 +4514,6 @@ export type Count_Function_Filter_Operators = {
 export type Count_Functions = {
   __typename?: 'count_functions';
   count?: Maybe<Scalars['Int']['output']>;
-};
-
-export type Create_Form_Entry_Input = {
-  content?: InputMaybe<Scalars['String']['input']>;
-  date_created?: InputMaybe<Scalars['Date']['input']>;
-  date_updated?: InputMaybe<Scalars['Date']['input']>;
-  form?: InputMaybe<Scalars['Int']['input']>;
-  from_email?: InputMaybe<Scalars['String']['input']>;
-  from_ip?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  status?: InputMaybe<Scalars['String']['input']>;
-  user_created?: InputMaybe<Scalars['String']['input']>;
-  user_updated?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Create_Help_Feedback_Input = {
-  comments?: InputMaybe<Scalars['String']['input']>;
-  date_created?: InputMaybe<Scalars['Date']['input']>;
-  date_updated?: InputMaybe<Scalars['Date']['input']>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  rating?: InputMaybe<Scalars['Int']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  url?: InputMaybe<Scalars['String']['input']>;
-  user_created?: InputMaybe<Scalars['String']['input']>;
-  user_updated?: InputMaybe<Scalars['String']['input']>;
-  visitor_id?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Create_Inbox_Input = {
-  data?: InputMaybe<Scalars['JSON']['input']>;
-  date_created?: InputMaybe<Scalars['Date']['input']>;
-  date_updated?: InputMaybe<Scalars['Date']['input']>;
-  form?: InputMaybe<Scalars['String']['input']>;
-  id?: InputMaybe<Scalars['ID']['input']>;
-  project?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Scalars['Int']['input']>;
-  status?: InputMaybe<Scalars['String']['input']>;
-  task?: InputMaybe<Scalars['String']['input']>;
-  user_created?: InputMaybe<Scalars['String']['input']>;
-  user_updated?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Date_Filter_Operators = {
@@ -3871,98 +4638,598 @@ export type Directus_Files_Mutated = {
   key: Scalars['ID']['output'];
 };
 
-export type Directus_Revisions = {
-  __typename?: 'directus_revisions';
-  activity: Scalars['Int']['output'];
-  collection: Scalars['String']['output'];
-  data?: Maybe<Scalars['JSON']['output']>;
-  data_func?: Maybe<Count_Functions>;
-  delta?: Maybe<Scalars['JSON']['output']>;
-  delta_func?: Maybe<Count_Functions>;
-  id: Scalars['ID']['output'];
-  item: Scalars['String']['output'];
-  parent?: Maybe<Directus_Revisions>;
-  version?: Maybe<Directus_Versions>;
-};
-
-
-export type Directus_RevisionsParentArgs = {
-  filter?: InputMaybe<Directus_Revisions_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type Directus_RevisionsVersionArgs = {
-  filter?: InputMaybe<Directus_Versions_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type Directus_Revisions_Filter = {
-  _and?: InputMaybe<Array<InputMaybe<Directus_Revisions_Filter>>>;
-  _or?: InputMaybe<Array<InputMaybe<Directus_Revisions_Filter>>>;
-  activity?: InputMaybe<Number_Filter_Operators>;
-  collection?: InputMaybe<String_Filter_Operators>;
-  data?: InputMaybe<String_Filter_Operators>;
-  data_func?: InputMaybe<Count_Function_Filter_Operators>;
-  delta?: InputMaybe<String_Filter_Operators>;
-  delta_func?: InputMaybe<Count_Function_Filter_Operators>;
-  id?: InputMaybe<Number_Filter_Operators>;
-  item?: InputMaybe<String_Filter_Operators>;
-  parent?: InputMaybe<Directus_Revisions_Filter>;
-  version?: InputMaybe<Directus_Versions_Filter>;
-};
-
-export type Directus_Revisions_Mutated = {
-  __typename?: 'directus_revisions_mutated';
-  data?: Maybe<Directus_Revisions>;
-  event?: Maybe<EventEnum>;
-  key: Scalars['ID']['output'];
-};
-
-export type Directus_Versions = {
-  __typename?: 'directus_versions';
-  collection: Scalars['String']['output'];
+export type Form_Builder = {
+  __typename?: 'form_builder';
   date_created?: Maybe<Scalars['Date']['output']>;
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
-  hash?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  item: Scalars['String']['output'];
-  key: Scalars['String']['output'];
+  key?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  on_success?: Maybe<Scalars['String']['output']>;
+  redirect_url?: Maybe<Scalars['String']['output']>;
+  schema?: Maybe<Array<Maybe<Form_Builder_Schema>>>;
+  schema_func?: Maybe<Count_Functions>;
+  status?: Maybe<Scalars['String']['output']>;
+  success_message?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
 };
 
-export type Directus_Versions_Filter = {
-  _and?: InputMaybe<Array<InputMaybe<Directus_Versions_Filter>>>;
-  _or?: InputMaybe<Array<InputMaybe<Directus_Versions_Filter>>>;
-  collection?: InputMaybe<String_Filter_Operators>;
+
+export type Form_BuilderSchemaArgs = {
+  filter?: InputMaybe<Form_Builder_Schema_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Form_Builder_Aggregated = {
+  __typename?: 'form_builder_aggregated';
+  avg?: Maybe<Form_Builder_Aggregated_Fields>;
+  avgDistinct?: Maybe<Form_Builder_Aggregated_Fields>;
+  count?: Maybe<Form_Builder_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Form_Builder_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Form_Builder_Aggregated_Fields>;
+  min?: Maybe<Form_Builder_Aggregated_Fields>;
+  sum?: Maybe<Form_Builder_Aggregated_Fields>;
+  sumDistinct?: Maybe<Form_Builder_Aggregated_Fields>;
+};
+
+export type Form_Builder_Aggregated_Count = {
+  __typename?: 'form_builder_aggregated_count';
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  key?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['Int']['output']>;
+  on_success?: Maybe<Scalars['Int']['output']>;
+  redirect_url?: Maybe<Scalars['Int']['output']>;
+  schema?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  success_message?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Form_Builder_Aggregated_Fields = {
+  __typename?: 'form_builder_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Form_Builder_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Form_Builder_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Form_Builder_Filter>>>;
   date_created?: InputMaybe<Date_Filter_Operators>;
   date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
-  hash?: InputMaybe<String_Filter_Operators>;
-  id?: InputMaybe<String_Filter_Operators>;
-  item?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
   key?: InputMaybe<String_Filter_Operators>;
   name?: InputMaybe<String_Filter_Operators>;
+  on_success?: InputMaybe<String_Filter_Operators>;
+  redirect_url?: InputMaybe<String_Filter_Operators>;
+  schema?: InputMaybe<Form_Builder_Schema_Filter>;
+  schema_func?: InputMaybe<Count_Function_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  success_message?: InputMaybe<String_Filter_Operators>;
   user_created?: InputMaybe<String_Filter_Operators>;
   user_updated?: InputMaybe<String_Filter_Operators>;
 };
 
-export type Directus_Versions_Mutated = {
-  __typename?: 'directus_versions_mutated';
-  data?: Maybe<Directus_Versions>;
+export type Form_Builder_Mutated = {
+  __typename?: 'form_builder_mutated';
+  data?: Maybe<Form_Builder>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Form_Builder_Schema = {
+  __typename?: 'form_builder_schema';
+  collection?: Maybe<Scalars['String']['output']>;
+  form_builder_id?: Maybe<Form_Builder>;
+  id: Scalars['ID']['output'];
+  item?: Maybe<Form_Builder_Schema_Item_Union>;
+};
+
+
+export type Form_Builder_SchemaForm_Builder_IdArgs = {
+  filter?: InputMaybe<Form_Builder_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Form_Builder_Schema_Aggregated = {
+  __typename?: 'form_builder_schema_aggregated';
+  avg?: Maybe<Form_Builder_Schema_Aggregated_Fields>;
+  avgDistinct?: Maybe<Form_Builder_Schema_Aggregated_Fields>;
+  count?: Maybe<Form_Builder_Schema_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Form_Builder_Schema_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Form_Builder_Schema_Aggregated_Fields>;
+  min?: Maybe<Form_Builder_Schema_Aggregated_Fields>;
+  sum?: Maybe<Form_Builder_Schema_Aggregated_Fields>;
+  sumDistinct?: Maybe<Form_Builder_Schema_Aggregated_Fields>;
+};
+
+export type Form_Builder_Schema_Aggregated_Count = {
+  __typename?: 'form_builder_schema_aggregated_count';
+  collection?: Maybe<Scalars['Int']['output']>;
+  form_builder_id?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  item?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Form_Builder_Schema_Aggregated_Fields = {
+  __typename?: 'form_builder_schema_aggregated_fields';
+  form_builder_id?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Form_Builder_Schema_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Form_Builder_Schema_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Form_Builder_Schema_Filter>>>;
+  collection?: InputMaybe<String_Filter_Operators>;
+  form_builder_id?: InputMaybe<Form_Builder_Filter>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  item__form_field_text?: InputMaybe<Form_Field_Text_Filter>;
+};
+
+export type Form_Builder_Schema_Item_Union = Form_Field_Text;
+
+export type Form_Builder_Schema_Mutated = {
+  __typename?: 'form_builder_schema_mutated';
+  data?: Maybe<Form_Builder_Schema>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Form_Builder_Translations = {
+  __typename?: 'form_builder_translations';
+  id: Scalars['ID']['output'];
+  languages_id?: Maybe<Languages>;
+};
+
+
+export type Form_Builder_TranslationsLanguages_IdArgs = {
+  filter?: InputMaybe<Languages_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Form_Builder_Translations_Aggregated = {
+  __typename?: 'form_builder_translations_aggregated';
+  avg?: Maybe<Form_Builder_Translations_Aggregated_Fields>;
+  avgDistinct?: Maybe<Form_Builder_Translations_Aggregated_Fields>;
+  count?: Maybe<Form_Builder_Translations_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Form_Builder_Translations_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Form_Builder_Translations_Aggregated_Fields>;
+  min?: Maybe<Form_Builder_Translations_Aggregated_Fields>;
+  sum?: Maybe<Form_Builder_Translations_Aggregated_Fields>;
+  sumDistinct?: Maybe<Form_Builder_Translations_Aggregated_Fields>;
+};
+
+export type Form_Builder_Translations_Aggregated_Count = {
+  __typename?: 'form_builder_translations_aggregated_count';
+  id?: Maybe<Scalars['Int']['output']>;
+  languages_id?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Form_Builder_Translations_Aggregated_Fields = {
+  __typename?: 'form_builder_translations_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Form_Builder_Translations_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Form_Builder_Translations_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Form_Builder_Translations_Filter>>>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  languages_id?: InputMaybe<Languages_Filter>;
+};
+
+export type Form_Builder_Translations_Mutated = {
+  __typename?: 'form_builder_translations_mutated';
+  data?: Maybe<Form_Builder_Translations>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Form_Configs = {
+  __typename?: 'form_configs';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  friendly_id?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  schema?: Maybe<Scalars['JSON']['output']>;
+  schema_func?: Maybe<Count_Functions>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Form_Configs_Aggregated = {
+  __typename?: 'form_configs_aggregated';
+  avg?: Maybe<Form_Configs_Aggregated_Fields>;
+  avgDistinct?: Maybe<Form_Configs_Aggregated_Fields>;
+  count?: Maybe<Form_Configs_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Form_Configs_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Form_Configs_Aggregated_Fields>;
+  min?: Maybe<Form_Configs_Aggregated_Fields>;
+  sum?: Maybe<Form_Configs_Aggregated_Fields>;
+  sumDistinct?: Maybe<Form_Configs_Aggregated_Fields>;
+};
+
+export type Form_Configs_Aggregated_Count = {
+  __typename?: 'form_configs_aggregated_count';
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  friendly_id?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  schema?: Maybe<Scalars['Int']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Form_Configs_Aggregated_Fields = {
+  __typename?: 'form_configs_aggregated_fields';
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Form_Configs_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Form_Configs_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Form_Configs_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  friendly_id?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  schema?: InputMaybe<String_Filter_Operators>;
+  schema_func?: InputMaybe<Count_Function_Filter_Operators>;
+  sort?: InputMaybe<Number_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Form_Configs_Mutated = {
+  __typename?: 'form_configs_mutated';
+  data?: Maybe<Form_Configs>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Form_Entry = {
+  __typename?: 'form_entry';
+  content?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  form?: Maybe<Form_Builder>;
+  from_email?: Maybe<Scalars['String']['output']>;
+  from_ip?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  language?: Maybe<Languages>;
+  status?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type Form_EntryFormArgs = {
+  filter?: InputMaybe<Form_Builder_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type Form_EntryLanguageArgs = {
+  filter?: InputMaybe<Languages_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Form_Entry_Aggregated = {
+  __typename?: 'form_entry_aggregated';
+  avg?: Maybe<Form_Entry_Aggregated_Fields>;
+  avgDistinct?: Maybe<Form_Entry_Aggregated_Fields>;
+  count?: Maybe<Form_Entry_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Form_Entry_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Form_Entry_Aggregated_Fields>;
+  min?: Maybe<Form_Entry_Aggregated_Fields>;
+  sum?: Maybe<Form_Entry_Aggregated_Fields>;
+  sumDistinct?: Maybe<Form_Entry_Aggregated_Fields>;
+};
+
+export type Form_Entry_Aggregated_Count = {
+  __typename?: 'form_entry_aggregated_count';
+  content?: Maybe<Scalars['Int']['output']>;
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  form?: Maybe<Scalars['Int']['output']>;
+  from_email?: Maybe<Scalars['Int']['output']>;
+  from_ip?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  language?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Form_Entry_Aggregated_Fields = {
+  __typename?: 'form_entry_aggregated_fields';
+  form?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Form_Entry_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Form_Entry_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Form_Entry_Filter>>>;
+  content?: InputMaybe<String_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  form?: InputMaybe<Form_Builder_Filter>;
+  from_email?: InputMaybe<String_Filter_Operators>;
+  from_ip?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  language?: InputMaybe<Languages_Filter>;
+  status?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Form_Entry_Mutated = {
+  __typename?: 'form_entry_mutated';
+  data?: Maybe<Form_Entry>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Form_Field_Settings = {
+  __typename?: 'form_field_settings';
+  disabled?: Maybe<Scalars['Boolean']['output']>;
+  /** This validation should follow the AJV format guidelines */
+  generic_validation?: Maybe<Scalars['String']['output']>;
+  halfwidth?: Maybe<Scalars['Boolean']['output']>;
+  hasPattern?: Maybe<Scalars['Boolean']['output']>;
+  id: Scalars['ID']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  pattern?: Maybe<Scalars['String']['output']>;
+  pattern_error_message?: Maybe<Scalars['String']['output']>;
+  readonly?: Maybe<Scalars['Boolean']['output']>;
+  required?: Maybe<Scalars['Boolean']['output']>;
+  required_error_message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Form_Field_Settings_Aggregated = {
+  __typename?: 'form_field_settings_aggregated';
+  avg?: Maybe<Form_Field_Settings_Aggregated_Fields>;
+  avgDistinct?: Maybe<Form_Field_Settings_Aggregated_Fields>;
+  count?: Maybe<Form_Field_Settings_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Form_Field_Settings_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Form_Field_Settings_Aggregated_Fields>;
+  min?: Maybe<Form_Field_Settings_Aggregated_Fields>;
+  sum?: Maybe<Form_Field_Settings_Aggregated_Fields>;
+  sumDistinct?: Maybe<Form_Field_Settings_Aggregated_Fields>;
+};
+
+export type Form_Field_Settings_Aggregated_Count = {
+  __typename?: 'form_field_settings_aggregated_count';
+  disabled?: Maybe<Scalars['Int']['output']>;
+  /** This validation should follow the AJV format guidelines */
+  generic_validation?: Maybe<Scalars['Int']['output']>;
+  halfwidth?: Maybe<Scalars['Int']['output']>;
+  hasPattern?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  label?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['Int']['output']>;
+  pattern?: Maybe<Scalars['Int']['output']>;
+  pattern_error_message?: Maybe<Scalars['Int']['output']>;
+  readonly?: Maybe<Scalars['Int']['output']>;
+  required?: Maybe<Scalars['Int']['output']>;
+  required_error_message?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Form_Field_Settings_Aggregated_Fields = {
+  __typename?: 'form_field_settings_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Form_Field_Settings_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Form_Field_Settings_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Form_Field_Settings_Filter>>>;
+  disabled?: InputMaybe<Boolean_Filter_Operators>;
+  generic_validation?: InputMaybe<String_Filter_Operators>;
+  halfwidth?: InputMaybe<Boolean_Filter_Operators>;
+  hasPattern?: InputMaybe<Boolean_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  label?: InputMaybe<String_Filter_Operators>;
+  name?: InputMaybe<String_Filter_Operators>;
+  pattern?: InputMaybe<String_Filter_Operators>;
+  pattern_error_message?: InputMaybe<String_Filter_Operators>;
+  readonly?: InputMaybe<Boolean_Filter_Operators>;
+  required?: InputMaybe<Boolean_Filter_Operators>;
+  required_error_message?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Form_Field_Settings_Mutated = {
+  __typename?: 'form_field_settings_mutated';
+  data?: Maybe<Form_Field_Settings>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Form_Field_Text = {
+  __typename?: 'form_field_text';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  form_field_settings?: Maybe<Form_Field_Settings>;
+  format?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  status?: Maybe<Scalars['String']['output']>;
+  text_settings?: Maybe<Form_Field_Text_Settings>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type Form_Field_TextForm_Field_SettingsArgs = {
+  filter?: InputMaybe<Form_Field_Settings_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type Form_Field_TextText_SettingsArgs = {
+  filter?: InputMaybe<Form_Field_Text_Settings_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Form_Field_Text_Aggregated = {
+  __typename?: 'form_field_text_aggregated';
+  avg?: Maybe<Form_Field_Text_Aggregated_Fields>;
+  avgDistinct?: Maybe<Form_Field_Text_Aggregated_Fields>;
+  count?: Maybe<Form_Field_Text_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Form_Field_Text_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Form_Field_Text_Aggregated_Fields>;
+  min?: Maybe<Form_Field_Text_Aggregated_Fields>;
+  sum?: Maybe<Form_Field_Text_Aggregated_Fields>;
+  sumDistinct?: Maybe<Form_Field_Text_Aggregated_Fields>;
+};
+
+export type Form_Field_Text_Aggregated_Count = {
+  __typename?: 'form_field_text_aggregated_count';
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  form_field_settings?: Maybe<Scalars['Int']['output']>;
+  format?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  text_settings?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Form_Field_Text_Aggregated_Fields = {
+  __typename?: 'form_field_text_aggregated_fields';
+  form_field_settings?: Maybe<Scalars['Float']['output']>;
+  id?: Maybe<Scalars['Float']['output']>;
+  text_settings?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Form_Field_Text_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Form_Field_Text_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Form_Field_Text_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  form_field_settings?: InputMaybe<Form_Field_Settings_Filter>;
+  format?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  text_settings?: InputMaybe<Form_Field_Text_Settings_Filter>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Form_Field_Text_Mutated = {
+  __typename?: 'form_field_text_mutated';
+  data?: Maybe<Form_Field_Text>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Form_Field_Text_Settings = {
+  __typename?: 'form_field_text_settings';
+  default_value?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  placeholder?: Maybe<Scalars['String']['output']>;
+};
+
+export type Form_Field_Text_Settings_Aggregated = {
+  __typename?: 'form_field_text_settings_aggregated';
+  avg?: Maybe<Form_Field_Text_Settings_Aggregated_Fields>;
+  avgDistinct?: Maybe<Form_Field_Text_Settings_Aggregated_Fields>;
+  count?: Maybe<Form_Field_Text_Settings_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Form_Field_Text_Settings_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Form_Field_Text_Settings_Aggregated_Fields>;
+  min?: Maybe<Form_Field_Text_Settings_Aggregated_Fields>;
+  sum?: Maybe<Form_Field_Text_Settings_Aggregated_Fields>;
+  sumDistinct?: Maybe<Form_Field_Text_Settings_Aggregated_Fields>;
+};
+
+export type Form_Field_Text_Settings_Aggregated_Count = {
+  __typename?: 'form_field_text_settings_aggregated_count';
+  default_value?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  placeholder?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Form_Field_Text_Settings_Aggregated_Fields = {
+  __typename?: 'form_field_text_settings_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Form_Field_Text_Settings_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Form_Field_Text_Settings_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Form_Field_Text_Settings_Filter>>>;
+  default_value?: InputMaybe<String_Filter_Operators>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  placeholder?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Form_Field_Text_Settings_Mutated = {
+  __typename?: 'form_field_text_settings_mutated';
+  data?: Maybe<Form_Field_Text_Settings>;
   event?: Maybe<EventEnum>;
   key: Scalars['ID']['output'];
 };
@@ -4058,69 +5325,6 @@ export type Forms_Mutated = {
   key: Scalars['ID']['output'];
 };
 
-export type Globals = {
-  __typename?: 'globals';
-  address_country?: Maybe<Scalars['String']['output']>;
-  address_locality?: Maybe<Scalars['String']['output']>;
-  address_region?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  logo_on_dark_bg?: Maybe<Directus_Files>;
-  logo_on_light_bg?: Maybe<Directus_Files>;
-  og_image?: Maybe<Directus_Files>;
-  phone?: Maybe<Scalars['String']['output']>;
-  postal_code?: Maybe<Scalars['String']['output']>;
-  social_links?: Maybe<Scalars['JSON']['output']>;
-  social_links_func?: Maybe<Count_Functions>;
-  street_address?: Maybe<Scalars['String']['output']>;
-  /** What's the website title? */
-  tagline?: Maybe<Scalars['String']['output']>;
-  theme?: Maybe<Scalars['JSON']['output']>;
-  theme_func?: Maybe<Count_Functions>;
-  /** What's the website title? */
-  title?: Maybe<Scalars['String']['output']>;
-  /** What's is the base url for the site? */
-  url?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type GlobalsLogo_On_Dark_BgArgs = {
-  filter?: InputMaybe<Directus_Files_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type GlobalsLogo_On_Light_BgArgs = {
-  filter?: InputMaybe<Directus_Files_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type GlobalsOg_ImageArgs = {
-  filter?: InputMaybe<Directus_Files_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type Globals_Mutated = {
-  __typename?: 'globals_mutated';
-  data?: Maybe<Globals>;
-  event?: Maybe<EventEnum>;
-  key: Scalars['ID']['output'];
-};
-
 export type Help_Articles = {
   __typename?: 'help_articles';
   content?: Maybe<Scalars['String']['output']>;
@@ -4128,7 +5332,7 @@ export type Help_Articles = {
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
-  help_collection?: Maybe<Help_Collections>;
+  help_collection?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   owner?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
@@ -4138,16 +5342,6 @@ export type Help_Articles = {
   title?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type Help_ArticlesHelp_CollectionArgs = {
-  filter?: InputMaybe<Help_Collections_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type Help_Articles_Aggregated = {
@@ -4194,7 +5388,7 @@ export type Help_Articles_Filter = {
   date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
-  help_collection?: InputMaybe<Help_Collections_Filter>;
+  help_collection?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
   owner?: InputMaybe<String_Filter_Operators>;
   slug?: InputMaybe<String_Filter_Operators>;
@@ -4213,21 +5407,27 @@ export type Help_Articles_Mutated = {
   key: Scalars['ID']['output'];
 };
 
-export type Help_Collections = {
-  __typename?: 'help_collections';
-  articles?: Maybe<Array<Maybe<Help_Articles>>>;
-  articles_func?: Maybe<Count_Functions>;
-  description?: Maybe<Scalars['String']['output']>;
-  icon?: Maybe<Scalars['String']['output']>;
+export type Inbox = {
+  __typename?: 'inbox';
+  data?: Maybe<Scalars['JSON']['output']>;
+  data_func?: Maybe<Count_Functions>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  form?: Maybe<Forms>;
   id: Scalars['ID']['output'];
-  slug?: Maybe<Scalars['String']['output']>;
+  project?: Maybe<Scalars['String']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  task?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
 };
 
 
-export type Help_CollectionsArticlesArgs = {
-  filter?: InputMaybe<Help_Articles_Filter>;
+export type InboxFormArgs = {
+  filter?: InputMaybe<Forms_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -4235,52 +5435,62 @@ export type Help_CollectionsArticlesArgs = {
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type Help_Collections_Aggregated = {
-  __typename?: 'help_collections_aggregated';
-  avg?: Maybe<Help_Collections_Aggregated_Fields>;
-  avgDistinct?: Maybe<Help_Collections_Aggregated_Fields>;
-  count?: Maybe<Help_Collections_Aggregated_Count>;
+export type Inbox_Aggregated = {
+  __typename?: 'inbox_aggregated';
+  avg?: Maybe<Inbox_Aggregated_Fields>;
+  avgDistinct?: Maybe<Inbox_Aggregated_Fields>;
+  count?: Maybe<Inbox_Aggregated_Count>;
   countAll?: Maybe<Scalars['Int']['output']>;
-  countDistinct?: Maybe<Help_Collections_Aggregated_Count>;
+  countDistinct?: Maybe<Inbox_Aggregated_Count>;
   group?: Maybe<Scalars['JSON']['output']>;
-  max?: Maybe<Help_Collections_Aggregated_Fields>;
-  min?: Maybe<Help_Collections_Aggregated_Fields>;
-  sum?: Maybe<Help_Collections_Aggregated_Fields>;
-  sumDistinct?: Maybe<Help_Collections_Aggregated_Fields>;
+  max?: Maybe<Inbox_Aggregated_Fields>;
+  min?: Maybe<Inbox_Aggregated_Fields>;
+  sum?: Maybe<Inbox_Aggregated_Fields>;
+  sumDistinct?: Maybe<Inbox_Aggregated_Fields>;
 };
 
-export type Help_Collections_Aggregated_Count = {
-  __typename?: 'help_collections_aggregated_count';
-  articles?: Maybe<Scalars['Int']['output']>;
-  description?: Maybe<Scalars['Int']['output']>;
-  icon?: Maybe<Scalars['Int']['output']>;
+export type Inbox_Aggregated_Count = {
+  __typename?: 'inbox_aggregated_count';
+  data?: Maybe<Scalars['Int']['output']>;
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  form?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  slug?: Maybe<Scalars['Int']['output']>;
+  project?: Maybe<Scalars['Int']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
-  title?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  task?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
 };
 
-export type Help_Collections_Aggregated_Fields = {
-  __typename?: 'help_collections_aggregated_fields';
+export type Inbox_Aggregated_Fields = {
+  __typename?: 'inbox_aggregated_fields';
   sort?: Maybe<Scalars['Float']['output']>;
 };
 
-export type Help_Collections_Filter = {
-  _and?: InputMaybe<Array<InputMaybe<Help_Collections_Filter>>>;
-  _or?: InputMaybe<Array<InputMaybe<Help_Collections_Filter>>>;
-  articles?: InputMaybe<Help_Articles_Filter>;
-  articles_func?: InputMaybe<Count_Function_Filter_Operators>;
-  description?: InputMaybe<String_Filter_Operators>;
-  icon?: InputMaybe<String_Filter_Operators>;
+export type Inbox_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Inbox_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Inbox_Filter>>>;
+  data?: InputMaybe<String_Filter_Operators>;
+  data_func?: InputMaybe<Count_Function_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  form?: InputMaybe<Forms_Filter>;
   id?: InputMaybe<String_Filter_Operators>;
-  slug?: InputMaybe<String_Filter_Operators>;
+  project?: InputMaybe<String_Filter_Operators>;
   sort?: InputMaybe<Number_Filter_Operators>;
-  title?: InputMaybe<String_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  task?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
 };
 
-export type Help_Collections_Mutated = {
-  __typename?: 'help_collections_mutated';
-  data?: Maybe<Help_Collections>;
+export type Inbox_Mutated = {
+  __typename?: 'inbox_mutated';
+  data?: Maybe<Inbox>;
   event?: Maybe<EventEnum>;
   key: Scalars['ID']['output'];
 };
@@ -4390,6 +5600,65 @@ export type Links_Filter = {
 export type Links_Mutated = {
   __typename?: 'links_mutated';
   data?: Maybe<Links>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Messages = {
+  __typename?: 'messages';
+  contact_id?: Maybe<Scalars['String']['output']>;
+  conversation?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  text?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+  visitor_id?: Maybe<Scalars['String']['output']>;
+};
+
+export type Messages_Aggregated = {
+  __typename?: 'messages_aggregated';
+  count?: Maybe<Messages_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Messages_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type Messages_Aggregated_Count = {
+  __typename?: 'messages_aggregated_count';
+  contact_id?: Maybe<Scalars['Int']['output']>;
+  conversation?: Maybe<Scalars['Int']['output']>;
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  text?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+  visitor_id?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Messages_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Messages_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Messages_Filter>>>;
+  contact_id?: InputMaybe<String_Filter_Operators>;
+  conversation?: InputMaybe<String_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  text?: InputMaybe<String_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+  visitor_id?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Messages_Mutated = {
+  __typename?: 'messages_mutated';
+  data?: Maybe<Messages>;
   event?: Maybe<EventEnum>;
   key: Scalars['ID']['output'];
 };
@@ -4781,6 +6050,181 @@ export type Page_Editor_Nodes_Mutated = {
   key: Scalars['ID']['output'];
 };
 
+export type Page_Settings = {
+  __typename?: 'page_settings';
+  belongs_to_collection?: Maybe<Scalars['String']['output']>;
+  belongs_to_key?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  route?: Maybe<Routes>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  translations?: Maybe<Array<Maybe<Page_Settings_Translations>>>;
+  translations_func?: Maybe<Count_Functions>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type Page_SettingsRouteArgs = {
+  filter?: InputMaybe<Routes_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type Page_SettingsTranslationsArgs = {
+  filter?: InputMaybe<Page_Settings_Translations_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Page_Settings_Aggregated = {
+  __typename?: 'page_settings_aggregated';
+  avg?: Maybe<Page_Settings_Aggregated_Fields>;
+  avgDistinct?: Maybe<Page_Settings_Aggregated_Fields>;
+  count?: Maybe<Page_Settings_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Page_Settings_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Page_Settings_Aggregated_Fields>;
+  min?: Maybe<Page_Settings_Aggregated_Fields>;
+  sum?: Maybe<Page_Settings_Aggregated_Fields>;
+  sumDistinct?: Maybe<Page_Settings_Aggregated_Fields>;
+};
+
+export type Page_Settings_Aggregated_Count = {
+  __typename?: 'page_settings_aggregated_count';
+  belongs_to_collection?: Maybe<Scalars['Int']['output']>;
+  belongs_to_key?: Maybe<Scalars['Int']['output']>;
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
+  id?: Maybe<Scalars['Int']['output']>;
+  route?: Maybe<Scalars['Int']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  translations?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Page_Settings_Aggregated_Fields = {
+  __typename?: 'page_settings_aggregated_fields';
+  sort?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Page_Settings_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Page_Settings_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Page_Settings_Filter>>>;
+  belongs_to_collection?: InputMaybe<String_Filter_Operators>;
+  belongs_to_key?: InputMaybe<String_Filter_Operators>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  id?: InputMaybe<String_Filter_Operators>;
+  route?: InputMaybe<Routes_Filter>;
+  sort?: InputMaybe<Number_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  translations?: InputMaybe<Page_Settings_Translations_Filter>;
+  translations_func?: InputMaybe<Count_Function_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Page_Settings_Mutated = {
+  __typename?: 'page_settings_mutated';
+  data?: Maybe<Page_Settings>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Page_Settings_Translations = {
+  __typename?: 'page_settings_translations';
+  id: Scalars['ID']['output'];
+  languages_code?: Maybe<Languages>;
+  page_settings_id?: Maybe<Page_Settings>;
+  path?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+export type Page_Settings_TranslationsLanguages_CodeArgs = {
+  filter?: InputMaybe<Languages_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type Page_Settings_TranslationsPage_Settings_IdArgs = {
+  filter?: InputMaybe<Page_Settings_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Page_Settings_Translations_Aggregated = {
+  __typename?: 'page_settings_translations_aggregated';
+  avg?: Maybe<Page_Settings_Translations_Aggregated_Fields>;
+  avgDistinct?: Maybe<Page_Settings_Translations_Aggregated_Fields>;
+  count?: Maybe<Page_Settings_Translations_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Page_Settings_Translations_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Page_Settings_Translations_Aggregated_Fields>;
+  min?: Maybe<Page_Settings_Translations_Aggregated_Fields>;
+  sum?: Maybe<Page_Settings_Translations_Aggregated_Fields>;
+  sumDistinct?: Maybe<Page_Settings_Translations_Aggregated_Fields>;
+};
+
+export type Page_Settings_Translations_Aggregated_Count = {
+  __typename?: 'page_settings_translations_aggregated_count';
+  id?: Maybe<Scalars['Int']['output']>;
+  languages_code?: Maybe<Scalars['Int']['output']>;
+  page_settings_id?: Maybe<Scalars['Int']['output']>;
+  path?: Maybe<Scalars['Int']['output']>;
+  slug?: Maybe<Scalars['Int']['output']>;
+  title?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Page_Settings_Translations_Aggregated_Fields = {
+  __typename?: 'page_settings_translations_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Page_Settings_Translations_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Page_Settings_Translations_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Page_Settings_Translations_Filter>>>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  languages_code?: InputMaybe<Languages_Filter>;
+  page_settings_id?: InputMaybe<Page_Settings_Filter>;
+  path?: InputMaybe<String_Filter_Operators>;
+  slug?: InputMaybe<String_Filter_Operators>;
+  title?: InputMaybe<String_Filter_Operators>;
+};
+
+export type Page_Settings_Translations_Mutated = {
+  __typename?: 'page_settings_translations_mutated';
+  data?: Maybe<Page_Settings_Translations>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
 export type Pages = {
   __typename?: 'pages';
   blocks?: Maybe<Array<Maybe<Page_Blocks>>>;
@@ -4790,9 +6234,10 @@ export type Pages = {
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
+  page_settings?: Maybe<Page_Settings>;
   /** Start with a slash (/page) and do NOT add a trailing slash (/page/) */
   permalink?: Maybe<Scalars['String']['output']>;
-  seo?: Maybe<Seo>;
+  seo?: Maybe<Scalars['String']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -4813,8 +6258,8 @@ export type PagesBlocksArgs = {
 };
 
 
-export type PagesSeoArgs = {
-  filter?: InputMaybe<Seo_Filter>;
+export type PagesPage_SettingsArgs = {
+  filter?: InputMaybe<Page_Settings_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -4852,6 +6297,7 @@ export type Pages_Aggregated_Count = {
   date_created?: Maybe<Scalars['Int']['output']>;
   date_updated?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
+  page_settings?: Maybe<Scalars['Int']['output']>;
   /** Start with a slash (/page) and do NOT add a trailing slash (/page/) */
   permalink?: Maybe<Scalars['Int']['output']>;
   seo?: Maybe<Scalars['Int']['output']>;
@@ -4873,23 +6319,13 @@ export type Pages_Blog = {
   featured_post?: Maybe<Posts>;
   headline?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  seo?: Maybe<Seo>;
+  seo?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
 
 export type Pages_BlogFeatured_PostArgs = {
   filter?: InputMaybe<Posts_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type Pages_BlogSeoArgs = {
-  filter?: InputMaybe<Seo_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -4914,8 +6350,9 @@ export type Pages_Filter = {
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
+  page_settings?: InputMaybe<Page_Settings_Filter>;
   permalink?: InputMaybe<String_Filter_Operators>;
-  seo?: InputMaybe<Seo_Filter>;
+  seo?: InputMaybe<String_Filter_Operators>;
   sort?: InputMaybe<Number_Filter_Operators>;
   status?: InputMaybe<String_Filter_Operators>;
   title?: InputMaybe<String_Filter_Operators>;
@@ -4936,18 +6373,8 @@ export type Pages_Projects = {
   __typename?: 'pages_projects';
   headline?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  seo?: Maybe<Seo>;
+  seo?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type Pages_ProjectsSeoArgs = {
-  filter?: InputMaybe<Seo_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type Pages_Projects_Mutated = {
@@ -4967,6 +6394,7 @@ export type Pages_Translations = {
   flexible_editor_func?: Maybe<Count_Functions>;
   id: Scalars['ID']['output'];
   languages_code?: Maybe<Languages>;
+  name?: Maybe<Scalars['String']['output']>;
   pages_id?: Maybe<Pages>;
 };
 
@@ -5021,6 +6449,7 @@ export type Pages_Translations_Aggregated_Count = {
   flexible_editor?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   languages_code?: Maybe<Scalars['Int']['output']>;
+  name?: Maybe<Scalars['Int']['output']>;
   pages_id?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -5040,6 +6469,7 @@ export type Pages_Translations_Filter = {
   flexible_editor_func?: InputMaybe<Count_Function_Filter_Operators>;
   id?: InputMaybe<Number_Filter_Operators>;
   languages_code?: InputMaybe<Languages_Filter>;
+  name?: InputMaybe<String_Filter_Operators>;
   pages_id?: InputMaybe<Pages_Filter>;
 };
 
@@ -5123,7 +6553,7 @@ export type Post_Gallery_Items_Mutated = {
 
 export type Posts = {
   __typename?: 'posts';
-  author?: Maybe<Team>;
+  author?: Maybe<Scalars['String']['output']>;
   built_with?: Maybe<Scalars['JSON']['output']>;
   built_with_func?: Maybe<Count_Functions>;
   category?: Maybe<Categories>;
@@ -5141,7 +6571,7 @@ export type Posts = {
   gallery_func?: Maybe<Count_Functions>;
   id: Scalars['ID']['output'];
   image?: Maybe<Directus_Files>;
-  seo?: Maybe<Seo>;
+  seo?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
@@ -5152,16 +6582,6 @@ export type Posts = {
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
   video_url?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type PostsAuthorArgs = {
-  filter?: InputMaybe<Team_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
@@ -5187,16 +6607,6 @@ export type PostsGalleryArgs = {
 
 export type PostsImageArgs = {
   filter?: InputMaybe<Directus_Files_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type PostsSeoArgs = {
-  filter?: InputMaybe<Seo_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -5254,7 +6664,7 @@ export type Posts_Aggregated_Fields = {
 export type Posts_Filter = {
   _and?: InputMaybe<Array<InputMaybe<Posts_Filter>>>;
   _or?: InputMaybe<Array<InputMaybe<Posts_Filter>>>;
-  author?: InputMaybe<Team_Filter>;
+  author?: InputMaybe<String_Filter_Operators>;
   built_with?: InputMaybe<String_Filter_Operators>;
   built_with_func?: InputMaybe<Count_Function_Filter_Operators>;
   category?: InputMaybe<Categories_Filter>;
@@ -5271,7 +6681,7 @@ export type Posts_Filter = {
   gallery_func?: InputMaybe<Count_Function_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
   image?: InputMaybe<Directus_Files_Filter>;
-  seo?: InputMaybe<Seo_Filter>;
+  seo?: InputMaybe<String_Filter_Operators>;
   slug?: InputMaybe<String_Filter_Operators>;
   sort?: InputMaybe<Number_Filter_Operators>;
   status?: InputMaybe<String_Filter_Operators>;
@@ -5296,10 +6706,14 @@ export type Redirects = {
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
+  destination?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  response_code?: Maybe<Scalars['Int']['output']>;
-  url_new?: Maybe<Scalars['String']['output']>;
-  url_old?: Maybe<Scalars['String']['output']>;
+  isrewrite?: Maybe<Scalars['Boolean']['output']>;
+  locale?: Maybe<Scalars['Boolean']['output']>;
+  permanent?: Maybe<Scalars['Boolean']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  source?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
 };
@@ -5322,17 +6736,21 @@ export type Redirects_Aggregated_Count = {
   __typename?: 'redirects_aggregated_count';
   date_created?: Maybe<Scalars['Int']['output']>;
   date_updated?: Maybe<Scalars['Int']['output']>;
+  destination?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  response_code?: Maybe<Scalars['Int']['output']>;
-  url_new?: Maybe<Scalars['Int']['output']>;
-  url_old?: Maybe<Scalars['Int']['output']>;
+  isrewrite?: Maybe<Scalars['Int']['output']>;
+  locale?: Maybe<Scalars['Int']['output']>;
+  permanent?: Maybe<Scalars['Int']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  source?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
   user_created?: Maybe<Scalars['Int']['output']>;
   user_updated?: Maybe<Scalars['Int']['output']>;
 };
 
 export type Redirects_Aggregated_Fields = {
   __typename?: 'redirects_aggregated_fields';
-  response_code?: Maybe<Scalars['Float']['output']>;
+  sort?: Maybe<Scalars['Float']['output']>;
 };
 
 export type Redirects_Filter = {
@@ -5342,10 +6760,14 @@ export type Redirects_Filter = {
   date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  destination?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
-  response_code?: InputMaybe<Number_Filter_Operators>;
-  url_new?: InputMaybe<String_Filter_Operators>;
-  url_old?: InputMaybe<String_Filter_Operators>;
+  isrewrite?: InputMaybe<Boolean_Filter_Operators>;
+  locale?: InputMaybe<Boolean_Filter_Operators>;
+  permanent?: InputMaybe<Boolean_Filter_Operators>;
+  sort?: InputMaybe<Number_Filter_Operators>;
+  source?: InputMaybe<String_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
   user_created?: InputMaybe<String_Filter_Operators>;
   user_updated?: InputMaybe<String_Filter_Operators>;
 };
@@ -5483,80 +6905,152 @@ export type Related_Block_Faqs_Mutated = {
   key: Scalars['ID']['output'];
 };
 
-export type Seo = {
-  __typename?: 'seo';
-  /** Where should the canonical URL for this entry point to. */
-  canonical_url?: Maybe<Scalars['String']['output']>;
+export type Routes = {
+  __typename?: 'routes';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
-  /** This entries meta description. Max 160 characters. */
-  meta_description?: Maybe<Scalars['String']['output']>;
-  /** Instruct crawlers not to follow links on this page. */
-  no_follow?: Maybe<Scalars['Boolean']['output']>;
-  /** Instruct crawlers not to index this entry. */
-  no_index?: Maybe<Scalars['Boolean']['output']>;
-  /** How often to instruct search engines to crawl. */
-  sitemap_change_frequency?: Maybe<Scalars['String']['output']>;
-  /** Valid values range from 0.0 to 1.0. This value does not affect how your pages are compared to pages on other sites, it only lets the search engines know which pages you deem most important for the crawlers. */
-  sitemap_priority?: Maybe<Scalars['Float']['output']>;
-  /** This entries title, defaults to title. Max 70 characters including the site name. */
-  title?: Maybe<Scalars['String']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  translations?: Maybe<Array<Maybe<Routes_Translations>>>;
+  translations_func?: Maybe<Count_Functions>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
 };
 
-export type Seo_Aggregated = {
-  __typename?: 'seo_aggregated';
-  avg?: Maybe<Seo_Aggregated_Fields>;
-  avgDistinct?: Maybe<Seo_Aggregated_Fields>;
-  count?: Maybe<Seo_Aggregated_Count>;
+
+export type RoutesTranslationsArgs = {
+  filter?: InputMaybe<Routes_Translations_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Routes_Aggregated = {
+  __typename?: 'routes_aggregated';
+  avg?: Maybe<Routes_Aggregated_Fields>;
+  avgDistinct?: Maybe<Routes_Aggregated_Fields>;
+  count?: Maybe<Routes_Aggregated_Count>;
   countAll?: Maybe<Scalars['Int']['output']>;
-  countDistinct?: Maybe<Seo_Aggregated_Count>;
+  countDistinct?: Maybe<Routes_Aggregated_Count>;
   group?: Maybe<Scalars['JSON']['output']>;
-  max?: Maybe<Seo_Aggregated_Fields>;
-  min?: Maybe<Seo_Aggregated_Fields>;
-  sum?: Maybe<Seo_Aggregated_Fields>;
-  sumDistinct?: Maybe<Seo_Aggregated_Fields>;
+  max?: Maybe<Routes_Aggregated_Fields>;
+  min?: Maybe<Routes_Aggregated_Fields>;
+  sum?: Maybe<Routes_Aggregated_Fields>;
+  sumDistinct?: Maybe<Routes_Aggregated_Fields>;
 };
 
-export type Seo_Aggregated_Count = {
-  __typename?: 'seo_aggregated_count';
-  /** Where should the canonical URL for this entry point to. */
-  canonical_url?: Maybe<Scalars['Int']['output']>;
+export type Routes_Aggregated_Count = {
+  __typename?: 'routes_aggregated_count';
+  date_created?: Maybe<Scalars['Int']['output']>;
+  date_updated?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  /** This entries meta description. Max 160 characters. */
-  meta_description?: Maybe<Scalars['Int']['output']>;
-  /** Instruct crawlers not to follow links on this page. */
-  no_follow?: Maybe<Scalars['Int']['output']>;
-  /** Instruct crawlers not to index this entry. */
-  no_index?: Maybe<Scalars['Int']['output']>;
-  /** How often to instruct search engines to crawl. */
-  sitemap_change_frequency?: Maybe<Scalars['Int']['output']>;
-  /** Valid values range from 0.0 to 1.0. This value does not affect how your pages are compared to pages on other sites, it only lets the search engines know which pages you deem most important for the crawlers. */
-  sitemap_priority?: Maybe<Scalars['Int']['output']>;
-  /** This entries title, defaults to title. Max 70 characters including the site name. */
-  title?: Maybe<Scalars['Int']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['Int']['output']>;
+  translations?: Maybe<Scalars['Int']['output']>;
+  user_created?: Maybe<Scalars['Int']['output']>;
+  user_updated?: Maybe<Scalars['Int']['output']>;
 };
 
-export type Seo_Aggregated_Fields = {
-  __typename?: 'seo_aggregated_fields';
-  /** Valid values range from 0.0 to 1.0. This value does not affect how your pages are compared to pages on other sites, it only lets the search engines know which pages you deem most important for the crawlers. */
-  sitemap_priority?: Maybe<Scalars['Float']['output']>;
+export type Routes_Aggregated_Fields = {
+  __typename?: 'routes_aggregated_fields';
+  sort?: Maybe<Scalars['Float']['output']>;
 };
 
-export type Seo_Filter = {
-  _and?: InputMaybe<Array<InputMaybe<Seo_Filter>>>;
-  _or?: InputMaybe<Array<InputMaybe<Seo_Filter>>>;
-  canonical_url?: InputMaybe<String_Filter_Operators>;
+export type Routes_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Routes_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Routes_Filter>>>;
+  date_created?: InputMaybe<Date_Filter_Operators>;
+  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
+  date_updated?: InputMaybe<Date_Filter_Operators>;
+  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
-  meta_description?: InputMaybe<String_Filter_Operators>;
-  no_follow?: InputMaybe<Boolean_Filter_Operators>;
-  no_index?: InputMaybe<Boolean_Filter_Operators>;
-  sitemap_change_frequency?: InputMaybe<String_Filter_Operators>;
-  sitemap_priority?: InputMaybe<Number_Filter_Operators>;
-  title?: InputMaybe<String_Filter_Operators>;
+  sort?: InputMaybe<Number_Filter_Operators>;
+  status?: InputMaybe<String_Filter_Operators>;
+  translations?: InputMaybe<Routes_Translations_Filter>;
+  translations_func?: InputMaybe<Count_Function_Filter_Operators>;
+  user_created?: InputMaybe<String_Filter_Operators>;
+  user_updated?: InputMaybe<String_Filter_Operators>;
 };
 
-export type Seo_Mutated = {
-  __typename?: 'seo_mutated';
-  data?: Maybe<Seo>;
+export type Routes_Mutated = {
+  __typename?: 'routes_mutated';
+  data?: Maybe<Routes>;
+  event?: Maybe<EventEnum>;
+  key: Scalars['ID']['output'];
+};
+
+export type Routes_Translations = {
+  __typename?: 'routes_translations';
+  id: Scalars['ID']['output'];
+  languages_code?: Maybe<Languages>;
+  route?: Maybe<Scalars['String']['output']>;
+  routes_id?: Maybe<Routes>;
+};
+
+
+export type Routes_TranslationsLanguages_CodeArgs = {
+  filter?: InputMaybe<Languages_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+export type Routes_TranslationsRoutes_IdArgs = {
+  filter?: InputMaybe<Routes_Filter>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  search?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type Routes_Translations_Aggregated = {
+  __typename?: 'routes_translations_aggregated';
+  avg?: Maybe<Routes_Translations_Aggregated_Fields>;
+  avgDistinct?: Maybe<Routes_Translations_Aggregated_Fields>;
+  count?: Maybe<Routes_Translations_Aggregated_Count>;
+  countAll?: Maybe<Scalars['Int']['output']>;
+  countDistinct?: Maybe<Routes_Translations_Aggregated_Count>;
+  group?: Maybe<Scalars['JSON']['output']>;
+  max?: Maybe<Routes_Translations_Aggregated_Fields>;
+  min?: Maybe<Routes_Translations_Aggregated_Fields>;
+  sum?: Maybe<Routes_Translations_Aggregated_Fields>;
+  sumDistinct?: Maybe<Routes_Translations_Aggregated_Fields>;
+};
+
+export type Routes_Translations_Aggregated_Count = {
+  __typename?: 'routes_translations_aggregated_count';
+  id?: Maybe<Scalars['Int']['output']>;
+  languages_code?: Maybe<Scalars['Int']['output']>;
+  route?: Maybe<Scalars['Int']['output']>;
+  routes_id?: Maybe<Scalars['Int']['output']>;
+};
+
+export type Routes_Translations_Aggregated_Fields = {
+  __typename?: 'routes_translations_aggregated_fields';
+  id?: Maybe<Scalars['Float']['output']>;
+};
+
+export type Routes_Translations_Filter = {
+  _and?: InputMaybe<Array<InputMaybe<Routes_Translations_Filter>>>;
+  _or?: InputMaybe<Array<InputMaybe<Routes_Translations_Filter>>>;
+  id?: InputMaybe<Number_Filter_Operators>;
+  languages_code?: InputMaybe<Languages_Filter>;
+  route?: InputMaybe<String_Filter_Operators>;
+  routes_id?: InputMaybe<Routes_Filter>;
+};
+
+export type Routes_Translations_Mutated = {
+  __typename?: 'routes_translations_mutated';
+  data?: Maybe<Routes_Translations>;
   event?: Maybe<EventEnum>;
   key: Scalars['ID']['output'];
 };
@@ -5583,215 +7077,17 @@ export type String_Filter_Operators = {
   _starts_with?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Team = {
-  __typename?: 'team';
-  bio?: Maybe<Scalars['String']['output']>;
+export type Version_Activites = {
+  __typename?: 'version_activites';
   date_created?: Maybe<Scalars['Date']['output']>;
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
-  image?: Maybe<Directus_Files>;
-  job_title?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  posts?: Maybe<Array<Maybe<Posts>>>;
-  posts_func?: Maybe<Count_Functions>;
-  social_media?: Maybe<Scalars['JSON']['output']>;
-  social_media_func?: Maybe<Count_Functions>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type TeamImageArgs = {
-  filter?: InputMaybe<Directus_Files_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type TeamPostsArgs = {
-  filter?: InputMaybe<Posts_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type Team_Aggregated = {
-  __typename?: 'team_aggregated';
-  avg?: Maybe<Team_Aggregated_Fields>;
-  avgDistinct?: Maybe<Team_Aggregated_Fields>;
-  count?: Maybe<Team_Aggregated_Count>;
-  countAll?: Maybe<Scalars['Int']['output']>;
-  countDistinct?: Maybe<Team_Aggregated_Count>;
-  group?: Maybe<Scalars['JSON']['output']>;
-  max?: Maybe<Team_Aggregated_Fields>;
-  min?: Maybe<Team_Aggregated_Fields>;
-  sum?: Maybe<Team_Aggregated_Fields>;
-  sumDistinct?: Maybe<Team_Aggregated_Fields>;
-};
-
-export type Team_Aggregated_Count = {
-  __typename?: 'team_aggregated_count';
-  bio?: Maybe<Scalars['Int']['output']>;
-  date_created?: Maybe<Scalars['Int']['output']>;
-  date_updated?: Maybe<Scalars['Int']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  image?: Maybe<Scalars['Int']['output']>;
-  job_title?: Maybe<Scalars['Int']['output']>;
-  name?: Maybe<Scalars['Int']['output']>;
-  posts?: Maybe<Scalars['Int']['output']>;
-  social_media?: Maybe<Scalars['Int']['output']>;
-  sort?: Maybe<Scalars['Int']['output']>;
-  status?: Maybe<Scalars['Int']['output']>;
-  user_created?: Maybe<Scalars['Int']['output']>;
-  user_updated?: Maybe<Scalars['Int']['output']>;
-};
-
-export type Team_Aggregated_Fields = {
-  __typename?: 'team_aggregated_fields';
-  sort?: Maybe<Scalars['Float']['output']>;
-};
-
-export type Team_Filter = {
-  _and?: InputMaybe<Array<InputMaybe<Team_Filter>>>;
-  _or?: InputMaybe<Array<InputMaybe<Team_Filter>>>;
-  bio?: InputMaybe<String_Filter_Operators>;
-  date_created?: InputMaybe<Date_Filter_Operators>;
-  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
-  date_updated?: InputMaybe<Date_Filter_Operators>;
-  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
-  id?: InputMaybe<String_Filter_Operators>;
-  image?: InputMaybe<Directus_Files_Filter>;
-  job_title?: InputMaybe<String_Filter_Operators>;
-  name?: InputMaybe<String_Filter_Operators>;
-  posts?: InputMaybe<Posts_Filter>;
-  posts_func?: InputMaybe<Count_Function_Filter_Operators>;
-  social_media?: InputMaybe<String_Filter_Operators>;
-  social_media_func?: InputMaybe<Count_Function_Filter_Operators>;
-  sort?: InputMaybe<Number_Filter_Operators>;
-  status?: InputMaybe<String_Filter_Operators>;
-  user_created?: InputMaybe<String_Filter_Operators>;
-  user_updated?: InputMaybe<String_Filter_Operators>;
-};
-
-export type Team_Mutated = {
-  __typename?: 'team_mutated';
-  data?: Maybe<Team>;
-  event?: Maybe<EventEnum>;
-  key: Scalars['ID']['output'];
-};
-
-export type Testimonials = {
-  __typename?: 'testimonials';
-  company?: Maybe<Scalars['String']['output']>;
-  company_logo?: Maybe<Directus_Files>;
-  content?: Maybe<Scalars['String']['output']>;
-  date_created?: Maybe<Scalars['Date']['output']>;
-  date_created_func?: Maybe<Datetime_Functions>;
-  date_updated?: Maybe<Scalars['Date']['output']>;
-  date_updated_func?: Maybe<Datetime_Functions>;
-  id: Scalars['ID']['output'];
-  image?: Maybe<Directus_Files>;
-  link?: Maybe<Scalars['String']['output']>;
-  sort?: Maybe<Scalars['Int']['output']>;
-  status?: Maybe<Scalars['String']['output']>;
-  subtitle?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  user_created?: Maybe<Scalars['String']['output']>;
-  user_updated?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type TestimonialsCompany_LogoArgs = {
-  filter?: InputMaybe<Directus_Files_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type TestimonialsImageArgs = {
-  filter?: InputMaybe<Directus_Files_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-export type Testimonials_Aggregated = {
-  __typename?: 'testimonials_aggregated';
-  avg?: Maybe<Testimonials_Aggregated_Fields>;
-  avgDistinct?: Maybe<Testimonials_Aggregated_Fields>;
-  count?: Maybe<Testimonials_Aggregated_Count>;
-  countAll?: Maybe<Scalars['Int']['output']>;
-  countDistinct?: Maybe<Testimonials_Aggregated_Count>;
-  group?: Maybe<Scalars['JSON']['output']>;
-  max?: Maybe<Testimonials_Aggregated_Fields>;
-  min?: Maybe<Testimonials_Aggregated_Fields>;
-  sum?: Maybe<Testimonials_Aggregated_Fields>;
-  sumDistinct?: Maybe<Testimonials_Aggregated_Fields>;
-};
-
-export type Testimonials_Aggregated_Count = {
-  __typename?: 'testimonials_aggregated_count';
-  company?: Maybe<Scalars['Int']['output']>;
-  company_logo?: Maybe<Scalars['Int']['output']>;
-  content?: Maybe<Scalars['Int']['output']>;
-  date_created?: Maybe<Scalars['Int']['output']>;
-  date_updated?: Maybe<Scalars['Int']['output']>;
-  id?: Maybe<Scalars['Int']['output']>;
-  image?: Maybe<Scalars['Int']['output']>;
-  link?: Maybe<Scalars['Int']['output']>;
-  sort?: Maybe<Scalars['Int']['output']>;
-  status?: Maybe<Scalars['Int']['output']>;
-  subtitle?: Maybe<Scalars['Int']['output']>;
-  title?: Maybe<Scalars['Int']['output']>;
-  user_created?: Maybe<Scalars['Int']['output']>;
-  user_updated?: Maybe<Scalars['Int']['output']>;
-};
-
-export type Testimonials_Aggregated_Fields = {
-  __typename?: 'testimonials_aggregated_fields';
-  sort?: Maybe<Scalars['Float']['output']>;
-};
-
-export type Testimonials_Filter = {
-  _and?: InputMaybe<Array<InputMaybe<Testimonials_Filter>>>;
-  _or?: InputMaybe<Array<InputMaybe<Testimonials_Filter>>>;
-  company?: InputMaybe<String_Filter_Operators>;
-  company_logo?: InputMaybe<Directus_Files_Filter>;
-  content?: InputMaybe<String_Filter_Operators>;
-  date_created?: InputMaybe<Date_Filter_Operators>;
-  date_created_func?: InputMaybe<Datetime_Function_Filter_Operators>;
-  date_updated?: InputMaybe<Date_Filter_Operators>;
-  date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
-  id?: InputMaybe<String_Filter_Operators>;
-  image?: InputMaybe<Directus_Files_Filter>;
-  link?: InputMaybe<String_Filter_Operators>;
-  sort?: InputMaybe<Number_Filter_Operators>;
-  status?: InputMaybe<String_Filter_Operators>;
-  subtitle?: InputMaybe<String_Filter_Operators>;
-  title?: InputMaybe<String_Filter_Operators>;
-  user_created?: InputMaybe<String_Filter_Operators>;
-  user_updated?: InputMaybe<String_Filter_Operators>;
-};
-
-export type Testimonials_Mutated = {
-  __typename?: 'testimonials_mutated';
-  data?: Maybe<Testimonials>;
-  event?: Maybe<EventEnum>;
-  key: Scalars['ID']['output'];
 };
 
 export type Version_Block_Button = {
@@ -5986,6 +7282,23 @@ export type Version_Block_Richtext = {
   title?: Maybe<Scalars['String']['output']>;
 };
 
+export type Version_Block_Settings = {
+  __typename?: 'version_block_settings';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  tokens?: Maybe<Scalars['JSON']['output']>;
+  tokens_func?: Maybe<Count_Functions>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
 export type Version_Block_Step_Items = {
   __typename?: 'version_block_step_items';
   block_steps?: Maybe<Scalars['JSON']['output']>;
@@ -6027,7 +7340,7 @@ export type Version_Block_Testimonial_Slider_Items = {
   date_updated_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
   sort?: Maybe<Scalars['Int']['output']>;
-  testimonials_id?: Maybe<Scalars['JSON']['output']>;
+  testimonials_id?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
 };
@@ -6051,15 +7364,157 @@ export type Version_Block_Video = {
   video_url?: Maybe<Scalars['String']['output']>;
 };
 
+export type Version_Block_Wysiwygs = {
+  __typename?: 'version_block_wysiwygs';
+  content?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  settings?: Maybe<Scalars['JSON']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
 export type Version_Categories = {
   __typename?: 'version_categories';
   color?: Maybe<Scalars['String']['output']>;
   headline?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  seo?: Maybe<Scalars['JSON']['output']>;
+  seo?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Contacts = {
+  __typename?: 'version_contacts';
+  /** Notes about this contact. Never visible to this person or their organization. */
+  contact_notes?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  email?: Maybe<Scalars['String']['output']>;
+  first_name?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  job_title?: Maybe<Scalars['String']['output']>;
+  last_name?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  /** Is this an active contact? */
+  status?: Maybe<Scalars['String']['output']>;
+  /** Not every contact will have a login to the portal. This is the linked user account for this contact. */
+  user?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Form_Builder = {
+  __typename?: 'version_form_builder';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  key?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  on_success?: Maybe<Scalars['String']['output']>;
+  redirect_url?: Maybe<Scalars['String']['output']>;
+  schema?: Maybe<Scalars['JSON']['output']>;
+  schema_func?: Maybe<Count_Functions>;
+  status?: Maybe<Scalars['String']['output']>;
+  success_message?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Form_Builder_Schema = {
+  __typename?: 'version_form_builder_schema';
+  collection?: Maybe<Scalars['String']['output']>;
+  form_builder_id?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  item?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Form_Builder_Translations = {
+  __typename?: 'version_form_builder_translations';
+  id: Scalars['ID']['output'];
+  languages_id?: Maybe<Scalars['JSON']['output']>;
+};
+
+export type Version_Form_Configs = {
+  __typename?: 'version_form_configs';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  friendly_id?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  schema?: Maybe<Scalars['JSON']['output']>;
+  schema_func?: Maybe<Count_Functions>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Form_Entry = {
+  __typename?: 'version_form_entry';
+  content?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  form?: Maybe<Scalars['JSON']['output']>;
+  from_email?: Maybe<Scalars['String']['output']>;
+  from_ip?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  language?: Maybe<Scalars['JSON']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Form_Field_Settings = {
+  __typename?: 'version_form_field_settings';
+  disabled?: Maybe<Scalars['Boolean']['output']>;
+  /** This validation should follow the AJV format guidelines */
+  generic_validation?: Maybe<Scalars['String']['output']>;
+  halfwidth?: Maybe<Scalars['Boolean']['output']>;
+  hasPattern?: Maybe<Scalars['Boolean']['output']>;
+  id: Scalars['ID']['output'];
+  label?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  pattern?: Maybe<Scalars['String']['output']>;
+  pattern_error_message?: Maybe<Scalars['String']['output']>;
+  readonly?: Maybe<Scalars['Boolean']['output']>;
+  required?: Maybe<Scalars['Boolean']['output']>;
+  required_error_message?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Form_Field_Text = {
+  __typename?: 'version_form_field_text';
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  form_field_settings?: Maybe<Scalars['JSON']['output']>;
+  format?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  status?: Maybe<Scalars['String']['output']>;
+  text_settings?: Maybe<Scalars['JSON']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Form_Field_Text_Settings = {
+  __typename?: 'version_form_field_text_settings';
+  default_value?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  placeholder?: Maybe<Scalars['String']['output']>;
 };
 
 export type Version_Forms = {
@@ -6085,32 +7540,6 @@ export type Version_Forms = {
   user_updated?: Maybe<Scalars['String']['output']>;
 };
 
-export type Version_Globals = {
-  __typename?: 'version_globals';
-  address_country?: Maybe<Scalars['String']['output']>;
-  address_locality?: Maybe<Scalars['String']['output']>;
-  address_region?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  logo_on_dark_bg?: Maybe<Scalars['JSON']['output']>;
-  logo_on_light_bg?: Maybe<Scalars['JSON']['output']>;
-  og_image?: Maybe<Scalars['JSON']['output']>;
-  phone?: Maybe<Scalars['String']['output']>;
-  postal_code?: Maybe<Scalars['String']['output']>;
-  social_links?: Maybe<Scalars['JSON']['output']>;
-  social_links_func?: Maybe<Count_Functions>;
-  street_address?: Maybe<Scalars['String']['output']>;
-  /** What's the website title? */
-  tagline?: Maybe<Scalars['String']['output']>;
-  theme?: Maybe<Scalars['JSON']['output']>;
-  theme_func?: Maybe<Count_Functions>;
-  /** What's the website title? */
-  title?: Maybe<Scalars['String']['output']>;
-  /** What's is the base url for the site? */
-  url?: Maybe<Scalars['String']['output']>;
-};
-
 export type Version_Help_Articles = {
   __typename?: 'version_help_articles';
   content?: Maybe<Scalars['String']['output']>;
@@ -6118,7 +7547,7 @@ export type Version_Help_Articles = {
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
-  help_collection?: Maybe<Scalars['JSON']['output']>;
+  help_collection?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   owner?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
@@ -6130,16 +7559,22 @@ export type Version_Help_Articles = {
   user_updated?: Maybe<Scalars['String']['output']>;
 };
 
-export type Version_Help_Collections = {
-  __typename?: 'version_help_collections';
-  articles?: Maybe<Scalars['JSON']['output']>;
-  articles_func?: Maybe<Count_Functions>;
-  description?: Maybe<Scalars['String']['output']>;
-  icon?: Maybe<Scalars['String']['output']>;
+export type Version_Inbox = {
+  __typename?: 'version_inbox';
+  data?: Maybe<Scalars['JSON']['output']>;
+  data_func?: Maybe<Count_Functions>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  form?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
-  slug?: Maybe<Scalars['String']['output']>;
+  project?: Maybe<Scalars['String']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  task?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
 };
 
 export type Version_Languages = {
@@ -6163,6 +7598,21 @@ export type Version_Links = {
   status?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Messages = {
+  __typename?: 'version_messages';
+  contact_id?: Maybe<Scalars['String']['output']>;
+  conversation?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  text?: Maybe<Scalars['String']['output']>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+  visitor_id?: Maybe<Scalars['String']['output']>;
 };
 
 export type Version_Navigation = {
@@ -6226,6 +7676,34 @@ export type Version_Page_Editor_Nodes = {
   pages_translations_id?: Maybe<Scalars['JSON']['output']>;
 };
 
+export type Version_Page_Settings = {
+  __typename?: 'version_page_settings';
+  belongs_to_collection?: Maybe<Scalars['String']['output']>;
+  belongs_to_key?: Maybe<Scalars['String']['output']>;
+  date_created?: Maybe<Scalars['Date']['output']>;
+  date_created_func?: Maybe<Datetime_Functions>;
+  date_updated?: Maybe<Scalars['Date']['output']>;
+  date_updated_func?: Maybe<Datetime_Functions>;
+  id: Scalars['ID']['output'];
+  route?: Maybe<Scalars['JSON']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+  translations?: Maybe<Scalars['JSON']['output']>;
+  translations_func?: Maybe<Count_Functions>;
+  user_created?: Maybe<Scalars['String']['output']>;
+  user_updated?: Maybe<Scalars['String']['output']>;
+};
+
+export type Version_Page_Settings_Translations = {
+  __typename?: 'version_page_settings_translations';
+  id: Scalars['ID']['output'];
+  languages_code?: Maybe<Scalars['JSON']['output']>;
+  page_settings_id?: Maybe<Scalars['JSON']['output']>;
+  path?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+};
+
 export type Version_Pages = {
   __typename?: 'version_pages';
   blocks?: Maybe<Scalars['JSON']['output']>;
@@ -6235,9 +7713,10 @@ export type Version_Pages = {
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
+  page_settings?: Maybe<Scalars['JSON']['output']>;
   /** Start with a slash (/page) and do NOT add a trailing slash (/page/) */
   permalink?: Maybe<Scalars['String']['output']>;
-  seo?: Maybe<Scalars['JSON']['output']>;
+  seo?: Maybe<Scalars['String']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -6252,7 +7731,7 @@ export type Version_Pages_Blog = {
   featured_post?: Maybe<Scalars['JSON']['output']>;
   headline?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  seo?: Maybe<Scalars['JSON']['output']>;
+  seo?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -6260,7 +7739,7 @@ export type Version_Pages_Projects = {
   __typename?: 'version_pages_projects';
   headline?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  seo?: Maybe<Scalars['JSON']['output']>;
+  seo?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
@@ -6274,6 +7753,7 @@ export type Version_Pages_Translations = {
   flexible_editor_func?: Maybe<Count_Functions>;
   id: Scalars['ID']['output'];
   languages_code?: Maybe<Scalars['JSON']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
   pages_id?: Maybe<Scalars['JSON']['output']>;
 };
 
@@ -6287,7 +7767,7 @@ export type Version_Post_Gallery_Items = {
 
 export type Version_Posts = {
   __typename?: 'version_posts';
-  author?: Maybe<Scalars['JSON']['output']>;
+  author?: Maybe<Scalars['String']['output']>;
   built_with?: Maybe<Scalars['JSON']['output']>;
   built_with_func?: Maybe<Count_Functions>;
   category?: Maybe<Scalars['JSON']['output']>;
@@ -6305,7 +7785,7 @@ export type Version_Posts = {
   gallery_func?: Maybe<Count_Functions>;
   id: Scalars['ID']['output'];
   image?: Maybe<Scalars['JSON']['output']>;
-  seo?: Maybe<Scalars['JSON']['output']>;
+  seo?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
@@ -6324,10 +7804,14 @@ export type Version_Redirects = {
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
+  destination?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  response_code?: Maybe<Scalars['Int']['output']>;
-  url_new?: Maybe<Scalars['String']['output']>;
-  url_old?: Maybe<Scalars['String']['output']>;
+  isrewrite?: Maybe<Scalars['Boolean']['output']>;
+  locale?: Maybe<Scalars['Boolean']['output']>;
+  permanent?: Maybe<Scalars['Boolean']['output']>;
+  sort?: Maybe<Scalars['Int']['output']>;
+  source?: Maybe<Scalars['String']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
 };
@@ -6346,64 +7830,27 @@ export type Version_Related_Block_Faqs_Block_Faqs = {
   related_block_faqs_id?: Maybe<Scalars['JSON']['output']>;
 };
 
-export type Version_Seo = {
-  __typename?: 'version_seo';
-  /** Where should the canonical URL for this entry point to. */
-  canonical_url?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  /** This entries meta description. Max 160 characters. */
-  meta_description?: Maybe<Scalars['String']['output']>;
-  /** Instruct crawlers not to follow links on this page. */
-  no_follow?: Maybe<Scalars['Boolean']['output']>;
-  /** Instruct crawlers not to index this entry. */
-  no_index?: Maybe<Scalars['Boolean']['output']>;
-  /** How often to instruct search engines to crawl. */
-  sitemap_change_frequency?: Maybe<Scalars['String']['output']>;
-  /** Valid values range from 0.0 to 1.0. This value does not affect how your pages are compared to pages on other sites, it only lets the search engines know which pages you deem most important for the crawlers. */
-  sitemap_priority?: Maybe<Scalars['Float']['output']>;
-  /** This entries title, defaults to title. Max 70 characters including the site name. */
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-export type Version_Team = {
-  __typename?: 'version_team';
-  bio?: Maybe<Scalars['String']['output']>;
+export type Version_Routes = {
+  __typename?: 'version_routes';
   date_created?: Maybe<Scalars['Date']['output']>;
   date_created_func?: Maybe<Datetime_Functions>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
-  image?: Maybe<Scalars['JSON']['output']>;
-  job_title?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  posts?: Maybe<Scalars['JSON']['output']>;
-  posts_func?: Maybe<Count_Functions>;
-  social_media?: Maybe<Scalars['JSON']['output']>;
-  social_media_func?: Maybe<Count_Functions>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
+  translations?: Maybe<Scalars['JSON']['output']>;
+  translations_func?: Maybe<Count_Functions>;
   user_created?: Maybe<Scalars['String']['output']>;
   user_updated?: Maybe<Scalars['String']['output']>;
 };
 
-export type Version_Testimonials = {
-  __typename?: 'version_testimonials';
-  company?: Maybe<Scalars['String']['output']>;
-  company_logo?: Maybe<Scalars['JSON']['output']>;
-  content?: Maybe<Scalars['String']['output']>;
-  date_created?: Maybe<Scalars['Date']['output']>;
-  date_created_func?: Maybe<Datetime_Functions>;
-  date_updated?: Maybe<Scalars['Date']['output']>;
-  date_updated_func?: Maybe<Datetime_Functions>;
+export type Version_Routes_Translations = {
+  __typename?: 'version_routes_translations';
   id: Scalars['ID']['output'];
-  image?: Maybe<Scalars['JSON']['output']>;
-  link?: Maybe<Scalars['String']['output']>;
-  sort?: Maybe<Scalars['Int']['output']>;
-  status?: Maybe<Scalars['String']['output']>;
-  subtitle?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  user_created?: Maybe<Scalars['String']['output']>;
-  user_updated?: Maybe<Scalars['String']['output']>;
+  languages_code?: Maybe<Scalars['JSON']['output']>;
+  route?: Maybe<Scalars['String']['output']>;
+  routes_id?: Maybe<Scalars['JSON']['output']>;
 };
 
 export type Version_Versioning_Example = {
@@ -6505,6 +7952,39 @@ export type PagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type PagesQuery = { __typename?: 'Query', pages: Array<{ __typename?: 'pages', title?: string | null, translations?: Array<{ __typename?: 'pages_translations', flexible_editor?: any | null, languages_code?: { __typename?: 'languages', code: string } | null, editor_nodes?: Array<{ __typename?: 'page_editor_nodes', id: string, collection?: string | null, pages_translations_id?: { __typename?: 'pages_translations', languages_code?: { __typename?: 'languages', code: string } | null } | null, item?: { __typename?: 'block_button', color?: string | null, date_created?: any | null, date_updated?: any | null, external_url?: string | null, id: string, label?: string | null, sort?: number | null, type?: string | null, variant?: string | null } | { __typename?: 'block_quote', content?: string | null, id: string, subtitle?: string | null, title?: string | null } | { __typename?: 'links', id: string, label?: string | null } | { __typename?: 'related_block_faqs', id: string, blocks?: Array<{ __typename?: 'related_block_faqs_block_faqs', id: string, block_faqs_id?: { __typename?: 'block_faqs', alignment?: string | null, faqs?: any | null, headline?: string | null, id: string, title?: string | null } | null } | null> | null } | null } | null> | null } | null> | null }> };
 
+export type PageSettingsFragment = { __typename?: 'page_settings', id: string, belongs_to_collection?: string | null, belongs_to_key?: string | null, translations?: Array<{ __typename?: 'page_settings_translations', path?: string | null, title?: string | null, slug?: string | null, languages_code?: { __typename?: 'languages', code: string } | null } | null> | null } & { ' $fragmentName'?: 'PageSettingsFragment' };
+
+export type PageFragment = { __typename?: 'pages', translations?: Array<{ __typename?: 'pages_translations', name?: string | null } | null> | null, page_settings?: (
+    { __typename?: 'page_settings' }
+    & { ' $fragmentRefs'?: { 'PageSettingsFragment': PageSettingsFragment } }
+  ) | null } & { ' $fragmentName'?: 'PageFragment' };
+
+export type PageByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+  locale: Scalars['String']['input'];
+}>;
+
+
+export type PageByIdQuery = { __typename?: 'Query', pages_by_id?: (
+    { __typename?: 'pages' }
+    & { ' $fragmentRefs'?: { 'PageFragment': PageFragment } }
+  ) | null };
+
+export type PageByIdWithoutFragmentQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+  locale: Scalars['String']['input'];
+}>;
+
+
+export type PageByIdWithoutFragmentQuery = { __typename?: 'Query', pages_by_id?: { __typename?: 'pages', translations?: Array<{ __typename?: 'pages_translations', name?: string | null } | null> | null, page_settings?: (
+      { __typename?: 'page_settings' }
+      & { ' $fragmentRefs'?: { 'PageSettingsFragment': PageSettingsFragment } }
+    ) | null } | null };
+
 export const DirectusFilesFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DirectusFiles"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"directus_files"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"filename_disk"}},{"kind":"Field","name":{"kind":"Name","value":"filename_download"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"embed"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"focal_point_x"}},{"kind":"Field","name":{"kind":"Name","value":"focal_point_y"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"thumbhash"}}]}}]} as unknown as DocumentNode<DirectusFilesFragment, unknown>;
+export const PageSettingsFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSettings"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"page_settings"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"belongs_to_collection"}},{"kind":"Field","name":{"kind":"Name","value":"belongs_to_key"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"languages_code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"locale"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<PageSettingsFragment, unknown>;
+export const PageFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Page"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"pages"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"translations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"languages_code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"locale"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"page_settings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"belongs_to_key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_nnull"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageSettings"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSettings"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"page_settings"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"belongs_to_collection"}},{"kind":"Field","name":{"kind":"Name","value":"belongs_to_key"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"languages_code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"locale"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<PageFragment, unknown>;
 export const BlockFilesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"BlockFiles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"block_files_by_id"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"files"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"directus_files_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"DirectusFiles"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"DirectusFiles"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"directus_files"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"filename_disk"}},{"kind":"Field","name":{"kind":"Name","value":"filename_download"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"height"}},{"kind":"Field","name":{"kind":"Name","value":"duration"}},{"kind":"Field","name":{"kind":"Name","value":"embed"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"focal_point_x"}},{"kind":"Field","name":{"kind":"Name","value":"focal_point_y"}},{"kind":"Field","name":{"kind":"Name","value":"caption"}},{"kind":"Field","name":{"kind":"Name","value":"thumbhash"}}]}}]} as unknown as DocumentNode<BlockFilesQuery, BlockFilesQueryVariables>;
 export const PagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"flexible_editor"}},{"kind":"Field","name":{"kind":"Name","value":"editor_nodes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"pages_translations_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"collection"}},{"kind":"Field","name":{"kind":"Name","value":"item"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"block_quote"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"subtitle"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"block_button"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"color"}},{"kind":"Field","name":{"kind":"Name","value":"date_created"}},{"kind":"Field","name":{"kind":"Name","value":"date_updated"}},{"kind":"Field","name":{"kind":"Name","value":"external_url"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}},{"kind":"Field","name":{"kind":"Name","value":"sort"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"variant"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"related_block_faqs"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"blocks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"block_faqs_id"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"alignment"}},{"kind":"Field","name":{"kind":"Name","value":"faqs"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"links"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"label"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<PagesQuery, PagesQueryVariables>;
+export const PageByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"locale"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages_by_id"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Page"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSettings"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"page_settings"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"belongs_to_collection"}},{"kind":"Field","name":{"kind":"Name","value":"belongs_to_key"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"languages_code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"locale"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Page"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"pages"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"translations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"languages_code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"locale"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"page_settings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"belongs_to_key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_nnull"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageSettings"}}]}}]}}]} as unknown as DocumentNode<PageByIdQuery, PageByIdQueryVariables>;
+export const PageByIdWithoutFragmentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PageByIdWithoutFragment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"locale"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"pages_by_id"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"translations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"languages_code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"locale"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"page_settings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"belongs_to_key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_nnull"},"value":{"kind":"BooleanValue","value":true}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"PageSettings"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"PageSettings"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"page_settings"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"belongs_to_collection"}},{"kind":"Field","name":{"kind":"Name","value":"belongs_to_key"}},{"kind":"Field","name":{"kind":"Name","value":"translations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filter"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"languages_code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"locale"}}}]}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"languages_code"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]} as unknown as DocumentNode<PageByIdWithoutFragmentQuery, PageByIdWithoutFragmentQueryVariables>;
