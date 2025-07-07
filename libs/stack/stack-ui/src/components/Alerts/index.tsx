@@ -2,10 +2,10 @@
 
 import { useRef } from 'react'
 import { useOverlayTriggerState } from 'react-stately'
+import useLabelledOverlay from '../../hooks/useLabelledOverlay'
 import type { TToken } from '../../providers/Theme/interface'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'
 import Carousel from '../Carousel'
-import useOverlayHook from '../Lightbox/hooks/overlay'
 import AlertsCloseButton from './components/AlertsCloseButton'
 import AlertsItem from './components/AlertsItem'
 import type { TAlertsProps } from './interface'
@@ -30,7 +30,7 @@ const Alerts = <T extends TToken>(props: TAlertsProps<T>) => {
 
   const state = useOverlayTriggerState({ ...props, defaultOpen })
 
-  const { triggerProps, overlayProps } = useOverlayHook({ ...props, type: 'dialog' }, state, triggerRef)
+  const { triggerProps, overlayProps } = useLabelledOverlay({ ...props, type: 'dialog' }, state, triggerRef)
 
   return (
     <TransitionComponent

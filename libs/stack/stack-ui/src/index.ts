@@ -8,6 +8,7 @@ export { default as ShareButton } from './components/ShareButton'
 export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
 export { default as Popover } from './components/Popover'
+export { default as PopoverButton } from './components/Popover/components/Button'
 export { default as Carousel } from './components/Carousel'
 export {
   CarouselNextNavigationButton,
@@ -18,16 +19,22 @@ export { default as WysiwygBlock } from './components/WysiwygBlock'
 export { default as Icon } from './components/Icon'
 export { default as Date } from './components/Date'
 export { default as Select, ReactHookFormSelect } from './components/fields/Select/Select'
-export { default as Checkbox } from './components/fields/Checkbox'
+export { default as Checkbox, ReactHookFormCheckBox } from './components/fields/Checkbox'
 export { default as SearchField } from './components/fields/SearchField'
 export { default as CheckboxGroup } from './components/fields/CheckboxGroup'
-export { default as CheckboxGroupItem } from './components/fields/CheckboxGroup/components/CheckboxGroupItem'
+export {
+  default as CheckboxGroupItem,
+  ReactHookFormCheckboxItem,
+} from './components/fields/CheckboxGroup/components/CheckboxGroupItem'
 export { default as TextArea, ReactHookFormTextArea } from './components/fields/TextArea'
 export { default as TextInputField, ReactHookFormInput } from './components/fields/TextInputField'
 export { default as DatePicker } from './components/fields/DatePicker'
+export { CalendarPopover } from './components/fields/DatePicker/components/CalendarPopover'
+export { default as DateField } from './components/fields/DatePicker/components/DateField'
 export { default as DateRangePicker } from './components/fields/DatePicker/DateRangePicker'
 export { default as Box, BoxWithForwardRef } from './components/Box'
 export { default as Calendar } from './components/Calendar'
+export { default as RangeCalendar } from './components/Calendar/RangeCalendar'
 export { default as Modal } from './components/Modal'
 export { default as Radio, ReactHookFormRadio } from './components/fields/Radio'
 export { default as RadioGroup } from './components/fields/RadioGroup'
@@ -40,6 +47,18 @@ export { default as Alerts } from './components/Alerts'
 export { default as AlertsItem } from './components/Alerts/components/AlertsItem'
 export { default as SelectItem } from './components/fields/SelectItem/SelectItem'
 export { default as Video } from './components/Video'
+export { default as TagGroup } from './components/TagGroup'
+export { TagItem } from './components/TagGroup/components/TagItem'
+export { default as TabList } from './components/TabList'
+export { TabItem } from './components/TabList/components/TabItem'
+export { default as TabPanel } from './components/TabList/components/TabPanel'
+export { default as Tab } from './components/TabList/components/Tab'
+export { default as ComboBox } from './components/fields/ComboBox'
+export { default as ReactHookFormComboBox } from './components/fields/ComboBox'
+export { default as ListBox } from './components/fields/ListBox'
+export { default as ListBoxSection } from './components/fields/ListBox/components/ListBoxSection'
+export { default as Option } from './components/fields/Option'
+export { Node } from './components/Node'
 export * from './components/icons'
 
 // providers
@@ -53,6 +72,7 @@ export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion
 export { SearchBarProvider } from './providers/UserSearchQuery'
 export { SwiperControllerContextProvider, useSwiperController } from './providers/Swiper'
 export { TranslationContextProvider, useTranslation } from './providers/Translation'
+export * as reactHookForm from 'react-hook-form'
 
 // types & interfaces
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
@@ -67,7 +87,25 @@ export type {
   TStyleValue,
 } from './providers/Theme/interface'
 export type { TMenuProps, TMenuItemProps } from './components/Menu/interface'
-export type { TDefaultComponent, Nullable } from './types/components'
+export type { TDefaultComponent, Nullable, TTransition, TReactHookForm } from './types/components'
+export type { TTextInputProps } from './components/fields/TextInputField/interface'
+export type { TCheckboxProps } from './components/fields/Checkbox/Checkbox.interface'
+export type { TSelectProps } from './components/fields/Select/Select.interface'
+export type { TBoxProps } from './components/Box/interface'
+export type { TDatePickerProps } from './components/fields/DatePicker/interface'
+export type { TDateProps } from './components/Date/interface'
+export type { TSidePanelButtons, TSidePanelButtonProps, TSidePanelContext } from './providers/SidePanel/interface'
+export type { default as TSearchProps } from './components/fields/SearchField/interface'
+export type { TTagGroupProps, TTagItemProps, TTagProps } from './components/TagGroup/interface'
+export type { TTabListProps, TTabProps, TTabPanelProps } from './components/TabList/interface'
+export type {
+  TDefaultNode,
+  TDefaultItemComponent,
+  TDefaultNodeComponent,
+  TDefaultSectionComponent,
+} from './types/react-stately'
+export type { TListBoxProps, TListBoxSectionProps } from './components/fields/ListBox/interface'
+export type { TOptionProps } from './components/fields/Option/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
@@ -76,6 +114,10 @@ export { default as useFacebookShareUrl } from './components/ShareButton/utils/u
 export { default as useMailToShareUrl } from './components/ShareButton/utils/useMailToShareUrl'
 export { default as useTwitterShareUrl } from './components/ShareButton/utils/useTwitterShareUrl'
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
+export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
+export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
+export { useDebounce } from './hooks/useDebounce'
+export { useComboBoxFiltering } from './components/fields/ComboBox/hooks/useComboBoxFiltering'
 
 // dev tools
 export { logger as StackUILogger } from './logger'

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { NextRequest } from 'next/server'
-import { NextResponse } from 'next/server'
+import type { NextRequest, NextResponse as NextResponseType } from 'next/server'
+import { NextResponse as NextResponseClass } from 'next/server'
 import { log } from '../logger'
 import { handleRedirect } from '../redirect/utils/handleRedirect'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
@@ -78,6 +78,11 @@ async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsT
   }
 }
 
+function removeLocaleFromPathname(pathname: string, config: DirectusRouteConfig) {
+  const currentLocale = Object.values(config.localeMap ?? {}).find((locale) => pathname.startsWith(`/${locale}/`))
+  return { locale: currentLocale, pathname: currentLocale ? pathname.replace(`/${currentLocale}/`, '/') : pathname }
+}
+
 /**
  * Handles routing for Directus.
  *
@@ -85,20 +90,18 @@ async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsT
  * @param {DirectusRouteConfig} config - Configuration for routing.
  * @returns {Promise<NextResponse>} The response object.
  */
-export function directusRouteRouter(request: NextRequest, config: DirectusRouteConfig): Promise<NextResponse>
-
+export async function directusRouteRouter(request: NextRequest, config: DirectusRouteConfig): Promise<NextResponseType>
 /**
  * @deprecated Use `directusRouteRouter(request, config)` instead. NextResponse is now directly imported in this file.
  */
-export function directusRouteRouter(
+export async function directusRouteRouter(
   request: NextRequest,
   config: DirectusRouteConfig,
-  response: NextResponse,
-): Promise<NextResponse>
-
-export async function directusRouteRouter(request: NextRequest, config: DirectusRouteConfig): Promise<NextResponse> {
-  const { pathname } = request.nextUrl
-  log('Processing request for pathname:', pathname)
+  NextResponse = NextResponseClass,
+): Promise<NextResponseType> {
+  const { pathname: localizedPathname } = request.nextUrl
+  const { locale, pathname } = removeLocaleFromPathname(localizedPathname, config)
+  log('Processing request for pathname:', { locale, pathname })
 
   const redirect = await handleRedirect(request, config.modules?.redirects)
   if (redirect) {
