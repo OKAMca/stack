@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
+import type { NextRequest, NextResponse as NextResponseType } from 'next/server'
+import { NextResponse as NextResponseClass } from 'next/server'
 import { log } from '../logger'
+import { handleRedirect } from '../redirect/utils/handleRedirect'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 
 interface PageSettingsTranslation {
@@ -80,30 +83,30 @@ function removeLocaleFromPathname(pathname: string, config: DirectusRouteConfig)
   return { locale: currentLocale, pathname: currentLocale ? pathname.replace(`/${currentLocale}/`, '/') : pathname }
 }
 
-//  Minimal interfaces for Next.js types
-interface MinimalNextUrl {
-  pathname: string
-  clone: () => MinimalNextUrl
-}
-
-interface MinimalNextRequest {
-  nextUrl: MinimalNextUrl
-}
-
-interface MinimalNextResponse {
-  next: () => MinimalNextResponse
-  notFound: () => MinimalNextResponse
-  rewrite: (url: MinimalNextUrl | URL) => MinimalNextResponse
-}
-
+/**
+ * Handles routing for Directus.
+ *
+ * @param {NextRequest} request - The incoming request object.
+ * @param {DirectusRouteConfig} config - Configuration for routing.
+ * @returns {Promise<NextResponse>} The response object.
+ */
+export async function directusRouteRouter(request: NextRequest, config: DirectusRouteConfig): Promise<NextResponseType>
+/**
+ * @deprecated Use `directusRouteRouter(request, config)` instead. NextResponse is now directly imported in this file.
+ */
 export async function directusRouteRouter(
-  request: MinimalNextRequest,
+  request: NextRequest,
   config: DirectusRouteConfig,
-  NextResponse: MinimalNextResponse,
-): Promise<MinimalNextResponse> {
+  NextResponse = NextResponseClass,
+): Promise<NextResponseType> {
   const { pathname: localizedPathname } = request.nextUrl
   const { locale, pathname } = removeLocaleFromPathname(localizedPathname, config)
   log('Processing request for pathname:', { locale, pathname })
+
+  const redirect = await handleRedirect(request, config.modules?.redirects)
+  if (redirect) {
+    return redirect
+  }
 
   const translations = await fetchPageSettingsTranslation(pathname)
 
