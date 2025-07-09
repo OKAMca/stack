@@ -1,3 +1,18 @@
+## 1.1.1 (2025-07-09)
+
+### 🩹 Fixes
+
+- **directus-next:** missing external deps for build ([8146c77](https://github.com/OKAMca/stack/commit/8146c77))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 0.3.0 (2024-12-03)
 
 
