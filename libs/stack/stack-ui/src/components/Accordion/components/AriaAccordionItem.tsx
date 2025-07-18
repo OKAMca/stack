@@ -1,3 +1,5 @@
+'use client'
+
 import { useAccordionItem } from '@react-aria/accordion'
 import { useRef } from 'react'
 import { FocusRing, FocusScope } from 'react-aria'
