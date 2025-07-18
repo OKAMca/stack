@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { directusRouteRouter } from '@okam/directus-next'
-import type { DirectusRouteConfig } from 'libs/directus/directus-next/src/types/directusRouteConfig'
+import { directusRouteRouter, type DirectusRouteConfig } from '@okam/directus-next'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
