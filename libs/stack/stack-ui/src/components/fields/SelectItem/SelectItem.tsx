@@ -1,3 +1,5 @@
+'use client'
+
 import { Item } from 'react-stately'
 import type { TSelectItemProps } from './SelectItem.interface'
 

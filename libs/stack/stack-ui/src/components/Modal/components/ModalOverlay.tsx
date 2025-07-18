@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef } from 'react'
 import { useModalOverlay } from 'react-aria'
 import Box, { BoxWithForwardRef } from '../../Box'
