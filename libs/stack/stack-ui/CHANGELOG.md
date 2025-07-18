@@ -1,3 +1,14 @@
+## 1.39.2 (2025-07-18)
+
+### 🩹 Fixes
+
+- **stack-ui:** always have use client for react-aria/stately imports ([027edae](https://github.com/OKAMca/stack/commit/027edae))
+- **stack-ui:** added use client to file with react-aria import ([51092ab](https://github.com/OKAMca/stack/commit/51092ab))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.39.1 (2025-07-18)
 
 ### 🩹 Fixes
