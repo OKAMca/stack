@@ -1,3 +1,5 @@
+'use client'
+
 import sanitizeHtml from 'sanitize-html'
 import type { TToken } from '../../providers/Theme/interface'
 import Typography from '../Typography'
