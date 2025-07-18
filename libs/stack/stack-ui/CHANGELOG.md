@@ -1,3 +1,13 @@
+## 1.39.1 (2025-07-18)
+
+### 🩹 Fixes
+
+- **stack-ui:** wysiwyg block use client ([8c3d3b0](https://github.com/OKAMca/stack/commit/8c3d3b0))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.39.0 (2025-07-04)
 
 ### 🚀 Features
