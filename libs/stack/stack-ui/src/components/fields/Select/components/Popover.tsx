@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { DismissButton, Overlay, usePopover } from 'react-aria'
 import Box, { BoxWithForwardRef } from '../../../Box'
