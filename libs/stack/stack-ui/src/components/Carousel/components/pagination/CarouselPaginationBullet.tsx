@@ -1,3 +1,5 @@
+'use client'
+
 import { useFocusManager, useKeyboard, usePress } from 'react-aria'
 import { useSwiperController } from '../../../../providers/Swiper'
 import Button from '../../../Button'
