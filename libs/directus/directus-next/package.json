@@ -32,6 +32,8 @@
     "access": "public"
   },
   "dependencies": {
+    "@okam/core-lib": "1.16.0",
+    "@okam/directus-node": "0.5.0",
     "@okam/logger": "1.1.0",
     "next": "^14.1.1",
     "radashi": "^12.3.0",
