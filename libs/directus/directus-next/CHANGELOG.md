@@ -1,3 +1,17 @@
+## 1.2.1 (2025-07-22)
+
+### 🩹 Fixes
+
+- **directus-next:** import from direrctus-node/edge instead ([99d3bce](https://github.com/OKAMca/stack/commit/99d3bce))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-node to 0.6.0
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.2.0 (2025-07-22)
 
 ### 🚀 Features
