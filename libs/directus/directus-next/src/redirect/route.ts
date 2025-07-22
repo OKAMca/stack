@@ -1,4 +1,4 @@
-import { fetchRedirectsData } from '@okam/directus-node'
+import { fetchRedirectsData } from '@okam/directus-node/edge'
 import { getJsonErrorResponse } from '../response'
 import { getRedirectSecretDefault } from './env'
 import type { HandleRedirectOptions } from './interface'

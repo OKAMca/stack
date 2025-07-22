@@ -1,4 +1,4 @@
-import type { TFetchRedirectsResponse } from '@okam/directus-node'
+import type { TFetchRedirectsResponse } from '@okam/directus-node/edge'
 import { log } from '../../logger'
 import type { DirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
 import { getApiRouteUrlDefault, getRedirectSecretDefault } from '../env'
