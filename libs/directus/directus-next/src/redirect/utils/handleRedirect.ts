@@ -1,5 +1,5 @@
 import { normalizePath } from '@okam/core-lib'
-import type { TRedirectData } from '@okam/directus-node'
+import type { TRedirectData } from '@okam/directus-node/edge'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { capitalize } from 'radashi'
