@@ -1,3 +1,17 @@
+## 1.7.12 (2025-07-22)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.1
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.7.10 (2025-07-22)
 
 ### 🩹 Fixes
