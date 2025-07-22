@@ -1,3 +1,21 @@
+## 0.6.0 (2025-07-22)
+
+### 🚀 Features
+
+- **directus-next:** /api/redirect route handler to fetch + cache directus redirects ([c21b953](https://github.com/OKAMca/stack/commit/c21b953))
+
+### 🩹 Fixes
+
+- **directus-node:** export edge-compatible code from separate file ([9f77744](https://github.com/OKAMca/stack/commit/9f77744))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 0.5.0 (2025-01-30)
 
 ### 🚀 Features
