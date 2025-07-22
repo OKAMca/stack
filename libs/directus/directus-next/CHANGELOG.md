@@ -1,3 +1,13 @@
+## 1.2.0 (2025-07-22)
+
+### 🚀 Features
+
+- **directus-next:** /api/redirect route handler to fetch + cache directus redirects ([c21b953](https://github.com/OKAMca/stack/commit/c21b953))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.1.1 (2025-07-09)
 
 ### 🩹 Fixes
