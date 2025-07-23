@@ -5,29 +5,31 @@
   "projectType": "library",
   "tags": ["publishable"],
   "targets": {
-    "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "outputPath": "dist/libs/directus/directus-node",
-        "tsConfig": "libs/directus/directus-node/tsconfig.lib.json",
-        "packageJson": "libs/directus/directus-node/package.json",
-        "main": "libs/directus/directus-node/src/index.ts",
-        "assets": ["libs/directus/directus-node/*.md"]
+        "lintFilePatterns": [
+          "libs/directus/directus-node/**/*.{ts,tsx,js,jsx}",
+          "libs/directus/directus-node/package.json",
+          "libs/directus/directus-node/project.json"
+        ]
       }
     },
-    "publish": {
-      "command": "node tools/scripts/publish.mjs directus-node {args.ver} {args.tag}",
-      "dependsOn": ["build"]
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "jestConfig": "libs/directus/directus-node/jest.config.ts"
+        "outputPath": "dist/libs/directus/directus-node"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
       }
     },
     "nx-release-publish": {
