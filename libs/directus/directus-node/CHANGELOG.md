@@ -1,3 +1,13 @@
+## 0.6.1 (2025-07-23)
+
+### 🩹 Fixes
+
+- directus next directus node builds ([#317](https://github.com/OKAMca/stack/pull/317))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 0.6.0 (2025-07-22)
 
 ### 🚀 Features
