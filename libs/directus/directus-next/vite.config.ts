@@ -45,13 +45,13 @@ export default defineConfig({
           format: 'es',
           entryFileNames: '[name].mjs',
           preserveModules: false,
-          banner: '"use server";',
+          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
         },
         {
           format: 'cjs', 
           entryFileNames: '[name].js',
           preserveModules: false,
-          banner: '"use server";',
+          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
         }
       ],
       // External packages that should not be bundled into your library.
