@@ -1,3 +1,17 @@
+## 1.2.2 (2025-07-23)
+
+### 🩹 Fixes
+
+- issue with vite config for directus next ([#318](https://github.com/OKAMca/stack/pull/318))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-node to 0.6.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 1.2.1 (2025-07-22)
 
 ### 🩹 Fixes
