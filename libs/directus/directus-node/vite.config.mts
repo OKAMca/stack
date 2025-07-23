@@ -41,10 +41,20 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      plugins: [preserveDirectives()],
-      output: {
-        preserveModules: true,
-      },
+      output: [
+        {
+          format: 'es',
+          entryFileNames: '[name].mjs',
+          preserveModules: false,
+          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
+        },
+        {
+          format: 'cjs',
+          entryFileNames: '[name].js',
+          preserveModules: false,
+          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
+        }
+      ],
       // External packages that should not be bundled into your library.
       external: [...externalDeps, '@okam/logger', '@okam/core-lib'],
     },
