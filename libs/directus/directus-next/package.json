@@ -1,7 +1,7 @@
 {
   "name": "@okam/directus-next",
   "main": "./index.js",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "types": "./index.d.ts",
   "exports": {
     ".": {
@@ -32,12 +32,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@okam/core-lib": "1.16.0",
-    "@okam/directus-node": "0.6.1",
+    "@okam/core-lib": "1.17.0",
+    "@okam/directus-node": "0.6.2",
     "@okam/logger": "1.1.0",
     "next": "^14.1.1",
     "radashi": "^12.3.0",
-    "@okam/directus-query": "1.4.1",
+    "@okam/directus-query": "1.4.2",
     "server-only": "0.0.1",
     "graphql-request": "7.1.2",
     "server-only-context": "0.1.0",
