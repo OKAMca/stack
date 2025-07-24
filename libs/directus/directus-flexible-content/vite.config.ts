@@ -44,7 +44,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, '@okam/stack-ui', '@okam/directus-block'],
+      external: [...externalDeps, '@okam/stack-ui', '@okam/directus-block', '@okam/core-lib'],
     },
   },
 })
