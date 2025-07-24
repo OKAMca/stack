@@ -25,7 +25,7 @@ const meta: Meta<typeof ComboBox> = {
     label: 'Brand',
     placeholder: 'Select a brand',
     allowsCustomValue: true,
-    menuTrigger: 'focus',
+    menuTrigger: 'input',
     children: [
       <Item key="1">CTV</Item>,
       <Item key="2">TSN</Item>,
