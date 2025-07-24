@@ -1,3 +1,11 @@
+## 1.2.3 (2025-07-24)
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.0
+- Updated directus-node to 0.6.2
+- Updated directus-query to 1.4.2
+
 ## 1.2.2 (2025-07-23)
 
 ### 🩹 Fixes

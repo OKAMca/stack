@@ -1,3 +1,9 @@
+## 1.39.3 (2025-07-24)
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.0
+
 ## 1.39.2 (2025-07-18)
 
 ### 🩹 Fixes

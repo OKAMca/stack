@@ -1,7 +1,7 @@
 {
   "name": "@okam/stack-ui",
   "main": "./index.js",
-  "version": "1.39.2",
+  "version": "1.39.3",
   "types": "./index.d.ts",
   "exports": {
     ".": {
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@internationalized/date": "3.8.0",
-    "@okam/core-lib": "1.16.0",
+    "@okam/core-lib": "1.17.0",
     "@okam/logger": "1.1.0",
     "@react-aria/accordion": "^3.0.0-alpha.36",
     "@react-aria/checkbox": "3.15.4",
