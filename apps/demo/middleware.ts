@@ -6,8 +6,6 @@ export const directusConfig: DirectusRouteConfig = {
   localeMap: {
     'fr-CA': 'fr',
     'en-CA': 'en',
-    'fr-FR': 'fr',
-    'en-US': 'en',
   },
   collectionSettings: {
     default: {
