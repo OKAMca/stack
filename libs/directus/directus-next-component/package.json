@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-next-component",
-  "version": "1.7.17",
+  "version": "1.7.18",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
