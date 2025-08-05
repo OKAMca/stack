@@ -12,8 +12,8 @@ function scrollToTop(behavior: ScrollBehavior) {
   window?.scrollTo?.({ top: 0, behavior })
 }
 
-function getParamsLocale(params: Params): string | undefined {
-  const { locale } = params
+function getParamsLocale(params: Params | undefined): string | undefined {
+  const { locale } = params ?? {}
   if (Array.isArray(locale)) return locale[0]
   return locale
 }
