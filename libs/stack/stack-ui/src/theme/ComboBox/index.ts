@@ -1,7 +1,26 @@
+import { tv } from 'tailwind-variants'
 import type { TTheme } from '../../providers/Theme/interface'
 import button from '../Button'
 import listBoxTheme from '../ListBox'
 import typography from '../Typography'
+
+const comboBoxButton = tv({
+  base: [
+    button.base,
+    `
+      px-4
+      py-2
+      text-white
+      bg-color-1-500
+    `,
+  ],
+  variants: {
+    isOpen: {
+      true: 'pointer-events-none',
+      false: 'hover:bg-color-1-400 active:bg-color-1-400',
+    },
+  },
+})
 
 const comboBoxTheme: TTheme = {
   wrapper: () => 'flex flex-col gap-4 relative',
@@ -9,7 +28,7 @@ const comboBoxTheme: TTheme = {
   container: () => 'flex flex-col gap-4',
   inputWrapper: () =>
     'relative flex items-center outline outline-2 outline-gray-300 focus-within:outline focus-within:outline-black focus-within:outline-2 [&>input]:flex-1 [&>input]:min-w-0 [&>input]:pr-10 [&>input]:border-0 [&>input]:outline-0 [&>input]:bg-transparent [&>input]:text-ellipsis [&>input]:whitespace-nowrap [&>input]:overflow-hidden',
-  button: (props) => button(props),
+  button: comboBoxButton,
   popover: {
     popover: () =>
       'w-[var(--comboBox-popover-container-width)] max-h-[300px] overflow-y-auto overflow-x-hidden text-white !bg-color-1-500 rounded-md p-2',
