@@ -1,3 +1,19 @@
+## 1.7.17 (2025-08-05)
+
+### 🩹 Fixes
+
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.3
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.7.14 (2025-07-23)
 
 ### 🩹 Fixes
