@@ -22,6 +22,13 @@ const meta: Meta<typeof Link> = {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <I18nProvider locale="en">
+        <Story />
+      </I18nProvider>
+    ),
+  ],
   args: {
     href: '/products/2',
     children: 'Product 2',
@@ -197,13 +204,6 @@ export const Locale: Story = {
 }
 
 export const ContextLocale: Story = {
-  decorators: [
-    (Story) => (
-      <I18nProvider locale="fr">
-        <Story />
-      </I18nProvider>
-    ),
-  ],
   args: {
     href: '/products/2',
     locale: undefined,
