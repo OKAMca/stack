@@ -1,3 +1,13 @@
+## 1.2.4 (2025-08-05)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.2.3 (2025-07-24)
 
 ### 🧱 Updated Dependencies
