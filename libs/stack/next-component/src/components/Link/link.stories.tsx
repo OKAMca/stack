@@ -1,5 +1,6 @@
-import { Box } from '@okam/stack-ui'
+import { Box, Typography } from '@okam/stack-ui'
 import type { Meta, StoryObj } from '@storybook/react'
+import { I18nProvider } from 'react-aria'
 import Link from './index'
 
 const meta: Meta<typeof Link> = {
@@ -21,16 +22,7 @@ const meta: Meta<typeof Link> = {
       },
     },
   },
-  decorators: [
-    (Story) => (
-      <>
-        <Box customTheme="h-screen bg-gray-100 flex items-center justify-center mb-8">This is long content</Box>
-        <Story />
-      </>
-    ),
-  ],
   args: {
-    locale: 'en',
     href: '/products/2',
     children: 'Product 2',
     scroll: true,
@@ -41,6 +33,7 @@ const meta: Meta<typeof Link> = {
     onPathnameChange: (pathname) => console.log('Pathname change', pathname),
     onSearchParamsChange: (searchParams) => console.log('Search params change', searchParams),
     onHashChange: (hash) => console.log('Hash change', hash),
+    tokens: { buttonStyle: 'default' },
   },
   argTypes: {
     scroll: {
@@ -143,22 +136,76 @@ const meta: Meta<typeof Link> = {
       },
     },
   },
+  render: ({ href, ...args }) => (
+    <Box customTheme="flex flex-col gap-4">
+      <Box customTheme="w-fit">
+        <Link href={href} {...args} />
+      </Box>
+      <Box customTheme="w-fit">
+        <Typography>Href: {href.toString()}</Typography>
+      </Box>
+    </Box>
+  ),
 }
 
 export default meta
 
 type Story = StoryObj<typeof Link>
 
-export const ScrollDefault: Story = {}
+export const ScrollDefault: Story = {
+  decorators: [
+    (Story) => (
+      <>
+        <Box customTheme="h-screen bg-gray-100 flex items-center justify-center mb-8">This is long content</Box>
+        <Story />
+      </>
+    ),
+  ],
+}
 
 export const ScrollFalse: Story = {
+  decorators: ScrollDefault.decorators,
   args: {
     scroll: false,
   },
 }
 
 export const ScrollTop: Story = {
+  decorators: ScrollDefault.decorators,
   args: {
     scroll: 'top',
+  },
+}
+
+export const Internal: Story = {
+  args: {
+    href: '/products/2',
+  },
+}
+
+export const External: Story = {
+  args: {
+    href: 'https://www.google.com',
+  },
+}
+
+export const Locale: Story = {
+  args: {
+    href: '/products/2',
+    locale: 'fr',
+  },
+}
+
+export const ContextLocale: Story = {
+  decorators: [
+    (Story) => (
+      <I18nProvider locale="fr">
+        <Story />
+      </I18nProvider>
+    ),
+  ],
+  args: {
+    href: '/products/2',
+    locale: undefined,
   },
 }
