@@ -1,13 +1,13 @@
 import type { TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
-import type { TDirectusLinkPropsConfig, TUseDirectusLink } from '../components/DirectusLink/interface'
-import useDirectusFile from './directus-file'
+import type { DirectusLinkPropsConfig, GetDirectusLink } from '../../components/DirectusLink/interface'
+import { getDirectusFile } from '../getDirectusFile'
 
-function useFile(props: TUseDirectusLink) {
+function getFile(props: GetDirectusLink) {
   const { file } = props
 
   const { filename_download: filenameDownload } = file ?? {}
-  const { src } = useDirectusFile(file) ?? {}
+  const { src } = getDirectusFile(file) ?? {}
 
   return {
     href: src,
@@ -15,7 +15,7 @@ function useFile(props: TUseDirectusLink) {
   }
 }
 
-function useCollection(props: TUseDirectusLink) {
+function getCollection(props: GetDirectusLink) {
   const { collection, target } = props
 
   return {
@@ -24,7 +24,7 @@ function useCollection(props: TUseDirectusLink) {
   }
 }
 
-function useExternalLink(props: TUseDirectusLink) {
+function getExternalLink(props: GetDirectusLink) {
   const { external_link: externalLink, target } = props
 
   return {
@@ -33,21 +33,21 @@ function useExternalLink(props: TUseDirectusLink) {
   }
 }
 
-function useAnchor(props: TUseDirectusLink) {
+function getAnchor(props: GetDirectusLink) {
   const { anchor } = props
 
   return { href: anchor ?? undefined }
 }
 
-const defaultPropsConfig: TDirectusLinkPropsConfig = {
-  collection: useCollection,
+const defaultPropsConfig: DirectusLinkPropsConfig = {
+  collection: getCollection,
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  'external-link': useExternalLink,
-  file: useFile,
-  anchor: useAnchor,
+  'external-link': getExternalLink,
+  file: getFile,
+  anchor: getAnchor,
 }
 
-export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
+export function getDirectusLink(props: GetDirectusLink): TAnchorProps {
   const {
     type,
     label,
@@ -95,3 +95,8 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     ...restOfLinkProps,
   }
 }
+
+/**
+ * @deprecated Use `getDirectusLink` instead
+ */
+export const useDirectusLink = getDirectusLink
