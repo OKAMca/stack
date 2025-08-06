@@ -1,16 +1,16 @@
 import type { Nullable } from '@okam/stack-ui'
-import DirectusLink from '../components/DirectusLink'
-import type { TDirectusLinkProps } from '../components/DirectusLink/interface'
+import DirectusLink from '../../components/DirectusLink'
+import type { DirectusLinkProps } from '../../components/DirectusLink/interface'
 import type {
-  TNavigationItems,
-  TNavigationItemsChildren,
-  TNavigationItemsParents,
-  TNavigationItemsTree,
-} from '../types/navigation-items'
+  NavigationItems,
+  NavigationItemsChildren,
+  NavigationItemsParents,
+  NavigationItemsTree,
+} from '../../types/navigationItems'
 
-function createLinkProps<Depth extends number, Link, NavigationItems>(
-  item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>,
-  onNavigationItem: (item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>) => Nullable<TDirectusLinkProps>,
+function createLinkProps<Depth extends number, Link, Items>(
+  item: Nullable<NavigationItems<Items, Link, Depth>>,
+  onNavigationItem: (item: Nullable<NavigationItems<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
 ) {
   const { tokens, variant } = item ?? {}
   const link = onNavigationItem(item)
@@ -28,13 +28,11 @@ function createLinkProps<Depth extends number, Link, NavigationItems>(
   return linkProps
 }
 
-function createParentTree<Depth extends number, Link, NavigationItems>(
-  item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>,
-  onNavigationItem: (
-    item: Nullable<TNavigationItemsParents<NavigationItems, Link, Depth>>,
-  ) => Nullable<TDirectusLinkProps>,
+function createParentTree<Depth extends number, Link, Items>(
+  item: Nullable<NavigationItems<Items, Link, Depth>>,
+  onNavigationItem: (item: Nullable<NavigationItemsParents<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
   depth = -1,
-): Nullable<TNavigationItemsTree> {
+): Nullable<NavigationItemsTree> {
   const { parent } = item ?? {}
   const linkProps = createLinkProps(item, onNavigationItem)
   const { id } = linkProps ?? {}
@@ -49,13 +47,11 @@ function createParentTree<Depth extends number, Link, NavigationItems>(
   }
 }
 
-function createChildrenTree<Depth extends number, Link, NavigationItems>(
-  item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>,
-  onNavigationItem: (
-    item: Nullable<TNavigationItemsChildren<NavigationItems, Link, Depth>>,
-  ) => Nullable<TDirectusLinkProps>,
+function createChildrenTree<Depth extends number, Link, Items>(
+  item: Nullable<NavigationItems<Items, Link, Depth>>,
+  onNavigationItem: (item: Nullable<NavigationItemsChildren<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
   depth = 1,
-): Nullable<TNavigationItemsTree> {
+): Nullable<NavigationItemsTree> {
   const { children } = item ?? {}
   const linkProps = createLinkProps(item, onNavigationItem)
   const { id } = linkProps ?? {}
@@ -76,14 +72,14 @@ function createChildrenTree<Depth extends number, Link, NavigationItems>(
  * @param onNavigationItem Called when a navigation item is about to be added to the tree
  * @returns A tree of navigation items with ready-to-use DirectusLink components
  */
-export default function useNavigationItems<
+export function getNavigationItems<
   Depth extends number,
   Link,
-  NavigationItems extends TNavigationItems<NavigationItems, Link, Depth> = TNavigationItems<unknown, Link, Depth>,
+  Items extends NavigationItems<Items, Link, Depth> = NavigationItems<unknown, Link, Depth>,
 >(
-  items: Nullable<Nullable<TNavigationItems<NavigationItems, Link, Depth>>[]>,
-  onNavigationItem: (item: Nullable<TNavigationItems<NavigationItems, Link, Depth>>) => Nullable<TDirectusLinkProps>,
-): Nullable<Nullable<TNavigationItemsTree>[]> {
+  items: Nullable<Nullable<NavigationItems<Items, Link, Depth>>[]>,
+  onNavigationItem: (item: Nullable<NavigationItems<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
+): Nullable<Nullable<NavigationItemsTree>[]> {
   const tree = items?.map((item) => {
     const { children, parent } = item ?? {}
 
@@ -103,3 +99,8 @@ export default function useNavigationItems<
 
   return tree
 }
+
+/**
+ * @deprecated Use `getNavigationItems` instead
+ */
+export const useNavigationItems = getNavigationItems
