@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { Nullable } from '@okam/stack-ui'
+import type { TFiles } from '../files'
 import type { Fragmentize } from './Fragments'
 
 export interface PageSettingsTranslation {
@@ -13,6 +14,10 @@ export interface PageSettingsTranslation {
   title?: Nullable<string>
   slug?: Nullable<string>
   path?: Nullable<string>
+  meta_description?: Nullable<string>
+  no_follow?: Nullable<boolean>
+  no_index?: Nullable<boolean>
+  og_image?: Nullable<TFiles>
 }
 
 export interface PageSettings {
