@@ -1,5 +1,5 @@
-import type { TDirectusFileProps } from '../DirectusFile/interface'
+import type { DirectusFileProps } from '../DirectusFile/interface'
 
-export interface TDirectusImgProps extends TDirectusFileProps {
+export interface TDirectusImgProps extends DirectusFileProps {
   fit?: 'cover' | 'contain' | 'inside' | 'outside'
 }
