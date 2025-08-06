@@ -1,19 +1,19 @@
-import type { TPageSettings, TFiles } from '@okam/directus-next'
-import { useMetadata } from '@okam/directus-next-component'
-import type { TMetadataOptions } from '@okam/directus-next-component'
+import type { PageSettings, TFiles } from '@okam/directus-next'
+import { getMetadata } from '@okam/directus-next-component'
+import type { MetadataOptions } from '@okam/directus-next-component'
 import type { Nullable } from '@okam/stack-ui'
 import type { OpenGraphType } from 'next/dist/lib/metadata/types/opengraph-types'
 import Link from 'next/link'
 
 // Mock page settings to simulate Directus data
-const mockPageSettings: TPageSettings = {
+const mockPageSettings: PageSettings = {
   id: 'metadata-demo',
   belongs_to_collection: 'pages',
   belongs_to_key: 'metadata-demo',
   translations: [
     {
       title: 'Metadata Demo Page',
-      meta_description: 'A demonstration of the useMetadata hook for Next.js pages',
+      meta_description: 'A demonstration of the getMetadata hook for Next.js pages',
       no_follow: false,
       no_index: false,
       og_image: {
@@ -29,7 +29,7 @@ const mockPageSettings: TPageSettings = {
 }
 
 // Metadata options configuration
-const metadataOptions: TMetadataOptions = {
+const metadataOptions: MetadataOptions = {
   ogImageMaxWidth: 1200,
   ogImageMaxHeight: 630,
   imageLoader: ({ src, width, height }: { src: string; width?: string | number; height?: string | number }) => {
@@ -53,7 +53,7 @@ const metadataOptions: TMetadataOptions = {
       src: '/images/metadata-fallback.png',
     }
   },
-  createAlternateUrls: (pageSettings: Nullable<TPageSettings>) => {
+  createAlternateUrls: (pageSettings: Nullable<PageSettings>) => {
     // Create alternate URLs for different languages
     if (!pageSettings?.translations?.length) return {}
     const { translations } = pageSettings
@@ -90,7 +90,7 @@ export default function MetadataDemo() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">About This Page</h2>
             <p className="text-gray-700 mb-4">
-              This page demonstrates how to use the <code>useMetadata</code> hook to generate dynamic metadata for your
+              This page demonstrates how to use the <code>getMetadata</code> hook to generate dynamic metadata for your
               Next.js pages based on Directus data.
             </p>
             <p className="text-gray-700 mb-4">
@@ -102,7 +102,7 @@ export default function MetadataDemo() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">How It Works</h2>
             <p className="text-gray-700 mb-4">
-              The <code>useMetadata</code> hook takes three parameters:
+              The <code>getMetadata</code> hook takes three parameters:
             </p>
             <ul className="list-disc pl-8 mb-4">
               <li className="text-gray-700 mb-2">
@@ -130,7 +130,7 @@ export default function MetadataDemo() {
                 <strong>Title</strong>: Metadata Demo Page
               </li>
               <li className="text-gray-700 mb-2">
-                <strong>Description</strong>: A demonstration of the useMetadata hook for Next.js pages
+                <strong>Description</strong>: A demonstration of the getMetadata hook for Next.js pages
               </li>
               <li className="text-gray-700 mb-2">
                 <strong>Open Graph</strong>: Image, title, description, type
@@ -150,7 +150,7 @@ export default function MetadataDemo() {
             <div className="bg-gray-100 p-6 rounded-lg">
               <code className="block whitespace-pre-wrap text-sm">
                 {`// Add to your Next.js page
-import { useMetadata } from '@okam/directus-next-component'
+import { getMetadata } from '@okam/directus-next-component'
 
 // Configure your metadata options
 const metadataOptions = {
@@ -179,7 +179,7 @@ const metadataOptions = {
 // Use in Next.js generateMetadata
 export async function generateMetadata() {
   const pageProps = await fetchPageData() // Your data fetching
-  return await useMetadata(pageProps, metadataOptions)
+  return await getMetadata(pageProps, metadataOptions)
 }`}
               </code>
             </div>
@@ -200,6 +200,6 @@ export async function generateMetadata() {
 export async function generateMetadata() {
   const pageProps = { pageSettings: mockPageSettings }
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const metadata = await useMetadata(pageProps, metadataOptions)
+  const metadata = await getMetadata(pageProps, metadataOptions)
   return metadata
 }
