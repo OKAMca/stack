@@ -1,14 +1,14 @@
-import type { TPageSettings } from '@okam/directus-next'
+import type { PageSettings } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
 import type { AlternateURLs } from 'next/dist/lib/metadata/types/alternative-urls-types'
 import type { OpenGraphType } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { StaticImageData } from 'next/image'
-import type { TDirectusFileProps } from '../components/DirectusFile/interface'
+import type { DirectusFileProps } from '../components/DirectusFile/interface'
 
 /**
  * Configuration options for metadata generation
  */
-export type TMetadataOptions = {
+export type MetadataOptions = {
   /**
    * Default fallback image to use for Open Graph tags when no other image is specified
    */
@@ -36,13 +36,13 @@ export type TMetadataOptions = {
    * @returns The files fragment
    */
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  getFilesFragment: <T extends { _typename: 'directus_files' }>(file: Nullable<T>) => Nullable<TDirectusFileProps>
+  getFilesFragment: <T extends { _typename: 'directus_files' }>(file: Nullable<T>) => Nullable<DirectusFileProps>
   /**
    * Create alternate URLs for the page
    * @param pageSettings The page settings
    * @returns The alternate URLs
    */
-  createAlternateUrls: (pageSettings: Nullable<TPageSettings>) => AlternateURLs
+  createAlternateUrls: (pageSettings: Nullable<PageSettings>) => AlternateURLs
 
   /**
    * The type config of Open Graph to use
