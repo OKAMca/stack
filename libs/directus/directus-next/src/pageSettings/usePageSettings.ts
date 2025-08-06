@@ -7,22 +7,22 @@ import { log } from '../logger'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 import { pageSettingsContext, pageSettingsVariablesContext } from './context'
 import type {
-  TUsePageSettingsConfig,
-  TUsePageSettingsProps,
+  TGetPageSettingsConfig,
+  TGetPageSettingsProps,
   TPageSettingsQueryItem,
-  TUsePageSettingsReturn,
+  TGetPageSettingsReturn,
 } from './interface'
 
-const [getPageSettings, setPageSettings] = pageSettingsContext()
+const [getPageSettingsContext, setPageSettingsContext] = pageSettingsContext()
 const [getVariables, setVariables] = pageSettingsVariablesContext()
 
-function isDirectusRouteConfig(config: TUsePageSettingsConfig | undefined): config is DirectusRouteConfig {
+function isDirectusRouteConfig(config: TGetPageSettingsConfig | undefined): config is DirectusRouteConfig {
   return !!config && 'localeMap' in config
 }
 
 function getDirectusVariables<QueryVariables extends Variables>(
   variables: QueryVariables | undefined,
-  config: TUsePageSettingsConfig | undefined,
+  config: TGetPageSettingsConfig | undefined,
 ) {
   const localeMap = isDirectusRouteConfig(config) ? config.localeMap : config
   if (!localeMap) {
@@ -60,17 +60,17 @@ function getDirectusVariables<QueryVariables extends Variables>(
  * ```
  * @returns The new queried page settings item or the cached value if the variables have not changed. If the query contains a fragment, the contents of the fragment will be returned.
  */
-export async function usePageSettings<
+export async function getPageSettings<
   Item extends TPageSettingsQueryItem,
   ItemKey extends string = string,
   QueryVariables extends Variables = Variables,
 >(
-  props?: TUsePageSettingsProps<Item, ItemKey, QueryVariables>,
+  props?: TGetPageSettingsProps<Item, ItemKey, QueryVariables>,
   itemKey?: Exclude<ItemKey, '__typename'>,
-): Promise<TUsePageSettingsReturn<Item>> {
+): Promise<TGetPageSettingsReturn<Item>> {
   const { variables, config } = props ?? {}
   const directusVariables = getDirectusVariables(variables, config)
-  const defaultReturn = (getPageSettings() as TUsePageSettingsReturn<Item>) ?? {}
+  const defaultReturn = (getPageSettingsContext() as TGetPageSettingsReturn<Item>) ?? {}
 
   if (!props || isEqual(getVariables(), directusVariables)) {
     log('Using cached page settings', { path: defaultReturn.page_settings?.translations?.[0]?.path })
@@ -84,7 +84,7 @@ export async function usePageSettings<
   const result = await queryGql(document, directusVariables)
 
   const items = result?.[key]
-  const currentItem = (Array.isArray(items) ? items?.[0] : items) as TUsePageSettingsReturn<Item>
+  const currentItem = (Array.isArray(items) ? items?.[0] : items) as TGetPageSettingsReturn<Item>
   const currentPageSettings = currentItem?.page_settings
   const currentPath = currentPageSettings?.translations?.[0]?.path
 
@@ -99,7 +99,7 @@ export async function usePageSettings<
   }
 
   log('Caching new page settings', { path: currentPath })
-  setPageSettings(currentItem)
+  setPageSettingsContext(currentItem)
   setVariables(variables)
 
   return currentItem
