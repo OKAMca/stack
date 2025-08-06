@@ -1,9 +1,9 @@
-import { usePageSettings } from '@okam/directus-next/server'
+import { getPageSettings } from '@okam/directus-next/server'
 import { PageByIdDocument } from 'apps/directus-data-query/src'
 import { directusConfig } from '../../../../middleware'
 
 export default async function Page(props: { params: { id: string; locale: string } }) {
-  const data = await usePageSettings({
+  const data = await getPageSettings({
     document: PageByIdDocument,
     variables: props.params,
     config: directusConfig,
