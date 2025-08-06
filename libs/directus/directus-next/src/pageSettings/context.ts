@@ -3,9 +3,9 @@
 import 'server-only'
 import type { Variables } from 'graphql-request'
 import createServerContext from 'server-only-context'
-import type { TPageSettingsQueryItem, TUsePageSettingsReturn } from './interface'
+import type { TPageSettingsQueryItem, TGetPageSettingsReturn } from './interface'
 
-export function pageSettingsContext<Item extends TPageSettingsQueryItem>(defaultValue?: TUsePageSettingsReturn<Item>) {
+export function pageSettingsContext<Item extends TPageSettingsQueryItem>(defaultValue?: TGetPageSettingsReturn<Item>) {
   const [pageSettings, setPageSettings] = createServerContext(defaultValue)
 
   return [pageSettings, setPageSettings] as const

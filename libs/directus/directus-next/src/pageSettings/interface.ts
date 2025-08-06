@@ -66,13 +66,13 @@ export type TPageSettingsItemDocument<
   QueryVariables extends Variables,
 > = TypedDocumentNode<TPageSettingsItemQuery<Item, ItemKey>, QueryVariables>
 
-export type TUsePageSettingsConfig = DirectusRouteConfig | Record<string, string>
+export type TGetPageSettingsConfig = DirectusRouteConfig | Record<string, string>
 
 /**
  * If not using a fragment in the item key, all type parameters must be passed. Otherwise, only the `page_settings` field will be in the type definition.
  * If using a fragment in the item key, the return type will contain the fragment.
  */
-export interface TUsePageSettingsProps<
+export interface TGetPageSettingsProps<
   Item extends TPageSettingsQueryItem,
   ItemKey extends string,
   QueryVariables extends Variables,
@@ -85,10 +85,10 @@ export interface TUsePageSettingsProps<
   /**
    * Either a directus route config or directly a locale map. Not passing a config while passing a document will result in direct usage of the `locale` variable.
    */
-  config?: TUsePageSettingsConfig
+  config?: TGetPageSettingsConfig
 }
 
-export type TUsePageSettingsReturn<Item extends TPageSettingsQueryItem> = Omit<Item, 'page_settings'> & {
+export type TGetPageSettingsReturn<Item extends TPageSettingsQueryItem> = Omit<Item, 'page_settings'> & {
   page_settings?:
     | Exclude<NonNullable<Item>['page_settings'], Fragmentize<TPageSettings, 'PageSettingsFragment'>>
     | null
