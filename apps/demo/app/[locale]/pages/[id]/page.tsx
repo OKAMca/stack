@@ -1,5 +1,5 @@
+import { PageByIdDocument } from '@demo/directus-data-query'
 import { usePageSettings } from '@okam/directus-next/server'
-import { PageByIdDocument } from 'apps/directus-data-query/src'
 import { directusConfig } from '../../../../middleware'
 
 export default async function Page(props: { params: { id: string; locale: string } }) {
