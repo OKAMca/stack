@@ -6,6 +6,7 @@ export { default as DirectusFile } from './components/DirectusFile'
 
 export { default as useDirectusFile } from './hooks/directus-file'
 export { default as useDirectusLink } from './hooks/directus-link'
+export { default as getDirectusSearchParams } from './hooks/directus-search-params'
 export { default as useNavigationItems } from './hooks/navigation-items'
 export { default as useMetadata } from './hooks/directus-metadata'
 export { logger as DirectusNextComponent } from './logger'
@@ -23,7 +24,7 @@ export type {
    */ TPageSettings,
 } from '@okam/directus-next'
 export type { TNavigationItems, TNavigationItemsTree } from './types/navigation-items'
-export type { TLinks } from './types/links'
+export type { TLinks, SearchParams } from './types/links'
 export type {
   TDirectusLinkProps,
   TUseDirectusLink,
