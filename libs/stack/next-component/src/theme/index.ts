@@ -1,9 +1,16 @@
-import { createThemeProvider, makeTheme } from '@okam/stack-ui'
-import { memo } from 'react'
-import linkTheme from './Link'
+'use client'
 
-const baseTheme = makeTheme({
-  link: linkTheme,
+import { createThemeProvider, makeTheme } from '@okam/stack-ui'
+import React from 'react'
+import buttonTheme from './Button'
+import filterTheme from './Filter'
+import typography from './Typography'
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const BaseTheme = makeTheme({
+  filter: filterTheme,
+  button: buttonTheme,
+  typography,
 })
 
-export default memo(createThemeProvider(baseTheme))
+export default React.memo(createThemeProvider(BaseTheme))
