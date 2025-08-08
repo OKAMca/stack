@@ -39,7 +39,6 @@ const Filter = <T extends TToken = TToken>(props: TFilterProps<T>) => {
     disabledKeys,
     disallowEmptySelection,
     errorMessage,
-    escapeKeyBehavior,
     onRemove,
     onSelectionChange,
     themeName = 'filter',
