@@ -106,6 +106,7 @@ export type {
 } from './types/react-stately'
 export type { TListBoxProps, TListBoxSectionProps } from './components/fields/ListBox/interface'
 export type { TOptionProps } from './components/fields/Option/interface'
+export type { TIconProps } from './components/Icon/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
