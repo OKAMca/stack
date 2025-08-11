@@ -2,19 +2,19 @@ import type { TDefaultComponent, TAnchorProps } from '@okam/stack-ui'
 import type { AriaAttributes, ComponentType } from 'react'
 import type { TLinks } from '../../types/links'
 
-export type TDirectusLink = Omit<TDefaultComponent, 'children'> & Omit<Partial<TLinks>, 'tokens'> & AriaAttributes
+export type DirectusLink = Omit<TDefaultComponent, 'children'> & Omit<Partial<TLinks>, 'tokens'> & AriaAttributes
 
-export interface TUseDirectusLink extends TDirectusLink {
-  propsConfig?: TDirectusLinkPropsConfig
+export interface GetDirectusLink extends DirectusLink {
+  propsConfig?: DirectusLinkPropsConfig
 }
-export interface TDirectusLinkProps extends TDirectusLink {
-  componentsConfig?: TDirectusLinkComponentsConfig
-  propsConfig?: TDirectusLinkPropsConfig
+export interface DirectusLinkProps extends DirectusLink {
+  componentsConfig?: DirectusLinkComponentsConfig
+  propsConfig?: DirectusLinkPropsConfig
 }
 
-export type TDirectusLinkComponentsConfig = Record<string, ComponentType<TDirectusLinkProps>>
+export type DirectusLinkComponentsConfig = Record<string, ComponentType<DirectusLinkProps>>
 
-export type TDirectusLinkPropsConfig<ReturnProps extends TAnchorProps = TAnchorProps> = Record<
+export type DirectusLinkPropsConfig<ReturnProps extends TAnchorProps = TAnchorProps> = Record<
   string,
-  (props: TUseDirectusLink) => ReturnProps
+  (props: GetDirectusLink) => ReturnProps
 >
