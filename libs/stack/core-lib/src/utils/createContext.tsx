@@ -6,7 +6,7 @@ import React from 'react'
  * A helper to create a Context and Provider with no upfront default value, and
  * without having to check for undefined all the time.
  */
-function createCtx<A extends Record<string, unknown> | null>() {
+function createCtx<A>() {
   const ctx = React.createContext<A | undefined>(undefined)
   function useCtx() {
     const c = React.useContext(ctx)
@@ -17,10 +17,10 @@ function createCtx<A extends Record<string, unknown> | null>() {
 
     return c
   }
-  return [useCtx, ctx.Provider] as const // 'as const' makes TypeScript infer a tuple
+  return [useCtx, ctx.Provider, ctx.Consumer] as const // 'as const' makes TypeScript infer a tuple
 }
 
-export function createCtxNullable<A extends Record<string, unknown> | null>() {
+export function createCtxNullable<A>() {
   const ctx = React.createContext<A | undefined>(undefined)
   function useCtx() {
     const c = React.useContext(ctx)
@@ -31,7 +31,7 @@ export function createCtxNullable<A extends Record<string, unknown> | null>() {
 
     return c
   }
-  return [useCtx, ctx.Provider] as const // 'as const' makes TypeScript infer a tuple
+  return [useCtx, ctx.Provider, ctx.Consumer] as const // 'as const' makes TypeScript infer a tuple
 }
 
 export default createCtx
