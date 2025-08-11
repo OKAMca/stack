@@ -1,3 +1,21 @@
+## 1.7.19 (2025-08-11)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.40.0
+- Updated next-component to 1.0.12
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.7.18 (2025-08-05)
 
 ### 🩹 Fixes
