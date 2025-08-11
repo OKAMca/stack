@@ -1,3 +1,7 @@
+## 1.40.0 (2025-08-11)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
 ## 1.39.3 (2025-07-24)
 
 ### 🧱 Updated Dependencies

@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-next-component",
-  "version": "1.7.18",
+  "version": "1.7.19",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "@okam/logger": "1.1.0",
-    "@okam/next-component": "1.0.11",
-    "@okam/stack-ui": "1.39.3",
+    "@okam/next-component": "1.0.12",
+    "@okam/stack-ui": "1.40.0",
     "@react-spring/web": "^9.7.5",
     "next": "^14.1.1",
     "radashi": "^12.3.0",
