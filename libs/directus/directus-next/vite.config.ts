@@ -2,7 +2,6 @@
 /// <reference types="vitest" />
 import * as path from 'path'
 import react from '@vitejs/plugin-react'
-import preserveDirectives from 'rollup-plugin-preserve-directives'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
@@ -41,12 +40,22 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      plugins: [preserveDirectives()],
-      output: {
-        preserveModules: true,
-      },
+      output: [
+        {
+          format: 'es',
+          entryFileNames: '[name].mjs',
+          preserveModules: false,
+          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
+        },
+        {
+          format: 'cjs', 
+          entryFileNames: '[name].js',
+          preserveModules: false,
+          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
+        }
+      ],
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, 'next/navigation', 'next/headers', 'next/server'],
+      external: [...externalDeps, 'next/navigation', 'next/headers', 'next/server', '@okam/directus-node', '@okam/logger', '@okam/core-lib', '@okam/directus-query'],
     },
     ssr: true,
   },

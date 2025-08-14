@@ -1,3 +1,7 @@
+'use client'
+
+// 'use client' needed for react-aria imports
+
 import { isEmpty } from 'radashi'
 import { mergeProps } from 'react-aria'
 import type { TToken } from '../providers/Theme/interface'

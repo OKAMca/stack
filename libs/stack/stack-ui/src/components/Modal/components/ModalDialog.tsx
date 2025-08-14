@@ -1,3 +1,5 @@
+'use client'
+
 import { FocusRing, FocusScope } from 'react-aria'
 import { Dialog } from '../../Dialog'
 import type { TModalDialogProps } from '../interface'

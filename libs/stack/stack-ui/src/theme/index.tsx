@@ -10,10 +10,12 @@ import { calendarTheme } from './Calendar'
 import carouselTheme from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
 import { checkboxGroup, checkboxGroupItemsGroup } from './CheckboxGroup'
+import comboBoxTheme from './ComboBox'
 import { datePickerTheme } from './DatePicker'
 import { imgTheme } from './Image'
 import lightboxTheme from './LightBox'
 import listBoxTheme from './ListBox'
+import popoverTheme from './Popover'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
 import { searchIcon, searchInput } from './Search'
@@ -40,10 +42,7 @@ const BaseTheme = makeTheme({
   carousel: carouselTheme,
   calendar: calendarTheme,
   datePicker: datePickerTheme,
-  popover: {
-    button: (props) => button(props),
-    popover: () => 'border-2 text-black p-4 bg-gray-300',
-  },
+  popover: popoverTheme,
   typography: (props) => typography(props),
   button: (props) => button(props),
   link: button,
@@ -52,6 +51,7 @@ const BaseTheme = makeTheme({
     container: (props) => sidePanelContainer(props),
     innerContainer: (props) => sidePanelInnerContainer(props),
   },
+  comboBox: comboBoxTheme,
   lightBox: lightboxTheme,
   shareButton: {
     icon: (props) => shareButtonIcon(props),
