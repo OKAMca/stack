@@ -1,3 +1,185 @@
+## 1.7.19 (2025-08-11)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.40.0
+- Updated next-component to 1.0.12
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.18 (2025-08-05)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.4
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.17 (2025-08-05)
+
+### 🩹 Fixes
+
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.3
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.14 (2025-07-23)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.2
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 1.7.12 (2025-07-22)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.1
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 1.7.10 (2025-07-22)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.0
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 1.7.9 (2025-07-18)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.39.2
+- Updated next-component to 1.0.10
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 1.7.8 (2025-07-18)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.39.1
+- Updated next-component to 1.0.9
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 1.7.7 (2025-07-09)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.1.1
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 1.7.6 (2025-07-04)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.39.0
+- Updated next-component to 1.0.8
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 1.7.5 (2025-07-01)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.38.1
+- Updated next-component to 1.0.7
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 1.7.4 (2025-07-01)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.38.0
+- Updated next-component to 1.0.6
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.7.3 (2025-05-26)
 
 ### 🧱 Updated Dependencies

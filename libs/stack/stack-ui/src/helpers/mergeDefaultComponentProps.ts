@@ -1,3 +1,7 @@
+'use client'
+
+// 'use client' needed for react-aria imports
+
 import { isEmpty } from 'radashi'
 import { mergeProps } from 'react-aria'
 import type { TToken } from '../providers/Theme/interface'
@@ -13,12 +17,19 @@ import type { Nullable, TDefaultComponent } from '../types/components'
  * @param args - An array of props belonging to `TDefaultComponent`
  * @returns A merged props object
  */
-export function mergeDefaultComponentProps<T extends TDefaultComponent>(...args: Nullable<Partial<T>>[]): T {
-  const mergedTokens = args.reduce<TToken>((acc, curr) => Object.assign(acc, curr?.tokens), {})
-  const mergedCustomThemes = args
-    .map((arg) => arg?.customTheme)
+export function mergeDefaultComponentProps<T extends TDefaultComponent, S>(
+  firstArg: Nullable<Partial<T>>,
+  ...args: Nullable<Partial<S>>[]
+): T & S {
+  const allArgs = [firstArg, ...args]
+  const mergedTokens = allArgs.reduce<TToken>(
+    (acc, curr) => (curr && 'tokens' in curr ? Object.assign(acc, curr?.tokens) : acc),
+    {},
+  )
+  const mergedCustomThemes = allArgs
+    .map((arg) => (arg && 'customTheme' in arg ? arg?.customTheme : undefined))
     .filter((theme) => !isEmpty(theme))
     .join(' ')
-  const mergedArgs = mergeProps<TDefaultComponent[]>(...args.filter((arg): arg is Exclude<T, null> => arg !== null))
-  return { ...mergedArgs, tokens: mergedTokens, customTheme: mergedCustomThemes } as T
+  const mergedArgs = mergeProps<TDefaultComponent[]>(...allArgs.filter((arg): arg is Exclude<T, null> => arg !== null))
+  return { ...mergedArgs, tokens: mergedTokens, customTheme: mergedCustomThemes } as T & S
 }

@@ -1,3 +1,82 @@
+## 1.40.0 (2025-08-11)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
+## 1.39.3 (2025-07-24)
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.0
+
+## 1.39.2 (2025-07-18)
+
+### 🩹 Fixes
+
+- **stack-ui:** always have use client for react-aria/stately imports ([027edae](https://github.com/OKAMca/stack/commit/027edae))
+- **stack-ui:** added use client to file with react-aria import ([51092ab](https://github.com/OKAMca/stack/commit/51092ab))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.39.1 (2025-07-18)
+
+### 🩹 Fixes
+
+- **stack-ui:** wysiwyg block use client ([8c3d3b0](https://github.com/OKAMca/stack/commit/8c3d3b0))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.39.0 (2025-07-04)
+
+### 🚀 Features
+
+- **stack-ui:** node item/section dispatcher component ([16f1dfa](https://github.com/OKAMca/stack/commit/16f1dfa))
+
+### 🩹 Fixes
+
+- **stack-ui:** listbox missing use client directive ([937f395](https://github.com/OKAMca/stack/commit/937f395))
+- **stack-ui:** missing exports ([54334dc](https://github.com/OKAMca/stack/commit/54334dc))
+- **stack-ui:** combobox debounces its listbox items display ([56c14b6](https://github.com/OKAMca/stack/commit/56c14b6))
+- **stack-ui:** accept DOMAttrributes on Box ([ede7e77](https://github.com/OKAMca/stack/commit/ede7e77))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.38.1 (2025-07-01)
+
+### 🩹 Fixes
+
+- **stack-ui:** missing use client directives ([84148f7](https://github.com/OKAMca/stack/commit/84148f7))
+- **stack-ui:** export listbox components/types ([e2a8338](https://github.com/OKAMca/stack/commit/e2a8338))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.38.0 (2025-07-01)
+
+### 🚀 Features
+
+- **stack-ui:** shared option list component ([bbf5c5b](https://github.com/OKAMca/stack/commit/bbf5c5b))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- **stack-ui:** listbox section items correrct theme name ([8acb1b5](https://github.com/OKAMca/stack/commit/8acb1b5))
+- **stack-ui:** safer option render ([5b26401](https://github.com/OKAMca/stack/commit/5b26401))
+- **stack-ui:** option component isSelectable token correct value ([6883551](https://github.com/OKAMca/stack/commit/6883551))
+- **stack-ui:** listbox interface ([eef614d](https://github.com/OKAMca/stack/commit/eef614d))
+- **stack-ui:** listbox fully accessible, supports link options ([4a43bde](https://github.com/OKAMca/stack/commit/4a43bde))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.37.0 (2025-05-22)
 
 ### 🚀 Features
