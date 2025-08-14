@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { FocusScope, useListBox, useOption } from 'react-aria'
 import useThemeContext from '../../../../providers/Theme/hooks'

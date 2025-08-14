@@ -18,7 +18,7 @@ export default defineConfig({
     nxCopyAssetsPlugin(['*.md']),
     dts({
       entryRoot: 'src',
-      tsConfigFilePath: path.join(__dirname, 'tsconfig.lib.json'),
+      tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
     }),
   ],
 
@@ -48,7 +48,7 @@ export default defineConfig({
       output: {
         preserveModules: true,
       },
-      external: externalDeps,
+      external: [...externalDeps, '@okam/core-lib', '@okam/logger'],
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
           return

@@ -1,3 +1,5 @@
+'use client'
+
 import { I18nProvider } from 'react-aria'
 import Date from './index'
 

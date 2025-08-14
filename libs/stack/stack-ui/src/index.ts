@@ -8,6 +8,7 @@ export { default as ShareButton } from './components/ShareButton'
 export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
 export { default as Popover } from './components/Popover'
+export { default as PopoverButton } from './components/Popover/components/Button'
 export { default as Carousel } from './components/Carousel'
 export { default as LegacyCarousel } from './components/Carousel/components/LegacyCarousel'
 export {
@@ -58,6 +59,12 @@ export { default as TabList } from './components/TabList'
 export { TabItem } from './components/TabList/components/TabItem'
 export { default as TabPanel } from './components/TabList/components/TabPanel'
 export { default as Tab } from './components/TabList/components/Tab'
+export { default as ComboBox } from './components/fields/ComboBox'
+export { default as ReactHookFormComboBox } from './components/fields/ComboBox'
+export { default as ListBox } from './components/fields/ListBox'
+export { default as ListBoxSection } from './components/fields/ListBox/components/ListBoxSection'
+export { default as Option } from './components/fields/Option'
+export { Node } from './components/Node'
 export * from './components/icons'
 
 // providers
@@ -102,7 +109,15 @@ export type { TSidePanelButtons, TSidePanelButtonProps, TSidePanelContext } from
 export type { default as TSearchProps } from './components/fields/SearchField/interface'
 export type { TTagGroupProps, TTagItemProps, TTagProps } from './components/TagGroup/interface'
 export type { TTabListProps, TTabProps, TTabPanelProps } from './components/TabList/interface'
-export type { TDefaultNode, TDefaultItemComponent } from './types/react-stately'
+export type {
+  TDefaultNode,
+  TDefaultItemComponent,
+  TDefaultNodeComponent,
+  TDefaultSectionComponent,
+} from './types/react-stately'
+export type { TListBoxProps, TListBoxSectionProps } from './components/fields/ListBox/interface'
+export type { TOptionProps } from './components/fields/Option/interface'
+export type { TIconProps } from './components/Icon/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
@@ -121,6 +136,8 @@ export { useCarouselPaginationFraction } from './components/Carousel/pagination/
 export { useCarouselNextNavigation } from './components/Carousel/navigation/useCarouselNextNavigation'
 export { useCarouselPrevNavigation } from './components/Carousel/navigation/useCarouselPrevNavigation'
 export { useCarouselA11yAnnouncer } from './components/Carousel/a11y/useCarouselA11yAnnouncer'
+export { useDebounce } from './hooks/useDebounce'
+export { useComboBoxFiltering } from './components/fields/ComboBox/hooks/useComboBoxFiltering'
 
 // dev tools
 export { logger as StackUILogger } from './logger'
