@@ -4,12 +4,12 @@ import type { RegisterOptions } from 'react-hook-form'
 import type { ListState } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
-import type { TDefaultItemComponent, TDefaultNode } from '../../../types/react-stately'
+import type { TDefaultNode, TDefaultNodeComponent } from '../../../types/react-stately'
 import type { TAnchorProps } from '../../Button/interface'
 
 export interface TListBoxProps<I extends object = object, T extends TToken = TToken>
   extends Omit<TDefaultComponent<T>, 'children'>,
-    AriaListBoxProps<I & TDefaultItemComponent<I, T>> {
+    AriaListBoxProps<I & TDefaultNodeComponent<I, T>> {
   /**
    * @default Anchor
    */
@@ -19,6 +19,15 @@ export interface TListBoxProps<I extends object = object, T extends TToken = TTo
 export interface TListBoxFormProps<I extends object = object, T extends TToken = TToken>
   extends Omit<TListBoxProps<I, T>, 'onBlur'>,
     TReactHookForm {}
+export interface TControlledListBoxProps<I extends object = object, T extends TToken = TToken>
+  extends Omit<TListBoxProps<I, T>, 'children'>,
+    Partial<Pick<TListBoxProps<I, T>, 'children'>> {
+  state: ListState<I>
+}
+
+export interface TControlledListBoxFormProps<I extends object = object, T extends TToken = TToken>
+  extends TControlledListBoxProps<I, T>,
+    Omit<TListBoxFormProps<I, T>, 'children' | 'onBlur'> {}
 
 export interface TListBoxSectionProps<I extends object = object, T extends TToken = TToken>
   extends Omit<TDefaultComponent<T>, 'children'>,
@@ -33,3 +42,7 @@ export interface TReactHookFormListBoxProps<I extends object = object, T extends
   name: string
   selectionMode?: Exclude<AriaListBoxProps<I>['selectionMode'], 'none'>
 }
+
+export interface TControlledReactHookFormListBoxProps<I extends object = object, T extends TToken = TToken>
+  extends TReactHookFormListBoxProps<I, T>,
+    Omit<TControlledListBoxFormProps<I, T>, 'children' | 'onBlur' | 'selectionMode'> {}

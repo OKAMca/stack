@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { directusRouteRouter } from '@okam/directus-next'
-import type { DirectusRouteConfig } from 'libs/directus/directus-next/src/types/directusRouteConfig'
-import { NextResponse } from 'next/server'
+import { directusRouteRouter, type DirectusRouteConfig } from '@okam/directus-next'
 import type { NextRequest } from 'next/server'
 
 export const directusConfig: DirectusRouteConfig = {
   localeMap: {
-    'fr-FR': 'fr',
-    'en-US': 'en',
+    'fr-CA': 'fr',
+    'en-CA': 'en',
   },
   collectionSettings: {
     default: {
@@ -17,8 +15,7 @@ export const directusConfig: DirectusRouteConfig = {
 }
 
 export async function middleware(request: NextRequest) {
-  // @ts-expect-error Will be fixed in another PR
-  return directusRouteRouter(request, directusConfig, NextResponse)
+  return directusRouteRouter(request, directusConfig)
 }
 
 export const config = {

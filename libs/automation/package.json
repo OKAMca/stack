@@ -1,10 +1,10 @@
 {
   "name": "@okam/automation",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "dependencies": {
     "@nx/devkit": "20.2.2",
     "tslib": "^2.3.0",
-    "@okam/core-lib": "1.16.0",
+    "@okam/core-lib": "1.17.0",
     "radashi": "^12.3.0"
   },
   "type": "commonjs",

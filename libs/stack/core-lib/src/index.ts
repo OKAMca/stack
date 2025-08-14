@@ -16,3 +16,5 @@ export { default as getNestedObjectValueOfKey } from './utils/object-find-deep-n
 export { default as checkObjectProperty } from './utils/object-property'
 
 export { capitalizeFirstLetter } from './utils/string-transform'
+
+export { normalizePath } from './utils/normalize-path'

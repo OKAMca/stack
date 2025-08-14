@@ -1,3 +1,5 @@
+'use client'
+
 import { FocusScope } from 'react-aria'
 import Box from '../../../Box'
 import type { TCarouselPaginationProps } from '../../interface'
