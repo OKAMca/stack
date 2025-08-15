@@ -6,8 +6,8 @@ import type { PressEvent } from 'react-aria'
 import { usePagination } from '../../../providers/Pagination'
 import type { PaginationButtonProps } from '../interface'
 
-const PaginationButton = <T extends TToken = TToken, Data = unknown, PageParam = unknown, E = DefaultError>(
-  props: PaginationButtonProps<T, Data, PageParam, E>,
+const PaginationButton = <Data = unknown, PageParam = unknown, E = DefaultError, T extends TToken = TToken>(
+  props: PaginationButtonProps<Data, PageParam, E, T>,
 ) => {
   const { themeName, tokens, customTheme, handlePageChange, handlePress: handlePressProp, ...rest } = props
   const pagination = usePagination<Data, PageParam, E>()

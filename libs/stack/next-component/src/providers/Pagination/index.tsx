@@ -1,6 +1,5 @@
 import { createCtx } from '@okam/core-lib'
-import type { DefaultError, QueryKey } from '@tanstack/react-query'
-import { useSuspenseInfiniteQuery } from '@tanstack/react-query'
+import type { DefaultError } from '@tanstack/react-query'
 import type { ProviderProps } from 'react'
 import { useMemo } from 'react'
 import type { PaginationContext, PaginationProviderProps } from './interface'
@@ -11,20 +10,14 @@ export const usePagination = usePaginationBase as unknown as <
   PageParam = unknown,
   E = DefaultError,
 >() => PaginationContext<Data, PageParam, E>
-const PaginationProvider = PaginationProviderBase as unknown as <Data, PageParam = unknown, E = DefaultError>(
+const PaginationProvider = PaginationProviderBase as unknown as <Data = unknown, PageParam = unknown, E = DefaultError>(
   props: ProviderProps<PaginationContext<Data, PageParam, E>>,
 ) => JSX.Element
 
-const PaginationContextProvider = <
-  Data = unknown,
-  E = DefaultError,
-  Key extends QueryKey = QueryKey,
-  PageParam = unknown,
->(
-  props: PaginationProviderProps<Data, E, Key, PageParam>,
+const PaginationContextProvider = <Data = unknown, PageParam = unknown, E = DefaultError>(
+  props: PaginationProviderProps<Data, PageParam, E>,
 ) => {
-  const { children, getItemKey, ...rest } = props
-  const result = useSuspenseInfiniteQuery(rest)
+  const { children, getItemKey, ...result } = props
   const value = useMemo(() => {
     return {
       ...result,
