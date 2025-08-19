@@ -1,3 +1,5 @@
+'use client'
+
 import { Box, type TToken } from '@okam/stack-ui'
 import { usePagination } from '../../providers/Pagination'
 import PaginationRenderer from './components/Renderer'
