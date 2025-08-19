@@ -1,3 +1,5 @@
+'use client'
+
 import { createCtx } from '@okam/core-lib'
 import type { DefaultError } from '@tanstack/react-query'
 import type { ProviderProps } from 'react'

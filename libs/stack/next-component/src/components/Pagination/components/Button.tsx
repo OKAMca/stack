@@ -1,3 +1,5 @@
+'use client'
+
 import type { TToken } from '@okam/stack-ui'
 import { Button } from '@okam/stack-ui'
 import type { DefaultError } from '@tanstack/react-query'
