@@ -1,10 +1,11 @@
 import type { ReactNode, RefObject } from 'react'
 import type { AriaComboBoxOptions } from 'react-aria'
 import type { RefCallBack } from 'react-hook-form'
-import type { ComboBoxStateOptions } from 'react-stately'
+import type { ComboBoxState, ComboBoxStateOptions } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
 import type { TDefaultNodeComponent } from '../../../types/react-stately'
+import type { TButtonProps } from '../../Button/interface'
 
 export type TFieldReactHookForm<T = TToken> = TReactHookForm & Omit<TDefaultComponent<T>, 'children'>
 
@@ -26,4 +27,8 @@ export interface TComboBoxProps<I extends object = object, T extends TToken = TT
    * @default 200
    */
   debounceDelay?: number
+}
+
+export interface TComboBoxButtonProps<T extends TToken = TToken> extends TButtonProps<T> {
+  state: ComboBoxState<object & TDefaultNodeComponent<object, TToken>>
 }
