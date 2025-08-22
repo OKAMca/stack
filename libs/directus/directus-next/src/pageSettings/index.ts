@@ -1,8 +1,3 @@
 export * from './context'
-export type {
-  TPageSettings,
-  TPageSettingsTranslation,
-  TPageSettingsItemDocument,
-  TPageSettingsItemQuery,
-} from './interface'
-export * from './usePageSettings'
+export type { GetPageSettingsConfig, GetPageSettingsProps, GetPageSettingsReturn } from './interface'
+export { getPageSettings, usePageSettings } from './getPageSettings'
