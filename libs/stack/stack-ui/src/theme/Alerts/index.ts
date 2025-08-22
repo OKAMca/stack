@@ -7,7 +7,7 @@ const alertsWrapper = tv({
 })
 
 const alertsCarouselWrapper = tv({
-  base: 'flex justify-between items-center gap-4 relative',
+  base: 'flex flex-wrap justify-between items-center gap-4 relative',
 })
 
 const alertsCloseBtn = tv({
@@ -16,7 +16,7 @@ const alertsCloseBtn = tv({
 })
 
 const alertsSwiperSwiper = tv({
-  base: 'bg-color-1-300 m-2 rounded-lg order-2',
+  base: 'bg-color-1-300 m-2 rounded-lg order-2 basis-9/12',
 })
 
 const alertsSwiperWrapper = tv({
@@ -48,6 +48,7 @@ const alertsItemIcon = tv({
 
 const alertsNavigationButton = tv({
   extend: button,
+  base: 'basis-1/12',
   variants: {
     order: {
       prev: 'order-1',
@@ -57,7 +58,7 @@ const alertsNavigationButton = tv({
 })
 
 const alertsPaginationWrapper = tv({
-  base: 'flex gap-4 justify-center absolute z-10 bottom-4 left-0 right-0',
+  base: 'flex gap-4 justify-center bg-color-1-200 z-10 bottom-4 left-0 right-0 order-4 basis-full',
 })
 
 const alertsPaginationBullet = tv({

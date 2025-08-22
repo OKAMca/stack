@@ -10,11 +10,17 @@ export { default as Lightbox } from './components/Lightbox'
 export { default as Popover } from './components/Popover'
 export { default as PopoverButton } from './components/Popover/components/Button'
 export { default as Carousel } from './components/Carousel'
+export { default as LegacyCarousel } from './components/Carousel/components/LegacyCarousel'
 export {
-  CarouselNextNavigationButton,
-  CarouselPrevNavigationButton,
-  CarouselNavigationButton,
-} from './components/Carousel/components/CarouselNavigationButton'
+  LegacyCarouselNextNavigationButton as CarouselNextNavigationButton,
+  LegacyCarouselPrevNavigationButton as CarouselPrevNavigationButton,
+  LegacyCarouselNavigationButton as CarouselNavigationButton,
+} from './components/Carousel/navigation/LegacyCarouselNavigationButton'
+export { default as CarouselNextNavigation } from './components/Carousel/navigation/CarouselNextNavigation'
+export { default as CarouselPrevNavigation } from './components/Carousel/navigation/CarouselPrevNavigation'
+export { default as CarouselPagination } from './components/Carousel/pagination/CarouselPagination'
+export { default as CarouselPaginationBullet } from './components/Carousel/pagination/CarouselPaginationBullet'
+export { default as CarouselPaginationFraction } from './components/Carousel/pagination/CarouselPaginationFraction'
 export { default as WysiwygBlock } from './components/WysiwygBlock'
 export { default as Icon } from './components/Icon'
 export { default as Date } from './components/Date'
@@ -70,7 +76,12 @@ export { MenuContextProvider, useMenu } from './providers/Menu'
 export { RadioGroupProvider, useRadioGroupCtx } from './providers/RadioGroup/RadioGroup'
 export { AccordionContextProvider, useAccordionCtx } from './providers/Accordion'
 export { SearchBarProvider } from './providers/UserSearchQuery'
-export { SwiperControllerContextProvider, useSwiperController } from './providers/Swiper'
+export {
+  CarouselContextProvider,
+  useCarousel,
+  SwiperControllerContextProvider,
+  useSwiperController,
+} from './providers/Carousel'
 export { TranslationContextProvider, useTranslation } from './providers/Translation'
 export * as reactHookForm from 'react-hook-form'
 
@@ -117,6 +128,14 @@ export { default as useTwitterShareUrl } from './components/ShareButton/utils/us
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
 export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
 export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
+export { useCarouselSwiper } from './components/Carousel/swiper/useCarouselSwiper'
+export { useCarouselSlide } from './components/Carousel/swiper/useCarouselSlide'
+export { useCarouselPagination } from './components/Carousel/pagination/useCarouselPagination'
+export { useCarouselPaginationBullet } from './components/Carousel/pagination/useCarouselPaginationBullet'
+export { useCarouselPaginationFraction } from './components/Carousel/pagination/useCarouselPaginationFraction'
+export { useCarouselNextNavigation } from './components/Carousel/navigation/useCarouselNextNavigation'
+export { useCarouselPrevNavigation } from './components/Carousel/navigation/useCarouselPrevNavigation'
+export { useCarouselA11yAnnouncer } from './components/Carousel/a11y/useCarouselA11yAnnouncer'
 export { useDebounce } from './hooks/useDebounce'
 export { useComboBoxFiltering } from './components/fields/ComboBox/hooks/useComboBoxFiltering'
 
