@@ -1,19 +1,19 @@
 'use client'
 
 import React from 'react'
-import { useSwiperController } from '../../../providers/Swiper'
+import { useCarousel } from '../../../providers/Carousel'
 import Box from '../../Box'
 import Button from '../../Button'
+import CarouselSlide from '../../Carousel/swiper/CarouselSlide'
 import Icon from '../../Icon'
 import type { TAlertsItemProps } from '../interface'
 
 const AlertsItem = (props: TAlertsItemProps) => {
-  const { title, button, content, themeName = 'alerts.item', tokens, icon, id } = props
-  const { controller } = useSwiperController()
-  const isActive = controller?.slides?.findIndex((slide) => slide.id === id) === controller?.activeIndex
+  const { title, button, content, themeName = 'alerts.item', tokens, icon, id, swiperSlideIndex = 0 } = props
+  const { activeIndex } = useCarousel()
+  const isActive = activeIndex === swiperSlideIndex
 
   if (!title && !button && !content && !icon) return null
-
   return (
     <>
       {icon && <Icon icon={icon} themeName={`${themeName}.icon`} tokens={tokens} />}
