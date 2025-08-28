@@ -1,0 +1,9 @@
+query BlockFaqs($page: Int, $limit: Int = 2) {
+  block_faqs(page: $page, limit: $limit) {
+    alignment
+    faqs
+    headline
+    id
+    title
+  }
+}

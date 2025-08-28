@@ -31,7 +31,8 @@
       "@okam/directus/directus-next": ["libs/directus/directus-next/src/index.ts"],
       "@okam/logger": ["libs/stack/logger/src/index.ts"],
       "@okam/next-component": ["libs/stack/next-component/src/index.ts"],
-      "@okam/stack-ui": ["libs/stack/stack-ui/src/index.ts"]
+      "@okam/stack-ui": ["libs/stack/stack-ui/src/index.ts"],
+      "@demo/directus-data-query": ["apps/directus-data-query/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
