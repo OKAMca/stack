@@ -1,13 +1,13 @@
 import { Box, WysiwygBlock } from '@okam/stack-ui'
 import React from 'react'
 import type { TBlockSerializerProps } from '../../components/BlockSerializer/interface'
-import useBlock from '../../hooks/useBlock'
+import { getBlock } from '../../utils'
 import type { BlockWysiwygFragment } from './interface'
 
 const BlockWysiwyg = async (props: TBlockSerializerProps<BlockWysiwygFragment>) => {
   const key = 'block_wysiwyg_by_id'
   const { themeName = 'wysiwyg', tokens } = props
-  const { content, title, level, cmsTokens } = await useBlock<BlockWysiwygFragment>(props, key)
+  const { content, title, level, cmsTokens } = await getBlock<BlockWysiwygFragment>(props, key)
 
   if (!content && !(title && level)) return null
 
