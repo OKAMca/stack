@@ -1,3 +1,19 @@
+## 1.41.0 (2025-08-28)
+
+### 🚀 Features
+
+- **stack-ui:** independent carousel components/hooks ([7cf1a47](https://github.com/OKAMca/stack/commit/7cf1a47))
+
+### 🩹 Fixes
+
+- **stack-ui:** wrong aria label navigate next a11y prop name ([28011ef](https://github.com/OKAMca/stack/commit/28011ef))
+- **stack-ui:** legacy carousel separate component ([85e5988](https://github.com/OKAMca/stack/commit/85e5988))
+- **stack-ui:** filter DOM swiper props ([72687bf](https://github.com/OKAMca/stack/commit/72687bf))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.40.1 (2025-08-22)
 
 ### 🩹 Fixes
