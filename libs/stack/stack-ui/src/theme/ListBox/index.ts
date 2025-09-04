@@ -89,6 +89,14 @@ const listBoxOptionDescription = tv({
   },
 })
 
+const listBoxErrorMessage = tv({
+  extend: typography,
+  defaultVariants: {
+    size: 'footnotes',
+    isError: true,
+  },
+})
+
 const itemTheme = {
   option: listBoxOptionOption,
   label: listBoxOptionLabel,
@@ -106,6 +114,7 @@ const listBoxTheme = {
     item: itemTheme,
   },
   item: itemTheme,
+  errorMessage: listBoxErrorMessage,
 }
 
 export default listBoxTheme
