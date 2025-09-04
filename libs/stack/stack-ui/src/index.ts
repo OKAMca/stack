@@ -21,6 +21,7 @@ export { default as CarouselPrevNavigation } from './components/Carousel/navigat
 export { default as CarouselPagination } from './components/Carousel/pagination/CarouselPagination'
 export { default as CarouselPaginationBullet } from './components/Carousel/pagination/CarouselPaginationBullet'
 export { default as CarouselPaginationFraction } from './components/Carousel/pagination/CarouselPaginationFraction'
+export { default as CarouselSwiper } from './components/Carousel/swiper/CarouselSwiper'
 export { default as WysiwygBlock } from './components/WysiwygBlock'
 export { default as Icon } from './components/Icon'
 export { default as Date } from './components/Date'
