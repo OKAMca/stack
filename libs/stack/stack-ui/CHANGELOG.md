@@ -1,3 +1,13 @@
+## 1.41.1 (2025-09-04)
+
+### 🩹 Fixes
+
+- **stack-ui:** export carousel swiper ([eb183b4](https://github.com/OKAMca/stack/commit/eb183b4))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.41.0 (2025-08-28)
 
 ### 🚀 Features
