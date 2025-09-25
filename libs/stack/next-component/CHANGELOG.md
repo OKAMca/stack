@@ -1,3 +1,24 @@
+## 1.1.0 (2025-09-25)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **next-component:** null guard against undefined next useParams return ([c347f3a](https://github.com/OKAMca/stack/commit/c347f3a))
+- **next-component:** link component doesnt prepend ext links with locale ([8659974](https://github.com/OKAMca/stack/commit/8659974))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.0.15 (2025-09-04)
 
 ### 🚀 Features
