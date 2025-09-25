@@ -1,13 +1,13 @@
 'use client'
 
 /* eslint-disable @typescript-eslint/naming-convention */
-import { mergeProps } from 'react-aria'
+import { mergeProps, usePress } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
 import type { TButtonProps } from '../../Button/interface'
 import type { TCarouselNavigation } from './interface'
 
 export function useCarouselNextNavigation(props: TButtonProps): TCarouselNavigation {
-  const { isDisabled: isDisabledProp, ...rest } = props
+  const { isDisabled: isDisabledProp, handlePress, ...rest } = props
   const { controller, nextNavigationRef, id, activeIndex } = useCarousel()
   const { params, slides } = controller ?? {}
   const { slidesPerView, loop } = params ?? {}
@@ -23,9 +23,18 @@ export function useCarouselNextNavigation(props: TButtonProps): TCarouselNavigat
   const allowNavigateNext = slidesGroupIndex < slidesGroupLength
   const isDisabled = isDisabledProp || (!loop && !allowNavigateNext)
 
+  const { pressProps } = usePress({
+    onPress: (e) => {
+      controller?.slideNext()
+      handlePress?.(e)
+    },
+    isDisabled,
+  })
+
   return {
     isDisabled,
     navigationProps: mergeProps(
+      pressProps,
       {
         'aria-disabled': isDisabled,
         'aria-controls': id,
