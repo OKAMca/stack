@@ -1,3 +1,13 @@
+## 1.41.2 (2025-09-25)
+
+### 🩹 Fixes
+
+- **stack-ui:** bump version ([dc92171](https://github.com/OKAMca/stack/commit/dc92171))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.41.1 (2025-09-04)
 
 ### 🩹 Fixes
