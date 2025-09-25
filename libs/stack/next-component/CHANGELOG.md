@@ -1,3 +1,9 @@
+## 1.1.1 (2025-09-25)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.2
+
 ## 1.1.0 (2025-09-25)
 
 ### 🚀 Features
