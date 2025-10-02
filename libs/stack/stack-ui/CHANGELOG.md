@@ -1,3 +1,19 @@
+## 1.42.0 (2025-10-02)
+
+### 🚀 Features
+
+- print button ([e5a149d](https://github.com/OKAMca/stack/commit/e5a149d))
+- **stack-ui:** add print button ([3053737](https://github.com/OKAMca/stack/commit/3053737))
+
+### 🩹 Fixes
+
+- **stack-ui:** add window check ([50d3828](https://github.com/OKAMca/stack/commit/50d3828))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Max Hilland
+
 ## 1.41.2 (2025-09-25)
 
 ### 🩹 Fixes
