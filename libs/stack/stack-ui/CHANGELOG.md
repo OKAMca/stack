@@ -1,3 +1,15 @@
+## 1.42.1 (2025-10-09)
+
+### 🩹 Fixes
+
+- **stack-ui:** remove getShareUrl ([ee04eac](https://github.com/OKAMca/stack/commit/ee04eac))
+- **stack-ui:** add missing getShareUrl util ([a73622a](https://github.com/OKAMca/stack/commit/a73622a))
+- **stack-ui:** add missing exports and utils ([5a95ed7](https://github.com/OKAMca/stack/commit/5a95ed7))
+
+### ❤️ Thank You
+
+- Max Hilland
+
 ## 1.42.0 (2025-10-02)
 
 ### 🚀 Features
