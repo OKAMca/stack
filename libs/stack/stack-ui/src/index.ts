@@ -129,6 +129,7 @@ export { default as useFacebookShareUrl } from './components/ShareButton/utils/u
 export { default as useMailToShareUrl } from './components/ShareButton/utils/useMailToShareUrl'
 export { default as useXShareUrl } from './components/ShareButton/utils/useXShareUrl'
 export { default as useLinkedinShareUrl } from './components/ShareButton/utils/useLinkedinShareUrl'
+export { default as getShareUrl } from './components/ShareButton/utils/getShareUrl'
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
 export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
 export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
