@@ -120,13 +120,15 @@ export type {
 export type { TListBoxProps, TListBoxSectionProps } from './components/fields/ListBox/interface'
 export type { TOptionProps } from './components/fields/Option/interface'
 export type { TIconProps } from './components/Icon/interface'
+export type { TShareButtonProps } from './components/ShareButton/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
 export { default as useWindow } from './components/ShareButton/utils/useWindow'
 export { default as useFacebookShareUrl } from './components/ShareButton/utils/useFacebookShareUrl'
 export { default as useMailToShareUrl } from './components/ShareButton/utils/useMailToShareUrl'
-export { default as useTwitterShareUrl } from './components/ShareButton/utils/useTwitterShareUrl'
+export { default as useXShareUrl } from './components/ShareButton/utils/useXShareUrl'
+export { default as useLinkedinShareUrl } from './components/ShareButton/utils/useLinkedinShareUrl'
 export { default as useAccordionState } from './components/Accordion/hooks/useAccordionState'
 export { mergeDefaultComponentProps } from './helpers/mergeDefaultComponentProps'
 export { default as useLabelledOverlay } from './hooks/useLabelledOverlay'
