@@ -1,9 +1,8 @@
 import type { Nullable, TToken } from '@okam/stack-ui'
-import type { TypedQueryDocumentNode } from 'graphql'
 import { get } from 'radashi'
 import type { TBlockSerializerProps } from '../components/BlockSerializer/interface'
 import { BlockSettingsFragmentDoc } from '../generated/graphql'
-import type { TBlockQuery, TBlockVariables, TCommonBlockFragment } from '../types/block'
+import type { TBlockDocument, TBlockVariables, TCommonBlockFragment } from '../types/block'
 import { getBlockProps, getFragment } from '../utils'
 
 /**
@@ -29,10 +28,10 @@ export default async function useBlock<
 >(
   props: TBlockSerializerProps<Fragment, Variables>,
   blockKey: string,
-  doc?: TypedQueryDocumentNode<TBlockQuery<Fragment>, Variables>,
+  doc?: TBlockDocument<Fragment, Variables>,
 ): Promise<Fragment & { cmsTokens: TToken }> {
   const item = get<Nullable<Fragment>>(props, 'item')
-  const document = doc ?? get<TypedQueryDocumentNode<TBlockQuery<Fragment>, Variables>>(props, 'document')
+  const document = doc ?? get<TBlockDocument<Fragment, Variables>>(props, 'document')
   const variables = get<TBlockVariables<Variables>>(props, 'variables')
 
   const propsWithFallback = await getBlockProps({
