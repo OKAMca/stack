@@ -104,7 +104,7 @@ export default function Index() {
           </Box>
           <Box>
             <ShareButton
-              id="share-button"
+              id="share-buttons"
               ariaLabel="Share stuff"
               sharingLinksList={[{ ariaLabel: 'Share on Facebook', icon: 'Facebook', key: 'facebook' }]}
             />
