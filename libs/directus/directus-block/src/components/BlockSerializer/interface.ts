@@ -17,7 +17,13 @@ export interface TBlock<
   Fragment extends TCommonBlockFragment = TCommonBlockFragment,
   Variables extends GraphQLVariables = TBlockVariables,
 > {
+  /**
+   * Directus collection name of the block.
+   */
   collection?: Nullable<string>
+  /**
+   * The actual block's data. If only the id is passed, the block will be queried using the `variables` prop. Otherwise, the block will be passed as is.
+   */
   item?: Nullable<Fragment>
   variables?: TBlockVariables<Variables>
   document?: TypedDocumentNode<TBlockQuery<Fragment>, Variables>
