@@ -16,8 +16,6 @@ export const ColumnShareButton = {
     tokens: {
       listDirection: 'column',
     },
-
-    offset: 20,
   },
 }
 
