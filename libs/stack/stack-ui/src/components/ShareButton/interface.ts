@@ -3,7 +3,6 @@ import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 
 export interface TShareButtonProps<T = TToken> extends TDefaultComponent<TShareButtonTokens & T> {
-  id: string
   icon?: React.ReactNode
   ariaLabel: string
   sharingLinksList: TShareButtonLink[]

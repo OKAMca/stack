@@ -10,7 +10,7 @@ import Icon from '../Icon'
 import type { TIconsContainerProps, TShareButtonProps } from './interface'
 
 export const IconsContainer = <T extends TToken>(props: TIconsContainerProps<T>) => {
-  const { sharingLinksList, id, isOpen, setIsOpen, onShare, themeName = 'shareButton', tokens, customTheme } = props
+  const { sharingLinksList, isOpen, setIsOpen, onShare, themeName = 'shareButton', tokens, customTheme } = props
 
   const linksListTheme = useThemeContext(`${themeName}.linksList`, { ...tokens, isOpen }, customTheme)
 
@@ -45,7 +45,7 @@ export const IconsContainer = <T extends TToken>(props: TIconsContainerProps<T>)
   }
 
   return (
-    <div className={linksListTheme} id={id} role="listbox" tabIndex={-1} onKeyDown={handleKeyDown}>
+    <div className={linksListTheme} id="share-buttons" role="listbox" tabIndex={-1} onKeyDown={handleKeyDown}>
       {sharingLinksList?.map((link) => {
         const { ariaLabel, onClick, href, icon, key } = link
 
@@ -71,17 +71,7 @@ export const IconsContainer = <T extends TToken>(props: TIconsContainerProps<T>)
 }
 
 const ShareButton = (props: TShareButtonProps) => {
-  const {
-    ariaLabel,
-    icon,
-    id,
-    sharingLinksList,
-    onShare,
-    customTheme,
-    themeName = 'shareButton',
-    tokens,
-    ...rest
-  } = props
+  const { ariaLabel, icon, sharingLinksList, onShare, customTheme, themeName = 'shareButton', tokens, ...rest } = props
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -138,17 +128,23 @@ const ShareButton = (props: TShareButtonProps) => {
     }
   }
 
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      setIsOpen(false)
+    }
+  }
+
   return (
     <FocusScope autoFocus restoreFocus contain={isOpen}>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div className={containerTheme} onKeyDown={handleKeyDown}>
+      <div className={containerTheme} onKeyDown={handleKeyDown} onBlur={handleBlur}>
         <ButtonWithForwardRef
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, isOpen }}
           aria-label={ariaLabel}
           aria-haspopup="listbox"
-          aria-expanded={isOpen ? 'true' : 'false'}
-          aria-controls="share-buttons"
+          aria-expanded={isOpen}
+          {...(isOpen && { 'aria-controls': 'share-buttons' })}
           handlePress={handleClick}
           {...rest}
         >
@@ -156,7 +152,6 @@ const ShareButton = (props: TShareButtonProps) => {
         </ButtonWithForwardRef>
         {isOpen && (
           <IconsContainer
-            id={id}
             sharingLinksList={sharingLinksList}
             onShare={onShare}
             isOpen={isOpen}

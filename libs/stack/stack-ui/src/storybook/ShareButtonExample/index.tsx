@@ -10,7 +10,6 @@ const ShareButtonExample = (props: TShareButtonProps) => {
   return (
     <>
       <ShareButton
-        id="share"
         ariaLabel="Share"
         tokens={tokens}
         sharingLinksList={[
