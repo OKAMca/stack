@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { TPageSettings, TFiles } from '@okam/directus-next'
+import type { PageSettings, TFiles } from '@okam/directus-next'
 
 /**
  * Represent the directus `links` collection, not the props of the DirectusLink component
@@ -15,6 +15,6 @@ export type TLinks = {
   scroll?: boolean | null
   target?: string | null
   type?: string | null
-  collection?: TPageSettings | null
+  collection?: PageSettings | null
   file?: TFiles | null
 }
