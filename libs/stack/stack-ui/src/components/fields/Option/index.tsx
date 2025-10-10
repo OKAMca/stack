@@ -69,12 +69,12 @@ const Option = <I extends object = object, T extends TToken = TToken>({
       return (
         <>
           {isLabelValid && (
-            <Box {...labelProps} themeName={`${themeName}.label`} tokens={optionTokens}>
+            <Box themeName={`${themeName}.label`} tokens={optionTokens}>
               {cloneElement(label, labelProps)}
             </Box>
           )}
           {isDescriptionValid && (
-            <Box {...descriptionProps} themeName={`${themeName}.description`} tokens={optionTokens}>
+            <Box themeName={`${themeName}.description`} tokens={optionTokens}>
               {cloneElement(description, descriptionProps)}
             </Box>
           )}

@@ -1,13 +1,16 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Anchor, Button } from '@okam/stack-ui'
 import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentType } from 'react'
-import { isValidElement, useState } from 'react'
+import { useState, isValidElement } from 'react'
+import { mergeProps } from 'react-aria'
+import { useForm, FormProvider, useFormContext } from 'react-hook-form'
 import type { Key, Selection } from 'react-stately'
 import { Item, Section } from 'react-stately'
 import Box from '../../Box'
 import { Node } from '../../Node'
 import ListBoxSection from './components/ListBoxSection'
-import ListBox from '.'
+import ListBox, { ReactHookFormListBox } from '.'
 
 const meta: Meta<typeof ListBox> = {
   title: 'Form/Fields/ListBox',
@@ -18,6 +21,18 @@ const meta: Meta<typeof ListBox> = {
     Section: ListBoxSection as unknown as ComponentType<unknown>,
   },
   argTypes: {
+    fieldRef: {
+      table: {
+        category: 'Form',
+      },
+    },
+    errorMessage: {
+      description:
+        'The error message to display when the field has errors. Only displayed when `isError` is `true` and the `errorMessage` prop is defined.',
+      table: {
+        category: 'Form',
+      },
+    },
     items: {
       description: 'The items to render in the listbox. Necessary when using `children` as a rendering function.',
       control: false,
@@ -285,6 +300,100 @@ export const LinkOptions: Story = {
       <Item key="orange" href="https://www.google.com">
         Orange
       </Item>,
+    ],
+  },
+}
+
+type ReactHookFormStory = StoryObj<typeof ReactHookFormListBox>
+
+export const ReactHookForm: ReactHookFormStory = {
+  decorators: [
+    (Story, context) => {
+      const { defaultSelectedKeys } = context.args
+      const methods = useForm({
+        mode: 'onChange',
+        reValidateMode: 'onChange',
+        defaultValues: {
+          fruits: defaultSelectedKeys,
+        },
+      })
+
+      return (
+        <FormProvider {...methods}>
+          <Story />
+        </FormProvider>
+      )
+    },
+  ],
+  render: (args) => {
+    const { rules } = args
+    const methods = useFormContext()
+    const { ref: fieldRef, ...registerProps } = methods.register('fruits', rules)
+
+    const clearAll = () => {
+      methods.resetField('fruits')
+      methods.clearErrors('fruits')
+    }
+
+    const handleSubmit = methods.handleSubmit((data) => {
+      console.log('Form submitted:', data)
+    })
+
+    return (
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit}>
+          <Box customTheme="flex gap-8">
+            <ReactHookFormListBox {...mergeProps(args, registerProps)} fieldRef={fieldRef} />
+            <Box customTheme="flex flex-col justify-center gap-2">
+              <Button tokens={{ intent: 'danger' }} handlePress={clearAll}>
+                Clear All
+              </Button>
+              <Button handlePress={() => handleSubmit()} {...{ type: 'submit' }}>
+                Submit Form
+              </Button>
+            </Box>
+          </Box>
+          <Box customTheme="mt-4 p-4 bg-gray-100 rounded">
+            <strong>Form Values:</strong>
+            <pre>{JSON.stringify(Array.from(methods.watch('fruits')), null, 2)}</pre>
+          </Box>
+        </form>
+      </FormProvider>
+    )
+  },
+  args: {
+    rules: {
+      required: 'Please select at least one fruit',
+      validate: (value: Set<Key>) => {
+        if (!value || value.size === 0) {
+          return 'Please select at least one fruit'
+        }
+        if (value.size > 3) {
+          return 'You can only select up to 3 fruits'
+        }
+        return true
+      },
+    },
+    isRequired: true,
+    name: 'fruits',
+    label: 'Select your three favorite fruits',
+    selectionMode: 'multiple',
+    defaultSelectedKeys: ['banana', 'apple'],
+    disabledKeys: ['banana'],
+    children: [
+      <Item key="banana">Banana</Item>,
+      <Item key="apple">Apple</Item>,
+      <Item key="orange">Orange</Item>,
+      <Item key="pear">Pear</Item>,
+      <Item key="pineapple">Pineapple</Item>,
+      <Item key="watermelon">Watermelon</Item>,
+      <Item key="strawberry">Strawberry</Item>,
+      <Item key="blueberry">Blueberry</Item>,
+      <Item key="raspberry">Raspberry</Item>,
+      <Item key="blackberry">Blackberry</Item>,
+      <Item key="cherry">Cherry</Item>,
+      <Item key="grape">Grape</Item>,
+      <Item key="kiwi">Kiwi</Item>,
     ],
   },
 }

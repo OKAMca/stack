@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type React from 'react'
-import type { HTMLAttributes } from 'react'
+import type { HTMLAttributes, ReactNode } from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TCustomTheme, TToken } from '../providers/Theme/interface'
 
@@ -12,7 +12,15 @@ export interface TDefaultComponent<T = TToken> {
   children?: React.ReactNode
 }
 
-export type TReactHookForm = {
+export interface TReactHookFormValidity {
+  isRequired?: boolean
+  isDisabled?: boolean
+  isInvalid?: boolean
+  isError?: boolean
+  errorMessage?: ReactNode
+}
+
+export type TReactHookForm = TReactHookFormValidity & {
   onBlur?: (...event: any[]) => void
   onChange?: (...event: any[]) => void
   fieldRef?: RefCallBack
