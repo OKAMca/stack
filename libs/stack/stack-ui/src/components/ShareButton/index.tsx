@@ -128,16 +128,10 @@ const ShareButton = (props: TShareButtonProps) => {
     }
   }
 
-  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
-    if (!e.currentTarget.contains(e.relatedTarget)) {
-      setIsOpen(false)
-    }
-  }
-
   return (
     <FocusScope autoFocus restoreFocus contain={isOpen}>
       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-      <div className={containerTheme} onKeyDown={handleKeyDown} onBlur={handleBlur}>
+      <div className={containerTheme} onKeyDown={handleKeyDown}>
         <ButtonWithForwardRef
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, isOpen }}
