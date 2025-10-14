@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-block",
-  "version": "1.5.20",
+  "version": "1.5.21",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -34,7 +34,7 @@
   "dependencies": {
     "@graphql-typed-document-node/core": "3.2.0",
     "@okam/directus-query": "1.4.2",
-    "@okam/stack-ui": "1.42.1",
+    "@okam/stack-ui": "1.42.2",
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.2",
     "radashi": "^12.3.0",
