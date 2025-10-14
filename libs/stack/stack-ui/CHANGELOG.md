@@ -1,3 +1,16 @@
+## 1.42.2 (2025-10-14)
+
+### 🩹 Fixes
+
+- **stack-ui:** remove unused offset prop ([56ed157](https://github.com/OKAMca/stack/commit/56ed157))
+- **stack-ui:** re-add id prop ([a4fde61](https://github.com/OKAMca/stack/commit/a4fde61))
+- **stack-ui:** remove onBlur handler ([f109a97](https://github.com/OKAMca/stack/commit/f109a97))
+- **stack-ui:** share button fixes ([df90c95](https://github.com/OKAMca/stack/commit/df90c95))
+
+### ❤️ Thank You
+
+- Max Hilland
+
 ## 1.42.1 (2025-10-09)
 
 ### 🩹 Fixes
