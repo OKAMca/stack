@@ -56,7 +56,7 @@ export type TBlockFunctionComponent<
 > = FunctionComponent<TBlockSerializerProps<Fragment, Variables, AdditionalProps>>
 
 /**
- * A component that's a part of the block serializer configuration. Includes its own key.
+ * To make a component a part of the block serializer configuration, add its own key to the config object.
  *
  * ### Basic usage
  * @example
