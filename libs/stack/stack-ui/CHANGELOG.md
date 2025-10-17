@@ -1,3 +1,104 @@
+## 1.42.3 (2025-10-17)
+
+### 🩹 Fixes
+
+- **stack-ui:** use correct operator ([2f8a0d7](https://github.com/OKAMca/stack/commit/2f8a0d7))
+
+### ❤️ Thank You
+
+- Max Hilland
+
+## 1.42.2 (2025-10-14)
+
+### 🩹 Fixes
+
+- **stack-ui:** remove unused offset prop ([56ed157](https://github.com/OKAMca/stack/commit/56ed157))
+- **stack-ui:** re-add id prop ([a4fde61](https://github.com/OKAMca/stack/commit/a4fde61))
+- **stack-ui:** remove onBlur handler ([f109a97](https://github.com/OKAMca/stack/commit/f109a97))
+- **stack-ui:** share button fixes ([df90c95](https://github.com/OKAMca/stack/commit/df90c95))
+
+### ❤️ Thank You
+
+- Max Hilland
+
+## 1.42.1 (2025-10-09)
+
+### 🩹 Fixes
+
+- **stack-ui:** remove getShareUrl ([ee04eac](https://github.com/OKAMca/stack/commit/ee04eac))
+- **stack-ui:** add missing getShareUrl util ([a73622a](https://github.com/OKAMca/stack/commit/a73622a))
+- **stack-ui:** add missing exports and utils ([5a95ed7](https://github.com/OKAMca/stack/commit/5a95ed7))
+
+### ❤️ Thank You
+
+- Max Hilland
+
+## 1.42.0 (2025-10-02)
+
+### 🚀 Features
+
+- print button ([e5a149d](https://github.com/OKAMca/stack/commit/e5a149d))
+- **stack-ui:** add print button ([3053737](https://github.com/OKAMca/stack/commit/3053737))
+
+### 🩹 Fixes
+
+- **stack-ui:** add window check ([50d3828](https://github.com/OKAMca/stack/commit/50d3828))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Max Hilland
+
+## 1.41.2 (2025-09-25)
+
+### 🩹 Fixes
+
+- **stack-ui:** bump version ([dc92171](https://github.com/OKAMca/stack/commit/dc92171))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.41.1 (2025-09-04)
+
+### 🩹 Fixes
+
+- **stack-ui:** export carousel swiper ([eb183b4](https://github.com/OKAMca/stack/commit/eb183b4))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.41.0 (2025-08-28)
+
+### 🚀 Features
+
+- **stack-ui:** independent carousel components/hooks ([7cf1a47](https://github.com/OKAMca/stack/commit/7cf1a47))
+
+### 🩹 Fixes
+
+- **stack-ui:** wrong aria label navigate next a11y prop name ([28011ef](https://github.com/OKAMca/stack/commit/28011ef))
+- **stack-ui:** legacy carousel separate component ([85e5988](https://github.com/OKAMca/stack/commit/85e5988))
+- **stack-ui:** filter DOM swiper props ([72687bf](https://github.com/OKAMca/stack/commit/72687bf))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.40.1 (2025-08-22)
+
+### 🩹 Fixes
+
+- **stack-ui:** clear button clears input value ([a1c9e34](https://github.com/OKAMca/stack/commit/a1c9e34))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.40.0 (2025-08-11)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
 ## 1.39.3 (2025-07-24)
 
 ### 🧱 Updated Dependencies

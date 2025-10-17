@@ -147,8 +147,8 @@ const ShareButton = (props: TShareButtonProps) => {
           tokens={{ ...tokens, isOpen }}
           aria-label={ariaLabel}
           aria-haspopup="listbox"
-          aria-expanded={isOpen ? 'true' : 'false'}
-          aria-controls="share-buttons"
+          aria-expanded={isOpen}
+          {...(isOpen && { 'aria-controls': id })}
           handlePress={handleClick}
           {...rest}
         >

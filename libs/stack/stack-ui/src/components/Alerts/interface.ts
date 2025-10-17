@@ -2,10 +2,11 @@ import type React from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
-import type { TCarouselComponentProps, TCarouselProps } from '../Carousel/interface'
+import type { TLegacyCarouselProps } from '../Carousel/interface'
+import type { TCarouselSlideProps } from '../Carousel/swiper/interface'
 import type { LightboxProps } from '../Lightbox/interface'
 
-export interface TAlertsItem {
+export interface TAlertsItem extends TCarouselSlideProps {
   id: string
   icon?: React.ReactNode
   title?: string
@@ -14,10 +15,8 @@ export interface TAlertsItem {
   button?: TButtonProps
 }
 
-export type TAlertsComponentProps<T extends TToken = TToken> = TCarouselComponentProps<TAlertsItemProps<T>>
+export type TAlertsItemProps<T extends TToken = TToken> = TAlertsItem & Omit<TDefaultComponent<T>, 'children'>
 
-export type TAlertsItemProps<T extends TToken = TToken> = TAlertsItem & TDefaultComponent<T>
-
-export type TAlertsProps<T extends TToken = TToken> = TAlertsComponentProps<T> &
-  Omit<TCarouselProps<TAlertsItemProps>, 'slides'> &
-  Omit<LightboxProps, 'children'>
+export type TAlertsProps<T extends TToken = TToken> = TLegacyCarouselProps<TAlertsItemProps> &
+  Omit<LightboxProps, 'children'> &
+  Omit<TDefaultComponent<T>, 'children'>
