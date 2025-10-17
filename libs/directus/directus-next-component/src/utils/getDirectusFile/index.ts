@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { TFiles } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
-import { logger } from '../logger'
+import { logger } from '../../logger'
 
 const IMG_DOMAIN = process.env.NEXT_PUBLIC_IMG_DOMAIN
 const IMG_PORT = process.env.NEXT_PUBLIC_IMG_PORT
@@ -15,7 +15,7 @@ function setSearchParams(url: URL, searchParams: Record<string, Nullable<string>
   })
 }
 
-function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Record<string, Nullable<string>>) {
+export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Record<string, Nullable<string>>) {
   const { id, filename_download, filenameDownload } = file ?? {}
   const { protocol = IMG_PROTOCOL, port = IMG_PORT, hostname = IMG_DOMAIN } = baseUrl ?? {}
 
@@ -34,7 +34,7 @@ function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Re
   }
 }
 
-export default function useDirectusFile(
+export function getDirectusFile(
   file: Nullable<TFiles>,
   baseUrl?: URL,
   searchParams?: Record<string, Nullable<string>>,
@@ -55,3 +55,8 @@ export default function useDirectusFile(
     ...rest,
   }
 }
+
+/**
+ * @deprecated Use `getDirectusFile` instead
+ */
+export const useDirectusFile = getDirectusFile
