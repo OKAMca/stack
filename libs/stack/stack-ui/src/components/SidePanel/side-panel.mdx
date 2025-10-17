@@ -1,6 +1,6 @@
 {/* side-panel.stories.mdx */}
 
-import { Canvas, Meta, Story } from '@storybook/blocks'
+import { Canvas, Meta, Story, ArgTypes } from '@storybook/blocks'
 import { ButtonWithForwardRef } from '../Button'
 import SidePanel from './'
 import { SidePanelContextProvider, useSidePanel } from '../../providers/SidePanel'
@@ -8,32 +8,36 @@ import * as SidePanelStories from './side-panel.stories';
 
 <Meta of={SidePanelStories} />
 
-export const SidePanelControl = () => {
-  const { buttonProps } = useSidePanel()
-  if (buttonProps == null) {
-    return null
-  }
-  return (
-    <ButtonWithForwardRef variant="black" {...buttonProps?.openButtonProps} ref={buttonProps?.openButtonRef}>
-      Open
-    </ButtonWithForwardRef>
-  )
-}
-
-export const Template = (args) => (
-  <SidePanelContextProvider 
-    onOpenCallback={() => console.log('Side panel is now opened!')}
-    onCloseCallback={() => console.log('Side panel is now closed!')}
-  >
-    <SidePanelControl />
-    <SidePanel {...args}>
-      <div>Hello world!</div>
-    </SidePanel>
-  </SidePanelContextProvider>
-)
-
 # Side Panel
 
-<Canvas>
-  <Story of={SidePanelStories.Default} />
-</Canvas>
+The side panel component is a modal component that opens from the side of the screen. It requires to be called within a `SidePanelContextProvider` to work. This allows for controlled behavior for components inside the side panel.
+
+Use `useSidePanel` hook to get the `buttonProps`, `overlayProps` and `overlayState` props to control the side panel's open state.
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+### Default
+
+<Canvas of={SidePanelStories.Default} />
+
+### Default Open
+
+See the [default open story](?path=/story/base-components-side-panel--default-open)
+
+### Controlled
+
+You can pass the `isOpen` prop and state its state in the `onOpenChange` prop to control the side panel's open state.
+
+```tsx
+const [isOpen, setIsOpen] = useState(false)
+
+<SidePanelContextProvider isOpen={isOpen} onOpenChange={setIsOpen}>
+  <SidePanel>Hello world!</SidePanel>
+</SidePanelContextProvider>
+```
+
+<Canvas of={SidePanelStories.Controlled} />

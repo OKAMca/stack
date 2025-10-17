@@ -1,3 +1,48 @@
+## 0.6.2 (2025-07-24)
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.0
+
+## 0.6.1 (2025-07-23)
+
+### 🩹 Fixes
+
+- directus next directus node builds ([#317](https://github.com/OKAMca/stack/pull/317))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 0.6.0 (2025-07-22)
+
+### 🚀 Features
+
+- **directus-next:** /api/redirect route handler to fetch + cache directus redirects ([c21b953](https://github.com/OKAMca/stack/commit/c21b953))
+
+### 🩹 Fixes
+
+- **directus-node:** export edge-compatible code from separate file ([9f77744](https://github.com/OKAMca/stack/commit/9f77744))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 0.5.0 (2025-01-30)
+
+### 🚀 Features
+
+- **redirection:** use new variable for redirection ([0c21683](https://github.com/OKAMca/stack/commit/0c21683))
+- **directus-node:** adding unit test, fix logger and adding read/write functions for redirections ([6d68bb4](https://github.com/OKAMca/stack/commit/6d68bb4))
+
+### ❤️ Thank You
+
+- Yan Morin
+
 ## 0.3.0 (2024-09-11)
 
 

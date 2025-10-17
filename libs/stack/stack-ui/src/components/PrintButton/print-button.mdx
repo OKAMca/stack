@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { ArgTypes } from '@storybook/blocks'
+import PrintButton from './'
+import * as PrintButtonStories from './print-button.stories';
+
+<Meta of={PrintButtonStories} />
+
+export const Template = (args) => <PrintButton {...args} />
+
+# PrintButton
+
+#### Print button component. Can be used to print the current page.
+
+## Props
+
+<ArgTypes />
+
+## Showcase
+
+### Default
+
+<Canvas>
+  <Story of={PrintButtonStories.Default} />
+</Canvas>

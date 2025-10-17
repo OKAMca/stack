@@ -1,0 +1,28 @@
+import { Canvas, Meta, Story, ArgTypes } from '@storybook/blocks'
+import RangeCalendar from './'
+import { OverlayContainer } from '@react-aria/overlays'
+import * as RangeCalendarStories from './range-calendar.stories';
+
+<Meta of={RangeCalendarStories} />
+
+export const RangeCalendarTemplate = (args) => <RangeCalendar {...args} />
+
+# Range Calendar
+
+Range Calendar component. Similar to the `Calendar` component, except it allows to select two dates (start and end). All the dates in that interval can be styles with tokens.
+
+## Props
+
+For props that are shared with the `Calendar` component, see the [Calendar documentation](?path=/docs/base-components-calendar--docs).
+
+<ArgTypes exclude={['as', 'themeName', 'tokens', 'customTheme', 'children', 'gridProps', 'buttons']} />
+
+## Showcase
+
+### Default
+
+<Canvas of={RangeCalendarStories.Default} />
+
+### Controlled
+
+<Canvas of={RangeCalendarStories.Controlled} />

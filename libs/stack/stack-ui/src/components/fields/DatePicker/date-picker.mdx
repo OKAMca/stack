@@ -1,4 +1,4 @@
-import { Canvas, Meta, Story } from '@storybook/blocks'
+import { Canvas, Meta, Story, ArgTypes } from '@storybook/blocks'
 import DatePicker from './'
 import DateRangePicker from './DateRangePicker'
 import { OverlayContainer } from '@react-aria/overlays'
@@ -10,18 +10,40 @@ import * as DatePickerStories from './date-picker.stories';
 
 Date Picker component.
 
-<Canvas>
-  <Story of={DatePickerStories.Default} />
-</Canvas>
+Calculations for this component are done with the [`@internationalized/date`](https://react-spectrum.adobe.com/internationalized/date/index.html) library.
 
-<Canvas>
-  <Story of={DatePickerStories.DateFieldAndIcon} />
-</Canvas>
+## Props
 
-<Canvas>
-  <Story of={DatePickerStories.OnlyIcon} />
-</Canvas>
+<ArgTypes of={DatePickerStories.Default} />
 
-<Canvas>
-  <Story of={DatePickerStories.DateRangePicker} />
-</Canvas>
+Many date picker props are shared the the `Calendar` component. For more information, see the [Calendar documentation](?path=/docs/base-components-calendar--docs) for more information.
+
+## Showcase
+
+### Style variations
+
+#### Default
+
+<Canvas of={DatePickerStories.Default} />
+
+#### Date field and icon
+
+<Canvas of={DatePickerStories.DateFieldAndIcon} />
+
+#### Only icon
+
+<Canvas of={DatePickerStories.OnlyIcon} />
+
+### Modified behaviors
+
+#### Unavailable dates
+
+In this example, unavailable dates will be rendered as disabled, making the user unable to select them. However, they are still technically selectable via the date field.
+
+If the user attempts to select an unavailable date via the date field, the `isInvalid` state will be applied to the whole component as a token.
+
+<Canvas of={DatePickerStories.UnavailableDates} />
+
+#### Controlled
+
+<Canvas of={DatePickerStories.Controlled} />

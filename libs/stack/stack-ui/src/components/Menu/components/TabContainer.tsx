@@ -2,7 +2,7 @@
 
 import { useMenu } from '../../../providers/Menu'
 import type { TDefaultComponent } from '../../../types/components'
-import TabPanel from '../../TabList/components/TabPanel/TabPanel'
+import TabPanel from '../../TabList/components/TabPanel'
 
 const TabContainer = (props: TDefaultComponent) => {
   const { tabState } = useMenu()
