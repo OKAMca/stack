@@ -1,3 +1,13 @@
+## 1.42.3 (2025-10-17)
+
+### 🩹 Fixes
+
+- **stack-ui:** use correct operator ([2f8a0d7](https://github.com/OKAMca/stack/commit/2f8a0d7))
+
+### ❤️ Thank You
+
+- Max Hilland
+
 ## 1.42.2 (2025-10-14)
 
 ### 🩹 Fixes
