@@ -1,17 +1,15 @@
 'use client'
 
-/* eslint-disable no-unused-vars */
 import { createCalendar } from '@internationalized/date'
-import { useCalendar } from '@react-aria/calendar'
 import { useLocale } from '@react-aria/i18n'
-import { useCalendarState } from '@react-stately/calendar'
 import { useRef } from 'react'
-import useThemeContext from '../../providers/Theme/hooks'
+import { useCalendar } from 'react-aria'
+import { useCalendarState } from 'react-stately'
 import type { TToken } from '../../providers/Theme/interface'
-import Button from '../Button'
-import Icon from '../Icon'
+import Box, { BoxWithForwardRef } from '../Box'
 import Typography from '../Typography'
 import CalendarGrid from './components/CalendarGrid'
+import NavigationButtons from './components/NavigationButtons'
 import type { TCalendarProps } from './interface'
 
 function Calendar<T extends TToken>({
@@ -19,54 +17,54 @@ function Calendar<T extends TToken>({
   tokens,
   customTheme,
   themeName = 'calendar',
+  gridProps,
+  value,
   ...rest
 }: TCalendarProps<T>) {
   const { locale } = useLocale()
   const state = useCalendarState({
     ...rest,
     locale,
+    value,
     createCalendar,
   })
 
-  const ref = useRef(null)
-  const { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar({ ...rest }, state)
+  const { isDisabled, isReadOnly, isValueInvalid, isFocused } = state
 
-  const containerTheme = useThemeContext(`${themeName}.container`, tokens)
-  const headerTheme = useThemeContext(`${themeName}.header`, tokens)
-  const navigationButtonsContainer = useThemeContext(`${themeName}.navigationButtonsContainer`, tokens)
+  const ref = useRef(null)
+  const { calendarProps, prevButtonProps, nextButtonProps, title } = useCalendar({ ...rest, value }, state)
+
+  const calendarTokens = {
+    isDisabled,
+    isReadOnly,
+    isValueInvalid,
+    isFocused,
+    ...tokens,
+  }
 
   return (
-    <div {...calendarProps} ref={ref} className={containerTheme}>
-      <div className={headerTheme}>
-        <Typography as="p" tokens={{ size: 'h6' }}>
+    <BoxWithForwardRef
+      {...calendarProps}
+      ref={ref}
+      themeName={`${themeName}.container`}
+      tokens={calendarTokens}
+      customTheme={customTheme}
+    >
+      <Box themeName={`${themeName}.header`} tokens={calendarTokens}>
+        <Typography as="p" themeName={`${themeName}.title`} tokens={calendarTokens}>
           {title}
         </Typography>
-        <div className={navigationButtonsContainer}>
-          <Button
-            themeName={`${themeName}.navigationButtons`}
-            tokens={{ ...tokens }}
-            type="button"
-            {...prevButtonProps}
-            handlePress={prevButtonProps?.onPress}
-          >
-            <Icon icon={buttons?.buttonPrev?.icon ?? 'ArrowLeft'} />
-          </Button>
-          <Button
-            themeName={`${themeName}.navigationButtons`}
-            tokens={{ ...tokens }}
-            type="button"
-            {...nextButtonProps}
-            handlePress={nextButtonProps?.onPress}
-          >
-            <Icon icon={buttons?.buttonNext?.icon ?? 'ArrowRight'} />
-          </Button>
-        </div>
-      </div>
-      <CalendarGrid state={state} />
-    </div>
+        <NavigationButtons
+          themeName={themeName}
+          tokens={calendarTokens}
+          buttons={buttons}
+          prevButtonProps={prevButtonProps}
+          nextButtonProps={nextButtonProps}
+        />
+      </Box>
+      <CalendarGrid {...gridProps} themeName={themeName} state={state} tokens={calendarTokens} />
+    </BoxWithForwardRef>
   )
 }
-
-Calendar.displayName = 'Calendar'
 
 export default Calendar

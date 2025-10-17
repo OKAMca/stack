@@ -7,9 +7,20 @@ import type { TDefaultComponent } from '../../../../types/components'
 export interface TListBoxProps extends AriaListBoxOptions<unknown>, TDefaultComponent {
   listBoxRef?: React.RefObject<any>
   state: ListState<unknown>
+  optionsWithHeaders?: { key: string; value: string }[]
 }
 
 export interface TOptionProps extends AriaOptionProps, TDefaultComponent {
   item: any
   state: ListState<unknown>
+}
+
+export type Item = {
+  key: React.Key
+  rendered: string
+}
+
+export type Section = {
+  header?: Item
+  items: Item[]
 }

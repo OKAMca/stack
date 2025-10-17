@@ -1,22 +1,27 @@
-import { Canvas, Meta, Story } from '@storybook/blocks'
+import { Canvas, Meta, Story, ArgTypes, Controls } from '@storybook/blocks'
 import Calendar from './'
-import RangeCalendar from './RangeCalendar'
 import { OverlayContainer } from '@react-aria/overlays'
 import * as CalendarStories from './calendar.stories';
 
 <Meta of={CalendarStories} />
 
 export const CalendarTemplate = (args) => <Calendar {...args} />
-export const RangeCalendarTemplate = (args) => <RangeCalendar {...args} />
 
 # Calendar
 
 Calendar component.
 
-<Canvas>
-  <Story of={CalendarStories.Calendar} />
-</Canvas>
+## Props
 
-<Canvas>
-  <Story of={CalendarStories.RangeCalendar} />
-</Canvas>
+<ArgTypes />
+
+## Showcase
+
+### Default
+
+<Canvas of={CalendarStories.Default} />
+
+### Controlled
+
+<Canvas of={CalendarStories.Controlled} />
+
