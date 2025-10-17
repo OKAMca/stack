@@ -1,3 +1,24 @@
+## 1.6.0 (2025-10-17)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-block:** clean up useBlock type usage ([c7b198e](https://github.com/OKAMca/stack/commit/c7b198e))
+- **directus-block:** always pass type params between block serializer types ([430e6db](https://github.com/OKAMca/stack/commit/430e6db))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.5.22 (2025-10-17)
 
 ### 🚀 Features

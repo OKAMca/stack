@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-block",
-  "version": "1.5.22",
+  "version": "1.6.0",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
