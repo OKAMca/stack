@@ -14,11 +14,21 @@ function isClient<Fragment extends TCommonBlockFragment, Variables extends TBloc
 }
 
 /**
- * Automatically determines wether a block should use `props.item` (passed props) or `props.variables` (makes its own query).
- * @param props Props of the block/block query. `props.item` serves as props the block uses directly, where as `props.variables` serves as variables for the block query.
- * @param blockKey Key of the block query that serves to return the contents of the block directly, removing one step
+ * General function to fetch the block data and its settings. Features the decision-making logic of {@link getBlockProps} that allows blocks to work with both passed props and queried props.
+ * @param props Props of the block component. Pass props directly from the block component.
+ * @param blockKey Key of the block data in the GraphQL document. Allows mapping props regardless of the block's collection name. Usually the block's collection name with `_by_id` appended since most queries are made by id.
  * @param docOrClient Client to pass to `queryGql`. Defaults to `defaultGraphqlRequestClient`. **Deprecated**: can also be a fallback for `props.document`.
- * @returns Contents of `blockKey` in the query. Also returns `settings.tokens` as `cmsTokens` for convenience.
+ * @returns The block data and its settings.
+ *
+ * @example
+ * ```tsx
+ * const BlockButtons = (props: TBlockSerializerProps<BlockButtonsFragment>) => {
+ *   const key = 'block_buttons_by_id'
+ *   const { tokens } = props
+ *   const { link, cmsTokens, variant } = await useBlock(props, key)
+ *   return <Link {...link} tokens={{ ...tokens, ...cmsTokens, style: variant }} />
+ * }
+ * ```
  */
 export async function useBlock<
   Fragment extends TCommonBlockFragment,
