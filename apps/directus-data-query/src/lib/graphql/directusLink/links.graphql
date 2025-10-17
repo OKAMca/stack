@@ -1,0 +1,31 @@
+fragment SearchParams on search_params {
+  id
+  name
+  value
+}
+
+fragment Links on links {
+  anchor
+  external_link
+  id
+  label
+  type
+  collection {
+    ...PageSettings
+  }
+  file {
+    id
+    filename_download
+    width
+    height
+  }
+  params {
+    ...SearchParams
+  }
+}
+
+query LinkById($id: ID!, $locale: String) {
+  links_by_id(id: $id) {
+    ...Links
+  }
+}
