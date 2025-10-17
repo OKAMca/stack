@@ -1,6 +1,6 @@
 import { defaultGraphqlRequestClient } from '@okam/directus-query'
 import type { Nullable, TToken } from '@okam/stack-ui'
-import type { GraphQLClient } from 'graphql-request'
+import { GraphQLClient } from 'graphql-request'
 import { get } from 'radashi'
 import type { TBlockSerializerProps } from '../components/BlockSerializer/interface'
 import { BlockSettingsFragmentDoc } from '../generated/graphql'
@@ -10,7 +10,7 @@ import { getBlockProps, getFragment } from '../utils'
 function isClient<Fragment extends TCommonBlockFragment, Variables extends TBlockVariables = TBlockVariables>(
   docOrClient: Nullable<TBlockDocument<Fragment, Variables> | GraphQLClient>,
 ) {
-  return typeof docOrClient === 'function'
+  return docOrClient instanceof GraphQLClient
 }
 
 /**
