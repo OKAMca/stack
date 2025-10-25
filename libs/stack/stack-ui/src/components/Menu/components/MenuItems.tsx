@@ -80,7 +80,6 @@ const LinkElement = (menuItem: TMenuItemProps) => {
       tokens={tokens}
       customTheme={customTheme}
       nextLinkProps={{
-        scroll: false,
         href: path,
         ...nextLinkProps,
       }}
