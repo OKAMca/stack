@@ -20,6 +20,8 @@ const ButtonElement = (menuItem: TMenuItemProps) => {
     children,
     childItems,
     as,
+    ariaLabel: legacyAriaLabel,
+    'aria-label': ariaLabel,
     ...rest
   } = menuItem
   const itemKey = path?.substring(1)
@@ -46,6 +48,7 @@ const ButtonElement = (menuItem: TMenuItemProps) => {
       key={`button-${id}`}
       handlePress={handlePress}
       as={as}
+      aria-label={ariaLabel ?? legacyAriaLabel}
     >
       {React.isValidElement(children) ? children : label}
     </Button>
@@ -65,6 +68,8 @@ const LinkElement = (menuItem: TMenuItemProps) => {
     children,
     as,
     childItems,
+    ariaLabel: legacyAriaLabel,
+    'aria-label': ariaLabel,
     ...rest
   } = menuItem
   const ref = useRef(null)
@@ -87,6 +92,7 @@ const LinkElement = (menuItem: TMenuItemProps) => {
       key={`link-${id}`}
       target={target ?? '_self'}
       as={as}
+      aria-label={ariaLabel ?? legacyAriaLabel}
     >
       {React.isValidElement(children) ? children : label}
     </Anchor>
