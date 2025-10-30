@@ -1,3 +1,4 @@
+import type { AriaLabelingProps } from '@react-types/shared'
 import type { AriaTabListProps } from '@react-types/tabs'
 import type React from 'react'
 import type { TToken } from '../../providers/Theme/interface'
@@ -34,7 +35,14 @@ export interface IMenuItemProp {
   onClick?: () => void
 }
 
-export type TMenuItemProps = IMenuItemProp & TDefaultComponent & PartialHtmlBaseElement
+export type TMenuItemProps = IMenuItemProp &
+  TDefaultComponent &
+  AriaLabelingProps & {
+    /**
+     * @deprecated Use `aria-label` instead
+     */
+    ariaLabel?: string
+  }
 
 export interface TMenuItemsProps extends TDefaultComponent {
   menuItems?: TMenuItemProps[] | null
