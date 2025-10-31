@@ -2,8 +2,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import 'server-only'
 import type { Variables } from 'graphql-request'
-// eslint-disable-next-line import/no-named-default
-import { default as createServerContext } from 'server-only-context'
+import { createServerContext } from '../createServerContext'
 import type { TPageSettingsQueryItem, TUsePageSettingsReturn } from './interface'
 
 export function pageSettingsContext<Item extends TPageSettingsQueryItem>(defaultValue?: TUsePageSettingsReturn<Item>) {
