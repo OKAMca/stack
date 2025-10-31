@@ -36,11 +36,9 @@ export default defineConfig({
   build: {
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: ['src/index.ts', 'src/server.ts'],
       name: 'next-component',
-      fileName: 'index',
-      // Change this to the formats you want to support.
-      // Don't forget to update your package.json as well.
+      // Removed 'fileName' because multiple entry points are specified
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
