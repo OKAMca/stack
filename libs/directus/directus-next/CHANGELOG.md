@@ -1,3 +1,14 @@
+## 1.2.5 (2025-10-31)
+
+### 🩹 Fixes
+
+- **directus-next:** import from server-only-context using "default as" syntax ([c4bb960](https://github.com/OKAMca/stack/commit/c4bb960))
+- **directus-next:** server-only-context marked as external lib ([6fcd3a6](https://github.com/OKAMca/stack/commit/6fcd3a6))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.2.4 (2025-08-05)
 
 ### 🩹 Fixes
