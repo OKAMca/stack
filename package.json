@@ -68,7 +68,6 @@
     "react-use": "17.5.1",
     "sanitize-html": "^2.13.1",
     "server-only": "^0.0.1",
-    "server-only-context": "^0.1.0",
     "storybook": "^8.4.7",
     "swiper": "11.1.15",
     "tailwind-variants": "^0.3.0",
