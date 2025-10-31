@@ -4,6 +4,28 @@
   "publishConfig": {
     "access": "public"
   },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./index.mjs"
+      }
+    },
+    "./server": {
+      "import": {
+        "types": "./server.d.ts",
+        "default": "./server.mjs"
+      },
+      "require": {
+        "types": "./server.d.ts",
+        "default": "./server.mjs"
+      }
+    }
+  },
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
