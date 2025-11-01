@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable react-hooks/rules-of-hooks */
 import 'server-only'
+import { createServerContext } from '@okam/next-component/server'
 import type { Variables } from 'graphql-request'
-// eslint-disable-next-line import/no-named-default
-import { default as createServerContext } from 'server-only-context'
 import type { TPageSettingsQueryItem, TUsePageSettingsReturn } from './interface'
 
 export function pageSettingsContext<Item extends TPageSettingsQueryItem>(defaultValue?: TUsePageSettingsReturn<Item>) {
