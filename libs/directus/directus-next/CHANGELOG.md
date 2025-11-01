@@ -1,3 +1,9 @@
+## 1.2.8 (2025-11-01)
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 1.2.1
+
 ## 1.2.7 (2025-11-01)
 
 ### 🧱 Updated Dependencies

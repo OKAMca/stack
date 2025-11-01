@@ -1,3 +1,14 @@
+## 1.2.1 (2025-11-01)
+
+### 🩹 Fixes
+
+- **next-component:** build project via @nx/vite:build ([36aa25d](https://github.com/OKAMca/stack/commit/36aa25d))
+- **next-component:** build using .mjs/.js formats, support /server output directory ([564ace3](https://github.com/OKAMca/stack/commit/564ace3))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.2.0 (2025-11-01)
 
 ### 🚀 Features
