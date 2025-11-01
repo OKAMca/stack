@@ -1,3 +1,13 @@
+## 1.2.0 (2025-11-01)
+
+### 🚀 Features
+
+- **next-component:** createServerContext function ([eaafb92](https://github.com/OKAMca/stack/commit/eaafb92))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.1.5 (2025-10-17)
 
 ### 🧱 Updated Dependencies
