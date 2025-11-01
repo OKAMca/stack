@@ -35,25 +35,36 @@ export default defineConfig({
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
     lib: {
-      // Could also be a dictionary or array of multiple entry points.
       entry: ['src/index.ts', 'src/server.ts'],
       name: 'next-component',
       // Removed 'fileName' because multiple entry points are specified
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      // External packages that should not be bundled into your library.
-      output: {
-        preserveModules: true,
-      },
-      external: [...externalDeps, '@okam/stack-ui', '@okam/logger', '@okam/core-lib'],
+      output: [
+        {
+          format: 'es',
+          entryFileNames: '[name].mjs',
+          preserveModules: true,
+          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
+        },
+        {
+          format: 'cjs',
+          entryFileNames: '[name].js',
+          preserveModules: true,
+          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
+        }
+      ],
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
           return
         }
         warn(warning)
       },
+      // External packages that should not be bundled into your library.
+      external: [...externalDeps, '@okam/stack-ui', '@okam/logger', '@okam/core-lib'],
       plugins: [preserveDirectives()],
     },
+    ssr: true,
   },
 })
