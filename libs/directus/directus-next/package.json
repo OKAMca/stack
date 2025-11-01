@@ -1,7 +1,7 @@
 {
   "name": "@okam/directus-next",
   "main": "./index.js",
-  "version": "1.2.6",
+  "version": "1.2.5",
   "types": "./index.d.ts",
   "exports": {
     ".": {
@@ -41,6 +41,7 @@
     "@okam/directus-query": "1.4.2",
     "server-only": "0.0.1",
     "graphql-request": "7.1.2",
-    "@graphql-typed-document-node/core": "3.2.0"
+    "@graphql-typed-document-node/core": "3.2.0",
+    "react": "18.3.1"
   }
 }

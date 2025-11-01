@@ -1,15 +1,3 @@
-## 1.2.6 (2025-11-01)
-
-### 🩹 Fixes
-
-- **directus-next:** add next-component as external ([08e39ab](https://github.com/OKAMca/stack/commit/08e39ab))
-- **directus-next:** import createServerContext from next-component instead ([e7637f0](https://github.com/OKAMca/stack/commit/e7637f0))
-- **directus-next:** local use of createServerContext, uninstalled server-only-context ([563bbc0](https://github.com/OKAMca/stack/commit/563bbc0))
-
-### ❤️ Thank You
-
-- poclerson
-
 ## 1.2.5 (2025-10-31)
 
 ### 🩹 Fixes
