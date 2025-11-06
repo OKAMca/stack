@@ -8,8 +8,10 @@ export function getValidLocale(maybeLocale: string | null | undefined, config: D
 export function splitLocaleFromPathname(pathname: string, config: DirectusRouteConfig) {
   const [, maybeLocale, ...parts] = pathname.split('/')
   const locale = getValidLocale(maybeLocale, config)
-  const rest = `/${parts.join('/')}`
-  const newPathname = locale ? rest : `/${maybeLocale}${rest}`
+  if (locale) {
+    const newPathname = parts.length > 0 ? `/${parts.join('/')}` : '/'
+    return { locale, pathname: newPathname }
+  }
 
-  return { locale, pathname: newPathname }
+  return { locale: undefined, pathname }
 }
