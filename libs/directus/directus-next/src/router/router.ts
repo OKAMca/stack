@@ -19,6 +19,33 @@ function getValidTranslation(translations: PageSettingsTranslation[], locale: st
   return translations?.find((t) => t.languages_code?.code?.startsWith(locale)) ?? translation
 }
 
+/**
+ * Handles incoming middleware requests and rewrites the path to the new format according to fetched page settings.
+ * @param request - The NextRequest object
+ * @param config - The DirectusRouteConfig object
+ * @deprecated Use `directusRouteRouter(request, config)` instead. NextResponse is now directly imported in this file.
+ * @param NextResponse - The NextResponse object
+ * @returns NextResponse
+ *
+ * @example
+ * ```typescript
+ * export const directusConfig: DirectusRouteConfig = {
+ *  localeMap: {
+ *    'fr-CA': 'fr',
+ *    'en-CA': 'en',
+ *  },
+ *  collectionSettings: {
+ *    default: {
+ *      idField: 'id',
+ *    },
+ *  },
+ * }
+ *
+ * export async function middleware(request: NextRequest) {
+ *   return directusRouteRouter(request, directusConfig)
+ * }
+ * ```
+ */
 export async function directusRouteRouter(
   request: NextRequest,
   config: DirectusRouteConfig,
