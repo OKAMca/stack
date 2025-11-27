@@ -2,7 +2,7 @@
 import type { BlockSettingsFragment } from '../../generated/graphql'
 
 export type BlockWysiwygFragment = {
-  __typename?: 'block_wysiwyg'
+  __typename?: 'block_wysiwygs'
   title?: string | null
   content?: string | null
   level?: string | null
