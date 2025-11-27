@@ -1,3 +1,16 @@
+## 1.42.4 (2025-11-27)
+
+### 🩹 Fixes
+
+- **stack-ui:** support for legacy menu item ariaLabel prop ([9ba1d1a](https://github.com/OKAMca/stack/commit/9ba1d1a))
+- **stack-ui:** menu items dont declare next link props ([a9563d1](https://github.com/OKAMca/stack/commit/a9563d1))
+- **stack-ui:** menu items use kebab-case aria labeling props ([d0b3781](https://github.com/OKAMca/stack/commit/d0b3781))
+- **stack-ui:** dialog safely spreads rest props, no more DOM props warnings ([79b3367](https://github.com/OKAMca/stack/commit/79b3367))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.42.3 (2025-10-17)
 
 ### 🩹 Fixes

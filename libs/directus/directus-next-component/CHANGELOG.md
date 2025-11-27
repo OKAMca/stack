@@ -1,3 +1,25 @@
+## 1.7.35 (2025-11-27)
+
+### 🚀 Features
+
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.4
+- Updated next-component to 1.2.2
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.7.34 (2025-11-22)
 
 ### 🚀 Features
