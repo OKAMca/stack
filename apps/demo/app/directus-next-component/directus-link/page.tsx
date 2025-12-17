@@ -122,7 +122,13 @@ const navigationItems = [
             "description": null,
             "focal_point_x": null,
             "focal_point_y": null
-          }
+          },
+          "params": [
+            {
+              "name": "test",
+              "value": "abc"
+            }
+          ]
         },
         "children": [
           {
