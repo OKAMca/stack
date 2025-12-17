@@ -83,7 +83,7 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
 
   if (!href) return {}
 
-  if (!URL.canParse(href)) {
+  if (!['http', '/', '#'].some((prefix) => href.startsWith(prefix))) {
     logger.log('Invalid href', 'error', { href })
     return {}
   }
