@@ -51,7 +51,12 @@ const defaultPropsConfig: TDirectusLinkPropsConfig = {
 
 export function parseRelativeUrl(href: string) {
   if (URL.canParse(href)) {
-    return new URL(href)
+    const url = new URL(href)
+    // Only allow http(s) for absolute URLs
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+      return null
+    }
+    return url
   }
   if (!href.startsWith('/') && !href.startsWith('#')) {
     return null
