@@ -1,53 +1,10 @@
-import type { TAnchorProps } from '@okam/stack-ui'
+import type { Nullable, TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
 import type { TDirectusLinkPropsConfig, TUseDirectusLink } from '../components/DirectusLink/interface'
 import { logger } from '../logger'
+import type { SearchParams } from '../types/links'
 import useDirectusFile from './directus-file'
 import getDirectusSearchParams from './directus-search-params'
-
-function useFile(props: TUseDirectusLink) {
-  const { file } = props
-
-  const { filename_download: filenameDownload } = file ?? {}
-  const { src } = useDirectusFile(file) ?? {}
-
-  return {
-    href: src,
-    download: filenameDownload ?? true,
-  }
-}
-
-function useCollection(props: TUseDirectusLink) {
-  const { collection, target } = props
-
-  return {
-    href: collection?.translations?.[0]?.path ?? undefined,
-    target: target ?? undefined,
-  }
-}
-
-function useExternalLink(props: TUseDirectusLink) {
-  const { external_link: externalLink, target } = props
-
-  return {
-    href: externalLink ?? undefined,
-    target: target ?? undefined,
-  }
-}
-
-function useAnchor(props: TUseDirectusLink) {
-  const { anchor } = props
-
-  return { href: anchor ?? undefined }
-}
-
-const defaultPropsConfig: TDirectusLinkPropsConfig = {
-  collection: useCollection,
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  'external-link': useExternalLink,
-  file: useFile,
-  anchor: useAnchor,
-}
 
 export function parseRelativeUrl(href: string) {
   if (URL.canParse(href)) {
@@ -64,6 +21,78 @@ export function parseRelativeUrl(href: string) {
 
   // Hack to use URL methods on relative URLs
   return new URL(href, 'http://localhost')
+}
+
+function getCompleteUrl(href: Nullable<string>, params: Nullable<Nullable<SearchParams>[]>) {
+  if (!href) return null
+  const searchParams = getDirectusSearchParams(params)
+
+  const url = parseRelativeUrl(href)
+
+  if (!url) {
+    logger.log('Invalid href', 'error', { href })
+    return null
+  }
+
+  searchParams.forEach((value, name) => {
+    url.searchParams.append(name, value)
+  })
+
+  return url
+}
+
+function useFile(props: TUseDirectusLink) {
+  const { file, params } = props
+
+  const { filename_download: filenameDownload } = file ?? {}
+  const { src } = useDirectusFile(file) ?? {}
+
+  const { href } = getCompleteUrl(src, params) ?? {}
+
+  return {
+    href,
+    download: filenameDownload ?? true,
+  }
+}
+
+function useCollection(props: TUseDirectusLink) {
+  const { collection, target, params } = props
+
+  const { href, origin } = getCompleteUrl(collection?.translations?.[0]?.path, params) ?? {}
+  const relativeHref = href && origin ? href.replace(origin, '') : undefined
+
+  return {
+    href: relativeHref,
+    target: target ?? undefined,
+  }
+}
+
+function useExternalLink(props: TUseDirectusLink) {
+  const { external_link: externalLink, target, params } = props
+
+  const { href } = getCompleteUrl(externalLink, params) ?? {}
+
+  return {
+    href,
+    target: target ?? undefined,
+  }
+}
+
+function useAnchor(props: TUseDirectusLink) {
+  const { anchor, params } = props
+
+  const { href, origin } = getCompleteUrl(anchor, params) ?? {}
+  const relativeHref = href && origin ? href.replace(origin, '') : undefined
+
+  return { href: relativeHref }
+}
+
+const defaultPropsConfig: TDirectusLinkPropsConfig = {
+  collection: useCollection,
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  'external-link': useExternalLink,
+  file: useFile,
+  anchor: useAnchor,
 }
 
 export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
@@ -88,8 +117,6 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     ...rest
   } = props
 
-  const searchParams = getDirectusSearchParams(params)
-
   if (!type) return {}
 
   const finalConfig = { ...defaultPropsConfig, ...(propsConfig ?? {}) }
@@ -100,19 +127,6 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
 
   if (!href) return {}
 
-  const absoluteUrl = parseRelativeUrl(href)
-
-  if (!absoluteUrl) {
-    logger.log('Invalid href', 'error', { href })
-    return {}
-  }
-
-  searchParams.forEach((value, name) => {
-    absoluteUrl.searchParams.append(name, value)
-  })
-
-  const relativeHref = absoluteUrl.href.replace(absoluteUrl.origin, '')
-
   return {
     ...rest,
     as,
@@ -120,12 +134,12 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     ...(customTheme ? { customTheme } : {}),
     ...(tokens ? { tokens } : {}),
     nextLinkProps: {
-      href: relativeHref,
+      href,
       prefetch: prefetch ?? undefined,
       scroll: scroll ?? undefined,
       replace: replace ?? undefined,
     },
-    href: relativeHref,
+    href,
     children: label,
     ...restOfLinkProps,
   }
