@@ -49,6 +49,18 @@ const defaultPropsConfig: TDirectusLinkPropsConfig = {
   anchor: useAnchor,
 }
 
+export function parseRelativeUrl(href: string) {
+  if (URL.canParse(href)) {
+    return new URL(href)
+  }
+  if (!href.startsWith('/') && !href.startsWith('#')) {
+    return null
+  }
+
+  // Hack to use URL methods on relative URLs
+  return new URL(href, 'http://localhost')
+}
+
 export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
   const {
     type,
@@ -83,15 +95,18 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
 
   if (!href) return {}
 
-  if (!['http', '/', '#'].some((prefix) => href.startsWith(prefix))) {
+  const absoluteUrl = parseRelativeUrl(href)
+
+  if (!absoluteUrl) {
     logger.log('Invalid href', 'error', { href })
     return {}
   }
 
-  const hrefUrl = new URL(href)
   searchParams.forEach((value, name) => {
-    hrefUrl.searchParams.append(name, value)
+    absoluteUrl.searchParams.append(name, value)
   })
+
+  const relativeHref = absoluteUrl.href.replace(absoluteUrl.origin, '')
 
   return {
     ...rest,
@@ -100,12 +115,12 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     ...(customTheme ? { customTheme } : {}),
     ...(tokens ? { tokens } : {}),
     nextLinkProps: {
-      href: hrefUrl.toString(),
+      href: relativeHref,
       prefetch: prefetch ?? undefined,
       scroll: scroll ?? undefined,
       replace: replace ?? undefined,
     },
-    href: hrefUrl.toString(),
+    href: relativeHref,
     children: label,
     ...restOfLinkProps,
   }
