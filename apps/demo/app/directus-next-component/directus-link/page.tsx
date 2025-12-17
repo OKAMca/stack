@@ -22,7 +22,13 @@ const navigationItems = [
       "target": "_self",
       "type": "anchor",
       "collection": null,
-      "file": null
+      "file": null,
+      "params": [
+        {
+          "name": "test",
+          "value": "abc"
+        }
+      ]
     },
     "parent": null,
     "children": [
@@ -39,7 +45,13 @@ const navigationItems = [
           "target": "_self",
           "type": "external-link",
           "collection": null,
-          "file": null
+          "file": null,
+          "params": [
+        {
+          "name": "test",
+          "value": "abc"
+        }
+      ]
         },
         "children": []
       },
@@ -57,6 +69,12 @@ const navigationItems = [
           "scroll": true,
           "target": "_self",
           "type": "collection",
+          "params": [
+            {
+              "name": "test",
+              "value": "abc"
+            }
+          ],
           "collection": {
             "id": "1e9d25bb-a3d9-43c4-97ab-e2174e30a30a",
             "belongs_to_collection": null,
