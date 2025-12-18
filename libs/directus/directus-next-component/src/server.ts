@@ -7,7 +7,11 @@ export { default as DirectusLink } from './components/DirectusLink'
 export { default as DirectusVideo } from './components/DirectusVideo'
 export { logger as DirectusNextComponent } from './logger'
 
-export { default as useDirectusFile } from './hooks/directus-file'
-export { default as useDirectusLink } from './hooks/directus-link'
+export { directusFile } from './utils/directusFile'
+export { directusLink } from './utils/directusLink'
+export { directusSearchParams } from './utils/directusSearchParams'
+
 export { default as useNavigationItems } from './hooks/navigation-items'
 export { default as useMetadata } from './hooks/directus-metadata'
+
+export { getDirectusLink } from './lib/getDirectusLink'
