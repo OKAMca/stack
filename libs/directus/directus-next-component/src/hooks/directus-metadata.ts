@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { TPageSettings, TPageSettingsTranslation } from '@okam/directus-next'
-import { useDirectusFile } from '@okam/directus-next-component/server'
 import type { Nullable } from '@okam/stack-ui'
 import type { Metadata } from 'next'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
@@ -8,6 +7,7 @@ import type { StaticImageData } from 'next/image'
 import { min } from 'radashi'
 import type { TDirectusFileProps } from '../components/DirectusFile/interface'
 import type { TMetadataOptions } from '../types/metadata'
+import { directusFile } from '../utils/directusFile'
 
 function withFallbacks<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
@@ -45,7 +45,7 @@ function useOpenGraphImage(
   image: Nullable<TDirectusFileProps>,
   options: TMetadataOptions,
 ): Nullable<Exclude<OpenGraph['images'], OpenGraph['images'][]>> {
-  const directusImage = useDirectusFile(image)
+  const directusImage = directusFile(image)
   const { src, alt } = directusImage ?? {}
   const { width: limitedWidth, height: limitedHeight } =
     (directusImage?.width && directusImage?.height

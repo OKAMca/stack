@@ -1,15 +1,15 @@
 import type { TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
-import type { TDirectusLinkPropsConfig, TUseDirectusLink } from '../components/DirectusLink/interface'
 import { logger } from '../logger'
-import useDirectusFile from './directus-file'
-import getDirectusSearchParams from './directus-search-params'
+import type { TDirectusLink, TDirectusLinkPropsConfig } from '../types/directus-link'
+import { directusFile } from './directusFile'
+import { directusSearchParams } from './directusSearchParams'
 
-function useFile(props: TUseDirectusLink) {
+function createFile(props: TDirectusLink) {
   const { file } = props
 
   const { filename_download: filenameDownload } = file ?? {}
-  const { src } = useDirectusFile(file) ?? {}
+  const { src } = directusFile(file) ?? {}
 
   return {
     href: src,
@@ -17,7 +17,7 @@ function useFile(props: TUseDirectusLink) {
   }
 }
 
-function useCollection(props: TUseDirectusLink) {
+function createCollection(props: TDirectusLink) {
   const { collection, target } = props
 
   return {
@@ -26,7 +26,7 @@ function useCollection(props: TUseDirectusLink) {
   }
 }
 
-function useExternalLink(props: TUseDirectusLink) {
+function createExternalLink(props: TDirectusLink) {
   const { external_link: externalLink, target } = props
 
   return {
@@ -35,21 +35,24 @@ function useExternalLink(props: TUseDirectusLink) {
   }
 }
 
-function useAnchor(props: TUseDirectusLink) {
+function createAnchor(props: TDirectusLink) {
   const { anchor } = props
 
   return { href: anchor ?? undefined }
 }
 
 const defaultPropsConfig: TDirectusLinkPropsConfig = {
-  collection: useCollection,
+  collection: createCollection,
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  'external-link': useExternalLink,
-  file: useFile,
-  anchor: useAnchor,
+  'external-link': createExternalLink,
+  file: createFile,
+  anchor: createAnchor,
 }
 
-export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
+/**
+ * Generic formatter for a directus `Links` into usable stack-ui `Anchor` props
+ */
+export function directusLink(props: TDirectusLink): TAnchorProps {
   const {
     type,
     label,
@@ -71,7 +74,7 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     ...rest
   } = props
 
-  const searchParams = getDirectusSearchParams(params)
+  const searchParams = directusSearchParams(params)
 
   if (!type) return {}
 
