@@ -34,11 +34,7 @@ function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Re
   }
 }
 
-export default function useDirectusFile(
-  file: Nullable<TFiles>,
-  baseUrl?: URL,
-  searchParams?: Record<string, Nullable<string>>,
-) {
+export function directusFile(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Record<string, Nullable<string>>) {
   const { description, width, height, title, id, ...rest } = file ?? {}
   if (!file || !id) return null
   const url = getDirectusUrl(file, baseUrl, searchParams)
