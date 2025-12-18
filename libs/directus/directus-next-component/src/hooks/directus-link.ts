@@ -6,7 +6,7 @@ import type { SearchParams } from '../types/links'
 import useDirectusFile from './directus-file'
 import getDirectusSearchParams from './directus-search-params'
 
-export function parseRelativeUrl(href: string) {
+export function parseUrlOrHref(href: string) {
   if (URL.canParse(href)) {
     const url = new URL(href)
     // Only allow http(s) for absolute URLs
@@ -27,7 +27,7 @@ function getCompleteUrl(href: Nullable<string>, params: Nullable<Nullable<Search
   if (!href) return null
   const searchParams = getDirectusSearchParams(params)
 
-  const url = parseRelativeUrl(href)
+  const url = parseUrlOrHref(href)
 
   if (!url) {
     logger.log('Invalid href', 'error', { href })
@@ -49,8 +49,17 @@ function useFile(props: TUseDirectusLink) {
 
   const { href } = getCompleteUrl(src, params) ?? {}
 
+  if (src && URL.canParse(src)) {
+    return {
+      href: src,
+      download: filenameDownload ?? true,
+    }
+  }
+
+  const relativeHref = href && origin ? href.replace(origin, '') : undefined
+
   return {
-    href,
+    href: relativeHref,
     download: filenameDownload ?? true,
   }
 }
