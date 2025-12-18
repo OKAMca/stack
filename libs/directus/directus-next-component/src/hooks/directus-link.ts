@@ -49,9 +49,9 @@ function useFile(props: TUseDirectusLink) {
 
   const { href, origin } = getCompleteUrl(src, params) ?? {}
 
-  if (src && URL.canParse(src)) {
+  if (href && URL.canParse(href)) {
     return {
-      href: src,
+      href,
       download: filenameDownload ?? true,
     }
   }
