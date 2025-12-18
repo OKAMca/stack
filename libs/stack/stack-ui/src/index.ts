@@ -121,6 +121,7 @@ export type { TListBoxProps, TListBoxSectionProps } from './components/fields/Li
 export type { TOptionProps } from './components/fields/Option/interface'
 export type { TIconProps } from './components/Icon/interface'
 export type { TShareButtonProps } from './components/ShareButton/interface'
+export type { TTranslateFunc, TTranslationContext, TTranslationProps } from './providers/Translation/interface'
 
 // utils
 export { default as generateUtmTags } from './components/ShareButton/utils/generateUtmTags'
