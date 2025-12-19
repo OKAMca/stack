@@ -1,7 +1,6 @@
 import type { Nullable, TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
 import type { TDirectusLinkPropsConfig, TUseDirectusLink } from '../components/DirectusLink/interface'
-import { logger } from '../logger'
 import type { SearchParams } from '../types/links'
 import useDirectusFile from './directus-file'
 import getDirectusSearchParams from './directus-search-params'
@@ -9,36 +8,45 @@ import getDirectusSearchParams from './directus-search-params'
 export function parseUrlOrHref(href: string) {
   if (URL.canParse(href)) {
     const url = new URL(href)
-    // Only allow http(s) for absolute URLs
-    if (url.protocol !== 'http:' && url.protocol !== 'https:') {
-      return null
+    // Only allow safe protocols for absolute URLs
+    if (!['http:', 'https:', 'mailto:', 'tel:'].includes(url.protocol)) {
+      throw new Error('Invalid protocol. An absolute URL must start with http or https.')
     }
     return url
   }
-  if (!href.startsWith('/') && !href.startsWith('#')) {
-    return null
+  if (!['/', '#', '?'].includes(href[0] ?? '')) {
+    throw new Error('Invalid href. A relative URL must start with / or #.')
   }
 
   // Hack to use URL methods on relative URLs
   return new URL(href, 'http://localhost')
 }
 
-function getCompleteUrl(href: Nullable<string>, params: Nullable<Nullable<SearchParams>[]>) {
+function withSearchParams(url: URL, searchParams: URLSearchParams) {
+  searchParams.forEach((value, name) => {
+    url.searchParams.append(name, value)
+  })
+  return url
+}
+
+function getCompleteHref(
+  href: Nullable<string>,
+  params: Nullable<Nullable<SearchParams>[]>,
+  type: 'relative' | 'absolute',
+) {
   if (!href) return null
+
   const searchParams = getDirectusSearchParams(params)
 
   const url = parseUrlOrHref(href)
 
-  if (!url) {
-    logger.log('Invalid href', 'error', { href })
-    return null
+  const completeUrl = withSearchParams(url, searchParams)
+
+  if (type === 'relative') {
+    const { origin } = completeUrl
+    return completeUrl.href.replace(origin, '')
   }
-
-  searchParams.forEach((value, name) => {
-    url.searchParams.append(name, value)
-  })
-
-  return url
+  return completeUrl.href
 }
 
 function useFile(props: TUseDirectusLink) {
@@ -47,19 +55,10 @@ function useFile(props: TUseDirectusLink) {
   const { filename_download: filenameDownload } = file ?? {}
   const { src } = useDirectusFile(file) ?? {}
 
-  const { href, origin } = getCompleteUrl(src, params) ?? {}
-
-  if (href && URL.canParse(href)) {
-    return {
-      href,
-      download: filenameDownload ?? true,
-    }
-  }
-
-  const relativeHref = href && origin ? href.replace(origin, '') : undefined
+  const href = getCompleteHref(src, params, 'absolute')
 
   return {
-    href: relativeHref,
+    href: href ?? undefined,
     download: filenameDownload ?? true,
   }
 }
@@ -67,11 +66,10 @@ function useFile(props: TUseDirectusLink) {
 function useCollection(props: TUseDirectusLink) {
   const { collection, target, params } = props
 
-  const { href, origin } = getCompleteUrl(collection?.translations?.[0]?.path, params) ?? {}
-  const relativeHref = href && origin ? href.replace(origin, '') : undefined
+  const href = getCompleteHref(collection?.translations?.[0]?.path, params, 'relative')
 
   return {
-    href: relativeHref,
+    href: href ?? undefined,
     target: target ?? undefined,
   }
 }
@@ -79,10 +77,10 @@ function useCollection(props: TUseDirectusLink) {
 function useExternalLink(props: TUseDirectusLink) {
   const { external_link: externalLink, target, params } = props
 
-  const { href } = getCompleteUrl(externalLink, params) ?? {}
+  const href = getCompleteHref(externalLink, params, 'absolute')
 
   return {
-    href,
+    href: href ?? undefined,
     target: target ?? undefined,
   }
 }
@@ -90,10 +88,9 @@ function useExternalLink(props: TUseDirectusLink) {
 function useAnchor(props: TUseDirectusLink) {
   const { anchor, params } = props
 
-  const { href, origin } = getCompleteUrl(anchor, params) ?? {}
-  const relativeHref = href && origin ? href.replace(origin, '') : undefined
+  const href = getCompleteHref(anchor, params, 'relative')
 
-  return { href: relativeHref }
+  return { href: href ?? undefined }
 }
 
 const defaultPropsConfig: TDirectusLinkPropsConfig = {
