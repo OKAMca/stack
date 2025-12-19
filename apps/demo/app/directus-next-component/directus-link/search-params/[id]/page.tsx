@@ -6,7 +6,7 @@ import {
   SearchParamsFragmentDoc,
   useFragment as getFragment,
 } from '@demo/directus-data-query'
-import { DirectusLink, getDirectusSearchParams } from '@okam/directus-next-component'
+import { DirectusLink, directusSearchParams } from '@okam/directus-next-component'
 import { queryGql } from '@okam/directus-query'
 import { Box, Typography } from '@okam/stack-ui'
 
@@ -26,7 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const { links_by_id: linkFragment } = (await queryGql(LinkByIdDocument, { id: params.id, locale: 'en' })) ?? {}
   const link = getLinksFragment(linkFragment)
   const { params: linkParams } = link
-  const searchParams = getDirectusSearchParams(linkParams)
+  const searchParams = directusSearchParams(linkParams)
 
   return (
     <Box customTheme="flex flex-col gap-4 mx-8">
