@@ -1,5 +1,5 @@
 import type { TDirectusLinkProps, TLinks, TNavigationItemsTree } from '@okam/directus-next-component'
-import { useDirectusLink, useNavigationItems } from '@okam/directus-next-component/server'
+import { getDirectusLink, useNavigationItems } from '@okam/directus-next-component/server'
 import { Anchor, type Nullable } from '@okam/stack-ui'
 
 /* eslint-disable */
@@ -139,8 +139,8 @@ const depthMap: Record<number, object> = {
   2: { padding: '4px', backgroundColor: 'green' },
 }
 
-const BrandDirectusLink = (props: TDirectusLinkProps) => {
-  const linkProps = useDirectusLink(props)
+const BrandDirectusLink = async (props: TDirectusLinkProps) => {
+  const linkProps = await getDirectusLink(props)
 
   return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline', ...linkProps.tokens }} />
 }
