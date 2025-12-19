@@ -1,161 +1,9 @@
-import type { TDirectusLinkProps, TLinks, TNavigationItemsTree } from '@okam/directus-next-component'
+import { NavigationItemsDocument, NavigationItemsFragmentDoc, useFragment } from '@demo/directus-data-query'
+import type { TDirectusLinkProps, TLinks, TNavigationItems, TNavigationItemsTree } from '@okam/directus-next-component'
 import { useDirectusLink, useNavigationItems } from '@okam/directus-next-component/server'
+import { queryGql } from '@okam/directus-query'
 import { Anchor, type Nullable } from '@okam/stack-ui'
-
-/* eslint-disable */
-const navigationItems = [
-  {
-    "id": "f9e5baee-22e3-4770-936c-a3a9614cdaf4",
-    "tokens": {
-      "size": "large",
-      "shape": "circular"
-    },
-    "variant": "menu",
-    "link": {
-      "anchor": "#parent-1",
-      "external_link": null,
-      "id": "1d96b8a1-022f-407f-a80d-187db5b2ff86",
-      "label": "Parent 1",
-      "prefetch": null,
-      "replace": false,
-      "scroll": true,
-      "target": "_self",
-      "type": "anchor",
-      "collection": null,
-      "file": null,
-      "params": [
-        {
-          "name": "test",
-          "value": "abc"
-        }
-      ]
-    },
-    "parent": null,
-    "children": [
-      {
-        "id": "7b2bb1fb-7810-4dc1-9106-44d836846ff5",
-        "link": {
-          "anchor": "#",
-          "external_link": "https://google.com",
-          "id": "3851c650-b9e8-4910-9130-28d1bd5508a5",
-          "label": "Enfant 1 (external)",
-          "prefetch": null,
-          "replace": false,
-          "scroll": true,
-          "target": "_self",
-          "type": "external-link",
-          "collection": null,
-          "file": null,
-          "params": [
-        {
-          "name": "test",
-          "value": "abc"
-        }
-      ]
-        },
-        "children": []
-      },
-      {
-        "id": "8f3a2eae-f2d9-47bc-9e8c-5453d62729e7",
-        "tokens": null,
-        "variant": null,
-        "link": {
-          "anchor": "#",
-          "external_link": null,
-          "id": "df7a3e71-b081-4e2b-bb41-b51d6b1958ec",
-          "label": "Enfant 2 (internal)",
-          "prefetch": null,
-          "replace": false,
-          "scroll": true,
-          "target": "_self",
-          "type": "collection",
-          "params": [
-            {
-              "name": "test",
-              "value": "abc"
-            }
-          ],
-          "collection": {
-            "id": "1e9d25bb-a3d9-43c4-97ab-e2174e30a30a",
-            "belongs_to_collection": null,
-            "translations": [
-              {
-                "slug": "enfant-2",
-                "title": null,
-                "path": "/enfant-2",
-                "languages_code": {
-                  "code": "fr-CA"
-                }
-              }
-            ],
-            "route": null
-          },
-          "file": null
-        },
-        "children": []
-      },
-      {
-        "id": "c3184e0b-f526-47ef-9c5f-6185206946f6",
-        "tokens": null,
-        "variant": null,
-        "link": {
-          "anchor": "#",
-          "external_link": null,
-          "id": "8adae6ab-7bf1-4a41-b8d9-49892f17942d",
-          "label": "Enfant 3 (file)",
-          "prefetch": null,
-          "replace": false,
-          "scroll": true,
-          "target": "_self",
-          "type": "file",
-          "collection": null,
-          "file": {
-            "id": "e33f4e3b-5707-47ae-a8d4-7ff8e75ebc16",
-            "filename_disk": "e33f4e3b-5707-47ae-a8d4-7ff8e75ebc16.jpeg",
-            "filename_download": "qc.REDACTED.ca",
-            "title": "qc.REDACTED.ca Logo",
-            "type": "image/jpeg",
-            "width": 1500,
-            "height": 1500,
-            "duration": null,
-            "embed": null,
-            "description": null,
-            "focal_point_x": null,
-            "focal_point_y": null
-          },
-          "params": [
-            {
-              "name": "test",
-              "value": "abc"
-            }
-          ]
-        },
-        "children": [
-          {
-            "id": "cafd18e7-b933-44bc-91a3-ebefed3b7765",
-            "tokens": null,
-            "variant": null,
-            "link": {
-              "anchor": "#",
-              "external_link": "https://facebook.com",
-              "id": "f135ba57-a7f2-41c3-93b7-94b500ff6ed0",
-              "label": "Petit enfant 1",
-              "prefetch": null,
-              "replace": false,
-              "scroll": true,
-              "target": "_self",
-              "type": "external-link",
-              "collection": null,
-              "file": null
-            },
-            "children": []
-          }
-        ]
-      }
-    ]
-  }
-]
-/* eslint-enable */
+import { isEmpty } from 'radashi'
 
 const depthMap: Record<number, object> = {
   0: { padding: '4px', backgroundColor: 'red' },
@@ -166,7 +14,7 @@ const depthMap: Record<number, object> = {
 const BrandDirectusLink = (props: TDirectusLinkProps) => {
   const linkProps = useDirectusLink(props)
 
-  return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline', ...linkProps.tokens }} />
+  return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline', className: 'text-white', ...linkProps.tokens }} />
 }
 
 function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
@@ -175,13 +23,10 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
   const style = depthMap[depth]
 
   if (!link || !linkProps) return null
-  if (!children) {
+  if (isEmpty(children)) {
     return (
-      <li style={style} key={linkProps?.id}>
-        {/* You can render your own component with linkProps */}
+      <li style={style} key={linkProps?.id} className="mx-2 my-1 border border-gray-300 rounded-md list-none">
         <BrandDirectusLink {...linkProps} />
-        {/* Or use the pre-rendered version */}
-        <div>{link}</div>
         <div>
           <strong>Depth: {depth}</strong>
         </div>
@@ -192,29 +37,40 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
     )
   }
   return (
-    <ul>
-      <li style={style} key={linkProps?.id}>
+    <ul className="list-none mb-4 mx-2">
+      <li style={style} key={linkProps?.id} className="my-1 border border-gray-300 rounded-md">
         <div>
           <BrandDirectusLink {...linkProps} />
         </div>
-        <div>{link}</div>
         <div>
           <strong>Depth: {depth}</strong>
         </div>
         <div>
           <strong>Type: {linkProps?.type}</strong>
         </div>
+        <ul className="list-none mb-4">{children.map((child) => renderTree(child))}</ul>
       </li>
-      {children.map((child) => renderTree(child))}
     </ul>
   )
 }
 
 export default async function Index() {
-  const navigationTree = useNavigationItems<3, { link?: Nullable<TLinks> }>(navigationItems, (item) => {
-    const { link } = item ?? {}
-    return { ...link, collection: link?.collection, file: link?.file }
+  const { navigation_items: navigationItemsFragment } = await queryGql(NavigationItemsDocument, {
+    locale: 'en-CA',
+    filter: { parent: { id: { _null: true } } },
   })
+  const navigationItems = useFragment(NavigationItemsFragmentDoc, navigationItemsFragment)
+  const navigationTree = useNavigationItems<3, { link?: Nullable<TLinks> }>(
+    navigationItems as Nullable<
+      Nullable<
+        TNavigationItems<TNavigationItems<unknown, { link?: Nullable<TLinks> }, 3>, { link?: Nullable<TLinks> }, 3>
+      >[]
+    >,
+    (item) => {
+      const { link } = item ?? {}
+      return { ...link, collection: link?.collection, file: link?.file }
+    },
+  )
 
   return navigationTree?.map((child) => renderTree(child))
 }
