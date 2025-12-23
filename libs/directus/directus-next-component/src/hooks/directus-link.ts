@@ -6,12 +6,12 @@ import type { SearchParams } from '../types/links'
 import useDirectusFile from './directus-file'
 import getDirectusSearchParams from './directus-search-params'
 
-const absoluteUrlSchema = z.url({ protocol: /^(http|https|mailto|tel):$/ })
+const absoluteUrlSchema = z.url({ protocol: /^(https?|mailto|tel)$/ })
 const relativeUrlSchema = z.string().regex(/^[/#?]/, {
-  message: `Invalid href. Must be a valid absolute URL or start with /, # or ?`,
+  error: (error) => `Invalid href ${error.input}. Must be a valid absolute URL or start with /, # or ?`,
 })
 
-const hrefSchema = absoluteUrlSchema.or(relativeUrlSchema).transform((value) => {
+const hrefSchema = z.union([absoluteUrlSchema, relativeUrlSchema]).transform((value) => {
   if (URL.canParse(value)) {
     return new URL(value)
   }
