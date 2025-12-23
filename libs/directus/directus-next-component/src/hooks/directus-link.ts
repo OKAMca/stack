@@ -1,26 +1,22 @@
 import type { Nullable, TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
+import { z } from 'zod'
 import type { TDirectusLinkPropsConfig, TUseDirectusLink } from '../components/DirectusLink/interface'
 import type { SearchParams } from '../types/links'
 import useDirectusFile from './directus-file'
 import getDirectusSearchParams from './directus-search-params'
 
-export function parseUrlOrHref(href: string) {
-  if (URL.canParse(href)) {
-    const url = new URL(href)
-    // Only allow safe protocols for absolute URLs
-    if (!['http:', 'https:', 'mailto:', 'tel:'].includes(url.protocol)) {
-      throw new Error('Invalid protocol. An absolute URL must start with http or https.')
-    }
-    return url
-  }
-  if (!['/', '#', '?'].includes(href[0] ?? '')) {
-    throw new Error('Invalid href. A relative URL must start with / or #.')
-  }
+const absoluteUrlSchema = z.url({ protocol: /^(http|https|mailto|tel):$/ })
+const relativeUrlSchema = z.string().regex(/^[/#?]/, {
+  message: `Invalid href. Must be a valid absolute URL or start with /, # or ?`,
+})
 
-  // Hack to use URL methods on relative URLs
-  return new URL(href, 'http://localhost')
-}
+const hrefSchema = absoluteUrlSchema.or(relativeUrlSchema).transform((value) => {
+  if (URL.canParse(value)) {
+    return new URL(value)
+  }
+  return new URL(value, 'http://localhost')
+})
 
 function withSearchParams(url: URL, searchParams: URLSearchParams) {
   searchParams.forEach((value, name) => {
@@ -38,7 +34,7 @@ function getCompleteHref(
 
   const searchParams = getDirectusSearchParams(params)
 
-  const url = parseUrlOrHref(href)
+  const url = hrefSchema.parse(href)
 
   const completeUrl = withSearchParams(url, searchParams)
 

@@ -40,6 +40,7 @@
     "radashi": "^12.3.0",
     "react": "18.3.1",
     "unlazy": "^0.12.1",
-    "@okam/directus-next": "1.2.9"
+    "@okam/directus-next": "1.2.9",
+    "zod": "^4.2.1"
   }
 }
