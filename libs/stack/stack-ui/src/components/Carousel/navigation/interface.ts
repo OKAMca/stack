@@ -10,6 +10,6 @@ export type TCarouselNavigationButtonProps = TButtonProps & {
 }
 export interface TCarouselNavigation {
   navigationProps: TButtonProps & DOMAttributes
-  ref: RefObject<HTMLButtonElement & HTMLAnchorElement>
+  ref: RefObject<(HTMLButtonElement & HTMLAnchorElement) | null>
   isDisabled: boolean
 }

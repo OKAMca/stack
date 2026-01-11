@@ -24,8 +24,8 @@ export type TCarouselContext = {
   setActiveIndex: Dispatch<SetStateAction<number>>
   id: string
   swiper: Swiper | undefined
-  swiperRef: RefObject<SwiperRef>
-  prevNavigationRef: RefObject<HTMLButtonElement & HTMLAnchorElement>
-  nextNavigationRef: RefObject<HTMLButtonElement & HTMLAnchorElement>
+  swiperRef: RefObject<SwiperRef | null>
+  prevNavigationRef: RefObject<(HTMLButtonElement & HTMLAnchorElement) | null>
+  nextNavigationRef: RefObject<(HTMLButtonElement & HTMLAnchorElement) | null>
   swiperProps: Omit<TSwiperProps, 'children' | 'modules' | 'controller' | 'id'>
 }

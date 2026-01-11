@@ -1,0 +1,282 @@
+# React 19 + Next.js 15 Upgrade Progress
+
+## 2026-01-11 - Task: fix-button-preventfocusonpress
+
+### Completed
+- Fixed Button component in `libs/stack/stack-ui/src/components/Button/index.tsx`
+- Added `preventFocusOnPress` to the destructuring on line 76 to filter it out before spreading to DOM elements
+- This prevents React 19 from throwing warnings about unknown DOM props
+
+### Changes Made
+- Modified line 76 to add `preventFocusOnPress` to destructured props:
+  ```typescript
+  const { onPress, onFocusChange, excludeFromTabOrder, preventFocusOnPress, ...allProps } = rest as Record<
+    string,
+    unknown
+  >
+  ```
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx lint stack-ui` - SUCCESS (only pre-existing warning in AlertsItem.tsx)
+
+### Issues Encountered
+- Had to format the line across multiple lines to satisfy prettier line length rules
+
+### Next Tasks
+- fix-uselabelledoverlay-preventfocusonpress
+- fix-popoverbutton-preventfocusonpress
+- fix-datepicker-wrapper-preventfocusonpress
+- fix-accordion-preventfocusonpress
+
+## 2026-01-11 - Task: fix-uselabelledoverlay-preventfocusonpress
+
+### Completed
+- Fixed useLabelledOverlay hook in `libs/stack/stack-ui/src/hooks/useLabelledOverlay/index.ts`
+- Added `preventFocusOnPress` to the destructuring on line 22 to filter it out before spreading to consumers
+- useOverlayTrigger returns preventFocusOnPress in triggerProps which was being spread to DOM elements
+
+### Changes Made
+- Modified line 22 to add `preventFocusOnPress` to destructured props:
+  ```typescript
+  const {
+    triggerProps: { onPress, preventFocusOnPress, ...triggerProps },
+    overlayProps,
+  } = useOverlayTrigger({ type }, state, ref)
+  ```
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx lint stack-ui` - SUCCESS (only pre-existing warning in AlertsItem.tsx)
+
+### Issues Encountered
+- None
+
+### Next Tasks
+- fix-popoverbutton-preventfocusonpress
+- fix-datepicker-wrapper-preventfocusonpress
+- fix-accordion-preventfocusonpress
+
+## 2026-01-11 - Task: fix-popoverbutton-preventfocusonpress
+
+### Completed
+- Fixed Popover Button component in `libs/stack/stack-ui/src/components/Popover/components/Button.tsx`
+- Added `preventFocusOnPress` to the destructuring on line 41 to filter it out before spreading to ButtonWithForwardRef
+- useOverlayTrigger returns preventFocusOnPress in triggerProps which was being passed to the DOM
+
+### Changes Made
+- Modified line 41 to add `preventFocusOnPress` to destructured props:
+  ```typescript
+  const { onPress, preventFocusOnPress, ...triggerButtonProps } = triggerProps
+  ```
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx lint stack-ui` - SUCCESS (only pre-existing warning in AlertsItem.tsx)
+
+### Issues Encountered
+- None
+
+### Next Tasks
+- fix-datepicker-wrapper-preventfocusonpress
+- fix-accordion-preventfocusonpress
+
+## 2026-01-11 - Task: fix-datepicker-wrapper-preventfocusonpress
+
+### Completed
+- Fixed DatePicker Wrapper component in `libs/stack/stack-ui/src/components/fields/DatePicker/components/Wrapper.tsx`
+- Added `preventFocusOnPress` filtering from buttonProps before spreading to Button component
+- useDatePicker returns buttonProps containing preventFocusOnPress which was being passed to the DOM
+
+### Changes Made
+- Added destructuring to filter out preventFocusOnPress:
+  ```typescript
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { preventFocusOnPress, onPress, ...restButtonProps } = buttonProps as typeof buttonProps & {
+    preventFocusOnPress?: unknown
+  }
+  ```
+- Changed Button props to use restButtonProps instead of buttonProps
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx lint stack-ui` - SUCCESS (only pre-existing warning in AlertsItem.tsx)
+
+### Issues Encountered
+- Initial approach using underscore prefix (`_preventFocusOnPress`) violated naming convention lint rule
+- Had to add eslint-disable comment for @typescript-eslint/no-unused-vars to match other files' patterns
+- Prettier auto-fix was applied to format multi-line Button props
+
+### Next Tasks
+- fix-accordion-preventfocusonpress
+
+## 2026-01-11 - Task: fix-accordion-preventfocusonpress
+
+### Completed
+- Fixed AriaAccordionItem component in `libs/stack/stack-ui/src/components/Accordion/components/AriaAccordionItem.tsx`
+- Added `preventFocusOnPress` filtering from buttonProps before spreading to ButtonWithForwardRef
+- useAccordionItem returns buttonProps that may contain preventFocusOnPress which was being passed to the DOM
+
+### Changes Made
+- Refactored to first get rawButtonProps, then destructure with type assertion:
+  ```typescript
+  const { buttonProps: rawButtonProps, regionProps } = useAccordionItem(props, state, ref)
+  // Filter preventFocusOnPress to prevent React 19 unknown prop warning
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {
+    onClick: onButtonClick,
+    onKeyDown,
+    onPointerDown,
+    preventFocusOnPress,
+    ...buttonProps
+  } = rawButtonProps as typeof rawButtonProps & {
+    preventFocusOnPress?: unknown
+  }
+  ```
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx lint stack-ui` - SUCCESS (only pre-existing warning in AlertsItem.tsx)
+
+### Issues Encountered
+- TypeScript error: `preventFocusOnPress` does not exist on type `ButtonHTMLAttributes<HTMLElement>`
+- Solution: Used type assertion with `& { preventFocusOnPress?: unknown }` pattern (consistent with DatePicker Wrapper)
+- Prettier required multi-line formatting for the destructuring
+
+### Next Tasks
+- Phase 1 complete! All preventFocusOnPress fixes are done.
+- Next: Phase 2 (dependency upgrades) - convert-react-to-peer-deps
+
+## 2026-01-11 - Task: convert-react-to-peer-deps
+
+### Completed
+- Converted react and react-dom from dependencies to peerDependencies in stack-ui package.json
+- This allows consumers to use either React 18 or React 19 with the library
+- Updated eslint configuration to ignore react-dom in dependency checks
+
+### Changes Made
+1. Modified `libs/stack/stack-ui/package.json`:
+   - Removed `react` from dependencies
+   - Added `peerDependencies` section with:
+     ```json
+     "peerDependencies": {
+       "react": "^18.0.0 || ^19.0.0",
+       "react-dom": "^18.0.0 || ^19.0.0"
+     }
+     ```
+
+2. Modified `libs/stack/stack-ui/.eslintrc.js`:
+   - Added `@nx/dependency-checks` rule with `react-dom` in ignoredDependencies
+   - This is necessary because react-dom is a peer dependency but not directly imported
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx run-many --all --target=lint` - SUCCESS
+
+### Issues Encountered
+- Initial lint failure: `@nx/dependency-checks` flagged react-dom as unused
+- Solution: Added react-dom to ignoredDependencies in stack-ui's eslint config
+- Had to replicate full dependency-checks config to avoid overriding base config
+
+### Notes
+- devDependencies for react/react-dom are handled at the root workspace level (package.json)
+- The prd.json mentioned adding them to stack-ui's devDependencies but the workspace already provides React 18.3.1 for development
+
+### Next Tasks
+- upgrade-types-react (Phase 2)
+- upgrade-types-react-dom (Phase 2)
+- upgrade-next (Phase 2)
+- upgrade-react-aria (Phase 2)
+- upgrade-react-stately (Phase 2)
+
+## 2026-01-11 - Task: fix-jsx-namespace (subtask of upgrade-types-react)
+
+### Completed
+- Fixed all JSX.Element references to use React.JSX.Element (required for @types/react@19)
+- In React 19 types, the global JSX namespace is removed and must be accessed via React.JSX
+
+### Files Changed
+1. `libs/stack/stack-ui/src/components/Accordion/components/AccordionItem.tsx:51`
+2. `libs/stack/stack-ui/src/components/Carousel/index.tsx:8` - also added React import
+3. `libs/stack/stack-ui/src/components/Menu/interface.ts:14,21`
+4. `libs/stack/stack-ui/src/components/SidePanel/interface.ts:11,13` - also added React type import
+5. `libs/stack/stack-ui/src/components/TagGroup/components/TagItem.tsx:78` - removed JSX type import
+6. `libs/stack/stack-ui/src/components/Node/index.tsx:149` - added React type import
+7. `libs/stack/stack-ui/src/components/TabList/components/TabItem.tsx:78` - removed JSX type import
+8. `libs/stack/stack-ui/src/providers/Menu/interface.ts:13-15,21-23,29-31`
+9. `libs/stack/stack-ui/src/storybook/Menu/Menu.tsx:87,113`
+
+### Verification
+- Build: Runs but has PRE-EXISTING errors (not introduced by this change)
+- Lint passed: `npx nx lint stack-ui` - SUCCESS (only pre-existing warning)
+- JSX.Element errors are now eliminated
+
+### Issues Encountered
+- Discovered that the build was already failing on main branch with TypeScript errors
+- These pre-existing errors are related to RefObject types and child.props being unknown
+- My JSX namespace changes do not introduce any new errors
+- Node/index.tsx required `import type React` instead of `import React` to satisfy lint rule
+
+### Pre-existing Build Errors (NOT related to this task)
+- `AlertsItem.tsx:32` - spread types issue with content.props
+- `Alerts/index.tsx:33` - RefObject<null> issue
+- `useCarouselSlide.tsx:35,46` - RefObject issue
+- `combo-box.stories.tsx:211,313` - unknown props issue
+- `ComboBox/index.tsx:148,151` - RefObject issue
+- `Select/Select.tsx:44` - useRef needs argument
+
+### Next Tasks
+- fix-refobject-null (subtask of upgrade-types-react)
+- fix-element-props-unknown (subtask of upgrade-types-react)
+- apply-types-upgrade (subtask of upgrade-types-react)
+
+## 2026-01-11 - Task: fix-refobject-null (subtask of upgrade-types-react)
+
+### Completed
+- Updated RefObject types to accept null (React 19 type change)
+- In React 19's @types/react, RefObject<T> no longer implicitly includes null
+- useRef<T>(null) now returns RefObject<T | null> instead of RefObject<T>
+
+### Files Changed (from prd.json)
+1. `libs/stack/stack-ui/src/hooks/useLabelledOverlay/index.ts:18`
+   - Changed `RefObject<Element>` to `RefObject<Element | null>`
+
+2. `libs/stack/stack-ui/src/components/Carousel/swiper/useCarouselSlide.tsx:10`
+   - Changed function parameter from `RefObject<HTMLElement>` to `RefObject<HTMLElement | null>`
+
+3. `libs/stack/stack-ui/src/components/Carousel/swiper/interface.ts:33,39`
+   - Updated TCarouselSwiper.ref to `RefObject<SwiperRef | null>`
+   - Updated TCarouselSlide.ref to `RefObject<HTMLElement | null>`
+
+4. `libs/stack/stack-ui/src/components/Popover/interface.ts:31,32`
+   - Updated popoverRef to `RefObject<HTMLElement | null>`
+   - Updated triggerRef to `RefObject<HTMLElement | null>`
+
+5. `libs/stack/stack-ui/src/providers/Carousel/interface.ts:27-29`
+   - Updated swiperRef to `RefObject<SwiperRef | null>`
+   - Updated prevNavigationRef to `RefObject<(HTMLButtonElement & HTMLAnchorElement) | null>`
+   - Updated nextNavigationRef to `RefObject<(HTMLButtonElement & HTMLAnchorElement) | null>`
+
+6. `libs/stack/stack-ui/src/components/Carousel/navigation/interface.ts:13`
+   - Updated TCarouselNavigation.ref to `RefObject<(HTMLButtonElement & HTMLAnchorElement) | null>`
+
+7. `libs/stack/stack-ui/src/components/fields/Select/Select.tsx:44`
+   - Fixed useRef<HTMLElement>() to useRef<HTMLElement>(null) (React 19 requires argument)
+
+### Verification
+- All RefObject-related TypeScript errors are now resolved
+- Lint passed: `npx nx run-many --all --target=lint` - SUCCESS (0 errors, 1 pre-existing warning)
+
+### Remaining Build Errors (NOT from this task - belong to other subtasks)
+- `AlertsItem.tsx:32` - child.props is unknown (fix-element-props-unknown task)
+- `combo-box.stories.tsx:211,313` - child.props is unknown (fix-element-props-unknown task)
+- `AccordionTransition.tsx:18`, `ModalTransition.tsx:19`, `RenderWithOpacity.tsx:17` - react-spring animated.div children issue (new issue discovered, needs to be added to prd.json)
+
+### Issues Encountered
+- The prd.json only listed 3 files, but fixing those revealed cascade effects in other files that also needed updating
+- All RefObject types in interfaces that are consumed by useRef(null) needed to be updated
+
+### Next Tasks
+- fix-element-props-unknown (subtask of upgrade-types-react)
+- apply-types-upgrade (subtask of upgrade-types-react)
+- Note: react-spring animated.div type issue should be added to prd.json

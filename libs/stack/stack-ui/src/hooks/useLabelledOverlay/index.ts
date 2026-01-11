@@ -15,7 +15,7 @@ import type { TLabelledOverlayAria } from './interface'
 function useLabelledOverlay(
   props: OverlayTriggerProps,
   state: OverlayTriggerState,
-  ref?: RefObject<Element>,
+  ref?: RefObject<Element | null>,
 ): TLabelledOverlayAria {
   const { type = 'dialog' } = props
   const {

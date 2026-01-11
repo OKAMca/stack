@@ -7,7 +7,7 @@ import { mergeProps } from 'react-aria'
 import type { Swiper } from 'swiper/types'
 import type { TCarouselSlideProps, TCarouselSlide } from './interface'
 
-function getClasses(swiper: Swiper | undefined, ref: RefObject<HTMLElement>) {
+function getClasses(swiper: Swiper | undefined, ref: RefObject<HTMLElement | null>) {
   if (!ref.current || !swiper) return []
   const { slideClass = 'swiper-slide' } = swiper.params
   const classes = ref.current?.className.split(' ').filter((className) => {
