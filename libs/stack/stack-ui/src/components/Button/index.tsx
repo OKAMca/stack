@@ -72,8 +72,11 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: TButtonRef) =>
   )
 
   const theme = useThemeContext(themeName, tokens, customTheme)
-  // excludeFromTabOrder being spread on an element creates unknown attributes error
-  const { onPress, onFocusChange, excludeFromTabOrder, ...allProps } = rest as Record<string, unknown>
+  // excludeFromTabOrder and preventFocusOnPress being spread on an element creates unknown attributes error in React 19
+  const { onPress, onFocusChange, excludeFromTabOrder, preventFocusOnPress, ...allProps } = rest as Record<
+    string,
+    unknown
+  >
 
   return (
     <FocusRing within focusRingClass="has-focus-ring">
