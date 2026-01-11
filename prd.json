@@ -163,9 +163,23 @@
             "description": "Fix child.props which is now 'unknown' in React 19 types",
             "files": [
               "libs/stack/stack-ui/src/components/Alerts/components/AlertsItem.tsx:32",
-              "libs/stack/stack-ui/src/components/fields/ComboBox/combo-box.stories.tsx:211,313"
+              "libs/stack/stack-ui/src/components/fields/ComboBox/combo-box.stories.tsx:211,298"
             ],
-            "status": "pending"
+            "status": "DONE",
+            "fix_applied": "Cast ReactElement to ReactElement<Record<string, unknown>> or ReactElement<any> for backward compatibility"
+          },
+          {
+            "id": "fix-react-spring-animated-children",
+            "description": "Fix react-spring animated.div not accepting children prop with React 19 types",
+            "files": [
+              "libs/stack/stack-ui/src/transitions/AccordionTransition.tsx:18",
+              "libs/stack/stack-ui/src/transitions/ModalTransition.tsx:19",
+              "libs/stack/stack-ui/src/transitions/RenderWithOpacity.tsx:17",
+              "libs/stack/stack-ui/src/transitions/RenderWithSlide.tsx:19",
+              "libs/stack/stack-ui/src/transitions/SidePanelTransition.tsx:28"
+            ],
+            "status": "pending",
+            "problem": "Property 'children' does not exist on type AnimatedProps - react-spring types incompatibility with React 19"
           },
           {
             "id": "apply-types-upgrade",
