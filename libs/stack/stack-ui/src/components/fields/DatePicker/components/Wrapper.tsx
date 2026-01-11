@@ -18,6 +18,11 @@ const Wrapper = forwardRef<HTMLDivElement, TWrapperProps>((props, ref) => {
     icon,
     children,
   } = props
+  // Filter preventFocusOnPress from buttonProps to prevent React 19 unknown prop warning
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { preventFocusOnPress, onPress, ...restButtonProps } = buttonProps as typeof buttonProps & {
+    preventFocusOnPress?: unknown
+  }
   return (
     <BoxWithForwardRef themeName={`${themeName}.wrapper`} tokens={tokens} {...groupProps} ref={ref}>
       {buttonLabel && (
@@ -28,13 +33,7 @@ const Wrapper = forwardRef<HTMLDivElement, TWrapperProps>((props, ref) => {
       <Box themeName={`${themeName}.dateFieldContainer`} tokens={tokens}>
         {children}
       </Box>
-      <Button
-        themeName={`${themeName}.button`}
-        tokens={tokens}
-        type="button"
-        {...buttonProps}
-        handlePress={buttonProps.onPress}
-      >
+      <Button themeName={`${themeName}.button`} tokens={tokens} {...restButtonProps} handlePress={onPress}>
         {buttonContent && (
           <Typography themeName={`${themeName}.buttonContent`} tokens={tokens}>
             {buttonContent}
