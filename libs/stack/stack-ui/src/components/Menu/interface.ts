@@ -11,14 +11,14 @@ export type MenuProps = {
   beforeTabContent?: React.ReactNode
   afterTabContent?: React.ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  PanelTransition?: (props: TTransition) => JSX.Element
+  PanelTransition?: (props: TTransition) => React.JSX.Element
 }
 
 export type TMenuProps<T = TToken> = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent<T>
 
 export type TMenuSidePanelProps = TMenuProps & {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  TransitionAnimation?: (props: TTransition) => JSX.Element
+  TransitionAnimation?: (props: TTransition) => React.JSX.Element
 }
 
 export type PartialHtmlBaseElement = Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>

@@ -84,7 +84,7 @@ export const MenuFactory = ({
   openBtn = null,
   MenuComponent,
 }: {
-  tabs: JSX.Element[]
+  tabs: React.JSX.Element[]
   id: string
   menuItems?: TMenuItemProps[] | null
   defaultIsOpen?: boolean
@@ -110,7 +110,7 @@ export const MenuFactory = ({
     >
       <>
         {openBtn}
-        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (props: unknown) => JSX.Element}>
+        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (props: unknown) => React.JSX.Element}>
           <MenuItems menuLinkComponent="a" menuItems={menuItems} />
         </MenuComponent>
       </>
