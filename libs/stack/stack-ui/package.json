@@ -21,6 +21,10 @@
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
   "dependencies": {
     "@internationalized/date": "3.8.0",
     "@okam/core-lib": "1.17.0",
@@ -44,7 +48,6 @@
     "@react-types/shared": "^3.26.0",
     "@react-types/tabs": "3.3.14",
     "radashi": "^12.3.0",
-    "react": "18.3.1",
     "react-aria": "^3.39.0",
     "react-div-100vh": "0.7.0",
     "react-hook-form": "7.54.0",

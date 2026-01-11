@@ -24,5 +24,26 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
+    '@nx/dependency-checks': [
+      'error',
+      {
+        buildTargets: ['build'],
+        checkMissingDependencies: true,
+        checkObsoleteDependencies: true,
+        checkVersionMismatches: true,
+        ignoredDependencies: [
+          'vite',
+          'vite-plugin-dts',
+          'vite-tsconfig-paths',
+          '@nx/react',
+          '@nx/react/tailwind',
+          '@vitejs/plugin-react',
+          '@nx/vite',
+          'rollup-plugin-preserve-directives',
+          'react-dom',
+        ],
+        ignoredFiles: ['libs/**/vite.config.ts', 'libs/**/tailwind.config.js', 'libs/**/rollup.config.js'],
+      },
+    ],
   },
 }
