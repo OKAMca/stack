@@ -4,6 +4,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type PartialNode } from '@react-stately/collections'
 import type { ItemElement } from '@react-types/shared'
+import type React from 'react'
 import { Children } from 'react'
 import type { ItemProps } from 'react-stately'
 import type { TDefaultItemComponent, TDefaultSectionComponent } from '../../types/react-stately'
@@ -146,6 +147,6 @@ Node.getCollectionNode = function* getCollectionNode<T extends object = object>(
 }
 
 // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
-const _Node = Node as unknown as (props: TNodeProps<any>) => JSX.Element
+const _Node = Node as unknown as (props: TNodeProps<any>) => React.JSX.Element
 
 export { _Node as Node }
