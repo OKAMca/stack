@@ -280,3 +280,44 @@
 - fix-element-props-unknown (subtask of upgrade-types-react)
 - apply-types-upgrade (subtask of upgrade-types-react)
 - Note: react-spring animated.div type issue should be added to prd.json
+
+## 2026-01-11 - Task: fix-element-props-unknown (subtask of upgrade-types-react)
+
+### Completed
+- Fixed child.props which is now 'unknown' in React 19 types
+- In React 19's @types/react, ReactElement.props is typed as 'unknown' instead of 'any'
+- This requires explicit type casting when accessing props on ReactElement
+
+### Files Changed
+1. `libs/stack/stack-ui/src/components/Alerts/components/AlertsItem.tsx:32`
+   - Fixed React.cloneElement call by casting content to `React.ReactElement<Record<string, unknown>>`
+   - This allows the spread of props while maintaining type safety
+   - Comment added explaining React 19 compatibility
+
+2. `libs/stack/stack-ui/src/components/fields/ComboBox/combo-box.stories.tsx:207,298`
+   - Fixed line 207: Cast metaChildren to `React.ReactElement<{ children: React.ReactNode }>[]`
+   - Fixed line 298: Cast children to `React.ReactElement<any>[]` with eslint-disable comment
+   - This allows accessing child.props.children without type errors
+
+### Verification
+- AlertsItem.tsx and combo-box.stories.tsx type errors are resolved
+- Lint passed (verified by build output showing no errors from these files)
+
+### Issues Encountered
+- Initial approach of casting just `content.props as Record<string, unknown>` didn't work
+- cloneElement's second argument types based on the element type, so the element itself needed casting
+- Discovered additional react-spring animated.div issues (separate from this task)
+
+### New Issues Discovered (added to prd.json)
+- react-spring animated.div doesn't accept children prop with React 19 types
+- Affected files:
+  - AccordionTransition.tsx:18
+  - ModalTransition.tsx:19
+  - RenderWithOpacity.tsx:17
+  - RenderWithSlide.tsx:19
+  - SidePanelTransition.tsx:28
+- This is tracked as new task: fix-react-spring-animated-children
+
+### Next Tasks
+- fix-react-spring-animated-children (new task)
+- apply-types-upgrade (subtask of upgrade-types-react)
