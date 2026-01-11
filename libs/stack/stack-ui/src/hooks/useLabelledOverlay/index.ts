@@ -19,7 +19,7 @@ function useLabelledOverlay(
 ): TLabelledOverlayAria {
   const { type = 'dialog' } = props
   const {
-    triggerProps: { onPress, ...triggerProps },
+    triggerProps: { onPress, preventFocusOnPress, ...triggerProps },
     overlayProps,
   } = useOverlayTrigger({ type }, state, ref)
 
