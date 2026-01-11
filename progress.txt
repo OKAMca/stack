@@ -321,3 +321,47 @@
 ### Next Tasks
 - fix-react-spring-animated-children (new task)
 - apply-types-upgrade (subtask of upgrade-types-react)
+
+## 2026-01-11 - Task: fix-react-spring-animated-children (subtask of upgrade-types-react)
+
+### Completed
+- Fixed react-spring animated.div not accepting children prop with React 19 types
+- In React 19's @types/react, the implicit children prop is removed from FC and component types
+- react-spring's AnimatedProps type doesn't include children, causing TypeScript errors
+
+### Files Changed
+1. `libs/stack/stack-ui/src/transitions/AccordionTransition.tsx`
+2. `libs/stack/stack-ui/src/transitions/ModalTransition.tsx`
+3. `libs/stack/stack-ui/src/transitions/RenderWithOpacity.tsx`
+4. `libs/stack/stack-ui/src/transitions/RenderWithSlide.tsx`
+5. `libs/stack/stack-ui/src/transitions/SidePanelTransition.tsx`
+
+### Solution Applied
+- Created type-cast wrapper for animated.div that accepts any props:
+  ```typescript
+  // Cast animated.div to accept children prop for React 19 type compatibility
+  // react-spring types don't include children in AnimatedProps with @types/react@19
+  // See: https://github.com/pmndrs/react-spring/issues/1572
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const AnimatedDiv = animated.div as React.FC<any>
+  ```
+- Replaced all `animated.div` usages with `AnimatedDiv`
+
+### Research Findings
+- This is a known issue with react-spring's types (GitHub issue #1572)
+- react-spring v9.x has peer dependency on React 16/17/18, not officially supporting React 19 yet
+- react-spring v10.x was released to address React 19 compatibility
+- The `any` cast is a temporary workaround until react-spring updates their types
+- Alternative: upgrade to @react-spring/web v10.x, but may introduce breaking changes
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx run-many --all --target=lint` - SUCCESS (0 errors, 1 pre-existing warning)
+
+### Issues Encountered
+- First attempt using `React.ComponentProps<typeof animated.div>` failed - only included style prop types, not other div attributes
+- Second attempt using `ComponentPropsWithRef<'div'>` failed - SpringValue types not compatible with regular CSS types
+- Final solution: Cast to `React.FC<any>` to bypass type checking entirely (safe since animated.div already works at runtime)
+
+### Next Tasks
+- apply-types-upgrade (subtask of upgrade-types-react) - Apply @types/react ^19.0.0 upgrade

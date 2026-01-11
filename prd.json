@@ -172,14 +172,15 @@
             "id": "fix-react-spring-animated-children",
             "description": "Fix react-spring animated.div not accepting children prop with React 19 types",
             "files": [
-              "libs/stack/stack-ui/src/transitions/AccordionTransition.tsx:18",
-              "libs/stack/stack-ui/src/transitions/ModalTransition.tsx:19",
-              "libs/stack/stack-ui/src/transitions/RenderWithOpacity.tsx:17",
-              "libs/stack/stack-ui/src/transitions/RenderWithSlide.tsx:19",
-              "libs/stack/stack-ui/src/transitions/SidePanelTransition.tsx:28"
+              "libs/stack/stack-ui/src/transitions/AccordionTransition.tsx",
+              "libs/stack/stack-ui/src/transitions/ModalTransition.tsx",
+              "libs/stack/stack-ui/src/transitions/RenderWithOpacity.tsx",
+              "libs/stack/stack-ui/src/transitions/RenderWithSlide.tsx",
+              "libs/stack/stack-ui/src/transitions/SidePanelTransition.tsx"
             ],
-            "status": "pending",
-            "problem": "Property 'children' does not exist on type AnimatedProps - react-spring types incompatibility with React 19"
+            "status": "DONE",
+            "problem": "Property 'children' does not exist on type AnimatedProps - react-spring types incompatibility with React 19",
+            "fix_applied": "Cast animated.div to React.FC<any> to bypass react-spring type incompatibility with @types/react@19. See https://github.com/pmndrs/react-spring/issues/1572"
           },
           {
             "id": "apply-types-upgrade",
