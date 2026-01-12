@@ -1,16 +1,20 @@
+import type { Meta, StoryObj } from '@storybook/react'
+import { type ComponentProps } from 'react'
+import { useFormContext } from 'react-hook-form'
+import ButtonComponent from '../../Button'
+import ErrorIcon from '../../icons/ErrorIcon'
 import MailIcon from '../../icons/Mail'
-import TextInputField from './index'
+import { ReactHookFormInput as TextInputField } from './index'
 
-const Template = (args) => {
-  const { backgroundColor, ...rest } = args
+const Template = (args: ComponentProps<typeof TextInputField>) => {
   return (
     <div className="flex flex-col m-auto justify-center items-center">
-      <TextInputField {...rest} />
+      <TextInputField {...args} />
     </div>
   )
 }
 
-export default {
+const meta: Meta<typeof TextInputField> = {
   title: 'Form/Fields/Text Input',
   component: TextInputField,
 
@@ -21,10 +25,10 @@ export default {
     isDisabled: false,
     isError: false,
     ariaLabel: 'First name',
-    errorIcon: 'Error',
+    errorIcon: <ErrorIcon width={16} height={16} />,
     onChange: (value) => console.log(`Value is now ${value}`),
     onBlur: (e) => console.log(`Value was ${e.target.value} when the field was blurred`),
-    onFocus: () => console.log('Was focused'),
+    icon: <MailIcon width={16} height={16} />,
   },
   argTypes: {
     themeName: {
@@ -49,7 +53,9 @@ export default {
   },
 }
 
-export const Default = {
+export default meta
+
+export const Default: StoryObj<typeof TextInputField> = {
   render: Template.bind({}),
   name: 'Default',
 
@@ -59,7 +65,7 @@ export const Default = {
   },
 }
 
-export const Disabled = {
+export const Disabled: StoryObj<typeof TextInputField> = {
   render: Template.bind({}),
   name: 'Disabled',
 
@@ -69,25 +75,33 @@ export const Disabled = {
   },
 }
 
-export const Error = {
+export const Error: StoryObj<typeof TextInputField> = {
   render: Template.bind({}),
   name: 'Error',
-
+  decorators: [
+    (Story) => {
+      const methods = useFormContext<{ 'email-error': string }>()
+      return (
+        <>
+          <ButtonComponent
+            tokens={{ className: 'mb-4 mx-auto' }}
+            handlePress={() =>
+              methods.formState.errors['email-error']
+                ? methods.clearErrors('email-error')
+                : methods.setError('email-error', { message: 'Invalid email address' })
+            }
+          >
+            Toggle error
+          </ButtonComponent>
+          <Story />
+        </>
+      )
+    },
+  ],
   args: {
     id: 'error',
     errorMessage: 'This is an error message',
     isError: true,
-  },
-}
-
-export const ErrorWithIcon = {
-  render: Template.bind({}),
-  name: 'ErrorWithIcon',
-
-  args: {
-    id: 'error-with-icon',
-    errorMessage: 'This is an error message',
-    isError: true,
-    icon: <MailIcon width={16} height={16} />,
+    name: 'email-error',
   },
 }

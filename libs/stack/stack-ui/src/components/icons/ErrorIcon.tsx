@@ -12,5 +12,5 @@ const SvgComponent = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-const Error = memo(SvgComponent, isEqual)
-export default Error
+const ErrorIcon = memo(SvgComponent, isEqual)
+export default ErrorIcon
