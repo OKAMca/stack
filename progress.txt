@@ -621,3 +621,42 @@
 - version-bump
 - publish-packages
 - update-vanier-mono
+
+## 2026-01-11 - Tasks: fix-directus-flexible-content-types, fix-directus-flexible-content-rendernodes (phase_5_remaining_libs)
+
+### Completed
+- Fixed JSX namespace issues in directus-flexible-content library for React 19 compatibility
+- Both tasks were completed together since they are tightly coupled (same package)
+
+### Files Changed
+
+1. `libs/directus/directus-flexible-content/src/lib/components/nodes/types.ts`
+   - Added `import type React from 'react'`
+   - Changed `JSX.IntrinsicElements` to `React.JSX.IntrinsicElements`
+   - Changed `JSX.Element` to `React.JSX.Element`
+   - Fixed import order and formatting per lint rules
+
+2. `libs/directus/directus-flexible-content/src/lib/components/RenderNodes/index.tsx`
+   - Added `import React, { type ReactNode } from 'react'`
+   - Changed return type from `FunctionComponent<RenderNodesProps>` to explicit `ReactNode`
+   - Changed `JSX.IntrinsicElements` to `React.JSX.IntrinsicElements` in callback parameter
+   - Added type cast `tagKey = tag as keyof TRenderingNodes` for index access
+   - Added type cast `as={tag as React.ElementType}` for Box component
+
+### Verification
+- Build passed: `npx nx build directus-flexible-content` - SUCCESS
+- Lint passed: `npx nx lint directus-flexible-content` - SUCCESS (0 errors)
+
+### Issues Encountered
+- `FunctionComponent` return type in React 19 is stricter - `renderView` returns `RenderedNode<T>` which doesn't match
+- Solution: Changed to explicit `ReactNode` return type annotation
+- Lint required regular import of React (not type import) since `React.JSX.IntrinsicElements` and `React.ElementType` are used
+- Index access on `TRenderingNodes` required explicit type cast since `tag` could be `string | number | symbol`
+
+### Next Tasks (Phase 5 remaining)
+- convert-core-lib-peer-deps
+- convert-next-component-peer-deps
+- convert-directus-query-peer-deps
+- convert-directus-block-peer-deps
+- convert-directus-next-component-peer-deps
+- convert-directus-flexible-content-peer-deps
