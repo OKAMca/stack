@@ -48,8 +48,13 @@ const textInputInput = tv({
 const textInputErrorMessage = tv({
   extend: typography,
   base: `ml-0`,
+  variants: {
+    isError: {
+      false: `hidden`,
+    },
+  },
   defaultVariants: {
-    isError: true,
+    isError: false,
     size: 'footnotes',
   },
 })
@@ -59,6 +64,9 @@ const textInputIcon = tv({
   variants: {
     isDisabled: {
       true: `text-gray-300`,
+    },
+    isError: {
+      true: `hidden`,
     },
   },
 })
