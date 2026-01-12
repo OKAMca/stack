@@ -201,7 +201,8 @@
         "package": "next",
         "from": "^14.1.1",
         "to": "^15.0.0",
-        "notes": "Next.js 15 for React 19 support"
+        "notes": "Next.js 15 for React 19 support",
+        "status": "DONE"
       },
       {
         "id": "upgrade-react-aria",

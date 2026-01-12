@@ -397,3 +397,37 @@
 - upgrade-react-aria (3.39.0 → 3.45.0)
 - upgrade-react-stately (3.37.0 → 3.43.0)
 - upgrade-react-spring (@react-spring/web 9.7.5 → 10.0.3) - REQUIRED for full React 19 runtime support
+
+## 2026-01-11 - Task: upgrade-next (phase_2_dependency_upgrades)
+
+### Completed
+- Upgraded Next.js from ^14.1.1 to ^15.0.0 across all packages
+- Also upgraded eslint-config-next from ^14.0.4 to ^15.0.0
+
+### Files Changed
+1. `/Users/marie-maxime/webdev/stack/package.json`
+   - Changed `"next": "^14.1.1"` to `"next": "^15.0.0"`
+   - Changed `"eslint-config-next": "^14.0.4"` to `"eslint-config-next": "^15.0.0"`
+
+2. `/Users/marie-maxime/webdev/stack/libs/directus/directus-next/package.json`
+   - Changed `"next": "^14.1.1"` to `"next": "^15.0.0"`
+
+3. `/Users/marie-maxime/webdev/stack/libs/stack/next-component/package.json`
+   - Changed `"next": "^14.1.1"` to `"next": "^15.0.0"`
+
+4. `/Users/marie-maxime/webdev/stack/libs/directus/directus-next-component/package.json`
+   - Changed `"next": "^14.1.1"` to `"next": "^15.0.0"`
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx run-many --all --target=lint` - SUCCESS (0 errors, 1 pre-existing warning)
+- npm install succeeded with Next.js 15 installed
+
+### Issues Encountered
+- None
+
+### Next Tasks (Phase 2 remaining)
+- upgrade-react-aria (3.39.0 → 3.45.0)
+- upgrade-react-stately (3.37.0 → 3.43.0)
+- upgrade-react-spring (@react-spring/web 9.7.5 → 10.0.3) - REQUIRED for full React 19 runtime support
+- npm-audit-fix
