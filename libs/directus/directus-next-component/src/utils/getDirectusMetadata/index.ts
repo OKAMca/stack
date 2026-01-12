@@ -6,12 +6,12 @@ import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { StaticImageData } from 'next/image'
 import { min } from 'radashi'
 import type { DirectusFileProps } from '../../components/DirectusFile/interface'
-import type { MetadataOptions } from '../../types/metadata'
+import type { TMetadataOptions } from '../../types/metadata'
 import { getDirectusFile } from '../getDirectusFile'
 
 function withFallbacks<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
-  options: MetadataOptions,
+  options: TMetadataOptions,
 ) {
   const { pageSettings } = pageProps ?? {}
   const pageSettingsTranslation = pageSettings?.translations?.[0]
@@ -32,7 +32,7 @@ function limitOpenGraphImageDimensions(width: number, height: number, maxWidth: 
   }
 }
 
-function getOpenGraphImageFallback(fallbackImage: StaticImageData | undefined, options: MetadataOptions) {
+function getOpenGraphImageFallback(fallbackImage: StaticImageData | undefined, options: TMetadataOptions) {
   if (!fallbackImage) return null
 
   const { width, height, src } = fallbackImage
@@ -43,7 +43,7 @@ function getOpenGraphImageFallback(fallbackImage: StaticImageData | undefined, o
 
 export function getOpenGraphImage(
   image: Nullable<DirectusFileProps>,
-  options: MetadataOptions,
+  options: TMetadataOptions,
 ): Nullable<Exclude<OpenGraph['images'], OpenGraph['images'][]>> {
   const directusImage = getDirectusFile(image)
   const { src, alt } = directusImage ?? {}
@@ -76,7 +76,7 @@ export function getOpenGraphImage(
 
 export function getMetadata<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
-  options: MetadataOptions,
+  options: TMetadataOptions,
   defaultProps?: Partial<TPageSettingsTranslation>,
 ) {
   const { title, image } = withFallbacks(pageProps, options)
