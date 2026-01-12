@@ -3,7 +3,7 @@ import type { Nullable } from '@okam/stack-ui'
 import type { TFiles } from '../files'
 import type { Fragmentize } from './Fragments'
 
-export interface PageSettingsTranslation {
+export interface TPageSettingsTranslation {
   languages_code?: Nullable<{
     code?: Nullable<string>
   }>
@@ -20,21 +20,21 @@ export interface PageSettingsTranslation {
   og_image?: Nullable<TFiles>
 }
 
-export interface PageSettings {
+export interface TPageSettings {
   id: string
   belongs_to_collection?: Nullable<string>
   belongs_to_key?: Nullable<string>
-  translations?: DeepNullableArray<PageSettingsTranslation>
+  translations?: DeepNullableArray<TPageSettingsTranslation>
   route?: Nullable<{
     translations?: DeepNullableArray<{ route?: Nullable<string> }>
   }>
 }
 
-export type PageSettingsQueryItem = Nullable<{
-  page_settings?: PageSettings | Fragmentize<PageSettings, 'PageSettingsFragment'>
+export type TPageSettingsQueryItem = Nullable<{
+  page_settings?: TPageSettings | Fragmentize<TPageSettings, 'PageSettingsFragment'>
 }>
 
-export type PageSettingsItemQuery<Item extends PageSettingsQueryItem, ItemKey extends string> = {
+export type TPageSettingsItemQuery<Item extends TPageSettingsQueryItem, ItemKey extends string> = {
   [Key in ItemKey]?: MaybeArray<Item> | MaybeArray<Fragmentize<Item>>
 } & {
   __typename?: 'Query'

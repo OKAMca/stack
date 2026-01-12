@@ -1,7 +1,7 @@
-export type { DirectusRouteConfig, DirectusRouteRedirectsModule } from './directusRouteConfig'
+export type { TDirectusRouteConfig, TDirectusRouteRedirectsModule } from './directusRouteConfig'
 export type {
-  PageSettingsTranslation,
-  PageSettings,
-  PageSettingsItemQuery,
-  PageSettingsQueryItem,
+  TPageSettingsTranslation,
+  TPageSettings,
+  TPageSettingsItemQuery,
+  TPageSettingsQueryItem,
 } from './pageSettings'
