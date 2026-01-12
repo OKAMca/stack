@@ -492,3 +492,27 @@
 - upgrade-react-stately (3.37.0 → 3.43.0)
 - upgrade-react-spring (@react-spring/web 9.7.5 → 10.0.3) - REQUIRED for full React 19 runtime support
 - npm-audit-fix
+
+## 2026-01-11 - Task: upgrade-react-stately (phase_2_dependency_upgrades)
+
+### Completed
+- Upgraded react-stately from ^3.37.0 to ^3.43.0
+- This is the companion library to react-aria for React 19 compatibility
+
+### Files Changed
+1. `/Users/marie-maxime/webdev/stack/libs/stack/stack-ui/package.json`
+   - Changed `"react-stately": "^3.37.0"` to `"react-stately": "^3.43.0"`
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx lint stack-ui` - SUCCESS (0 errors, 1 pre-existing warning)
+- Installed version: react-stately@3.43.0
+
+### Issues Encountered
+- Initial `npm install` did not update the locked version
+- Had to run `npm update react-stately` to get version 3.43.0 installed
+- Lint initially failed with `@nx/dependency-checks` error due to version mismatch
+
+### Next Tasks (Phase 2 remaining)
+- upgrade-react-spring (@react-spring/web 9.7.5 → 10.0.3) - REQUIRED for full React 19 runtime support
+- npm-audit-fix
