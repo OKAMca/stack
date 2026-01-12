@@ -112,7 +112,7 @@ export type PageSettings = {
   } | null
 }
 
-export type PageSettingsItemQuery<Item extends PageSettingsQueryItem, ItemKey extends string> = {
+export type PageSettingsItemQuery<Item extends TPageSettingsQueryItem, ItemKey extends string> = {
   __typename?: 'Query'
 } & {
   [Key in ItemKey]?: MaybeArray<Item> | MaybeArray<Fragmentize<Item>>

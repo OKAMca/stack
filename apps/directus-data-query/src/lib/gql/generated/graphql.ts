@@ -16816,7 +16816,7 @@ export type Navigation = {
 };
 
 
-export type NavigationItemsArgs = {
+export type TNavigationItemsArgs = {
   filter?: InputMaybe<Navigation_Items_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
