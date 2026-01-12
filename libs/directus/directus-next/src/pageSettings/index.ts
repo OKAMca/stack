@@ -1,3 +1,3 @@
 export * from './context'
-export type { GetPageSettingsConfig, GetPageSettingsProps, GetPageSettingsReturn } from './interface'
+export type { TGetPageSettingsConfig, TGetPageSettingsProps, TGetPageSettingsReturn } from './interface'
 export { getPageSettings, usePageSettings } from './getPageSettings'
