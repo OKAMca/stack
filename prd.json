@@ -222,7 +222,8 @@
         "package": "react-stately",
         "from": "^3.37.0",
         "to": "^3.43.0",
-        "notes": "Latest version for React 19 compatibility"
+        "notes": "Latest version for React 19 compatibility",
+        "status": "DONE"
       },
       {
         "id": "upgrade-react-spring",
