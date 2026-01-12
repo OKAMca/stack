@@ -2,28 +2,28 @@
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { Nullable } from '@okam/stack-ui'
 import type { Variables } from 'graphql-request'
-import type { DirectusRouteConfig } from '../types/directusRouteConfig'
+import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { Fragmentize } from '../types/Fragments'
-import type { PageSettings, PageSettingsItemQuery, PageSettingsQueryItem } from '../types/pageSettings'
+import type { TPageSettings, TPageSettingsItemQuery, TPageSettingsQueryItem } from '../types/pageSettings'
 
-export type PageSettingsItemDocument<
-  Item extends PageSettingsQueryItem,
+export type TPageSettingsItemDocument<
+  Item extends TPageSettingsQueryItem,
   ItemKey extends string,
   QueryVariables extends Variables,
-> = TypedDocumentNode<PageSettingsItemQuery<Item, ItemKey>, QueryVariables>
+> = TypedDocumentNode<TPageSettingsItemQuery<Item, ItemKey>, QueryVariables>
 
-export type GetPageSettingsConfig = DirectusRouteConfig | Record<string, string>
+export type GetPageSettingsConfig = TDirectusRouteConfig | Record<string, string>
 
 /**
  * If not using a fragment in the item key, all type parameters must be passed. Otherwise, only the `page_settings` field will be in the type definition.
  * If using a fragment in the item key, the return type will contain the fragment.
  */
 export interface GetPageSettingsProps<
-  Item extends PageSettingsQueryItem,
+  Item extends TPageSettingsQueryItem,
   ItemKey extends string,
   QueryVariables extends Variables,
 > {
-  document: PageSettingsItemDocument<Item, ItemKey, QueryVariables>
+  document: TPageSettingsItemDocument<Item, ItemKey, QueryVariables>
   /**
    * `variables.locale` is a special value that will get mapped according to the config.
    */
@@ -34,8 +34,8 @@ export interface GetPageSettingsProps<
   config?: GetPageSettingsConfig
 }
 
-export type GetPageSettingsReturn<Item extends PageSettingsQueryItem> = Omit<Item, 'page_settings'> & {
+export type GetPageSettingsReturn<Item extends TPageSettingsQueryItem> = Omit<Item, 'page_settings'> & {
   page_settings?: Nullable<
-    Exclude<NonNullable<Item>['page_settings'], Fragmentize<PageSettings, 'PageSettingsFragment'>>
+    Exclude<NonNullable<Item>['page_settings'], Fragmentize<TPageSettings, 'PageSettingsFragment'>>
   >
 }

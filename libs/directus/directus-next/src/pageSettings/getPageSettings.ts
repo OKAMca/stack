@@ -4,15 +4,15 @@ import { queryGql } from '@okam/directus-query'
 import type { Variables } from 'graphql-request'
 import { get, invert, isEqual } from 'radashi'
 import { log } from '../logger'
-import type { DirectusRouteConfig } from '../types/directusRouteConfig'
-import type { PageSettingsQueryItem } from '../types/pageSettings'
+import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
+import type { TPageSettingsQueryItem } from '../types/pageSettings'
 import { pageSettingsContext, pageSettingsVariablesContext } from './context'
 import type { GetPageSettingsConfig, GetPageSettingsProps, GetPageSettingsReturn } from './interface'
 
 const [getPageSettingsContext, setPageSettingsContext] = pageSettingsContext()
 const [getVariables, setVariables] = pageSettingsVariablesContext()
 
-function isDirectusRouteConfig(config: GetPageSettingsConfig | undefined): config is DirectusRouteConfig {
+function isTDirectusRouteConfig(config: GetPageSettingsConfig | undefined): config is TDirectusRouteConfig {
   return !!config && 'localeMap' in config
 }
 
@@ -20,7 +20,7 @@ function getDirectusVariables<QueryVariables extends Variables>(
   variables: QueryVariables | undefined,
   config: GetPageSettingsConfig | undefined,
 ) {
-  const localeMap = isDirectusRouteConfig(config) ? config.localeMap : config
+  const localeMap = isTDirectusRouteConfig(config) ? config.localeMap : config
   if (!localeMap) {
     return variables
   }
@@ -57,7 +57,7 @@ function getDirectusVariables<QueryVariables extends Variables>(
  * @returns The new queried page settings item or the cached value if the variables have not changed. If the query contains a fragment, the contents of the fragment will be returned.
  */
 export async function getPageSettings<
-  Item extends PageSettingsQueryItem,
+  Item extends TPageSettingsQueryItem,
   ItemKey extends string = string,
   QueryVariables extends Variables = Variables,
 >(
