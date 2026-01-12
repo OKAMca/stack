@@ -38,7 +38,7 @@ const PopoverButton = <T extends TToken>(props: TPopoverButtonProps<T>) => {
     isOpen: state.isOpen,
   })
 
-  const { onPress, ...triggerButtonProps } = triggerProps
+  const { onPress, preventFocusOnPress, ...triggerButtonProps } = triggerProps
   const handlePress: typeof onPress = (e) => {
     onPress?.(e)
     handlePressProp?.(e)

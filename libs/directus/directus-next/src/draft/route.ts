@@ -130,12 +130,12 @@ export type HandleDraftOptions = {
  *   })
  * }
  */
-export default function handleDraftRoute({
+export default async function handleDraftRoute({
   url,
   getDirectusLanguage,
   getDraftSecret,
   getJsonError,
-}: HandleDraftOptions): Response | undefined {
+}: HandleDraftOptions): Promise<Response | undefined> {
   const getSecretFunction = getDraftSecret || getDraftSecretDefault
   const getJsonErrorResponseFunction = getJsonError || getJsonErrorResponse
   const { secret, languages, paths, routes, type, version } = parseDraftParams(url)
@@ -196,7 +196,7 @@ export default function handleDraftRoute({
   }
 
   // todo check if slug is valid
-  draftMode().enable()
+  ;(await draftMode()).enable()
 
   // doesn't work: using cookies() from next/headers because it's readonly
   // doesn't work if (pk) { res.cookies.set('__draftmode_pk', pk); }

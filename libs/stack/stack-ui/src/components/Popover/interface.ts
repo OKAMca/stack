@@ -28,8 +28,8 @@ export interface TPopoverProps<T = TToken>
   children: ReactElement | ReactElement[]
   arrow?: ReactElement<SVGProps<SVGSVGElement> & TDefaultComponent<T>>
   sizeRef?: RefObject<HTMLElement | null>
-  popoverRef?: RefObject<HTMLElement>
-  triggerRef: RefObject<HTMLElement>
+  popoverRef?: RefObject<HTMLElement | null>
+  triggerRef: RefObject<HTMLElement | null>
 }
 
 export type PopoverOrientation = 'left' | 'right'

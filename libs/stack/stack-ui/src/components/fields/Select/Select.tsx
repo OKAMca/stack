@@ -41,7 +41,7 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
     ...rest
   } = props
 
-  const inputRef = useRef<HTMLElement>()
+  const inputRef = useRef<HTMLElement>(null)
   const buttonRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
 
   const mergeRefs = (ref: HTMLElement) => {
