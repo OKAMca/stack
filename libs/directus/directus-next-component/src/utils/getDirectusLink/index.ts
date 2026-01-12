@@ -1,11 +1,11 @@
 import { logger } from '@okam/logger'
 import type { TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
-import type { DirectusLinkPropsConfig, GetDirectusLink } from '../../components/DirectusLink/interface'
+import type { TDirectusLinkPropsConfig, TGetDirectusLink } from '../../components/DirectusLink/interface'
 import { getDirectusFile } from '../getDirectusFile'
 import { getDirectusSearchParams } from '../getDirectusSearchParams'
 
-function getFile(props: GetDirectusLink) {
+function getFile(props: TGetDirectusLink) {
   const { file } = props
 
   const { filename_download: filenameDownload } = file ?? {}
@@ -17,7 +17,7 @@ function getFile(props: GetDirectusLink) {
   }
 }
 
-function getCollection(props: GetDirectusLink) {
+function getCollection(props: TGetDirectusLink) {
   const { collection, target } = props
 
   return {
@@ -26,7 +26,7 @@ function getCollection(props: GetDirectusLink) {
   }
 }
 
-function getExternalLink(props: GetDirectusLink) {
+function getExternalLink(props: TGetDirectusLink) {
   const { external_link: externalLink, target } = props
 
   return {
@@ -35,13 +35,13 @@ function getExternalLink(props: GetDirectusLink) {
   }
 }
 
-function getAnchor(props: GetDirectusLink) {
+function getAnchor(props: TGetDirectusLink) {
   const { anchor } = props
 
   return { href: anchor ?? undefined }
 }
 
-const defaultPropsConfig: DirectusLinkPropsConfig = {
+const defaultPropsConfig: TDirectusLinkPropsConfig = {
   collection: getCollection,
   // eslint-disable-next-line @typescript-eslint/naming-convention
   'external-link': getExternalLink,
@@ -49,7 +49,7 @@ const defaultPropsConfig: DirectusLinkPropsConfig = {
   anchor: getAnchor,
 }
 
-export function getDirectusLink(props: GetDirectusLink): TAnchorProps {
+export function getDirectusLink(props: TGetDirectusLink): TAnchorProps {
   const {
     type,
     label,

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { PageSettings, TFiles } from '@okam/directus-next'
+import type { TPageSettings, TFiles } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
 
 /**
@@ -16,12 +16,12 @@ export interface TLinks {
   scroll?: Nullable<boolean>
   target?: Nullable<string>
   type?: Nullable<string>
-  collection?: Nullable<PageSettings>
+  collection?: Nullable<TPageSettings>
   file?: Nullable<TFiles>
-  params?: Nullable<Nullable<SearchParams>[]>
+  params?: Nullable<Nullable<TSearchParams>[]>
 }
 
-export interface SearchParams {
+export interface TSearchParams {
   id?: string
   name?: Nullable<string>
   value?: Nullable<string>

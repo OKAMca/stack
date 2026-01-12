@@ -6,7 +6,7 @@ export { default as DirectusFile } from './components/DirectusFile'
 
 export { getDirectusFile, useDirectusFile } from './utils/getDirectusFile'
 export { getDirectusLink, useDirectusLink } from './utils/getDirectusLink'
-export { getNavigationItems, useNavigationItems } from './utils/getNavigationItems'
+export { getNavigationItems, useTNavigationItems } from './utils/getNavigationItems'
 export { getMetadata, useMetadata } from './utils/getDirectusMetadata'
 export { getDirectusSearchParams } from './utils/getDirectusSearchParams'
 
@@ -15,7 +15,7 @@ export { logger as DirectusNextComponent } from './logger'
 export * from './types'
 export type {
   DirectusLinkProps,
-  DirectusLinkPropsConfig,
+  TDirectusLinkPropsConfig,
   DirectusLinkComponentsConfig,
 } from './components/DirectusLink/interface'
 export type { DirectusFileProps } from './components/DirectusFile/interface'
@@ -32,5 +32,5 @@ export type {
 export type {
   /**
    * @deprecated Import from `@okam/directus-next` instead
-   */ PageSettings,
+   */ TPageSettings,
 } from '@okam/directus-next'
