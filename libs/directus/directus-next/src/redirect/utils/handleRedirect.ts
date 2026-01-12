@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { capitalize } from 'radashi'
 import { log } from '../../logger'
-import type { DirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
+import type { TDirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
 import { getRedirectsRoute } from './getRedirectsRoute'
 
 function splitDestination(destination: string) {
@@ -25,7 +25,7 @@ function validateExternalRedirect(redirect: TRedirectData) {
 /**
  * Handles next redirection using directus redirects
  */
-export async function handleRedirect(request: NextRequest, options: DirectusRouteRedirectsModule = {}) {
+export async function handleRedirect(request: NextRequest, options: TDirectusRouteRedirectsModule = {}) {
   const url = request.nextUrl.clone()
   const { pathname } = request.nextUrl
   const normalizedPathname = normalizePath(pathname)
