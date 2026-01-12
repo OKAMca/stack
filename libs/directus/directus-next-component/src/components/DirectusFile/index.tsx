@@ -1,7 +1,7 @@
 import directusFileConfig from './config'
-import type { DirectusFileProps } from './interface'
+import type { TDirectusFileProps } from './interface'
 
-const DirectusFile = (props: DirectusFileProps) => {
+const DirectusFile = (props: TDirectusFileProps) => {
   const { type, ...rest } = props
 
   const fileType = type?.split('/')?.[0]

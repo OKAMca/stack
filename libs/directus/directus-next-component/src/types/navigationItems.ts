@@ -1,12 +1,12 @@
 import type { Nullable } from '@okam/stack-ui'
-import type { DirectusLinkProps } from '../components/DirectusLink/interface'
+import type { TDirectusLinkProps } from '../components/DirectusLink/interface'
 
 export type TNavigationItemsTree = {
   /**
    * Pre-rendered DirectusLink component for quick usage
    */
   link: Nullable<React.ReactElement>
-  linkProps: Nullable<DirectusLinkProps>
+  linkProps: Nullable<TDirectusLinkProps>
   children?: Nullable<Nullable<TNavigationItemsTree>[]>
   parent?: Nullable<TNavigationItemsTree>
   /**

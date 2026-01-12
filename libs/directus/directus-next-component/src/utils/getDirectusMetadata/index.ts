@@ -5,7 +5,7 @@ import type { Metadata } from 'next'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { StaticImageData } from 'next/image'
 import { min } from 'radashi'
-import type { DirectusFileProps } from '../../components/DirectusFile/interface'
+import type { TDirectusFileProps } from '../../components/DirectusFile/interface'
 import type { TMetadataOptions } from '../../types/metadata'
 import { getDirectusFile } from '../getDirectusFile'
 
@@ -42,7 +42,7 @@ function getOpenGraphImageFallback(fallbackImage: StaticImageData | undefined, o
 }
 
 export function getOpenGraphImage(
-  image: Nullable<DirectusFileProps>,
+  image: Nullable<TDirectusFileProps>,
   options: TMetadataOptions,
 ): Nullable<Exclude<OpenGraph['images'], OpenGraph['images'][]>> {
   const directusImage = getDirectusFile(image)
