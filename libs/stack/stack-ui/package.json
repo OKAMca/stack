@@ -37,7 +37,7 @@
     "@react-aria/tabs": "^3.10.9",
     "@react-aria/utils": "^3.32.0",
     "@react-aria/visually-hidden": "^3.8.29",
-    "@react-spring/web": "^9.7.5",
+    "@react-spring/web": "^10.0.3",
     "@react-stately/checkbox": "^3.7.3",
     "@react-stately/collections": "^3.12.8",
     "@react-stately/overlays": "^3.6.21",
