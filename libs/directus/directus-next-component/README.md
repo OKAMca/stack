@@ -89,7 +89,7 @@ const depthMap: Record<number, object> = {
 }
 
 // Loop recursively through navigation items and assign style based on depth
-function renderTree(tree: Nullable<TTTNavigationItemsTree>): React.ReactNode {
+function renderTree(tree: Nullable<TTNavigationItemsTree>): React.ReactNode {
   if (!tree) return null
   const { children, link, linkProps, depth } = tree
   const style = depthMap[depth]

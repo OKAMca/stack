@@ -3,9 +3,9 @@ import DirectusLink from '../../components/DirectusLink'
 import type { DirectusLinkProps } from '../../components/DirectusLink/interface'
 import type {
   TNavigationItems,
-  TTNavigationItemsChildren,
-  TTNavigationItemsParents,
-  TTNavigationItemsTree,
+  TNavigationItemsChildren,
+  TNavigationItemsParents,
+  TNavigationItemsTree,
 } from '../../types/navigationItems'
 
 function createLinkProps<Depth extends number, Link, Items>(
@@ -30,9 +30,9 @@ function createLinkProps<Depth extends number, Link, Items>(
 
 function createParentTree<Depth extends number, Link, Items>(
   item: Nullable<TNavigationItems<Items, Link, Depth>>,
-  onNavigationItem: (item: Nullable<TTNavigationItemsParents<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
+  onNavigationItem: (item: Nullable<TNavigationItemsParents<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
   depth = -1,
-): Nullable<TTNavigationItemsTree> {
+): Nullable<TNavigationItemsTree> {
   const { parent } = item ?? {}
   const linkProps = createLinkProps(item, onNavigationItem)
   const { id } = linkProps ?? {}
@@ -49,9 +49,9 @@ function createParentTree<Depth extends number, Link, Items>(
 
 function createChildrenTree<Depth extends number, Link, Items>(
   item: Nullable<TNavigationItems<Items, Link, Depth>>,
-  onNavigationItem: (item: Nullable<TTNavigationItemsChildren<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
+  onNavigationItem: (item: Nullable<TNavigationItemsChildren<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
   depth = 1,
-): Nullable<TTNavigationItemsTree> {
+): Nullable<TNavigationItemsTree> {
   const { children } = item ?? {}
   const linkProps = createLinkProps(item, onNavigationItem)
   const { id } = linkProps ?? {}
@@ -79,7 +79,7 @@ export function getNavigationItems<
 >(
   items: Nullable<Nullable<TNavigationItems<Items, Link, Depth>>[]>,
   onNavigationItem: (item: Nullable<TNavigationItems<Items, Link, Depth>>) => Nullable<DirectusLinkProps>,
-): Nullable<Nullable<TTNavigationItemsTree>[]> {
+): Nullable<Nullable<TNavigationItemsTree>[]> {
   const tree = items?.map((item) => {
     const { children, parent } = item ?? {}
 

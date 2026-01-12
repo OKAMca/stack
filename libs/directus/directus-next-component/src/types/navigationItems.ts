@@ -1,14 +1,14 @@
 import type { Nullable } from '@okam/stack-ui'
 import type { DirectusLinkProps } from '../components/DirectusLink/interface'
 
-export type TTNavigationItemsTree = {
+export type TNavigationItemsTree = {
   /**
    * Pre-rendered DirectusLink component for quick usage
    */
   link: Nullable<React.ReactElement>
   linkProps: Nullable<DirectusLinkProps>
-  children?: Nullable<Nullable<TTNavigationItemsTree>[]>
-  parent?: Nullable<TTNavigationItemsTree>
+  children?: Nullable<Nullable<TNavigationItemsTree>[]>
+  parent?: Nullable<TNavigationItemsTree>
   /**
    * Starts at 0.
    * For each level of parent, goes down by 1
@@ -19,23 +19,23 @@ export type TTNavigationItemsTree = {
 
 type DepthLimit = [never, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-export type TTNavigationItemsBase<Link> = {
+export type TNavigationItemsBase<Link> = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tokens?: any | null
   variant?: string | null
 } & Link
 
-export type TTNavigationItemsParents<TNavigationItems, Link, Depth extends number> = Depth extends never
-  ? TTNavigationItemsBase<Link>
+export type TNavigationItemsParents<TNavigationItems, Link, Depth extends number> = Depth extends never
+  ? TNavigationItemsBase<Link>
   : {
-      parent?: Nullable<TTNavigationItemsParents<TNavigationItems, Link, Depth>>
-    } & TTNavigationItemsBase<Link>
+      parent?: Nullable<TNavigationItemsParents<TNavigationItems, Link, Depth>>
+    } & TNavigationItemsBase<Link>
 
-export type TTNavigationItemsChildren<TNavigationItems, Link, Depth extends number> = Depth extends never
-  ? TTNavigationItemsBase<Link>
+export type TNavigationItemsChildren<TNavigationItems, Link, Depth extends number> = Depth extends never
+  ? TNavigationItemsBase<Link>
   : {
-      children?: Nullable<Nullable<TTNavigationItemsChildren<TNavigationItems, Link, DepthLimit[Depth]>>[]>
-    } & TTNavigationItemsBase<Link>
+      children?: Nullable<Nullable<TNavigationItemsChildren<TNavigationItems, Link, DepthLimit[Depth]>>[]>
+    } & TNavigationItemsBase<Link>
 
-export type TNavigationItems<Items, Link, Depth extends number> = TTNavigationItemsChildren<Items, Link, Depth> &
-  TTNavigationItemsParents<Items, Link, Depth>
+export type TNavigationItems<Items, Link, Depth extends number> = TNavigationItemsChildren<Items, Link, Depth> &
+  TNavigationItemsParents<Items, Link, Depth>

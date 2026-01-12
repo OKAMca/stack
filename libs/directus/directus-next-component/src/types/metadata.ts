@@ -8,7 +8,7 @@ import type { DirectusFileProps } from '../components/DirectusFile/interface'
 /**
  * Configuration options for metadata generation
  */
-export type MetadataOptions = {
+export type TMetadataOptions = {
   /**
    * Default fallback image to use for Open Graph tags when no other image is specified
    */
