@@ -1,7 +1,7 @@
 {
   "project": "@okam/stack React 19 + Next.js 15 Upgrade",
   "goal": "Upgrade all @okam/* packages to support React 19 and Next.js 15",
-  "repo": "/Users/marie-maxime/webdev/stack",
+  "repo": ".",
   "context": {
     "vanier_upgrade": "vanier-mono Next.js 15 upgrade complete with workarounds (see prd.json)",
     "current_versions": {
