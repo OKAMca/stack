@@ -1,4 +1,4 @@
-import type { PageSettings } from '@okam/directus-next'
+import type { TPageSettings } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
 import type { AlternateURLs } from 'next/dist/lib/metadata/types/alternative-urls-types'
 import type { OpenGraphType } from 'next/dist/lib/metadata/types/opengraph-types'
@@ -42,7 +42,7 @@ export type MetadataOptions = {
    * @param pageSettings The page settings
    * @returns The alternate URLs
    */
-  createAlternateUrls: (pageSettings: Nullable<PageSettings>) => AlternateURLs
+  createAlternateUrls: (pageSettings: Nullable<TPageSettings>) => AlternateURLs
 
   /**
    * The type config of Open Graph to use

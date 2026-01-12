@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type { PageSettings, PageSettingsTranslation } from '@okam/directus-next'
+import type { TPageSettings, TPageSettingsTranslation } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
 import type { Metadata } from 'next'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
@@ -9,7 +9,7 @@ import type { DirectusFileProps } from '../../components/DirectusFile/interface'
 import type { MetadataOptions } from '../../types/metadata'
 import { getDirectusFile } from '../getDirectusFile'
 
-function withFallbacks<TPageProps extends { pageSettings: PageSettings }>(
+function withFallbacks<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
   options: MetadataOptions,
 ) {
@@ -74,10 +74,10 @@ export function getOpenGraphImage(
   }
 }
 
-export function getMetadata<TPageProps extends { pageSettings: PageSettings }>(
+export function getMetadata<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
   options: MetadataOptions,
-  defaultProps?: Partial<PageSettingsTranslation>,
+  defaultProps?: Partial<TPageSettingsTranslation>,
 ) {
   const { title, image } = withFallbacks(pageProps, options)
   const { pageSettings } = pageProps ?? {}
