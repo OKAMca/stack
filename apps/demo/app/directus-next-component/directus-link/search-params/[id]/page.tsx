@@ -22,8 +22,9 @@ function getLinksFragment(linkFragment: FragmentType<typeof LinksFragmentDoc> | 
   }
 }
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { links_by_id: linkFragment } = (await queryGql(LinkByIdDocument, { id: params.id, locale: 'en' })) ?? {}
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const { links_by_id: linkFragment } = (await queryGql(LinkByIdDocument, { id, locale: 'en' })) ?? {}
   const link = getLinksFragment(linkFragment)
   const { params: linkParams } = link
   const searchParams = getDirectusSearchParams(linkParams)

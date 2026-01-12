@@ -10,23 +10,23 @@ export type TMenuProviderProps = {
   defaultIsOpen?: boolean
   onCloseCallback?: () => void
   onOpenCallback?: () => void
-  openBtn?: () => JSX.Element
-  closeBtn?: () => JSX.Element
-  secondaryOpenBtn?: () => JSX.Element
+  openBtn?: () => React.JSX.Element
+  closeBtn?: () => React.JSX.Element
+  secondaryOpenBtn?: () => React.JSX.Element
 }
 
 export type IMenuProviderProps = AriaTabListProps<TMenuProviderProps> & TMenuProviderProps
 
 export type TMenuContext = {
-  openBtn?: () => JSX.Element
-  closeBtn?: () => JSX.Element
-  secondaryOpenBtn?: () => JSX.Element
+  openBtn?: () => React.JSX.Element
+  closeBtn?: () => React.JSX.Element
+  secondaryOpenBtn?: () => React.JSX.Element
   tabState: TabListState<object>
   defaultSelectedKey: string
 }
 
 export type TMenuProps = {
-  openBtn?: () => JSX.Element
-  closeBtn?: () => JSX.Element
-  secondaryOpenBtn?: () => JSX.Element
+  openBtn?: () => React.JSX.Element
+  closeBtn?: () => React.JSX.Element
+  secondaryOpenBtn?: () => React.JSX.Element
 }

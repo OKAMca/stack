@@ -3,18 +3,18 @@ const { getDefaultIgnorePatterns } = require("../../linter/helpers");
 module.exports = {
   extends: [
     'plugin:@nx/react',
-    '../../.eslintrc.js', 
-    '../../linter/bases/typescript', 
-    '../../linter/bases/regexp', 
-    '../../linter/bases/jest', 
-    '../../linter/bases/rtl', 
-    '../../linter/bases/storybook', 
-    '../../linter/bases/react', 
-    'plugin:@next/next/core-web-vitals', 
+    '../../.eslintrc.js',
+    '../../linter/bases/typescript',
+    '../../linter/bases/regexp',
+    '../../linter/bases/jest',
+    '../../linter/bases/rtl',
+    '../../linter/bases/storybook',
+    '../../linter/bases/react',
+    'plugin:@next/next/core-web-vitals',
     'plugin:@next/next/recommended',
-    '../../linter/bases/prettier', 
+    '../../linter/bases/prettier',
   ],
-  ignorePatterns: ['!**/*', ...getDefaultIgnorePatterns(), '.next', 'public/**/*', '.out', 'jest.config.ts'],
+  ignorePatterns: ['!**/*', ...getDefaultIgnorePatterns(), '.next', 'next-env.d.ts', 'public/**/*', '.out', 'jest.config.ts'],
   overrides: [
     {
       files: ['*.ts', '*.tsx', '*.js', '*.jsx'],
