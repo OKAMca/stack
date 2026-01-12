@@ -1,6 +1,6 @@
 import type { TDefaultComponent } from '@okam/stack-ui'
 import { Box } from '@okam/stack-ui'
-import type { FunctionComponent } from 'react'
+import React, { type ReactNode } from 'react'
 import { renderView, mergeSerializers } from '../../functions'
 
 import type { JSONContent, Extensions, ReactComponentSerializers } from '../../functions/types'
@@ -16,7 +16,7 @@ interface RenderNodesProps extends TDefaultComponent {
   remappedAttributes?: Record<string, string>
 }
 
-const RenderNodes: FunctionComponent<RenderNodesProps> = (props) => {
+const RenderNodes = (props: RenderNodesProps): ReactNode => {
   const {
     content,
     serializers = [],
@@ -36,14 +36,15 @@ const RenderNodes: FunctionComponent<RenderNodesProps> = (props) => {
     clonedContent,
     mergedSerializers,
     // @ts-expect-error Expects ReactNode
-    (tag: keyof JSX.IntrinsicElements, attrs: JSONContent['attrs'], children: ReactNode) => {
+    (tag: keyof React.JSX.IntrinsicElements, attrs: JSONContent['attrs'], children: ReactNode) => {
       const defaultAttributes = {
         ...attrs,
         style: undefined,
       }
       const mappedAttributes = remapAttributes(remappedAttributes, defaultAttributes)
 
-      const renderingNode = renderingNodes?.[tag] ?? nodes?.[tag]
+      const tagKey = tag as keyof TRenderingNodes
+      const renderingNode = renderingNodes?.[tagKey] ?? nodes?.[tagKey]
 
       if (renderingNode) {
         return renderingNode({ children, attrs: mappedAttributes, themeName, tokens, customTheme })
@@ -52,7 +53,7 @@ const RenderNodes: FunctionComponent<RenderNodesProps> = (props) => {
       return (
         <Box
           key={JSON.stringify(children)}
-          as={tag}
+          as={tag as React.ElementType}
           {...mappedAttributes}
           themeName={themeName}
           tokens={tokens}

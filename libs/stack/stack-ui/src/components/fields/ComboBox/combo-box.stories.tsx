@@ -204,7 +204,7 @@ export const ChildrenRenderingFunction: Story = {
     name: 'brand-children-rendering-function',
   },
   render(args) {
-    const metaChildren = meta.args?.children as React.ReactElement[]
+    const metaChildren = meta.args?.children as React.ReactElement<{ children: React.ReactNode }>[]
     const items =
       metaChildren?.map((child) => ({
         key: child.key as string,
@@ -295,7 +295,7 @@ export const ReactHookForm: Story = {
   render() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const methods = useForm<{ brand: string }>()
-    const children = meta.args?.children as React.ReactElement[]
+    const children = meta.args?.children as React.ReactElement<{ children: React.ReactNode }>[]
 
     return (
       <FormProvider {...methods}>

@@ -48,6 +48,6 @@ AccordionItem.getCollectionNode = function* getCollectionNode(
 }
 
 // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
-const _AccordionItem = AccordionItem as (props: TAccordionItemProps) => JSX.Element
+const _AccordionItem = AccordionItem as (props: TAccordionItemProps) => React.JSX.Element
 
 export default _AccordionItem

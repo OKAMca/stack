@@ -114,3 +114,8 @@ yarn-error.log*
 
 .vercel
 .aider*
+
+# Automation scripts and logs
+progress.txt
+ralph.sh
+qa-ralph.sh

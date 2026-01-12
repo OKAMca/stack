@@ -22,6 +22,10 @@ export const Anchor = React.forwardRef((props: TAnchorProps, forwardRef: TAnchor
     nextLinkProps: { onClick, ...nextLinkProps } = {} as NextLinkProps,
     ...rest
   } = props
+  const { onPress, onFocusChange, excludeFromTabOrder, preventFocusOnPress, ...anchorProps } = rest as Record<
+    string,
+    unknown
+  >
 
   const ref = forwardRef
   const { linkProps } = useLink(
@@ -46,7 +50,7 @@ export const Anchor = React.forwardRef((props: TAnchorProps, forwardRef: TAnchor
 
   return (
     <FocusRing focusRingClass="has-focus-ring">
-      <Component ref={ref} {...linkProps} {...nextLinkProps} {...rest} className={theme}>
+      <Component ref={ref} {...linkProps} {...nextLinkProps} {...anchorProps} className={theme}>
         {children}
       </Component>
     </FocusRing>
@@ -72,8 +76,10 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: TButtonRef) =>
   )
 
   const theme = useThemeContext(themeName, tokens, customTheme)
-  // excludeFromTabOrder being spread on an element creates unknown attributes error
-  const { onPress, onFocusChange, excludeFromTabOrder, ...allProps } = rest as Record<string, unknown>
+  const { onPress, onFocusChange, excludeFromTabOrder, preventFocusOnPress, ...allProps } = rest as Record<
+    string,
+    unknown
+  >
 
   return (
     <FocusRing within focusRingClass="has-focus-ring">
