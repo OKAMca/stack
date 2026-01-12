@@ -516,3 +516,46 @@
 ### Next Tasks (Phase 2 remaining)
 - upgrade-react-spring (@react-spring/web 9.7.5 → 10.0.3) - REQUIRED for full React 19 runtime support
 - npm-audit-fix
+
+## 2026-01-11 - Task: upgrade-react-spring (phase_2_dependency_upgrades)
+
+### Completed
+- Upgraded @react-spring/web from ^9.7.5 to ^10.0.3
+- This is a major version upgrade that adds official React 19 support
+- Removed all temporary type cast workarounds that were no longer needed
+
+### Files Changed
+1. `/Users/marie-maxime/webdev/stack/libs/stack/stack-ui/package.json`
+   - Changed `"@react-spring/web": "^9.7.5"` to `"@react-spring/web": "^10.0.3"`
+
+2. Removed AnimatedDiv type cast workarounds from 5 transition files:
+   - `libs/stack/stack-ui/src/transitions/AccordionTransition.tsx`
+   - `libs/stack/stack-ui/src/transitions/ModalTransition.tsx`
+   - `libs/stack/stack-ui/src/transitions/RenderWithOpacity.tsx`
+   - `libs/stack/stack-ui/src/transitions/RenderWithSlide.tsx`
+   - `libs/stack/stack-ui/src/transitions/SidePanelTransition.tsx`
+
+   These files previously had:
+   ```typescript
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   const AnimatedDiv = animated.div as React.FC<any>
+   ```
+
+   This workaround was removed because v10 properly supports React 19 types and animated.div now accepts children prop natively.
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx run-many --all --target=lint` - SUCCESS (0 errors, 1 pre-existing warning)
+- TypeScript: `npx tsc --noEmit` - SUCCESS (no type errors)
+
+### Issues Encountered
+- `npm update` doesn't cross major versions, had to use `npm install @react-spring/web@10.0.3` explicitly
+- Initial installation showed package at v9.7.5 until explicit install was done
+
+### Breaking Changes Notes
+- react-spring v10 introduces React 19 support with the SpringContext API change
+- No code changes required for the APIs used (useTransition, animated, config)
+- All 5 transition components work identically after upgrade
+
+### Next Tasks (Phase 2 remaining)
+- npm-audit-fix (optional - security vulnerabilities)
