@@ -7,18 +7,18 @@ import { log } from '../logger'
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { TPageSettingsQueryItem } from '../types/pageSettings'
 import { pageSettingsContext, pageSettingsVariablesContext } from './context'
-import type { GetPageSettingsConfig, GetPageSettingsProps, GetPageSettingsReturn } from './interface'
+import type { TGetPageSettingsConfig, TGetPageSettingsProps, TGetPageSettingsReturn } from './interface'
 
 const [getPageSettingsContext, setPageSettingsContext] = pageSettingsContext()
 const [getVariables, setVariables] = pageSettingsVariablesContext()
 
-function isTDirectusRouteConfig(config: GetPageSettingsConfig | undefined): config is TDirectusRouteConfig {
+function isTDirectusRouteConfig(config: TGetPageSettingsConfig | undefined): config is TDirectusRouteConfig {
   return !!config && 'localeMap' in config
 }
 
 function getDirectusVariables<QueryVariables extends Variables>(
   variables: QueryVariables | undefined,
-  config: GetPageSettingsConfig | undefined,
+  config: TGetPageSettingsConfig | undefined,
 ) {
   const localeMap = isTDirectusRouteConfig(config) ? config.localeMap : config
   if (!localeMap) {
@@ -61,12 +61,12 @@ export async function getPageSettings<
   ItemKey extends string = string,
   QueryVariables extends Variables = Variables,
 >(
-  props?: GetPageSettingsProps<Item, ItemKey, QueryVariables>,
+  props?: TGetPageSettingsProps<Item, ItemKey, QueryVariables>,
   itemKey?: Exclude<ItemKey, '__typename'>,
-): Promise<GetPageSettingsReturn<Item>> {
+): Promise<TGetPageSettingsReturn<Item>> {
   const { variables, config } = props ?? {}
   const directusVariables = getDirectusVariables(variables, config)
-  const defaultReturn = getPageSettingsContext() as Exclude<GetPageSettingsReturn<Item>, undefined>
+  const defaultReturn = getPageSettingsContext() as Exclude<TGetPageSettingsReturn<Item>, undefined>
 
   if (!props || isEqual(getVariables(), directusVariables)) {
     log('Using cached page settings', { path: defaultReturn.page_settings?.translations?.[0]?.path })
@@ -80,7 +80,7 @@ export async function getPageSettings<
   const result = await queryGql(document, directusVariables)
 
   const items = result?.[key]
-  const currentItem = (Array.isArray(items) ? items?.[0] : items) as GetPageSettingsReturn<Item>
+  const currentItem = (Array.isArray(items) ? items?.[0] : items) as TGetPageSettingsReturn<Item>
   const currentPageSettings = currentItem?.page_settings
   const currentPath = currentPageSettings?.translations?.[0]?.path
 
