@@ -40,6 +40,40 @@
       }
     ]
   },
+  "design_decisions": {
+    "react_18_runtime_with_react_19_types": {
+      "description": "Root package.json uses React 18.3.1 runtime with @types/react@19",
+      "rationale": [
+        "Library peerDependencies support both React 18 and 19: ^18.0.0 || ^19.0.0",
+        "Using React 19 types validates code is type-compatible with both versions",
+        "Runtime stays at 18.3.1 for stable development/testing environment",
+        "Consumers can use either React 18 or 19 - the library works with both"
+      ],
+      "note": "This is intentional and not a version mismatch bug"
+    },
+    "react_aria_accordion_alpha": {
+      "description": "@react-aria/accordion is pinned to ^3.0.0-alpha.36",
+      "rationale": "No stable 3.x release exists for accordion - only alpha and nightly builds available",
+      "note": "Cannot upgrade until react-aria releases stable accordion package"
+    }
+  },
+  "follow_up_issues": [
+    {
+      "id": "select-ref-typing-cleanup",
+      "file": "libs/stack/stack-ui/src/components/fields/Select/Select.tsx",
+      "lines": "44-52, 71",
+      "problem": "Ref typing uses unsafe cast: mergeRefs as unknown as RefObject<HTMLElement | null>",
+      "details": [
+        "useRef<HTMLElement>(null) returns RefObject with readonly current property",
+        "mergeRefs function assigns to inputRef.current which is technically readonly",
+        "The cast bypasses type errors rather than fixing the underlying type contract"
+      ],
+      "suggested_fix": "Refactor to use MutableRefObject or useCallback-based ref merging pattern",
+      "priority": "low",
+      "status": "PENDING",
+      "note": "Pre-existing issue, not introduced by React 19 upgrade"
+    }
+  ],
   "current_phase": {
     "description": "Fix remaining libs for React 19 compatibility",
     "phase_5_remaining_libs": {
