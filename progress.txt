@@ -747,3 +747,27 @@
 - convert-directus-block-peer-deps
 - convert-directus-next-component-peer-deps
 - convert-directus-flexible-content-peer-deps
+
+## 2026-01-11 - Task: convert-directus-query-peer-deps
+
+### Completed
+- Converted `libs/directus/directus-query/package.json` to use React as peerDependency
+- Moved `react` from `dependencies` to `peerDependencies` with range `^18.0.0 || ^19.0.0`
+- Added `react` to `devDependencies` with version `^19.0.0` for local development
+
+### Changes Made
+- Removed `"react": "18.3.1"` from dependencies
+- Added peerDependencies section: `"react": "^18.0.0 || ^19.0.0"`
+- Added devDependencies section: `"react": "^19.0.0"`
+
+### Verification
+- Build passed: `npx nx build directus-query` - SUCCESS
+- Lint passed: `npx nx lint directus-query` - SUCCESS
+
+### Issues Encountered
+- None
+
+### Next Tasks
+- convert-directus-block-peer-deps
+- convert-directus-next-component-peer-deps
+- convert-directus-flexible-content-peer-deps
