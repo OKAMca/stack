@@ -102,8 +102,9 @@ const graphqlCodegenConfig = (options: CodegenOptions): CodegenConfig => {
     deconfig({ path: localEnvPath, override: true })
 
     // Use provided values or fall back to environment variables
-    const schemaUrl = providedSchemaUrl || process.env['NEXT_PUBLIC_GRAPHQL_URL']
-    const authToken = providedAuthToken || process.env['NEXT_PUBLIC_API_TOKEN']
+    const schemaUrl =
+      providedSchemaUrl ?? process.env['NEXT_SERVER_GRAPHQL_URL'] ?? process.env['NEXT_PUBLIC_GRAPHQL_URL']
+    const authToken = providedAuthToken ?? process.env['NEXT_PUBLIC_API_TOKEN']
 
     if (!schemaUrl) {
       const errorMsg =
