@@ -1,7 +1,9 @@
+import { logger } from '@okam/logger'
 import type { TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
 import type { DirectusLinkPropsConfig, GetDirectusLink } from '../../components/DirectusLink/interface'
 import { getDirectusFile } from '../getDirectusFile'
+import { getDirectusSearchParams } from '../getDirectusSearchParams'
 
 function getFile(props: GetDirectusLink) {
   const { file } = props
@@ -65,8 +67,11 @@ export function getDirectusLink(props: GetDirectusLink): TAnchorProps {
     external_link: externalLink,
     file,
     id,
+    params,
     ...rest
   } = props
+
+  const searchParams = getDirectusSearchParams(params)
 
   if (!type) return {}
 
@@ -78,6 +83,16 @@ export function getDirectusLink(props: GetDirectusLink): TAnchorProps {
 
   if (!href) return {}
 
+  if (!URL.canParse(href)) {
+    logger.log('Invalid href', 'error', { href })
+    return {}
+  }
+
+  const hrefUrl = new URL(href)
+  searchParams.forEach((value, name) => {
+    hrefUrl.searchParams.append(name, value)
+  })
+
   return {
     ...rest,
     as,
@@ -85,12 +100,12 @@ export function getDirectusLink(props: GetDirectusLink): TAnchorProps {
     ...(customTheme ? { customTheme } : {}),
     ...(tokens ? { tokens } : {}),
     nextLinkProps: {
-      href,
+      href: hrefUrl.toString(),
       prefetch: prefetch ?? undefined,
       scroll: scroll ?? undefined,
       replace: replace ?? undefined,
     },
-    href,
+    href: hrefUrl.toString(),
     children: label,
     ...restOfLinkProps,
   }

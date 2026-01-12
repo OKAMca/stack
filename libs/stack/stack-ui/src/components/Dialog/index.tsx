@@ -1,5 +1,6 @@
 'use client'
 
+import { filterDOMProps } from '@react-aria/utils'
 import { useRef } from 'react'
 import { useDialog } from 'react-aria'
 import { BoxWithForwardRef } from '../Box'
@@ -13,7 +14,7 @@ export function Dialog(props: TDialogProps) {
 
   return (
     <BoxWithForwardRef
-      {...rest}
+      {...filterDOMProps(rest)}
       themeName={`${themeName}.wrapper`}
       tokens={tokens}
       customTheme={customTheme}

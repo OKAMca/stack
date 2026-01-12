@@ -16,6 +16,7 @@ import { imgTheme } from './Image'
 import lightboxTheme from './LightBox'
 import listBoxTheme from './ListBox'
 import popoverTheme from './Popover'
+import { printButton, printButtonIcon } from './PrintButton'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
 import { searchIcon, searchInput } from './Search'
@@ -53,6 +54,10 @@ const BaseTheme = makeTheme({
   },
   comboBox: comboBoxTheme,
   lightBox: lightboxTheme,
+  printButton: {
+    icon: (props) => printButtonIcon(props),
+    button: (props) => printButton(props),
+  },
   shareButton: {
     icon: (props) => shareButtonIcon(props),
     button: (props) => shareButton(props),
