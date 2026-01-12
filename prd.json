@@ -1,6 +1,6 @@
 {
   "project": "@okam/stack React 19 + Next.js 15 Upgrade",
-  "goal": "Upgrade @okam/stack-ui and related packages to support React 19 and Next.js 15",
+  "goal": "Upgrade all @okam/* packages to support React 19 and Next.js 15",
   "repo": "/Users/marie-maxime/webdev/stack",
   "context": {
     "vanier_upgrade": "vanier-mono Next.js 15 upgrade complete with workarounds (see prd.json)",
@@ -40,9 +40,64 @@
       }
     ]
   },
-  "phase_1_code_fixes": {
-    "description": "Fix React 19 compatibility issues in stack-ui (document any breaking changes)",
-    "tasks": [
+  "current_phase": {
+    "description": "Fix remaining libs for React 19 compatibility",
+    "phase_5_remaining_libs": {
+      "description": "Upgrade remaining libs to support React 18/19",
+      "tasks": [
+        {
+          "id": "fix-directus-flexible-content-types",
+          "file": "libs/directus/directus-flexible-content/src/lib/components/nodes/types.ts",
+          "problem": "JSX.IntrinsicElements and JSX.Element not found in @types/react@19",
+          "fix": "Add import type React from 'react', change JSX.X to React.JSX.X",
+          "status": "DONE"
+        },
+        {
+          "id": "fix-directus-flexible-content-rendernodes",
+          "file": "libs/directus/directus-flexible-content/src/lib/components/RenderNodes/index.tsx",
+          "problem": "JSX namespace + FunctionComponent return type + symbol index type errors",
+          "fix": "Add React import, fix JSX namespace, fix tag type casting",
+          "status": "DONE"
+        },
+        {
+          "id": "convert-core-lib-peer-deps",
+          "file": "libs/stack/core-lib/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+        },
+        {
+          "id": "convert-next-component-peer-deps",
+          "file": "libs/stack/next-component/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+        },
+        {
+          "id": "convert-directus-query-peer-deps",
+          "file": "libs/directus/directus-query/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+        },
+        {
+          "id": "convert-directus-block-peer-deps",
+          "file": "libs/directus/directus-block/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+        },
+        {
+          "id": "convert-directus-next-component-peer-deps",
+          "file": "libs/directus/directus-next-component/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+        },
+        {
+          "id": "convert-directus-flexible-content-peer-deps",
+          "file": "libs/directus/directus-flexible-content/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+        }
+      ]
+    }
+  },
+  "archived_completed": {
+    "note": "These phases are complete - archived for reference",
+    "phase_1_code_fixes": {
+      "description": "Fix React 19 compatibility issues in stack-ui (document any breaking changes)",
+      "status": "COMPLETE",
+      "tasks": [
       {
         "id": "fix-button-preventfocusonpress",
         "file": "libs/stack/stack-ui/src/components/Button/index.tsx",
@@ -95,10 +150,11 @@
         "status": "DONE"
       }
     ]
-  },
-  "phase_2_dependency_upgrades": {
-    "description": "Upgrade dependencies to React 19 compatible versions",
-    "tasks": [
+    },
+    "phase_2_dependency_upgrades": {
+      "description": "Upgrade dependencies to React 19 compatible versions",
+      "status": "COMPLETE",
+      "tasks": [
       {
         "id": "convert-react-to-peer-deps",
         "description": "Move react and react-dom from dependencies to peerDependencies to support both React 18 and 19",
@@ -284,60 +340,17 @@
         "notes": "Run after dependency upgrades. Some fixes require --force which may introduce breaking changes (verdaccio, vite-plugin-dts)."
       }
     ]
-  },
-  "phase_3_testing": {
-    "description": "Verify all components work with React 19",
-    "tasks": [
-      {
-        "id": "run-build",
-        "command": "nx run-many --all --target=build",
-        "notes": "Ensure all packages build without errors",
-        "status": "DONE"
-      },
-      {
-        "id": "run-storybook",
-        "command": "npm run storybook",
-        "notes": "Verify components render correctly in Storybook",
-        "status": "DONE",
-        "verification_results": {
-          "storybook_started": true,
-          "components_tested": ["Button", "Popover", "SidePanel", "Accordion", "DatePicker"],
-          "console_warnings": "No unknown DOM prop warnings (only Next.js 16 deprecation warning for next/config)"
-        }
-      },
-      {
-        "id": "test-overlay-components",
-        "components": ["SidePanel", "Popover", "Modal", "Dialog"],
-        "notes": "These use useOverlayTrigger - verify aria-hidden behavior",
-        "status": "DONE",
-        "verification_results": "SidePanel and Popover tested - both open/close correctly without console warnings"
-      },
-      {
-        "id": "test-button-components",
-        "components": ["Button", "ButtonWithForwardRef", "Anchor"],
-        "notes": "Verify no console warnings about unknown props",
-        "status": "DONE",
-        "verification_results": "Button and Accordion button tested - no preventFocusOnPress or other unknown prop warnings"
-      }
-    ]
-  },
-  "phase_4_publish": {
-    "description": "Publish updated packages",
-    "tasks": [
-      {
-        "id": "version-bump",
-        "notes": "Bump to next minor or major version (breaking change due to React 19 peer dep)"
-      },
-      {
-        "id": "publish-packages",
-        "command": "npm run release",
-        "notes": "Publish all updated @okam/* packages"
-      },
-      {
-        "id": "update-vanier-mono",
-        "notes": "After publishing, update vanier-mono to use new stack-ui version and remove workarounds"
-      }
-    ]
+    },
+    "phase_3_testing": {
+      "description": "Verify all components work with React 19",
+      "status": "COMPLETE",
+      "summary": "Build, Storybook, and component tests all passed"
+    },
+    "phase_4_publish": {
+      "description": "Publish updated packages",
+      "status": "PENDING",
+      "tasks": ["version-bump", "publish-packages", "update-vanier-mono"]
+    }
   },
   "vanier_workarounds_to_remove": {
     "description": "After stack upgrade, these workarounds can be removed from vanier-mono",
