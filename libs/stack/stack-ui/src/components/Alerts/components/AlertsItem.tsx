@@ -4,7 +4,6 @@ import React from 'react'
 import { useCarousel } from '../../../providers/Carousel'
 import Box from '../../Box'
 import Button from '../../Button'
-import CarouselSlide from '../../Carousel/swiper/CarouselSlide'
 import Icon from '../../Icon'
 import type { TAlertsItemProps } from '../interface'
 
@@ -29,7 +28,10 @@ const AlertsItem = (props: TAlertsItemProps) => {
           )}
           {content &&
             (React.isValidElement(content)
-              ? React.cloneElement(content, { ...content.props, themeName: `${themeName}.content`, tokens })
+              ? React.cloneElement(content as React.ReactElement<Record<string, unknown>>, {
+                  themeName: `${themeName}.content`,
+                  tokens,
+                })
               : content)}
         </Box>
       )}

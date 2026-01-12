@@ -1,7 +1,6 @@
 'use client'
 
 import { animated, useTransition } from '@react-spring/web'
-import React from 'react'
 import useThemeContext from '../providers/Theme/hooks'
 import type { TTransition } from '../types/components'
 

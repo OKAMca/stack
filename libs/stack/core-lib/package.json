@@ -27,7 +27,12 @@
   },
   "dependencies": {
     "@tsed/exceptions": "^8.3.1",
-    "dequal": "^2.0.3",
-    "react": "18.3.1"
+    "dequal": "^2.0.3"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "react": "^19.0.0"
   }
 }

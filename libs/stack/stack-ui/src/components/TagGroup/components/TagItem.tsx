@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { PartialNode } from '@react-stately/collections'
 import type { ItemProps } from '@react-types/shared'
-import type { JSX, ReactElement } from 'react'
+import type { ReactElement } from 'react'
 import React from 'react'
 import { log } from '../../../logger'
 import type { TTagElement, TTagItemProps } from '../interface'
@@ -75,5 +75,5 @@ TagItem.getCollectionNode = function* getCollectionNode<T extends object>(
 
 // We don't want getCollectionNode to show up in the type definition
 // eslint-disable-next-line no-underscore-dangle, @typescript-eslint/naming-convention
-const _TagItem = TagItem as <T extends object>(props: TTagItemProps<T>) => JSX.Element
+const _TagItem = TagItem as <T extends object>(props: TTagItemProps<T>) => React.JSX.Element
 export { _TagItem as TagItem }

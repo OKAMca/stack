@@ -30,11 +30,11 @@ export interface TCarouselSwiperProps<TSlideProps extends TCarouselSlideProps = 
 export interface TCarouselSwiper<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps> {
   swiperProps: TSwiperProps & DOMAttributes
   slides: TSlideProps[]
-  ref: RefObject<SwiperRef>
+  ref: RefObject<SwiperRef | null>
 }
 
 export interface TCarouselSlide extends SlideData {
   slideProps: DOMAttributes
   titleProps: DOMAttributes
-  ref: RefObject<HTMLElement>
+  ref: RefObject<HTMLElement | null>
 }
