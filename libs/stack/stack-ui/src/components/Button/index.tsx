@@ -72,7 +72,7 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: TButtonRef) =>
   )
 
   const theme = useThemeContext(themeName, tokens, customTheme)
-  // excludeFromTabOrder and preventFocusOnPress being spread on an element creates unknown attributes error in React 19
+  // Filter props that shouldn't be spread to DOM elements
   const { onPress, onFocusChange, excludeFromTabOrder, preventFocusOnPress, ...allProps } = rest as Record<
     string,
     unknown

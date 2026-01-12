@@ -28,14 +28,10 @@ const AlertsItem = (props: TAlertsItemProps) => {
           )}
           {content &&
             (React.isValidElement(content)
-              ? React.cloneElement(
-                  // Cast to ReactElement<any> for React 19 compatibility where element.props is 'unknown'
-                  content as React.ReactElement<Record<string, unknown>>,
-                  {
-                    themeName: `${themeName}.content`,
-                    tokens,
-                  },
-                )
+              ? React.cloneElement(content as React.ReactElement<Record<string, unknown>>, {
+                  themeName: `${themeName}.content`,
+                  tokens,
+                })
               : content)}
         </Box>
       )}
