@@ -295,9 +295,7 @@ export const ReactHookForm: Story = {
   render() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const methods = useForm<{ brand: string }>()
-    // Cast to ReactElement<any> for React 19 compatibility where element.props is 'unknown'
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const children = meta.args?.children as React.ReactElement<any>[]
+    const children = meta.args?.children as React.ReactElement<{ children: React.ReactNode }>[]
 
     return (
       <FormProvider {...methods}>

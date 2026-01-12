@@ -21,18 +21,10 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
   const ref = useRef(null)
   const { state, TransitionAnimation = AccordionTransition } = useAccordionCtx()
 
-  const { buttonProps: rawButtonProps, regionProps } = useAccordionItem(props, state, ref)
-  // Filter preventFocusOnPress to prevent React 19 unknown prop warning
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {
-    onClick: onButtonClick,
-    onKeyDown,
-    onPointerDown,
-    preventFocusOnPress,
-    ...buttonProps
-  } = rawButtonProps as typeof rawButtonProps & {
-    preventFocusOnPress?: unknown
-  }
+    buttonProps: { onClick: onButtonClick, onKeyDown, onPointerDown, ...buttonProps },
+    regionProps,
+  } = useAccordionItem(props, state, ref)
 
   const isOpen = state.selectionManager.selectedKeys.has(key)
 
