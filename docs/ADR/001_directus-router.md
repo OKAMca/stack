@@ -54,7 +54,7 @@ approach to routing. The new implementation will:
 
 1. Update the GraphQL query in `fetchPageSettingsTranslation` to search translations directly based on the path.
 2. Modify `directusRouteRouter` to use the new query and extract necessary information.
-3. Implement a `DirectusRouteConfig` interface that includes:
+3. Implement a `TDirectusRouteConfig` interface that includes:
    - An optional `localeMap`
    - A `collectionSettings` object for collection-specific configurations
 4. Use the `localeMap` to convert Directus locales to NextJS locales when rewriting paths, falling back to the
@@ -198,7 +198,7 @@ feature would work as follows:
 #### Potential Implementation:
 
 ```typescript
-async function reverseRouting(request: NextRequest, config: DirectusRouteConfig) {
+async function reverseRouting(request: NextRequest, config: TDirectusRouteConfig) {
   const { pathname } = request.nextUrl
   const match = pathname.match(/^\/([^\/]+)\/([^\/]+)\/([^\/]+)$/)
 

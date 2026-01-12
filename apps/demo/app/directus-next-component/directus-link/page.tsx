@@ -1,4 +1,4 @@
-import type { DirectusLinkProps, TLinks, NavigationItemsTree } from '@okam/directus-next-component'
+import type { DirectusLinkProps, TLinks, TTNavigationItemsTree } from '@okam/directus-next-component'
 import { getDirectusLink, getNavigationItems } from '@okam/directus-next-component/server'
 import { Anchor, type Nullable } from '@okam/stack-ui'
 
@@ -145,7 +145,7 @@ const BrandDirectusLink = (props: DirectusLinkProps) => {
   return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline', ...linkProps.tokens }} />
 }
 
-function renderTree(tree: Nullable<NavigationItemsTree>): React.ReactNode {
+function renderTree(tree: Nullable<TTNavigationItemsTree>): React.ReactNode {
   if (!tree) return null
   const { children, link, depth, linkProps } = tree
   const style = depthMap[depth]
