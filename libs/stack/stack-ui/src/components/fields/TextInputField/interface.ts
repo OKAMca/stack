@@ -12,6 +12,7 @@ export interface TTextInputProps<T = TToken>
   name: string
   ariaLabel?: string
   errorMessage?: string
+  isInvalid?: boolean
   fieldRef?: RefCallBack
   icon?: ReactNode
   errorIcon?: ReactNode

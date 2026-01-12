@@ -1,15 +1,18 @@
 'use client'
 
 import { FocusRing } from '@react-aria/focus'
+import { isEmpty } from 'radashi'
+import type { ChangeEvent } from 'react'
 import { useRef } from 'react'
 import { useTextField } from 'react-aria'
-import { get, useFormContext } from 'react-hook-form'
+import type { RegisterOptions } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import useThemeContext from '../../../providers/Theme/hooks'
 import { useTranslation } from '../../../providers/Translation'
 import Box from '../../Box'
 import Icon from '../../Icon'
 import Typography from '../../Typography'
-import type { TTextInputProps, TUseTextFieldInputProps } from './interface'
+import type { TTextInputProps } from './interface'
 
 const TextInputField = (props: TTextInputProps) => {
   const {
@@ -18,6 +21,7 @@ const TextInputField = (props: TTextInputProps) => {
     label,
     isRequired = false,
     isDisabled = false,
+    isInvalid = false,
     required,
     disabled,
     errorMessage,
@@ -27,58 +31,64 @@ const TextInputField = (props: TTextInputProps) => {
     tokens,
     customTheme,
     ariaLabel,
+    placeholder,
+    isReadOnly = false,
+    ...rest
   } = props
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   const legacyRequired = required ?? isRequired
   const legacyDisabled = disabled ?? isDisabled
 
-  const ref = useRef<HTMLInputElement | null>(null)
-  // inputProps will be cast to TUseTextFieldInputProps
-  // so you should only use useTextField<'input'>
-  const { errorMessageProps, inputProps, labelProps } = useTextField<'input'>(
-    { 'aria-label': ariaLabel, ...props, isRequired: legacyRequired, isDisabled: legacyDisabled },
-    ref,
+  // Get React Aria's TextField props
+  const { labelProps, inputProps, errorMessageProps } = useTextField(
+    {
+      label,
+      errorMessage,
+      isRequired: legacyRequired,
+      isDisabled: legacyDisabled,
+      isInvalid,
+      isReadOnly,
+      ...rest,
+    },
+    inputRef,
   )
 
-  const { 'aria-labelledby': inputPropsAriaLabelledBy, ...accessibleInputProps } = {
-    ...(inputProps as TUseTextFieldInputProps),
-    required: legacyRequired,
-    disabled: legacyDisabled,
+  const mergeRefs = (ref: HTMLInputElement) => {
+    if (ref) {
+      fieldRef?.(ref)
+      inputRef.current = ref
+    }
   }
 
   const inputTokens = { ...tokens, isDisabled, isRequired, isError: !!errorMessage }
-
-  const wrapper = useThemeContext(`${themeName}.wrapper`, inputTokens, customTheme)
-  const input = useThemeContext(`${themeName}.input`, inputTokens, customTheme)
+  const input = useThemeContext(`${themeName}.input`, inputTokens)
 
   return (
     <Box>
       <FocusRing focusRingClass="has-focus-ring" within>
-        <div aria-disabled={isDisabled} className={wrapper}>
-          <Box themeName={`${themeName}.inputWrapper`} tokens={inputTokens} customTheme={customTheme}>
-            {label && (
-              // eslint-disable-next-line jsx-a11y/label-has-associated-control
-              <Box
-                as="label"
-                themeName={`${themeName}.label`}
-                tokens={inputTokens}
-                customTheme={customTheme}
-                {...labelProps}
-              >
-                {label}
-              </Box>
-            )}
-            <Box themeName={`${themeName}`} tokens={inputTokens} customTheme={customTheme}>
-              {children}
-              <input
-                {...accessibleInputProps}
-                className={input}
-                ref={(e) => {
-                  fieldRef?.(e)
-                  ref.current = e
-                }}
-              />
+        <Box
+          aria-disabled={inputProps.disabled}
+          themeName={`${themeName}.wrapper`}
+          tokens={inputTokens}
+          customTheme={customTheme}
+        >
+          {label && (
+            // eslint-disable-next-line jsx-a11y/label-has-associated-control
+            <Box
+              as="label"
+              tokens={inputTokens}
+              themeName={`${themeName}.label`}
+              customTheme={customTheme}
+              {...labelProps}
+            >
+              {label}
             </Box>
+          )}
+          <Box themeName={`${themeName}.container`} tokens={inputTokens} customTheme={customTheme}>
+            {children}
+            <input aria-label={ariaLabel} {...inputProps} placeholder={placeholder} ref={mergeRefs} className={input} />
           </Box>
           {icon && (
             <Icon
@@ -89,7 +99,7 @@ const TextInputField = (props: TTextInputProps) => {
               aria-hidden
             />
           )}
-          {errorIcon && (
+          {errorMessage && errorIcon && (
             <Icon
               themeName={`${themeName}.errorIcon`}
               tokens={inputTokens}
@@ -98,10 +108,15 @@ const TextInputField = (props: TTextInputProps) => {
               aria-hidden
             />
           )}
-        </div>
+        </Box>
       </FocusRing>
       {errorMessage && (
-        <Typography themeName={`${themeName}.errorMessage`} tokens={inputTokens} {...errorMessageProps}>
+        <Typography
+          themeName={`${themeName}.errorMessage`}
+          tokens={inputTokens}
+          customTheme={customTheme}
+          {...errorMessageProps}
+        >
           {errorMessage}
         </Typography>
       )}
@@ -109,28 +124,108 @@ const TextInputField = (props: TTextInputProps) => {
   )
 }
 
-export const ReactHookFormInput = (props: TTextInputProps) => {
-  const { name, required: legacyRequired, isRequired, minLength = 0, maxLength = 99999999, validation } = props
-  const { register, formState } = useFormContext()
-  const error: Error = get(formState.errors, name)
-  const errMsg = error?.message ?? undefined
+export const ReactHookFormInput = ({
+  name,
+  label,
+  rules,
+  tokens,
+  ariaLabel,
+  defaultValue = '',
+  placeholder = '',
+  themeName = 'textInput',
+  isReadOnly = false,
+  minLength,
+  maxLength,
+  required,
+  isRequired,
+  onChange,
+  onBlur,
+  children = null,
+  errorIcon,
+  icon,
+  ...rest
+}: TTextInputProps & { rules: RegisterOptions }) => {
+  const { control } = useFormContext()
   const { t } = useTranslation()
-  const required = isRequired ?? legacyRequired
 
-  const { ref: refCallback, ...rest } = register(name, {
-    ...(required ? { required: t('FORM.ERROR.REQUIRED') ?? 'required' } : {}),
-    minLength: {
-      value: minLength,
-      message: t('FORM.ERROR.MIN_LENGTH', { length: minLength }),
-    },
-    maxLength: {
-      value: maxLength,
-      message: t('FORM.ERROR.MAX_LENGTH', { length: minLength }),
-    },
-    ...validation,
-  })
+  const getAriaFields = () => {
+    const ariaFields = Object.entries(rest).filter(([key, _value]) => key.startsWith('aria-'))
+    return Object.fromEntries(ariaFields)
+  }
 
-  return <TextInputField fieldRef={refCallback} {...rest} {...props} errorMessage={errMsg} />
+  const ruleMerged = {
+    required: (required ?? isRequired) ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
+    ...(minLength != null && {
+      minLength: {
+        value: minLength,
+        message: t('FORM.ERROR.MIN_LENGTH', { length: minLength }),
+      },
+    }),
+    ...(maxLength != null && {
+      maxLength: {
+        value: maxLength,
+        message: t('FORM.ERROR.MAX_LENGTH', { length: maxLength }),
+      },
+    }),
+    ...rules,
+  }
+
+  return (
+    <Controller
+      name={name}
+      control={control}
+      rules={ruleMerged}
+      disabled={rules?.disabled}
+      defaultValue={defaultValue}
+      render={({ field, fieldState }) => {
+        const { ref, ...fieldProps } = field
+        const isError = !isEmpty(fieldState.error)
+
+        const validityField = {
+          isDisabled: field.disabled ?? false,
+          isRequired: rules?.required === true || rules?.required === 'required',
+          isInvalid: fieldState.invalid,
+          isError,
+          isReadOnly,
+        }
+
+        const inputTokens = {
+          ...tokens,
+          ...validityField,
+        }
+
+        return (
+          <TextInputField
+            {...fieldProps}
+            {...validityField}
+            {...getAriaFields()}
+            fieldRef={ref}
+            name={name}
+            placeholder={placeholder}
+            themeName={themeName}
+            label={label}
+            tokens={inputTokens}
+            ariaLabel={ariaLabel}
+            isDisabled={field.disabled}
+            isRequired={rules?.required === true || rules?.required === 'required'}
+            isInvalid={fieldState.invalid}
+            errorMessage={fieldState.error?.message}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              field.onChange(e)
+              onChange?.(e)
+            }}
+            onBlur={(e: ChangeEvent<HTMLInputElement>) => {
+              field.onBlur()
+              onBlur?.(e)
+            }}
+            icon={icon}
+            errorIcon={errorIcon}
+          >
+            {children}
+          </TextInputField>
+        )
+      }}
+    />
+  )
 }
-
 export default TextInputField
