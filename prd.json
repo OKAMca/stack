@@ -90,7 +90,12 @@
         {
           "id": "convert-directus-next-component-peer-deps",
           "file": "libs/directus/directus-next-component/package.json",
-          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE",
+          "additional_fixes": [
+            "Updated @react-spring/web from ^9.7.5 to ^10.0.3",
+            "Fixed Next.js 15 async draftMode() in directus-next/src/draft/route.ts"
+          ]
         },
         {
           "id": "convert-directus-flexible-content-peer-deps",

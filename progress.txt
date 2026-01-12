@@ -794,3 +794,35 @@
 ### Next Tasks
 - convert-directus-next-component-peer-deps
 - convert-directus-flexible-content-peer-deps
+
+## 2026-01-11 - Task: convert-directus-next-component-peer-deps
+
+### Completed
+- Converted `libs/directus/directus-next-component/package.json` to use React as peerDependency
+- Moved `react` from `dependencies` to `peerDependencies` with range `^18.0.0 || ^19.0.0`
+- Added `react` to `devDependencies` with version `^19.0.0` for local development
+- Also fixed Next.js 15 async draftMode() issue in directus-next
+
+### Changes Made
+1. `libs/directus/directus-next-component/package.json`:
+   - Removed `"react": "18.3.1"` from dependencies
+   - Added peerDependencies section: `"react": "^18.0.0 || ^19.0.0"`
+   - Added devDependencies section: `"react": "^19.0.0"`
+   - Updated `@react-spring/web` from `^9.7.5` to `^10.0.3` (lint compliance)
+
+2. `libs/directus/directus-next/src/draft/route.ts`:
+   - Fixed `handleDraftRoute` to be async function returning `Promise<Response | undefined>`
+   - Changed `draftMode().enable()` to `(await draftMode()).enable()`
+   - This is required for Next.js 15 where `draftMode()` is now async
+
+### Verification
+- Build passed: `npx nx build directus-next-component` - SUCCESS
+- Lint passed: `npx nx lint directus-next-component` - SUCCESS
+- Lint passed: `npx nx lint directus-next` - SUCCESS
+
+### Issues Encountered
+1. **draftMode() is now async in Next.js 15**: The build failed initially because `directus-next` (a dependency) used synchronous `draftMode().enable()`. In Next.js 15, `draftMode()` returns a Promise and must be awaited.
+2. **@react-spring/web version mismatch**: The lint check flagged that `@react-spring/web` was at `^9.7.5` but installed version is 10.0.3. Updated to `^10.0.3`.
+
+### Next Tasks
+- convert-directus-flexible-content-peer-deps
