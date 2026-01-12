@@ -1,9 +1,8 @@
 'use client'
 
-import React from 'react'
+import { useEffect } from 'react'
 import Div100vh from 'react-div-100vh'
 import { useSidePanel } from '../../providers/SidePanel'
-import useThemeContext from '../../providers/Theme/hooks'
 import type { TToken } from '../../providers/Theme/interface'
 import RenderWithSlide from '../../transitions/RenderWithSlide'
 import SidePanelTransition from '../../transitions/SidePanelTransition'
@@ -19,34 +18,55 @@ const SidePanel = <T extends TToken>(props: TSidePanelProps<T>) => {
     tokens,
     TransitionAnimation = RenderWithSlide,
     PanelTransition = SidePanelTransition,
+    onOpenChange,
     customTheme,
+    isDismissable = true,
+    shouldCloseOnInteractOutside,
+    isKeyboardDismissDisabled = false,
+    onCloseCallBack,
+    title,
+    ...rest
   } = props
 
-  const wrapperTheme = useThemeContext(`${themeName}.wrapper`, tokens, customTheme)
-
   const { overlayState, overlayProps } = useSidePanel()
+  const { isOpen } = overlayState
+
+  useEffect(() => {
+    onOpenChange?.(isOpen)
+    if (!isOpen) {
+      onCloseCallBack?.()
+    }
+  }, [isOpen, onOpenChange, onCloseCallBack])
+
+  const sidePanelTokens = {
+    isOpen,
+    ...tokens,
+  }
 
   return (
     <Modal
       themeName={themeName}
-      tokens={tokens}
+      tokens={sidePanelTokens}
+      customTheme={customTheme}
       state={overlayState}
       {...overlayProps}
       transitionComponent={PanelTransition}
-      isDismissable
+      isDismissable={isDismissable}
+      shouldCloseOnInteractOutside={shouldCloseOnInteractOutside}
+      isKeyboardDismissDisabled={isKeyboardDismissDisabled}
+      title={title}
+      {...rest}
     >
-      <Div100vh className={wrapperTheme}>
+      <Box as={Div100vh} themeName={`${themeName}.wrapper`} tokens={sidePanelTokens}>
         {closeBtnRender && closeBtnRender()}
-        <TransitionAnimation
-          themeName={`${themeName}.transitionAnimation`}
-          tokens={tokens}
-          isVisible={overlayState.isOpen}
-        >
-          <Box themeName={`${themeName}.container`}>
-            <Box themeName={`${themeName}.innerContainer`}>{children}</Box>
+        <TransitionAnimation themeName={`${themeName}.transitionAnimation`} tokens={sidePanelTokens} isVisible={isOpen}>
+          <Box themeName={`${themeName}.container`} tokens={sidePanelTokens}>
+            <Box themeName={`${themeName}.innerContainer`} tokens={sidePanelTokens}>
+              {children}
+            </Box>
           </Box>
         </TransitionAnimation>
-      </Div100vh>
+      </Box>
     </Modal>
   )
 }

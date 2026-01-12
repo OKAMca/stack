@@ -1,21 +1,47 @@
 'use client'
 
-/* eslint-disable react/require-default-props */
-import { useDateRangePicker } from '@react-aria/datepicker'
-import { useDateRangePickerState } from '@react-stately/datepicker'
 import { useRef } from 'react'
-import useThemeContext from '../../../providers/Theme/hooks'
+import { useDateRangePicker } from 'react-aria'
+import { useDateRangePickerState } from 'react-stately'
 import Box from '../../Box'
-import Button from '../../Button'
 import RangeCalendar from '../../Calendar/RangeCalendar'
 import { Dialog } from '../../Dialog'
-import Icon from '../../Icon'
+import Typography from '../../Typography'
 import { CalendarPopover } from './components/CalendarPopover'
 import DateField from './components/DateField'
+import Wrapper from './components/Wrapper'
 import type { TDateRangePickerProps } from './interface'
 
 function DateRangePicker(props: TDateRangePickerProps) {
+  const {
+    popoverPlacement: legacyPopoverPlacement = 'bottom start',
+    placement: propPlacement = 'bottom start',
+    buttonLabel,
+    description,
+    themeName = 'datePicker',
+    tokens,
+    customTheme,
+    icon,
+    buttonContent,
+    innerDateFieldSeparator = ' - ',
+    outerDateFieldSeparator = ' - ',
+    invalidIndicator = '❌',
+    children,
+    label,
+    containerPadding,
+    shouldCloseOnInteractOutside,
+    arrowBoundaryOffset,
+    isNonModal,
+    isKeyboardDismissDisabled,
+    arrowSize,
+    boundaryElement,
+    maxHeight,
+    shouldUpdatePosition,
+  } = props
+
+  const placement = propPlacement ?? legacyPopoverPlacement
   const state = useDateRangePickerState(props)
+  const { isInvalid, isOpen, hasTime } = state
   const ref = useRef(null)
   const {
     labelProps,
@@ -28,48 +54,111 @@ function DateRangePicker(props: TDateRangePickerProps) {
     calendarProps,
   } = useDateRangePicker(props, state, ref)
 
-  const { label, buttonLabel, description, themeName = 'datePicker', tokens, popoverPlacement, icon } = props
-
-  const containerTheme = useThemeContext(`${themeName}.container`, tokens)
-  const dateFieldTheme = useThemeContext(`${themeName}.dateField`, tokens)
-  const labelTheme = useThemeContext(`${themeName}.label`, tokens)
+  const datePickerTokens = {
+    ...tokens,
+    isInvalid,
+    isOpen,
+    hasTime,
+  }
 
   return (
-    <div className={containerTheme}>
-      {label && <span {...labelProps}>{label}</span>}
-      {description && <div {...descriptionProps}>{description}</div>}
-      <div {...groupProps} ref={ref}>
-        <Box themeName={`${themeName}.wrapper`} tokens={{ ...tokens }}>
-          {buttonLabel && <p className={labelTheme}>{buttonLabel}</p>}
-          <div className={dateFieldTheme}>
-            <DateField {...startFieldProps} /> -
-            <DateField {...endFieldProps} />
-            {state.isInvalid && '❌'}
-          </div>
-          <Button
-            themeName={`${themeName}.button`}
-            tokens={{ ...tokens }}
-            type="button"
-            {...buttonProps}
-            handlePress={buttonProps.onPress}
-          >
-            <Icon themeName={`${themeName}.icon`} tokens={{ ...tokens }} icon={icon ?? 'ArrowDown'} />
-          </Button>
+    <Box themeName={`${themeName}.container`} tokens={datePickerTokens} customTheme={customTheme}>
+      {label && (
+        <Typography as="span" themeName={`${themeName}.label`} tokens={datePickerTokens} {...labelProps}>
+          {label}
+        </Typography>
+      )}
+      {description && (
+        <Box as="div" themeName={`${themeName}.description`} tokens={datePickerTokens} {...descriptionProps}>
+          {description}
         </Box>
-      </div>
+      )}
+      <Wrapper
+        themeName={themeName}
+        tokens={datePickerTokens}
+        ref={ref}
+        groupProps={groupProps}
+        buttonProps={buttonProps}
+        buttonLabel={buttonLabel}
+        buttonContent={buttonContent}
+        icon={icon}
+      >
+        <DateField
+          themeName={themeName}
+          tokens={{ ...datePickerTokens, position: 'outer', range: 'start' }}
+          {...startFieldProps}
+        />
+        {outerDateFieldSeparator && (
+          <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={datePickerTokens}>
+            {outerDateFieldSeparator}
+          </Box>
+        )}
+        <DateField
+          themeName={themeName}
+          tokens={{ ...datePickerTokens, position: 'outer', range: 'end' }}
+          {...endFieldProps}
+        />
+        {state.isInvalid && (
+          <Box
+            as="span"
+            themeName={`${themeName}.invalidIndicator`}
+            tokens={{ ...datePickerTokens, position: 'outer' }}
+          >
+            {invalidIndicator}
+          </Box>
+        )}
+      </Wrapper>
       {state.isOpen && (
-        <CalendarPopover triggerRef={ref} state={state} placement={popoverPlacement}>
-          <Dialog {...dialogProps}>
-            <div className={dateFieldTheme}>
-              <DateField {...startFieldProps} /> -
-              <DateField {...endFieldProps} />
-              {state.isInvalid && '❌'}
-            </div>
-            <RangeCalendar {...calendarProps} />
+        <CalendarPopover
+          themeName={themeName}
+          tokens={datePickerTokens}
+          triggerRef={ref}
+          state={state}
+          placement={placement}
+          containerPadding={containerPadding}
+          shouldCloseOnInteractOutside={shouldCloseOnInteractOutside}
+          arrowBoundaryOffset={arrowBoundaryOffset}
+          isNonModal={isNonModal}
+          isKeyboardDismissDisabled={isKeyboardDismissDisabled}
+          arrowSize={arrowSize}
+          boundaryElement={boundaryElement}
+          maxHeight={maxHeight}
+          shouldUpdatePosition={shouldUpdatePosition}
+        >
+          <Dialog themeName={`${themeName}.dialog`} tokens={datePickerTokens} {...dialogProps}>
+            {children}
+            <Box themeName={`${themeName}.dateFieldContainer`} tokens={datePickerTokens}>
+              <DateField
+                themeName={themeName}
+                tokens={{ ...datePickerTokens, position: 'inner', range: 'start' }}
+                {...startFieldProps}
+              />
+              {innerDateFieldSeparator && (
+                <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={datePickerTokens}>
+                  {innerDateFieldSeparator}
+                </Box>
+              )}
+              <DateField
+                themeName={themeName}
+                tokens={{ ...datePickerTokens, position: 'inner', range: 'end' }}
+                {...endFieldProps}
+              />
+              {state.isInvalid && (
+                <Box
+                  as="span"
+                  themeName={`${themeName}.invalidIndicator`}
+                  tokens={{ ...datePickerTokens, position: 'inner' }}
+                >
+                  {invalidIndicator}
+                </Box>
+              )}
+            </Box>
+            {/* Don't pass state tokens to calendar as they might override the calendar's own state tokens */}
+            <RangeCalendar {...calendarProps} tokens={tokens} />
           </Dialog>
         </CalendarPopover>
       )}
-    </div>
+    </Box>
   )
 }
 
