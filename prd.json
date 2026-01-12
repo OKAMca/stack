@@ -291,7 +291,8 @@
       {
         "id": "run-build",
         "command": "nx run-many --all --target=build",
-        "notes": "Ensure all packages build without errors"
+        "notes": "Ensure all packages build without errors",
+        "status": "DONE"
       },
       {
         "id": "run-storybook",

@@ -4,7 +4,6 @@ import React from 'react'
 import { useCarousel } from '../../../providers/Carousel'
 import Box from '../../Box'
 import Button from '../../Button'
-import CarouselSlide from '../../Carousel/swiper/CarouselSlide'
 import Icon from '../../Icon'
 import type { TAlertsItemProps } from '../interface'
 
