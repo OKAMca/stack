@@ -106,7 +106,7 @@ export type PageSettings = {
   id: string
   belongs_to_collection?: string | null
   belongs_to_key?: string | null
-  translations?: Array<PageSettingsTranslation | null> | null
+  translations?: Array<TPageSettingsTranslation | null> | null
   route?: {
     translations?: Array<{ route?: string | null } | null> | null
   } | null

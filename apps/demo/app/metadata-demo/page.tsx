@@ -1,12 +1,12 @@
-import type { PageSettings, TFiles } from '@okam/directus-next'
+import type { TPageSettings, TFiles } from '@okam/directus-next'
 import { getMetadata } from '@okam/directus-next-component'
-import type { MetadataOptions } from '@okam/directus-next-component'
+import type { TMetadataOptions } from '@okam/directus-next-component'
 import type { Nullable } from '@okam/stack-ui'
 import type { OpenGraphType } from 'next/dist/lib/metadata/types/opengraph-types'
 import Link from 'next/link'
 
 // Mock page settings to simulate Directus data
-const mockPageSettings: PageSettings = {
+const mockPageSettings: TPageSettings = {
   id: 'metadata-demo',
   belongs_to_collection: 'pages',
   belongs_to_key: 'metadata-demo',
@@ -29,7 +29,7 @@ const mockPageSettings: PageSettings = {
 }
 
 // Metadata options configuration
-const metadataOptions: MetadataOptions = {
+const metadataOptions: TMetadataOptions = {
   ogImageMaxWidth: 1200,
   ogImageMaxHeight: 630,
   imageLoader: ({ src, width, height }: { src: string; width?: string | number; height?: string | number }) => {
@@ -53,7 +53,7 @@ const metadataOptions: MetadataOptions = {
       src: '/images/metadata-fallback.png',
     }
   },
-  createAlternateUrls: (pageSettings: Nullable<PageSettings>) => {
+  createAlternateUrls: (pageSettings: Nullable<TPageSettings>) => {
     // Create alternate URLs for different languages
     if (!pageSettings?.translations?.length) return {}
     const { translations } = pageSettings
