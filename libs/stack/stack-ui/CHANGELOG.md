@@ -1,3 +1,240 @@
+## 1.42.4 (2025-11-27)
+
+### 🩹 Fixes
+
+- **stack-ui:** support for legacy menu item ariaLabel prop ([9ba1d1a](https://github.com/OKAMca/stack/commit/9ba1d1a))
+- **stack-ui:** menu items dont declare next link props ([a9563d1](https://github.com/OKAMca/stack/commit/a9563d1))
+- **stack-ui:** menu items use kebab-case aria labeling props ([d0b3781](https://github.com/OKAMca/stack/commit/d0b3781))
+- **stack-ui:** dialog safely spreads rest props, no more DOM props warnings ([79b3367](https://github.com/OKAMca/stack/commit/79b3367))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.42.3 (2025-10-17)
+
+### 🩹 Fixes
+
+- **stack-ui:** use correct operator ([2f8a0d7](https://github.com/OKAMca/stack/commit/2f8a0d7))
+
+### ❤️ Thank You
+
+- Max Hilland
+
+## 1.42.2 (2025-10-14)
+
+### 🩹 Fixes
+
+- **stack-ui:** remove unused offset prop ([56ed157](https://github.com/OKAMca/stack/commit/56ed157))
+- **stack-ui:** re-add id prop ([a4fde61](https://github.com/OKAMca/stack/commit/a4fde61))
+- **stack-ui:** remove onBlur handler ([f109a97](https://github.com/OKAMca/stack/commit/f109a97))
+- **stack-ui:** share button fixes ([df90c95](https://github.com/OKAMca/stack/commit/df90c95))
+
+### ❤️ Thank You
+
+- Max Hilland
+
+## 1.42.1 (2025-10-09)
+
+### 🩹 Fixes
+
+- **stack-ui:** remove getShareUrl ([ee04eac](https://github.com/OKAMca/stack/commit/ee04eac))
+- **stack-ui:** add missing getShareUrl util ([a73622a](https://github.com/OKAMca/stack/commit/a73622a))
+- **stack-ui:** add missing exports and utils ([5a95ed7](https://github.com/OKAMca/stack/commit/5a95ed7))
+
+### ❤️ Thank You
+
+- Max Hilland
+
+## 1.42.0 (2025-10-02)
+
+### 🚀 Features
+
+- print button ([e5a149d](https://github.com/OKAMca/stack/commit/e5a149d))
+- **stack-ui:** add print button ([3053737](https://github.com/OKAMca/stack/commit/3053737))
+
+### 🩹 Fixes
+
+- **stack-ui:** add window check ([50d3828](https://github.com/OKAMca/stack/commit/50d3828))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Max Hilland
+
+## 1.41.2 (2025-09-25)
+
+### 🩹 Fixes
+
+- **stack-ui:** bump version ([dc92171](https://github.com/OKAMca/stack/commit/dc92171))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.41.1 (2025-09-04)
+
+### 🩹 Fixes
+
+- **stack-ui:** export carousel swiper ([eb183b4](https://github.com/OKAMca/stack/commit/eb183b4))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.41.0 (2025-08-28)
+
+### 🚀 Features
+
+- **stack-ui:** independent carousel components/hooks ([7cf1a47](https://github.com/OKAMca/stack/commit/7cf1a47))
+
+### 🩹 Fixes
+
+- **stack-ui:** wrong aria label navigate next a11y prop name ([28011ef](https://github.com/OKAMca/stack/commit/28011ef))
+- **stack-ui:** legacy carousel separate component ([85e5988](https://github.com/OKAMca/stack/commit/85e5988))
+- **stack-ui:** filter DOM swiper props ([72687bf](https://github.com/OKAMca/stack/commit/72687bf))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.40.1 (2025-08-22)
+
+### 🩹 Fixes
+
+- **stack-ui:** clear button clears input value ([a1c9e34](https://github.com/OKAMca/stack/commit/a1c9e34))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.40.0 (2025-08-11)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
+## 1.39.3 (2025-07-24)
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.0
+
+## 1.39.2 (2025-07-18)
+
+### 🩹 Fixes
+
+- **stack-ui:** always have use client for react-aria/stately imports ([027edae](https://github.com/OKAMca/stack/commit/027edae))
+- **stack-ui:** added use client to file with react-aria import ([51092ab](https://github.com/OKAMca/stack/commit/51092ab))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.39.1 (2025-07-18)
+
+### 🩹 Fixes
+
+- **stack-ui:** wysiwyg block use client ([8c3d3b0](https://github.com/OKAMca/stack/commit/8c3d3b0))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.39.0 (2025-07-04)
+
+### 🚀 Features
+
+- **stack-ui:** node item/section dispatcher component ([16f1dfa](https://github.com/OKAMca/stack/commit/16f1dfa))
+
+### 🩹 Fixes
+
+- **stack-ui:** listbox missing use client directive ([937f395](https://github.com/OKAMca/stack/commit/937f395))
+- **stack-ui:** missing exports ([54334dc](https://github.com/OKAMca/stack/commit/54334dc))
+- **stack-ui:** combobox debounces its listbox items display ([56c14b6](https://github.com/OKAMca/stack/commit/56c14b6))
+- **stack-ui:** accept DOMAttrributes on Box ([ede7e77](https://github.com/OKAMca/stack/commit/ede7e77))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.38.1 (2025-07-01)
+
+### 🩹 Fixes
+
+- **stack-ui:** missing use client directives ([84148f7](https://github.com/OKAMca/stack/commit/84148f7))
+- **stack-ui:** export listbox components/types ([e2a8338](https://github.com/OKAMca/stack/commit/e2a8338))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.38.0 (2025-07-01)
+
+### 🚀 Features
+
+- **stack-ui:** shared option list component ([bbf5c5b](https://github.com/OKAMca/stack/commit/bbf5c5b))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- **stack-ui:** listbox section items correrct theme name ([8acb1b5](https://github.com/OKAMca/stack/commit/8acb1b5))
+- **stack-ui:** safer option render ([5b26401](https://github.com/OKAMca/stack/commit/5b26401))
+- **stack-ui:** option component isSelectable token correct value ([6883551](https://github.com/OKAMca/stack/commit/6883551))
+- **stack-ui:** listbox interface ([eef614d](https://github.com/OKAMca/stack/commit/eef614d))
+- **stack-ui:** listbox fully accessible, supports link options ([4a43bde](https://github.com/OKAMca/stack/commit/4a43bde))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.37.0 (2025-05-22)
+
+### 🚀 Features
+
+- **stack-ui:** add conditional rendering for trigger and close buttons in Lightbox component ([313716e](https://github.com/OKAMca/stack/commit/313716e))
+
+### 🩹 Fixes
+
+- **stack-ui:** remove hardcoded tokens in Lightbox component ([99cdfbf](https://github.com/OKAMca/stack/commit/99cdfbf))
+
+### ❤️ Thank You
+
+- Jerome Trottier
+
+## 1.31.0 (2025-05-01)
+
+### 🚀 Features
+
+- **next-component:** next link wrapper component + hook ([ed654da](https://github.com/OKAMca/stack/commit/ed654da))
+- add header option to select component ([0338ebc](https://github.com/OKAMca/stack/commit/0338ebc))
+- **stack-ui:** added wysiwyg allowed attribute and tags control ([8e7138f](https://github.com/OKAMca/stack/commit/8e7138f))
+- bump versions to force publish ([6e3eb60](https://github.com/OKAMca/stack/commit/6e3eb60))
+- project cleanup ([a5dde9d](https://github.com/OKAMca/stack/commit/a5dde9d))
+- add factory for Logger ([#214](https://github.com/OKAMca/stack/pull/214))
+
+### 🩹 Fixes
+
+- issue where select header was selectable with arrow ([#279](https://github.com/OKAMca/stack/pull/279))
+- **stack-ui:** side panel context buttonProps typing ([e1d7a94](https://github.com/OKAMca/stack/commit/e1d7a94))
+- lint ([89ece66](https://github.com/OKAMca/stack/commit/89ece66))
+- checkbox a11y issue ([3340653](https://github.com/OKAMca/stack/commit/3340653))
+- bump package ([b6259d1](https://github.com/OKAMca/stack/commit/b6259d1))
+- rhf wrapper ([f03c080](https://github.com/OKAMca/stack/commit/f03c080))
+- missing chuldren prop for TextInput field ([c03f035](https://github.com/OKAMca/stack/commit/c03f035))
+- missing export ([8c9ab9c](https://github.com/OKAMca/stack/commit/8c9ab9c))
+- missing export ([690e7ae](https://github.com/OKAMca/stack/commit/690e7ae))
+- missing export ([bec9b4d](https://github.com/OKAMca/stack/commit/bec9b4d))
+- types ([610a5be](https://github.com/OKAMca/stack/commit/610a5be))
+- missing exports ([5c1f130](https://github.com/OKAMca/stack/commit/5c1f130))
+- issue with react hook form and react aria ([#255](https://github.com/OKAMca/stack/pull/255))
+- issue with typing not resolving correctly when installing package ([bc4c81d](https://github.com/OKAMca/stack/commit/bc4c81d))
+
+### ❤️ Thank You
+
+- Jerome Trottier
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.30.1 (2024-11-05)
 
 

@@ -7,7 +7,7 @@ export const items: TMenuItemProps[] = [
     path: '#shows',
     label: 'Open 2nd Level Menu Label',
     children: <div>Open 2nd Level Menu</div>,
-    ariaLabel: 'Open 2nd Level Menu Aria',
+    'aria-label': 'Open 2nd Level Menu Aria',
     childItems: [
       {
         id: 'abc',

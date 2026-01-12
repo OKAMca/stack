@@ -14,7 +14,7 @@ const RenderWithOpacity = ({ isVisible, children, themeName, tokens, customTheme
   return transition(
     (styles, bool) =>
       bool && (
-        <animated.div className={transitionTheme} style={styles} {...rest}>
+        <animated.div {...rest} className={transitionTheme} style={styles}>
           {children}
         </animated.div>
       ),

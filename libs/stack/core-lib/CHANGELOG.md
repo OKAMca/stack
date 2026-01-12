@@ -1,3 +1,20 @@
+## 1.17.0 (2025-07-24)
+
+### 🚀 Features
+
+- **directus-next:** /api/redirect route handler to fetch + cache directus redirects ([c21b953](https://github.com/OKAMca/stack/commit/c21b953))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.15.0 (2024-10-04)
 
 

@@ -1,3 +1,20 @@
+## 1.4.2 (2025-07-24)
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.3.0 (2024-11-06)
 
 

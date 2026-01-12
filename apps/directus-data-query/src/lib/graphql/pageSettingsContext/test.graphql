@@ -1,0 +1,40 @@
+fragment PageSettings on page_settings {
+  id
+  belongs_to_collection
+  belongs_to_key
+  translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+    languages_code {
+      code
+    }
+    path
+    title
+    slug
+  }
+}
+
+fragment Page on pages {
+  translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+    name
+  }
+  page_settings(filter: { belongs_to_key: { _nnull: true } }) {
+    ...PageSettings
+  }
+}
+
+query PageById($id: ID!, $locale: String!) {
+  pages_by_id(id: $id) {
+    ...Page
+  }
+}
+
+query PageByIdWithoutFragment($id: ID!, $locale: String!) {
+  pages_by_id(id: $id) {
+     translations(filter: { languages_code: { code: { _eq: $locale } } }) {
+      name
+    }
+    page_settings(filter: { belongs_to_key: { _nnull: true } }) {
+      ...PageSettings
+    }
+  }
+}
+
