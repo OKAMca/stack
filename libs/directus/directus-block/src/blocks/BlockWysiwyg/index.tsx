@@ -1,7 +1,7 @@
 import { Box, WysiwygBlock } from '@okam/stack-ui'
 import React from 'react'
 import type { TBlockSerializerProps } from '../../components/BlockSerializer/interface'
-import useBlock from '../../hooks/useBlock'
+import { useBlock } from '../../hooks/useBlock'
 import type { BlockWysiwygFragment } from './interface'
 
 const BlockWysiwyg = async (props: TBlockSerializerProps<BlockWysiwygFragment>) => {
