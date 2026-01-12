@@ -5,16 +5,16 @@ import type { TLinks } from '../../types/links'
 export type DirectusLink = Omit<TDefaultComponent, 'children'> & Omit<Partial<TLinks>, 'tokens'> & AriaAttributes
 
 export interface TGetDirectusLink extends DirectusLink {
-  propsConfig?: TDirectusLinkPropsConfig
+  propsConfig?: TTDirectusLinkPropsConfig
 }
-export interface DirectusLinkProps extends DirectusLink {
-  componentsConfig?: DirectusLinkComponentsConfig
-  propsConfig?: TDirectusLinkPropsConfig
+export interface TDirectusLinkProps extends DirectusLink {
+  componentsConfig?: TDirectusLinkComponentsConfig
+  propsConfig?: TTDirectusLinkPropsConfig
 }
 
-export type DirectusLinkComponentsConfig = Record<string, ComponentType<DirectusLinkProps>>
+export type TDirectusLinkComponentsConfig = Record<string, ComponentType<TDirectusLinkProps>>
 
-export type TDirectusLinkPropsConfig<ReturnProps extends TAnchorProps = TAnchorProps> = Record<
+export type TTDirectusLinkPropsConfig<ReturnProps extends TAnchorProps = TAnchorProps> = Record<
   string,
   (props: TGetDirectusLink) => ReturnProps
 >

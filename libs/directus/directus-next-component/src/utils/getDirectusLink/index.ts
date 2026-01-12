@@ -1,7 +1,7 @@
 import { logger } from '@okam/logger'
 import type { TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
-import type { TDirectusLinkPropsConfig, TGetDirectusLink } from '../../components/DirectusLink/interface'
+import type { TTDirectusLinkPropsConfig, TGetDirectusLink } from '../../components/DirectusLink/interface'
 import { getDirectusFile } from '../getDirectusFile'
 import { getDirectusSearchParams } from '../getDirectusSearchParams'
 
@@ -41,7 +41,7 @@ function getAnchor(props: TGetDirectusLink) {
   return { href: anchor ?? undefined }
 }
 
-const defaultPropsConfig: TDirectusLinkPropsConfig = {
+const defaultPropsConfig: TTDirectusLinkPropsConfig = {
   collection: getCollection,
   // eslint-disable-next-line @typescript-eslint/naming-convention
   'external-link': getExternalLink,

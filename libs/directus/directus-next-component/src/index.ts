@@ -6,7 +6,7 @@ export { default as DirectusFile } from './components/DirectusFile'
 
 export { getDirectusFile, useDirectusFile } from './utils/getDirectusFile'
 export { getDirectusLink, useDirectusLink } from './utils/getDirectusLink'
-export { getNavigationItems, useTNavigationItems } from './utils/getNavigationItems'
+export { getNavigationItems, useNavigationItems } from './utils/getNavigationItems'
 export { getMetadata, useMetadata } from './utils/getDirectusMetadata'
 export { getDirectusSearchParams } from './utils/getDirectusSearchParams'
 
@@ -14,11 +14,11 @@ export { logger as DirectusNextComponent } from './logger'
 
 export * from './types'
 export type {
-  DirectusLinkProps,
-  TDirectusLinkPropsConfig,
-  DirectusLinkComponentsConfig,
+  TDirectusLinkProps,
+  TTDirectusLinkPropsConfig,
+  TDirectusLinkComponentsConfig,
 } from './components/DirectusLink/interface'
-export type { DirectusFileProps } from './components/DirectusFile/interface'
+export type { TDirectusFileProps } from './components/DirectusFile/interface'
 export type { TDirectusImgProps } from './components/DirectusImg/interface'
 export type { TDirectusVideoProps } from './components/DirectusVideo/interface'
 

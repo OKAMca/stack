@@ -57,9 +57,9 @@ const BrandLink = (props) => {
 }
 ```
 
-## useTNavigationItems hook
+## useNavigationItems hook
 
-The `useTNavigationItems` hook allows to build recursively a navigation structure using the `DirectusLink` component. 
+The `useNavigationItems` hook allows to build recursively a navigation structure using the `DirectusLink` component. 
 
 The tokens passed to `link` and `linkProps` include also include, in order of priority:
 - The tokens passed from `onNavigationItem`
@@ -118,7 +118,7 @@ function renderTree(tree: Nullable<TTNavigationItemsTree>): React.ReactNode {
 
 const NavigationComponent = (props) => {
   // Depth and links type cannot be inferred directly, they must be passed
-  const navigation = useTNavigationItems<3, { link?: LinksFragment }>(
+  const navigation = useNavigationItems<3, { link?: LinksFragment }>(
     props.navigationItems, 
 
     // Use `onNavigationItem` to parse the fragments
