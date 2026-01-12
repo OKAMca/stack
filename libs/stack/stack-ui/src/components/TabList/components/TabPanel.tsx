@@ -14,6 +14,8 @@ const TabPanel = <I extends object, T extends TToken = TToken>(props: TTabPanelP
     themeName = 'tabList.panel',
     tokens,
     panelTransition: PanelTransition = RenderWithOpacity,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Filter out id as it may be Key (number | string) but TTransition expects string | undefined
+    id,
     ...rest
   } = props
   const ref = useRef(null)

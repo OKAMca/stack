@@ -209,7 +209,13 @@
         "package": "react-aria",
         "from": "^3.39.0",
         "to": "^3.45.0",
-        "notes": "Latest version has React 19 ref cleanup support. Note: peerDeps metadata issue causes npm warnings with React 19 stable (github.com/adobe/react-spectrum/issues/9267)"
+        "notes": "Latest version has React 19 ref cleanup support. Note: peerDeps metadata issue causes npm warnings with React 19 stable (github.com/adobe/react-spectrum/issues/9267)",
+        "status": "DONE",
+        "breaking_changes_applied": [
+          "onSelectionChange callback now accepts Key | null (was Key) - updated Select.interface.ts",
+          "Updated all @react-aria/* and @react-stately/* sub-packages to compatible versions",
+          "Filtered id prop in TabPanel to avoid Key type mismatch with TTransition"
+        ]
       },
       {
         "id": "upgrade-react-stately",
