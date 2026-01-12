@@ -60,6 +60,24 @@ export default {
     setOpen: {
       description: `Allows the lightbox component's thumbnail to still controll the lightbox's state even in a case of controlled state`,
     },
+
+    showTriggerButton: {
+      description:
+        'Controls visibility of the trigger button. Useful in controlled state scenarios where you might want to provide your own trigger. Defaults to true.',
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: true,
+    },
+
+    showCloseButton: {
+      description:
+        'Controls visibility of the close button. Useful in controlled state scenarios where you might want to handle closing differently. Defaults to true.',
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: true,
+    },
   },
 
   args: {
@@ -78,4 +96,13 @@ export const Default = {
 export const ControlledState = {
   render: TemplateControlledState.bind({}),
   name: 'ControlledState',
+}
+
+export const ControlledStateHiddenButtons = {
+  render: TemplateControlledState.bind({}),
+  name: 'Controlled State with Hidden Buttons',
+  args: {
+    showTriggerButton: false,
+    showCloseButton: false,
+  },
 }
