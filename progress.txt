@@ -365,3 +365,35 @@
 
 ### Next Tasks
 - apply-types-upgrade (subtask of upgrade-types-react) - Apply @types/react ^19.0.0 upgrade
+
+## 2026-01-11 - Task: apply-types-upgrade (subtask of upgrade-types-react)
+
+### Completed
+- Upgraded @types/react from 18.2.33 to ^19.0.0 in root package.json devDependencies
+- Upgraded @types/react-dom from 18.2.14 to ^19.0.0 in root package.json devDependencies
+- This completes the upgrade-types-react and upgrade-types-react-dom tasks
+
+### Changes Made
+1. Modified `/Users/marie-maxime/webdev/stack/package.json`:
+   - Changed `"@types/react": "18.2.33"` to `"@types/react": "^19.0.0"`
+   - Changed `"@types/react-dom": "18.2.14"` to `"@types/react-dom": "^19.0.0"`
+
+2. Ran `npm install` to update dependencies
+   - @types/react@19.2.8 installed
+   - @types/react-dom@19.2.3 installed
+
+### Verification
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx run-many --all --target=lint` - SUCCESS (0 errors, 1 pre-existing warning)
+
+### Notes
+- React and react-dom runtime remain at 18.3.1 for now
+- Upgrading runtime to React 19 is blocked by @react-spring/web@9.7.5 which has peer dependency on React 16/17/18
+- The types upgrade validates that stack-ui is TypeScript-compatible with React 19
+- The peerDependencies already support React 18 and 19: `"react": "^18.0.0 || ^19.0.0"`
+
+### Next Tasks (Phase 2 remaining)
+- upgrade-next (Next.js 14 → 15)
+- upgrade-react-aria (3.39.0 → 3.45.0)
+- upgrade-react-stately (3.37.0 → 3.43.0)
+- upgrade-react-spring (@react-spring/web 9.7.5 → 10.0.3) - REQUIRED for full React 19 runtime support

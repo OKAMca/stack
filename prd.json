@@ -122,7 +122,7 @@
         "package": "@types/react",
         "to": "^19.0.0",
         "notes": "TypeScript types for React 19. IMPORTANT: Must fix TypeScript errors first before upgrading.",
-        "status": "IN_PROGRESS",
+        "status": "DONE",
         "subtasks": [
           {
             "id": "fix-jsx-namespace",
@@ -185,7 +185,7 @@
           {
             "id": "apply-types-upgrade",
             "description": "Apply @types/react ^19.0.0 upgrade after all fixes",
-            "status": "pending"
+            "status": "DONE"
           }
         ]
       },
@@ -193,7 +193,8 @@
         "id": "upgrade-types-react-dom",
         "package": "@types/react-dom",
         "to": "^19.0.0",
-        "notes": "TypeScript types for React DOM 19"
+        "notes": "TypeScript types for React DOM 19",
+        "status": "DONE"
       },
       {
         "id": "upgrade-next",
@@ -217,10 +218,12 @@
         "notes": "Latest version for React 19 compatibility"
       },
       {
-        "id": "check-react-spring",
+        "id": "upgrade-react-spring",
         "package": "@react-spring/web",
         "from": "^9.7.5",
-        "notes": "Check if v10 needed for React 19, review changelog for breaking changes"
+        "to": "^10.0.3",
+        "notes": "REQUIRED: React 19 support added in 10.0.0 (PR #2368). Fixes 'children' prop TypeScript error with AnimatedProps.",
+        "breaking_changes": "Major version upgrade - test all transitions: AccordionTransition, ModalTransition, RenderWithOpacity, RenderWithSlide, SidePanelTransition"
       },
       {
         "id": "npm-audit-fix",
