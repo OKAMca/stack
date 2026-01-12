@@ -8,6 +8,7 @@ export { getDirectusFile, useDirectusFile } from './utils/getDirectusFile'
 export { getDirectusLink, useDirectusLink } from './utils/getDirectusLink'
 export { getNavigationItems, useNavigationItems } from './utils/getNavigationItems'
 export { getMetadata, useMetadata } from './utils/getDirectusMetadata'
+export { getDirectusSearchParams } from './utils/getDirectusSearchParams'
 
 export { logger as DirectusNextComponent } from './logger'
 
@@ -26,4 +27,10 @@ export type {
    * @deprecated Import from `@okam/directus-next` instead
    */
   TFiles,
+} from '@okam/directus-next'
+
+export type {
+  /**
+   * @deprecated Import from `@okam/directus-next` instead
+   */ PageSettings,
 } from '@okam/directus-next'
