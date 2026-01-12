@@ -696,3 +696,54 @@
 - convert-directus-block-peer-deps
 - convert-directus-next-component-peer-deps
 - convert-directus-flexible-content-peer-deps
+
+## 2026-01-11 - Task: convert-next-component-peer-deps (phase_5_remaining_libs)
+
+### Completed
+- Converted react from dependencies to peerDependencies in next-component package.json
+- Fixed Next.js 15 compatibility issues discovered during build verification
+- This allows consumers to use either React 18 or React 19 with the library
+
+### Changes Made
+1. `libs/stack/next-component/package.json`
+   - Removed `"react": "18.3.1"` from dependencies
+   - Added peerDependencies section:
+     ```json
+     "peerDependencies": {
+       "react": "^18.0.0 || ^19.0.0"
+     }
+     ```
+   - Added devDependencies section:
+     ```json
+     "devDependencies": {
+       "react": "^19.0.0"
+     }
+     ```
+
+2. `libs/stack/next-component/src/hooks/useLink/index.ts`
+   - Removed import of `Params` from internal Next.js path `'next/dist/shared/lib/router/utils/route-matcher'`
+   - Added local type definition: `type Params = Record<string, string | string[] | undefined>`
+   - This fixes the build error where Next.js 15 moved the Params type location
+
+3. `libs/stack/stack-ui/src/types/next-link.ts`
+   - Updated `prefetch` prop type from `boolean | null` to `'auto' | 'unstable_forceStale' | boolean | null`
+   - This matches Next.js 15's LinkProps which added new prefetch values
+
+### Verification
+- Build passed: `npx nx build next-component` - SUCCESS
+- Lint passed: `npx nx lint next-component` - SUCCESS (0 errors)
+- Build passed: `npx nx build stack-ui` - SUCCESS
+- Lint passed: `npx nx lint stack-ui` - SUCCESS (0 errors)
+
+### Issues Encountered
+1. **Params type import breaking change**: Next.js 15 moved the Params type from `next/dist/shared/lib/router/utils/route-matcher` to `next/dist/server/request/params`. Rather than depend on internal paths, defined type locally.
+
+2. **prefetch prop type mismatch**: Next.js 15 expanded the prefetch prop to include `'auto'` and `'unstable_forceStale'` values. The TUseLinkReturn interface (which extends NextLinkProps) had these new values but stack-ui's NextLinkProps type only accepted `boolean | null`.
+
+3. **Import order lint error**: Initially placed type definition before imports, triggering `import/first` lint rule. Fixed by moving type definition after all imports.
+
+### Next Tasks (Phase 5 remaining)
+- convert-directus-query-peer-deps
+- convert-directus-block-peer-deps
+- convert-directus-next-component-peer-deps
+- convert-directus-flexible-content-peer-deps

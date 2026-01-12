@@ -68,7 +68,12 @@
         {
           "id": "convert-next-component-peer-deps",
           "file": "libs/stack/next-component/package.json",
-          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE",
+          "additional_fixes": [
+            "Fixed Next.js 15 Params type import - changed from internal path 'next/dist/shared/lib/router/utils/route-matcher' to local type definition",
+            "Updated stack-ui NextLinkProps type to support Next.js 15 prefetch values ('auto' | 'unstable_forceStale')"
+          ]
         },
         {
           "id": "convert-directus-query-peer-deps",

@@ -1,12 +1,14 @@
 'use client'
 
-import type { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 import type { LinkProps } from 'next/link'
 import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import { useLocale } from 'react-aria'
 import { useHash } from '../useHash'
 import type { TLink, TUseLinkReturn } from './interface'
+
+// Define Params type locally to avoid Next.js internal import path changes
+type Params = Record<string, string | string[] | undefined>
 
 function scrollToTop(behavior: ScrollBehavior) {
   window?.scrollTo?.({ top: 0, behavior })
