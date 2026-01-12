@@ -84,7 +84,8 @@
         {
           "id": "convert-directus-block-peer-deps",
           "file": "libs/directus/directus-block/package.json",
-          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE"
         },
         {
           "id": "convert-directus-next-component-peer-deps",
