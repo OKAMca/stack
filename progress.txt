@@ -587,3 +587,37 @@
 - run-storybook (verify components render correctly)
 - test-overlay-components (SidePanel, Popover, Modal, Dialog)
 - test-button-components (Button, ButtonWithForwardRef, Anchor)
+
+## 2026-01-11 - Tasks: run-storybook, test-overlay-components, test-button-components (phase_3_testing)
+
+### Completed
+- Started Storybook successfully on port 4400
+- Tested all key components in Storybook using Playwright browser automation
+- Verified no console warnings about unknown DOM props (like preventFocusOnPress)
+
+### Components Tested
+1. **Button** - Renders correctly, no console warnings
+2. **Popover** - Opens/closes correctly, no console warnings
+3. **Side Panel** - Opens/closes correctly, no console warnings
+4. **Accordion** - Expands/collapses correctly, no console warnings
+5. **DatePicker** - Calendar popover opens correctly, no console warnings
+
+### Console Warnings Found
+- Only 2 warnings present (neither related to React 19 upgrade):
+  1. `Failed to load resource: 404 (Not Found)` for favicon.svg (cosmetic issue)
+  2. `Runtime config is deprecated and will be removed in Next.js 16` - related to next/config usage
+
+### Verification
+- No `preventFocusOnPress` or other unknown DOM prop warnings
+- All overlay components (Popover, SidePanel) use useOverlayTrigger and work correctly
+- All button components work correctly without spreading react-aria internal props to DOM
+
+### Notes
+- Storybook takes ~90 seconds to build and start
+- All React 19 + react-aria 3.45.0 + react-spring 10.0.3 compatibility verified
+- Phase 3 testing is now complete
+
+### Next Tasks (Phase 4)
+- version-bump
+- publish-packages
+- update-vanier-mono
