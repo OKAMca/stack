@@ -660,3 +660,39 @@
 - convert-directus-block-peer-deps
 - convert-directus-next-component-peer-deps
 - convert-directus-flexible-content-peer-deps
+
+## 2026-01-11 - Task: convert-core-lib-peer-deps (phase_5_remaining_libs)
+
+### Completed
+- Converted react from dependencies to peerDependencies in core-lib package.json
+- This allows consumers to use either React 18 or React 19 with the library
+
+### Changes Made
+1. `libs/stack/core-lib/package.json`
+   - Removed `"react": "18.3.1"` from dependencies
+   - Added peerDependencies section:
+     ```json
+     "peerDependencies": {
+       "react": "^18.0.0 || ^19.0.0"
+     }
+     ```
+   - Added devDependencies section:
+     ```json
+     "devDependencies": {
+       "react": "^19.0.0"
+     }
+     ```
+
+### Verification
+- Build passed: `npx nx build core-lib` - SUCCESS
+- Lint passed: `npx nx lint core-lib` - SUCCESS (0 errors)
+
+### Issues Encountered
+- None
+
+### Next Tasks (Phase 5 remaining)
+- convert-next-component-peer-deps
+- convert-directus-query-peer-deps
+- convert-directus-block-peer-deps
+- convert-directus-next-component-peer-deps
+- convert-directus-flexible-content-peer-deps

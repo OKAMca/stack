@@ -62,7 +62,8 @@
         {
           "id": "convert-core-lib-peer-deps",
           "file": "libs/stack/core-lib/package.json",
-          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)"
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE"
         },
         {
           "id": "convert-next-component-peer-deps",
