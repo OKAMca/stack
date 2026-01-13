@@ -1,6 +1,7 @@
 'use client'
 
 import { useQueryState, parseAsArrayOf, parseAsString } from 'nuqs'
+import { useMemo } from 'react'
 import { useListState, type Selection } from 'react-stately'
 import { useUpdateEffect } from 'react-use'
 import type { TFilter } from './interface'
@@ -23,7 +24,10 @@ export function useFilterState(props: TFilter) {
   } = props
 
   const defaultValue = Array.from(defaultSelectedKeysProp).map((key) => key.toString())
-  const queryStateOptions = parser.withOptions(options ?? {}).withDefault(defaultValue)
+  const queryStateOptions = useMemo(
+    () => parser.withOptions(options ?? {}).withDefault(defaultValue),
+    [parser, options, defaultValue],
+  )
 
   const [selectedKeys, setSelectedKeys] = useQueryState(id, queryStateOptions)
 
