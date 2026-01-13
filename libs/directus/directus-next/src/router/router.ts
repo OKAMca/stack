@@ -7,11 +7,7 @@ import { handleRedirect } from '../redirect/utils/handleRedirect'
 import type { PageSettingsTranslation } from '../types'
 import type { DirectusRouteConfig } from '../types/directusRouteConfig'
 import { fetchPageSettingsTranslation } from './utils/fetchPageSettingsTranslation'
-
-function removeLocaleFromPathname(pathname: string, config: DirectusRouteConfig) {
-  const currentLocale = Object.values(config.localeMap ?? {}).find((locale) => pathname.startsWith(`/${locale}/`))
-  return { locale: currentLocale, pathname: currentLocale ? pathname.replace(`/${currentLocale}/`, '/') : pathname }
-}
+import { splitLocaleFromPathname } from './utils/locale'
 
 function getValidTranslation(translations: PageSettingsTranslation[], locale: string | undefined) {
   const translation = translations[0]
@@ -23,6 +19,33 @@ function getValidTranslation(translations: PageSettingsTranslation[], locale: st
   return translations?.find((t) => t.languages_code?.code?.startsWith(locale)) ?? translation
 }
 
+/**
+ * Handles incoming middleware requests and rewrites the path to the new format according to fetched page settings.
+ * @param request - The NextRequest object
+ * @param config - The DirectusRouteConfig object
+ * @deprecated Use `directusRouteRouter(request, config)` instead. NextResponse is now directly imported in this file.
+ * @param NextResponse - The NextResponse object
+ * @returns NextResponse
+ *
+ * @example
+ * ```typescript
+ * export const directusConfig: DirectusRouteConfig = {
+ *  localeMap: {
+ *    'fr-CA': 'fr',
+ *    'en-CA': 'en',
+ *  },
+ *  collectionSettings: {
+ *    default: {
+ *      idField: 'id',
+ *    },
+ *  },
+ * }
+ *
+ * export async function middleware(request: NextRequest) {
+ *   return directusRouteRouter(request, directusConfig)
+ * }
+ * ```
+ */
 export async function directusRouteRouter(
   request: NextRequest,
   config: DirectusRouteConfig,
@@ -32,7 +55,7 @@ export async function directusRouteRouter(
   NextResponse = NextResponseClass,
 ): Promise<NextResponseType> {
   const { pathname: localizedPathname } = request.nextUrl
-  const { locale, pathname } = removeLocaleFromPathname(localizedPathname, config)
+  const { locale, pathname } = splitLocaleFromPathname(localizedPathname, config)
   log('Processing request for pathname:', { locale, pathname })
 
   const redirect = await handleRedirect(request, config.modules?.redirects)
