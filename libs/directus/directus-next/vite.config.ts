@@ -48,14 +48,14 @@ export default defineConfig({
           banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
         },
         {
-          format: 'cjs', 
+          format: 'cjs',
           entryFileNames: '[name].js',
           preserveModules: false,
           banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
         }
       ],
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, 'next/navigation', 'next/headers', 'next/server', '@okam/directus-node', '@okam/logger', '@okam/core-lib', '@okam/directus-query'],
+      external: [...externalDeps, 'next/navigation', 'next/headers', 'next/server', '@okam/directus-node', '@okam/logger', '@okam/core-lib', '@okam/directus-query', '@okam/next-component'],
     },
     ssr: true,
   },

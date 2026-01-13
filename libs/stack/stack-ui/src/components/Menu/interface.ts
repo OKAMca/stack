@@ -1,3 +1,4 @@
+import type { AriaLabelingProps } from '@react-types/shared'
 import type { AriaTabListProps } from '@react-types/tabs'
 import type React from 'react'
 import type { TToken } from '../../providers/Theme/interface'
@@ -10,14 +11,14 @@ export type MenuProps = {
   beforeTabContent?: React.ReactNode
   afterTabContent?: React.ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  PanelTransition?: (props: TTransition) => JSX.Element
+  PanelTransition?: (props: TTransition) => React.JSX.Element
 }
 
 export type TMenuProps<T = TToken> = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent<T>
 
 export type TMenuSidePanelProps = TMenuProps & {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  TransitionAnimation?: (props: TTransition) => JSX.Element
+  TransitionAnimation?: (props: TTransition) => React.JSX.Element
 }
 
 export type PartialHtmlBaseElement = Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>
@@ -34,7 +35,14 @@ export interface IMenuItemProp {
   onClick?: () => void
 }
 
-export type TMenuItemProps = IMenuItemProp & TDefaultComponent & PartialHtmlBaseElement
+export type TMenuItemProps = IMenuItemProp &
+  TDefaultComponent &
+  AriaLabelingProps & {
+    /**
+     * @deprecated Use `aria-label` instead
+     */
+    ariaLabel?: string
+  }
 
 export interface TMenuItemsProps extends TDefaultComponent {
   menuItems?: TMenuItemProps[] | null

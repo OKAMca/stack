@@ -16,6 +16,7 @@ import { imgTheme } from './Image'
 import lightboxTheme from './LightBox'
 import listBoxTheme from './ListBox'
 import popoverTheme from './Popover'
+import { printButton, printButtonIcon } from './PrintButton'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
 import { searchIcon, searchInput } from './Search'
@@ -28,6 +29,7 @@ import {
   shareButtonLinksList,
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
+import { skipToMain } from './SkipToMain'
 import tabListTheme from './TabList'
 import tagGroupTheme from './TagGroup'
 import { textArea } from './TextArea'
@@ -53,6 +55,10 @@ const BaseTheme = makeTheme({
   },
   comboBox: comboBoxTheme,
   lightBox: lightboxTheme,
+  printButton: {
+    icon: (props) => printButtonIcon(props),
+    button: (props) => printButton(props),
+  },
   shareButton: {
     icon: (props) => shareButtonIcon(props),
     button: (props) => shareButton(props),
@@ -61,6 +67,7 @@ const BaseTheme = makeTheme({
     link: (props) => shareButtonLink(props),
     linkIcons: (props) => shareButtonLinkIcons(props),
   },
+  skipToMain: (props) => skipToMain(props),
   checkbox: {
     container: (props) => checkboxContainer(props),
     label: (props) => checkboxLabel(props),
