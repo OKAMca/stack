@@ -27,7 +27,7 @@ import type { TFilterProps } from './interface'
  */
 const Filter = <T extends TToken = TToken>(props: TFilterProps<T>) => {
   const {
-    label,
+    // TagGroup-specific props
     children,
     items,
     defaultSelectedKeys,
@@ -41,13 +41,26 @@ const Filter = <T extends TToken = TToken>(props: TFilterProps<T>) => {
     errorMessage,
     onRemove,
     onSelectionChange,
+    // Common props
     themeName = 'filter',
     tokens,
     customTheme,
+    // PopoverButton props with defaults
     type = 'dialog',
     placement = 'bottom',
-    ...rest
+    // Remaining PopoverButton props
+    ...popoverButtonProps
   } = props
+
+  const tagGroupProps = {
+    items,
+    selectionBehavior,
+    selectionMode,
+    description,
+    disallowEmptySelection,
+    errorMessage,
+    onRemove,
+  }
 
   const state = useFilterState({ ...props, selectionMode })
 
@@ -56,23 +69,11 @@ const Filter = <T extends TToken = TToken>(props: TFilterProps<T>) => {
       <PopoverButton
         themeName={`${themeName}.popover`}
         tokens={tokens}
-        label={label}
         type={type}
         placement={placement}
-        {...rest}
+        {...popoverButtonProps}
       >
-        <TagGroup
-          themeName={`${themeName}.tagGroup`}
-          tokens={tokens}
-          {...rest}
-          items={items}
-          selectionBehavior={selectionBehavior}
-          selectionMode={selectionMode}
-          description={description}
-          disallowEmptySelection={disallowEmptySelection}
-          errorMessage={errorMessage}
-          {...state}
-        >
+        <TagGroup themeName={`${themeName}.tagGroup`} tokens={tokens} {...tagGroupProps} {...state}>
           {children}
         </TagGroup>
       </PopoverButton>
