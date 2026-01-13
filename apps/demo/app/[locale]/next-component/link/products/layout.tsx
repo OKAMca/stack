@@ -1,6 +1,6 @@
 import { Box, Typography } from '@okam/stack-ui'
 
-export default async function Layout(props: { children: React.ReactNode; params: { id: string; locale: string } }) {
+export default async function Layout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
