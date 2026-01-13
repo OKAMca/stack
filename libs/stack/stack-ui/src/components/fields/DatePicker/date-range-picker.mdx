@@ -1,0 +1,48 @@
+import { Canvas, Meta, Story, ArgTypes } from '@storybook/blocks'
+import DateRangePicker from './DateRangePicker'
+import * as DateRangePickerStories from './date-range-picker.stories';
+
+<Meta of={DateRangePickerStories} />
+
+# Date Range Picker
+
+Date Range Picker component. As opposed to the `DatePicker` component, this component allows the user to select a range two dates.
+
+## Props
+
+For props that are shared with the `DatePicker` component, see the [DatePicker documentation](?path=/docs/form-fields-datepicker--docs).
+
+<ArgTypes
+  of={DateRangePickerStories  .Default}
+  exclude={['themeName', 'tokens', 'customTheme', 'onChange', 'as', 'children', 'popoverPlacement', 'label', 'description', 'buttonLabel', 'buttonContent', 'icon', 'invalidIndicator']}
+ />
+
+## Showcase
+
+### Style variations
+
+#### Default
+
+<Canvas of={DateRangePickerStories.Default} />
+
+#### Date field and icon
+
+<Canvas of={DateRangePickerStories.DateFieldAndIcon} />
+
+#### Only icon
+
+<Canvas of={DateRangePickerStories.OnlyIcon} />
+
+### Modified behaviors
+
+#### Unavailable dates
+
+In this example, unavailable dates will be rendered as disabled, making the user unable to select them. However, they are still technically selectable via the date field.
+
+If the user attempts to select an unavailable date via the date field, the `isInvalid` state will be applied to the whole component as a token.
+
+<Canvas of={DateRangePickerStories.UnavailableDates} />
+
+#### Controlled
+
+<Canvas of={DateRangePickerStories.Controlled} />

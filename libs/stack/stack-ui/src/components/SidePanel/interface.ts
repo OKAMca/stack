@@ -1,17 +1,20 @@
-import type { HTMLAttributes } from 'react'
 import type React from 'react'
+import type { ReactNode } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent, TTransition } from '../../types/components'
+import type { TModalAria } from '../Modal/interface'
 
-export interface ISidePanelProps extends HTMLAttributes<HTMLElement> {
+export interface TSidePanelProps<T extends TToken> extends TDefaultComponent<T>, TModalAria {
   id: string
-  children?: React.ReactNode
-  closeBtnRender?: () => React.ReactNode
+  children?: ReactNode
+  closeBtnRender?: () => ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  TransitionAnimation?: (props: TTransition) => JSX.Element
+  TransitionAnimation?: (props: TTransition) => React.JSX.Element
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  PanelTransition?: (props: TTransition) => JSX.Element
+  PanelTransition?: (props: TTransition) => React.JSX.Element
+  /**
+   * @deprecated Use `onOpenChange` instead
+   */
   onCloseCallBack?: () => void
+  onOpenChange?: (isOpen: boolean) => void
 }
-
-export type TSidePanelProps<T = TToken> = ISidePanelProps & TDefaultComponent<T>

@@ -1,6 +1,9 @@
 {
   "name": "@okam/next-component",
-  "version": "0.4.1",
+  "version": "1.2.3",
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": {
       "import": {
@@ -9,31 +12,36 @@
       },
       "require": {
         "types": "./index.d.ts",
-        "default": "./index.js"
+        "default": "./index.mjs"
       }
     },
     "./server": {
       "import": {
         "types": "./server.d.ts",
-        "default": "./server.js"
+        "default": "./server.mjs"
       },
       "require": {
         "types": "./server.d.ts",
-        "default": "./server.js"
+        "default": "./server.mjs"
       }
     }
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
-    "@okam/stack-ui": "1.32.6",
-    "@okam/core-lib": "1.16.0",
-    "react": "18.3.1",
+    "@okam/stack-ui": "2.0.0",
     "@tanstack/react-query": "^5.62.3",
-    "next": "^14.1.1"
+    "@okam/core-lib": "1.17.0",
+    "next": "^15.0.0",
+    "react-use": "17.5.1",
+    "tailwind-variants": "^0.3.0",
+    "react-aria": "^3.39.0"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "react": "^19.0.0"
   }
 }

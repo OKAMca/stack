@@ -1,9 +1,9 @@
+import { PagesDocument } from '@demo/directus-data-query'
 import type { TBlockSerializerConfig } from '@okam/directus-block'
 import type { JSONContent } from '@okam/directus-flexible-content'
 import { FlexibleEditorContent } from '@okam/directus-flexible-content'
 import { queryGql } from '@okam/directus-query'
 import { Box, Typography } from '@okam/stack-ui'
-import { PagesDocument } from 'apps/directus-data-query/src'
 
 export default async function Index() {
   const flexibleContent = await queryGql(PagesDocument)
@@ -16,12 +16,15 @@ export default async function Index() {
   const relationBlocks: TBlockSerializerConfig = {
     components: {
       block_button: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         default: (props) => <Box as="span">Related Block Button</Box>,
       },
       related_block_faqs: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         default: (props) => <Box as="span">Related Block FAQ</Box>,
       },
       block_quote: {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         default: (props) => <Box>Block Quotes</Box>,
       },
     },

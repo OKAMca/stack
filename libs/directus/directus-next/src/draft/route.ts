@@ -14,7 +14,7 @@ import { template } from 'radashi'
 import { getJsonErrorResponse } from '../response'
 import { getDraftSecretDefault } from './env'
 
-export function parseParams(url: string) {
+export function parseDraftParams(url: string) {
   const { searchParams } = new URL(url)
   const secret = searchParams.get('secret') || ''
   const languagesParam = searchParams.get('languages')
@@ -130,15 +130,15 @@ export type HandleDraftOptions = {
  *   })
  * }
  */
-export default function handleDraftRoute({
+export default async function handleDraftRoute({
   url,
   getDirectusLanguage,
   getDraftSecret,
   getJsonError,
-}: HandleDraftOptions): Response | undefined {
+}: HandleDraftOptions): Promise<Response | undefined> {
   const getSecretFunction = getDraftSecret || getDraftSecretDefault
   const getJsonErrorResponseFunction = getJsonError || getJsonErrorResponse
-  const { secret, languages, paths, routes, type, version } = parseParams(url)
+  const { secret, languages, paths, routes, type, version } = parseDraftParams(url)
 
   if (secret !== getSecretFunction()) {
     return getJsonErrorResponseFunction({ error: 'Invalid argument' }, 401)
@@ -196,7 +196,7 @@ export default function handleDraftRoute({
   }
 
   // todo check if slug is valid
-  draftMode().enable()
+  ;(await draftMode()).enable()
 
   // doesn't work: using cookies() from next/headers because it's readonly
   // doesn't work if (pk) { res.cookies.set('__draftmode_pk', pk); }

@@ -7,33 +7,17 @@ import { adminBarTheme } from './AdminBar'
 import alertsTheme from './Alerts'
 import { container, grid, gridItem, main } from './Box'
 import button from './Button'
-import {
-  calendarCell,
-  calendarCellContainer,
-  calendarCellFormattedDate,
-  calendarContainer,
-  calendarDayLabel,
-  calendarHeaderContainer,
-  calendarNavigationButtons,
-  calendarNavigationButtonsContainer,
-  calendarTable,
-} from './Calendar'
+import { calendarTheme } from './Calendar'
 import carouselTheme from './Carousel'
 import { checkBox, checkMark, checkMarkIcon, checkboxContainer, checkboxLabel } from './Checkbox'
 import { checkboxGroup, checkboxGroupItemsGroup } from './CheckboxGroup'
-import {
-  datePickerButton,
-  datePickerCalendarPopoverContainer,
-  datePickerCalendarPopoverUnderlay,
-  datePickerContainer,
-  datePickerDateField,
-  datePickerDateSegment,
-  datePickerIcon,
-  datePickerLabel,
-  datePickerWrapper,
-} from './DatePicker'
+import comboBoxTheme from './ComboBox'
+import { datePickerTheme } from './DatePicker'
 import { imgTheme } from './Image'
 import lightboxTheme from './LightBox'
+import listBoxTheme from './ListBox'
+import popoverTheme from './Popover'
+import { printButton, printButtonIcon } from './PrintButton'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
 import { searchIcon, searchInput } from './Search'
@@ -46,7 +30,11 @@ import {
   shareButtonLinksList,
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
+import { skipToMain } from './SkipToMain'
+import tabListTheme from './TabList'
+import tagGroupTheme from './TagGroup'
 import { textArea } from './TextArea'
+import textInputTheme from './TextInput'
 import typography from './Typography'
 
 const BaseTheme = makeTheme({
@@ -57,40 +45,23 @@ const BaseTheme = makeTheme({
   accordion: accordionTheme,
   adminBar: adminBarTheme,
   carousel: carouselTheme,
-  calendar: {
-    container: (props) => calendarContainer(props),
-    header: (props) => calendarHeaderContainer(props),
-    navigationButtonsContainer: (props) => calendarNavigationButtonsContainer(props),
-    navigationButtons: (props) => calendarNavigationButtons(props),
-    table: (props) => calendarTable(props),
-    dayLabel: (props) => calendarDayLabel(props),
-    cellContainer: (props) => calendarCellContainer(props),
-    cell: (props) => calendarCell(props),
-    cellDate: (props) => calendarCellFormattedDate(props),
-  },
-  datePicker: {
-    container: (props) => datePickerContainer(props),
-    button: (props) => datePickerButton(props),
-    wrapper: (props) => datePickerWrapper(props),
-    icon: (props) => datePickerIcon(props),
-    dateField: (props) => datePickerDateField(props),
-    dateSegment: (props) => datePickerDateSegment(props),
-    label: (props) => datePickerLabel(props),
-    calendarPopover: (props) => datePickerCalendarPopoverContainer(props),
-    calendarUnderlay: (props) => datePickerCalendarPopoverUnderlay(props),
-  },
-  popover: {
-    button: (props) => button(props),
-    popover: () => 'border-2 text-black p-4 bg-gray-300',
-  },
+  calendar: calendarTheme,
+  datePicker: datePickerTheme,
+  popover: popoverTheme,
   typography: (props) => typography(props),
   button: (props) => button(props),
+  link: button,
   sidePanel: {
     wrapper: (props) => sidePanelWrapper(props),
     container: (props) => sidePanelContainer(props),
     innerContainer: (props) => sidePanelInnerContainer(props),
   },
+  comboBox: comboBoxTheme,
   lightBox: lightboxTheme,
+  printButton: {
+    icon: (props) => printButtonIcon(props),
+    button: (props) => printButton(props),
+  },
   shareButton: {
     icon: (props) => shareButtonIcon(props),
     button: (props) => shareButton(props),
@@ -99,6 +70,7 @@ const BaseTheme = makeTheme({
     link: (props) => shareButtonLink(props),
     linkIcons: (props) => shareButtonLinkIcons(props),
   },
+  skipToMain: (props) => skipToMain(props),
   checkbox: {
     container: (props) => checkboxContainer(props),
     label: (props) => checkboxLabel(props),
@@ -134,7 +106,10 @@ const BaseTheme = makeTheme({
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
     wrapper: () => 'flex flex-col gap-4 relative',
     container: () => 'flex flex-col gap-4',
+    list: () => 'flex flex-col gap-4',
     li: () => 'transition w-full hover:text-gray-300 focus-ring-white',
+    headerText: () => 'text-gray-300',
+    section: () => 'flex flex-col gap-4',
   },
   textarea: {
     wrapper: () => 'flex flex-col',
@@ -143,6 +118,7 @@ const BaseTheme = makeTheme({
     input: (props) => textArea(props),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
   },
+  textInput: textInputTheme,
   search: {
     wrapper: () => 'min-w-fit sm:w-80 flex flex-col gap-2',
     container: () =>
@@ -151,14 +127,6 @@ const BaseTheme = makeTheme({
     input: (props) => searchInput(props),
     icon: (props) => searchIcon(props),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
-  },
-  textInput: {
-    wrapper: () =>
-      `group flex flex-col rounded-md px-4 py-1 mb-3 m-0.5 border-2 aria-disabled:pointer-events-none aria-disabled:opacity-30 focus-ring-black`,
-    label: () => 'group-has-[:required]:after:content-["_*"] group-has-[:required]:after:text-red-500 text-xs',
-    container: () => 'flex items-center gap-4',
-    input: () => '',
-    errorMessage: (props) => typography({ ...props, className: 'ml-0', size: 'footnotes', isError: true }),
   },
   menu: {
     sidePanel: {
@@ -177,6 +145,9 @@ const BaseTheme = makeTheme({
   },
   img: imgTheme,
   alerts: alertsTheme,
+  tagGroup: tagGroupTheme,
+  tabList: tabListTheme,
+  listBox: listBoxTheme,
 })
 
 export default React.memo(createThemeProvider(BaseTheme))

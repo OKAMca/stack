@@ -1,6 +1,8 @@
+'use client'
+
 import { usePopover, DismissButton, Overlay } from '@react-aria/overlays'
 import * as React from 'react'
-import useThemeContext from '../../../../providers/Theme/hooks'
+import Box, { BoxWithForwardRef } from '../../../Box'
 import type { TCalendarPopoverProps } from '../interface'
 
 export function CalendarPopover({ themeName = 'datePicker', tokens, ...rest }: TCalendarPopoverProps) {
@@ -15,17 +17,14 @@ export function CalendarPopover({ themeName = 'datePicker', tokens, ...rest }: T
     state,
   )
 
-  const underlayTheme = useThemeContext(`${themeName}.calendarUnderlay`, tokens)
-  const popoverTheme = useThemeContext(`${themeName}.calendarPopover`, tokens)
-
   return (
     <Overlay>
-      <div {...underlayProps} className={underlayTheme} />
-      <div {...popoverProps} ref={ref} className={popoverTheme}>
+      <Box themeName={`${themeName}.calendarUnderlay`} tokens={tokens} {...underlayProps} />
+      <BoxWithForwardRef themeName={`${themeName}.calendarPopover`} tokens={tokens} {...popoverProps} ref={ref}>
         <DismissButton onDismiss={state.close} />
         {children}
         <DismissButton onDismiss={state.close} />
-      </div>
+      </BoxWithForwardRef>
     </Overlay>
   )
 }
