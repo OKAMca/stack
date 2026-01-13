@@ -1,5 +1,12 @@
 import Providers from './Providers'
 
-export default function RootLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
-  return <Providers locale={params.locale}>{children}</Providers>
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  return <Providers locale={locale}>{children}</Providers>
 }

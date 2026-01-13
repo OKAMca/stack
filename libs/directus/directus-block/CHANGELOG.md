@@ -1,3 +1,224 @@
+## 1.6.2 (2026-01-13)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.0.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
+## 1.6.1 (2025-11-27)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.4
+
+## 1.6.0 (2025-10-17)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-block:** clean up useBlock type usage ([c7b198e](https://github.com/OKAMca/stack/commit/c7b198e))
+- **directus-block:** always pass type params between block serializer types ([430e6db](https://github.com/OKAMca/stack/commit/430e6db))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.5.22 (2025-10-17)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.3
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
+## 1.5.21 (2025-10-14)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.2
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
+## 1.5.20 (2025-10-09)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
+## 1.5.19 (2025-10-02)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
+## 1.5.18 (2025-09-25)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.2
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
+## 1.5.17 (2025-09-04)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
+## 1.5.16 (2025-08-28)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
+## 1.5.15 (2025-08-22)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.40.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.5.14 (2025-08-11)
 
 ### 🚀 Features

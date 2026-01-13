@@ -1,3 +1,293 @@
+## 1.2.24 (2026-01-13)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.0.0
+- Updated directus-block to 1.6.2
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.23 (2025-11-27)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.4
+- Updated directus-block to 1.6.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.22 (2025-10-17)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-block to 1.6.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.21 (2025-10-17)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.3
+- Updated directus-block to 1.5.22
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.20 (2025-10-14)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.2
+- Updated directus-block to 1.5.21
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.19 (2025-10-09)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.1
+- Updated directus-block to 1.5.20
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.18 (2025-10-02)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.0
+- Updated directus-block to 1.5.19
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.17 (2025-09-25)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.2
+- Updated directus-block to 1.5.18
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.16 (2025-09-04)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.1
+- Updated directus-block to 1.5.17
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.15 (2025-08-28)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.0
+- Updated directus-block to 1.5.16
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.2.14 (2025-08-22)
+
+### 🚀 Features
+
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.40.1
+- Updated directus-block to 1.5.15
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.2.13 (2025-08-11)
 
 ### 🚀 Features

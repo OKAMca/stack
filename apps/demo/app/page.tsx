@@ -42,6 +42,17 @@ export default function Index() {
               </Link>
               <span className="ml-2 text-sm text-gray-600">- Demonstrates how to use the useMetadata hook</span>
             </li>
+            <li className="mb-2">
+              <Link
+                href="/directus-next-component/directus-link/search-params/a3f81e37-44dc-4f2a-bcc0-8aa9a7403a88"
+                className="text-blue-600 hover:underline"
+              >
+                Directus Link Search Params Demo
+              </Link>
+              <span className="ml-2 text-sm text-gray-600">
+                - Demonstrates the appending of directus search params via link.params fielddocs to the link
+              </span>
+            </li>
           </ul>
         </div>
         <Select
@@ -104,7 +115,7 @@ export default function Index() {
           </Box>
           <Box>
             <ShareButton
-              id="share-button"
+              id="share-buttons"
               ariaLabel="Share stuff"
               sharingLinksList={[{ ariaLabel: 'Share on Facebook', icon: 'Facebook', key: 'facebook' }]}
             />

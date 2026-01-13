@@ -10,11 +10,14 @@ import { Controller, useFormContext } from 'react-hook-form'
 import useThemeContext from '../../../providers/Theme/hooks'
 import { useTranslation } from '../../../providers/Translation'
 import Box from '../../Box'
+import Icon from '../../Icon'
 import Typography from '../../Typography'
 import type { TTextInputProps } from './interface'
 
 const TextInputField = (props: TTextInputProps) => {
   const {
+    icon,
+    errorIcon,
     label,
     isRequired = false,
     isDisabled = false,
@@ -59,40 +62,65 @@ const TextInputField = (props: TTextInputProps) => {
     }
   }
 
-  const input = useThemeContext(`${themeName}.input`, tokens)
+  const inputTokens = { ...tokens, isDisabled, isRequired, isError: !!errorMessage }
+  const input = useThemeContext(`${themeName}.input`, inputTokens)
 
   return (
-    <div>
+    <Box>
       <FocusRing focusRingClass="has-focus-ring" within>
         <Box
           aria-disabled={inputProps.disabled}
           themeName={`${themeName}.wrapper`}
-          tokens={tokens}
+          tokens={inputTokens}
           customTheme={customTheme}
         >
           {label && (
             // eslint-disable-next-line jsx-a11y/label-has-associated-control
-            <Box as="label" tokens={tokens} themeName={`${themeName}.label`} customTheme={customTheme} {...labelProps}>
+            <Box
+              as="label"
+              tokens={inputTokens}
+              themeName={`${themeName}.label`}
+              customTheme={customTheme}
+              {...labelProps}
+            >
               {label}
             </Box>
           )}
-          <Box themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
+          <Box themeName={`${themeName}.container`} tokens={inputTokens} customTheme={customTheme}>
             {children}
             <input aria-label={ariaLabel} {...inputProps} placeholder={placeholder} ref={mergeRefs} className={input} />
           </Box>
+          {icon && (
+            <Icon
+              themeName={`${themeName}.icon`}
+              tokens={inputTokens}
+              customTheme={customTheme}
+              icon={icon}
+              aria-hidden
+            />
+          )}
+          {errorMessage && errorIcon && (
+            <Icon
+              themeName={`${themeName}.errorIcon`}
+              tokens={inputTokens}
+              customTheme={customTheme}
+              icon={errorIcon}
+              aria-hidden
+            />
+          )}
         </Box>
       </FocusRing>
       {errorMessage && (
         <Typography
           themeName={`${themeName}.errorMessage`}
-          tokens={tokens}
+          tokens={inputTokens}
           customTheme={customTheme}
           {...errorMessageProps}
         >
           {errorMessage}
         </Typography>
       )}
-    </div>
+    </Box>
   )
 }
 
@@ -113,6 +141,8 @@ export const ReactHookFormInput = ({
   onChange,
   onBlur,
   children = null,
+  errorIcon,
+  icon,
   ...rest
 }: TTextInputProps & { rules: RegisterOptions }) => {
   const { control } = useFormContext()
@@ -188,6 +218,8 @@ export const ReactHookFormInput = ({
               field.onBlur()
               onBlur?.(e)
             }}
+            icon={icon}
+            errorIcon={errorIcon}
           >
             {children}
           </TextInputField>
