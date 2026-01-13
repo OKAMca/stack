@@ -33,6 +33,7 @@ import { skipToMain } from './SkipToMain'
 import tabListTheme from './TabList'
 import tagGroupTheme from './TagGroup'
 import { textArea } from './TextArea'
+import textInputTheme from './TextInput'
 import typography from './Typography'
 
 const BaseTheme = makeTheme({
@@ -115,6 +116,7 @@ const BaseTheme = makeTheme({
     input: (props) => textArea(props),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
   },
+  textInput: textInputTheme,
   search: {
     wrapper: () => 'min-w-fit sm:w-80 flex flex-col gap-2',
     container: () =>
@@ -123,14 +125,6 @@ const BaseTheme = makeTheme({
     input: (props) => searchInput(props),
     icon: (props) => searchIcon(props),
     errorMessage: (props) => typography({ ...props, size: 'footnotes', isError: true }),
-  },
-  textInput: {
-    wrapper: () =>
-      `group flex flex-col rounded-md px-4 py-1 mb-3 m-0.5 border-2 aria-disabled:pointer-events-none aria-disabled:opacity-30 focus-ring-black`,
-    label: () => 'group-has-[:required]:after:content-["_*"] group-has-[:required]:after:text-red-500 text-xs',
-    container: () => 'flex items-center gap-4',
-    input: () => '',
-    errorMessage: (props) => typography({ ...props, className: 'ml-0', size: 'footnotes', isError: true }),
   },
   menu: {
     sidePanel: {
