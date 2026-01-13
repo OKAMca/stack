@@ -1,6 +1,7 @@
 'use client'
 
 import { useQueryState, parseAsArrayOf, parseAsString } from 'nuqs'
+import { isEqual } from 'radashi'
 import { useMemo } from 'react'
 import { useListState, type Selection } from 'react-stately'
 import { useUpdateEffect } from 'react-use'
@@ -49,8 +50,11 @@ export function useFilterState(props: TFilter) {
   })
 
   useUpdateEffect(() => {
-    const stringKeys = Array.from(state.selectionManager.selectedKeys).map((key) => key.toString())
-    setSelectedKeys(stringKeys)
+    const next = [...state.selectionManager.selectedKeys].map(String)
+    if (isEqual(next, selectedKeys)) {
+      return
+    }
+    setSelectedKeys(next)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.selectionManager.selectedKeys])
 
