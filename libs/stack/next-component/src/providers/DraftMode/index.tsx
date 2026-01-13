@@ -10,7 +10,7 @@ import { handleDraftMode } from './utils/handleDraftMode'
 export const [useDraftMode, DraftModeProvider] = createCtx<TDraftModeContext>()
 
 export function DraftModeContextProvider(props: TDraftModeProviderProps) {
-  const { children, defaultEnabled, cookieDuration: defaultCookieDuration } = props
+  const { children, defaultEnabled, cookieDuration: defaultCookieDuration = 1, queryOptions, mutationOptions } = props
   const [isEnabled, setEnabled] = useState(defaultEnabled ?? false)
   const [cookieDuration, setCookieDuration] = useState(defaultCookieDuration) // Default to 1 day
   const router = useRouter()
@@ -23,6 +23,7 @@ export function DraftModeContextProvider(props: TDraftModeProviderProps) {
       setEnabled(response.isEnabled)
       return response
     },
+    ...queryOptions,
   })
 
   const result = useMutation({
@@ -38,6 +39,7 @@ export function DraftModeContextProvider(props: TDraftModeProviderProps) {
       router.refresh()
       setEnabled(response.isEnabled)
     },
+    ...mutationOptions,
   })
 
   const value = useMemo(
