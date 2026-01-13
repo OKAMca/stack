@@ -36,7 +36,7 @@
     "tailwind-variants": "^0.3.0",
     "react-aria": "^3.39.0",
     "react-stately": "^3.37.0",
-    "nuqs": "^2.4.1",
+    "nuqs": "^2.4.3",
     "radashi": "^12.3.0"
   },
   "peerDependencies": {
