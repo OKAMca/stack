@@ -1,3 +1,21 @@
+## 1.2.3 (2026-01-13)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.0.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 1.2.2 (2025-11-27)
 
 ### 🧱 Updated Dependencies
