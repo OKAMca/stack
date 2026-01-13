@@ -48,7 +48,9 @@ const SelectContent = ({
         errorMessage={errorMessage}
         {...rest}
         onSelectionChange={(key) => {
-          setValue(key.toString())
+          if (key !== null) {
+            setValue(key.toString())
+          }
         }}
         value={value}
         options={options}

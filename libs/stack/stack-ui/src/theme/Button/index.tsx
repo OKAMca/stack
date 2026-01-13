@@ -12,6 +12,7 @@ const button = tv({
     disabled:pointer-events-none
     disabled:opacity-30
     focus-ring-black
+    h-fit
   `,
   defaultVariants: {
     buttonStyle: 'default',
@@ -29,15 +30,15 @@ const button = tv({
             px-4
             py-2
             text-white
-            !bg-color-1-500 
-            hover:!bg-color-1-400
-            active:!bg-color-1-400
+            bg-color-1-500
+            hover:bg-color-1-400
+            active:bg-color-1-400
           `,
       outline: `
             px-4
             py-2
             bg-transparent
-            !border-color-1-500
+            border-color-1-500
             text-color-1-500
             hover:bg-color-1-500
             hover:text-white
@@ -51,15 +52,16 @@ const button = tv({
             hover:border-b-color-1-500
             active:border-b-color-1-500
             focus:border-b-color-1-500
-    
+
           `,
     },
     intent: {
+      danger: ``,
       error: `
-            !bg-error 
-            text-white 
+            bg-error
+            text-white
             pointer-events-none
-            !border-error
+            border-error
           `,
     },
     size: {
@@ -71,6 +73,21 @@ const button = tv({
       circular: `rounded-full`,
     },
   },
+  compoundVariants: [
+    {
+      intent: 'danger',
+      buttonStyle: 'default',
+      className: `
+            bg-danger-500
+            text-white
+            border-danger-500
+            hover:bg-danger-400
+            hover:border-danger-400
+            focus:bg-danger-400
+            focus:border-danger-400
+          `,
+    },
+  ],
 })
 
 export default button
