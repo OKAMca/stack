@@ -21,6 +21,7 @@ export function DraftModeContextProvider(props: TDraftModeProviderProps) {
       const [enabled, duration] = queryKey
       const response = await handleDraftMode({ enable: enabled, cookieDuration: duration })
       setEnabled(response.isEnabled)
+      return response
     },
   })
 
