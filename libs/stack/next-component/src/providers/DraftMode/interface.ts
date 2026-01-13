@@ -8,8 +8,8 @@ export interface TDraftModeProviderProps {
    * The duration of the draft mode cookie in days
    */
   cookieDuration?: number
-  queryOptions?: UseQueryOptions<TDraftModeStatus, Error, TDraftModeStatus, [boolean, number]>
-  mutationOptions?: UseMutationOptions<TDraftModeStatus, Error, TDraftModeStatus, unknown>
+  queryOptions?: UseQueryOptions<TDraftModeStatus, Error, TDraftModeStatus, ['draftMode']>
+  mutationOptions?: UseMutationOptions<TDraftModeStatus, Error, TDraftModeStatus, ['draftMode']>
 }
 
 export type TDraftModeStatus = {
@@ -20,7 +20,7 @@ export type TDraftModeStatus = {
   cookieDuration?: number
 }
 
-type TDraftModeQueryResult = UseMutationResult<TDraftModeStatus, Error, TDraftModeStatus, unknown>
+type TDraftModeQueryResult = UseMutationResult<TDraftModeStatus, Error, TDraftModeStatus, ['draftMode']>
 
 export type TDraftModeContext = {
   setEnabled: (enable: boolean) => void
