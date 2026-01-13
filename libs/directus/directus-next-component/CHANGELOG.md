@@ -2,7 +2,7 @@
 
 ### 🚀 Features
 
-- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- React 19 + Next.js 15 support ([#369](https://github.com/OKAMca/stack/pull/369))
 - **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
 
 ### 🩹 Fixes
@@ -11,13 +11,9 @@
 - **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
 - update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
 
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
-
 ### 🧱 Updated Dependencies
 
-- Updated stack-ui to 2.0.0
+- Updated stack-ui to 1.43.0
 - Updated next-component to 1.2.3
 
 ### ❤️ Thank You
