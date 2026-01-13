@@ -1,3 +1,4 @@
+import type React from 'react'
 import type { ReactNode } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent, TTransition } from '../../types/components'
@@ -8,9 +9,9 @@ export interface TSidePanelProps<T extends TToken> extends TDefaultComponent<T>,
   children?: ReactNode
   closeBtnRender?: () => ReactNode
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  TransitionAnimation?: (props: TTransition) => JSX.Element
+  TransitionAnimation?: (props: TTransition) => React.JSX.Element
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  PanelTransition?: (props: TTransition) => JSX.Element
+  PanelTransition?: (props: TTransition) => React.JSX.Element
   /**
    * @deprecated Use `onOpenChange` instead
    */

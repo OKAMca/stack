@@ -8,7 +8,6 @@ export interface TShareButtonProps<T = TToken> extends TDefaultComponent<TShareB
   ariaLabel: string
   sharingLinksList: TShareButtonLink[]
   onShare?: (sharingMedium: string) => void
-  offset?: number
 }
 
 interface TShareButtonTokens extends TToken {

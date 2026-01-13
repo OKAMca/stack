@@ -1,3 +1,342 @@
+## 1.7.36 (2026-01-13)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.0.0
+- Updated next-component to 1.2.3
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.35 (2025-11-27)
+
+### 🚀 Features
+
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.4
+- Updated next-component to 1.2.2
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.34 (2025-11-22)
+
+### 🚀 Features
+
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.8
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.33 (2025-11-06)
+
+### 🚀 Features
+
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.7
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.32 (2025-11-01)
+
+### 🚀 Features
+
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 1.2.1
+- Updated directus-next to 1.2.8
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.31 (2025-11-01)
+
+### 🚀 Features
+
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 1.2.0
+- Updated directus-next to 1.2.7
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.30 (2025-11-01)
+
+### 🚀 Features
+
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.6
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.29 (2025-10-31)
+
+### 🚀 Features
+
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.5
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.28 (2025-10-17)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.3
+- Updated next-component to 1.1.5
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.27 (2025-10-14)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.2
+- Updated next-component to 1.1.4
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.26 (2025-10-09)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.1
+- Updated next-component to 1.1.3
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.25 (2025-10-02)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.42.0
+- Updated next-component to 1.1.2
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.24 (2025-09-25)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.2
+- Updated next-component to 1.1.1
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.23 (2025-09-25)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 1.1.0
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.22 (2025-09-04)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.1
+- Updated next-component to 1.0.15
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.21 (2025-08-28)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.41.0
+- Updated next-component to 1.0.14
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
+## 1.7.20 (2025-08-22)
+
+### 🩹 Fixes
+
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.40.1
+- Updated next-component to 1.0.13
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.7.19 (2025-08-11)
 
 ### 🩹 Fixes

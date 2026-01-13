@@ -1,3 +1,38 @@
+## 1.2.8 (2025-11-01)
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 1.2.1
+
+## 1.2.7 (2025-11-01)
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 1.2.0
+
+## 1.2.6 (2025-11-01)
+
+### 🩹 Fixes
+
+- **directus-next:** add next-component as external ([08e39ab](https://github.com/OKAMca/stack/commit/08e39ab))
+- **directus-next:** import createServerContext from next-component instead ([e7637f0](https://github.com/OKAMca/stack/commit/e7637f0))
+- **directus-next:** local use of createServerContext, uninstalled server-only-context ([563bbc0](https://github.com/OKAMca/stack/commit/563bbc0))
+
+### ❤️ Thank You
+
+- poclerson
+
+## 1.2.5 (2025-10-31)
+
+### 🩹 Fixes
+
+- **directus-next:** import from server-only-context using "default as" syntax ([c4bb960](https://github.com/OKAMca/stack/commit/c4bb960))
+- **directus-next:** server-only-context marked as external lib ([6fcd3a6](https://github.com/OKAMca/stack/commit/6fcd3a6))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.2.4 (2025-08-05)
 
 ### 🩹 Fixes
