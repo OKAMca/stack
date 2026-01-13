@@ -1,0 +1,83 @@
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import SkipToMain, { Main } from './'
+import * as SkipToMainStories from './skip-to-main.stories';
+
+<Meta of={SkipToMainStories} />
+
+# SkipToMain
+
+The **SkipToMain** component provides accessible navigation for keyboard users, allowing them to quickly skip repetitive content (like navigation) and jump directly to the main content of the page.
+
+## Components
+
+This module exports two components:
+
+### SkipToMain
+A skip link button that appears on keyboard focus, allowing users to bypass navigation and jump to main content.
+
+### Main
+A main landmark region component that uses react-aria's `useLandmark` hook to enable enhanced keyboard navigation between page landmarks.
+
+## Features
+
+- **Fully accessible**: Uses react-aria's `useLandmark` hook for proper ARIA semantics
+- **Keyboard navigation**: Supports F6/Shift+F6 to navigate between landmarks, Alt+F6 to jump to main
+- **Visually hidden by default**: The skip link is positioned off-screen and only appears when focused via keyboard
+- **Smooth transitions**: Skip link smoothly slides into view on focus
+- **Themeable**: Integrates with the stack-ui theme system
+- **Flexible**: Accepts custom aria-label and href attributes
+
+## Example
+
+<Canvas>
+  <Story of={SkipToMainStories.Default} />
+</Canvas>
+
+## Usage
+
+```tsx
+import { SkipToMain, Main } from '@okam/stack-ui'
+
+function Layout({ children }) {
+  return (
+    <>
+      <SkipToMain href="#main" ariaLabel="Skip to main content">
+        Skip to main content
+      </SkipToMain>
+      
+      <header>
+        <nav>{/* Navigation items */}</nav>
+      </header>
+      
+      <Main id="main">
+        {children}
+      </Main>
+      
+      <footer>{/* Footer content */}</footer>
+    </>
+  )
+}
+```
+
+## Props
+
+### SkipToMain Props
+- `href` (string): Target anchor for the skip link (default: '#main')
+- `ariaLabel` (string, **required**): Accessible label for screen readers
+- `children` (ReactNode): Button text content
+- All standard `TDefaultComponent` props (themeName, tokens, customTheme)
+
+### Main Props
+- `id` (string): Element ID for skip link target (default: 'main')
+- `as` (ElementType): HTML element to render (default: 'main')
+- `tabIndex` (number): Tab index for focus management (default: -1)
+- `children` (ReactNode): Main content
+- All standard `TDefaultComponent` props (themeName, tokens, customTheme)
+- All `AriaLandmarkProps` from react-aria
+
+## Accessibility
+
+- The **SkipToMain** link should be the first focusable element on the page
+- The **Main** component uses `tabIndex={-1}` to allow programmatic focus without being in the tab order
+- Keyboard users can use F6/Shift+F6 to navigate between landmarks on the page
+- Alt+F6 will jump directly to the main landmark

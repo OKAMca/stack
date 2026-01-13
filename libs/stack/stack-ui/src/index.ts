@@ -5,6 +5,7 @@ export { default as Accordion } from './components/Accordion'
 export { default as AccordionItem } from './components/Accordion/components/AccordionItem'
 export { default as Button, ButtonWithForwardRef, Anchor } from './components/Button'
 export { default as PrintButton } from './components/PrintButton'
+export { default as SkipToMain, Main } from './components/SkipToMain'
 export { default as ShareButton } from './components/ShareButton'
 export { default as SidePanel } from './components/SidePanel'
 export { default as Lightbox } from './components/Lightbox'
@@ -89,6 +90,7 @@ export * as reactHookForm from 'react-hook-form'
 
 // types & interfaces
 export type { TButtonProps, TAnchorProps } from './components/Button/interface'
+export type { TSkipToMainProps, TMainProps } from './components/SkipToMain/interface'
 export type { TTypographyProps } from './components/Typography/interface'
 export type {
   TTheme,

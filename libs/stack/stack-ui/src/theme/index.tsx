@@ -29,6 +29,7 @@ import {
   shareButtonLinksList,
 } from './ShareButton'
 import { sidePanelWrapper, sidePanelContainer, sidePanelInnerContainer } from './SidePanel'
+import { skipToMain } from './SkipToMain'
 import tabListTheme from './TabList'
 import tagGroupTheme from './TagGroup'
 import { textArea } from './TextArea'
@@ -66,6 +67,7 @@ const BaseTheme = makeTheme({
     link: (props) => shareButtonLink(props),
     linkIcons: (props) => shareButtonLinkIcons(props),
   },
+  skipToMain: (props) => skipToMain(props),
   checkbox: {
     container: (props) => checkboxContainer(props),
     label: (props) => checkboxLabel(props),
