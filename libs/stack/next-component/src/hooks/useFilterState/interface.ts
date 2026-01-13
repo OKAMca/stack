@@ -1,11 +1,11 @@
+import type { TDefaultItemComponent, TToken } from '@okam/stack-ui'
 import type { Options, ParserBuilder } from 'nuqs'
 import type { AriaTagGroupProps } from 'react-aria'
-import type { ItemProps, SelectionMode } from 'react-stately'
+import type { SelectionMode } from 'react-stately'
 
 export type TFilterValue = string[]
 
-export type TFilterItem = ItemProps<never> & { key: string }
-
+export type TFilterItem<T extends TToken = TToken> = TDefaultItemComponent<never, T>
 export interface TFilter extends Omit<AriaTagGroupProps<TFilterItem>, 'selectionMode'> {
   id: string
   /**
