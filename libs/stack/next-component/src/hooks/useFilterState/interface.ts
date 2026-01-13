@@ -1,6 +1,6 @@
 import type { Options, ParserBuilder } from 'nuqs'
 import type { AriaTagGroupProps } from 'react-aria'
-import type { ItemProps } from 'react-stately'
+import type { ItemProps, SelectionMode } from 'react-stately'
 
 export type TFilterValue = string[]
 
@@ -14,5 +14,5 @@ export interface TFilter extends Omit<AriaTagGroupProps<TFilterItem>, 'selection
   parser?: ParserBuilder<TFilterValue>
   defaultSelectedKeys?: Exclude<AriaTagGroupProps<object>['defaultSelectedKeys'], 'all'>
   options?: Options
-  selectionMode?: 'multiple' | 'single'
+  selectionMode?: Exclude<SelectionMode, 'none'>
 }
