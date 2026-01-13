@@ -62,9 +62,14 @@ export { default as TabList } from './components/TabList'
 export { TabItem } from './components/TabList/components/TabItem'
 export { default as TabPanel } from './components/TabList/components/TabPanel'
 export { default as Tab } from './components/TabList/components/Tab'
+export {
+  default as ListBox,
+  ControlledListBox,
+  ReactHookFormListBox,
+  ControlledReactHookFormListBox,
+} from './components/fields/ListBox'
 export { default as ComboBox } from './components/fields/ComboBox'
 export { default as ReactHookFormComboBox } from './components/fields/ComboBox'
-export { default as ListBox } from './components/fields/ListBox'
 export { default as ListBoxSection } from './components/fields/ListBox/components/ListBoxSection'
 export { default as Option } from './components/fields/Option'
 export { Node } from './components/Node'
