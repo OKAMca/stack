@@ -15,7 +15,7 @@ export { logger as DirectusNextComponent } from './logger'
 export * from './types'
 export type {
   TDirectusLinkProps,
-  TTDirectusLinkPropsConfig,
+  TDirectusLinkPropsConfig,
   TDirectusLinkComponentsConfig,
 } from './components/DirectusLink/interface'
 export type { TDirectusFileProps } from './components/DirectusFile/interface'
