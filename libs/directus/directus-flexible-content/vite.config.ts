@@ -17,7 +17,7 @@ export default defineConfig({
     nxCopyAssetsPlugin(['*.md']),
     dts({
       entryRoot: 'src',
-      tsConfigFilePath: path.join(__dirname, 'tsconfig.lib.json'),
+      tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
     }),
   ],
 
@@ -44,7 +44,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, '@okam/stack-ui', '@okam/directus-block'],
+      external: [...externalDeps, '@okam/stack-ui', '@okam/directus-block', '@okam/core-lib'],
     },
   },
 })

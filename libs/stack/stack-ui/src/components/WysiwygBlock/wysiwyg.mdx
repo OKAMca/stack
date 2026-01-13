@@ -1,64 +1,18 @@
-import { Canvas, Meta, Story } from '@storybook/blocks'
-import { ArgTypes } from '@storybook/blocks'
-import WysiwygBlock from './'
-import * as WysiwygStories from './wysiwyg.stories';
+import { Canvas, Meta, Story, Stories, ArgTypes, Description } from '@storybook/blocks'
+import * as WysiwygStories from './wysiwyg.stories'
 
 <Meta of={WysiwygStories} />
 
-export const Template = (args) => {
-  return <WysiwygBlock {...args} />
-}
-
 # Wysiwyg Block
+
+<Description of={WysiwygStories} />
 
 #### Wysiwyg Block. Can be used in CMS to insert HTML elements as text with certain attributes (h1, h2, h3, link with target, etc.)
 
 ## Props
 
-<ArgTypes />
+<ArgTypes of={WysiwygStories} />
 
-## Showcase
+## All Stories
 
-### Wysiwyg Block link with target \_self
-
-<Canvas>
-  <Story of={WysiwygStories.LinkWithTargetSelf} />
-</Canvas>
-
-### Wysiwyg Block link with target \_blank
-
-<Canvas>
-  <Story of={WysiwygStories.LinkWithTargetBlank} />
-</Canvas>
-
-### Wysiwyg Block with tailwind styles
-
-<Canvas>
-  <Story of={WysiwygStories.WithTailwindStyles} />
-</Canvas>
-
-### Wysiwyg Block with style tag
-
-<Canvas>
-  <Story of={WysiwygStories.WithStyleTag} />
-</Canvas>
-
-### Wysiwyg Block with aria attributes
-
-<Canvas>
-  <Story of={WysiwygStories.WithAriaAttributes} />
-</Canvas>
-
-<Canvas>
-  <Story of={WysiwygStories.YoutubeEmbedVideoIframe} />
-</Canvas>
-
-<Canvas>
-  <Story of={WysiwygStories.WebsiteWithScrolling} />
-</Canvas>
-
-### Wysiwyg Block with image tag
-
-<Canvas>
-  <Story of={WysiwygStories.WithImageTag} />
-</Canvas>
+<Stories />

@@ -12,6 +12,7 @@ const SelectContent = ({
   label,
   name,
   placeholderLabel,
+  options,
   ...rest
 }: TSelectProps) => {
   const [value, setValue] = useState<Nullable<string>>()
@@ -47,15 +48,12 @@ const SelectContent = ({
         errorMessage={errorMessage}
         {...rest}
         onSelectionChange={(key) => {
-          setValue(key.toString())
+          if (key !== null) {
+            setValue(key.toString())
+          }
         }}
         value={value}
-        options={[
-          { key: '1', value: 'Option 1' },
-          { key: '2', value: 'Option 2' },
-          { key: '3', value: 'Option 3' },
-          { key: '4', value: 'Option 4' },
-        ]}
+        options={options}
       />
     </>
   )

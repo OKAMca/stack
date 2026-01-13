@@ -1,17 +1,27 @@
+'use client'
+
 import { isSameDay, getDayOfWeek } from '@internationalized/date'
-import { useCalendarCell } from '@react-aria/calendar'
 import { useFocusRing } from '@react-aria/focus'
 import { mergeProps } from '@react-aria/utils'
-import type { RangeCalendarState } from '@react-stately/calendar'
 import { useRef } from 'react'
-import { useLocale } from 'react-aria'
-import useThemeContext from '../../../providers/Theme/hooks'
+import { useCalendarCell, useLocale } from 'react-aria'
+import type { RangeCalendarState } from 'react-stately'
+import Box, { BoxWithForwardRef } from '../../Box'
 import type { TCalendarCellProps } from '../interface'
 
-function CalendarCell({ themeName = 'calendar', tokens, state, date }: TCalendarCellProps) {
+function CalendarCell(props: TCalendarCellProps) {
+  const { themeName = 'calendar', tokens, state, date } = props
   const ref = useRef(null)
-  const { cellProps, buttonProps, isSelected, isOutsideVisibleRange, isDisabled, formattedDate, isInvalid } =
-    useCalendarCell({ date }, state, ref)
+  const {
+    isUnavailable,
+    cellProps,
+    buttonProps,
+    isSelected,
+    isOutsideVisibleRange,
+    isDisabled,
+    formattedDate,
+    isInvalid,
+  } = useCalendarCell(props, state, ref)
 
   // The start and end date of the selected range will have
   // an emphasized appearance.
@@ -31,30 +41,36 @@ function CalendarCell({ themeName = 'calendar', tokens, state, date }: TCalendar
 
   const { focusProps, isFocusVisible } = useFocusRing()
 
-  const cellContainerTheme = useThemeContext(`${themeName}.cellContainer`, { ...tokens, isFocusVisible })
-  const cellTheme = useThemeContext(`${themeName}.cell`, {
-    ...tokens,
-    isSelected,
+  const calendarCellTokens = {
     isInvalid,
     isDisabled,
-    isRoundedLeft,
-    isRoundedRight,
-  })
-  const cellDate = useThemeContext(`${themeName}.cellDate`, {
-    ...tokens,
+    isUnavailable,
     isSelected,
-    isInvalid,
-    isDisabled,
-    isSelectionStart,
-    isSelectionEnd,
-  })
+    isFocusVisible,
+    isOutsideVisibleRange,
+    ...tokens,
+  }
 
   return (
-    <td {...cellProps} aria-disabled={false} className={cellContainerTheme}>
-      <div {...mergeProps(buttonProps, focusProps)} ref={ref} hidden={isOutsideVisibleRange} className={cellTheme}>
-        <div className={cellDate}>{formattedDate}</div>
-      </div>
-    </td>
+    <Box
+      as="td"
+      {...cellProps}
+      aria-disabled={false}
+      themeName={`${themeName}.cellContainer`}
+      tokens={calendarCellTokens}
+    >
+      <BoxWithForwardRef
+        {...mergeProps(buttonProps, focusProps)}
+        ref={ref}
+        aria-hidden={isOutsideVisibleRange}
+        themeName={`${themeName}.cell`}
+        tokens={{ ...calendarCellTokens, isRoundedLeft, isRoundedRight }}
+      >
+        <Box themeName={`${themeName}.cellDate`} tokens={{ ...calendarCellTokens, isSelectionStart, isSelectionEnd }}>
+          {formattedDate}
+        </Box>
+      </BoxWithForwardRef>
+    </Box>
   )
 }
 

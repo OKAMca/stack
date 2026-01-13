@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Box,
   Button,
@@ -8,7 +10,7 @@ import {
   Icon,
   Lightbox,
   ArrowRight,
-  Popover,
+  PopoverButton,
   ShareButton,
   SidePanel,
   Typography,
@@ -17,11 +19,17 @@ import {
   TextInputField,
   Select,
 } from '@okam/stack-ui'
+
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRef } from 'react'
 import SidePanelControl from './components/SidePanelControl'
 
-export default async function Index() {
+export default function Index() {
+  const targetRef = useRef(null)
+  const overlayRef = useRef(null)
+
   return (
     <div>
       <div className="flex flex-col gap-16 p-8">
@@ -35,6 +43,28 @@ export default async function Index() {
           </Box>
         </Box>
 
+        <div className="mb-8 p-4 bg-blue-50 rounded-lg shadow">
+          <Typography tokens={{ size: 'h3' }}>Demo Pages</Typography>
+          <ul className="list-disc pl-8">
+            <li className="mb-2">
+              <Link href="/metadata-demo" className="text-blue-600 hover:underline">
+                Metadata Hook Demo
+              </Link>
+              <span className="ml-2 text-sm text-gray-600">- Demonstrates how to use the useMetadata hook</span>
+            </li>
+            <li className="mb-2">
+              <Link
+                href="/directus-next-component/directus-link/search-params/a3f81e37-44dc-4f2a-bcc0-8aa9a7403a88"
+                className="text-blue-600 hover:underline"
+              >
+                Directus Link Search Params Demo
+              </Link>
+              <span className="ml-2 text-sm text-gray-600">
+                - Demonstrates the appending of directus search params via link.params fielddocs to the link
+              </span>
+            </li>
+          </ul>
+        </div>
         <Select
           id="season"
           label="Select a season"
@@ -79,13 +109,23 @@ export default async function Index() {
             </Lightbox>
           </Box>
           <Box>
-            <Popover placement="bottom start" offset={0} buttonProps={{}}>
-              <div>This is a popover</div>
-            </Popover>
+            <PopoverButton
+              as="span"
+              label="Open popover"
+              placement="bottom start"
+              offset={0}
+              shouldCloseOnInteractOutside={() => false}
+              isKeyboardDismissDisabled
+              targetRef={targetRef}
+              overlayRef={overlayRef}
+              type="dialog"
+            >
+              <Typography>This is a popover</Typography>
+            </PopoverButton>
           </Box>
           <Box>
             <ShareButton
-              id="share-button"
+              id="share-buttons"
               ariaLabel="Share stuff"
               sharingLinksList={[{ ariaLabel: 'Share on Facebook', icon: 'Facebook', key: 'facebook' }]}
             />

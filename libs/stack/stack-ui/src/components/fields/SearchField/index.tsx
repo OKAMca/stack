@@ -1,6 +1,7 @@
 'use client'
 
-import React from 'react'
+import { Box } from '@okam/stack-ui'
+import React, { useCallback } from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
@@ -12,48 +13,83 @@ import Search from '../../icons/Search'
 import Typography from '../../Typography'
 import type TSearchProps from './interface'
 
+const BuiltinIcon = ({ value }: { value: string }) => {
+  if (value === '') {
+    return <Search width="16" height="16" />
+  }
+
+  return <Close width="16" height="16" />
+}
+
 const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
   const { setUserSearchQuery } = useUserQueryValHook()
-  const { label, themeName = 'search', tokens, customTheme, disabled, errorMessage, placeholder } = props
-  const state = useSearchFieldState(props)
-  setUserSearchQuery(state.value)
+  const {
+    label,
+    themeName = 'search',
+    tokens,
+    customTheme,
+    disabled,
+    errorMessage,
+    placeholder,
+    icon,
+    isDisabled,
+  } = props
+  const internalIsDisabled = isDisabled || disabled
+  const internalProps = { ...props, isDisabled: internalIsDisabled }
+  const state = useSearchFieldState(internalProps)
   const ref = React.useRef(null)
-  const { labelProps, inputProps, errorMessageProps, clearButtonProps } = useSearchField(props, state, ref)
+  const { labelProps, inputProps, errorMessageProps, clearButtonProps } = useSearchField(internalProps, state, ref)
 
-  const searchTokens = { ...tokens, isError: errorMessage != null }
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setUserSearchQuery(state.value)
+      inputProps.onChange?.(e)
+    },
+    [setUserSearchQuery, state.value, inputProps],
+  )
 
-  const wrapperTheme = useThemeContext(`${themeName}.wrapper`, searchTokens, customTheme)
+  const isError = errorMessage != null
+
+  const searchTokens = { ...tokens, isError, isDisabled: internalIsDisabled ?? false }
+
   const inputTheme = useThemeContext(`${themeName}.input`, searchTokens, customTheme)
-  const labelTheme = useThemeContext(`${themeName}.label`, searchTokens, customTheme)
-  const containerTheme = useThemeContext(`${themeName}.container`, searchTokens, customTheme)
 
   return (
-    <div className={wrapperTheme} aria-disabled={disabled}>
+    <Box themeName={`${themeName}.wrapper`} tokens={searchTokens} aria-disabled={internalIsDisabled ?? false}>
       {label && (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
-        <label {...labelProps} className={labelTheme}>
+        <Box {...labelProps} as="label" themeName={`${themeName}.label`} tokens={searchTokens}>
           {label}
-        </label>
+        </Box>
       )}
-      <div className={containerTheme}>
-        <input ref={ref} {...inputProps} placeholder={placeholder} className={inputTheme} disabled={disabled} />
+      <Box themeName={`${themeName}.container`} tokens={searchTokens}>
+        <input
+          ref={ref}
+          {...inputProps}
+          onChange={handleChange}
+          placeholder={placeholder}
+          className={inputTheme}
+          disabled={internalIsDisabled}
+        />
         <FocusRing focusRingClass="has-focus-ring">
           <Button
+            isDisabled={internalIsDisabled}
             handlePress={clearButtonProps.onPress}
-            tokens={{ isIconOnly: true, buttonStyle: 'hollow' }}
+            tokens={{ isIconOnly: true, buttonStyle: 'hollow', isDisabled: internalIsDisabled ?? false }}
             themeName={`${themeName}.icon`}
             aria-label="clear"
           >
-            {state.value === '' ? <Search width="16" height="16" /> : <Close width="16" height="16" />}
+            {icon == null && <BuiltinIcon value={state.value} />}
+            {icon != null && icon}
           </Button>
         </FocusRing>
-      </div>
+      </Box>
       {errorMessage && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={searchTokens} {...errorMessageProps}>
           {errorMessage}
         </Typography>
       )}
-    </div>
+    </Box>
   )
 }
 

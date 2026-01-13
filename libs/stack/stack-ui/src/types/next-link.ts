@@ -6,10 +6,12 @@ export type NextLinkProps = {
   scroll?: boolean
   shallow?: boolean
   passHref?: boolean
-  prefetch?: boolean
+  // Updated for Next.js 15: prefetch now supports 'auto' and 'unstable_forceStale' values
+  prefetch?: 'auto' | 'unstable_forceStale' | boolean | null
   locale?: string | false
   legacyBehavior?: boolean
   onMouseEnter?: React.MouseEventHandler<HTMLAnchorElement>
   onTouchStart?: React.TouchEventHandler<HTMLAnchorElement>
   onClick?: React.MouseEventHandler<HTMLAnchorElement>
+  as?: string | UrlObject
 }
