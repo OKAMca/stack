@@ -20,7 +20,7 @@
   "private": true,
   "dependencies": {
     "@nx/devkit": "20.2.2",
-    "@nx/next": "20.2.2",
+    "@nx/next": "22.3.3",
     "@nx/plugin": "20.2.2",
     "@react-aria/accordion": "^3.0.0-alpha.36",
     "@react-aria/focus": "^3.19.0",
@@ -88,7 +88,7 @@
     "@nx/jest": "20.2.2",
     "@nx/js": "20.2.2",
     "@nx/node": "20.2.2",
-    "@nx/react": "20.2.2",
+    "@nx/react": "22.3.3",
     "@nx/rollup": "20.2.2",
     "@nx/storybook": "20.2.2",
     "@nx/vite": "20.2.2",
