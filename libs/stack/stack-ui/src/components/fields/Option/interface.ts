@@ -7,8 +7,7 @@ import type { TDefaultNode } from '../../../types/react-stately'
 import type { TAnchorProps } from '../../Button/interface'
 
 export interface TOptionProps<I extends object = object, T extends TToken = TToken>
-  extends TDefaultComponent<T>,
-    AriaOptionProps {
+  extends TDefaultComponent<T>, AriaOptionProps {
   state: ListState<I>
   item: TDefaultNode<I>
   /**

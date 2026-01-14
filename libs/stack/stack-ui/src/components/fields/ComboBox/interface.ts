@@ -10,7 +10,8 @@ import type { TButtonProps } from '../../Button/interface'
 export type TFieldReactHookForm<T = TToken> = TReactHookForm & Omit<TDefaultComponent<T>, 'children'>
 
 export interface TComboBoxProps<I extends object = object, T extends TToken = TToken>
-  extends Omit<TFieldReactHookForm<T>, keyof AriaComboBoxOptions<I>>,
+  extends
+    Omit<TFieldReactHookForm<T>, keyof AriaComboBoxOptions<I>>,
     Omit<AriaComboBoxOptions<I & TDefaultNodeComponent<I, T>>, 'inputRef' | 'buttonRef' | 'popoverRef' | 'listBoxRef'>,
     ComboBoxStateOptions<I & TDefaultNodeComponent<I, T>> {
   hookFormRef?: RefCallBack

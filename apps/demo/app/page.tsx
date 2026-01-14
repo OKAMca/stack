@@ -23,13 +23,9 @@ import {
 import image from 'libs/stack/stack-ui/static/images/image.png'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRef } from 'react'
 import SidePanelControl from './components/SidePanelControl'
 
 export default function Index() {
-  const targetRef = useRef(null)
-  const overlayRef = useRef(null)
-
   return (
     <div>
       <div className="flex flex-col gap-16 p-8">
@@ -116,8 +112,6 @@ export default function Index() {
               offset={0}
               shouldCloseOnInteractOutside={() => false}
               isKeyboardDismissDisabled
-              targetRef={targetRef}
-              overlayRef={overlayRef}
               type="dialog"
             >
               <Typography>This is a popover</Typography>

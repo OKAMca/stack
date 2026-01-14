@@ -1,8 +1,12 @@
-## 1.6.2 (2026-01-13)
+## 1.6.3 (2026-01-14)
 
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- ⚠️  functions starting with "use" should be reserved to react hooks ([68f1f8f](https://github.com/OKAMca/stack/commit/68f1f8f))
 
 ### ⚠️  Breaking Changes
 
@@ -10,7 +14,22 @@
 
 ### 🧱 Updated Dependencies
 
-- Updated stack-ui to 2.0.0
+- Updated stack-ui to 1.44.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
+## 1.6.2 (2026-01-13)
+
+### 🚀 Features
+
+- React 19 + Next.js 15 support ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.43.0
 
 ### ❤️ Thank You
 

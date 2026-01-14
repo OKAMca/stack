@@ -1,4 +1,4 @@
-## 1.2.3 (2026-01-13)
+## 1.2.4 (2026-01-14)
 
 ### 🚀 Features
 
@@ -10,7 +10,21 @@
 
 ### 🧱 Updated Dependencies
 
-- Updated stack-ui to 2.0.0
+- Updated stack-ui to 1.44.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
+## 1.2.3 (2026-01-13)
+
+### 🚀 Features
+
+- React 19 + Next.js 15 support ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.43.0
 
 ### ❤️ Thank You
 

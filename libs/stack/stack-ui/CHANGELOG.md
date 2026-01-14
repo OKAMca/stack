@@ -1,16 +1,35 @@
-# 2.0.0 (2026-01-13)
+## 1.44.0 (2026-01-14)
 
 ### 🚀 Features
 
+- **stack-ui:** listbox react hook form integration ([f79cffc](https://github.com/OKAMca/stack/commit/f79cffc))
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
 
 ### 🩹 Fixes
 
+- **stack-ui:** props order fix ([b129ebe](https://github.com/OKAMca/stack/commit/b129ebe))
+- **stack-ui:** add icon + error icon to text input ([485cd9e](https://github.com/OKAMca/stack/commit/485cd9e))
 - **stack-ui:** typing fixes ([dc7b453](https://github.com/OKAMca/stack/commit/dc7b453))
 
 ### ⚠️  Breaking Changes
 
 - Consumers must now have react and react-dom in their own
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Max Hilland
+- Pierre-Olivier Clerson @poclerson
+
+# 1.43.0 (2026-01-13)
+
+### 🚀 Features
+
+- React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- **stack-ui:** typing fixes ([dc7b453](https://github.com/OKAMca/stack/commit/dc7b453))
 
 ### ❤️ Thank You
 

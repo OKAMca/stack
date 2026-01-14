@@ -1,0 +1,14 @@
+fragment BlockWysiwygs on block_wysiwygs {
+  id
+  content
+  settings {
+    ...BlockSettings
+  }
+}
+
+query BlockWysiwygs($id: ID!) {
+  block_wysiwygs_by_id(id: $id) {
+    ...BlockWysiwygs
+  }
+}
+

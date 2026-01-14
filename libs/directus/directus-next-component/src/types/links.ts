@@ -18,10 +18,10 @@ export interface TLinks {
   type?: Nullable<string>
   collection?: Nullable<TPageSettings>
   file?: Nullable<TFiles>
-  params?: Nullable<Nullable<SearchParams>[]>
+  params?: Nullable<Nullable<TSearchParams>[]>
 }
 
-export interface SearchParams {
+export interface TSearchParams {
   id?: string
   name?: Nullable<string>
   value?: Nullable<string>

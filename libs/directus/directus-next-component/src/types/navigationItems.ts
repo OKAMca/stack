@@ -25,21 +25,17 @@ export type TNavigationItemsBase<Link> = {
   variant?: string | null
 } & Link
 
-export type TNavigationItemsParents<NavigationItems, Link, Depth extends number> = Depth extends never
+export type TNavigationItemsParents<TNavigationItems, Link, Depth extends number> = Depth extends never
   ? TNavigationItemsBase<Link>
   : {
-      parent?: Nullable<TNavigationItemsParents<NavigationItems, Link, Depth>>
+      parent?: Nullable<TNavigationItemsParents<TNavigationItems, Link, Depth>>
     } & TNavigationItemsBase<Link>
 
-export type TNavigationItemsChildren<NavigationItems, Link, Depth extends number> = Depth extends never
+export type TNavigationItemsChildren<TNavigationItems, Link, Depth extends number> = Depth extends never
   ? TNavigationItemsBase<Link>
   : {
-      children?: Nullable<Nullable<TNavigationItemsChildren<NavigationItems, Link, DepthLimit[Depth]>>[]>
+      children?: Nullable<Nullable<TNavigationItemsChildren<TNavigationItems, Link, DepthLimit[Depth]>>[]>
     } & TNavigationItemsBase<Link>
 
-export type TNavigationItems<NavigationItems, Link, Depth extends number> = TNavigationItemsChildren<
-  NavigationItems,
-  Link,
-  Depth
-> &
-  TNavigationItemsParents<NavigationItems, Link, Depth>
+export type TNavigationItems<Items, Link, Depth extends number> = TNavigationItemsChildren<Items, Link, Depth> &
+  TNavigationItemsParents<Items, Link, Depth>
