@@ -1,4 +1,4 @@
-import type { DirectusRouteConfig } from '../../types'
+import type { TDirectusRouteConfig } from '../../types'
 
 /**
  * Validates if a given string is a valid locale from the directus route configuration.
@@ -6,7 +6,7 @@ import type { DirectusRouteConfig } from '../../types'
  * @param config The Directus route configuration containing the locale map
  * @returns The validated locale string, or undefined if invalid
  */
-export function getValidLocale(maybeLocale: string | null | undefined, config: DirectusRouteConfig) {
+export function getValidLocale(maybeLocale: string | null | undefined, config: TDirectusRouteConfig) {
   const locale = Object.values(config.localeMap ?? {}).find((l) => l === maybeLocale)
   return locale
 }
@@ -17,7 +17,7 @@ export function getValidLocale(maybeLocale: string | null | undefined, config: D
  * @param config The Directus route configuration containing the locale map
  * @returns The locale and the pathname without the locale
  */
-export function splitLocaleFromPathname(pathname: string, config: DirectusRouteConfig) {
+export function splitLocaleFromPathname(pathname: string, config: TDirectusRouteConfig) {
   const [, maybeLocale, ...parts] = pathname.split('/')
   const locale = getValidLocale(maybeLocale, config)
   if (locale) {

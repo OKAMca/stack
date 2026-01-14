@@ -1,0 +1,322 @@
+{
+  "archived_from": "@okam/stack React 19 + Next.js 15 Upgrade",
+  "archive_date": "2026-01-14",
+  "completed_phases": {
+    "phase_1_code_fixes": {
+      "description": "Fix React 19 compatibility issues in stack-ui (document any breaking changes)",
+      "status": "COMPLETE",
+      "tasks": [
+        {
+          "id": "fix-button-preventfocusonpress",
+          "file": "libs/stack/stack-ui/src/components/Button/index.tsx",
+          "line": 76,
+          "problem": "preventFocusOnPress prop from react-aria is spread to DOM elements, React 19 rejects unknown props",
+          "current_code": "const { onPress, onFocusChange, excludeFromTabOrder, ...allProps } = rest as Record<string, unknown>",
+          "fix": "Add preventFocusOnPress to destructuring: const { onPress, onFocusChange, excludeFromTabOrder, preventFocusOnPress, ...allProps } = rest",
+          "status": "DONE"
+        },
+        {
+          "id": "fix-uselabelledoverlay-preventfocusonpress",
+          "file": "libs/stack/stack-ui/src/hooks/useLabelledOverlay/index.ts",
+          "line": 22,
+          "problem": "useOverlayTrigger returns preventFocusOnPress in triggerProps, gets spread to consumers",
+          "current_code": "triggerProps: { onPress, ...triggerProps }",
+          "fix": "Also filter preventFocusOnPress: triggerProps: { onPress, preventFocusOnPress, ...triggerProps }",
+          "status": "DONE"
+        },
+        {
+          "id": "fix-combobox-already-done",
+          "file": "libs/stack/stack-ui/src/components/fields/ComboBox/index.tsx",
+          "status": "ALREADY FIXED",
+          "note": "Already filters preventFocusOnPress from buttonProps"
+        },
+        {
+          "id": "fix-popoverbutton-preventfocusonpress",
+          "file": "libs/stack/stack-ui/src/components/Popover/components/Button.tsx",
+          "line": 41,
+          "problem": "useOverlayTrigger returns preventFocusOnPress in triggerProps, only onPress is filtered before spreading to ButtonWithForwardRef",
+          "current_code": "const { onPress, ...triggerButtonProps } = triggerProps",
+          "fix": "Also filter preventFocusOnPress: const { onPress, preventFocusOnPress, ...triggerButtonProps } = triggerProps",
+          "status": "DONE"
+        },
+        {
+          "id": "fix-datepicker-wrapper-preventfocusonpress",
+          "file": "libs/stack/stack-ui/src/components/fields/DatePicker/components/Wrapper.tsx",
+          "line": 35,
+          "problem": "useDatePicker returns buttonProps containing preventFocusOnPress which is spread to Button component",
+          "current_code": "{...buttonProps}",
+          "fix": "Filter preventFocusOnPress before spreading: const { preventFocusOnPress, ...restButtonProps } = buttonProps; then use {...restButtonProps}",
+          "status": "DONE"
+        },
+        {
+          "id": "fix-accordion-preventfocusonpress",
+          "file": "libs/stack/stack-ui/src/components/Accordion/components/AriaAccordionItem.tsx",
+          "line": 25,
+          "problem": "useAccordionItem returns buttonProps that may contain preventFocusOnPress, spread to ButtonWithForwardRef",
+          "current_code": "buttonProps: { onClick: onButtonClick, onKeyDown, onPointerDown, ...buttonProps }",
+          "fix": "Also filter preventFocusOnPress: buttonProps: { onClick: onButtonClick, onKeyDown, onPointerDown, preventFocusOnPress, ...buttonProps }",
+          "status": "DONE"
+        }
+      ]
+    },
+    "phase_2_dependency_upgrades": {
+      "description": "Upgrade dependencies to React 19 compatible versions",
+      "status": "COMPLETE",
+      "tasks": [
+        {
+          "id": "convert-react-to-peer-deps",
+          "description": "Move react and react-dom from dependencies to peerDependencies to support both React 18 and 19",
+          "files": ["libs/stack/stack-ui/package.json"],
+          "changes": {
+            "remove_from_dependencies": ["react", "react-dom"],
+            "add_to_peerDependencies": {
+              "react": "^18.0.0 || ^19.0.0",
+              "react-dom": "^18.0.0 || ^19.0.0"
+            },
+            "add_to_devDependencies": {
+              "react": "^19.0.0",
+              "react-dom": "^19.0.0"
+            }
+          },
+          "notes": "This allows consumers to use either React 18 or 19. devDependencies are for local development/testing.",
+          "status": "DONE"
+        },
+        {
+          "id": "upgrade-types-react",
+          "package": "@types/react",
+          "to": "^19.0.0",
+          "notes": "TypeScript types for React 19. IMPORTANT: Must fix TypeScript errors first before upgrading.",
+          "status": "DONE",
+          "subtasks": [
+            {
+              "id": "fix-jsx-namespace",
+              "description": "Replace JSX.Element with React.JSX.Element in all files",
+              "files": [
+                "libs/stack/stack-ui/src/components/Accordion/components/AccordionItem.tsx:51",
+                "libs/stack/stack-ui/src/components/Carousel/index.tsx:8",
+                "libs/stack/stack-ui/src/components/Menu/interface.ts:14,21",
+                "libs/stack/stack-ui/src/components/SidePanel/interface.ts:11,13",
+                "libs/stack/stack-ui/src/components/TagGroup/components/TagItem.tsx:78",
+                "libs/stack/stack-ui/src/components/Node/index.tsx:149",
+                "libs/stack/stack-ui/src/components/TabList/components/TabItem.tsx:78",
+                "libs/stack/stack-ui/src/providers/Menu/interface.ts:13-15,21-23,29-31",
+                "libs/stack/stack-ui/src/storybook/Menu/Menu.tsx:87,113"
+              ],
+              "status": "DONE"
+            },
+            {
+              "id": "fix-refobject-null",
+              "description": "Update RefObject types to accept null (React 19 change)",
+              "files": [
+                "libs/stack/stack-ui/src/components/Alerts/index.tsx:33",
+                "libs/stack/stack-ui/src/components/Carousel/swiper/useCarouselSlide.tsx:35,46",
+                "libs/stack/stack-ui/src/components/fields/ComboBox/index.tsx:148"
+              ],
+              "status": "DONE",
+              "additional_files_fixed": [
+                "libs/stack/stack-ui/src/hooks/useLabelledOverlay/index.ts:18",
+                "libs/stack/stack-ui/src/components/Carousel/swiper/interface.ts:33,39",
+                "libs/stack/stack-ui/src/components/Popover/interface.ts:31,32",
+                "libs/stack/stack-ui/src/providers/Carousel/interface.ts:27-29",
+                "libs/stack/stack-ui/src/components/Carousel/navigation/interface.ts:13",
+                "libs/stack/stack-ui/src/components/fields/Select/Select.tsx:44"
+              ]
+            },
+            {
+              "id": "fix-element-props-unknown",
+              "description": "Fix child.props which is now 'unknown' in React 19 types",
+              "files": [
+                "libs/stack/stack-ui/src/components/Alerts/components/AlertsItem.tsx:32",
+                "libs/stack/stack-ui/src/components/fields/ComboBox/combo-box.stories.tsx:211,298"
+              ],
+              "status": "DONE",
+              "fix_applied": "Cast ReactElement to ReactElement<Record<string, unknown>> or ReactElement<any> for backward compatibility"
+            },
+            {
+              "id": "fix-react-spring-animated-children",
+              "description": "Fix react-spring animated.div not accepting children prop with React 19 types",
+              "files": [
+                "libs/stack/stack-ui/src/transitions/AccordionTransition.tsx",
+                "libs/stack/stack-ui/src/transitions/ModalTransition.tsx",
+                "libs/stack/stack-ui/src/transitions/RenderWithOpacity.tsx",
+                "libs/stack/stack-ui/src/transitions/RenderWithSlide.tsx",
+                "libs/stack/stack-ui/src/transitions/SidePanelTransition.tsx"
+              ],
+              "status": "DONE",
+              "problem": "Property 'children' does not exist on type AnimatedProps - react-spring types incompatibility with React 19",
+              "fix_applied": "Cast animated.div to React.FC<any> to bypass react-spring type incompatibility with @types/react@19. See https://github.com/pmndrs/react-spring/issues/1572"
+            },
+            {
+              "id": "apply-types-upgrade",
+              "description": "Apply @types/react ^19.0.0 upgrade after all fixes",
+              "status": "DONE"
+            }
+          ]
+        },
+        {
+          "id": "upgrade-types-react-dom",
+          "package": "@types/react-dom",
+          "to": "^19.0.0",
+          "notes": "TypeScript types for React DOM 19",
+          "status": "DONE"
+        },
+        {
+          "id": "upgrade-next",
+          "package": "next",
+          "from": "^14.1.1",
+          "to": "^15.0.0",
+          "notes": "Next.js 15 for React 19 support",
+          "status": "DONE"
+        },
+        {
+          "id": "upgrade-react-aria",
+          "package": "react-aria",
+          "from": "^3.39.0",
+          "to": "^3.45.0",
+          "notes": "Latest version has React 19 ref cleanup support. Note: peerDeps metadata issue causes npm warnings with React 19 stable (github.com/adobe/react-spectrum/issues/9267)",
+          "status": "DONE",
+          "breaking_changes_applied": [
+            "onSelectionChange callback now accepts Key | null (was Key) - updated Select.interface.ts",
+            "Updated all @react-aria/* and @react-stately/* sub-packages to compatible versions",
+            "Filtered id prop in TabPanel to avoid Key type mismatch with TTransition"
+          ]
+        },
+        {
+          "id": "upgrade-react-stately",
+          "package": "react-stately",
+          "from": "^3.37.0",
+          "to": "^3.43.0",
+          "notes": "Latest version for React 19 compatibility",
+          "status": "DONE"
+        },
+        {
+          "id": "upgrade-react-spring",
+          "package": "@react-spring/web",
+          "from": "^9.7.5",
+          "to": "^10.0.3",
+          "notes": "REQUIRED: React 19 support added in 10.0.0 (PR #2368). Fixes 'children' prop TypeScript error with AnimatedProps.",
+          "breaking_changes": "Major version upgrade - test all transitions: AccordionTransition, ModalTransition, RenderWithOpacity, RenderWithSlide, SidePanelTransition",
+          "status": "DONE",
+          "cleanup_performed": "Removed temporary type cast workarounds (AnimatedDiv = animated.div as React.FC<any>) from all 5 transition files - no longer needed with v10's proper React 19 type support"
+        },
+        {
+          "id": "npm-audit-fix",
+          "command": "npm audit fix",
+          "description": "Fix critical security vulnerabilities in dependencies",
+          "summary": "80 vulnerabilities (16 low, 31 moderate, 19 high, 14 critical)",
+          "critical_vulnerabilities": [
+            {
+              "package": "sha.js",
+              "severity": "critical",
+              "issue": "Missing type checks leading to hash rewind",
+              "advisory": "GHSA-95m3-7q98-8xr5"
+            },
+            {
+              "package": "vitest",
+              "severity": "critical",
+              "issue": "Remote Code Execution when accessing malicious website while API server listening",
+              "advisory": "GHSA-9crc-q9x8-hgqq",
+              "note": "Fix requires --force, may install @vitest/coverage-v8@1.6.1 outside stated range"
+            },
+            {
+              "package": "axios",
+              "severity": "high",
+              "issue": "DoS attack through lack of data size check + SSRF/Credential Leakage via Absolute URL",
+              "advisories": ["GHSA-4hjh-wcwx-xvwj", "GHSA-jr5f-v2jv-69x6"]
+            },
+            {
+              "package": "qs",
+              "severity": "high",
+              "issue": "arrayLimit bypass allows DoS via memory exhaustion",
+              "advisory": "GHSA-6rw7-vpxm-498p"
+            },
+            {
+              "package": "radashi",
+              "severity": "moderate",
+              "issue": "Prototype Pollution vulnerability",
+              "advisory": "GHSA-2xv9-ghh9-xc69",
+              "note": "Direct dependency of stack-ui - upgrade to >=12.5.1"
+            },
+            {
+              "package": "@tiptap/extension-link",
+              "severity": "moderate",
+              "issue": "Cross-site Scripting (XSS)",
+              "advisory": "GHSA-vhrc-hgrq-x75r",
+              "note": "Upgrade to >=2.10.4"
+            }
+          ],
+          "notes": "Run after dependency upgrades. Some fixes require --force which may introduce breaking changes (verdaccio, vite-plugin-dts)."
+        }
+      ]
+    },
+    "phase_3_testing": {
+      "description": "Verify all components work with React 19",
+      "status": "COMPLETE",
+      "summary": "Build, Storybook, and component tests all passed"
+    },
+    "phase_5_remaining_libs": {
+      "description": "Upgrade remaining libs to support React 18/19",
+      "status": "COMPLETE",
+      "tasks": [
+        {
+          "id": "fix-directus-flexible-content-types",
+          "file": "libs/directus/directus-flexible-content/src/lib/components/nodes/types.ts",
+          "problem": "JSX.IntrinsicElements and JSX.Element not found in @types/react@19",
+          "fix": "Add import type React from 'react', change JSX.X to React.JSX.X",
+          "status": "DONE"
+        },
+        {
+          "id": "fix-directus-flexible-content-rendernodes",
+          "file": "libs/directus/directus-flexible-content/src/lib/components/RenderNodes/index.tsx",
+          "problem": "JSX namespace + FunctionComponent return type + symbol index type errors",
+          "fix": "Add React import, fix JSX namespace, fix tag type casting",
+          "status": "DONE"
+        },
+        {
+          "id": "convert-core-lib-peer-deps",
+          "file": "libs/stack/core-lib/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE"
+        },
+        {
+          "id": "convert-next-component-peer-deps",
+          "file": "libs/stack/next-component/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE",
+          "additional_fixes": [
+            "Fixed Next.js 15 Params type import - changed from internal path 'next/dist/shared/lib/router/utils/route-matcher' to local type definition",
+            "Updated stack-ui NextLinkProps type to support Next.js 15 prefetch values ('auto' | 'unstable_forceStale')"
+          ]
+        },
+        {
+          "id": "convert-directus-query-peer-deps",
+          "file": "libs/directus/directus-query/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE"
+        },
+        {
+          "id": "convert-directus-block-peer-deps",
+          "file": "libs/directus/directus-block/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE"
+        },
+        {
+          "id": "convert-directus-next-component-peer-deps",
+          "file": "libs/directus/directus-next-component/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE",
+          "additional_fixes": [
+            "Updated @react-spring/web from ^9.7.5 to ^10.0.3",
+            "Fixed Next.js 15 async draftMode() in directus-next/src/draft/route.ts"
+          ]
+        },
+        {
+          "id": "convert-directus-flexible-content-peer-deps",
+          "file": "libs/directus/directus-flexible-content/package.json",
+          "change": "Move react from dependencies to peerDependencies (^18.0.0 || ^19.0.0)",
+          "status": "DONE"
+        }
+      ]
+    }
+  }
+}

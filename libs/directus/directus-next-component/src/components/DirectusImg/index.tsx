@@ -1,13 +1,13 @@
 import { Img } from '@okam/next-component'
 import type { CSSProperties } from 'react'
 import { createPngDataUri } from 'unlazy/thumbhash'
-import useDirectusFile from '../../hooks/directus-file'
+import { getDirectusFile } from '../../utils/getDirectusFile'
 import type { TDirectusImgProps } from './interface'
 
 const DirectusImg = (props: TDirectusImgProps) => {
   const { fit, baseUrl, focal_point_x: focalPointX, focal_point_y: focalPointY, thumbhash, width, height } = props
 
-  const fileProps = useDirectusFile(props, baseUrl, { fit })
+  const fileProps = getDirectusFile(props, baseUrl, { fit })
   if (!fileProps) return null
 
   const hasFocalPoint = !!focalPointX && !!focalPointY && !!width && !!height

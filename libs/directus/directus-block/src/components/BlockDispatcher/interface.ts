@@ -4,8 +4,10 @@ import type React from 'react'
 import type { TAdditionalProps } from '../../types/block'
 import type { TBlockSerializerProps, TBlockSerializerConfig } from '../BlockSerializer/interface'
 
-interface TBaseBlockDispatcherProps<AdditionalProps extends TAdditionalProps = TAdditionalProps>
-  extends Omit<TDefaultComponent, 'children'> {
+interface TBaseBlockDispatcherProps<AdditionalProps extends TAdditionalProps = TAdditionalProps> extends Omit<
+  TDefaultComponent,
+  'children'
+> {
   config?: TBlockSerializerConfig
   defaultVariant?: string
   additionalProps?: AdditionalProps

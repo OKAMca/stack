@@ -59,9 +59,8 @@ const externalDeps = [
   "tailwind-variants",
   "tslib",
   "unlazy",
-  "usehooks-ts"
-  
-
+  "usehooks-ts",
+  "zod"
 ]
 
 export default externalDeps
