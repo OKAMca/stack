@@ -163,7 +163,10 @@ export default async function handleDraftRoute({
   }
 
   if (!success) {
-    return getJsonErrorResponseFunction({ error: error.issues }, 400)
+    return getJsonErrorResponseFunction(
+      { error: error.issues },
+      error.issues[0]?.code === 'custom' ? error.issues[0]?.params?.code : 400,
+    )
   }
 
   const { type, languages, version, enable } = data
