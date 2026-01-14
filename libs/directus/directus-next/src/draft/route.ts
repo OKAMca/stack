@@ -5,7 +5,7 @@
  * @var {string[]} languages List of languages ['en-CA', 'fr-CA']
  * @var {string} type Type of the draft mode, 'path' or 'route'
  * @var {string[]} urls  List of urls ['/page', '/fr/page']. Required if type is 'path'.
- * @var {string[] routes List of route templated rules (not used), {variable} are fetched inside the query string. Required if type is 'route'.
+ * @var {string[]} routes List of route templated rules (not used), {variable} are fetched inside the query string. Required if type is 'route'.
  * @var {string} version Collection Item Version (if empty, graphql use the main version)
  * @var {string} pk User graphql key (not used)
  * @return Response
