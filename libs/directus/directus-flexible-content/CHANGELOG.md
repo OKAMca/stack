@@ -2,7 +2,7 @@
 
 ### 🚀 Features
 
-- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- React 19 + Next.js 15 support ([#369](https://github.com/OKAMca/stack/pull/369))
 - bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
 
 ### 🩹 Fixes
@@ -14,13 +14,9 @@
 - search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
 - select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
 
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
-
 ### 🧱 Updated Dependencies
 
-- Updated stack-ui to 2.0.0
+- Updated stack-ui to 1.43.0
 - Updated directus-block to 1.6.2
 
 ### ❤️ Thank You

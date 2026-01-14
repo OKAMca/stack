@@ -1,0 +1,4 @@
+fragment BlockSettings on block_settings {
+  variant
+  tokens
+}
