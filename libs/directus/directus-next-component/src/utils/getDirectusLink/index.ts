@@ -1,44 +1,96 @@
-import { logger } from '@okam/logger'
-import type { TAnchorProps } from '@okam/stack-ui'
+import type { Nullable, TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
+import { z } from 'zod'
 import type { TDirectusLinkPropsConfig, TGetDirectusLink } from '../../components/DirectusLink/interface'
+import type { TSearchParams } from '../../types/links'
 import { getDirectusFile } from '../getDirectusFile'
 import { getDirectusSearchParams } from '../getDirectusSearchParams'
 
+const absoluteUrlSchema = z.url({ protocol: /^(https?|mailto|tel)$/ })
+const relativeUrlSchema = z.string().regex(/^[/#?]/, {
+  error: (error) => `Invalid href ${error.input}. Must be a valid absolute URL or start with /, # or ?`,
+})
+
+const hrefSchema = z.union([absoluteUrlSchema, relativeUrlSchema]).transform((value) => {
+  try {
+    return new URL(value)
+  } catch (error) {
+    return new URL(value, 'http://localhost')
+  }
+})
+
+function withSearchParams(url: URL, searchParams: URLSearchParams) {
+  searchParams.forEach((value, name) => {
+    url.searchParams.append(name, value)
+  })
+  return url
+}
+
+function getCompleteHref(
+  href: Nullable<string>,
+  params: Nullable<Nullable<TSearchParams>[]>,
+  type: 'relative' | 'absolute',
+) {
+  if (!href) return null
+
+  const searchParams = getDirectusSearchParams(params)
+
+  const url = hrefSchema.parse(href)
+
+  const completeUrl = withSearchParams(url, searchParams)
+
+  if (type === 'relative') {
+    const { origin } = completeUrl
+    if (href.startsWith('#')) {
+      return completeUrl.href.replace(origin, '').substring(1) // Remove leading /
+    }
+    return completeUrl.href.replace(origin, '')
+  }
+  return completeUrl.href
+}
+
 function getFile(props: TGetDirectusLink) {
-  const { file } = props
+  const { file, params } = props
 
   const { filename_download: filenameDownload } = file ?? {}
   const { src } = getDirectusFile(file) ?? {}
 
+  const href = getCompleteHref(src, params, 'absolute')
+
   return {
-    href: src,
+    href: href ?? undefined,
     download: filenameDownload ?? true,
   }
 }
 
 function getCollection(props: TGetDirectusLink) {
-  const { collection, target } = props
+  const { collection, target, params } = props
+
+  const href = getCompleteHref(collection?.translations?.[0]?.path, params, 'relative')
 
   return {
-    href: collection?.translations?.[0]?.path ?? undefined,
+    href: href ?? undefined,
     target: target ?? undefined,
   }
 }
 
 function getExternalLink(props: TGetDirectusLink) {
-  const { external_link: externalLink, target } = props
+  const { external_link: externalLink, target, params } = props
+
+  const href = getCompleteHref(externalLink, params, 'absolute')
 
   return {
-    href: externalLink ?? undefined,
+    href: href ?? undefined,
     target: target ?? undefined,
   }
 }
 
 function getAnchor(props: TGetDirectusLink) {
-  const { anchor } = props
+  const { anchor, params } = props
 
-  return { href: anchor ?? undefined }
+  const href = getCompleteHref(anchor, params, 'relative')
+
+  return { href: href ?? undefined }
 }
 
 const defaultPropsConfig: TDirectusLinkPropsConfig = {
@@ -71,8 +123,6 @@ export function getDirectusLink(props: TGetDirectusLink): TAnchorProps {
     ...rest
   } = props
 
-  const searchParams = getDirectusSearchParams(params)
-
   if (!type) return {}
 
   const finalConfig = { ...defaultPropsConfig, ...(propsConfig ?? {}) }
@@ -83,16 +133,6 @@ export function getDirectusLink(props: TGetDirectusLink): TAnchorProps {
 
   if (!href) return {}
 
-  if (!URL.canParse(href)) {
-    logger.log('Invalid href', 'error', { href })
-    return {}
-  }
-
-  const hrefUrl = new URL(href)
-  searchParams.forEach((value, name) => {
-    hrefUrl.searchParams.append(name, value)
-  })
-
   return {
     ...rest,
     as,
@@ -100,12 +140,12 @@ export function getDirectusLink(props: TGetDirectusLink): TAnchorProps {
     ...(customTheme ? { customTheme } : {}),
     ...(tokens ? { tokens } : {}),
     nextLinkProps: {
-      href: hrefUrl.toString(),
+      href,
       prefetch: prefetch ?? undefined,
       scroll: scroll ?? undefined,
       replace: replace ?? undefined,
     },
-    href: hrefUrl.toString(),
+    href,
     children: label,
     ...restOfLinkProps,
   }

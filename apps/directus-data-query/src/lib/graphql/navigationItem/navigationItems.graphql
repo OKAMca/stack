@@ -1,0 +1,33 @@
+fragment NavigationItemsBase on navigation_items {
+  link {
+    ...Links
+  }
+  variant
+  tokens
+}
+
+fragment NavigationItems on navigation_items {
+  link {
+    ...Links
+  }
+  variant
+  tokens
+  children {
+    ...NavigationItemsBase
+    children {
+      ...NavigationItemsBase
+    }
+  }
+  parent {
+    ...NavigationItemsBase
+    parent {
+      ...NavigationItemsBase
+    }
+  }
+}
+
+query NavigationItems($locale: String, $filter: navigation_items_filter = {}) {
+  navigation_items(filter: $filter) {
+    ...NavigationItems
+  }
+}
