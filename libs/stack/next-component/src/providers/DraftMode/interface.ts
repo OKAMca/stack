@@ -1,4 +1,4 @@
-import type { UseMutationOptions, UseMutationResult, UseQueryOptions } from '@tanstack/react-query'
+import type { UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
 import type { ReactNode } from 'react'
 
 export interface TDraftModeProviderProps {
@@ -8,7 +8,6 @@ export interface TDraftModeProviderProps {
    * The duration of the draft mode cookie in days
    */
   cookieDuration?: number
-  queryOptions?: UseQueryOptions<TDraftModeStatus, Error, TDraftModeStatus, ['draftMode']>
   mutationOptions?: UseMutationOptions<TDraftModeStatus, Error, TDraftModeStatus, ['draftMode']>
 }
 
