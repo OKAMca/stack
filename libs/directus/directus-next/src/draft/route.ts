@@ -39,7 +39,7 @@ const jsonStringsArraySchema = (message: string, code: number) =>
         return zod.NEVER
       }
     })
-    .pipe(zod.array(zod.string(), { error: () => ({ message, errorCode: code }) }))
+    .pipe(zod.array(zod.string(), { error: () => ({ message }) }))
 
 const languagesSchema = jsonStringsArraySchema('Invalid languages argument', 400)
 
