@@ -8,8 +8,7 @@ import type { TSwiperProps } from '../interface'
 type SlideData = ReturnType<typeof useSwiperSlide>
 
 export interface TCarouselSlideProps
-  extends Omit<TDefaultComponent, 'children'>,
-    Omit<SwiperSlideProps, 'children' | 'content'> {
+  extends Omit<TDefaultComponent, 'children'>, Omit<SwiperSlideProps, 'children' | 'content'> {
   id: string
   ariaLabel?: string
   children?: ReactNode | ((props: SlideData & TDefaultComponent) => ReactNode)
@@ -23,8 +22,10 @@ export interface TCarouselSlideProps
   swiper?: Swiper | undefined
 }
 
-export interface TCarouselSwiperProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends Omit<TDefaultComponent, 'children'> {
+export interface TCarouselSwiperProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps> extends Omit<
+  TDefaultComponent,
+  'children'
+> {
   children?: ((props: TSlideProps) => ReactNode) | ReactElement<TSlideProps> | ReactElement<TSlideProps>[]
 }
 export interface TCarouselSwiper<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps> {
