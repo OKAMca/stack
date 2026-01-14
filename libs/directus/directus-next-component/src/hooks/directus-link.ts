@@ -41,7 +41,7 @@ function getCompleteHref(
   if (type === 'relative') {
     const { origin } = completeUrl
     if (href.startsWith('#')) {
-      return completeUrl.href.replace(origin, '').substring(1)
+      return completeUrl.href.replace(origin, '').substring(1) // Remove leading /
     }
     return completeUrl.href.replace(origin, '')
   }
