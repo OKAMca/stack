@@ -1,0 +1,33 @@
+import * as FilterStories from './filter.stories'
+import { Canvas, Meta, Story } from '@storybook/blocks'
+import { Controls } from '@storybook/blocks'
+
+<Meta of={FilterStories} />
+
+# Filter
+
+Filter component. Based on react-stately `useListState` wrapping `useQueryState`, it matches search params to the values selected in the `TagGroup`'s  `Popover`.
+
+## Props
+
+<Controls />
+
+## Showcases
+
+Since Storybook doesn't support `useQueryState` editing the search params, you must view stories on their individual pages. Some features, like controlling the selection from the URL, are not supported in Storybook (even on individual pages). Run the `demo` next app and navigate to `/next-component/filter` to see the features in action.
+
+### Default
+
+[Default](iframe.html?globals=&id=fields-filter--default&viewMode=story)
+
+### Controlled
+
+[Controlled](iframe.html?globals=&id=fields-filter--controlled&viewMode=story)
+
+### Default Selected Keys
+
+[Default Selected Keys](iframe.html?globals=&id=fields-filter--default-selected-keys&viewMode=story)
+
+### Disabled Keys
+
+[Disabled Keys](iframe.html?globals=&id=fields-filter--disabled-keys&viewMode=story)

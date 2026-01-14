@@ -6,7 +6,7 @@ import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
 
-type TTagCollectionElement<I extends object> = CollectionElement<I> & { removeButtonProps?: TButtonProps }
+type TTagCollectionElement<I extends object> = (CollectionElement<I> & { removeButtonProps?: TButtonProps }) | null
 
 export type TTagItem<I extends object> = I & {
   removeButtonProps?: TButtonProps
