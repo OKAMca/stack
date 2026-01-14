@@ -1,0 +1,30 @@
+import type { UseMutationOptions, UseMutationResult } from '@tanstack/react-query'
+import type { ReactNode } from 'react'
+
+export interface TDraftModeProviderProps {
+  children: ReactNode
+  defaultEnabled?: boolean
+  /**
+   * The duration of the draft mode cookie in days
+   */
+  cookieDuration?: number
+  mutationOptions?: UseMutationOptions<TDraftModeStatus, Error, TDraftModeStatus, ['draftMode']>
+}
+
+export type TDraftModeStatus = {
+  isEnabled: boolean
+  /**
+   * The duration of the draft mode cookie in days
+   */
+  cookieDuration?: number
+}
+
+type TDraftModeQueryResult = UseMutationResult<TDraftModeStatus, Error, TDraftModeStatus, ['draftMode']>
+
+export type TDraftModeContext = {
+  setEnabled: (enable: boolean) => void
+  setCookieDuration: (duration: number) => void
+  cookieDuration?: number
+} & TDraftModeStatus & {
+    [Key in keyof TDraftModeQueryResult]: TDraftModeQueryResult[Key]
+  }
