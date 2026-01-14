@@ -15,7 +15,7 @@ export function DraftModeContextProvider(props: TDraftModeProviderProps) {
   const [cookieDuration, setCookieDuration] = useState(defaultCookieDuration) // Default to 1 day
   const router = useRouter()
 
-  const { mutate, mutateAsync, isPending, isError, error, isSuccess, status, reset } = useMutation({
+  const mutation = useMutation({
     mutationKey: ['draftMode'] as const,
     mutationFn: async (params: TDraftModeStatus) => {
       const response = await handleDraftMode({
@@ -33,20 +33,14 @@ export function DraftModeContextProvider(props: TDraftModeProviderProps) {
 
   const value = useMemo(
     () => ({
-      mutate,
-      mutateAsync,
-      isPending,
-      isError,
-      error,
-      isSuccess,
-      status,
-      reset,
+      ...mutation,
       isEnabled,
       setEnabled,
       cookieDuration,
       setCookieDuration,
     }),
-    [isEnabled, cookieDuration, isPending, isError, error, isSuccess, status, mutate, mutateAsync, reset],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isEnabled, cookieDuration, mutation.isPending, mutation.isError, mutation.isSuccess, mutation.status],
   )
 
   return <DraftModeProvider value={value}>{children}</DraftModeProvider>
