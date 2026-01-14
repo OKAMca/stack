@@ -22,8 +22,18 @@ import { NextResponse } from 'next/server'
  */
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export async function POST(request: NextRequest) {
-  const { enable, cookieDuration } = await request.json()
   const draft = await draftMode()
+
+  let enable: boolean | undefined
+  let cookieDuration: number | undefined
+
+  try {
+    const body = await request.json()
+    enable = body.enable
+    cookieDuration = body.cookieDuration
+  } catch {
+    return NextResponse.json({ isEnabled: draft.isEnabled }, { status: 400 })
+  }
 
   // Return current state if enable param is invalid
   if (enable === null || enable === undefined) {

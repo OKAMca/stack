@@ -74,37 +74,22 @@ export default async function AdminBarDemoPage() {
             </Typography>
             <pre className="bg-gray-900 p-2 mt-2 rounded text-xs overflow-auto">
               {`// apps/demo/app/api/draft-mode/route.ts
-                import { draftMode } from 'next/headers'
+                import { draftMode, cookies } from 'next/headers'
                 import type { NextRequest } from 'next/server'
                 import { NextResponse } from 'next/server'
 
                 /**
                  * Draft Mode API Route
-                 *
-                 * This API route handles enabling and disabling draft mode by setting or removing
-                 * the necessary cookies. It's designed to work with the handleDraftMode utility
-                 * from the stack-ui library.
-                 *
-                 * Request format:
-                 * {
-                 *   enable: boolean,        // Whether to enable or disable draft mode
-                 *   cookieDuration?: number // Duration in days, if not provided, the cookie will have the expiration set to the session
-                 * }
-                 *
-                 * Response format:
-                 * {
-                 *   isEnabled: boolean      // The current state of draft mode after the operation
-                 * }
+                 * Request: { enable: boolean, cookieDuration?: number }
+                 * Response: { isEnabled: boolean }
                  */
                 export async function POST(request: NextRequest) {
                     const { enable, cookieDuration } = await request.json()
+                    const draft = await draftMode()
 
-                    // Return current state if enable param is invalid
                     if (enable === null || enable === undefined) {
-                      return NextResponse.json({ isEnabled: draftMode().isEnabled }, { status: 200 })
+                      return NextResponse.json({ isEnabled: draft.isEnabled }, { status: 200 })
                     }
-
-                    const draft = draftMode()
 
                     if (!enable) {
                       draft.disable()
@@ -113,7 +98,6 @@ export default async function AdminBarDemoPage() {
 
                     draft.enable()
 
-                    // Set cookie duration if specified
                     if (!cookieDuration || cookieDuration <= 0) {
                       return NextResponse.json({ isEnabled: true }, { status: 200 })
                     }
@@ -121,13 +105,11 @@ export default async function AdminBarDemoPage() {
                     const cookieStore = await cookies()
                     const draftModeCookie = cookieStore.get('__prerender_bypass')
 
-                    if (!draftModeCookie?.value) {
-                      return NextResponse.json({ isEnabled: true }, { status: 200 })
+                    if (draftModeCookie?.value) {
+                      cookieStore.set('__prerender_bypass', draftModeCookie.value, {
+                        maxAge: cookieDuration * 24 * 60 * 60,
+                      })
                     }
-
-                    cookieStore.set('__prerender_bypass', draftModeCookie.value, {
-                      maxAge: cookieDuration * 24 * 60 * 60, // Convert days to seconds
-                    })
 
                     return NextResponse.json({ isEnabled: true }, { status: 200 })
                 }`}
