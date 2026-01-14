@@ -183,7 +183,7 @@ export default async function handleDraftRoute({
       const path = urls[index] || ''
 
       if (!path) {
-        return getJsonErrorResponse({ error: 'Invalid path' }, 400)
+        return getJsonErrorResponseFunction({ error: 'Invalid path' }, 400)
       }
 
       redirectUrl = path
@@ -192,12 +192,12 @@ export default async function handleDraftRoute({
       const route = routes?.[index] || ''
 
       if (!route) {
-        return getJsonErrorResponse({ error: 'Invalid route' }, 400)
+        return getJsonErrorResponseFunction({ error: 'Invalid route' }, 400)
       }
 
       const pathFromRoute = getPathFromRoute(route, url, index)
       if (!pathFromRoute) {
-        return getJsonErrorResponse({ error: 'Invalid route' }, 400)
+        return getJsonErrorResponseFunction({ error: 'Invalid route' }, 400)
       }
       redirectUrl = pathFromRoute
     }
