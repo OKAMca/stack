@@ -14,8 +14,10 @@ export interface TSwiperProps extends Omit<SwiperProps, 'a11y'> {
 
 export type TSwiperModule = keyof typeof SwiperModules
 
-export interface TLegacyCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends Omit<TCarouselProps, 'children'> {
+export interface TLegacyCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps> extends Omit<
+  TCarouselProps,
+  'children'
+> {
   children: (props: TSlideProps) => ReactNode
   /**
    * @deprecated Call the button in children instead
@@ -28,8 +30,7 @@ export interface TLegacyCarouselProps<TSlideProps extends TCarouselSlideProps = 
 }
 
 export interface TCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends Omit<TSwiperProps, 'children' | 'modules' | 'controller'>,
-    Omit<TDefaultComponent, 'children'> {
+  extends Omit<TSwiperProps, 'children' | 'modules' | 'controller'>, Omit<TDefaultComponent, 'children'> {
   children: ReactNode
   modules?: TSwiperModule[]
   slides: TSlideProps[]

@@ -6,7 +6,8 @@ import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
 
 export interface TPopoverButtonProps<T = TToken>
-  extends TDefaultComponent<T>,
+  extends
+    TDefaultComponent<T>,
     TButtonProps<T>,
     AriaOverlayTriggerProps,
     Omit<AriaPositionProps, 'targetRef' | 'overlayRef'>,
@@ -21,9 +22,7 @@ export interface TPopoverButtonProps<T = TToken>
 }
 
 export interface TPopoverProps<T = TToken>
-  extends TDefaultComponent<T>,
-    Omit<AriaPopoverProps, 'popoverRef' | 'triggerRef'>,
-    FocusScopeProps {
+  extends TDefaultComponent<T>, Omit<AriaPopoverProps, 'popoverRef' | 'triggerRef'>, FocusScopeProps {
   state: OverlayTriggerState
   children: ReactElement | ReactElement[]
   arrow?: ReactElement<SVGProps<SVGSVGElement> & TDefaultComponent<T>>

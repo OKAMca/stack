@@ -16,8 +16,7 @@ export type TTagItem<I extends object> = I & {
 type TTagNode<I extends object> = Omit<Node<I>, 'props'> & { props?: TTagItem<I> & ItemProps<I> }
 
 export interface TTagGroupProps<I extends object, T = TToken>
-  extends Omit<TDefaultComponent<T>, 'children'>,
-    Omit<AriaTagGroupProps<TTagItem<I>>, 'children'> {
+  extends Omit<TDefaultComponent<T>, 'children'>, Omit<AriaTagGroupProps<TTagItem<I>>, 'children'> {
   children: TTagCollectionElement<I> | TTagCollectionElement<I>[] | ((item: TTagItem<I>) => TTagCollectionElement<I>)
   /**
    * Acts as a default for the remove button of all tags. Individual tags `props.item.props.removeButtonProps` take precedence.
@@ -27,8 +26,7 @@ export interface TTagGroupProps<I extends object, T = TToken>
 }
 
 export interface TTagProps<I extends object, T = TToken>
-  extends Omit<TDefaultComponent<T>, 'children'>,
-    Omit<AriaTagProps<TTagItem<I>>, 'item'> {
+  extends Omit<TDefaultComponent<T>, 'children'>, Omit<AriaTagProps<TTagItem<I>>, 'item'> {
   state: ListState<TTagItem<I>>
   item: TTagNode<I>
 }
