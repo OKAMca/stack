@@ -203,12 +203,6 @@ export default async function handleDraftRoute({
     }
   }
 
-  // appending version= to redirect
-  if (redirectUrl && version) {
-    const withParams = redirectUrl.indexOf('?') !== -1
-    redirectUrl = `${redirectUrl}${withParams ? '&' : '?'}version=${encodeURIComponent(version)}`
-  }
-
   const draft = await draftMode()
 
   if (enable === true) {
@@ -222,6 +216,10 @@ export default async function handleDraftRoute({
   // doesn't work if (pk) { res.cookies.set('__draftmode_pk', pk); }
   // redirect generate an error with a mutableCookies from the store, used by draftMode
   if (redirectUrl) {
+    if (version) {
+      const withParams = redirectUrl.indexOf('?') !== -1
+      redirectUrl = `${redirectUrl}${withParams ? '&' : '?'}version=${encodeURIComponent(version)}`
+    }
     redirect(redirectUrl)
   }
   return new Response(JSON.stringify({ isEnabled: draft.isEnabled }), { status: 200 })
