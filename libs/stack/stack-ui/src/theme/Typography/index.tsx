@@ -27,7 +27,7 @@ const typography = tv({
       white: `text-white`,
     },
     isError: {
-      true: 'text-sm text-error py-3',
+      true: 'text-sm text-error',
     },
     align: {
       center: 'text-center',

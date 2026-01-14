@@ -1,3 +1,18 @@
+# 1.43.0 (2026-01-13)
+
+### 🚀 Features
+
+- React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- **stack-ui:** typing fixes ([dc7b453](https://github.com/OKAMca/stack/commit/dc7b453))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Max Hilland
+
 ## 1.42.4 (2025-11-27)
 
 ### 🩹 Fixes
