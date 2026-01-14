@@ -1,3 +1,27 @@
+## 1.2.11 (2026-01-14)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- ⚠️  functions starting with "use" should be reserved to react hooks ([68f1f8f](https://github.com/OKAMca/stack/commit/68f1f8f))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.44.0
+- Updated next-component to 1.2.4
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.2.8 (2025-11-01)
 
 ### 🧱 Updated Dependencies
