@@ -68,7 +68,6 @@ const draftParamsSchema = zod.discriminatedUnion(
     zod
       .object({
         type: zod.literal('route'),
-        secret: zod.string(),
         routes: jsonStringsArraySchema('Invalid routes argument', 400),
         languages: languagesSchema,
       })
