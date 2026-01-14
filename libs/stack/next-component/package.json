@@ -39,7 +39,8 @@
     "react-aria": "^3.39.0",
     "react-stately": "^3.43.0",
     "nuqs": "^2.4.3",
-    "radashi": "^12.3.0"
+    "radashi": "^12.3.0",
+    "server-only": "^0.0.1"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

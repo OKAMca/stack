@@ -16,10 +16,14 @@ export async function handleDraftMode(options: DraftModeOptions | boolean) {
       body: JSON.stringify({ enable, cookieDuration }),
     })
 
+    if (!response.ok) {
+      throw new Error(`Draft mode API returned ${response.status}: ${response.statusText}`)
+    }
+
     const json = await response.json()
     const { isEnabled } = json ?? {}
 
-    if (!isEnabled || typeof isEnabled !== 'boolean') {
+    if (typeof isEnabled !== 'boolean') {
       return { isEnabled: false }
     }
 
