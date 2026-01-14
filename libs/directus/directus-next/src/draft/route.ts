@@ -44,7 +44,6 @@ const jsonStringsArraySchema = (message: string, code: number) =>
 const languagesSchema = jsonStringsArraySchema('Invalid languages argument', 400)
 
 const commonSchema = zod.object({
-  secret: zod.string({ error: () => ({ message: `Invalid secret argument` }) }),
   version: zod.string().optional(),
   enable: zod
     .enum(['true', 'false'])
@@ -52,6 +51,12 @@ const commonSchema = zod.object({
     .optional(),
   pk: zod.string().optional(),
 })
+
+const createSecretSchema = (expectedSecret: string) =>
+  zod.string({ error: () => ({ message: 'Invalid secret argument' }) }).refine((val) => val === expectedSecret, {
+    message: 'Invalid secret argument',
+    params: { code: 401 },
+  })
 
 const draftParamsSchema = zod.discriminatedUnion(
   'type',
@@ -82,9 +87,15 @@ const draftParamsSchema = zod.discriminatedUnion(
   { error: () => ({ message: `Invalid type/urls/routes arguments combination` }) },
 )
 
-export function parseDraftParams(url: string) {
+export function parseDraftParams(url: string, expectedSecret: string) {
   const { searchParams } = new URL(url)
   const searchParamsObject = Object.fromEntries(searchParams.entries())
+
+  const secretResult = createSecretSchema(expectedSecret).safeParse(searchParamsObject.secret)
+  if (!secretResult.success) {
+    return secretResult
+  }
+
   const result = draftParamsSchema.safeParse(searchParamsObject)
   return result
 }
@@ -153,13 +164,7 @@ export default async function handleDraftRoute({
 }: HandleDraftOptions): Promise<Response | undefined> {
   const getSecretFunction = getDraftSecret || getDraftSecretDefault
   const getJsonErrorResponseFunction = getJsonError || getJsonErrorResponse
-  const { success, error, data } = parseDraftParams(url)
-
-  const { secret } = data ?? {}
-
-  if (secret !== getSecretFunction() && error?.issues?.some((issue) => issue.path.includes('secret'))) {
-    return getJsonErrorResponseFunction({ error: `Invalid secret argument` }, 401)
-  }
+  const { success, error, data } = parseDraftParams(url, getSecretFunction())
 
   if (!success) {
     return getJsonErrorResponseFunction(
