@@ -1,5 +1,5 @@
 import { log } from '../../logger'
-import type { PageSettingsTranslation } from '../../types'
+import type { TPageSettingsTranslation } from '../../types'
 
 const query = `
   query Languages_code($filter: page_settings_translations_filter) {
@@ -19,7 +19,7 @@ const query = `
   }
 `
 
-export async function fetchPageSettingsTranslation(path: string): Promise<PageSettingsTranslation[] | null> {
+export async function fetchPageSettingsTranslation(path: string): Promise<TPageSettingsTranslation[] | null> {
   const graphqlEndpoint = process.env.NEXT_SERVER_GRAPHQL_URL || process.env.NEXT_PUBLIC_GRAPHQL_URL
   const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
@@ -54,7 +54,7 @@ export async function fetchPageSettingsTranslation(path: string): Promise<PageSe
 
     const { data } = await response.json()
     log('GraphQL response:', data)
-    return data.page_settings_translations as PageSettingsTranslation[]
+    return data.page_settings_translations as TPageSettingsTranslation[]
   } catch (error) {
     log('GraphQL Error:', error)
     return null

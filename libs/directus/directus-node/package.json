@@ -34,6 +34,7 @@
   "dependencies": {
     "@graphql-codegen/cli": "^5.0.3",
     "@okam/logger": "1.1.0",
+    "dotenv": "^16.4.7",
     "@okam/core-lib": "1.17.0"
   }
 }

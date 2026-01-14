@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { directusRouteRouter, type DirectusRouteConfig } from '@okam/directus-next'
+import { directusRouteRouter, type TDirectusRouteConfig } from '@okam/directus-next'
 import type { NextRequest } from 'next/server'
 
-export const directusConfig: DirectusRouteConfig = {
+export const directusConfig: TDirectusRouteConfig = {
   localeMap: {
     'fr-CA': 'fr',
     'en-CA': 'en',

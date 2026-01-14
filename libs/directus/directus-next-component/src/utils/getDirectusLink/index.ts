@@ -1,10 +1,10 @@
 import type { Nullable, TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
 import { z } from 'zod'
-import type { TDirectusLinkPropsConfig, TUseDirectusLink } from '../components/DirectusLink/interface'
-import type { SearchParams } from '../types/links'
-import useDirectusFile from './directus-file'
-import getDirectusSearchParams from './directus-search-params'
+import type { TDirectusLinkPropsConfig, TGetDirectusLink } from '../../components/DirectusLink/interface'
+import type { SearchParams } from '../../types/links'
+import { getDirectusFile } from '../getDirectusFile'
+import { getDirectusSearchParams } from '../getDirectusSearchParams'
 
 const absoluteUrlSchema = z.url({ protocol: /^(https?|mailto|tel)$/ })
 const relativeUrlSchema = z.string().regex(/^[/#?]/, {
@@ -49,11 +49,11 @@ function getCompleteHref(
   return completeUrl.href
 }
 
-function useFile(props: TUseDirectusLink) {
+function getFile(props: TGetDirectusLink) {
   const { file, params } = props
 
   const { filename_download: filenameDownload } = file ?? {}
-  const { src } = useDirectusFile(file) ?? {}
+  const { src } = getDirectusFile(file) ?? {}
 
   const href = getCompleteHref(src, params, 'absolute')
 
@@ -63,7 +63,7 @@ function useFile(props: TUseDirectusLink) {
   }
 }
 
-function useCollection(props: TUseDirectusLink) {
+function getCollection(props: TGetDirectusLink) {
   const { collection, target, params } = props
 
   const href = getCompleteHref(collection?.translations?.[0]?.path, params, 'relative')
@@ -74,7 +74,7 @@ function useCollection(props: TUseDirectusLink) {
   }
 }
 
-function useExternalLink(props: TUseDirectusLink) {
+function getExternalLink(props: TGetDirectusLink) {
   const { external_link: externalLink, target, params } = props
 
   const href = getCompleteHref(externalLink, params, 'absolute')
@@ -85,7 +85,7 @@ function useExternalLink(props: TUseDirectusLink) {
   }
 }
 
-function useAnchor(props: TUseDirectusLink) {
+function getAnchor(props: TGetDirectusLink) {
   const { anchor, params } = props
 
   const href = getCompleteHref(anchor, params, 'relative')
@@ -94,14 +94,14 @@ function useAnchor(props: TUseDirectusLink) {
 }
 
 const defaultPropsConfig: TDirectusLinkPropsConfig = {
-  collection: useCollection,
+  collection: getCollection,
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  'external-link': useExternalLink,
-  file: useFile,
-  anchor: useAnchor,
+  'external-link': getExternalLink,
+  file: getFile,
+  anchor: getAnchor,
 }
 
-export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
+export function getDirectusLink(props: TGetDirectusLink): TAnchorProps {
   const {
     type,
     label,
@@ -150,3 +150,8 @@ export default function useDirectusLink(props: TUseDirectusLink): TAnchorProps {
     ...restOfLinkProps,
   }
 }
+
+/**
+ * @deprecated Use `getDirectusLink` instead
+ */
+export const useDirectusLink = getDirectusLink

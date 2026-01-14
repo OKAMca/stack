@@ -1,6 +1,6 @@
 import { NavigationItemsDocument, NavigationItemsFragmentDoc, useFragment } from '@demo/directus-data-query'
 import type { TDirectusLinkProps, TLinks, TNavigationItems, TNavigationItemsTree } from '@okam/directus-next-component'
-import { useDirectusLink, useNavigationItems } from '@okam/directus-next-component/server'
+import { getDirectusLink, getNavigationItems } from '@okam/directus-next-component/server'
 import { queryGql } from '@okam/directus-query'
 import { Anchor, type Nullable } from '@okam/stack-ui'
 import { isEmpty } from 'radashi'
@@ -12,7 +12,7 @@ const depthMap: Record<number, object> = {
 }
 
 const BrandDirectusLink = (props: TDirectusLinkProps) => {
-  const linkProps = useDirectusLink(props)
+  const linkProps = getDirectusLink(props)
 
   return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline', className: 'text-white', ...linkProps.tokens }} />
 }
@@ -60,7 +60,7 @@ export default async function Index() {
     filter: { parent: { id: { _null: true } } },
   })
   const navigationItems = useFragment(NavigationItemsFragmentDoc, navigationItemsFragment)
-  const navigationTree = useNavigationItems<3, { link?: Nullable<TLinks> }>(
+  const navigationTree = getNavigationItems<3, { link?: Nullable<TLinks> }>(
     navigationItems as Nullable<
       Nullable<
         TNavigationItems<TNavigationItems<unknown, { link?: Nullable<TLinks> }, 3>, { link?: Nullable<TLinks> }, 3>
