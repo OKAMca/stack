@@ -2,21 +2,21 @@
 
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
 import { useQuery } from '@tanstack/react-query'
-import type { QueryOptions, UseQueryResult } from '@tanstack/react-query'
+import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import type { GraphQLClient, Variables } from 'graphql-request'
 import { getQueryValues, queryGql } from '../query'
 
 export function useGqlQuery<TResult, TVariables extends Variables>(
   document: TypedDocumentNode<TResult, TVariables>,
   variables?: TVariables,
-  options?: QueryOptions & { enabled: boolean; useErrorBoundary: boolean },
+  options?: Omit<UseQueryOptions<TResult, Error, TResult>, 'queryKey' | 'queryFn'>,
   client?: GraphQLClient,
-): UseQueryResult<TResult> {
+): UseQueryResult<TResult, Error> {
   const values = getQueryValues<TResult, TVariables>(document, variables)
 
-  return useQuery({
+  return useQuery<TResult, Error, TResult>({
     queryKey: values,
-    queryFn: async ({ queryKey }) => queryGql(document, queryKey[1] as TVariables, client),
+    queryFn: async ({ queryKey }) => queryGql(document, queryKey[1] as TVariables, client) as Promise<TResult>,
     ...options,
   })
 }

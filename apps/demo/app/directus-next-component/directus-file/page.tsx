@@ -11,5 +11,11 @@ export default async function Index() {
     useFragment(DirectusFilesFragmentDoc, file?.directus_files_id),
   )
 
-  return <Box>{files?.map((file) => <DirectusFile key={file?.id} {...file} />)}</Box>
+  return (
+    <Box>
+      {files?.map((file) => (
+        <DirectusFile key={file?.id} {...file} />
+      ))}
+    </Box>
+  )
 }

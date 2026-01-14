@@ -12,9 +12,7 @@ type TCloseButtonProps =
   | FunctionComponent<TButtonProps>
 
 export interface LightboxProps<T = TToken>
-  extends TDefaultComponent<T>,
-    OverlayTriggerProps,
-    Omit<AriaOverlayTriggerProps, 'type'> {
+  extends TDefaultComponent<T>, OverlayTriggerProps, Omit<AriaOverlayTriggerProps, 'type'> {
   closeButtonAriaLabel?: string
   setOpen?: Dispatch<SetStateAction<boolean>>
   closeButton?: TCloseButtonProps

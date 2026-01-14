@@ -18,8 +18,10 @@ export interface TDateSegmentProps extends TDefaultComponent {
   state: DateFieldState
 }
 
-interface TDatePickerBase
-  extends Omit<AriaPopoverProps, 'popoverRef' | 'triggerRef' | 'targetRef' | 'overlayRef' | 'groupRef'> {
+interface TDatePickerBase extends Omit<
+  AriaPopoverProps,
+  'popoverRef' | 'triggerRef' | 'targetRef' | 'overlayRef' | 'groupRef'
+> {
   /**
    * @deprecated Use `placement` instead.
    * @default 'bottom start'
@@ -38,14 +40,10 @@ interface TDatePickerBase
 }
 
 export interface TDatePickerProps<T = TToken>
-  extends DatePickerStateOptions<DateValue>,
-    TDefaultComponent<T>,
-    TDatePickerBase {}
+  extends DatePickerStateOptions<DateValue>, TDefaultComponent<T>, TDatePickerBase {}
 
 export interface TDateRangePickerProps<T = TToken>
-  extends DateRangePickerStateOptions<DateValue>,
-    TDefaultComponent<T>,
-    TDatePickerBase {
+  extends DateRangePickerStateOptions<DateValue>, TDefaultComponent<T>, TDatePickerBase {
   /**
    * @default ' - '
    */
@@ -62,7 +60,8 @@ export interface TCalendarPopoverProps extends Omit<AriaPopoverProps, 'popoverRe
 }
 
 export interface TWrapperProps
-  extends TDefaultComponent,
+  extends
+    TDefaultComponent,
     Pick<DateRangePickerAria | DatePickerAria, 'groupProps' | 'buttonProps'>,
     Pick<TDatePickerBase, 'icon' | 'buttonLabel' | 'buttonContent'> {
   children: ReactNode
