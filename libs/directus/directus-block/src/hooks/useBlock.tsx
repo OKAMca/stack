@@ -1,15 +1,23 @@
+import { defaultGraphqlRequestClient } from '@okam/directus-query'
 import type { Nullable, TToken } from '@okam/stack-ui'
+import { GraphQLClient } from 'graphql-request'
 import { get } from 'radashi'
 import type { TBlockSerializerProps } from '../components/BlockSerializer/interface'
 import { BlockSettingsFragmentDoc } from '../generated/graphql'
 import type { TBlockDocument, TBlockVariables, TCommonBlockFragment } from '../types/block'
 import { getBlockProps, getFragment } from '../utils'
 
+function isClient<Fragment extends TCommonBlockFragment, Variables extends TBlockVariables = TBlockVariables>(
+  docOrClient: Nullable<TBlockDocument<Fragment, Variables> | GraphQLClient>,
+) {
+  return docOrClient instanceof GraphQLClient
+}
+
 /**
  * General function to fetch the block data and its settings. Features the decision-making logic of {@link getBlockProps} that allows blocks to work with both passed props and queried props.
  * @param props Props of the block component. Pass props directly from the block component.
  * @param blockKey Key of the block data in the GraphQL document. Allows mapping props regardless of the block's collection name. Usually the block's collection name with `_by_id` appended since most queries are made by id.
- * @param doc Alternative for passing the GraphQL document to the block component. If not passed, the document will be retrieved from the block's props or config.
+ * @param docOrClient Client to pass to `queryGql`. Defaults to `defaultGraphqlRequestClient`. **Deprecated**: can also be a fallback for `props.document`.
  * @returns The block data and its settings.
  *
  * @example
@@ -22,24 +30,53 @@ import { getBlockProps, getFragment } from '../utils'
  * }
  * ```
  */
-export default async function useBlock<
+export async function useBlock<
   Fragment extends TCommonBlockFragment,
   Variables extends TBlockVariables = TBlockVariables,
 >(
   props: TBlockSerializerProps<Fragment, Variables>,
   blockKey: string,
-  doc?: TBlockDocument<Fragment, Variables>,
-): Promise<Fragment & { cmsTokens: TToken }> {
-  const item = get<Nullable<Fragment>>(props, 'item')
-  const document = doc ?? get<TBlockDocument<Fragment, Variables>>(props, 'document')
-  const variables = get<TBlockVariables<Variables>>(props, 'variables')
+  /**
+   * @default defaultGraphqlRequestClient
+   */
+  client?: GraphQLClient,
+): Promise<Fragment & { cmsTokens: TToken }>
 
-  const propsWithFallback = await getBlockProps({
-    item,
-    blockKey,
-    document,
-    variables,
-  })
+export async function useBlock<
+  Fragment extends TCommonBlockFragment,
+  Variables extends TBlockVariables = TBlockVariables,
+>(
+  props: TBlockSerializerProps<Fragment, Variables>,
+  blockKey: string,
+  /**
+   * @deprecated Use props.document instead
+   */
+  doc?: TBlockDocument<Fragment, Variables>,
+): Promise<Fragment & { cmsTokens: TToken }>
+
+export async function useBlock<
+  Fragment extends TCommonBlockFragment,
+  Variables extends TBlockVariables = TBlockVariables,
+>(
+  props: TBlockSerializerProps<Fragment, Variables>,
+  blockKey: string,
+  docOrClient: TBlockDocument<Fragment, Variables> | GraphQLClient = defaultGraphqlRequestClient,
+): Promise<Fragment & { cmsTokens: TToken }> {
+  const item = get<Nullable<TCommonBlockFragment>>(props, 'item')
+  const isPropClient = isClient(docOrClient)
+
+  const document = get<TBlockDocument<Fragment, Variables>>(props, 'document')
+  const variables = get<Variables>(props, 'variables')
+
+  const propsWithFallback = await getBlockProps(
+    {
+      item,
+      blockKey,
+      document: document ?? (!isPropClient ? docOrClient : undefined),
+      variables,
+    },
+    isPropClient ? docOrClient : undefined,
+  )
 
   const { tokens } = getFragment(BlockSettingsFragmentDoc, propsWithFallback?.settings) ?? {}
   return { ...(propsWithFallback as Fragment), cmsTokens: tokens }

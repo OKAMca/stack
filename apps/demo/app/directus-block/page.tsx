@@ -1,9 +1,16 @@
+import { blockWysiwygConfig } from '@okam/directus-block'
 import { BlockDispatcher, BlockSerializer } from '@okam/directus-block/server'
 import { Box } from '@okam/stack-ui'
+import { BlockWysiwygsDocument } from 'apps/directus-data-query/src'
 
 export default function Index() {
   return (
     <BlockDispatcher
+      config={{
+        components: {
+          block_wysiwygs: { document: BlockWysiwygsDocument, ...blockWysiwygConfig.block_wysiwygs },
+        },
+      }}
       blocks={[
         {
           item: {
@@ -12,19 +19,19 @@ export default function Index() {
             title: 'Title',
             level: 'h2',
           },
-          collection: 'block_wysiwyg',
+          collection: 'block_wysiwygs',
         },
         {
           item: {
-            id: 'passing only item.id for querying works',
+            id: '4192cbb8-dbf8-4947-addb-469c0fac4f25',
           },
-          collection: 'block_wysiwyg',
+          collection: 'block_wysiwygs',
         },
         {
           variables: {
-            id: 'passing only variables works',
+            id: 'b03789bb-2c0d-4160-be6a-ac49f67f7c61',
           },
-          collection: 'block_wysiwyg',
+          collection: 'block_wysiwygs',
         },
       ]}
     >
