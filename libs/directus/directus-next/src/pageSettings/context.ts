@@ -3,9 +3,10 @@
 import 'server-only'
 import { createServerContext } from '@okam/next-component/server'
 import type { Variables } from 'graphql-request'
-import type { TPageSettingsQueryItem, TUsePageSettingsReturn } from './interface'
+import type { TPageSettingsQueryItem } from '../types/pageSettings'
+import type { TGetPageSettingsReturn } from './interface'
 
-export function pageSettingsContext<Item extends TPageSettingsQueryItem>(defaultValue?: TUsePageSettingsReturn<Item>) {
+export function pageSettingsContext<Item extends TPageSettingsQueryItem>(defaultValue?: TGetPageSettingsReturn<Item>) {
   const [pageSettings, setPageSettings] = createServerContext(defaultValue)
 
   return [pageSettings, setPageSettings] as const

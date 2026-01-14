@@ -1,3 +1,5 @@
+export * from './utils'
+
 export type { BlockSettingsFragment } from './generated/graphql'
 
 // Types

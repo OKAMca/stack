@@ -3,9 +3,10 @@ import type { Nullable, TToken } from '@okam/stack-ui'
 import { GraphQLClient } from 'graphql-request'
 import { get } from 'radashi'
 import type { TBlockSerializerProps } from '../components/BlockSerializer/interface'
+import { useFragment as getFragment } from '../generated/fragment-masking'
 import { BlockSettingsFragmentDoc } from '../generated/graphql'
 import type { TBlockDocument, TBlockVariables, TCommonBlockFragment } from '../types/block'
-import { getBlockProps, getFragment } from '../utils'
+import getBlockProps from './getBlockProps'
 
 function isClient<Fragment extends TCommonBlockFragment, Variables extends TBlockVariables = TBlockVariables>(
   docOrClient: Nullable<TBlockDocument<Fragment, Variables> | GraphQLClient>,
@@ -25,12 +26,12 @@ function isClient<Fragment extends TCommonBlockFragment, Variables extends TBloc
  * const BlockButtons = (props: TBlockSerializerProps<BlockButtonsFragment>) => {
  *   const key = 'block_buttons_by_id'
  *   const { tokens } = props
- *   const { link, cmsTokens, variant } = await useBlock(props, key)
+ *   const { link, cmsTokens, variant } = await getBlock(props, key)
  *   return <Link {...link} tokens={{ ...tokens, ...cmsTokens, style: variant }} />
  * }
  * ```
  */
-export async function useBlock<
+export async function getBlock<
   Fragment extends TCommonBlockFragment,
   Variables extends TBlockVariables = TBlockVariables,
 >(
@@ -42,7 +43,7 @@ export async function useBlock<
   client?: GraphQLClient,
 ): Promise<Fragment & { cmsTokens: TToken }>
 
-export async function useBlock<
+export async function getBlock<
   Fragment extends TCommonBlockFragment,
   Variables extends TBlockVariables = TBlockVariables,
 >(
@@ -54,7 +55,7 @@ export async function useBlock<
   doc?: TBlockDocument<Fragment, Variables>,
 ): Promise<Fragment & { cmsTokens: TToken }>
 
-export async function useBlock<
+export async function getBlock<
   Fragment extends TCommonBlockFragment,
   Variables extends TBlockVariables = TBlockVariables,
 >(

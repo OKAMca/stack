@@ -13166,11 +13166,11 @@ export type Create_Links_Input = {
   external_link?: InputMaybe<Scalars['String']['input']>;
   file?: InputMaybe<Create_Directus_Files_Input>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  label?: InputMaybe<Scalars['String']['input']>;
+  label: Scalars['String']['input'];
   params?: InputMaybe<Array<InputMaybe<Create_Search_Params_Input>>>;
   sort?: InputMaybe<Scalars['Int']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
+  type: Scalars['String']['input'];
   user_created?: InputMaybe<Create_Directus_Users_Input>;
   user_updated?: InputMaybe<Create_Directus_Users_Input>;
 };
@@ -13191,7 +13191,6 @@ export type Create_Navigation_Input = {
   date_created?: InputMaybe<Scalars['Date']['input']>;
   date_updated?: InputMaybe<Scalars['Date']['input']>;
   id: Scalars['ID']['input'];
-  items?: InputMaybe<Array<InputMaybe<Create_Navigation_Items_Input>>>;
   status?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   user_created?: InputMaybe<Create_Directus_Users_Input>;
@@ -13200,21 +13199,12 @@ export type Create_Navigation_Input = {
 
 export type Create_Navigation_Items_Input = {
   children?: InputMaybe<Array<InputMaybe<Create_Navigation_Items_Input>>>;
-  has_children?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Icon that displays in dropdown menus on website. */
-  icon?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  /** Label to help users. Displays below the link in dropdown nav menus. */
-  label?: InputMaybe<Scalars['String']['input']>;
-  navigation?: InputMaybe<Create_Navigation_Input>;
-  open_in_new_tab?: InputMaybe<Scalars['Boolean']['input']>;
-  page?: InputMaybe<Create_Pages_Input>;
+  link?: InputMaybe<Create_Links_Input>;
   parent?: InputMaybe<Create_Navigation_Items_Input>;
   sort?: InputMaybe<Scalars['Int']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
   tokens?: InputMaybe<Scalars['JSON']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
-  url?: InputMaybe<Scalars['String']['input']>;
   variant?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -16585,12 +16575,12 @@ export type Links = {
   external_link?: Maybe<Scalars['String']['output']>;
   file?: Maybe<Directus_Files>;
   id: Scalars['ID']['output'];
-  label?: Maybe<Scalars['String']['output']>;
+  label: Scalars['String']['output'];
   params?: Maybe<Array<Maybe<Search_Params>>>;
   params_func?: Maybe<Count_Functions>;
   sort?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['String']['output']>;
-  type?: Maybe<Scalars['String']['output']>;
+  type: Scalars['String']['output'];
   user_created?: Maybe<Directus_Users>;
   user_updated?: Maybe<Directus_Users>;
 };
@@ -16807,22 +16797,10 @@ export type Navigation = {
   date_updated?: Maybe<Scalars['Date']['output']>;
   date_updated_func?: Maybe<Datetime_Functions>;
   id: Scalars['ID']['output'];
-  items?: Maybe<Array<Maybe<Navigation_Items>>>;
-  items_func?: Maybe<Count_Functions>;
   status?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Directus_Users>;
   user_updated?: Maybe<Directus_Users>;
-};
-
-
-export type NavigationItemsArgs = {
-  filter?: InputMaybe<Navigation_Items_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
@@ -16858,7 +16836,6 @@ export type Navigation_Aggregated_Count = {
   date_created?: Maybe<Scalars['Int']['output']>;
   date_updated?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  items?: Maybe<Scalars['Int']['output']>;
   status?: Maybe<Scalars['Int']['output']>;
   title?: Maybe<Scalars['Int']['output']>;
   user_created?: Maybe<Scalars['Int']['output']>;
@@ -16873,8 +16850,6 @@ export type Navigation_Filter = {
   date_updated?: InputMaybe<Date_Filter_Operators>;
   date_updated_func?: InputMaybe<Datetime_Function_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
-  items?: InputMaybe<Navigation_Items_Filter>;
-  items_func?: InputMaybe<Count_Function_Filter_Operators>;
   status?: InputMaybe<String_Filter_Operators>;
   title?: InputMaybe<String_Filter_Operators>;
   user_created?: InputMaybe<Directus_Users_Filter>;
@@ -16885,22 +16860,13 @@ export type Navigation_Items = {
   __typename?: 'navigation_items';
   children?: Maybe<Array<Maybe<Navigation_Items>>>;
   children_func?: Maybe<Count_Functions>;
-  has_children?: Maybe<Scalars['Boolean']['output']>;
-  /** Icon that displays in dropdown menus on website. */
-  icon?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  /** Label to help users. Displays below the link in dropdown nav menus. */
-  label?: Maybe<Scalars['String']['output']>;
-  navigation?: Maybe<Navigation>;
-  open_in_new_tab?: Maybe<Scalars['Boolean']['output']>;
-  page?: Maybe<Pages>;
+  link?: Maybe<Links>;
   parent?: Maybe<Navigation_Items>;
   sort?: Maybe<Scalars['Int']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
   tokens?: Maybe<Scalars['JSON']['output']>;
   tokens_func?: Maybe<Count_Functions>;
-  type?: Maybe<Scalars['String']['output']>;
-  url?: Maybe<Scalars['String']['output']>;
   variant?: Maybe<Scalars['String']['output']>;
 };
 
@@ -16915,18 +16881,8 @@ export type Navigation_ItemsChildrenArgs = {
 };
 
 
-export type Navigation_ItemsNavigationArgs = {
-  filter?: InputMaybe<Navigation_Filter>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  page?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
-
-export type Navigation_ItemsPageArgs = {
-  filter?: InputMaybe<Pages_Filter>;
+export type Navigation_ItemsLinkArgs = {
+  filter?: InputMaybe<Links_Filter>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
@@ -16961,21 +16917,12 @@ export type Navigation_Items_Aggregated = {
 export type Navigation_Items_Aggregated_Count = {
   __typename?: 'navigation_items_aggregated_count';
   children?: Maybe<Scalars['Int']['output']>;
-  has_children?: Maybe<Scalars['Int']['output']>;
-  /** Icon that displays in dropdown menus on website. */
-  icon?: Maybe<Scalars['Int']['output']>;
+  color?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
-  /** Label to help users. Displays below the link in dropdown nav menus. */
-  label?: Maybe<Scalars['Int']['output']>;
-  navigation?: Maybe<Scalars['Int']['output']>;
-  open_in_new_tab?: Maybe<Scalars['Int']['output']>;
-  page?: Maybe<Scalars['Int']['output']>;
+  link?: Maybe<Scalars['Int']['output']>;
   parent?: Maybe<Scalars['Int']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
-  title?: Maybe<Scalars['Int']['output']>;
   tokens?: Maybe<Scalars['Int']['output']>;
-  type?: Maybe<Scalars['Int']['output']>;
-  url?: Maybe<Scalars['Int']['output']>;
   variant?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -16989,20 +16936,13 @@ export type Navigation_Items_Filter = {
   _or?: InputMaybe<Array<InputMaybe<Navigation_Items_Filter>>>;
   children?: InputMaybe<Navigation_Items_Filter>;
   children_func?: InputMaybe<Count_Function_Filter_Operators>;
-  has_children?: InputMaybe<Boolean_Filter_Operators>;
-  icon?: InputMaybe<String_Filter_Operators>;
+  color?: InputMaybe<String_Filter_Operators>;
   id?: InputMaybe<String_Filter_Operators>;
-  label?: InputMaybe<String_Filter_Operators>;
-  navigation?: InputMaybe<Navigation_Filter>;
-  open_in_new_tab?: InputMaybe<Boolean_Filter_Operators>;
-  page?: InputMaybe<Pages_Filter>;
+  link?: InputMaybe<Links_Filter>;
   parent?: InputMaybe<Navigation_Items_Filter>;
   sort?: InputMaybe<Number_Filter_Operators>;
-  title?: InputMaybe<String_Filter_Operators>;
   tokens?: InputMaybe<String_Filter_Operators>;
   tokens_func?: InputMaybe<Count_Function_Filter_Operators>;
-  type?: InputMaybe<String_Filter_Operators>;
-  url?: InputMaybe<String_Filter_Operators>;
   variant?: InputMaybe<String_Filter_Operators>;
 };
 
@@ -22694,7 +22634,6 @@ export type Update_Navigation_Input = {
   date_created?: InputMaybe<Scalars['Date']['input']>;
   date_updated?: InputMaybe<Scalars['Date']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  items?: InputMaybe<Array<InputMaybe<Update_Navigation_Items_Input>>>;
   status?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   user_created?: InputMaybe<Update_Directus_Users_Input>;
@@ -22703,21 +22642,12 @@ export type Update_Navigation_Input = {
 
 export type Update_Navigation_Items_Input = {
   children?: InputMaybe<Array<InputMaybe<Update_Navigation_Items_Input>>>;
-  has_children?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Icon that displays in dropdown menus on website. */
-  icon?: InputMaybe<Scalars['String']['input']>;
+  color?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
-  /** Label to help users. Displays below the link in dropdown nav menus. */
-  label?: InputMaybe<Scalars['String']['input']>;
-  navigation?: InputMaybe<Update_Navigation_Input>;
-  open_in_new_tab?: InputMaybe<Scalars['Boolean']['input']>;
-  page?: InputMaybe<Update_Pages_Input>;
+  link?: InputMaybe<Update_Links_Input>;
   parent?: InputMaybe<Update_Navigation_Items_Input>;
   sort?: InputMaybe<Scalars['Int']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
   tokens?: InputMaybe<Scalars['JSON']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
-  url?: InputMaybe<Scalars['String']['input']>;
   variant?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -23965,7 +23895,6 @@ export type Version_Navigation = {
   date_created?: Maybe<Scalars['Date']['output']>;
   date_updated?: Maybe<Scalars['Date']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  items?: Maybe<Scalars['JSON']['output']>;
   status?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   user_created?: Maybe<Scalars['JSON']['output']>;
@@ -23975,21 +23904,12 @@ export type Version_Navigation = {
 export type Version_Navigation_Items = {
   __typename?: 'version_navigation_items';
   children?: Maybe<Scalars['JSON']['output']>;
-  has_children?: Maybe<Scalars['Boolean']['output']>;
-  /** Icon that displays in dropdown menus on website. */
-  icon?: Maybe<Scalars['String']['output']>;
+  color?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
-  /** Label to help users. Displays below the link in dropdown nav menus. */
-  label?: Maybe<Scalars['String']['output']>;
-  navigation?: Maybe<Scalars['JSON']['output']>;
-  open_in_new_tab?: Maybe<Scalars['Boolean']['output']>;
-  page?: Maybe<Scalars['JSON']['output']>;
+  link?: Maybe<Scalars['JSON']['output']>;
   parent?: Maybe<Scalars['JSON']['output']>;
   sort?: Maybe<Scalars['Int']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
   tokens?: Maybe<Scalars['JSON']['output']>;
-  type?: Maybe<Scalars['String']['output']>;
-  url?: Maybe<Scalars['String']['output']>;
   variant?: Maybe<Scalars['String']['output']>;
 };
 
@@ -24815,7 +24735,7 @@ export type BlockFilesQuery = { __typename?: 'Query', block_files_by_id?: { __ty
 
 export type SearchParamsFragment = { __typename?: 'search_params', id: string, name?: string | null, value?: string | null } & { ' $fragmentName'?: 'SearchParamsFragment' };
 
-export type LinksFragment = { __typename?: 'links', anchor?: string | null, external_link?: string | null, id: string, label?: string | null, type?: string | null, collection?: (
+export type LinksFragment = { __typename?: 'links', anchor?: string | null, external_link?: string | null, id: string, label: string, type: string, collection?: (
     { __typename?: 'page_settings' }
     & { ' $fragmentRefs'?: { 'PageSettingsFragment': PageSettingsFragment } }
   ) | null, file?: { __typename?: 'directus_files', id: string, filename_download: string, width?: number | null, height?: number | null } | null, params?: Array<(
