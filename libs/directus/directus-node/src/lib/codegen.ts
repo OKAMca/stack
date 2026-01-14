@@ -108,7 +108,7 @@ const graphqlCodegenConfig = (options: CodegenOptions): CodegenConfig => {
 
     if (!schemaUrl) {
       const errorMsg =
-        'GraphQL schema URL is not defined. Provide it as an option or set NEXT_PUBLIC_GRAPHQL_URL environment variable.'
+        'GraphQL schema URL is not defined. Provide it as an option or set NEXT_SERVER_GRAPHQL_URL or NEXT_PUBLIC_GRAPHQL_URL environment variable.'
       logger.log(errorMsg, 'error')
       throw new Error(errorMsg)
     }
@@ -134,7 +134,7 @@ const graphqlCodegenConfig = (options: CodegenOptions): CodegenConfig => {
       documents: [path.resolve(projectRoot, documentsGlob)],
       ignoreNoDocuments: true, // for better experience with the watcher
       generates: {
-        [outputPath]: {
+        [path.resolve(projectRoot, outputPath)]: {
           preset: 'client',
         },
       },
