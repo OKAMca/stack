@@ -1,5 +1,5 @@
 import type { TDirectusLinkProps, TLinks, TNavigationItemsTree } from '@okam/directus-next-component'
-import { useDirectusLink, useNavigationItems } from '@okam/directus-next-component/server'
+import { getDirectusLink, getNavigationItems } from '@okam/directus-next-component/server'
 import { Anchor, type Nullable } from '@okam/stack-ui'
 
 /* eslint-disable */
@@ -140,7 +140,7 @@ const depthMap: Record<number, object> = {
 }
 
 const BrandDirectusLink = (props: TDirectusLinkProps) => {
-  const linkProps = useDirectusLink(props)
+  const linkProps = getDirectusLink(props)
 
   return <Anchor {...linkProps} tokens={{ buttonStyle: 'outline', ...linkProps.tokens }} />
 }
@@ -187,7 +187,7 @@ function renderTree(tree: Nullable<TNavigationItemsTree>): React.ReactNode {
 }
 
 export default async function Index() {
-  const navigationTree = useNavigationItems<3, { link?: Nullable<TLinks> }>(navigationItems, (item) => {
+  const navigationTree = getNavigationItems<3, { link?: Nullable<TLinks> }>(navigationItems, (item) => {
     const { link } = item ?? {}
     return { ...link, collection: link?.collection, file: link?.file }
   })

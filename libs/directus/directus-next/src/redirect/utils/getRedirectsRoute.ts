@@ -1,20 +1,20 @@
 import type { TFetchRedirectsResponse } from '@okam/directus-node/edge'
 import { log } from '../../logger'
-import type { DirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
+import type { TDirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
 import { getApiRouteUrlDefault, getRedirectSecretDefault } from '../env'
 
 const defaultApiRoute = '/api/redirect'
 
 /**
  * Gets a response from `options.apiRoute`
- * @param {DirectusRouteRedirectsModule} options
+ * @param {TDirectusRouteRedirectsModule} options
  * @returns {Promise<TFetchRedirectsResponse>}
  */
 export async function getRedirectsRoute({
   apiRoute = defaultApiRoute,
   getApiRouteUrl = getApiRouteUrlDefault,
   getRedirectSecret = getRedirectSecretDefault,
-}: DirectusRouteRedirectsModule = {}): Promise<TFetchRedirectsResponse> {
+}: TDirectusRouteRedirectsModule = {}): Promise<TFetchRedirectsResponse> {
   const secret = getRedirectSecret()
   try {
     const url = new URL(apiRoute, getApiRouteUrl())

@@ -1,11 +1,11 @@
 import { Anchor } from '@okam/stack-ui'
-import useDirectusLink from '../../hooks/directus-link'
+import { getDirectusLink } from '../../utils/getDirectusLink'
 import type { TDirectusLinkProps } from './interface'
 
 const DirectusLink = (props: TDirectusLinkProps) => {
   const { type, componentsConfig } = props
 
-  const linkProps = useDirectusLink(props)
+  const linkProps = getDirectusLink(props)
 
   if (!type) return null
 

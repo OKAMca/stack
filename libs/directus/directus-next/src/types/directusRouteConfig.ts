@@ -1,4 +1,4 @@
-export interface DirectusRouteRedirectsModule {
+export interface TDirectusRouteRedirectsModule {
   /**
    * @default process.env.NEXT_API_REDIRECT_SECRET
    */
@@ -13,7 +13,7 @@ export interface DirectusRouteRedirectsModule {
   apiRoute?: string
 }
 
-export interface DirectusRouteConfig {
+export interface TDirectusRouteConfig {
   localeMap?: Record<string, string>
   collectionSettings: {
     [collection: string]: {
@@ -25,6 +25,6 @@ export interface DirectusRouteConfig {
     }
   }
   modules?: {
-    redirects?: DirectusRouteRedirectsModule
+    redirects?: TDirectusRouteRedirectsModule
   }
 }
