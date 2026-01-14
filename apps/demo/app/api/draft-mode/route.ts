@@ -51,6 +51,10 @@ export async function POST(request: NextRequest) {
 
   cookieStore.set('__prerender_bypass', draftModeCookie.value, {
     maxAge: cookieDuration * 24 * 60 * 60, // Convert days to seconds
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
   })
 
   return NextResponse.json({ isEnabled: true }, { status: 200 })

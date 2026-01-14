@@ -151,6 +151,21 @@ export const adminBarErrorTypography = tv({
   },
 })
 
+// DraftMode wrapper styles
+export const adminBarDraftMode = tv({
+  base: 'flex items-center gap-2',
+  variants: {
+    align: {
+      start: 'justify-start',
+      center: 'justify-center',
+      end: 'justify-end',
+    },
+  },
+  defaultVariants: {
+    align: 'start',
+  },
+})
+
 // Export the theme components
 export const adminBarTheme = {
   container: adminBarContainer,
@@ -160,4 +175,5 @@ export const adminBarTheme = {
   datePicker: adminBarDatePicker,
   error: adminBarError,
   errorTypography: adminBarErrorTypography,
+  draftMode: adminBarDraftMode,
 }
