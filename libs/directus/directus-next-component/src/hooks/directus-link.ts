@@ -12,10 +12,11 @@ const relativeUrlSchema = z.string().regex(/^[/#?]/, {
 })
 
 const hrefSchema = z.union([absoluteUrlSchema, relativeUrlSchema]).transform((value) => {
-  if (URL.canParse(value)) {
+  try {
     return new URL(value)
+  } catch (error) {
+    return new URL(value, 'http://localhost')
   }
-  return new URL(value, 'http://localhost')
 })
 
 function withSearchParams(url: URL, searchParams: URLSearchParams) {
