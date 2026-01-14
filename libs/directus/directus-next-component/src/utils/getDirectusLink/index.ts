@@ -2,7 +2,7 @@ import type { Nullable, TAnchorProps } from '@okam/stack-ui'
 import Link from 'next/link'
 import { z } from 'zod'
 import type { TDirectusLinkPropsConfig, TGetDirectusLink } from '../../components/DirectusLink/interface'
-import type { SearchParams } from '../../types/links'
+import type { TSearchParams } from '../../types/links'
 import { getDirectusFile } from '../getDirectusFile'
 import { getDirectusSearchParams } from '../getDirectusSearchParams'
 
@@ -28,7 +28,7 @@ function withSearchParams(url: URL, searchParams: URLSearchParams) {
 
 function getCompleteHref(
   href: Nullable<string>,
-  params: Nullable<Nullable<SearchParams>[]>,
+  params: Nullable<Nullable<TSearchParams>[]>,
   type: 'relative' | 'absolute',
 ) {
   if (!href) return null
