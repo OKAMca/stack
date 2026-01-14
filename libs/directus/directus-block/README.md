@@ -41,6 +41,12 @@ This component calls the good component in the configuration from the `collectio
 - variables: The block's variables. Passing the id is necessary
 - document: Can also be passed in the config. The document that will be used to make a query
 
+#### `useBlock` function
+
+The `useBlock` function is a hook that automatically determines wether a block should use `props.item` (passed props) or `props.variables` (makes its own query).
+
+If `props.item` only contains `id` and `settings`, the item will be determined to be empty, and the block will still make the query using `props.variables`.
+
 ## Configuration
 
 A configuration uses the `components` prop to map a key value, like so:

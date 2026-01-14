@@ -14,6 +14,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+    "fragment BlockSettings on block_settings {\n  variant\n  tokens\n}": types.BlockSettingsFragmentDoc,
+    "fragment BlockWysiwygs on block_wysiwygs {\n  id\n  content\n  settings {\n    ...BlockSettings\n  }\n}\n\nquery BlockWysiwygs($id: ID!) {\n  block_wysiwygs_by_id(id: $id) {\n    ...BlockWysiwygs\n  }\n}": types.BlockWysiwygsFragmentDoc,
     "fragment DirectusFiles on directus_files {\n  id\n  filename_disk\n  filename_download\n  title\n  type\n  width\n  height\n  duration\n  embed\n  description\n  focal_point_x\n  focal_point_y\n  caption\n  thumbhash\n}": types.DirectusFilesFragmentDoc,
     "query BlockFiles($id: ID!) {\n  block_files_by_id(id: $id) {\n    files {\n      directus_files_id {\n        ...DirectusFiles\n      }\n    }\n  }\n}": types.BlockFilesDocument,
     "fragment SearchParams on search_params {\n  id\n  name\n  value\n}\n\nfragment Links on links {\n  anchor\n  external_link\n  id\n  label\n  type\n  collection {\n    ...PageSettings\n  }\n  file {\n    id\n    filename_download\n    width\n    height\n  }\n  params {\n    ...SearchParams\n  }\n}\n\nquery LinkById($id: ID!, $locale: String) {\n  links_by_id(id: $id) {\n    ...Links\n  }\n}": types.SearchParamsFragmentDoc,
@@ -36,6 +38,14 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment BlockSettings on block_settings {\n  variant\n  tokens\n}"): (typeof documents)["fragment BlockSettings on block_settings {\n  variant\n  tokens\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment BlockWysiwygs on block_wysiwygs {\n  id\n  content\n  settings {\n    ...BlockSettings\n  }\n}\n\nquery BlockWysiwygs($id: ID!) {\n  block_wysiwygs_by_id(id: $id) {\n    ...BlockWysiwygs\n  }\n}"): (typeof documents)["fragment BlockWysiwygs on block_wysiwygs {\n  id\n  content\n  settings {\n    ...BlockSettings\n  }\n}\n\nquery BlockWysiwygs($id: ID!) {\n  block_wysiwygs_by_id(id: $id) {\n    ...BlockWysiwygs\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

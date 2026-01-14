@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import type { TPageSettings, TPageSettingsTranslation } from '@okam/directus-next'
-import { useDirectusFile } from '@okam/directus-next-component/server'
 import type { Nullable } from '@okam/stack-ui'
 import type { Metadata } from 'next'
 import type { OpenGraph } from 'next/dist/lib/metadata/types/opengraph-types'
 import type { StaticImageData } from 'next/image'
 import { min } from 'radashi'
-import type { TDirectusFileProps } from '../components/DirectusFile/interface'
-import type { TMetadataOptions } from '../types/metadata'
+import type { TDirectusFileProps } from '../../components/DirectusFile/interface'
+import type { TMetadataOptions } from '../../types/metadata'
+import { getDirectusFile } from '../getDirectusFile'
 
 function withFallbacks<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
@@ -41,11 +41,11 @@ function getOpenGraphImageFallback(fallbackImage: StaticImageData | undefined, o
   return { ...fallbackImage, ...dimensions, url: src }
 }
 
-function useOpenGraphImage(
+export function getOpenGraphImage(
   image: Nullable<TDirectusFileProps>,
   options: TMetadataOptions,
 ): Nullable<Exclude<OpenGraph['images'], OpenGraph['images'][]>> {
-  const directusImage = useDirectusFile(image)
+  const directusImage = getDirectusFile(image)
   const { src, alt } = directusImage ?? {}
   const { width: limitedWidth, height: limitedHeight } =
     (directusImage?.width && directusImage?.height
@@ -74,7 +74,7 @@ function useOpenGraphImage(
   }
 }
 
-export default function useMetadata<TPageProps extends { pageSettings: TPageSettings }>(
+export function getMetadata<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
   options: TMetadataOptions,
   defaultProps?: Partial<TPageSettingsTranslation>,
@@ -87,9 +87,9 @@ export default function useMetadata<TPageProps extends { pageSettings: TPageSett
   const noFollow = defaultProps?.no_follow ?? translation?.no_follow
   const noIndex = defaultProps?.no_index ?? translation?.no_index
 
-  const directusImage = useDirectusFile(image)
+  const directusImage = getDirectusFile(image)
   const openGraphImage =
-    useOpenGraphImage(directusImage, options) ?? getOpenGraphImageFallback(options?.ogFallbackImage, options)
+    getOpenGraphImage(directusImage, options) ?? getOpenGraphImageFallback(options?.ogFallbackImage, options)
   const openGraphType = options.openGraphTypeConfig[pageSettings?.belongs_to_collection ?? ''] ?? 'website'
 
   const alternates = options.createAlternateUrls(pageSettings)
@@ -120,3 +120,8 @@ export default function useMetadata<TPageProps extends { pageSettings: TPageSett
 
   return metadata
 }
+
+/**
+ * @deprecated Use `getMetadata` instead
+ */
+export const useMetadata = getMetadata

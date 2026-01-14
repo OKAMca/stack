@@ -63,13 +63,13 @@ export const Main = <T extends TToken>({
     <BoxWithForwardRef
       as={as}
       id={id}
-      tabIndex={tabIndex}
       themeName={themeName}
       tokens={tokens}
       customTheme={customTheme}
       ref={ref}
       {...rest}
       {...landmarkProps}
+      tabIndex={tabIndex}
     >
       {children}
     </BoxWithForwardRef>
