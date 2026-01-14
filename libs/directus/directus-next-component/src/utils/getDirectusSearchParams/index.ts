@@ -1,8 +1,8 @@
 import type { Nullable } from '@okam/stack-ui'
 import { isEmpty } from 'radashi'
-import type { SearchParams } from '../types/links'
+import type { TSearchParams } from '../../types/links'
 
-export default function getDirectusSearchParams(params: Nullable<Nullable<SearchParams>[]>): URLSearchParams {
+export function getDirectusSearchParams(params: Nullable<Nullable<TSearchParams>[]>): URLSearchParams {
   const searchParams = new URLSearchParams()
 
   params?.forEach((param) => {
@@ -16,3 +16,8 @@ export default function getDirectusSearchParams(params: Nullable<Nullable<Search
 
   return searchParams
 }
+
+/**
+ * @deprecated Use `getDirectusSearchParams` instead
+ */
+export const useDirectusSearchParams = getDirectusSearchParams

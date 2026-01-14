@@ -4,12 +4,12 @@ import { NextResponse as NextResponseClass } from 'next/server'
 import { isEmpty } from 'radashi'
 import { log } from '../logger'
 import { handleRedirect } from '../redirect/utils/handleRedirect'
-import type { PageSettingsTranslation } from '../types'
-import type { DirectusRouteConfig } from '../types/directusRouteConfig'
+import type { TPageSettingsTranslation } from '../types'
+import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import { fetchPageSettingsTranslation } from './utils/fetchPageSettingsTranslation'
 import { splitLocaleFromPathname } from './utils/locale'
 
-function getValidTranslation(translations: PageSettingsTranslation[], locale: string | undefined) {
+function getValidTranslation(translations: TPageSettingsTranslation[], locale: string | undefined) {
   const translation = translations[0]
   if (!locale) {
     log('No locale provided, using first translation as default:', { translation })
@@ -22,14 +22,14 @@ function getValidTranslation(translations: PageSettingsTranslation[], locale: st
 /**
  * Handles incoming middleware requests and rewrites the path to the new format according to fetched page settings.
  * @param request - The NextRequest object
- * @param config - The DirectusRouteConfig object
+ * @param config - The TDirectusRouteConfig object
  * @deprecated Use `directusRouteRouter(request, config)` instead. NextResponse is now directly imported in this file.
  * @param NextResponse - The NextResponse object
  * @returns NextResponse
  *
  * @example
  * ```typescript
- * export const directusConfig: DirectusRouteConfig = {
+ * export const directusConfig: TDirectusRouteConfig = {
  *  localeMap: {
  *    'fr-CA': 'fr',
  *    'en-CA': 'en',
@@ -48,7 +48,7 @@ function getValidTranslation(translations: PageSettingsTranslation[], locale: st
  */
 export async function directusRouteRouter(
   request: NextRequest,
-  config: DirectusRouteConfig,
+  config: TDirectusRouteConfig,
   /**
    * @deprecated Use `directusRouteRouter(request, config)` instead. NextResponse is now directly imported in this file.
    */

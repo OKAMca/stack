@@ -4,12 +4,23 @@ export { default as DirectusImg } from './components/DirectusImg'
 export { default as DirectusVideo } from './components/DirectusVideo'
 export { default as DirectusFile } from './components/DirectusFile'
 
-export { default as useDirectusFile } from './hooks/directus-file'
-export { default as useDirectusLink } from './hooks/directus-link'
-export { default as getDirectusSearchParams } from './hooks/directus-search-params'
-export { default as useNavigationItems } from './hooks/navigation-items'
-export { default as useMetadata } from './hooks/directus-metadata'
+export { getDirectusFile, useDirectusFile } from './utils/getDirectusFile'
+export { getDirectusLink, useDirectusLink } from './utils/getDirectusLink'
+export { getNavigationItems, useNavigationItems } from './utils/getNavigationItems'
+export { getMetadata, useMetadata } from './utils/getDirectusMetadata'
+export { getDirectusSearchParams } from './utils/getDirectusSearchParams'
+
 export { logger as DirectusNextComponent } from './logger'
+
+export * from './types'
+export type {
+  TDirectusLinkProps,
+  TDirectusLinkPropsConfig,
+  TDirectusLinkComponentsConfig,
+} from './components/DirectusLink/interface'
+export type { TDirectusFileProps } from './components/DirectusFile/interface'
+export type { TDirectusImgProps } from './components/DirectusImg/interface'
+export type { TDirectusVideoProps } from './components/DirectusVideo/interface'
 
 export type {
   /**
@@ -23,13 +34,3 @@ export type {
    * @deprecated Import from `@okam/directus-next` instead
    */ TPageSettings,
 } from '@okam/directus-next'
-export type { TNavigationItems, TNavigationItemsTree } from './types/navigation-items'
-export type { TLinks, SearchParams } from './types/links'
-export type {
-  TDirectusLinkProps,
-  TUseDirectusLink,
-  TDirectusLink,
-  TDirectusLinkPropsConfig,
-  TDirectusLinkComponentsConfig,
-} from './components/DirectusLink/interface'
-export type { TMetadataOptions } from './types/metadata'
