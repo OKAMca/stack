@@ -17,7 +17,7 @@
 
 import { draftMode } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { get, template } from 'radashi'
+import { template } from 'radashi'
 import * as zod from 'zod'
 import { getJsonErrorResponse } from '../response'
 import { getDraftSecretDefault } from './env'
@@ -34,17 +34,17 @@ const jsonStringsArraySchema = (message: string, code: number) =>
         ctx.addIssue({
           code: zod.ZodIssueCode.custom,
           message: 'Invalid JSON string',
-          path: [],
+          params: { code },
         })
         return zod.NEVER
       }
     })
-    .pipe(zod.array(zod.string(), { error: () => ({ message, code }) }))
+    .pipe(zod.array(zod.string(), { error: () => ({ message, errorCode: code }) }))
 
 const languagesSchema = jsonStringsArraySchema('Invalid languages argument', 400)
 
 const commonSchema = zod.object({
-  secret: zod.string({ error: () => ({ message: 'Invalid secret argument', code: 401 }) }),
+  secret: zod.string({ error: () => ({ message: `Invalid secret argument` }) }),
   version: zod.string().optional(),
   enable: zod
     .enum(['true', 'false'])
@@ -53,31 +53,35 @@ const commonSchema = zod.object({
   pk: zod.string().optional(),
 })
 
-const draftParamsSchema = zod.discriminatedUnion('type', [
-  // When type is 'path', urls is required
-  zod
-    .object({
-      type: zod.literal('path'),
-      urls: jsonStringsArraySchema('Invalid urls argument', 400),
-      languages: languagesSchema,
-    })
-    .extend(commonSchema.shape),
-  // When type is 'route', routes is required
-  zod
-    .object({
-      type: zod.literal('route'),
-      secret: zod.string(),
-      routes: jsonStringsArraySchema('Invalid routes argument', 400),
-      languages: languagesSchema,
-    })
-    .extend(commonSchema.shape),
-  zod
-    .object({
-      type: zod.undefined(),
-      languages: languagesSchema.optional(),
-    })
-    .extend(commonSchema.shape),
-])
+const draftParamsSchema = zod.discriminatedUnion(
+  'type',
+  [
+    // When type is 'path', urls is required
+    zod
+      .object({
+        type: zod.literal('path'),
+        urls: jsonStringsArraySchema('Invalid urls argument', 400),
+        languages: languagesSchema,
+      })
+      .extend(commonSchema.shape),
+    // When type is 'route', routes is required
+    zod
+      .object({
+        type: zod.literal('route'),
+        secret: zod.string(),
+        routes: jsonStringsArraySchema('Invalid routes argument', 400),
+        languages: languagesSchema,
+      })
+      .extend(commonSchema.shape),
+    zod
+      .object({
+        type: zod.undefined(),
+        languages: languagesSchema.optional(),
+      })
+      .extend(commonSchema.shape),
+  ],
+  { error: () => ({ message: `Invalid type/urls/routes arguments combination` }) },
+)
 
 export function parseDraftParams(url: string) {
   const { searchParams } = new URL(url)
@@ -152,15 +156,17 @@ export default async function handleDraftRoute({
   const getJsonErrorResponseFunction = getJsonError || getJsonErrorResponse
   const { success, error, data } = parseDraftParams(url)
 
+  const { secret } = data ?? {}
+
+  if (secret !== getSecretFunction() && error?.issues?.some((issue) => issue.path.includes('secret'))) {
+    return getJsonErrorResponseFunction({ error: `Invalid secret argument` }, 401)
+  }
+
   if (!success) {
-    return getJsonErrorResponseFunction({ error: error.message }, get(error, 'code', 400))
+    return getJsonErrorResponseFunction({ error: error.issues }, 400)
   }
 
-  const { secret, languages, type, version, enable } = data
-
-  if (secret !== getSecretFunction()) {
-    return getJsonErrorResponseFunction({ error: 'Invalid argument' }, 401)
-  }
+  const { type, languages, version, enable } = data
 
   let redirectUrl
 
