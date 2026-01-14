@@ -7,8 +7,7 @@ import type { TCustomA11yOptions } from '../a11y/interface'
 import type { TCarouselSlideProps } from '../swiper/interface'
 
 export interface TCarouselPaginationProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends Omit<TDefaultComponent, 'children'>,
-    Pick<TCustomA11yOptions, 'paginationGroupLabel'> {
+  extends Omit<TDefaultComponent, 'children'>, Pick<TCustomA11yOptions, 'paginationGroupLabel'> {
   /**
    * @deprecated Use the activeIndex from the context instead
    */
@@ -20,8 +19,9 @@ export interface TCarouselPaginationProps<TSlideProps extends TCarouselSlideProp
   children: ReactNode | ((props: SwiperClass) => ReactNode)
 }
 
-export interface TCarouselPaginationBulletProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
-  extends TButtonProps {
+export interface TCarouselPaginationBulletProps<
+  TSlideProps extends TCarouselSlideProps = TCarouselSlideProps,
+> extends TButtonProps {
   /**
    * @deprecated Use the activeIndex from the context instead
    */

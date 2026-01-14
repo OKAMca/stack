@@ -17,15 +17,13 @@ export interface TTabProps<I extends object = object> extends AriaTabProps, TDef
 }
 
 export interface TTabPanelProps<I extends object, T extends TToken = TToken>
-  extends AriaTabPanelProps,
-    TDefaultComponent<T> {
+  extends AriaTabPanelProps, TDefaultComponent<T> {
   state: TabListState<I>
   panelTransition?: ComponentType<TTransition>
 }
 
 export interface TTabListProps<I extends object, T extends TToken = TToken>
-  extends AriaTabListProps<I & TDefaultItemComponent<I, T>>,
-    Omit<TDefaultComponent<T>, 'children'> {
+  extends AriaTabListProps<I & TDefaultItemComponent<I, T>>, Omit<TDefaultComponent<T>, 'children'> {
   label?: React.ReactNode
   panelTransition?: ComponentType<TTransition>
 }

@@ -15,8 +15,7 @@ export interface TDefaultNode<I extends object> extends Omit<Node<I>, 'props'> {
  * Overrides the `ItemProps` type from `react-stately` for items with theming support.
  */
 export interface TDefaultItemComponent<I extends object = object, T extends TToken = TToken>
-  extends Omit<TDefaultComponent<T>, 'children'>,
-    ItemProps<I> {
+  extends Omit<TDefaultComponent<T>, 'children'>, ItemProps<I> {
   key: Key
 }
 
@@ -24,8 +23,7 @@ export interface TDefaultItemComponent<I extends object = object, T extends TTok
  * Overrides the `SectionProps` type from `react-stately` for sections with theming support.
  */
 export interface TDefaultSectionComponent<I extends object = object, T extends TToken = TToken>
-  extends Omit<TDefaultComponent<T>, 'children'>,
-    SectionProps<I> {
+  extends Omit<TDefaultComponent<T>, 'children'>, SectionProps<I> {
   key: Key
 }
 

@@ -45,6 +45,7 @@ export interface TCalendarCellProps extends TDefaultComponent {
 }
 
 export interface TCalendarNavigationButtonsProps
-  extends TDefaultComponent,
+  extends
+    TDefaultComponent,
     Pick<TCalendarProps, 'buttons'>,
     Pick<CalendarAria, 'prevButtonProps' | 'nextButtonProps'> {}
