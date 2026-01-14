@@ -32,12 +32,18 @@ jobs:
         shell: bash
 
       - name: Build packages
-        run : npx nx run-many -t=build --projects=tag:publishable
+        run: npx nx run-many -t=build --projects=tag:publishable
         shell: bash
+
+      - name: Debug npm auth
+        run: |
+          echo "Token length: ${#NODE_AUTH_TOKEN}"
+          npm whoami || echo "whoami failed"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish packages
         run: npx nx release publish
         shell: bash
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
