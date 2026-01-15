@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-next-component",
-  "version": "1.7.38",
+  "version": "1.7.39",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
@@ -39,7 +39,7 @@
     "next": "^15.0.0",
     "radashi": "^12.3.0",
     "unlazy": "^0.12.1",
-    "@okam/directus-next": "1.2.12",
+    "@okam/directus-next": "1.2.13",
     "zod": "^4.2.1"
   },
   "peerDependencies": {
