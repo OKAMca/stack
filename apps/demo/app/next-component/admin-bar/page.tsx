@@ -15,7 +15,7 @@ export default async function AdminBarDemoPage() {
 
     const draft = await draftMode()
 
-    if (isEnabled) {
+    if (draft.isEnabled) {
       draft.disable()
     } else {
       draft.enable()
