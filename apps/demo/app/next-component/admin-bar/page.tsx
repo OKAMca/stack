@@ -1,12 +1,29 @@
 import { AdminBar } from '@okam/next-component/server'
 import { Typography, Button, Box } from '@okam/stack-ui'
+import { draftMode } from 'next/headers'
 import Link from 'next/link'
 import DraftModeButton from './DraftModeButton'
 
 export default async function AdminBarDemoPage() {
+  const { isEnabled } = await draftMode()
+
+  /**
+   * This should not be done inside actual code, this is only for demonstration purposes.
+   */
+  const toggleDraftMode = async () => {
+    'use server'
+
+    const draft = await draftMode()
+
+    if (isEnabled) {
+      draft.disable()
+    } else {
+      draft.enable()
+    }
+  }
   return (
     <div className="p-8">
-      <AdminBar tokens={{ position: 'top' }} draftModeButtonLabel="Exit Preview Mode">
+      <AdminBar tokens={{ position: 'top' }}>
         <Box>
           <Typography tokens={{ size: 'sm', weight: 'bold', color: 'primary' }}>MyStack CMS</Typography>
           <Typography tokens={{ size: 'xs' }}>Draft Mode Active</Typography>
@@ -60,7 +77,9 @@ export default async function AdminBarDemoPage() {
           <Link href="/" passHref>
             <Button>Back to Home</Button>
           </Link>
-          <DraftModeButton />
+          <DraftModeButton handlePress={toggleDraftMode}>
+            {isEnabled ? 'Exit Preview Mode' : 'Enable Draft Mode'}
+          </DraftModeButton>
         </div>
 
         <div className="mt-8 p-4 bg-gray-100 rounded-md">
@@ -69,27 +88,42 @@ export default async function AdminBarDemoPage() {
           <div>
             <Typography tokens={{ size: 'md', weight: 'bold' }}>Draft Mode Control API</Typography>
             <Typography tokens={{ size: 'sm' }}>
-              <code className="bg-gray-200 px-1 rounded">POST /api/draft-mode</code> - Enables or disables draft mode
-              using Next.js's draftMode API.
+              <code className="bg-gray-200 px-1 rounded">POST /api/draft</code> - Enables or disables draft mode using
+              Next.js's draftMode API.
             </Typography>
             <pre className="bg-gray-900 p-2 mt-2 rounded text-xs overflow-auto">
-              {`// apps/demo/app/api/draft-mode/route.ts
-                import { draftMode, cookies } from 'next/headers'
+              {`// apps/demo/app/api/draft/route.ts
+                import { draftMode } from 'next/headers'
                 import type { NextRequest } from 'next/server'
                 import { NextResponse } from 'next/server'
 
                 /**
                  * Draft Mode API Route
-                 * Request: { enable: boolean, cookieDuration?: number }
-                 * Response: { isEnabled: boolean }
+                 *
+                 * This API route handles enabling and disabling draft mode by setting or removing
+                 * the necessary cookies. It's designed to work with the handleDraftMode utility
+                 * from the stack-ui library.
+                 *
+                 * Request format:
+                 * {
+                 *   enable: boolean,        // Whether to enable or disable draft mode
+                 *   cookieDuration?: number // Duration in days, if not provided, the cookie will have the expiration set to the session
+                 * }
+                 *
+                 * Response format:
+                 * {
+                 *   isEnabled: boolean      // The current state of draft mode after the operation
+                 * }
                  */
                 export async function POST(request: NextRequest) {
                     const { enable, cookieDuration } = await request.json()
-                    const draft = await draftMode()
 
+                    // Return current state if enable param is invalid
                     if (enable === null || enable === undefined) {
-                      return NextResponse.json({ isEnabled: draft.isEnabled }, { status: 200 })
+                      return NextResponse.json({ isEnabled: draftMode().isEnabled }, { status: 200 })
                     }
+
+                    const draft = draftMode()
 
                     if (!enable) {
                       draft.disable()
@@ -98,6 +132,7 @@ export default async function AdminBarDemoPage() {
 
                     draft.enable()
 
+                    // Set cookie duration if specified
                     if (!cookieDuration || cookieDuration <= 0) {
                       return NextResponse.json({ isEnabled: true }, { status: 200 })
                     }
@@ -105,11 +140,13 @@ export default async function AdminBarDemoPage() {
                     const cookieStore = await cookies()
                     const draftModeCookie = cookieStore.get('__prerender_bypass')
 
-                    if (draftModeCookie?.value) {
-                      cookieStore.set('__prerender_bypass', draftModeCookie.value, {
-                        maxAge: cookieDuration * 24 * 60 * 60,
-                      })
+                    if (!draftModeCookie?.value) {
+                      return NextResponse.json({ isEnabled: true }, { status: 200 })
                     }
+
+                    cookieStore.set('__prerender_bypass', draftModeCookie.value, {
+                      maxAge: cookieDuration * 24 * 60 * 60, // Convert days to seconds
+                    })
 
                     return NextResponse.json({ isEnabled: true }, { status: 200 })
                 }`}
