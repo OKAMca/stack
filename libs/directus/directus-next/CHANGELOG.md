@@ -1,3 +1,25 @@
+## 1.2.13 (2026-01-15)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- **directus-next:** remove server-only ([ecd8d1b](https://github.com/OKAMca/stack/commit/ecd8d1b))
+- **directus-next:** draft route handler uses zod, returns draft isEnabled whenever possible ([#376](https://github.com/OKAMca/stack/pull/376))
+- ⚠️  functions starting with "use" should be reserved to react hooks ([68f1f8f](https://github.com/OKAMca/stack/commit/68f1f8f))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.2.12 (2026-01-15)
 
 ### 🚀 Features
