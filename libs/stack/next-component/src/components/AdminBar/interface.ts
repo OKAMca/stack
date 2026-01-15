@@ -8,7 +8,6 @@ import type { ReactNode } from 'react'
  * Its visibility is driven by Next.js's draftMode cookie.
  *
  * @property {ReactNode} children - Content to render inside the AdminBar. Put the DraftMode component inside the children.
- * @property {string} draftModeButtonLabel - Optional custom label for the draft mode button
  */
 export interface TAdminBarProps<T = TToken> extends TDefaultComponent<T> {
   children: ReactNode
