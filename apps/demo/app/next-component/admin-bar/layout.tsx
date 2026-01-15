@@ -4,9 +4,7 @@ import AdminBarProviders from './providers'
 export default async function AdminBarDemoLayout({ children }: { children: React.ReactNode }) {
   return (
     <AdminBarProviders>
-      <DraftModeServerContextProvider defaultEnabled cookieDuration={12}>
-        {children}
-      </DraftModeServerContextProvider>
+      <DraftModeServerContextProvider>{children}</DraftModeServerContextProvider>
     </AdminBarProviders>
   )
 }
