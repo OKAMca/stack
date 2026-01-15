@@ -1,3 +1,13 @@
+## 1.2.14 (2026-01-15)
+
+### 🩹 Fixes
+
+- **directus-next:** try to restrict server-only use to internal code ([e7162e3](https://github.com/OKAMca/stack/commit/e7162e3))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.2.13 (2026-01-15)
 
 ### 🚀 Features
