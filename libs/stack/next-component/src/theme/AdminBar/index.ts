@@ -86,36 +86,6 @@ export const adminBarButton = tv({
   },
 })
 
-// Status indicator for the AdminBar
-export const adminBarStatus = tv({
-  base: 'inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium',
-  variants: {
-    status: {
-      draft: 'bg-yellow-100 text-yellow-800',
-      published: 'bg-green-100 text-green-800',
-      error: 'bg-red-100 text-red-800',
-    },
-  },
-  defaultVariants: {
-    status: 'draft',
-  },
-})
-
-// Date picker styles specific to the AdminBar
-export const adminBarDatePicker = tv({
-  base: 'border rounded px-2 py-1 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500',
-  variants: {
-    size: {
-      small: 'text-xs px-2 py-0.5',
-      medium: 'text-sm px-3 py-1',
-      large: 'text-base px-4 py-2',
-    },
-  },
-  defaultVariants: {
-    size: 'medium',
-  },
-})
-
 // Error component styles specific to the AdminBar
 export const adminBarError = tv({
   base: 'flex items-center justify-center bg-red-50 text-red-700 px-3 py-1 rounded-md text-sm',
@@ -151,29 +121,11 @@ export const adminBarErrorTypography = tv({
   },
 })
 
-// DraftMode wrapper styles
-export const adminBarDraftMode = tv({
-  base: 'flex items-center gap-2',
-  variants: {
-    align: {
-      start: 'justify-start',
-      center: 'justify-center',
-      end: 'justify-end',
-    },
-  },
-  defaultVariants: {
-    align: 'start',
-  },
-})
-
 // Export the theme components
 export const adminBarTheme = {
   container: adminBarContainer,
   content: adminBarContent,
   button: adminBarButton,
-  status: adminBarStatus,
-  datePicker: adminBarDatePicker,
   error: adminBarError,
   errorTypography: adminBarErrorTypography,
-  draftMode: adminBarDraftMode,
 }

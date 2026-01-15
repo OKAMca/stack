@@ -1,4 +1,3 @@
-// components
 export { default as AdminBar } from './components/AdminBar'
 
 // providers
