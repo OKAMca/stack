@@ -26,7 +26,6 @@ export default async function AdminBarDemoPage() {
       <AdminBar tokens={{ position: 'top' }}>
         <Box>
           <Typography tokens={{ size: 'sm', weight: 'bold', color: 'primary' }}>MyStack CMS</Typography>
-          <Typography tokens={{ size: 'xs' }}>Draft Mode Active</Typography>
         </Box>
 
         <div className="flex gap-2">
