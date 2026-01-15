@@ -1,3 +1,4 @@
+import 'server-only'
 import { createServerContext } from '@okam/next-component/server'
 import type { Variables } from 'graphql-request'
 import type { TPageSettingsQueryItem } from '../types/pageSettings'
