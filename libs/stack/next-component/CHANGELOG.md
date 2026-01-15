@@ -1,3 +1,24 @@
+## 1.3.0 (2026-01-15)
+
+### 🚀 Features
+
+- **admin-bar:** add AdminBar with draft mode support ([289427e](https://github.com/OKAMca/stack/commit/289427e))
+- **next-component:** nuqs wrapper for react-aria ([d63f2f7](https://github.com/OKAMca/stack/commit/d63f2f7))
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- adminbar safe draft mode handling ([#385](https://github.com/OKAMca/stack/pull/385))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.2.4 (2026-01-14)
 
 ### 🚀 Features
