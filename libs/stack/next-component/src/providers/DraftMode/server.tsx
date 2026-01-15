@@ -1,20 +1,13 @@
-import 'server-only'
-
-import type { TDraftModeProviderProps } from './interface'
-import { getDraftMode } from './utils/getDraftMode'
+import { draftMode } from 'next/headers'
+import type { TDraftModeServerProviderProps } from './interface'
 import { DraftModeContextProvider } from '.'
 
-const DraftModeServerContextProvider = async (props: TDraftModeProviderProps) => {
-  const { children, defaultEnabled: propDefaultEnabled, cookieDuration: propCookieDuration, mutationOptions } = props
-  const { isEnabled } = await getDraftMode()
-  const defaultEnabled = propDefaultEnabled ?? isEnabled
+const DraftModeServerContextProvider = async (props: TDraftModeServerProviderProps) => {
+  const { children, ...rest } = props
+  const { isEnabled } = await draftMode()
 
   return (
-    <DraftModeContextProvider
-      defaultEnabled={defaultEnabled}
-      cookieDuration={propCookieDuration}
-      mutationOptions={mutationOptions}
-    >
+    <DraftModeContextProvider isEnabled={isEnabled} {...rest}>
       {children}
     </DraftModeContextProvider>
   )
