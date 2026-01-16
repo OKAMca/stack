@@ -1,3 +1,10 @@
+## 1.8.3 (2026-01-16)
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 1.3.1
+- Updated directus-next to 1.2.19
+
 ## 1.8.0 (2026-01-16)
 
 ### 🚀 Features
