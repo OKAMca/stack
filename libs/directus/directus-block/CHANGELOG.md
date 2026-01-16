@@ -1,3 +1,9 @@
+## 1.7.1 (2026-01-16)
+
+### 🧱 Updated Dependencies
+
+- Updated directus-query to 1.5.0
+
 ## 1.7.0 (2026-01-16)
 
 ### 🚀 Features
