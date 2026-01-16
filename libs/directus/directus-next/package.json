@@ -34,7 +34,6 @@
   "dependencies": {
     "@okam/core-lib": "1.17.0",
     "@okam/directus-node": "0.6.2",
-    "@okam/stack-ui": "1.44.0",
     "@okam/logger": "1.1.0",
     "@okam/next-component": "1.3.0",
     "next": "^15.0.0",

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
-import type { Nullable } from '@okam/stack-ui'
 import type { Variables } from 'graphql-request'
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { Fragmentize } from '../types/Fragments'
@@ -35,7 +34,8 @@ export interface TGetPageSettingsProps<
 }
 
 export type TGetPageSettingsReturn<Item extends TPageSettingsQueryItem> = Omit<Item, 'page_settings'> & {
-  page_settings?: Nullable<
-    Exclude<NonNullable<Item>['page_settings'], Fragmentize<TPageSettings, 'PageSettingsFragment'>>
-  >
+  page_settings?:
+    | Exclude<NonNullable<Item>['page_settings'], Fragmentize<TPageSettings, 'PageSettingsFragment'>>
+    | null
+    | undefined
 }
