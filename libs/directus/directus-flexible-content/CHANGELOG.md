@@ -3,6 +3,7 @@
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- Consumers must now have react and react-dom in their own
 - bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
 
 ### 🩹 Fixes
@@ -13,10 +14,6 @@
 - search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
 - search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
 - select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
-
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
 
 ### 🧱 Updated Dependencies
 

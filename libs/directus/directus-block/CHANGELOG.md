@@ -3,14 +3,11 @@
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- Consumers must now have react and react-dom in their own
 
 ### 🩹 Fixes
 
 - ⚠️  functions starting with "use" should be reserved to react hooks ([68f1f8f](https://github.com/OKAMca/stack/commit/68f1f8f))
-
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
 
 ### 🧱 Updated Dependencies
 
