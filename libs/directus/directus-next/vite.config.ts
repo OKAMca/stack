@@ -55,7 +55,7 @@ export default defineConfig({
         }
       ],
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, 'next/navigation', 'next/headers', 'next/server', '@okam/directus-node', '@okam/logger', '@okam/core-lib', '@okam/directus-query', '@okam/next-component', '@okam/stack-ui'],
+      external: [...externalDeps, 'next/navigation', 'next/headers', 'next/server', /^@okam\//],
     },
     ssr: true,
   },

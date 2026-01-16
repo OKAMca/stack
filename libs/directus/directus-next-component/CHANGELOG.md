@@ -3,6 +3,7 @@
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- Consumers must now have react and react-dom in their own
 - **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
 
 ### 🩹 Fixes
@@ -12,10 +13,6 @@
 - **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
 - **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
 - update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
-
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
 
 ### 🧱 Updated Dependencies
 
@@ -32,6 +29,7 @@
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- Consumers must now have react and react-dom in their own
 - **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
 
 ### 🩹 Fixes
@@ -41,10 +39,6 @@
 - **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
 - **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
 - update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
-
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
 
 ### 🧱 Updated Dependencies
 
@@ -61,6 +55,7 @@
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- Consumers must now have react and react-dom in their own
 - **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
 
 ### 🩹 Fixes
@@ -70,10 +65,6 @@
 - **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
 - **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
 - update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
-
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
 
 ### 🧱 Updated Dependencies
 
@@ -90,6 +81,7 @@
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- Consumers must now have react and react-dom in their own
 - **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
 
 ### 🩹 Fixes
@@ -99,10 +91,6 @@
 - **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
 - **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
 - update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
-
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
 
 ### 🧱 Updated Dependencies
 
@@ -120,6 +108,7 @@
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- Consumers must now have react and react-dom in their own
 - **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
 
 ### 🩹 Fixes
@@ -129,10 +118,6 @@
 - **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
 - **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
 - update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
-
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
 
 ### 🧱 Updated Dependencies
 

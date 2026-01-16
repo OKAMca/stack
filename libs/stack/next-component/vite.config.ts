@@ -62,7 +62,7 @@ export default defineConfig({
         warn(warning)
       },
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, '@okam/stack-ui', '@okam/logger', '@okam/core-lib'],
+      external: [...externalDeps, /^@okam\//],
       plugins: [preserveDirectives()],
     },
     ssr: true,
