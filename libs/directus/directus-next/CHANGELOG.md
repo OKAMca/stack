@@ -1,3 +1,9 @@
+## 1.2.19 (2026-01-16)
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 1.3.1
+
 ## 1.2.18 (2026-01-16)
 
 ### 🧱 Updated Dependencies

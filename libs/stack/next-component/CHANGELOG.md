@@ -1,3 +1,14 @@
+## 1.3.1 (2026-01-16)
+
+### 🩹 Fixes
+
+- **next-component:** remove breaking changes tag ([3dcba77](https://github.com/OKAMca/stack/commit/3dcba77))
+- **next-component:** stop bundling okam libs ([ba6ba7c](https://github.com/OKAMca/stack/commit/ba6ba7c))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.3.0 (2026-01-15)
 
 ### 🚀 Features
