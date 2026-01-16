@@ -1,7 +1,7 @@
 {
   "name": "@okam/directus-next",
   "main": "./index.js",
-  "version": "1.2.19",
+  "version": "1.2.20",
   "types": "./index.d.ts",
   "exports": {
     ".": {
@@ -35,7 +35,7 @@
     "@okam/core-lib": "1.17.0",
     "@okam/directus-node": "0.7.0",
     "@okam/logger": "1.1.0",
-    "@okam/next-component": "1.3.1",
+    "@okam/next-component": "1.3.2",
     "next": "^15.0.0",
     "radashi": "^12.3.0",
     "@okam/directus-query": "1.5.0",

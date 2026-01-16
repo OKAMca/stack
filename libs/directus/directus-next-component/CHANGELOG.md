@@ -1,3 +1,10 @@
+## 1.8.4 (2026-01-16)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.44.1
+- Updated next-component to 1.3.2
+
 ## 1.8.3 (2026-01-16)
 
 ### 🧱 Updated Dependencies
