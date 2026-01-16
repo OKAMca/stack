@@ -46,7 +46,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, '@okam/stack-ui', '@okam/directus-query'],
+      external: [...externalDeps, /^@okam\//],
       plugins: [preserveDirectives()],
       output: {
         preserveModules: true,
