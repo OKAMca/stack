@@ -1,3 +1,13 @@
+## 1.2.15 (2026-01-16)
+
+### 🩹 Fixes
+
+- **directus-next:** stop depending on stack-ui ([cc1e033](https://github.com/OKAMca/stack/commit/cc1e033))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.2.14 (2026-01-15)
 
 ### 🩹 Fixes
