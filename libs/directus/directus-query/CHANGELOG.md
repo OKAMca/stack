@@ -1,3 +1,27 @@
+## 1.5.0 (2026-01-16)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- **directus-query:** stop bundling okam libs ([ebb2885](https://github.com/OKAMca/stack/commit/ebb2885))
+- **directus-next:** draft route handler uses zod, returns draft isEnabled whenever possible ([#376](https://github.com/OKAMca/stack/pull/376))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.4.2 (2025-07-24)
 
 ### 🩹 Fixes
