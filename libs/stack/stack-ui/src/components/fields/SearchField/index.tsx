@@ -1,12 +1,12 @@
 'use client'
 
-import Box from '../../Box'
 import React, { useCallback } from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
 import type { TToken } from '../../../providers/Theme/interface'
 import { useUserQueryValHook } from '../../../providers/UserSearchQuery'
+import Box from '../../Box'
 import Button from '../../Button'
 import Close from '../../icons/CloseBtn'
 import Search from '../../icons/Search'
