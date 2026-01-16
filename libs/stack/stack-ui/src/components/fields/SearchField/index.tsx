@@ -1,6 +1,6 @@
 'use client'
 
-import { Box } from '@okam/stack-ui'
+import Box from '../../Box'
 import React, { useCallback } from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
