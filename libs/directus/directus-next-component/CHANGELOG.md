@@ -1,3 +1,34 @@
+## 1.7.42 (2026-01-16)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- **directus-next-component:** directus link supports search params ([21a3e46](https://github.com/OKAMca/stack/commit/21a3e46))
+
+### 🩹 Fixes
+
+- **directus-next-component:** remove breaking changes tag ([cb030b6](https://github.com/OKAMca/stack/commit/cb030b6))
+- **directus-next-component:** stop bundling okam libs ([c2a9016](https://github.com/OKAMca/stack/commit/c2a9016))
+- **directus-next-component:** valid directus link href error handling ([#365](https://github.com/OKAMca/stack/pull/365))
+- ⚠️  functions starting with "use" should be reserved to react hooks ([68f1f8f](https://github.com/OKAMca/stack/commit/68f1f8f))
+- **directus-next:** bump version ([e9441ad](https://github.com/OKAMca/stack/commit/e9441ad))
+- **directus-next-component:** core-lib in externals deps ([9b04ca0](https://github.com/OKAMca/stack/commit/9b04ca0))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 1.2.16
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.7.41 (2026-01-16)
 
 ### 🚀 Features

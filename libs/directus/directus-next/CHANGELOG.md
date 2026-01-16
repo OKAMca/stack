@@ -1,3 +1,14 @@
+## 1.2.16 (2026-01-16)
+
+### 🩹 Fixes
+
+- **directus-next:** remove breaking changes tag ([368332c](https://github.com/OKAMca/stack/commit/368332c))
+- **directus-next:** stop bundling okam libs ([04b2d27](https://github.com/OKAMca/stack/commit/04b2d27))
+
+### ❤️ Thank You
+
+- poclerson
+
 ## 1.2.15 (2026-01-16)
 
 ### 🩹 Fixes
