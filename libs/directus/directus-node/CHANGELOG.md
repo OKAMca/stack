@@ -1,3 +1,18 @@
+## 0.7.0 (2026-01-16)
+
+### 🚀 Features
+
+- **directus-query:** codegen file update ([82811eb](https://github.com/OKAMca/stack/commit/82811eb))
+
+### 🩹 Fixes
+
+- **directus-node:** stop bundling okam libs ([38cada6](https://github.com/OKAMca/stack/commit/38cada6))
+
+### ❤️ Thank You
+
+- Jérôme Trottier @JeromeTrottier
+- poclerson
+
 ## 0.6.2 (2025-07-24)
 
 ### 🧱 Updated Dependencies
