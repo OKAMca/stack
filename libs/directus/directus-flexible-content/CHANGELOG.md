@@ -1,3 +1,10 @@
+## 1.3.2 (2026-01-16)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.44.1
+- Updated directus-block to 1.7.2
+
 ## 1.3.0 (2026-01-16)
 
 ### 🚀 Features
