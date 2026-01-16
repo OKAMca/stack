@@ -48,7 +48,7 @@ export default defineConfig({
       output: {
         preserveModules: true,
       },
-      external: [...externalDeps, '@okam/core-lib', '@okam/logger'],
+      external: [...externalDeps, /^@okam\//],
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
           return
