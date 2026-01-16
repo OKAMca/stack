@@ -1,3 +1,26 @@
+## 1.7.0 (2026-01-16)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- **directus-block:** remove breaking changes tag ([b521c26](https://github.com/OKAMca/stack/commit/b521c26))
+- **directus-block:** stop bundling okam libs ([b0ddad5](https://github.com/OKAMca/stack/commit/b0ddad5))
+- **directus-next:** draft route handler uses zod, returns draft isEnabled whenever possible ([#376](https://github.com/OKAMca/stack/pull/376))
+- ⚠️  functions starting with "use" should be reserved to react hooks ([68f1f8f](https://github.com/OKAMca/stack/commit/68f1f8f))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.6.3 (2026-01-14)
 
 ### 🚀 Features
