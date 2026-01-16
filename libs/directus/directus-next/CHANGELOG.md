@@ -1,3 +1,9 @@
+## 1.2.17 (2026-01-16)
+
+### 🧱 Updated Dependencies
+
+- Updated directus-node to 0.7.0
+
 ## 1.2.16 (2026-01-16)
 
 ### 🩹 Fixes
