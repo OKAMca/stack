@@ -1,3 +1,35 @@
+## 1.2.26 (2026-01-16)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- bump ([ab924b9](https://github.com/OKAMca/stack/commit/ab924b9))
+
+### 🩹 Fixes
+
+- **directus-flexible-content:** remove breaking changes tag ([37954b3](https://github.com/OKAMca/stack/commit/37954b3))
+- **directus-flexible-content:** stop bundling okam libs ([cc8cfed](https://github.com/OKAMca/stack/commit/cc8cfed))
+- **directus-flexible-content:** core-lib in external deps ([e44cb2b](https://github.com/OKAMca/stack/commit/e44cb2b))
+- update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
+- package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
+- search field type export ([5ab6070](https://github.com/OKAMca/stack/commit/5ab6070))
+- search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
+- select controlled ([#280](https://github.com/OKAMca/stack/pull/280))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### 🧱 Updated Dependencies
+
+- Updated directus-block to 1.7.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.2.25 (2026-01-14)
 
 ### 🚀 Features
