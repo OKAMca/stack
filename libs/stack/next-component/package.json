@@ -1,6 +1,6 @@
 {
   "name": "@okam/next-component",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "publishConfig": {
     "access": "public"
   },
@@ -30,7 +30,7 @@
     "url": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
-    "@okam/stack-ui": "1.44.1",
+    "@okam/stack-ui": "1.44.2",
     "@okam/core-lib": "1.17.0",
     "next": "^15.0.0",
     "react-use": "17.5.1",

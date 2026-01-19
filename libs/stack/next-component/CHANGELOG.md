@@ -1,3 +1,17 @@
+## 1.3.3 (2026-01-19)
+
+### 🩹 Fixes
+
+- cross-lib type imports are always absolute ([#392](https://github.com/OKAMca/stack/pull/392))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.44.2
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.3.2 (2026-01-16)
 
 ### 🧱 Updated Dependencies
