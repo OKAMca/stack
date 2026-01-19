@@ -1,7 +1,7 @@
 {
   "name": "@okam/directus-node",
   "main": "./src/index.js",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "types": "./src/index.d.ts",
   "publishConfig": {
     "access": "public"
