@@ -1,3 +1,33 @@
+## 1.44.3 (2026-01-19)
+
+### 🚀 Features
+
+- **admin-bar:** add AdminBar with draft mode support ([289427e](https://github.com/OKAMca/stack/commit/289427e))
+- **next-component:** nuqs wrapper for react-aria ([d63f2f7](https://github.com/OKAMca/stack/commit/d63f2f7))
+- **stack-ui:** listbox react hook form integration ([f79cffc](https://github.com/OKAMca/stack/commit/f79cffc))
+
+### 🩹 Fixes
+
+- cross-lib type imports are always absolute ([#392](https://github.com/OKAMca/stack/pull/392))
+- replace safe import to avoid weird externalization issues ([2c1bf26](https://github.com/OKAMca/stack/commit/2c1bf26))
+- **stack-ui:** remove breaking changes tag ([02ef258](https://github.com/OKAMca/stack/commit/02ef258))
+- **stack-ui:** stop bundling okam libs ([57c2f4f](https://github.com/OKAMca/stack/commit/57c2f4f))
+- adminbar safe draft mode handling ([#385](https://github.com/OKAMca/stack/pull/385))
+- **directus-next:** draft route handler uses zod, returns draft isEnabled whenever possible ([#376](https://github.com/OKAMca/stack/pull/376))
+- **stack-ui:** props order fix ([b129ebe](https://github.com/OKAMca/stack/commit/b129ebe))
+- **stack-ui:** add icon + error icon to text input ([485cd9e](https://github.com/OKAMca/stack/commit/485cd9e))
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Max Hilland
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.44.2 (2026-01-19)
 
 ### 🚀 Features
