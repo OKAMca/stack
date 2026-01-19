@@ -1,3 +1,13 @@
+## 1.2.21 (2026-01-19)
+
+### 🩹 Fixes
+
+- cross-lib type imports are always absolute ([#392](https://github.com/OKAMca/stack/pull/392))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 1.2.19 (2026-01-16)
 
 ### 🧱 Updated Dependencies
