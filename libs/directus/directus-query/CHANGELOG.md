@@ -3,6 +3,7 @@
 ### 🚀 Features
 
 - ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+- Consumers must now have react and react-dom in their own
 
 ### 🩹 Fixes
 
@@ -11,10 +12,6 @@
 - update vite-plugin-dts to version 3 ([5d33c77](https://github.com/OKAMca/stack/commit/5d33c77))
 - package deps error ([b665a45](https://github.com/OKAMca/stack/commit/b665a45))
 - search field icon ([0850fde](https://github.com/OKAMca/stack/commit/0850fde))
-
-### ⚠️  Breaking Changes
-
-- Consumers must now have react and react-dom in their own
 
 ### ❤️ Thank You
 
