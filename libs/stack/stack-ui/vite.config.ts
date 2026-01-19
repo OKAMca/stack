@@ -19,6 +19,7 @@ export default defineConfig({
     dts({
       entryRoot: 'src',
       tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
+      aliasesExclude: [/^@okam\//],
     }),
   ],
 
