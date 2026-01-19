@@ -1,3 +1,24 @@
+## 1.17.1 (2026-01-19)
+
+### 🚀 Features
+
+- ⚠️  React 19 + Next.js 15 upgrade for all @okam/* packages ([#369](https://github.com/OKAMca/stack/pull/369))
+
+### 🩹 Fixes
+
+- cross-lib type imports are always absolute ([#392](https://github.com/OKAMca/stack/pull/392))
+- **core-lib:** stop bundling okam libs ([7985a31](https://github.com/OKAMca/stack/commit/7985a31))
+
+### ⚠️  Breaking Changes
+
+- Consumers must now have react and react-dom in their own
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 1.17.0 (2025-07-24)
 
 ### 🚀 Features
