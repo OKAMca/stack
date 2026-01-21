@@ -1,31 +1,32 @@
-import { Item } from '@react-stately/collections'
-import { isEmpty } from 'radashi'
 import type { ComponentType } from 'react'
-import React from 'react'
-import Button, { ButtonWithForwardRef } from '../../components/Button'
+import type { PressEvent } from 'react-aria'
 import type { TButtonProps } from '../../components/Button/interface'
-import MenuItems from '../../components/Menu/components/MenuItems'
 import type { TMenuItemProps, TMenuProps, TMenuSidePanelProps } from '../../components/Menu/interface'
+import { isEmpty } from 'radashi'
+import * as React from 'react'
+import { Item } from 'react-stately'
+import { Button, ButtonWithForwardRef } from '../../components/Button'
+import MenuItems from '../../components/Menu/components/MenuItems'
 import MenuSidePanel from '../../components/Menu/MenuSidePanel'
-import Typography from '../../components/Typography'
+import { Typography } from '../../components/Typography'
 import { MenuContextProvider, useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
 import RenderWithSlide from '../../transitions/RenderWithSlide'
 import { items } from './mock'
 
-export type TSubMenuTab = {
+export interface TSubMenuTab {
   key: string
   title: string
   childItems?: TMenuItemProps[] | null
   extra: React.ReactNode | undefined
 }
 
-export type TSubMenuExtraData = {
+export interface TSubMenuExtraData {
   path: string
   data: React.ReactNode
 }
 
-export const SidePanelControl = () => {
+export function SidePanelControl() {
   const { buttonProps } = useSidePanel()
 
   return (
@@ -35,25 +36,25 @@ export const SidePanelControl = () => {
   )
 }
 
-export const BackBtn = ({ label }: TButtonProps & { label?: string }) => {
+export function BackBtn({ label }: TButtonProps & { label?: string }) {
   const { tabState, defaultSelectedKey } = useMenu()
   const { setSelectedKey } = tabState
 
   return <Button handlePress={() => setSelectedKey?.(defaultSelectedKey)}>{label}</Button>
 }
 
-export const CloseBtn = () => {
+export function CloseBtn() {
   const { tabState, defaultSelectedKey } = useMenu()
   const { buttonProps, overlayState } = useSidePanel()
   const { closeButtonProps, closeButtonRef } = buttonProps
   const { isOpen } = overlayState
 
-  const handlePress = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handlePress = (e: PressEvent) => {
     tabState?.setSelectedKey?.(defaultSelectedKey)
-    closeButtonProps?.onClick?.(e)
+    closeButtonProps?.handlePress?.(e)
   }
 
-  const updatedCloseButtonProps = { ...closeButtonProps, onClick: handlePress }
+  const updatedCloseButtonProps = { ...closeButtonProps, handlePress }
 
   return (
     isOpen && (
@@ -64,19 +65,21 @@ export const CloseBtn = () => {
   )
 }
 
-export const ShowTab = ({ children }: { children: React.ReactNode }) => (
-  <div>
+export function ShowTab({ children }: { children: React.ReactNode }) {
+  return (
     <div>
-      <BackBtn label="SHOWS" />
-      <CloseBtn />
+      <div>
+        <BackBtn label="SHOWS" />
+        <CloseBtn />
+      </div>
+      <Typography>{children}</Typography>
     </div>
-    <Typography>{children}</Typography>
-  </div>
-)
+  )
+}
 
 export const CloseBtnRender = () => <CloseBtn />
 
-export const MenuFactory = ({
+export function MenuFactory({
   menuItems,
   tabs,
   id,
@@ -90,7 +93,7 @@ export const MenuFactory = ({
   defaultIsOpen?: boolean
   openBtn?: React.ReactNode | null
   MenuComponent: ComponentType<TMenuProps | TMenuSidePanelProps>
-}) => {
+}) {
   const { tabState, defaultSelectedKey } = useMenu()
 
   const handleCloseMenu = () => {
@@ -110,7 +113,7 @@ export const MenuFactory = ({
     >
       <>
         {openBtn}
-        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (props: unknown) => React.JSX.Element}>
+        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (_props: unknown) => React.JSX.Element}>
           <MenuItems menuLinkComponent="a" menuItems={menuItems} />
         </MenuComponent>
       </>
@@ -118,16 +121,12 @@ export const MenuFactory = ({
   )
 }
 
-export const menuTabs = (
-  menu: TMenuItemProps[],
-  extras?: TSubMenuExtraData[],
-  MenuComponent: ComponentType<TMenuProps> = MenuSidePanel,
-) => {
+export function menuTabs(menu: TMenuItemProps[], extras?: TSubMenuExtraData[], MenuComponent: ComponentType<TMenuProps> = MenuSidePanel) {
   const tabs: TSubMenuTab[] = [{ key: 'empty', title: 'empty', childItems: null, extra: null }]
 
   const recursiveFilter = (x: TMenuItemProps) => {
     if (x.path?.startsWith('#')) {
-      const extra = extras?.find((f) => x.path === f.path)
+      const extra = extras?.find(f => x.path === f.path)
       tabs.push({ key: x.path.substring(1), title: x.label ?? x.path, childItems: x.childItems, extra: extra?.data })
     }
   }
@@ -150,7 +149,7 @@ export const menuTabs = (
   })
 }
 
-const MenuContent = () => {
+function MenuContent() {
   const extras: TSubMenuExtraData[] = [
     {
       path: '#shows',

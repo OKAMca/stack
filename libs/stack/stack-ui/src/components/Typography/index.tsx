@@ -1,19 +1,18 @@
 'use client'
 
-/* eslint-disable react/display-name */
-import React from 'react'
-import useThemeContext from '../../providers/Theme/hooks'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TTypographyProps } from './interface'
+import * as React from 'react'
+import useThemeContext from '../../providers/Theme/hooks'
 
-const Typography = <T extends TToken>({
+export function Typography<T extends TToken>({
   as: Component = 'span',
   themeName = 'typography',
   tokens,
   customTheme,
   children,
   ...rest
-}: TTypographyProps<T>) => {
+}: TTypographyProps<T>) {
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
@@ -23,7 +22,7 @@ const Typography = <T extends TToken>({
   )
 }
 
-export const TypographyWithForwardRef = React.forwardRef((props: TTypographyProps, ref: React.Ref<HTMLElement>) => {
+export function TypographyWithForwardRef({ ref, ...props }: TTypographyProps & { ref?: React.Ref<HTMLElement> }) {
   const { as: Component = 'span', tokens, themeName = 'typography', customTheme, children, ...rest } = props
   const theme = useThemeContext(themeName, tokens, customTheme)
   return (
@@ -31,6 +30,4 @@ export const TypographyWithForwardRef = React.forwardRef((props: TTypographyProp
       {children}
     </Component>
   )
-})
-
-export default Typography
+}

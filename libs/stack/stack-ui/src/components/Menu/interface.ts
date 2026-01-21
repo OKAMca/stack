@@ -1,24 +1,24 @@
 import type { AriaLabelingProps } from '@react-types/shared'
-import type { AriaTabListProps } from '@react-types/tabs'
-import type React from 'react'
+import type * as React from 'react'
+import type { AriaTabListProps } from 'react-aria'
 import type { TToken } from '../../providers/Theme/interface'
 import type { Maybe, TDefaultComponent, TTransition } from '../../types/components'
 import type { NextLinkProps } from '../../types/next-link'
 
-export type MenuProps = {
+export interface MenuProps {
   id: string
   children: React.ReactNode
   beforeTabContent?: React.ReactNode
   afterTabContent?: React.ReactNode
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  PanelTransition?: (props: TTransition) => React.JSX.Element
+
+  PanelTransition?: (_props: TTransition) => React.JSX.Element
 }
 
 export type TMenuProps<T = TToken> = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent<T>
 
 export type TMenuSidePanelProps = TMenuProps & {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  TransitionAnimation?: (props: TTransition) => React.JSX.Element
+
+  TransitionAnimation?: (_props: TTransition) => React.JSX.Element
 }
 
 export type PartialHtmlBaseElement = Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>
@@ -30,14 +30,13 @@ export interface IMenuItemProp {
   path?: string
   label?: string
   nextLinkProps?: NextLinkProps
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  as?: React.ElementType<any>
+  as?: React.ElementType
   onClick?: () => void
 }
 
-export type TMenuItemProps = IMenuItemProp &
-  TDefaultComponent &
-  AriaLabelingProps & {
+export type TMenuItemProps = IMenuItemProp
+  & TDefaultComponent
+  & AriaLabelingProps & {
     /**
      * @deprecated Use `aria-label` instead
      */
@@ -46,10 +45,8 @@ export type TMenuItemProps = IMenuItemProp &
 
 export interface TMenuItemsProps extends TDefaultComponent {
   menuItems?: TMenuItemProps[] | null
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  menuLinkComponent?: React.ElementType<any>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  buttonLinkComponent?: React.ElementType<any>
+  menuLinkComponent?: React.ElementType
+  buttonLinkComponent?: React.ElementType
   children?: React.ReactNode
 }
 

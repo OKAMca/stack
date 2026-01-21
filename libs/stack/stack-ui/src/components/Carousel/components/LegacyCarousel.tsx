@@ -1,19 +1,19 @@
 'use client'
 
+import type { TLegacyCarouselProps } from '../interface'
 import { useRef } from 'react'
 import Carousel from '..'
 import { useCarousel } from '../../../providers/Carousel'
-import type { TLegacyCarouselProps } from '../interface'
 import {
-  LegacyCarouselPrevNavigationButton,
   LegacyCarouselNextNavigationButton,
+  LegacyCarouselPrevNavigationButton,
 } from '../navigation/LegacyCarouselNavigationButton'
 import CarouselPagination from '../pagination/CarouselPagination'
 import CarouselPaginationBullet from '../pagination/CarouselPaginationBullet'
 import CarouselSlide from '../swiper/CarouselSlide'
 import CarouselSwiper from '../swiper/CarouselSwiper'
 
-const InnerLegacyCarousel = (props: TLegacyCarouselProps) => {
+function InnerLegacyCarousel(props: TLegacyCarouselProps) {
   const {
     id,
     themeName = 'carousel',
@@ -25,7 +25,7 @@ const InnerLegacyCarousel = (props: TLegacyCarouselProps) => {
     prevButton: PrevButton = LegacyCarouselPrevNavigationButton,
     nextButton: NextButton = LegacyCarouselNextNavigationButton,
     onSlideChange,
-    children = (slide) => <CarouselSlide {...slide} />,
+    children = slide => <CarouselSlide {...slide} />,
     ...rest
   } = props
   const prevButtonRef = useRef(null)
@@ -93,7 +93,7 @@ const InnerLegacyCarousel = (props: TLegacyCarouselProps) => {
 /**
  * @deprecated Use Carousel instead
  */
-const LegacyCarousel = (props: TLegacyCarouselProps) => {
+function LegacyCarousel(props: TLegacyCarouselProps) {
   const { children, ...rest } = props
   return (
     <Carousel {...rest}>

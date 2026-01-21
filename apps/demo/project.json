@@ -3,10 +3,13 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/demo",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/next:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/demo"
@@ -15,7 +18,9 @@
         "development": {
           "outputPath": "apps/demo"
         },
-        "production": {}
+        "production": {
+          "webpack": true
+        }
       }
     },
     "serve": {
@@ -44,26 +49,33 @@
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@nx/vitest:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
       "options": {
-        "jestConfig": "apps/demo/jest.config.ts",
+        "reportsDirectory": "../../coverage/apps/demo",
         "passWithNoTests": true
       },
       "configurations": {
         "ci": {
-          "ci": true,
-          "codeCoverage": true
+          "coverage": {
+            "enabled": true
+          }
         }
       }
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/demo/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/demo/**/*.{ts,tsx,js,jsx}",
+          "apps/demo/project.json"
+        ]
       }
     }
-  },
-  "tags": []
+  }
 }

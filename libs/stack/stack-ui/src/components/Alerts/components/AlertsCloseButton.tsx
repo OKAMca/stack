@@ -1,11 +1,14 @@
-import type { Ref } from 'react'
-import { forwardRef } from 'react'
+import type * as React from 'react'
+import type { TAnchorProps } from '../../Button/interface'
 import { ButtonWithForwardRef } from '../../Button'
-import type { TButtonProps } from '../../Button/interface'
 import Icon from '../../Icon'
 import CloseBtn from '../../icons/CloseBtn'
 
-const AlertsCloseButton = forwardRef((props: TButtonProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
+interface AlertsCloseButtonProps extends TAnchorProps {
+  ref?: React.Ref<HTMLElement>
+}
+
+function AlertsCloseButton({ ref, ...props }: AlertsCloseButtonProps) {
   const { themeName = 'alerts.closeBtn', ...rest } = props
 
   return (
@@ -13,7 +16,7 @@ const AlertsCloseButton = forwardRef((props: TButtonProps, ref: Ref<HTMLButtonEl
       <Icon icon={<CloseBtn />} />
     </ButtonWithForwardRef>
   )
-})
+}
 
 AlertsCloseButton.displayName = 'AlertsCloseButton'
 

@@ -1,10 +1,10 @@
 'use client'
 
-import Button from '../../Button'
 import type { TCarouselPaginationBulletProps } from './interface'
+import { Button } from '../../Button'
 import { useCarouselPaginationBullet } from './useCarouselPaginationBullet'
 
-const CarouselPaginationBullet = (props: TCarouselPaginationBulletProps) => {
+function CarouselPaginationBullet(props: TCarouselPaginationBulletProps) {
   const { themeName = 'carousel.pagination', tokens, customTheme } = props
 
   const { paginationBulletProps, isActive } = useCarouselPaginationBullet(props)

@@ -1,8 +1,8 @@
 'use client'
 
+import type { TCarouselPaginationFraction, TCarouselPaginationFractionProps } from './interface'
 import { mergeProps } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
-import type { TCarouselPaginationFractionProps, TCarouselPaginationFraction } from './interface'
 
 export function useCarouselPaginationFraction(props: TCarouselPaginationFractionProps): TCarouselPaginationFraction {
   const { startIndex = 1, ...rest } = props

@@ -1,9 +1,9 @@
-import * as path from 'path'
 import type { Tree } from '@nx/devkit'
+import type { BlockGeneratorSchema } from './schema'
+import * as path from 'node:path'
 import { formatFiles, generateFiles } from '@nx/devkit'
 import { capitalizeFirstLetter } from '@okam/core-lib'
 import { camel, snake } from 'radashi'
-import type { BlockGeneratorSchema } from './schema'
 
 export async function blockGenerator(tree: Tree, options: BlockGeneratorSchema) {
   const getName = () => {

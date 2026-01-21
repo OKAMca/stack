@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import Box from '../../components/Box'
-import Select from '../../components/fields/Select/Select'
 import type { TSelectProps } from '../../components/fields/Select/Select.interface'
 import type { Nullable } from '../../types/components'
+import { useState } from 'react'
+import { Box } from '../../components/Box'
+import { Select } from '../../components/fields/Select/Select'
 
-const SelectContent = ({
+function SelectContent({
   disabled = false,
   isError = false,
   errorMessage,
@@ -14,7 +14,7 @@ const SelectContent = ({
   placeholderLabel,
   options,
   ...rest
-}: TSelectProps) => {
+}: TSelectProps) {
   const [value, setValue] = useState<Nullable<string>>()
 
   return (

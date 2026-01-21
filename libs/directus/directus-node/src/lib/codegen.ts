@@ -1,5 +1,5 @@
-import path from 'path'
 import type { CodegenConfig } from '@graphql-codegen/cli'
+import path from 'node:path'
 import { config as deconfig } from 'dotenv'
 import { logger } from '../logger'
 
@@ -83,7 +83,7 @@ export interface CodegenOptions {
  * @param options - Configuration options for the codegen
  * @returns GraphQL codegen configuration object that can be used with the GraphQL Code Generator
  */
-const graphqlCodegenConfig = (options: CodegenOptions): CodegenConfig => {
+function graphqlCodegenConfig(options: CodegenOptions): CodegenConfig {
   const {
     schemaUrl: providedSchemaUrl,
     authToken: providedAuthToken,
@@ -102,13 +102,14 @@ const graphqlCodegenConfig = (options: CodegenOptions): CodegenConfig => {
     deconfig({ path: localEnvPath, override: true })
 
     // Use provided values or fall back to environment variables
-    const schemaUrl =
-      providedSchemaUrl ?? process.env['NEXT_SERVER_GRAPHQL_URL'] ?? process.env['NEXT_PUBLIC_GRAPHQL_URL']
+
+    const schemaUrl = providedSchemaUrl ?? process.env['NEXT_SERVER_GRAPHQL_URL'] ?? process.env['NEXT_PUBLIC_GRAPHQL_URL']
+
     const authToken = providedAuthToken ?? process.env['NEXT_PUBLIC_API_TOKEN']
 
-    if (!schemaUrl) {
-      const errorMsg =
-        'GraphQL schema URL is not defined. Provide it as an option or set NEXT_SERVER_GRAPHQL_URL or NEXT_PUBLIC_GRAPHQL_URL environment variable.'
+    if (schemaUrl == null || schemaUrl === '') {
+      const errorMsg
+        = 'GraphQL schema URL is not defined. Provide it as an option or set NEXT_SERVER_GRAPHQL_URL or NEXT_PUBLIC_GRAPHQL_URL environment variable.'
       logger.log(errorMsg, 'error')
       throw new Error(errorMsg)
     }
@@ -118,7 +119,7 @@ const graphqlCodegenConfig = (options: CodegenOptions): CodegenConfig => {
       ...additionalHeaders,
     }
 
-    if (authToken) {
+    if (authToken != null && authToken !== '') {
       headers['Authorization'] = `Bearer ${authToken}`
     }
 
@@ -141,7 +142,8 @@ const graphqlCodegenConfig = (options: CodegenOptions): CodegenConfig => {
     }
 
     return config
-  } catch (error) {
+  }
+  catch (error) {
     logger.log('Error creating GraphQL codegen configuration:', 'error', { error })
     throw error
   }

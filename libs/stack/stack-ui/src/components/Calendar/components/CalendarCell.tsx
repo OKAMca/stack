@@ -1,13 +1,11 @@
 'use client'
 
-import { isSameDay, getDayOfWeek } from '@internationalized/date'
-import { useFocusRing } from '@react-aria/focus'
-import { mergeProps } from '@react-aria/utils'
-import { useRef } from 'react'
-import { useCalendarCell, useLocale } from 'react-aria'
 import type { RangeCalendarState } from 'react-stately'
-import Box, { BoxWithForwardRef } from '../../Box'
 import type { TCalendarCellProps } from '../interface'
+import { getDayOfWeek, isSameDay } from '@internationalized/date'
+import { useRef } from 'react'
+import { mergeProps, useCalendarCell, useFocusRing, useLocale } from 'react-aria'
+import { Box, BoxWithForwardRef } from '../../Box'
 
 function CalendarCell(props: TCalendarCellProps) {
   const { themeName = 'calendar', tokens, state, date } = props
@@ -30,14 +28,14 @@ function CalendarCell(props: TCalendarCellProps) {
   const startDate = range?.start
   const endDate = range?.end
 
-  const isSelectionStart = range && startDate ? isSameDay(date, startDate) : isSelected
-  const isSelectionEnd = range && endDate ? isSameDay(date, endDate) : isSelected
+  const isSelectionStart = range != null && startDate != null ? isSameDay(date, startDate) : isSelected
+  const isSelectionEnd = range != null && endDate != null ? isSameDay(date, endDate) : isSelected
 
   const { locale } = useLocale()
   const dayOfWeek = getDayOfWeek(date, locale)
   const isRoundedLeft = isSelected && (isSelectionStart || dayOfWeek === 0 || date.day === 1)
-  const isRoundedRight =
-    isSelected && (isSelectionEnd || dayOfWeek === 6 || date.day === date.calendar.getDaysInMonth(date))
+  const isRoundedRight
+    = isSelected && (isSelectionEnd || dayOfWeek === 6 || date.day === date.calendar.getDaysInMonth(date))
 
   const { focusProps, isFocusVisible } = useFocusRing()
 

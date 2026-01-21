@@ -1,20 +1,22 @@
+import { Main, SkipToMain } from '.'
 import { Box, Typography } from '../..'
-import SkipToMain, { Main } from '.'
 
-const Template = (args) => (
-  <>
-    <SkipToMain {...args} />
-    <Main id="main">
-      <Box themeName="container">
-        <Typography as="p">Tab to see the skip link appear</Typography>
-        <Typography as="h1" tokens={{ size: 'h1' }}>
-          Main Content
-        </Typography>
-        <Typography as="p">This is the main content area.</Typography>
-      </Box>
-    </Main>
-  </>
-)
+function Template(args) {
+  return (
+    <>
+      <SkipToMain {...args} />
+      <Main id="main">
+        <Box themeName="container">
+          <Typography as="p">Tab to see the skip link appear</Typography>
+          <Typography as="h1" tokens={{ size: 'h1' }}>
+            Main Content
+          </Typography>
+          <Typography as="p">This is the main content area.</Typography>
+        </Box>
+      </Main>
+    </>
+  )
+}
 
 export default {
   title: 'BASE COMPONENTS/SkipToMain',

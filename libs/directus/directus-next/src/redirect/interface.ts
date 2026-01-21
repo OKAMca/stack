@@ -12,8 +12,7 @@ export interface HandleRedirectOptions {
    * @default process.env.NEXT_API_TOKEN_ADMIN
    */
   getDirectusApiToken?: () => string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  getJsonError?: (data: any, status: number) => Response
+  getJsonError?: (_data: unknown, _status: number) => Response
   /**
    * @default 2000
    */

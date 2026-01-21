@@ -1,137 +1,130 @@
 'use client'
 
-import { mergeProps } from '@react-aria/utils'
-import type { Selection } from '@react-types/shared'
-import { isEmpty } from 'radashi'
 import type { ElementType, RefObject } from 'react'
-import { useRef, forwardRef } from 'react'
-import { useListBox } from 'react-aria'
-import { Controller, useFormContext } from 'react-hook-form'
-import { useListState } from 'react-stately'
+import type { Selection } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
-import { useTranslation } from '../../../providers/Translation'
-import Box, { BoxWithForwardRef } from '../../Box'
-import { Anchor } from '../../Button'
-import Typography from '../../Typography'
-import Option from '../Option'
-import ListBoxSection from './components/ListBoxSection'
 import type {
   TControlledListBoxFormProps,
+  TControlledReactHookFormListBoxProps,
   TListBoxFormProps,
   TReactHookFormListBoxProps,
-  TControlledReactHookFormListBoxProps,
 } from './interface'
+import { isEmpty } from 'radashi'
+import { useRef } from 'react'
+import { mergeProps, useListBox } from 'react-aria'
+import { Controller, useFormContext } from 'react-hook-form'
+import { useListState } from 'react-stately'
+import { useTranslation } from '../../../providers/Translation'
+import { Box, BoxWithForwardRef } from '../../Box'
+import { Anchor } from '../../Button'
+import { Typography } from '../../Typography'
+import Option from '../Option'
+import ListBoxSection from './components/ListBoxSection'
 
 const itemComponents: Record<string, ElementType> = {
   item: Option,
   section: ListBoxSection,
 }
 
-export const ControlledListBox = forwardRef<HTMLElement, TControlledListBoxFormProps<object, TToken>>(
-  (props, listBoxRef) => {
-    const {
-      themeName = 'listBox',
-      tokens,
-      customTheme,
-      label,
-      escapeKeyBehavior = 'clearSelection',
-      linkElementType = Anchor,
-      isDisabled = false,
-      isRequired = false,
-      isInvalid = false,
-      isError = false,
-      errorMessage,
-      disabledKeys,
-      fieldRef,
-      ...rest
-    } = props
-    const state = useListState(props)
-    const keys = state.collection.getKeys()
-    const mergeRefs = (newRef: HTMLElement) => {
-      if (newRef) {
-        fieldRef?.(newRef)
-        if (!listBoxRef) return
-        if (typeof listBoxRef === 'function') {
-          listBoxRef(newRef)
-        } else {
-          // eslint-disable-next-line no-param-reassign
-          listBoxRef.current = newRef
-        }
+export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledListBoxFormProps<object, TToken> & { ref?: React.Ref<HTMLElement | null> }) {
+  const {
+    themeName = 'listBox',
+    tokens,
+    customTheme,
+    label,
+    escapeKeyBehavior = 'clearSelection',
+    linkElementType = Anchor,
+    isDisabled = false,
+    isRequired = false,
+    isInvalid = false,
+    isError = false,
+    errorMessage,
+    disabledKeys,
+    fieldRef,
+    ...rest
+  } = props
+  const state = useListState(props)
+  const keys = state.collection.getKeys()
+  const mergeRefs = (newRef: HTMLElement | null) => {
+    if (newRef != null) {
+      fieldRef?.(newRef)
+      if (listBoxRef == null)
+        return
+      if (typeof listBoxRef === 'function') {
+        listBoxRef(newRef)
+      }
+      else if (typeof listBoxRef === 'object') {
+        (listBoxRef as React.MutableRefObject<HTMLElement | null>).current = newRef
       }
     }
-    const { listBoxProps, labelProps } = useListBox(
-      {
-        ...rest,
-        escapeKeyBehavior,
-        label,
-        disabledKeys: isDisabled ? keys : disabledKeys,
-      },
-      state,
-      mergeRefs as unknown as RefObject<HTMLElement | null>,
-    )
+  }
+  const { listBoxProps, labelProps } = useListBox(
+    {
+      ...rest,
+      escapeKeyBehavior,
+      label,
+      disabledKeys: isDisabled ? keys : disabledKeys,
+    },
+    state,
+    mergeRefs as unknown as RefObject<HTMLElement | null>,
+  )
 
-    const listBoxTokens = {
-      ...tokens,
-      isDisabled,
-      isRequired,
-      isInvalid,
-      isError,
-    }
+  const listBoxTokens = {
+    ...tokens,
+    isDisabled,
+    isRequired,
+    isInvalid,
+    isError,
+  }
 
-    return (
-      <Box themeName={`${themeName}.wrapper`} tokens={listBoxTokens} customTheme={customTheme}>
-        {label && (
-          <Typography {...labelProps} themeName={`${themeName}.label`} tokens={listBoxTokens}>
-            {label}
-          </Typography>
-        )}
-        <BoxWithForwardRef
-          ref={listBoxRef}
-          as="ul"
-          {...listBoxProps}
-          themeName={`${themeName}.list`}
-          tokens={listBoxTokens}
-        >
-          {[...state.collection].map((item) => {
-            const { key } = item
-            const type = item.type ?? 'item'
-            const Component = itemComponents[type]
-            return (
-              <Component
-                key={key}
-                {...{ [type]: item }}
-                state={state}
-                tokens={{ ...tokens, type }}
-                themeName={`${themeName}.${type}`}
-                linkElementType={linkElementType}
-              />
-            )
-          })}
-        </BoxWithForwardRef>
-        {isError && errorMessage && (
-          <Typography themeName={`${themeName}.errorMessage`} tokens={listBoxTokens}>
-            {errorMessage}
-          </Typography>
-        )}
-      </Box>
-    )
-  },
-)
+  return (
+    <Box themeName={`${themeName}.wrapper`} tokens={listBoxTokens} customTheme={customTheme}>
+      {label != null && (
+        <Typography {...labelProps} themeName={`${themeName}.label`} tokens={listBoxTokens}>
+          {label}
+        </Typography>
+      )}
+      <BoxWithForwardRef
+        ref={listBoxRef}
+        as="ul"
+        {...listBoxProps}
+        themeName={`${themeName}.list`}
+        tokens={listBoxTokens}
+      >
+        {[...state.collection].map((item) => {
+          const { key } = item
+          const type = item.type ?? 'item'
+          const Component = itemComponents[type] ?? Option
+          return (
+            <Component
+              key={key}
+              {...{ [type]: item }}
+              state={state}
+              tokens={{ ...tokens, type }}
+              themeName={`${themeName}.${type}`}
+              linkElementType={linkElementType}
+            />
+          )
+        })}
+      </BoxWithForwardRef>
+      {(isError && errorMessage != null) && (
+        <Typography themeName={`${themeName}.errorMessage`} tokens={listBoxTokens}>
+          {errorMessage}
+        </Typography>
+      )}
+    </Box>
+  )
+}
 
 ControlledListBox.displayName = 'ControlledListBox'
 
-const ListBox = (props: TListBoxFormProps<object, TToken>) => {
+export function ListBox(props: TListBoxFormProps<object, TToken>) {
   const state = useListState(props)
   const ref = useRef<HTMLElement>(null)
   return <ControlledListBox {...props} state={state} ref={ref} />
 }
 
-export default ListBox
-
-export const ControlledReactHookFormListBox = forwardRef<
-  HTMLElement,
-  TControlledReactHookFormListBoxProps<object, TToken>
->((props, listBoxRef) => {
+export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TControlledReactHookFormListBoxProps<object, TToken> & { ref?: React.Ref<HTMLElement | null> }) {
   const { name, rules, isRequired, isDisabled, tokens, selectionMode = 'single', errorMessage, ...rest } = props
   const { control, setValue, watch, getValues } = useFormContext()
 
@@ -186,11 +179,11 @@ export const ControlledReactHookFormListBox = forwardRef<
       }}
     />
   )
-})
+}
 
 ControlledReactHookFormListBox.displayName = 'ControlledReactHookFormListBox'
 
-export const ReactHookFormListBox = (props: TReactHookFormListBoxProps<object, TToken>) => {
+export function ReactHookFormListBox(props: TReactHookFormListBoxProps<object, TToken>) {
   const state = useListState(props)
   const ref = useRef<HTMLElement>(null)
   return <ControlledReactHookFormListBox {...props} state={state} ref={ref} />

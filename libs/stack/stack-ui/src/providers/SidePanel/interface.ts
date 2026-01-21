@@ -1,8 +1,8 @@
-import type { OverlayTriggerProps, OverlayTriggerState } from '@react-stately/overlays'
 import type { DOMProps } from '@react-types/shared'
-import type React from 'react'
+import type * as React from 'react'
 import type { ButtonHTMLAttributes } from 'react'
-import type { OverlayTriggerProps as OverlayTriggerPropsAria, AriaButtonProps } from 'react-aria'
+import type { AriaButtonProps, OverlayTriggerProps as OverlayTriggerPropsAria } from 'react-aria'
+import type { OverlayTriggerProps, OverlayTriggerState } from 'react-stately'
 
 export interface TSidePanelProviderProps extends OverlayTriggerProps, Partial<OverlayTriggerPropsAria> {
   children: React.ReactNode
@@ -25,7 +25,7 @@ export type TSidePanelButtonProps = Omit<AriaButtonProps<'button'>, 'onPress'> &
   handlePress?: AriaButtonProps<'button'>['onPress']
 }
 
-export type TSidePanelButtons = {
+export interface TSidePanelButtons {
   closeButtonProps: TSidePanelButtonProps & ButtonHTMLAttributes<HTMLButtonElement>
   closeButtonRef: React.MutableRefObject<null>
   openButtonProps: TSidePanelButtonProps & React.HTMLAttributes<HTMLDivElement>
@@ -41,7 +41,7 @@ export type TSidePanelButtons = {
  */
 export type TButtonProps = TSidePanelButtons
 
-export type TSidePanelContext = {
+export interface TSidePanelContext {
   defaultSelectedKey: string
   overlayState: OverlayTriggerState
   buttonProps: TSidePanelButtons

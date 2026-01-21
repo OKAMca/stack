@@ -1,13 +1,12 @@
 'use client'
 
+import type { TDateFieldProps, TDateSegmentProps } from '../interface'
 import { createCalendar } from '@internationalized/date'
-import { useLocale } from '@react-aria/i18n'
 import { useRef } from 'react'
-import { FocusRing, useDateField, useDateSegment, useFocusRing } from 'react-aria'
+import { FocusRing, useDateField, useDateSegment, useFocusRing, useLocale } from 'react-aria'
 import { useDateFieldState } from 'react-stately'
 import useThemeContext from '../../../../providers/Theme/hooks'
 import { BoxWithForwardRef } from '../../../Box'
-import type { TDateFieldProps, TDateSegmentProps } from '../interface'
 
 function DateSegment(props: TDateSegmentProps) {
   const { themeName = 'datePicker', tokens, customTheme, segment, state } = props
@@ -82,7 +81,7 @@ function DateField(props: TDateFieldProps) {
       customTheme={customTheme}
     >
       {state.segments.map((segment, i) => (
-        // eslint-disable-next-line react/no-array-index-key
+        // eslint-disable-next-line react/no-array-index-key -- react-stately segments lack stable IDs; position-based key matches library pattern
         <DateSegment themeName={themeName} tokens={dateFieldTokens} key={i} segment={segment} state={state} />
       ))}
     </BoxWithForwardRef>

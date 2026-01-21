@@ -1,9 +1,9 @@
-import type { PressEvent } from '@react-types/shared'
-import { forwardRef, useCallback } from 'react'
-import { ButtonWithForwardRef } from '../../../Button'
+import type { PressEvent } from 'react-aria'
 import type { TComboBoxButtonProps } from '../interface'
+import { useCallback } from 'react'
+import { ButtonWithForwardRef } from '../../../Button'
 
-const ComboBoxButton = forwardRef<HTMLButtonElement & HTMLAnchorElement, TComboBoxButtonProps>((props, ref) => {
+function ComboBoxButton({ ref, ...props }: TComboBoxButtonProps & { ref?: React.RefObject<HTMLButtonElement & HTMLAnchorElement | null> }) {
   const { state, handlePress: handlePressProp, ...rest } = props
 
   const handlePress = useCallback(
@@ -16,7 +16,7 @@ const ComboBoxButton = forwardRef<HTMLButtonElement & HTMLAnchorElement, TComboB
   )
 
   return <ButtonWithForwardRef {...rest} ref={ref} handlePress={handlePress} />
-})
+}
 ComboBoxButton.displayName = 'ComboBoxButton'
 
 export default ComboBoxButton

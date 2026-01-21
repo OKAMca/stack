@@ -1,13 +1,13 @@
 'use client'
 
-import { useMenu } from '../../../providers/Menu'
 import type { TDefaultComponent } from '../../../types/components'
+import { useMenu } from '../../../providers/Menu'
 import TabPanel from '../../TabList/components/TabPanel'
 
-const TabContainer = (props: TDefaultComponent) => {
+function TabContainer(props: TDefaultComponent) {
   const { tabState } = useMenu()
 
-  return <TabPanel {...props} key={tabState.selectedItem?.key} state={tabState} />
+  return <TabPanel key={tabState.selectedItem?.key} {...props} state={tabState} />
 }
 
 export default TabContainer

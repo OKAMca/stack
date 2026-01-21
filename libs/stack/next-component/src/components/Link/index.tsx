@@ -1,13 +1,12 @@
 'use client'
 
+import type * as React from 'react'
+import type { TLinkProps } from './interface'
 import { Anchor } from '@okam/stack-ui'
 import NextLink from 'next/link'
-import type { Ref } from 'react'
-import { forwardRef } from 'react'
 import { useLink } from '../../hooks/useLink'
-import type { TLinkProps } from './interface'
 
-const Link = forwardRef((props: TLinkProps, ref: Ref<HTMLButtonElement & HTMLAnchorElement>) => {
+function Link({ ref, ...props }: TLinkProps & { ref?: React.Ref<HTMLElement> }) {
   const {
     themeName = 'link',
     tokens,
@@ -39,7 +38,7 @@ const Link = forwardRef((props: TLinkProps, ref: Ref<HTMLButtonElement & HTMLAnc
       {children}
     </Anchor>
   )
-})
+}
 
 Link.displayName = 'Link'
 

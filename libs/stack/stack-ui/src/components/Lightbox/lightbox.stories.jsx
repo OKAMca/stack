@@ -1,9 +1,9 @@
 import Image from 'next/image'
+import Lightbox from '.'
 import image from '../../../static/images/image.png'
 import LightboxControlledState from '../../storybook/Lightbox/LightboxControlledState'
-import Lightbox from '.'
 
-const Template = (args) => {
+function Template(args) {
   return (
     <Lightbox {...args}>
       <Image src={image} width={570} height={762} alt="Lightbox preview" />
@@ -11,7 +11,7 @@ const Template = (args) => {
   )
 }
 
-const TemplateControlledState = (args) => {
+function TemplateControlledState(args) {
   return (
     <LightboxControlledState {...args}>
       <Image src={image} width={570} height={762} alt="Lightbox preview" />
@@ -83,7 +83,7 @@ export default {
   args: {
     label: 'Open Dialog',
     thumbnailContent: <Image src={image} width={570} height={762} alt="Dog picture" />,
-    onOpenChange: (isOpen) => console.log(`Lightbox is now ${isOpen}`),
+    onOpenChange: isOpen => console.log(`Lightbox is now ${isOpen}`),
     closeButtonAriaLabel: 'Close the modal',
   },
 }

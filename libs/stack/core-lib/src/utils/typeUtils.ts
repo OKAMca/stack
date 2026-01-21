@@ -12,6 +12,6 @@ export function maybeWithDefault<T>(x: Maybe<T>, defaultValue: NonNullable<T>) {
   return defaultValue
 }
 
-export function unknownToString(str: string | unknown): string {
+export function unknownToString(str: unknown): string {
   return typeof str === 'string' ? str : ''
 }

@@ -16,7 +16,7 @@ export interface TCarouselPaginationProps<TSlideProps extends TCarouselSlideProp
    * @deprecated Use the slides from the context instead
    */
   slides?: TSlideProps[]
-  children: ReactNode | ((props: SwiperClass) => ReactNode)
+  children: ReactNode | ((_props: SwiperClass) => ReactNode)
 }
 
 export interface TCarouselPaginationBulletProps<

@@ -1,12 +1,12 @@
-import Button from '../Button'
+import Accordion from '.'
+import { Button } from '../Button'
 import CloseBtn from '../icons/CloseBtn'
 import AccordionItem from './components/AccordionItem'
 import useAccordionState from './hooks/useAccordionState'
-import Accordion from '.'
 
-const Template = (args) => <Accordion {...args} />
+const Template = args => <Accordion {...args} />
 
-const TemplateControlledState = (args) => {
+function TemplateControlledState(args) {
   const state = useAccordionState(args)
   const { selectionManager } = state
 
@@ -81,7 +81,7 @@ export default {
 
   args: {
     id: '1',
-    onSelectionChange: (keys) => console.log('Selection changed to: ', keys),
+    onSelectionChange: keys => console.log('Selection changed to: ', keys),
     selectionMode: 'single',
   },
 
@@ -106,7 +106,7 @@ export const LeftAligned = {
       <AccordionItem
         key="item-1"
         title="This is an accordion"
-        onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        onOpenChange={isOpen => console.log(`Open state was change to: ${isOpen}`)}
         icon="Plus"
       >
         BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
@@ -132,7 +132,7 @@ export const CenterAligned = {
       <AccordionItem
         key="item-1"
         title="This is an accordion"
-        onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        onOpenChange={isOpen => console.log(`Open state was change to: ${isOpen}`)}
       >
         BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
         prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
@@ -160,7 +160,7 @@ export const DefaultOpened = {
         key="item-1"
         title="This is an accordion"
         defaultOpen
-        onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        onOpenChange={isOpen => console.log(`Open state was change to: ${isOpen}`)}
       >
         BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
         prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
@@ -190,7 +190,7 @@ export const WithFocusableItems = {
         tokens={{
           bgColor: 'white',
         }}
-        onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        onOpenChange={isOpen => console.log(`Open state was change to: ${isOpen}`)}
         icon="Plus"
       >
         <Button>Focusable item 1</Button>
@@ -202,7 +202,7 @@ export const WithFocusableItems = {
         tokens={{
           bgColor: 'gray',
         }}
-        onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        onOpenChange={isOpen => console.log(`Open state was change to: ${isOpen}`)}
         icon="Plus"
       >
         <Button>Focusable item</Button>
@@ -228,14 +228,14 @@ export const ControlledState = {
       <AccordionItem
         key="item-1"
         title="This is an accordion"
-        onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        onOpenChange={isOpen => console.log(`Open state was change to: ${isOpen}`)}
       >
         Item 1
       </AccordionItem>,
       <AccordionItem
         key="item-2"
         title="This is an accordion 2"
-        onOpenChange={(isOpen) => console.log(`Open state was change to: ${isOpen}`)}
+        onOpenChange={isOpen => console.log(`Open state was change to: ${isOpen}`)}
       >
         Item 2
       </AccordionItem>,

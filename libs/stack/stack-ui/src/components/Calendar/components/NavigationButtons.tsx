@@ -1,16 +1,16 @@
-import Box from '../../Box'
-import Button from '../../Button'
-import Icon from '../../Icon'
 import type { TCalendarNavigationButtonsProps } from '../interface'
+import { Box } from '../../Box'
+import { Button } from '../../Button'
+import Icon from '../../Icon'
 
-const NavigationButtons = ({
+function NavigationButtons({
   themeName = 'calendar',
   tokens,
   buttons,
   prevButtonProps,
   nextButtonProps,
   ...rest
-}: TCalendarNavigationButtonsProps) => {
+}: TCalendarNavigationButtonsProps) {
   return (
     <Box themeName={`${themeName}.navigationButtonsContainer`} tokens={tokens} {...rest}>
       <Button

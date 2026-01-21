@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable @typescript-eslint/naming-convention */
 import type { TFiles } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
 import { logger } from '../../logger'
@@ -10,7 +8,8 @@ const IMG_PROTOCOL = process.env.NEXT_PUBLIC_IMG_PROTOCOL ?? 'https'
 
 function setSearchParams(url: URL, searchParams: Record<string, Nullable<string>>) {
   Object.entries(searchParams).forEach(([key, value]) => {
-    if (!value) return
+    if (value == null || value === '')
+      return
     url.searchParams.set(key, value)
   })
 }
@@ -19,16 +18,20 @@ export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchPara
   const { id, filename_download, filenameDownload } = file ?? {}
   const { protocol = IMG_PROTOCOL, port = IMG_PORT, hostname = IMG_DOMAIN } = baseUrl ?? {}
 
-  if (!hostname || !id) return null
+  if (hostname == null || hostname === '' || id == null || id === '')
+    return null
 
   try {
     const url = new URL(`/assets/${id}/${filename_download ?? filenameDownload ?? ''}`, `${protocol}://${hostname}`)
-    if (port) url.port = port
-    if (searchParams) setSearchParams(url, searchParams)
+    if (port != null && port !== '')
+      url.port = port
+    if (searchParams != null)
+      setSearchParams(url, searchParams)
 
     return url
-  } catch (error) {
-    logger.log("Couldn't create URL", 'warn', { error })
+  }
+  catch (error) {
+    logger.log('Couldn\'t create URL', 'warn', { error })
 
     return null
   }
@@ -40,10 +43,12 @@ export function getDirectusFile(
   searchParams?: Record<string, Nullable<string>>,
 ) {
   const { description, width, height, title, id, ...rest } = file ?? {}
-  if (!file || !id) return null
+  if (file == null || id == null || id === '')
+    return null
   const url = getDirectusUrl(file, baseUrl, searchParams)
 
-  if (!url) return null
+  if (url == null)
+    return null
 
   return {
     src: url.href,

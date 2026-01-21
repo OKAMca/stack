@@ -1,13 +1,14 @@
-import { Box, type TToken } from '@okam/stack-ui'
-import { draftMode } from 'next/headers'
+import type { TToken } from '@okam/stack-ui'
 import type { TAdminBarProps } from './interface'
+import { Box } from '@okam/stack-ui'
+import { draftMode } from 'next/headers'
 
-const AdminBar = async <T extends TToken>({
+async function AdminBar<T extends TToken>({
   children,
   themeName = 'adminBar',
   tokens,
   customTheme,
-}: TAdminBarProps<T>) => {
+}: TAdminBarProps<T>) {
   const { isEnabled } = await draftMode()
   return (
     isEnabled && (

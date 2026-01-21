@@ -1,4 +1,4 @@
-import Select from './Select'
+import { Select } from './Select'
 
 export default {
   title: 'Form/Fields/Select',
@@ -20,7 +20,7 @@ const defaultOptions = [
 ]
 
 // Create a template for all stories
-const Template = (args) => <Select {...args} />
+const Template = args => <Select {...args} />
 
 export const Default = {
   render: Template.bind({}),

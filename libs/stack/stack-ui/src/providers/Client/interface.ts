@@ -1,13 +1,13 @@
-import type React from 'react'
+import type * as React from 'react'
 
-export type TClientProviderProps = {
+export interface TClientProviderProps {
   children: React.ReactNode
 }
 
-export type TClientProps = {
+export interface TClientProps {
   isClient: boolean
 }
 
-export type TClientContext = {
+export interface TClientContext {
   isClient: boolean
 }

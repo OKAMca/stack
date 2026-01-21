@@ -1,6 +1,0 @@
-node_modules
-types/types.d.ts
-types/**
-next.config.js
-__test__/**
-vite.config.ts

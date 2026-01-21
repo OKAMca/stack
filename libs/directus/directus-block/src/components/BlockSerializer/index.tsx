@@ -1,20 +1,23 @@
+import type { TBlockSerializerProps } from './interface'
 import { BlockSettingsFragmentDoc } from '../../generated/graphql'
 import { getFragment } from '../../utils'
-import type { TBlockSerializerProps } from './interface'
 
-const BlockSerializer = (props: TBlockSerializerProps) => {
+function BlockSerializer(props: TBlockSerializerProps) {
   const { item, collection, config, variables, defaultVariant, ...rest } = props
 
-  if (!collection || !config) return null
+  if ((collection == null || collection === '') || config == null)
+    return null
 
   const blockConfig = config?.components?.[collection]
 
-  if (!blockConfig) return null
+  if (blockConfig == null)
+    return null
 
   const { settings } = item ?? {}
   const id = item?.id ?? variables?.id
 
-  if (!id) return null
+  if (id == null || id === '')
+    return null
 
   const { variant } = getFragment(BlockSettingsFragmentDoc, settings) ?? {}
 
@@ -25,7 +28,8 @@ const BlockSerializer = (props: TBlockSerializerProps) => {
   const variantBlockComponent = blockConfig.variants?.[variantWithFallback ?? '']
   const BlockComponent = variantBlockComponent ?? defaultBlockComponent
 
-  if (!BlockComponent) return null
+  if (BlockComponent == null)
+    return null
 
   return (
     <BlockComponent

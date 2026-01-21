@@ -1,20 +1,22 @@
-import { SearchBarProvider } from '../../../providers/UserSearchQuery'
 import Search from '.'
+import { SearchBarProvider } from '../../../providers/UserSearchQuery'
 
-const Template = (args) => (
-  <SearchBarProvider userQuery="">
-    <Search {...args} />
-  </SearchBarProvider>
-)
+function Template(args) {
+  return (
+    <SearchBarProvider userQuery="">
+      <Search {...args} />
+    </SearchBarProvider>
+  )
+}
 
 export default {
   title: 'Form/Fields/Search',
   component: Search,
 
   args: {
-    placeholder: 'Search',
-    onChange: (value) => console.log(`You have typed ${value}`),
-    onSubmit: (value) => console.log(`You have submitted ${value}`),
+    'placeholder': 'Search',
+    'onChange': value => console.log(`You have typed ${value}`),
+    'onSubmit': value => console.log(`You have submitted ${value}`),
     'aria-label': 'Search',
   },
 }

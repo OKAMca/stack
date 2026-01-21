@@ -5,17 +5,22 @@
   "projectType": "library",
   "release": {
     "version": {
-      "generatorOptions": {
-        "packageRoot": "dist/{projectRoot}",
-        "currentVersionResolver": "git-tag"
-      }
+      "currentVersionResolver": "git-tag",
+      "preserveLocalDependencyProtocols": false,
+      "manifestRootsToUpdate": [
+        "dist/{projectRoot}"
+      ]
     }
   },
-  "tags": ["publishable"],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/stack/logger"
@@ -35,13 +40,25 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/stack/logger/**/*.{ts,tsx,js,jsx}",
+          "libs/stack/logger/package.json",
+          "libs/stack/logger/project.json"
+        ]
+      }
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@nx/vitest:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
       "options": {
-        "jestConfig": "libs/stack/logger/jest.config.ts"
+        "reportsDirectory": "../../../coverage/libs/stack/logger"
       }
     }
   }

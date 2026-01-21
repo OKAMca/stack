@@ -1,12 +1,14 @@
 'use client'
 
+import type { TTranslateFunc, TTranslationContext, TTranslationProps } from './interface'
 import { createCtx } from '@okam/core-lib'
 import { get } from 'radashi'
 import { useCallback, useMemo } from 'react'
 import { log } from '../../logger'
-import type { TTranslateFunc, TTranslationContext, TTranslationProps } from './interface'
 
-export const [useTranslation, TranslationProvider] = createCtx<TTranslationContext>()
+const translationCtx = createCtx<TTranslationContext>()
+export const useTranslation = translationCtx[0]
+const TranslationProvider = translationCtx[1]
 
 export function TranslationContextProvider({
   useTranslationFunc,

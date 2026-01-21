@@ -1,4 +1,4 @@
-import type React from 'react'
+import type * as React from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 
@@ -7,7 +7,7 @@ export interface TShareButtonProps<T = TToken> extends TDefaultComponent<TShareB
   icon?: React.ReactNode
   ariaLabel: string
   sharingLinksList: TShareButtonLink[]
-  onShare?: (sharingMedium: string) => void
+  onShare?: (_sharingMedium: string) => void
 }
 
 interface TShareButtonTokens extends TToken {
@@ -16,13 +16,13 @@ interface TShareButtonTokens extends TToken {
 
 export interface TIconsContainerProps<T = TToken> extends Omit<TShareButtonProps<T>, 'ariaLabel' | 'icon'> {
   isOpen: boolean
-  setIsOpen: (isOpen: boolean) => void
+  setIsOpen: (_isOpen: boolean) => void
 }
 
 export interface TShareButtonLink {
   ariaLabel: string
   icon?: React.ReactNode
   key: string
-  onClick?: (linkKey: string) => void
+  onClick?: (_linkKey: string) => void
   href?: string
 }

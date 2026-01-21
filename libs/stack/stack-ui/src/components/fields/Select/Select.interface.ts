@@ -1,9 +1,9 @@
 import type { CollectionChildren } from '@react-types/shared'
 import type { Key } from 'react'
-import type React from 'react'
+import type * as React from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
-import type { TDefaultComponent, TReactHookForm, Nullable } from '../../../types/components'
+import type { Nullable, TDefaultComponent, TReactHookForm } from '../../../types/components'
 
 export type TFieldReactHookForm<T = TToken> = TReactHookForm & Omit<TDefaultComponent<T>, 'children'>
 export interface TSelectProps<T = TToken> extends TFieldReactHookForm<T> {
@@ -19,10 +19,10 @@ export interface TSelectProps<T = TToken> extends TFieldReactHookForm<T> {
   fieldRef?: RefCallBack
   placeholderLabel: string
   hookFormRef?: RefCallBack
-  onSelectionChange?: (value: Key | null) => void
+  onSelectionChange?: (_value: Key | null) => void
   defaultValue?: string
   value?: Nullable<string>
   popoverMatchesWidth?: boolean
-  options?: { key: string; value: string }[]
+  options?: { key: string, value: string }[]
   isInvalid?: boolean
 }

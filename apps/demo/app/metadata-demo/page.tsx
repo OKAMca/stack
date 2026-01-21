@@ -1,8 +1,8 @@
-import type { TPageSettings, TFiles } from '@okam/directus-next'
-import { getMetadata } from '@okam/directus-next-component'
+import type { TFiles, TPageSettings } from '@okam/directus-next'
 import type { TMetadataOptions } from '@okam/directus-next-component'
 import type { Nullable } from '@okam/stack-ui'
 import type { OpenGraphType } from 'next/dist/lib/metadata/types/opengraph-types'
+import { getMetadata } from '@okam/directus-next-component'
 import Link from 'next/link'
 
 // Mock page settings to simulate Directus data
@@ -32,16 +32,19 @@ const mockPageSettings: TPageSettings = {
 const metadataOptions: TMetadataOptions = {
   ogImageMaxWidth: 1200,
   ogImageMaxHeight: 630,
-  imageLoader: ({ src, width, height }: { src: string; width?: string | number; height?: string | number }) => {
+  imageLoader: ({ src, width, height }: { src: string, width?: string | number, height?: string | number }) => {
     // Simple example of an image loader
     const params = new URLSearchParams()
-    if (width) params.set('width', width.toString())
-    if (height) params.set('height', height.toString())
+    if (width != null)
+      params.set('width', width.toString())
+    if (height != null)
+      params.set('height', height.toString())
     const queryParams = params.toString()
     return queryParams ? `${src}?${queryParams}` : src
   },
   getFilesFragment: <T extends { _typename: 'directus_files' }>(file: Nullable<T>) => {
-    if (!file) return null
+    if (file == null)
+      return null
     // In a real-world scenario, this would extract the file data from the Directus response
     return {
       id: 'mock-image-id',
@@ -55,19 +58,20 @@ const metadataOptions: TMetadataOptions = {
   },
   createAlternateUrls: (pageSettings: Nullable<TPageSettings>) => {
     // Create alternate URLs for different languages
-    if (!pageSettings?.translations?.length) return {}
+    if (pageSettings?.translations == null || pageSettings.translations.length === 0)
+      return {}
     const { translations } = pageSettings
     // Only include languages with valid codes
     const languages = translations
-      .map((t) => t?.languages_code?.code)
+      .map(t => t?.languages_code?.code)
       .filter((code): code is string => typeof code === 'string')
     const alternates = {
       canonical: new URL(`https://example.com/metadata-demo`),
       languages: {} as Record<string, string>,
     }
     languages.forEach((lang) => {
-      const translation = translations.find((t) => t?.languages_code?.code === lang)
-      if (translation) {
+      const translation = translations.find(t => t?.languages_code?.code === lang)
+      if (translation != null) {
         alternates.languages[lang] = `https://example.com/${lang}/metadata-demo`
       }
     })
@@ -90,7 +94,11 @@ export default function MetadataDemo() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">About This Page</h2>
             <p className="text-gray-700 mb-4">
-              This page demonstrates how to use the <code>getMetadata</code> hook to generate dynamic metadata for your
+              This page demonstrates how to use the
+              {' '}
+              <code>getMetadata</code>
+              {' '}
+              hook to generate dynamic metadata for your
               Next.js pages based on Directus data.
             </p>
             <p className="text-gray-700 mb-4">
@@ -102,23 +110,40 @@ export default function MetadataDemo() {
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-4">How It Works</h2>
             <p className="text-gray-700 mb-4">
-              The <code>getMetadata</code> hook takes three parameters:
+              The
+              {' '}
+              <code>getMetadata</code>
+              {' '}
+              hook takes three parameters:
             </p>
             <ul className="list-disc pl-8 mb-4">
               <li className="text-gray-700 mb-2">
-                <strong>pageProps</strong>: An object containing a <code>pageSettings</code> property with Directus page
+                <strong>pageProps</strong>
+                : An object containing a
+                <code>pageSettings</code>
+                {' '}
+                property with Directus page
                 data
               </li>
               <li className="text-gray-700 mb-2">
-                <strong>options</strong>: Configuration for metadata generation (see code for details)
+                <strong>options</strong>
+                : Configuration for metadata generation (see code for details)
               </li>
               <li className="text-gray-700 mb-2">
-                <strong>defaultProps</strong>: Optional default values for metadata fields
+                <strong>defaultProps</strong>
+                : Optional default values for metadata fields
               </li>
             </ul>
             <p className="text-gray-700 mb-4">
-              The hook returns a Next.js <code>Metadata</code> object that can be used directly with the{' '}
-              <code>generateMetadata</code> export function.
+              The hook returns a Next.js
+              {' '}
+              <code>Metadata</code>
+              {' '}
+              object that can be used directly with the
+              {' '}
+              <code>generateMetadata</code>
+              {' '}
+              export function.
             </p>
           </section>
 
@@ -127,19 +152,24 @@ export default function MetadataDemo() {
             <p className="text-gray-700 mb-4">This page includes the following metadata:</p>
             <ul className="list-disc pl-8 mb-4">
               <li className="text-gray-700 mb-2">
-                <strong>Title</strong>: Metadata Demo Page
+                <strong>Title</strong>
+                : Metadata Demo Page
               </li>
               <li className="text-gray-700 mb-2">
-                <strong>Description</strong>: A demonstration of the getMetadata hook for Next.js pages
+                <strong>Description</strong>
+                : A demonstration of the getMetadata hook for Next.js pages
               </li>
               <li className="text-gray-700 mb-2">
-                <strong>Open Graph</strong>: Image, title, description, type
+                <strong>Open Graph</strong>
+                : Image, title, description, type
               </li>
               <li className="text-gray-700 mb-2">
-                <strong>Twitter</strong>: Image, title, description
+                <strong>Twitter</strong>
+                : Image, title, description
               </li>
               <li className="text-gray-700 mb-2">
-                <strong>Alternate URLs</strong>: For language variants
+                <strong>Alternate URLs</strong>
+                : For language variants
               </li>
             </ul>
             <p className="text-gray-700">Inspect the page source to see the generated metadata in action.</p>
@@ -197,9 +227,9 @@ export async function generateMetadata() {
 }
 
 // We need to use the Next.js metadata API to generate metadata
-export async function generateMetadata() {
+export function generateMetadata() {
   const pageProps = { pageSettings: mockPageSettings }
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const metadata = await getMetadata(pageProps, metadataOptions)
+
+  const metadata = getMetadata(pageProps, metadataOptions)
   return metadata
 }

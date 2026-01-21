@@ -1,7 +1,7 @@
 /**
  * @link https://jsonapi.org/format/#errors
  */
-export type JsonApiError = {
+export interface JsonApiError {
   /** a short, human-readable summary of the problem that SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization. */
   title: string
   /** a unique identifier for this particular occurrence of the problem. */
@@ -18,12 +18,12 @@ export type JsonApiError = {
   meta?: Record<string, unknown>
 }
 
-export type JsonApiErrorResponse = {
+export interface JsonApiErrorResponse {
   success: false
   errors: JsonApiError[]
 }
 
-export type JsonApiResponseMeta = {
+export interface JsonApiResponseMeta {
   meta?: {
     cacheHit?: boolean
   } & Record<string, string | number | boolean | Record<string, unknown>>

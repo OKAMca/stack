@@ -1,8 +1,8 @@
+import type { TTransition } from '../types/components'
 import { animated, config, useTransition } from '@react-spring/web'
 import useThemeContext from '../providers/Theme/hooks'
-import type { TTransition } from '../types/components'
 
-const RenderWithOpacity = ({ isVisible, children, themeName, tokens, customTheme, ...rest }: TTransition) => {
+function RenderWithOpacity({ isVisible, children, themeName, tokens, customTheme, ...rest }: TTransition) {
   const transitionTheme = useThemeContext(themeName, tokens, customTheme)
   const transition = useTransition(isVisible, {
     from: { opacity: 0 },

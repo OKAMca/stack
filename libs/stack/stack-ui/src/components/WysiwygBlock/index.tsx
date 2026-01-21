@@ -1,10 +1,10 @@
 'use client'
 
-import sanitizeHtml from 'sanitize-html'
 import type { TToken } from '../../providers/Theme/interface'
-import Typography from '../Typography'
-import { ariaAttributes, booleanAttributes } from './attributes'
 import type TWysiwygBlockProps from './interface'
+import sanitizeHtml from 'sanitize-html'
+import { Typography } from '../Typography'
+import { ariaAttributes, booleanAttributes } from './attributes'
 
 const defaultAllowedTags = ['iframe', 'img']
 const defaultAllowedAttributes = {
@@ -23,7 +23,7 @@ const defaultAllowedAttributes = {
   img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
 }
 
-const WysiwygBlock = <Tags extends string = string, T extends TToken = TToken>({
+function WysiwygBlock<Tags extends string = string, T extends TToken = TToken>({
   content,
   themeName = 'wysiwyg',
   useSanitizerDefaultAllowedTags = true,
@@ -31,7 +31,7 @@ const WysiwygBlock = <Tags extends string = string, T extends TToken = TToken>({
   allowedTags = defaultAllowedTags as Tags[],
   allowedAttributes = defaultAllowedAttributes as Partial<Record<Tags, string[]>>,
   ...rest
-}: TWysiwygBlockProps<Tags, T>) => {
+}: TWysiwygBlockProps<Tags, T>) {
   const sanitizedContent = sanitizeHtml(content, {
     allowedTags: useSanitizerDefaultAllowedTags ? sanitizeHtml.defaults.allowedTags.concat(allowedTags) : allowedTags,
     nonBooleanAttributes: [],

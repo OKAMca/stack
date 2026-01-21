@@ -1,10 +1,9 @@
 'use client'
 
-/* eslint-disable @typescript-eslint/naming-convention */
-import { mergeProps, usePress } from 'react-aria'
-import { useCarousel } from '../../../providers/Carousel'
 import type { TButtonProps } from '../../Button/interface'
 import type { TCarouselNavigation } from './interface'
+import { mergeProps, usePress } from 'react-aria'
+import { useCarousel } from '../../../providers/Carousel'
 
 export function useCarouselPrevNavigation(props: TButtonProps): TCarouselNavigation {
   const { isDisabled: isDisabledProp, handlePress, ...rest } = props
@@ -15,6 +14,7 @@ export function useCarouselPrevNavigation(props: TButtonProps): TCarouselNavigat
   const { loop } = params ?? {}
 
   const allowNavigatePrev = activeIndex > 0
+  // eslint-disable-next-line ts/prefer-nullish-coalescing -- boolean OR for disabled state logic
   const isDisabled = isDisabledProp || (!loop && !allowNavigatePrev)
 
   const { pressProps } = usePress({

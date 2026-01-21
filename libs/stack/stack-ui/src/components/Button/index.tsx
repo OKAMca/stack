@@ -1,16 +1,15 @@
-/* eslint-disable react/display-name */
-
 'use client'
 
 import type { RefObject } from 'react'
-import React, { useRef } from 'react'
-import { FocusRing, useButton, useLink } from 'react-aria'
-import useThemeContext from '../../providers/Theme/hooks'
 import type { TToken } from '../../providers/Theme/interface'
 import type { NextLinkProps } from '../../types/next-link'
-import type { TAnchorProps, TAnchorRef, TButtonProps, TButtonRef } from './interface'
+import type { TAnchorProps, TButtonProps } from './interface'
+import * as React from 'react'
+import { useRef } from 'react'
+import { FocusRing, useButton, useLink } from 'react-aria'
+import useThemeContext from '../../providers/Theme/hooks'
 
-export const Anchor = React.forwardRef((props: TAnchorProps, forwardRef: TAnchorRef) => {
+export function Anchor({ ref: forwardRef, ...props }: TAnchorProps & { ref?: React.Ref<HTMLElement> }) {
   const {
     as: Component = 'a',
     handlePress,
@@ -55,9 +54,9 @@ export const Anchor = React.forwardRef((props: TAnchorProps, forwardRef: TAnchor
       </Component>
     </FocusRing>
   )
-})
+}
 
-const Button = React.forwardRef((props: TButtonProps, forwardRef: TButtonRef) => {
+function Button({ ref: forwardRef, ...props }: TButtonProps & { ref?: React.Ref<HTMLElement> }) {
   const {
     as: Component = 'button',
     handlePress,
@@ -88,23 +87,26 @@ const Button = React.forwardRef((props: TButtonProps, forwardRef: TButtonRef) =>
       </Component>
     </FocusRing>
   )
-})
+}
 
-export const ButtonWithForwardRef = React.forwardRef(
-  (props: TButtonProps, ref: React.Ref<HTMLButtonElement & HTMLAnchorElement>) => {
-    const { as } = props
-    if (as === 'a') return <Anchor ref={ref} {...props} />
-    return <Button ref={ref} {...props} />
-  },
-)
+export function ButtonWithForwardRef({ ref, ...props }: TAnchorProps & { ref?: React.Ref<HTMLElement> }) {
+  const { as } = props
+  if (as === 'a')
+    return <Anchor ref={ref} {...props} />
+  return <Button ref={ref} {...props} />
+}
 
-const ButtonComponent = <T extends TToken>(props: TButtonProps<T>) => {
+ButtonWithForwardRef.displayName = 'ButtonWithForwardRef'
+
+export function ButtonComponent<T extends TToken>(props: TButtonProps<T>) {
   const { as } = props
   const ref = useRef(null)
-  if (as === 'a') return <Anchor ref={ref} {...props} />
+  if (as === 'a')
+    return <Anchor ref={ref} {...props} />
   return <Button ref={ref} {...props} />
 }
 
 ButtonComponent.displayName = 'Button'
 
-export default ButtonComponent
+// Named export alias for backwards compatibility with barrel file
+export { ButtonComponent as Button }

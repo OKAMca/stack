@@ -1,11 +1,11 @@
-import { defaultGraphqlRequestClient } from '@okam/directus-query'
 import type { Nullable, TToken } from '@okam/stack-ui'
+import type { TBlockSerializerProps } from '../components/BlockSerializer/interface'
+import type { TBlockDocument, TBlockVariables, TCommonBlockFragment } from '../types/block'
+import { defaultGraphqlRequestClient } from '@okam/directus-query'
 import { GraphQLClient } from 'graphql-request'
 import { get } from 'radashi'
-import type { TBlockSerializerProps } from '../components/BlockSerializer/interface'
 import { useFragment as getFragment } from '../generated/fragment-masking'
 import { BlockSettingsFragmentDoc } from '../generated/graphql'
-import type { TBlockDocument, TBlockVariables, TCommonBlockFragment } from '../types/block'
 import getBlockProps from './getBlockProps'
 
 function isClient<Fragment extends TCommonBlockFragment, Variables extends TBlockVariables = TBlockVariables>(
@@ -35,24 +35,24 @@ export async function getBlock<
   Fragment extends TCommonBlockFragment,
   Variables extends TBlockVariables = TBlockVariables,
 >(
-  props: TBlockSerializerProps<Fragment, Variables>,
-  blockKey: string,
+  _props: TBlockSerializerProps<Fragment, Variables>,
+  _blockKey: string,
   /**
    * @default defaultGraphqlRequestClient
    */
-  client?: GraphQLClient,
+  _client?: GraphQLClient,
 ): Promise<Fragment & { cmsTokens: TToken }>
 
 export async function getBlock<
   Fragment extends TCommonBlockFragment,
   Variables extends TBlockVariables = TBlockVariables,
 >(
-  props: TBlockSerializerProps<Fragment, Variables>,
-  blockKey: string,
+  _props: TBlockSerializerProps<Fragment, Variables>,
+  _blockKey: string,
   /**
    * @deprecated Use props.document instead
    */
-  doc?: TBlockDocument<Fragment, Variables>,
+  _doc?: TBlockDocument<Fragment, Variables>,
 ): Promise<Fragment & { cmsTokens: TToken }>
 
 export async function getBlock<

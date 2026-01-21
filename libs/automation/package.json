@@ -1,15 +1,15 @@
 {
   "name": "@okam/automation",
-  "version": "1.2.2",
-  "dependencies": {
-    "@nx/devkit": "20.2.2",
-    "tslib": "^2.3.0",
-    "@okam/core-lib": "1.17.1",
-    "radashi": "^12.3.0"
-  },
   "type": "commonjs",
-  "main": "./src/index.js",
+  "version": "1.2.2",
   "typings": "./src/index.d.ts",
   "private": true,
+  "main": "./src/index.js",
+  "dependencies": {
+    "@nx/devkit": "22.3.3",
+    "@okam/core-lib": "1.17.1",
+    "radashi": "^12.3.0",
+    "tslib": "^2.3.0"
+  },
   "generators": "./generators.json"
 }

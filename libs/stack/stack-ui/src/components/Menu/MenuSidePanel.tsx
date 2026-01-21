@@ -1,11 +1,11 @@
 'use client'
 
+import type { TMenuSidePanelProps } from './interface'
 import { useMenu } from '../../providers/Menu'
 import SidePanel from '../SidePanel'
 import InnerContent from './components/InnerContent'
-import type { TMenuSidePanelProps } from './interface'
 
-const MenuSidePanel = (props: TMenuSidePanelProps) => {
+function MenuSidePanel(props: TMenuSidePanelProps) {
   const {
     id = 'main-menu',
     children,

@@ -3,7 +3,7 @@
 import generateUtmTags from './generateUtmTags'
 import useWindow from './useWindow'
 
-const useMailToShareUrl = (media: string, medium: string, urlToShare: string) => {
+function useMailToShareUrl(media: string, medium: string, urlToShare: string) {
   const { windowLocation, windowTitle } = useWindow()
 
   const currentURL = urlToShare || windowLocation

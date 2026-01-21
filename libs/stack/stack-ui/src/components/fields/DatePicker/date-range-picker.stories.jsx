@@ -1,21 +1,23 @@
-import { today, getLocalTimeZone, isWeekend } from '@internationalized/date'
+import { getLocalTimeZone, isWeekend, today } from '@internationalized/date'
 import { useState } from 'react'
-import Box from '../../Box'
+import { Box } from '../../Box'
 import RangeCalendar from '../../Calendar/RangeCalendar'
 import DateRangePicker from './DateRangePicker'
 
 /**
- * @typedef {import('@storybook/react').Meta<typeof DateRangePicker>} Meta
- * @typedef {import('@storybook/react').StoryObj<typeof DateRangePicker>} Story
+ * @typedef {import('@storybook/react-webpack5').Meta<typeof DateRangePicker>} Meta
+ * @typedef {import('@storybook/react-webpack5').StoryObj<typeof DateRangePicker>} Story
  */
 
-const Template = (args) => (
-  <Box customTheme="min-h-[500px] flex justify-center w-full">
-    <DateRangePicker {...args} />
-  </Box>
-)
+function Template(args) {
+  return (
+    <Box customTheme="min-h-[500px] flex justify-center w-full">
+      <DateRangePicker {...args} />
+    </Box>
+  )
+}
 
-const TemplateControlled = (args) => {
+function TemplateControlled(args) {
   const { defaultValue, onChange, ...rest } = args
   const [value, setValue] = useState(defaultValue)
   return (
@@ -52,7 +54,7 @@ const meta = {
   args: {
     buttonContent: 'Select Date',
     label: 'Filter by date',
-    onChange: (date) => console.log(date),
+    onChange: date => console.log(date),
     innerDateFieldSeparator: ' to ',
     outerDateFieldSeparator: ' to ',
     invalidIndicator: 'Invalid date',
@@ -140,9 +142,9 @@ export const UnavailableDates = {
         [now.add({ days: 14 }), now.add({ days: 16 })],
         [now.add({ days: 23 }), now.add({ days: 24 })],
       ]
-      const isUnavailable =
-        isWeekend(date, 'en-CA') ||
-        disabledRanges.some((interval) => date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0)
+      const isUnavailable
+        = isWeekend(date, 'en-CA')
+          || disabledRanges.some(interval => date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0)
       return isUnavailable
     },
   },

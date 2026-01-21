@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import type { ComponentType } from 'react'
-import React from 'react'
+import * as React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Item, Section } from 'react-stately'
-import Box from '../../Box'
-import Button from '../../Button'
-import { Node } from '../../Node'
-import Popover from '../../Popover'
-import ListBox from '../ListBox'
-import { useComboBoxFiltering } from './hooks/useComboBoxFiltering'
 import ComboBox, { ReactHookFormComboBox } from '.'
+import { Box } from '../../Box'
+import { Button } from '../../Button'
+import { Node } from '../../Node'
+import { Popover } from '../../Popover'
+import { ListBox } from '../ListBox'
+import { useComboBoxFiltering } from './hooks/useComboBoxFiltering'
 
 const meta: Meta<typeof ComboBox> = {
   title: 'Form/Fields/ComboBox',
@@ -205,14 +205,13 @@ export const ChildrenRenderingFunction: Story = {
   },
   render(args) {
     const metaChildren = meta.args?.children as React.ReactElement<{ children: React.ReactNode }>[]
-    const items =
-      metaChildren?.map((child) => ({
+    const items
+      = metaChildren?.map(child => ({
         key: child.key as string,
         children: child.props.children,
-      })) || []
+      })) ?? []
 
     // Apply filtering hook for search functionality
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { inputValue, onInputChange, items: filteredItems } = useComboBoxFiltering(items)
 
     return (
@@ -221,7 +220,7 @@ export const ChildrenRenderingFunction: Story = {
         name="brand-children-rendering-function"
         inputValue={inputValue}
         onInputChange={onInputChange}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line ts/no-explicit-any -- useComboBoxFiltering returns generic type; cast needed for react-aria Item typing
         items={filteredItems as any}
       >
         {({ key, children, ...item }) => (
@@ -265,7 +264,6 @@ export const ChildrenRenderingFunctionWithSections: Story = {
     ]
 
     // Apply filtering hook
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { inputValue, onInputChange, items } = useComboBoxFiltering(sections)
 
     return (
@@ -274,7 +272,7 @@ export const ChildrenRenderingFunctionWithSections: Story = {
         name="brand-children-rendering-function-with-sections"
         inputValue={inputValue}
         onInputChange={onInputChange}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line ts/no-explicit-any -- useComboBoxFiltering returns generic type; cast needed for react-aria Item typing
         items={items as any}
       >
         {({ key, children, ...item }) => (
@@ -293,7 +291,6 @@ export const ReactHookForm: Story = {
     name: 'brand-react-hook-form',
   },
   render() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const methods = useForm<{ brand: string }>()
     const children = meta.args?.children as React.ReactElement<{ children: React.ReactNode }>[]
 

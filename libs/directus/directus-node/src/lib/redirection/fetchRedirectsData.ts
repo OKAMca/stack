@@ -1,5 +1,5 @@
+import type { TFetchRedirectsConfig, TFetchRedirectsResponse, TRedirectData } from './interface'
 import { logger } from '@okam/logger'
-import type { TFetchRedirectsConfig, TFetchRedirectsResponse } from './interface'
 import { normalizeRedirects } from './utils/validateRedirects'
 
 export const redirectDefaultLimit = 2000
@@ -10,7 +10,9 @@ export const redirectDefaultLimit = 2000
  */
 export function getDefaultConfig(): TFetchRedirectsConfig {
   return {
+    // eslint-disable-next-line ts/prefer-nullish-coalescing, ts/strict-boolean-expressions -- empty string env var should fallback to next option
     graphqlEndpoint: process.env['NEXT_REDIRECT_GRAPHQL_URL'] || process.env['NEXT_PUBLIC_GRAPHQL_URL'] || '',
+    // eslint-disable-next-line ts/prefer-nullish-coalescing, ts/strict-boolean-expressions -- empty string env var should fallback to default
     graphqlApiKey: process.env['NEXT_API_TOKEN_ADMIN'] || '',
     redirectsFilename: './redirect/redirects.json',
     rewritesFilename: './redirect/rewrites.json',
@@ -33,12 +35,12 @@ export async function fetchRedirectsData(
     limit = defaultLimit,
   } = config
 
-  if (!graphqlEndpoint) {
+  if (graphqlEndpoint == null || graphqlEndpoint === '') {
     throw new Error(
       'Missing fetchRedirects configuration `graphqlEndpoint`. Check environment variables NEXT_REDIRECT_GRAPHQL_URL or NEXT_PUBLIC_GRAPHQL_URL',
     )
   }
-  if (!graphqlApiKey) {
+  if (graphqlApiKey == null || graphqlApiKey === '') {
     throw new Error(
       'Missing fetchRedirects configuration `graphqlApiKey`. Check environment variable NEXT_API_TOKEN_ADMIN',
     )
@@ -73,16 +75,16 @@ export async function fetchRedirectsData(
       ...init,
       method: 'POST',
       headers: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${graphqlApiKey}`,
+        'Authorization': `Bearer ${graphqlApiKey}`,
       },
       body: JSON.stringify(graphqlBody),
     })
-    const { data } = await response.json()
-    const { redirects, rewrites } = data ?? {}
+    const json = await response.json() as { data?: { redirects?: TRedirectData[], rewrites?: TRedirectData[] } }
+    const { redirects, rewrites } = json.data ?? {}
 
-    if (!redirects?.length && !rewrites?.length) {
+    if ((redirects == null || redirects.length === 0) && (rewrites == null || rewrites.length === 0)) {
       logger.log('No redirects/rewrites found', 'warn')
       return {
         redirects: [],
@@ -90,12 +92,13 @@ export async function fetchRedirectsData(
       }
     }
 
-    logger.log(`Fetch redirects count: ${redirects?.length || 0}, rewrites count: ${rewrites?.length || 0}`)
+    logger.log(`Fetch redirects count: ${redirects?.length ?? 0}, rewrites count: ${rewrites?.length ?? 0}`)
     return {
-      redirects: normalizeRedirects(redirects),
-      rewrites: normalizeRedirects(rewrites),
+      redirects: normalizeRedirects(redirects ?? null),
+      rewrites: normalizeRedirects(rewrites ?? null),
     }
-  } catch (e) {
+  }
+  catch (e) {
     logger.log(`Error fetching redirects: ${(e as Error).message}`, 'error')
   }
   return {

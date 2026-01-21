@@ -1,11 +1,11 @@
 'use client'
 
+import type { TModalOverlayProps } from '../interface'
 import { useRef } from 'react'
 import { useModalOverlay } from 'react-aria'
-import Box, { BoxWithForwardRef } from '../../Box'
-import type { TModalOverlayProps } from '../interface'
+import { Box, BoxWithForwardRef } from '../../Box'
 
-const ModalOverlay = (props: TModalOverlayProps) => {
+function ModalOverlay(props: TModalOverlayProps) {
   const { themeName, tokens, customTheme, children, state, ...rest } = props
 
   const ref = useRef(null)

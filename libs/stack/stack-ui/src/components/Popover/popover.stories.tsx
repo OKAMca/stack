@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import type { Meta, StoryObj } from '@storybook/react'
-import Typography from '../Typography'
+import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import { Typography } from '../Typography'
 import PopoverButton from './components/Button'
 
 const meta: Meta<typeof PopoverButton> = {

@@ -1,5 +1,5 @@
 import { AdminBar } from '@okam/next-component/server'
-import { Typography, Button, Box } from '@okam/stack-ui'
+import { Box, Button, Typography } from '@okam/stack-ui'
 import { draftMode } from 'next/headers'
 import Link from 'next/link'
 import DraftModeButton from './DraftModeButton'
@@ -17,7 +17,8 @@ export default async function AdminBarDemoPage() {
 
     if (draft.isEnabled) {
       draft.disable()
-    } else {
+    }
+    else {
       draft.enable()
     }
   }
@@ -76,7 +77,7 @@ export default async function AdminBarDemoPage() {
           <Link href="/" passHref>
             <Button>Back to Home</Button>
           </Link>
-          <DraftModeButton handlePress={toggleDraftMode}>
+          <DraftModeButton action={toggleDraftMode}>
             {isEnabled ? 'Exit Preview Mode' : 'Enable Draft Mode'}
           </DraftModeButton>
         </div>
@@ -87,8 +88,9 @@ export default async function AdminBarDemoPage() {
           <div>
             <Typography tokens={{ size: 'md', weight: 'bold' }}>Draft Mode Control API</Typography>
             <Typography tokens={{ size: 'sm' }}>
-              <code className="bg-gray-200 px-1 rounded">POST /api/draft</code> - Enables or disables draft mode using
-              Next.js's draftMode API.
+              <code className="bg-gray-200 px-1 rounded">POST /api/draft</code>
+              {' '}
+              - Enables or disables draft mode using Next.js's draftMode API.
             </Typography>
             <pre className="bg-gray-900 p-2 mt-2 rounded text-xs overflow-auto">
               {`// apps/demo/app/api/draft/route.ts

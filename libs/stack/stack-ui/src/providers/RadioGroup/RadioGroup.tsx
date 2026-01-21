@@ -1,19 +1,19 @@
 'use client'
 
-import type { RadioGroupState } from '@react-stately/radio'
-import { createContext, useContext } from 'react'
+import type { RadioGroupState } from 'react-stately'
 import type { TRadioGroupContext } from './RadioGroup.interface'
+import { createContext, use } from 'react'
 
 const RadioGroupContext = createContext<RadioGroupState | null>(null)
 
-const RadioGroupProvider = (props: TRadioGroupContext) => {
+function RadioGroupProvider(props: TRadioGroupContext) {
   const { children, state } = props
 
-  return <RadioGroupContext.Provider value={state}>{children}</RadioGroupContext.Provider>
+  return <RadioGroupContext value={state}>{children}</RadioGroupContext>
 }
 
 function useRadioGroupCtx() {
-  const context = useContext(RadioGroupContext)
+  const context = use(RadioGroupContext)
 
   if (context !== null) {
     return context

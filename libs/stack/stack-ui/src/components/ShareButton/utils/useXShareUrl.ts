@@ -3,7 +3,7 @@
 import generateUtmTags from './generateUtmTags'
 import useWindow from './useWindow'
 
-const useXShareUrl = (media: string, medium: string, textParam: string, urlToShare: string) => {
+function useXShareUrl(media: string, medium: string, textParam: string, urlToShare: string) {
   const { windowLocation } = useWindow()
 
   const currentURL = urlToShare || windowLocation

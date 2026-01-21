@@ -1,9 +1,9 @@
 'use client'
 
-import { createCtxNullable } from '@okam/core-lib'
-import { useMemo, useRef, useState } from 'react'
 import type { SwiperClass, SwiperRef } from 'swiper/react'
 import type { TCarouselContext, TCarouselProviderProps } from './interface'
+import { createCtxNullable } from '@okam/core-lib'
+import { useMemo, useRef, useState } from 'react'
 
 const [useCarousel, CarouselProvider] = createCtxNullable<TCarouselContext>()
 
@@ -55,11 +55,11 @@ export function CarouselContextProvider(props: TCarouselProviderProps) {
 /**
  * @deprecated Use CarouselContextProvider instead
  */
-// eslint-disable-next-line @typescript-eslint/naming-convention
+
 export const SwiperControllerContextProvider = CarouselContextProvider
 
 /**
  * @deprecated Use useCarousel instead
  */
-// eslint-disable-next-line @typescript-eslint/naming-convention
+
 export const useSwiperController = useCarousel

@@ -1,11 +1,11 @@
 'use client'
 
+import type { TDialogProps } from './interface'
 import { filterDOMProps } from '@react-aria/utils'
 import { useRef } from 'react'
 import { useDialog } from 'react-aria'
 import { BoxWithForwardRef } from '../Box'
-import Typography from '../Typography'
-import type { TDialogProps } from './interface'
+import { Typography } from '../Typography'
 
 export function Dialog(props: TDialogProps) {
   const { themeName = 'dialog', tokens, title, customTheme, children, ...rest } = props
@@ -21,7 +21,7 @@ export function Dialog(props: TDialogProps) {
       {...dialogProps}
       ref={ref}
     >
-      {title && (
+      {title != null && title !== '' && (
         <Typography themeName={`${themeName}.title`} tokens={tokens} {...titleProps}>
           {title}
         </Typography>

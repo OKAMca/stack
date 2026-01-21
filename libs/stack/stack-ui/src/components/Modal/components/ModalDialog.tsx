@@ -1,10 +1,10 @@
 'use client'
 
+import type { TModalDialogProps } from '../interface'
 import { FocusRing, FocusScope } from 'react-aria'
 import { Dialog } from '../../Dialog'
-import type { TModalDialogProps } from '../interface'
 
-const ModalDialog = (props: TModalDialogProps) => {
+function ModalDialog(props: TModalDialogProps) {
   const { children, themeName, tokens, customTheme, title, ...rest } = props
 
   return (

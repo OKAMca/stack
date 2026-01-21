@@ -7,7 +7,7 @@ import type { TDirectusRouteConfig } from '../../types'
  * @returns The validated locale string, or undefined if invalid
  */
 export function getValidLocale(maybeLocale: string | null | undefined, config: TDirectusRouteConfig) {
-  const locale = Object.values(config.localeMap ?? {}).find((l) => l === maybeLocale)
+  const locale = Object.values(config.localeMap ?? {}).find(l => l === maybeLocale)
   return locale
 }
 
@@ -20,7 +20,7 @@ export function getValidLocale(maybeLocale: string | null | undefined, config: T
 export function splitLocaleFromPathname(pathname: string, config: TDirectusRouteConfig) {
   const [, maybeLocale, ...parts] = pathname.split('/')
   const locale = getValidLocale(maybeLocale, config)
-  if (locale) {
+  if (locale != null && locale !== '') {
     const newPathname = parts.length > 0 ? `/${parts.join('/')}` : '/'
     return { locale, pathname: newPathname }
   }

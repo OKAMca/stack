@@ -1,9 +1,9 @@
-import Menu from '../../components/Menu/Menu'
 import type { TSubMenuExtraData } from './Menu'
-import { ShowTab, menuTabs, MenuFactory, SidePanelControl } from './Menu'
+import Menu from '../../components/Menu/Menu'
+import { MenuFactory, menuTabs, ShowTab, SidePanelControl } from './Menu'
 import { items } from './mock'
 
-const MenuContent = () => {
+function MenuContent() {
   const extras: TSubMenuExtraData[] = [
     {
       path: '#shows',

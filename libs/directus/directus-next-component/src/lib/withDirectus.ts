@@ -4,7 +4,7 @@ interface CustomPluginOptions {
   [key: string]: string
 }
 
-const withDirectus = (nextConfig: NextConfig = {}, pluginOptions: CustomPluginOptions = {}): NextConfig => {
+function withDirectus(nextConfig: NextConfig = {}, pluginOptions: CustomPluginOptions = {}): NextConfig {
   // Create a new object for the combined environment variables
   const combinedEnv = {
     ...nextConfig.env,

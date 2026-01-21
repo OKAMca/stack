@@ -1,12 +1,12 @@
-import { Canvas, Meta, Story } from '@storybook/blocks'
-import { ArgTypes } from '@storybook/blocks'
+import { Canvas, Meta, Story } from '@storybook/addon-docs/blocks'
+import { ArgTypes } from '@storybook/addon-docs/blocks'
 import Carousel from './index'
-import Button from '../Button'
+import { Button } from '../Button'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
-import { CarouselNextNavigationButton, CarouselPrevNavigationButton } from './navigation/LegacyCarouselNavigationButton'
+import { LegacyCarouselNextNavigationButton, LegacyCarouselPrevNavigationButton } from './navigation/LegacyCarouselNavigationButton'
 import { forwardRef } from 'react'
 import * as CarouselStories from './carousel.stories';
 

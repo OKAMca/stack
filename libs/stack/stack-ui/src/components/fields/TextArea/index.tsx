@@ -1,20 +1,18 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 'use client'
 
-import { FocusRing } from '@react-aria/focus'
-import { isEmpty } from 'radashi'
-import React, { useRef } from 'react'
-import { useTextField } from 'react-aria'
 import type { RegisterOptions } from 'react-hook-form'
+import type { TToken } from '../../../providers/Theme/interface'
+import type { TTextInputProps } from '../TextInputField/interface'
+import { isEmpty } from 'radashi'
+import * as React from 'react'
+import { useRef } from 'react'
+import { FocusRing, useTextField } from 'react-aria'
 import { Controller, useFormContext } from 'react-hook-form'
 import useThemeContext from '../../../providers/Theme/hooks'
-import type { TToken } from '../../../providers/Theme/interface'
 import { useTranslation } from '../../../providers/Translation'
-import Typography from '../../Typography'
-import type { TTextInputProps } from '../TextInputField/interface'
+import { Typography } from '../../Typography'
 
-const TextArea = <T extends TToken>(props: TTextInputProps<T>) => {
+export function TextArea<T extends TToken>(props: TTextInputProps<T>) {
   const {
     id,
     label,
@@ -46,7 +44,7 @@ const TextArea = <T extends TToken>(props: TTextInputProps<T>) => {
   return (
     <div>
       <div className={wrapper} aria-disabled={disabled ? 'true' : 'false'}>
-        {label && (
+        {label != null && (
           <label className={labelTheme} {...labelProps}>
             {label}
           </label>
@@ -75,7 +73,7 @@ const TextArea = <T extends TToken>(props: TTextInputProps<T>) => {
           </div>
         </FocusRing>
       </div>
-      {errorMessage && (
+      {errorMessage != null && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={inputTokens} {...errorMessageProps}>
           {errorMessage}
         </Typography>
@@ -84,7 +82,7 @@ const TextArea = <T extends TToken>(props: TTextInputProps<T>) => {
   )
 }
 
-export const ReactHookFormTextArea = ({
+export function ReactHookFormTextArea({
   name,
   label,
   rules,
@@ -102,7 +100,7 @@ export const ReactHookFormTextArea = ({
   onBlur,
   children = null,
   ...rest
-}: TTextInputProps & { rules: RegisterOptions }) => {
+}: TTextInputProps & { rules: RegisterOptions }) {
   const { control } = useFormContext()
   const { t } = useTranslation()
 
@@ -184,5 +182,3 @@ export const ReactHookFormTextArea = ({
     />
   )
 }
-
-export default TextArea

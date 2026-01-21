@@ -1,7 +1,7 @@
 import { getRandomInt } from './random-utils'
 
 export class ArrayUtils {
-  static getRandom<T>(items: T[]): T {
+  static getRandom<T>(items: T[]): T | undefined {
     return items[getRandomInt(0, items.length - 1)]
   }
 

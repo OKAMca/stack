@@ -3,14 +3,28 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/stack/next-component/src",
   "projectType": "library",
-  "tags": ["publishable"],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/stack/next-component/**/*.{ts,tsx,js,jsx}",
+          "libs/stack/next-component/package.json",
+          "libs/stack/next-component/project.json"
+        ]
+      }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/stack/next-component"
@@ -38,7 +52,9 @@
     },
     "build-storybook": {
       "executor": "@nx/storybook:build",
-      "outputs": ["{options.outputDir}"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
       "options": {
         "outputDir": "dist/storybook/next-component",
         "configDir": "libs/stack/next-component/.storybook"

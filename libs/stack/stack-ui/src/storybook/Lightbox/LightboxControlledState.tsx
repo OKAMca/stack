@@ -1,11 +1,11 @@
-import { useState } from 'react'
-import Box from '../../components/Box'
-import Button from '../../components/Button'
 import type { TButtonProps } from '../../components/Button/interface'
-import Lightbox from '../../components/Lightbox'
 import type { TLightboxProps } from '../../components/Lightbox/interface'
+import { useState } from 'react'
+import { Box } from '../../components/Box'
+import { Button } from '../../components/Button'
+import Lightbox from '../../components/Lightbox'
 
-const LightboxControlledState = (props: TLightboxProps) => {
+function LightboxControlledState(props: TLightboxProps) {
   const { children, showTriggerButton = true, showCloseButton = true, ...rest } = props
 
   const [isOpen, setOpen] = useState(false)

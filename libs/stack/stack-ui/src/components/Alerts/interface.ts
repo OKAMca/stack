@@ -1,4 +1,4 @@
-import type React from 'react'
+import type * as React from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
@@ -17,6 +17,6 @@ export interface TAlertsItem extends TCarouselSlideProps {
 
 export type TAlertsItemProps<T extends TToken = TToken> = TAlertsItem & Omit<TDefaultComponent<T>, 'children'>
 
-export type TAlertsProps<T extends TToken = TToken> = TLegacyCarouselProps<TAlertsItemProps> &
-  Omit<LightboxProps, 'children'> &
-  Omit<TDefaultComponent<T>, 'children'>
+export type TAlertsProps<T extends TToken = TToken> = TLegacyCarouselProps<TAlertsItemProps>
+  & Omit<LightboxProps, 'children'>
+  & Omit<TDefaultComponent<T>, 'children'>

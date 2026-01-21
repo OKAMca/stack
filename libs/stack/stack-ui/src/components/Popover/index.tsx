@@ -1,12 +1,22 @@
 'use client'
 
+/**
+ * Popover - react-aria overlay component
+ *
+ * Uses cloneElement to inject arrow positioning props from usePopover,
+ * and Children.map to wrap children with FocusRing.
+ *
+ * @see https://react-spectrum.adobe.com/react-aria/Popover.html
+ * @see docs/ADR/005_react-stately-eslint-exceptions.md
+ */
+
 import type { CSSProperties } from 'react'
+import type { TPopoverProps } from './interface'
 import { Children, cloneElement, useRef } from 'react'
 import { DismissButton, FocusRing, FocusScope, Overlay, usePopover } from 'react-aria'
-import Box, { BoxWithForwardRef } from '../Box'
-import type { TPopoverProps } from './interface'
+import { Box, BoxWithForwardRef } from '../Box'
 
-export const Popover = (props: TPopoverProps) => {
+export function Popover(props: TPopoverProps) {
   const {
     children,
     themeName = 'popover',
@@ -64,9 +74,9 @@ export const Popover = (props: TPopoverProps) => {
           {...popoverProps}
           style={style}
         >
-          {arrow && cloneElement(arrow, { ...arrowProps, themeName: `${themeName}.arrow`, tokens: popoverTokens })}
+          {arrow != null && cloneElement(arrow, { ...arrowProps, themeName: `${themeName}.arrow`, tokens: popoverTokens })}
           <DismissButton onDismiss={state.close} />
-          {Children.map(children, (child) => (
+          {Children.map(children, child => (
             <FocusRing focusRingClass="has-focus-ring">{child}</FocusRing>
           ))}
           <DismissButton onDismiss={state.close} />
@@ -75,5 +85,3 @@ export const Popover = (props: TPopoverProps) => {
     </Overlay>
   )
 }
-
-export default Popover

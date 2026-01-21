@@ -1,11 +1,11 @@
 'use client'
 
 import type { LinkProps } from 'next/link'
+import type { TLink, TUseLinkReturn } from './interface'
 import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import { useLocale } from 'react-aria'
 import { useHash } from '../useHash'
-import type { TLink, TUseLinkReturn } from './interface'
 
 // Define Params type locally to avoid Next.js internal import path changes
 type Params = Record<string, string | string[] | undefined>
@@ -16,7 +16,8 @@ function scrollToTop(behavior: ScrollBehavior) {
 
 function getParamsLocale(params: Params | undefined): string | undefined {
   const { locale } = params ?? {}
-  if (Array.isArray(locale)) return locale[0]
+  if (Array.isArray(locale))
+    return locale[0]
   return locale
 }
 
@@ -40,9 +41,10 @@ export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale'
   const hrefString = href.toString()
 
   const isExternal = /^[a-z]+:\/\//i.test(hrefString) || hrefString.startsWith('//')
-  if (isExternal) return hrefString
+  if (isExternal)
+    return hrefString
 
-  if (locale) {
+  if (locale != null && locale !== false) {
     return `/${locale}${hrefString}`
   }
 
@@ -81,7 +83,8 @@ export function useLink(props: TLink): TUseLinkReturn {
   const nextScroll = isNextScroll ? scroll : false
 
   const handleScroll = useCallback(() => {
-    if (isNextScroll) return
+    if (isNextScroll)
+      return
 
     scrollToTop(behavior)
   }, [behavior, isNextScroll])

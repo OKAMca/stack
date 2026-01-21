@@ -1,13 +1,12 @@
 'use client'
 
-import { useDateFormatter } from '@react-aria/i18n'
-import { isEmpty } from 'radashi'
-import { useIsSSR } from 'react-aria'
-import useThemeContext from '../../providers/Theme/hooks'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDateProps } from './interface'
+import { isEmpty } from 'radashi'
+import { useDateFormatter, useIsSSR } from 'react-aria'
+import useThemeContext from '../../providers/Theme/hooks'
 
-const DateComponent = <T extends TToken>(props: TDateProps<T>) => {
+function DateComponent<T extends TToken>(props: TDateProps<T>) {
   const {
     as: Component = 'time',
     date,
@@ -26,11 +25,13 @@ const DateComponent = <T extends TToken>(props: TDateProps<T>) => {
   const formattedDate = formatter.format(parsedDate)
   const theme = useThemeContext(themeName, tokens, customTheme)
 
-  return isSSR || isEmpty(formattedDate) ? null : (
-    <Component {...rest} dateTime={parsedDate.toISOString()} className={theme}>
-      {formattedDate}
-    </Component>
-  )
+  return isSSR || isEmpty(formattedDate)
+    ? null
+    : (
+        <Component {...rest} dateTime={parsedDate.toISOString()} className={theme}>
+          {formattedDate}
+        </Component>
+      )
 }
 
 export default DateComponent

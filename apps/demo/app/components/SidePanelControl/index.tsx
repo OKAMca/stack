@@ -2,7 +2,7 @@
 
 import { ButtonWithForwardRef, useSidePanel } from '@okam/stack-ui'
 
-const SidePanelControl = () => {
+function SidePanelControl() {
   const { buttonProps } = useSidePanel()
   if (buttonProps == null) {
     return null

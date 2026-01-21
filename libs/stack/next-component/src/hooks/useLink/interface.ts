@@ -15,9 +15,9 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as'> {
    * @default instant
    */
   behavior?: ScrollBehavior
-  onPathnameChange?: (pathname: string) => void
-  onSearchParamsChange?: (searchParams: ReadonlyURLSearchParams) => void
-  onHashChange?: (hash: string) => void
+  onPathnameChange?: (_pathname: string) => void
+  onSearchParamsChange?: (_searchParams: ReadonlyURLSearchParams) => void
+  onHashChange?: (_hash: string) => void
 }
 
 export interface TUseLinkReturn extends Omit<NextLinkProps, 'href'> {

@@ -1,15 +1,15 @@
-import { normalizePath } from '@okam/core-lib'
 import type { TRedirectData } from '@okam/directus-node/edge'
 import type { NextRequest } from 'next/server'
+import type { TDirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
+import { normalizePath } from '@okam/core-lib'
 import { NextResponse } from 'next/server'
 import { capitalize } from 'radashi'
 import { log } from '../../logger'
-import type { TDirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
 import { getRedirectsRoute } from './getRedirectsRoute'
 
 function splitDestination(destination: string) {
-  const [pathname, search] = destination.split('?')
-  if (!search) {
+  const [pathname = '', search] = destination.split('?')
+  if (search == null || search === '') {
     return [pathname] as const
   }
   return [pathname, `?${search}`] as const
@@ -33,10 +33,10 @@ export async function handleRedirect(request: NextRequest, options: TDirectusRou
   const { redirects, rewrites } = await getRedirectsRoute(options)
   const redirect = redirects.find(({ source }) => source === normalizedPathname)
   const rewrite = rewrites.find(({ source }) => source === normalizedPathname)
-  const type = redirect ? 'redirect' : 'rewrite'
+  const type = redirect != null ? 'redirect' : 'rewrite'
   const reroute = redirect ?? rewrite
 
-  if (!reroute) {
+  if (reroute == null) {
     return null
   }
 
@@ -44,7 +44,7 @@ export async function handleRedirect(request: NextRequest, options: TDirectusRou
   const status = permanent ? 308 : 307
 
   const externalRedirect = validateExternalRedirect(reroute)
-  if (externalRedirect) {
+  if (externalRedirect != null && externalRedirect !== '') {
     log(`External ${type} found`, { [type]: externalRedirect, permanent })
     return NextResponse.redirect(externalRedirect, { status })
   }
@@ -53,7 +53,8 @@ export async function handleRedirect(request: NextRequest, options: TDirectusRou
 
   const { destination } = reroute
   const [destinationPathname, search] = splitDestination(destination)
-  if (search) url.search = search
+  if (search != null)
+    url.search = search
   url.pathname = destinationPathname
 
   log(`${capitalize(type)}ing to ${url.toString()} with status ${status}`)

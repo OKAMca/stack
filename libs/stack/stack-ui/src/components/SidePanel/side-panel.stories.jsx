@@ -1,19 +1,19 @@
-/* eslint-disable no-template-curly-in-string */
+/* eslint-disable no-template-curly-in-string -- Template strings in JSDoc/argTypes descriptions are literal text, not code */
 import { useState } from 'react'
+import SidePanel from '.'
 import { SidePanelContextProvider, useSidePanel } from '../../providers/SidePanel'
-import Button, { ButtonWithForwardRef } from '../Button'
+import { Button, ButtonWithForwardRef } from '../Button'
 import Modal from '../Modal'
 import ModalDialog from '../Modal/components/ModalDialog'
 import ModalOverlay from '../Modal/components/ModalOverlay'
-import Typography from '../Typography'
-import SidePanel from '.'
+import { Typography } from '../Typography'
 
 /**
- * @typedef {import('@storybook/react').Meta<typeof SidePanel>} Meta
- * @typedef {import('@storybook/react').StoryObj<typeof SidePanel>} Story
+ * @typedef {import('@storybook/react-webpack5').Meta<typeof SidePanel>} Meta
+ * @typedef {import('@storybook/react-webpack5').StoryObj<typeof SidePanel>} Story
  */
 
-const SidePanelClose = () => {
+function SidePanelClose() {
   const { buttonProps } = useSidePanel()
   if (buttonProps == null) {
     return null
@@ -29,7 +29,7 @@ const SidePanelClose = () => {
   )
 }
 
-const SidePanelOpen = () => {
+function SidePanelOpen() {
   const { buttonProps } = useSidePanel()
   if (buttonProps == null) {
     return null
@@ -44,38 +44,42 @@ const SidePanelOpen = () => {
 /**
  * @param {import('./interface').TSidePanelProps} args
  */
-const Template = (args) => (
-  <SidePanelContextProvider
-    onOpenChange={(isOpen) => console.log(`Side panel is now ${isOpen ? 'opened' : 'closed'}!`)}
-  >
-    <SidePanelOpen />
-    <SidePanel {...args}>
-      <SidePanelClose />
-      <Typography tokens={{ color: 'white', size: 'h3' }}>Hello world!</Typography>
-    </SidePanel>
-  </SidePanelContextProvider>
-)
+function Template(args) {
+  return (
+    <SidePanelContextProvider
+      onOpenChange={isOpen => console.log(`Side panel is now ${isOpen ? 'opened' : 'closed'}!`)}
+    >
+      <SidePanelOpen />
+      <SidePanel {...args}>
+        <SidePanelClose />
+        <Typography tokens={{ color: 'white', size: 'h3' }}>Hello world!</Typography>
+      </SidePanel>
+    </SidePanelContextProvider>
+  )
+}
 
 /**
  * @param {import('./interface').TSidePanelProps} args
  */
-const TemplateDefaultOpen = (args) => (
-  <SidePanelContextProvider
-    onOpenChange={(isOpen) => console.log(`Side panel is now ${isOpen ? 'opened' : 'closed'}!`)}
-    defaultOpen
-  >
-    <SidePanelOpen />
-    <SidePanel {...args}>
-      <SidePanelClose />
-      <Typography tokens={{ color: 'white', size: 'h3' }}>Hello world!</Typography>
-    </SidePanel>
-  </SidePanelContextProvider>
-)
+function TemplateDefaultOpen(args) {
+  return (
+    <SidePanelContextProvider
+      onOpenChange={isOpen => console.log(`Side panel is now ${isOpen ? 'opened' : 'closed'}!`)}
+      defaultOpen
+    >
+      <SidePanelOpen />
+      <SidePanel {...args}>
+        <SidePanelClose />
+        <Typography tokens={{ color: 'white', size: 'h3' }}>Hello world!</Typography>
+      </SidePanel>
+    </SidePanelContextProvider>
+  )
+}
 
 /**
  * @param {import('./interface').TSidePanelProps} args
  */
-const TemplateControlled = (args) => {
+function TemplateControlled(args) {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <>
@@ -114,7 +118,7 @@ const meta = {
     isDismissable: { control: 'boolean', table: { defaultValue: { summary: 'true' } } },
     shouldCloseOnInteractOutside: { control: 'boolean', table: { defaultValue: { summary: 'true' } } },
     isKeyboardDismissDisabled: { control: 'boolean', table: { defaultValue: { summary: 'false' } } },
-    title: { description: "Title for the side panel's modal's dialog. Gets applied to the element with `role=dialog`" },
+    title: { description: 'Title for the side panel\'s modal\'s dialog. Gets applied to the element with `role=dialog`' },
   },
 }
 

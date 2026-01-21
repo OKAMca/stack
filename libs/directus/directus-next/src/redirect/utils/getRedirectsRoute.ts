@@ -1,6 +1,6 @@
 import type { TFetchRedirectsResponse } from '@okam/directus-node/edge'
-import { log } from '../../logger'
 import type { TDirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
+import { log } from '../../logger'
 import { getApiRouteUrlDefault, getRedirectSecretDefault } from '../env'
 
 const defaultApiRoute = '/api/redirect'
@@ -25,10 +25,11 @@ export async function getRedirectsRoute({
       log(`${apiRoute} not ok. Returned`, { status: response.status }, 'error')
       return { redirects: [], rewrites: [] }
     }
-    const data = await response.json()
+    const data = await response.json() as TFetchRedirectsResponse
 
     return data
-  } catch (error) {
+  }
+  catch (error) {
     log(`Error fetching redirects from ${apiRoute}.`, { error }, 'error')
     return { redirects: [], rewrites: [] }
   }

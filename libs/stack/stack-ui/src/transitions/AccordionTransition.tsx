@@ -1,8 +1,8 @@
+import type { TTransition } from '../types/components'
 import { animated, useTransition } from '@react-spring/web'
 import useThemeContext from '../providers/Theme/hooks'
-import type { TTransition } from '../types/components'
 
-const AccordionTransition = (props: TTransition) => {
+function AccordionTransition(props: TTransition) {
   const { isVisible, children, themeName, tokens, customTheme, ...rest } = props
   const transition = useTransition(isVisible, {
     from: { gridTemplateRows: '0fr', paddingTop: '0', paddingBottom: '0' },

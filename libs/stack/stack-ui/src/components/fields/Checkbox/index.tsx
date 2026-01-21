@@ -1,22 +1,19 @@
 'use client'
 
-import { useCheckbox } from '@react-aria/checkbox'
-import { FocusRing, useFocusRing } from '@react-aria/focus'
-import { mergeProps } from '@react-aria/utils'
-import { VisuallyHidden } from '@react-aria/visually-hidden'
-import { useToggleState } from '@react-stately/toggle'
+import type { RegisterOptions } from 'react-hook-form'
+import type { TToken } from '../../../providers/Theme/interface'
+import type { TCheckboxProps } from './Checkbox.interface'
 import { isEmpty } from 'radashi'
 import { useRef } from 'react'
-import type { RegisterOptions } from 'react-hook-form'
+import { FocusRing, mergeProps, useCheckbox, useFocusRing, VisuallyHidden } from 'react-aria'
 import { Controller, useFormContext } from 'react-hook-form'
+import { useToggleState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
-import type { TToken } from '../../../providers/Theme/interface'
 import { useTranslation } from '../../../providers/Translation'
 import Icon from '../../Icon'
-import Typography from '../../Typography'
-import type { TCheckboxProps } from './Checkbox.interface'
+import { Typography } from '../../Typography'
 
-const Checkbox = <T extends TToken>(props: TCheckboxProps<T>) => {
+export function Checkbox<T extends TToken>(props: TCheckboxProps<T>) {
   const {
     id,
     label,
@@ -55,14 +52,14 @@ const Checkbox = <T extends TToken>(props: TCheckboxProps<T>) => {
             <input type="checkbox" ref={ref} {...mergeProps(inputProps, focusProps)} />
           </VisuallyHidden>
           <div className={checkBoxTheme}>
-            <div className={checkMarkTheme}>{icon && <Icon icon={icon} customTheme={checkMarkIconTheme} />}</div>
+            <div className={checkMarkTheme}>{icon != null && <Icon icon={icon} customTheme={checkMarkIconTheme} />}</div>
           </div>
           <Typography themeName={`${themeName}.label`} tokens={checkBoxTokens}>
             {label}
           </Typography>
         </label>
       </FocusRing>
-      {isError && errorMessage && (
+      {isError && errorMessage != null && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={checkBoxTokens}>
           {errorMessage}
         </Typography>
@@ -71,9 +68,7 @@ const Checkbox = <T extends TToken>(props: TCheckboxProps<T>) => {
   )
 }
 
-export default Checkbox
-
-export const ReactHookFormCheckBox = ({
+export function ReactHookFormCheckBox({
   name,
   label,
   rules,
@@ -86,7 +81,7 @@ export const ReactHookFormCheckBox = ({
   onChange,
   onBlur,
   ...rest
-}: TCheckboxProps<TToken> & { rules: RegisterOptions; name: string; defaultValue: boolean }) => {
+}: TCheckboxProps<TToken> & { rules: RegisterOptions, name: string, defaultValue: boolean }) {
   const { control } = useFormContext()
   const { t } = useTranslation()
 
@@ -96,13 +91,13 @@ export const ReactHookFormCheckBox = ({
   }
 
   const ruleMerged = {
-    required: rules?.required ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
+    required: rules?.required != null && rules.required !== false ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
     ...rules,
   }
 
   return (
     <Controller
-      name={name}
+      name={name ?? ''}
       control={control}
       rules={ruleMerged}
       disabled={rules?.disabled}

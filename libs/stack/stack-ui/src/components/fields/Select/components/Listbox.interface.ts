@@ -1,26 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type React from 'react'
+import type * as React from 'react'
 import type { AriaListBoxOptions, AriaOptionProps } from 'react-aria'
-import type { ListState } from 'react-stately'
+import type { ListState, Node } from 'react-stately'
 import type { TDefaultComponent } from '../../../../types/components'
 
-export interface TListBoxProps extends AriaListBoxOptions<unknown>, TDefaultComponent {
-  listBoxRef?: React.RefObject<any>
-  state: ListState<unknown>
-  optionsWithHeaders?: { key: string; value: string }[]
+export interface TListBoxProps<T extends object = object> extends AriaListBoxOptions<T>, TDefaultComponent {
+  listBoxRef?: React.RefObject<HTMLUListElement>
+  state: ListState<T>
+  optionsWithHeaders?: { key: string, value: string }[]
 }
 
-export interface TOptionProps extends AriaOptionProps, TDefaultComponent {
-  item: any
-  state: ListState<unknown>
+export interface TOptionProps<T extends object = object> extends AriaOptionProps, TDefaultComponent {
+  item: Item<T>
+  state: ListState<T>
 }
 
-export type Item = {
-  key: React.Key
-  rendered: string
-}
+export type Item<T extends object = object> = Pick<Node<T>, 'key' | 'rendered'>
 
-export type Section = {
-  header?: Item
-  items: Item[]
+export interface Section<T extends object = object> {
+  header?: Item<T>
+  items: Item<T>[]
 }

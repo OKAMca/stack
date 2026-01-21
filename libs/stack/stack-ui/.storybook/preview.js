@@ -1,16 +1,16 @@
-/** @type { import('@storybook/react').Preview } */
+/** @type { import('@storybook/react-webpack5').Preview } */
 
-import '../src/tailwind.css' // replace with the name of your tailwind css file
-import React, { Suspense, useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import { I18nProvider, OverlayProvider } from 'react-aria'
-import BaseThemeProvider from '../src/theme'
-import { IsClientContextProvider } from '../src/providers/Client'
 import { FormProvider, useForm } from 'react-hook-form'
 import { TranslationContextProvider } from '../src'
+import { IsClientContextProvider } from '../src/providers/Client'
+import BaseThemeProvider from '../src/theme'
+import '../src/tailwind.css' // replace with the name of your tailwind css file
 
-const useTranslationFunc = () => {
+function getTranslationMock() {
   return {
-    t: (key) => key,
+    t: key => key,
     i18n: {
       language: 'en',
     },
@@ -46,7 +46,7 @@ const preview = {
     (Story, context) => {
       const locale = context?.globals?.locale || 'en'
       const theme = context?.globals?.theme || 'light'
-      const bgColor = {light: 'bg-white', dark: 'bg-black'}[theme]
+      const bgColor = { light: 'bg-white', dark: 'bg-black' }[theme]
       const methods = useForm({
         defaultValues: context?.globals?.defaultValues || {},
       })
@@ -69,14 +69,14 @@ const preview = {
           </style>
           <BaseThemeProvider>
             <I18nProvider locale={locale}>
-            <TranslationContextProvider useTranslationFunc={useTranslationFunc}>
-              <IsClientContextProvider>
-                <OverlayProvider>
-                  <FormProvider {...methods}>
-                    <Suspense fallback={<div>Loading... </div>}>
-                      <Story />
-                    </Suspense>
-                  </FormProvider>
+              <TranslationContextProvider useTranslationFunc={getTranslationMock}>
+                <IsClientContextProvider>
+                  <OverlayProvider>
+                    <FormProvider {...methods}>
+                      <Suspense fallback={<div>Loading... </div>}>
+                        <Story />
+                      </Suspense>
+                    </FormProvider>
                   </OverlayProvider>
                 </IsClientContextProvider>
               </TranslationContextProvider>
@@ -85,7 +85,7 @@ const preview = {
         </>
       )
     },
-  ]
+  ],
 }
 
 export default preview

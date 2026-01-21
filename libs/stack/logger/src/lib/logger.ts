@@ -1,8 +1,8 @@
 export type LogSeverity = 'info' | 'warn' | 'error' | 'log'
-export type LogFunction = (message: string, severity?: LogSeverity, context?: Record<string, unknown>) => void
+export type LogFunction = (_message: string, _severity?: LogSeverity, _context?: Record<string, unknown>) => void
 
 export class Logger {
-  private static instance: Logger
+  private static instance: Logger | undefined
 
   private logger: LogFunction
 
@@ -15,15 +15,15 @@ export class Logger {
   public constructor(nameSpace?: string, logger?: LogFunction, suppressConsole?: boolean) {
     this.nameSpace = nameSpace ?? this.nameSpace
     this.suppressConsole = suppressConsole ?? this.suppressConsole
-    this.logger = logger ?? this.internalLogger
+    this.logger = logger ?? this.internalLogger.bind(this)
   }
 
   private internalLogger(message: string, severity?: LogSeverity, context?: Record<string, unknown>): void {
     if (this.env === 'production') {
       return
     }
-    // eslint-disable-next-line no-console
-    console[severity || 'log'](`${this.nameSpace} ${message}`.trimStart(), context ?? '')
+    // eslint-disable-next-line no-console -- Logger utility intentionally uses console for dev output
+    console[severity ?? 'log'](`${this.nameSpace} ${message}`.trimStart(), context ?? '')
   }
 
   public setLogger(logger: LogFunction) {
@@ -37,9 +37,7 @@ export class Logger {
   }
 
   public static getInstance(): Logger {
-    if (!Logger.instance) {
-      Logger.instance = new Logger()
-    }
+    Logger.instance ??= new Logger()
     return Logger.instance
   }
 

@@ -1,4 +1,4 @@
-import type { ItemProps, Node, Key, SectionProps } from 'react-stately'
+import type { ItemProps, Key, Node, SectionProps } from 'react-stately'
 import type { TToken } from '../providers/Theme/interface'
 import type { TDefaultComponent } from './components'
 
@@ -27,6 +27,6 @@ export interface TDefaultSectionComponent<I extends object = object, T extends T
   key: Key
 }
 
-export type TDefaultNodeComponent<I extends object = object, T extends TToken = TToken> =
-  | TDefaultItemComponent<I, T>
-  | TDefaultSectionComponent<TDefaultItemComponent<I, T>, T>
+export type TDefaultNodeComponent<I extends object = object, T extends TToken = TToken>
+  = | TDefaultItemComponent<I, T>
+    | TDefaultSectionComponent<TDefaultItemComponent<I, T>, T>

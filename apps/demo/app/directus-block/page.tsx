@@ -8,7 +8,7 @@ export default function Index() {
     <BlockDispatcher
       config={{
         components: {
-          block_wysiwygs: { document: BlockWysiwygsDocument, ...blockWysiwygConfig.block_wysiwygs },
+          block_wysiwygs: { document: BlockWysiwygsDocument, ...blockWysiwygConfig.block_wysiwygs! },
         },
       }}
       blocks={[
@@ -35,7 +35,7 @@ export default function Index() {
         },
       ]}
     >
-      {(block) => (
+      {block => (
         <Box key={block.item?.id}>
           <BlockSerializer {...block} />
         </Box>

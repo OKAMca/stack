@@ -1,19 +1,18 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { queryGql } from '@okam/directus-query'
-
 import type { Variables } from 'graphql-request'
-import { get, invert, isEqual } from 'radashi'
-import { log } from '../logger'
+
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { TPageSettingsQueryItem } from '../types/pageSettings'
-import { pageSettingsContext, pageSettingsVariablesContext } from './context'
 import type { TGetPageSettingsConfig, TGetPageSettingsProps, TGetPageSettingsReturn } from './interface'
+import { queryGql } from '@okam/directus-query'
+import { get, invert, isEqual } from 'radashi'
+import { log } from '../logger'
+import { pageSettingsContext, pageSettingsVariablesContext } from './context'
 
 const [getPageSettingsContext, setPageSettingsContext] = pageSettingsContext()
 const [getVariables, setVariables] = pageSettingsVariablesContext()
 
 function isTDirectusRouteConfig(config: TGetPageSettingsConfig | undefined): config is TDirectusRouteConfig {
-  return !!config && 'localeMap' in config
+  return config != null && 'localeMap' in config
 }
 
 function getDirectusVariables<QueryVariables extends Variables>(
@@ -21,7 +20,7 @@ function getDirectusVariables<QueryVariables extends Variables>(
   config: TGetPageSettingsConfig | undefined,
 ) {
   const localeMap = isTDirectusRouteConfig(config) ? config.localeMap : config
-  if (!localeMap) {
+  if (localeMap == null) {
     return variables
   }
   const locale = get<string>(variables, 'locale')
@@ -68,7 +67,7 @@ export async function getPageSettings<
   const directusVariables = getDirectusVariables(variables, config)
   const defaultReturn = getPageSettingsContext() as Exclude<TGetPageSettingsReturn<Item>, undefined>
 
-  if (!props || isEqual(getVariables(), directusVariables)) {
+  if (props == null || isEqual(getVariables(), directusVariables)) {
     log('Using cached page settings', { path: defaultReturn.page_settings?.translations?.[0]?.path })
     return defaultReturn
   }
@@ -80,16 +79,16 @@ export async function getPageSettings<
   const result = await queryGql(document, directusVariables)
 
   const items = result?.[key]
-  const currentItem = (Array.isArray(items) ? items?.[0] : items) as TGetPageSettingsReturn<Item>
+  const currentItem = (Array.isArray(items) ? items?.[0] : items) as TGetPageSettingsReturn<Item> | undefined
   const currentPageSettings = currentItem?.page_settings
   const currentPath = currentPageSettings?.translations?.[0]?.path
 
-  if (!currentItem) {
+  if (currentItem == null) {
     log('No item found. Falling back to cached page settings', { path: currentPath }, 'warn')
     return defaultReturn
   }
 
-  if (!currentPageSettings) {
+  if (currentPageSettings == null) {
     log('No page settings found. Falling back to cached page settings', { path: currentPath }, 'warn')
     return defaultReturn
   }

@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable ts/no-explicit-any */
+
 import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core'
 
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };

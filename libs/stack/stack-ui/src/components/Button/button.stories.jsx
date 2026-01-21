@@ -1,14 +1,16 @@
+import { Button } from '.'
 import Icon from '../Icon'
-import Button from '.'
 
-const Template = (args) => <Button {...args}>Button</Button>
+const Template = args => <Button {...args}>Button</Button>
 
-const IconButton = (args) => (
-  <Button {...args}>
-    <span>Button</span>
-    <Icon icon="ArrowRight" />
-  </Button>
-)
+function IconButton(args) {
+  return (
+    <Button {...args}>
+      <span>Button</span>
+      <Icon icon="ArrowRight" />
+    </Button>
+  )
+}
 
 export default {
   title: 'BASE COMPONENTS/Button',

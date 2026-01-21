@@ -1,9 +1,9 @@
 import type { CollectionChildren } from '@react-types/shared'
-import type React from 'react'
+import type * as React from 'react'
 import type { AriaTabListProps } from 'react-aria'
 import type { TabListState } from 'react-stately'
 
-export type TMenuProviderProps = {
+export interface TMenuProviderProps {
   children: React.ReactNode
   tabs?: CollectionChildren<object>
   defaultSelectedKey: string
@@ -17,7 +17,7 @@ export type TMenuProviderProps = {
 
 export type IMenuProviderProps = AriaTabListProps<TMenuProviderProps> & TMenuProviderProps
 
-export type TMenuContext = {
+export interface TMenuContext {
   openBtn?: () => React.JSX.Element
   closeBtn?: () => React.JSX.Element
   secondaryOpenBtn?: () => React.JSX.Element
@@ -25,7 +25,7 @@ export type TMenuContext = {
   defaultSelectedKey: string
 }
 
-export type TMenuProps = {
+export interface TMenuProps {
   openBtn?: () => React.JSX.Element
   closeBtn?: () => React.JSX.Element
   secondaryOpenBtn?: () => React.JSX.Element

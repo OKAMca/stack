@@ -1,9 +1,9 @@
 import type { Tree } from '@nx/devkit'
-import { readProjectConfiguration } from '@nx/devkit'
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing'
-
-import { componentGenerator } from './generator'
 import type { ComponentGeneratorSchema } from './schema'
+
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { componentGenerator } from './generator'
 
 describe('component generator', () => {
   let tree: Tree
@@ -15,7 +15,9 @@ describe('component generator', () => {
 
   it('should run successfully', async () => {
     await componentGenerator(tree, options)
-    const config = readProjectConfiguration(tree, 'component')
-    expect(config).toBeDefined()
+    // The generator creates component files, not a project configuration
+    // Check that the component files were generated at the expected path
+    expect(tree.exists('/Test/index.tsx')).toBeTruthy()
+    expect(tree.exists('/Test/interface.ts')).toBeTruthy()
   })
 })

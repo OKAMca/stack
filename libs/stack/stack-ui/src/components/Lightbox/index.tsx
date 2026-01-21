@@ -1,18 +1,18 @@
 'use client'
 
-import { FocusRing } from '@react-aria/focus'
+import type { TToken } from '../../providers/Theme/interface'
+import type { TButtonProps } from '../Button/interface'
+import type { TLightboxProps } from './interface'
+import { FocusRing } from 'react-aria'
 import { useOverlayTriggerState } from 'react-stately'
 import useLabelledOverlay from '../../hooks/useLabelledOverlay'
-import type { TToken } from '../../providers/Theme/interface'
-import Box from '../Box'
-import Button from '../Button'
-import type { TButtonProps } from '../Button/interface'
+import { Box } from '../Box'
+import { Button } from '../Button'
 import Icon from '../Icon'
 import Modal from '../Modal'
-import Typography from '../Typography'
-import type { TLightboxProps } from './interface'
+import { Typography } from '../Typography'
 
-const LightboxCloseButton = (props: TButtonProps) => {
+function LightboxCloseButton(props: TButtonProps) {
   const { themeName, tokens, children, ...rest } = props
   return (
     <Button themeName={themeName} tokens={tokens} {...rest}>
@@ -21,7 +21,7 @@ const LightboxCloseButton = (props: TButtonProps) => {
   )
 }
 
-const Lightbox = <T extends TToken>(props: TLightboxProps<T>) => {
+function Lightbox<T extends TToken>(props: TLightboxProps<T>) {
   const {
     children,
     thumbnailContent,

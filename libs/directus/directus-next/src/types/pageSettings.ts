@@ -1,19 +1,18 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import type { TFiles } from '../files'
 import type { Fragmentize } from './Fragments'
 
 export interface TPageSettingsTranslation {
   languages_code?:
     | {
-        code?: string | null | undefined
-      }
+      code?: string | null | undefined
+    }
     | null
     | undefined
   page_settings_id?:
     | {
-        belongs_to_collection?: string | null | undefined
-        belongs_to_key?: string | null | undefined
-      }
+      belongs_to_collection?: string | null | undefined
+      belongs_to_key?: string | null | undefined
+    }
     | null
     | undefined
   title?: string | null | undefined
@@ -32,16 +31,16 @@ export interface TPageSettings {
   translations?: DeepNullableArray<TPageSettingsTranslation>
   route?:
     | {
-        translations?: DeepNullableArray<{ route?: string | null | undefined }>
-      }
+      translations?: DeepNullableArray<{ route?: string | null | undefined }>
+    }
     | null
     | undefined
 }
 
-export type TPageSettingsQueryItem =
-  | {
-      page_settings?: TPageSettings | Fragmentize<TPageSettings, 'PageSettingsFragment'>
-    }
+export type TPageSettingsQueryItem
+  = | {
+    page_settings?: TPageSettings | Fragmentize<TPageSettings, 'PageSettingsFragment'>
+  }
   | null
   | undefined
 

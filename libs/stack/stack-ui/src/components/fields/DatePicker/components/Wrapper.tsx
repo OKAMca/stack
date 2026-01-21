@@ -1,13 +1,12 @@
 'use client'
 
-import { forwardRef } from 'react'
-import Box, { BoxWithForwardRef } from '../../../Box'
-import Button from '../../../Button'
-import Icon from '../../../Icon'
-import Typography from '../../../Typography'
 import type { TWrapperProps } from '../interface'
+import { Box, BoxWithForwardRef } from '../../../Box'
+import { Button } from '../../../Button'
+import Icon from '../../../Icon'
+import { Typography } from '../../../Typography'
 
-const Wrapper = forwardRef<HTMLDivElement, TWrapperProps>((props, ref) => {
+function Wrapper({ ref, ...props }: TWrapperProps & { ref?: React.RefObject<HTMLDivElement | null> }) {
   const {
     themeName = 'datePicker',
     tokens,
@@ -20,7 +19,7 @@ const Wrapper = forwardRef<HTMLDivElement, TWrapperProps>((props, ref) => {
   } = props
   return (
     <BoxWithForwardRef themeName={`${themeName}.wrapper`} tokens={tokens} {...groupProps} ref={ref}>
-      {buttonLabel && (
+      {(buttonLabel != null && buttonLabel !== '') && (
         <Typography themeName={`${themeName}.buttonLabel`} tokens={tokens}>
           {buttonLabel}
         </Typography>
@@ -35,7 +34,7 @@ const Wrapper = forwardRef<HTMLDivElement, TWrapperProps>((props, ref) => {
         {...buttonProps}
         handlePress={buttonProps.onPress}
       >
-        {buttonContent && (
+        {(buttonContent != null && buttonContent !== '') && (
           <Typography themeName={`${themeName}.buttonContent`} tokens={tokens}>
             {buttonContent}
           </Typography>
@@ -44,7 +43,7 @@ const Wrapper = forwardRef<HTMLDivElement, TWrapperProps>((props, ref) => {
       </Button>
     </BoxWithForwardRef>
   )
-})
+}
 
 Wrapper.displayName = 'Wrapper'
 

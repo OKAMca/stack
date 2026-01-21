@@ -3,8 +3,8 @@ import type { JsonApiError } from './json-api-response.types'
 
 export class JsonApiErrorFactory {
   static fromCatchVariable = (error: unknown, defaultHttpStatus = 500): JsonApiError => {
-    const e =
-      typeof error === 'string' || error instanceof Error
+    const e
+      = typeof error === 'string' || error instanceof Error
         ? error
         : `Unknown error (type of catched variable: ${typeof error}`
     return JsonApiErrorFactory.fromTsedException(e, defaultHttpStatus)
@@ -20,7 +20,8 @@ export class JsonApiErrorFactory {
     if (typeof exception === 'string') {
       title = exception
       status = defaultHttpStatus
-    } else {
+    }
+    else {
       title = exception.message
       status = 'status' in exception ? exception.status : defaultHttpStatus
     }

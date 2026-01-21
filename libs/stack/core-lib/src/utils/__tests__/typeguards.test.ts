@@ -28,7 +28,7 @@ describe('typeguards tests', () => {
       ['100', true],
       ['-3', true],
       ['2.12', true],
-      [NaN, false],
+      [Number.NaN, false],
       [undefined, false],
       [false, false],
       [null, false],

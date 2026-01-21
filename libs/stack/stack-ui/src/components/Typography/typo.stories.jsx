@@ -1,10 +1,12 @@
-import Typography from './index'
+import { Typography } from './index'
 
-const Template = (args) => (
-  <div>
-    <Typography {...args}>Hello world!</Typography>
-  </div>
-)
+function Template(args) {
+  return (
+    <div>
+      <Typography {...args}>Hello world!</Typography>
+    </div>
+  )
+}
 
 export default {
   title: 'BASE COMPONENTS/Typography',

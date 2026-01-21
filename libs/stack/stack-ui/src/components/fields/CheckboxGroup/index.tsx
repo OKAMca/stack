@@ -1,15 +1,14 @@
 'use client'
 
-/* eslint-disable no-unused-vars */
-import { useCheckboxGroupState } from '@react-stately/checkbox'
-import { useCheckboxGroup } from 'react-aria'
-import { CheckboxGroupProvider } from '../../../providers/CheckboxGroup'
 import type { TToken } from '../../../providers/Theme/interface'
-import Box from '../../Box'
-import Typography from '../../Typography'
 import type { TCheckboxGroupProps } from './interface'
+import { useCheckboxGroup } from 'react-aria'
+import { useCheckboxGroupState } from 'react-stately'
+import { CheckboxGroupProvider } from '../../../providers/CheckboxGroup'
+import { Box } from '../../Box'
+import { Typography } from '../../Typography'
 
-const CheckboxGroup = <T extends TToken>(props: TCheckboxGroupProps<T>) => {
+function CheckboxGroup<T extends TToken>(props: TCheckboxGroupProps<T>) {
   const {
     label,
     isError = false,
@@ -31,7 +30,7 @@ const CheckboxGroup = <T extends TToken>(props: TCheckboxGroupProps<T>) => {
       themeName={`${themeName}.checkboxGroup`}
       tokens={CheckboxGroupTokens}
     >
-      {label && (
+      {(label != null && label !== '') && (
         <Typography {...labelProps} tokens={{ size: 'h6' }}>
           {label}
         </Typography>
@@ -39,7 +38,7 @@ const CheckboxGroup = <T extends TToken>(props: TCheckboxGroupProps<T>) => {
       <Box themeName={`${themeName}.checkboxGroupItemsGroup`}>
         <CheckboxGroupProvider state={state}>{children}</CheckboxGroupProvider>
       </Box>
-      {isError && errorMessage && (
+      {isError && (errorMessage != null && errorMessage !== '') && (
         <Typography {...errorMessageProps} tokens={{ isError: true }}>
           {errorMessage}
         </Typography>

@@ -1,19 +1,19 @@
 'use client'
 
-import { isEmpty } from 'radashi'
-import { useRef } from 'react'
-import { FocusRing, VisuallyHidden, useCheckboxGroupItem } from 'react-aria'
-import { Controller, useFormContext } from 'react-hook-form'
 import type { RegisterOptions } from 'react-hook-form'
 import type { CheckboxGroupState } from 'react-stately'
+import type { TCheckboxGroupItemProps } from '../../interface'
+import { isEmpty } from 'radashi'
+import { useRef } from 'react'
+import { FocusRing, useCheckboxGroupItem, VisuallyHidden } from 'react-aria'
+import { Controller, useFormContext } from 'react-hook-form'
 import { useCheckboxGroupCtx } from '../../../../../providers/CheckboxGroup'
 import useThemeContext from '../../../../../providers/Theme/hooks'
 import { useTranslation } from '../../../../../providers/Translation'
 import Icon from '../../../../Icon'
-import Typography from '../../../../Typography'
-import type { TCheckboxGroupItemProps } from '../../interface'
+import { Typography } from '../../../../Typography'
 
-const ContextCheckboxGroupItem = (props: TCheckboxGroupItemProps & { state: CheckboxGroupState }) => {
+function ContextCheckboxGroupItem(props: TCheckboxGroupItemProps & { state: CheckboxGroupState }) {
   const {
     id,
     ariaLabel,
@@ -46,14 +46,14 @@ const ContextCheckboxGroupItem = (props: TCheckboxGroupItemProps & { state: Chec
             <input ref={ref} {...inputProps} />
           </VisuallyHidden>
           <div className={checkBoxTheme} aria-checked={isSelected(value)} role="checkbox" aria-labelledby={id}>
-            <div className={checkMarkTheme}>{icon && <Icon icon={icon} customTheme={checkMarkIconTheme} />}</div>
+            <div className={checkMarkTheme}>{icon != null && <Icon icon={icon} customTheme={checkMarkIconTheme} />}</div>
           </div>
           <Typography themeName={`${themeName}.label`} tokens={checkBoxTokens}>
             {label}
           </Typography>
         </label>
       </FocusRing>
-      {isError && errorMessage && (
+      {isError && errorMessage != null && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={checkBoxTokens}>
           {errorMessage}
         </Typography>
@@ -62,12 +62,12 @@ const ContextCheckboxGroupItem = (props: TCheckboxGroupItemProps & { state: Chec
   )
 }
 
-const CheckboxGroupItem = (props: TCheckboxGroupItemProps) => {
+export function CheckboxGroupItem(props: TCheckboxGroupItemProps) {
   const state = useCheckboxGroupCtx()
-  return state && <ContextCheckboxGroupItem state={state} {...props} />
+  return state != null && <ContextCheckboxGroupItem state={state} {...props} />
 }
 
-export const ReactHookFormCheckboxItem = ({
+export function ReactHookFormCheckboxItem({
   name,
   label,
   rules,
@@ -86,7 +86,7 @@ export const ReactHookFormCheckboxItem = ({
   rules?: RegisterOptions
   name: string
   defaultValue?: boolean
-}) => {
+}) {
   const { control } = useFormContext()
   const { t } = useTranslation()
 
@@ -153,5 +153,3 @@ export const ReactHookFormCheckboxItem = ({
     />
   )
 }
-
-export default CheckboxGroupItem

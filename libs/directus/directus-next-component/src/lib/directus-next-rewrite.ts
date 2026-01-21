@@ -7,7 +7,7 @@ export async function fetchPageSettings(pathName: string, lang = 'fr-CA') {
   const graphqlEndpoint = process.env.NEXT_PUBLIC_GRAPHQL_URL
   const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
-  if (!graphqlEndpoint || !graphqlApiKey) {
+  if (graphqlEndpoint == null || graphqlEndpoint === '' || graphqlApiKey == null || graphqlApiKey === '') {
     throw new Error('Missing graphql configuration: NEXT_PUBLIC_GRAPHQL_URL or NEXT_API_TOKEN_ADMIN')
   }
 
@@ -42,14 +42,15 @@ export async function fetchPageSettings(pathName: string, lang = 'fr-CA') {
     const response = await fetch(graphqlEndpoint, {
       method: 'POST',
       headers: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${graphqlApiKey}`,
+        'Authorization': `Bearer ${graphqlApiKey}`,
       },
       body: JSON.stringify(graphqlBody),
     })
 
-    const { data } = await response.json()
+    const json = await response.json() as { data?: { page_settings?: Array<{ belongs_to_key?: string, belongs_to_collection?: string }> } }
+    const { data } = json
 
     const key = get<string>(data, 'page_settings.0.belongs_to_key')
     const collection = get<string>(data, 'page_settings.0.belongs_to_collection')
@@ -59,7 +60,8 @@ export async function fetchPageSettings(pathName: string, lang = 'fr-CA') {
     }
 
     return `/${collection}/${key}`
-  } catch (e) {
+  }
+  catch (e) {
     logger.log('GraphQL Error', 'error', { err: e })
     return null
   }
@@ -75,9 +77,9 @@ function removeLocaleFromPathName(pathName: string, locale: string) {
 export async function directusRouteMiddleware(request: NextRequest, locales: string[]) {
   const { pathname } = request.nextUrl
 
-  const locale = locales.find((l) => pathname.startsWith(`/${l}`))
+  const locale: string | undefined = locales.find(l => pathname.startsWith(`/${l}`))
 
-  const pathNameWithoutLocale = locale ? removeLocaleFromPathName(pathname, locale) : pathname
+  const pathNameWithoutLocale = locale != null ? removeLocaleFromPathName(pathname, locale) : pathname
 
   // Fetch page settings based on the request path.
   const route = await fetchPageSettings(pathNameWithoutLocale, locale)

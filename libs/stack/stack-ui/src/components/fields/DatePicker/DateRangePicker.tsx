@@ -1,16 +1,16 @@
 'use client'
 
+import type { TDateRangePickerProps } from './interface'
 import { useRef } from 'react'
 import { useDateRangePicker } from 'react-aria'
 import { useDateRangePickerState } from 'react-stately'
-import Box from '../../Box'
+import { Box } from '../../Box'
 import RangeCalendar from '../../Calendar/RangeCalendar'
 import { Dialog } from '../../Dialog'
-import Typography from '../../Typography'
+import { Typography } from '../../Typography'
 import { CalendarPopover } from './components/CalendarPopover'
 import DateField from './components/DateField'
 import Wrapper from './components/Wrapper'
-import type { TDateRangePickerProps } from './interface'
 
 function DateRangePicker(props: TDateRangePickerProps) {
   const {
@@ -63,12 +63,12 @@ function DateRangePicker(props: TDateRangePickerProps) {
 
   return (
     <Box themeName={`${themeName}.container`} tokens={datePickerTokens} customTheme={customTheme}>
-      {label && (
+      {(label != null && label !== '') && (
         <Typography as="span" themeName={`${themeName}.label`} tokens={datePickerTokens} {...labelProps}>
           {label}
         </Typography>
       )}
-      {description && (
+      {(description != null && description !== '') && (
         <Box as="div" themeName={`${themeName}.description`} tokens={datePickerTokens} {...descriptionProps}>
           {description}
         </Box>
@@ -88,7 +88,7 @@ function DateRangePicker(props: TDateRangePickerProps) {
           tokens={{ ...datePickerTokens, position: 'outer', range: 'start' }}
           {...startFieldProps}
         />
-        {outerDateFieldSeparator && (
+        {(outerDateFieldSeparator != null && outerDateFieldSeparator !== '') && (
           <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={datePickerTokens}>
             {outerDateFieldSeparator}
           </Box>
@@ -133,7 +133,7 @@ function DateRangePicker(props: TDateRangePickerProps) {
                 tokens={{ ...datePickerTokens, position: 'inner', range: 'start' }}
                 {...startFieldProps}
               />
-              {innerDateFieldSeparator && (
+              {(innerDateFieldSeparator != null && innerDateFieldSeparator !== '') && (
                 <Box as="span" themeName={`${themeName}.dateFieldSeparator`} tokens={datePickerTokens}>
                   {innerDateFieldSeparator}
                 </Box>

@@ -1,14 +1,14 @@
 'use client'
 
-import { useRef } from 'react'
-import { FocusRing, useTag } from 'react-aria'
 import type { TToken } from '../../../providers/Theme/interface'
-import Box, { BoxWithForwardRef } from '../../Box'
-import Button from '../../Button'
 import type { TButtonProps } from '../../Button/interface'
 import type { TTagProps } from '../interface'
+import { useRef } from 'react'
+import { FocusRing, useTag } from 'react-aria'
+import { Box, BoxWithForwardRef } from '../../Box'
+import { Button } from '../../Button'
 
-const Tag = <Item extends object, T = TToken>(props: TTagProps<Item, T>) => {
+function Tag<Item extends object, T = TToken>(props: TTagProps<Item, T>) {
   const { themeName, tokens, customTheme, as, item, state, ...rest } = props
   const { removeButtonProps: removeButtonPropsItem, href } = item.props ?? {}
   const ref = useRef(null)
@@ -29,7 +29,7 @@ const Tag = <Item extends object, T = TToken>(props: TTagProps<Item, T>) => {
     isFocused,
     isPressed,
     isSelected,
-    isLink: !!href,
+    isLink: href != null && href !== '',
   }
 
   const removeButtonProps: TButtonProps = {
@@ -55,7 +55,7 @@ const Tag = <Item extends object, T = TToken>(props: TTagProps<Item, T>) => {
           <Box themeName={`${themeName}.item`} tokens={tagTokens}>
             {item.rendered}
           </Box>
-          {allowsRemoving && removeButtonPropsItem && (
+          {allowsRemoving && removeButtonPropsItem != null && (
             <Button themeName={`${themeName}.removeButton`} tokens={tagTokens} {...removeButtonProps} />
           )}
         </Box>

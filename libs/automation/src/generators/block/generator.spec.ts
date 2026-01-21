@@ -1,9 +1,9 @@
 import type { Tree } from '@nx/devkit'
-import { readProjectConfiguration } from '@nx/devkit'
-import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing'
-
-import { blockGenerator } from './generator'
 import type { BlockGeneratorSchema } from './schema'
+
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { blockGenerator } from './generator'
 
 describe('block generator', () => {
   let tree: Tree
@@ -23,7 +23,10 @@ describe('block generator', () => {
 
   it('should run successfully', async () => {
     await blockGenerator(tree, options)
-    const config = readProjectConfiguration(tree, 'block')
-    expect(config).toBeDefined()
+    // The generator creates block component files, not a project configuration
+    // Check that the block files were generated at the expected path
+    expect(tree.exists('/BlockTest/src/index.tsx')).toBeTruthy()
+    expect(tree.exists('/BlockTest/src/config.tsx')).toBeTruthy()
+    expect(tree.exists('/BlockTest/src/interface.ts')).toBeTruthy()
   })
 })

@@ -1,22 +1,24 @@
-import { today, getLocalTimeZone, isWeekend } from '@internationalized/date'
+import { getLocalTimeZone, isWeekend, today } from '@internationalized/date'
 import { useState } from 'react'
-import Box from '../../Box'
+import DatePicker from '.'
+import { Box } from '../../Box'
 import Calendar from '../../Calendar'
 import { CalendarPopover } from './components/CalendarPopover'
-import DatePicker from '.'
 
 /**
- * @typedef {import('@storybook/react').Meta<typeof DatePicker>} Meta
- * @typedef {import('@storybook/react').StoryObj<typeof DatePicker>} Story
+ * @typedef {import('@storybook/react-webpack5').Meta<typeof DatePicker>} Meta
+ * @typedef {import('@storybook/react-webpack5').StoryObj<typeof DatePicker>} Story
  */
 
-const Template = (args) => (
-  <Box customTheme="min-h-[500px] flex justify-center w-full">
-    <DatePicker {...args} />
-  </Box>
-)
+function Template(args) {
+  return (
+    <Box customTheme="min-h-[500px] flex justify-center w-full">
+      <DatePicker {...args} />
+    </Box>
+  )
+}
 
-const TemplateControlled = (args) => {
+function TemplateControlled(args) {
   const { defaultValue, onChange, ...rest } = args
   const [value, setValue] = useState(defaultValue)
   return (
@@ -56,7 +58,7 @@ const meta = {
   },
   args: {
     label: 'Filter by date',
-    onChange: (date) => console.log(date),
+    onChange: date => console.log(date),
     invalidIndicator: 'Invalid date',
   },
   argTypes: {
@@ -263,9 +265,9 @@ export const UnavailableDates = {
         [now.add({ days: 14 }), now.add({ days: 16 })],
         [now.add({ days: 23 }), now.add({ days: 24 })],
       ]
-      const isUnavailable =
-        isWeekend(date, 'en-CA') ||
-        disabledRanges.some((interval) => date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0)
+      const isUnavailable
+        = isWeekend(date, 'en-CA')
+          || disabledRanges.some(interval => date.compare(interval[0]) >= 0 && date.compare(interval[1]) <= 0)
       return isUnavailable
     },
   },

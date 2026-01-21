@@ -1,7 +1,7 @@
-import Radio from '../Radio/index'
+import { Radio } from '../Radio/index'
 import RadioGroup from './index'
 
-const Template = (args) => {
+function Template(args) {
   return (
     <RadioGroup label="Question 1/12" {...args}>
       <Radio id="item1" label="Item 1" name="item" value="1" aria-label="Choose item 1" />
@@ -11,7 +11,7 @@ const Template = (args) => {
   )
 }
 
-const TemplateError = (args) => {
+function TemplateError(args) {
   return (
     <RadioGroup label="Question 2/12" {...args}>
       <Radio id="item4" label="Item 1" name="item" value="1" aria-label="Choose item 1" />

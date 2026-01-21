@@ -1,6 +1,31 @@
 {
+  "archives": [
+    {
+      "project": "@okam/stack React 19 + Next.js 15 Upgrade",
+      "archive_date": "2026-01-14",
+      "status": "READY_TO_PUBLISH",
+      "pending_tasks": ["version-bump", "publish-packages", "update-vanier-mono"]
+    }
+  ],
+
   "archived_from": "@okam/stack React 19 + Next.js 15 Upgrade",
   "archive_date": "2026-01-14",
+
+  "version_upgrades": {
+    "react": "18.3.1 → peerDep ^18.0.0 || ^19.0.0",
+    "next": "^14.1.1 → ^15.0.0",
+    "react-aria": "^3.39.0 → ^3.45.0",
+    "react-stately": "^3.37.0 → ^3.43.0",
+    "@react-spring/web": "^9.7.5 → ^10.0.3",
+    "@types/react": "→ ^19.0.0",
+    "@types/react-dom": "→ ^19.0.0"
+  },
+
+  "breaking_changes_documented": [
+    "react/react-dom moved to peerDependencies - consumers must have in own dependencies",
+    "Library now supports React 18.x and 19.x only"
+  ],
+
   "completed_phases": {
     "phase_1_code_fixes": {
       "description": "Fix React 19 compatibility issues in stack-ui (document any breaking changes)",

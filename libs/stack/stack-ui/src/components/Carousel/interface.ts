@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import type { ReactNode } from 'react'
 import type * as SwiperModules from 'swiper/modules'
 import type { SwiperProps } from 'swiper/react'
@@ -18,7 +17,7 @@ export interface TLegacyCarouselProps<TSlideProps extends TCarouselSlideProps = 
   TCarouselProps,
   'children'
 > {
-  children: (props: TSlideProps) => ReactNode
+  children: (_props: TSlideProps) => ReactNode
   /**
    * @deprecated Call the button in children instead
    */

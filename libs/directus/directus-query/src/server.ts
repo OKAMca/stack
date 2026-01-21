@@ -1,7 +1,7 @@
-export * from './lib/query'
 export { default as initDirectusQuery } from './lib/init'
-export { logger as DirectusQueryLogger } from './logger'
+export * from './lib/query'
 export {
-  graphqlRequestClient as defaultGraphqlRequestClient,
   graphqlRequestAdmin as defaultGraphqlRequestAdmin,
+  graphqlRequestClient as defaultGraphqlRequestClient,
 } from './lib/request'
+export { logger as DirectusQueryLogger } from './logger'

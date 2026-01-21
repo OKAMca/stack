@@ -3,7 +3,7 @@
 import generateUtmTags from './generateUtmTags'
 import useWindow from './useWindow'
 
-const useLinkedinShareUrl = (media: string, medium: string, urlToShare: string) => {
+function useLinkedinShareUrl(media: string, medium: string, urlToShare: string) {
   const { windowLocation } = useWindow()
 
   const currentURL = urlToShare || windowLocation

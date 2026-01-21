@@ -35,11 +35,12 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
+    emptyOutDir: false,
     lib: {
       entry: ['src/index.ts', 'src/edge.ts'],
       name: 'directus-node',
       // Removed 'fileName' because multiple entry points are specified
-      formats: ['es', 'cjs'],
+      // Note: formats not needed - rollupOptions.output array takes precedence
     },
     rollupOptions: {
       output: [

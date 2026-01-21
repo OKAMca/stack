@@ -1,12 +1,12 @@
-import Box from '../Box'
-import Typography from '../Typography'
 import Alerts from '.'
+import { Box } from '../Box'
+import { Typography } from '../Typography'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
 
-const Template = (args) => <Alerts {...args} />
+const Template = args => <Alerts {...args} />
 
 export default {
   title: 'Base components/Alerts',
@@ -29,7 +29,7 @@ export default {
     },
 
     closeButtonAriaLabel: 'Close alerts',
-    onOpenChange: (isOpen) => console.log(`Alerts component was ${isOpen ? 'opened' : 'closed'}`),
+    onOpenChange: isOpen => console.log(`Alerts component was ${isOpen ? 'opened' : 'closed'}`),
     onNavigationPrev: () => console.log('Navigated to previous slide'),
     onNavigationNext: () => console.log('Navigated to next slide'),
   },
@@ -44,7 +44,7 @@ export default {
     },
 
     a11y: {
-      description: "React Swiper's accessibility module parameters",
+      description: 'React Swiper\'s accessibility module parameters',
     },
 
     children: {
@@ -99,7 +99,7 @@ export default {
     modules: {
       table: {
         defaultValue: {
-          summary: "['A11y', 'Keyboard']",
+          summary: '[\'A11y\', \'Keyboard\']',
         },
 
         type: {
@@ -120,12 +120,12 @@ export const SingleAlert = {
   args: {
     slides: [
       {
-        id: '1',
-        title: 'Alert 1 title',
+        'id': '1',
+        'title': 'Alert 1 title',
         'aria-label': 'Alert 1 aria',
-        icon: 'X',
+        'icon': 'X',
 
-        content: (
+        'content': (
           <>
             <Box>
               <Typography
@@ -160,12 +160,12 @@ export const Navigation = {
 
     slides: [
       {
-        id: '1',
-        title: 'Alert 1 title',
+        'id': '1',
+        'title': 'Alert 1 title',
         'aria-label': 'Alert 1 aria',
-        icon: 'X',
+        'icon': 'X',
 
-        content: (
+        'content': (
           <>
             <Box>
               <Typography
@@ -189,22 +189,22 @@ export const Navigation = {
         ),
       },
       {
-        button: {
+        'button': {
           href: '#',
           as: 'a',
           children: 'Consulter toutes les alertes',
         },
 
-        id: '2',
-        title: 'Alert 2 title',
+        'id': '2',
+        'title': 'Alert 2 title',
         'aria-label': 'Alert 2 aria',
-        icon: 'YouTube',
+        'icon': 'YouTube',
       },
       {
-        id: '3',
-        title: 'Alert 3 title',
+        'id': '3',
+        'title': 'Alert 3 title',
         'aria-label': 'Alert 3 aria',
-        icon: 'Mail',
+        'icon': 'Mail',
       },
     ],
   },
@@ -218,11 +218,11 @@ export const Pagination = {
 
     slides: [
       {
-        id: '1',
+        'id': '1',
         'aria-label': 'Alert 1 aria',
-        icon: 'X',
+        'icon': 'X',
 
-        content: (
+        'content': (
           <>
             <Box>
               <Typography
@@ -246,16 +246,16 @@ export const Pagination = {
         ),
       },
       {
-        id: '2',
-        title: 'Alert 2 title',
+        'id': '2',
+        'title': 'Alert 2 title',
         'aria-label': 'Alert 2 aria',
-        icon: 'YouTube',
+        'icon': 'YouTube',
       },
       {
-        id: '3',
-        title: 'Alert 3 title',
+        'id': '3',
+        'title': 'Alert 3 title',
         'aria-label': 'Alert 3 aria',
-        icon: 'Mail',
+        'icon': 'Mail',
       },
     ],
   },
@@ -270,12 +270,12 @@ export const PaginationNavigation = {
 
     slides: [
       {
-        id: '1',
-        title: 'Alert 1 title',
+        'id': '1',
+        'title': 'Alert 1 title',
         'aria-label': 'Alert 1 aria',
-        icon: 'X',
+        'icon': 'X',
 
-        content: (
+        'content': (
           <>
             <Box>
               <Typography
@@ -299,16 +299,16 @@ export const PaginationNavigation = {
         ),
       },
       {
-        id: '2',
-        title: 'Alert 2 title',
+        'id': '2',
+        'title': 'Alert 2 title',
         'aria-label': 'Alert 2 aria',
-        icon: 'YouTube',
+        'icon': 'YouTube',
       },
       {
-        id: '3',
-        title: 'Alert 3 title',
+        'id': '3',
+        'title': 'Alert 3 title',
         'aria-label': 'Alert 3 aria',
-        icon: 'Mail',
+        'icon': 'Mail',
       },
     ],
   },

@@ -1,23 +1,31 @@
 'use client'
 
-import { useAccordion } from '@react-aria/accordion'
-import { useRef } from 'react'
 import type { Node } from 'react-stately'
-import { AccordionContextProvider } from '../../providers/Accordion'
 import type { TToken } from '../../providers/Theme/interface'
+import type { TAccordionItemProps, TAccordionProps } from './interface'
+import { useSelectableList } from '@react-aria/selection'
+import { useRef } from 'react'
+import { AccordionContextProvider } from '../../providers/Accordion'
 import { BoxWithForwardRef } from '../Box'
 import AriaAccordionItem from './components/AriaAccordionItem'
 import useAccordionState from './hooks/useAccordionState'
-import type { TAccordionItemProps, TAccordionProps } from './interface'
 
-const Accordion = <T extends TToken>(props: TAccordionProps<T>) => {
-  const { themeName = 'accordion', tokens, customTheme, TransitionAnimation } = props
+function Accordion<T extends TToken>(props: TAccordionProps<T>) {
+  const { id, themeName = 'accordion', tokens, customTheme, TransitionAnimation } = props
 
-  const accordionRef = useRef(null)
+  const accordionRef = useRef<HTMLDivElement | null>(null)
 
   const state = useAccordionState(props)
 
-  const { accordionProps } = useAccordion(props, state, accordionRef)
+  const { listProps } = useSelectableList({
+    collection: state.collection,
+    disabledKeys: state.disabledKeys,
+    selectionManager: state.selectionManager,
+    allowsTabNavigation: true,
+    disallowTypeAhead: true,
+    ref: accordionRef,
+  })
+  const accordionProps = { ...listProps, tabIndex: undefined }
 
   return (
     <AccordionContextProvider state={state} TransitionAnimation={TransitionAnimation}>
@@ -26,6 +34,7 @@ const Accordion = <T extends TToken>(props: TAccordionProps<T>) => {
         tokens={tokens}
         customTheme={customTheme}
         ref={accordionRef}
+        id={id}
         {...accordionProps}
       >
         {[...state.collection].map((item: Node<TAccordionItemProps>) => {

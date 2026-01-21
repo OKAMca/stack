@@ -1,16 +1,16 @@
 'use client'
 
+import type { TToken } from '../../providers/Theme/interface'
+import type { TAlertsProps } from './interface'
 import { useRef } from 'react'
 import { useOverlayTriggerState } from 'react-stately'
 import useLabelledOverlay from '../../hooks/useLabelledOverlay'
-import type { TToken } from '../../providers/Theme/interface'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'
 import LegacyCarousel from '../Carousel/components/LegacyCarousel'
 import AlertsCloseButton from './components/AlertsCloseButton'
 import AlertsItem from './components/AlertsItem'
-import type { TAlertsProps } from './interface'
 
-const Alerts = <T extends TToken>(props: TAlertsProps<T>) => {
+function Alerts<T extends TToken>(props: TAlertsProps<T>) {
   const {
     themeName = 'alerts',
     tokens,

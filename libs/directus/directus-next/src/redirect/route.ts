@@ -1,11 +1,11 @@
+import type { HandleRedirectOptions } from './interface'
 import { fetchRedirectsData } from '@okam/directus-node/edge'
 import { getJsonErrorResponse } from '../response'
 import { getRedirectSecretDefault } from './env'
-import type { HandleRedirectOptions } from './interface'
 
 export function parseRedirectParams(url: string) {
   const { searchParams } = new URL(url)
-  const secret = searchParams.get('secret') || ''
+  const secret = searchParams.get('secret') ?? ''
   return { secret }
 }
 

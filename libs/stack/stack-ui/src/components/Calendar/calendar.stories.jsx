@@ -1,18 +1,18 @@
 import { today } from '@internationalized/date'
 import { useState } from 'react'
-import Box from '../Box'
-import Typography from '../Typography'
+import Calendar from '.'
+import { Box } from '../Box'
+import { Typography } from '../Typography'
 import CalendarCell from './components/CalendarCell'
 import CalendarGrid from './components/CalendarGrid'
 import NavigationButtons from './components/NavigationButtons'
-import Calendar from '.'
 
 /**
- * @typedef {import('@storybook/react').Meta<typeof Calendar>} Meta
- * @typedef {import('@storybook/react').Story<typeof Calendar>} Story
+ * @typedef {import('@storybook/react-webpack5').Meta<typeof Calendar>} Meta
+ * @typedef {import('@storybook/react-webpack5').Story<typeof Calendar>} Story
  */
 
-const TemplateControlled = (args) => {
+function TemplateControlled(args) {
   const { onChange, defaultValue, ...rest } = args
   const [value, setValue] = useState(defaultValue)
   return (
@@ -49,7 +49,7 @@ const meta = {
     NavigationButtons,
   },
   args: {
-    onChange: (value) => console.log('Date changed', value),
+    onChange: value => console.log('Date changed', value),
   },
   argTypes: {
     isInvalid: {

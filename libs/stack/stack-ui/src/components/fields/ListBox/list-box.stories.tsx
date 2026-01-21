@@ -1,16 +1,18 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { Anchor, Button } from '@okam/stack-ui'
-import type { Meta, StoryObj } from '@storybook/react'
-import type { ComponentType } from 'react'
-import { useState, isValidElement } from 'react'
-import { mergeProps } from 'react-aria'
-import { useForm, FormProvider, useFormContext } from 'react-hook-form'
+import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { ComponentProps, ComponentType } from 'react'
 import type { Key, Selection } from 'react-stately'
+import { Anchor, Button } from '@okam/stack-ui'
+import { isValidElement, useState } from 'react'
+import { mergeProps } from 'react-aria'
+import { FormProvider, useForm, useFormContext } from 'react-hook-form'
 import { Item, Section } from 'react-stately'
-import Box from '../../Box'
+import { ListBox, ReactHookFormListBox } from '.'
+import { Box } from '../../Box'
 import { Node } from '../../Node'
 import ListBoxSection from './components/ListBoxSection'
-import ListBox, { ReactHookFormListBox } from '.'
+
+type ListBoxArgs = ComponentProps<typeof ListBox>
+type ReactHookFormListBoxArgs = ComponentProps<typeof ReactHookFormListBox>
 
 const meta: Meta<typeof ListBox> = {
   title: 'Form/Fields/ListBox',
@@ -200,7 +202,7 @@ export const ChildrenRenderingFunctionWithSections: Story = {
       {
         key: 'fruits',
         title: 'Fruits',
-        children: (item) => <Item key={item.key}>{item.children}</Item>,
+        children: item => <Item key={item.key}>{item.children}</Item>,
         items: [
           { key: 'banana', children: 'Banana' },
           { key: 'apple', children: 'Apple' },
@@ -227,16 +229,17 @@ export const Selectable: Story = {
 }
 
 export const Controlled: Story = {
-  render: (args) => {
+  render: (args: ListBoxArgs) => {
     const { onSelectionChange, children, items, ...rest } = args
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(['banana', 'apple']))
+
+    const [selectedKeys, setSelectedKeys] = useState<Selection>(() => new Set(['banana', 'apple']))
     const handleButtonPress = (key: Key) => {
       setSelectedKeys((newSelectedKeys) => {
         const copy = new Set(newSelectedKeys)
         if (copy.has(key)) {
           copy.delete(key)
-        } else {
+        }
+        else {
           copy.add(key)
         }
         return copy
@@ -246,7 +249,7 @@ export const Controlled: Story = {
       <Box>
         <Box customTheme="m-4 flex flex-wrap gap-2">
           {[...(items ?? [])].map(
-            (item) =>
+            item =>
               isValidElement(item.children) && (
                 <Button key={item.key} handlePress={() => handleButtonPress(item.key)}>
                   {item.children}
@@ -325,7 +328,7 @@ export const ReactHookForm: ReactHookFormStory = {
       )
     },
   ],
-  render: (args) => {
+  render: (args: ReactHookFormListBoxArgs) => {
     const { rules } = args
     const methods = useFormContext()
     const { ref: fieldRef, ...registerProps } = methods.register('fruits', rules)
@@ -348,7 +351,7 @@ export const ReactHookForm: ReactHookFormStory = {
               <Button tokens={{ intent: 'danger' }} handlePress={clearAll}>
                 Clear All
               </Button>
-              <Button handlePress={() => handleSubmit()} {...{ type: 'submit' }}>
+              <Button handlePress={async () => handleSubmit()} {...{ type: 'submit' }}>
                 Submit Form
               </Button>
             </Box>
@@ -365,7 +368,7 @@ export const ReactHookForm: ReactHookFormStory = {
     rules: {
       required: 'Please select at least one fruit',
       validate: (value: Set<Key>) => {
-        if (!value || value.size === 0) {
+        if (value == null || value.size === 0) {
           return 'Please select at least one fruit'
         }
         if (value.size > 3) {

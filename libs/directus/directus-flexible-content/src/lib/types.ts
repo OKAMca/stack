@@ -9,7 +9,7 @@ export type RelationBlockProps = RelationBlockAttrs & {
   attrs: RelationBlockAttrs & { data: { blocks: TCommonBlockFragment[] } }
 }
 
-export type RelationBlockAttrs = {
+export interface RelationBlockAttrs {
   id: string | null
   junction: string | null
   collection: string | null

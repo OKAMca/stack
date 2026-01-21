@@ -1,6 +1,6 @@
-import TextArea from './index'
+import { TextArea } from './index'
 
-const Template = (args) => {
+function Template(args) {
   const { backgroundColor, ...rest } = args
   return (
     <div className="flex flex-col m-auto h-screen justify-center items-center">

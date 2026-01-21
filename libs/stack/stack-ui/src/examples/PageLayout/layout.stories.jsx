@@ -1,18 +1,20 @@
 import PageLayoutExample from './index'
 
-const Template = (args) => (
-  <>
-    <style>
-      {`
+function Template(args) {
+  return (
+    <>
+      <style>
+        {`
         #storybook-root {
           width: 100%;
           padding: 0 !important;
         }
       `}
-    </style>
-    <PageLayoutExample {...args} />
-  </>
-)
+      </style>
+      <PageLayoutExample {...args} />
+    </>
+  )
+}
 
 export default {
   title: 'LAYOUT EXAMPLE/Simple',

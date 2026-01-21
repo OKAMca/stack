@@ -3,15 +3,28 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/directus/directus-flexible-content/src",
   "projectType": "library",
-  "tags": ["publishable"],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/directus/directus-flexible-content/**/*.{ts,tsx,js,jsx}",
+          "libs/directus/directus-flexible-content/package.json",
+          "libs/directus/directus-flexible-content/project.json"
+        ]
+      }
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/libs/directus/directus-flexible-content"
@@ -26,10 +39,13 @@
       }
     },
     "test": {
-      "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
+      "executor": "@nx/vitest:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
       "options": {
-        "reportsDirectory": "../../../coverage/libs/directus/directus-flexible-content"
+        "reportsDirectory": "../../../coverage/libs/directus/directus-flexible-content",
+        "passWithNoTests": true
       }
     },
     "nx-release-publish": {

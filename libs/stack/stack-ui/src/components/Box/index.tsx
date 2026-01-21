@@ -1,12 +1,11 @@
 'use client'
 
-/* eslint-disable react/display-name */
-import React from 'react'
-import useThemeContext from '../../providers/Theme/hooks'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TBoxProps } from './interface'
+import * as React from 'react'
+import useThemeContext from '../../providers/Theme/hooks'
 
-const Box = <T extends TToken>({
+export function Box<T extends TToken>({
   as: Component = 'div',
   themeName = 'box',
   tokens,
@@ -14,7 +13,7 @@ const Box = <T extends TToken>({
   children,
   className,
   ...rest
-}: TBoxProps<T>) => {
+}: TBoxProps<T>) {
   const theme = useThemeContext(themeName, tokens, customTheme)
 
   return (
@@ -24,14 +23,25 @@ const Box = <T extends TToken>({
   )
 }
 
-export const BoxWithForwardRef = React.forwardRef((props: TBoxProps, ref: React.Ref<HTMLElement>) => {
-  const { as: Component = 'div', tokens, themeName = 'box', customTheme, children, ...rest } = props
+export interface TBoxWithForwardRefProps<T = TToken> extends TBoxProps<T> {
+  ref?: React.Ref<HTMLElement>
+}
+
+export function BoxWithForwardRef<T extends TToken>({
+  ref,
+  as: Component = 'div',
+  tokens,
+  themeName = 'box',
+  customTheme,
+  children,
+  ...rest
+}: TBoxWithForwardRefProps<T>) {
   const theme = useThemeContext(themeName, tokens, customTheme)
   return (
     <Component {...rest} ref={ref} className={theme}>
       {children}
     </Component>
   )
-})
+}
 
-export default Box
+BoxWithForwardRef.displayName = 'BoxWithForwardRef'
