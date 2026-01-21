@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-throw-literal */
 import { isNonEmptyString } from './typeguards'
 
 export class Asserts {
@@ -30,9 +29,9 @@ export class Asserts {
   }
 
   private static createException(msgOrErrorFactory?: string | (() => Error), fallbackMsg?: string) {
-    if (typeof msgOrErrorFactory === 'string' || msgOrErrorFactory === undefined) {
-      throw new Error(msgOrErrorFactory ?? fallbackMsg ?? 'Assertion did not pass.')
+    if (typeof msgOrErrorFactory === 'function') {
+      throw msgOrErrorFactory()
     }
-    throw msgOrErrorFactory()
+    throw new Error(msgOrErrorFactory ?? fallbackMsg ?? 'Assertion did not pass.')
   }
 }

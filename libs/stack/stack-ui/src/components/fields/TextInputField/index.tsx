@@ -1,20 +1,19 @@
 'use client'
 
-import { FocusRing } from '@react-aria/focus'
-import { isEmpty } from 'radashi'
 import type { ChangeEvent } from 'react'
-import { useRef } from 'react'
-import { useTextField } from 'react-aria'
 import type { RegisterOptions } from 'react-hook-form'
+import type { TTextInputProps } from './interface'
+import { isEmpty } from 'radashi'
+import { useRef } from 'react'
+import { FocusRing, useTextField } from 'react-aria'
 import { Controller, useFormContext } from 'react-hook-form'
 import useThemeContext from '../../../providers/Theme/hooks'
 import { useTranslation } from '../../../providers/Translation'
-import Box from '../../Box'
+import { Box } from '../../Box'
 import Icon from '../../Icon'
-import Typography from '../../Typography'
-import type { TTextInputProps } from './interface'
+import { Typography } from '../../Typography'
 
-const TextInputField = (props: TTextInputProps) => {
+export function TextInputField(props: TTextInputProps) {
   const {
     icon,
     errorIcon,
@@ -55,14 +54,14 @@ const TextInputField = (props: TTextInputProps) => {
     inputRef,
   )
 
-  const mergeRefs = (ref: HTMLInputElement) => {
-    if (ref) {
+  const mergeRefs = (ref: HTMLInputElement | null) => {
+    if (ref != null) {
       fieldRef?.(ref)
       inputRef.current = ref
     }
   }
 
-  const inputTokens = { ...tokens, isDisabled, isRequired, isError: !!errorMessage }
+  const inputTokens = { ...tokens, isDisabled, isRequired, isError: errorMessage != null }
   const input = useThemeContext(`${themeName}.input`, inputTokens)
 
   return (
@@ -74,8 +73,7 @@ const TextInputField = (props: TTextInputProps) => {
           tokens={inputTokens}
           customTheme={customTheme}
         >
-          {label && (
-            // eslint-disable-next-line jsx-a11y/label-has-associated-control
+          {label != null && (
             <Box
               as="label"
               tokens={inputTokens}
@@ -90,7 +88,7 @@ const TextInputField = (props: TTextInputProps) => {
             {children}
             <input aria-label={ariaLabel} {...inputProps} placeholder={placeholder} ref={mergeRefs} className={input} />
           </Box>
-          {icon && (
+          {icon != null && (
             <Icon
               themeName={`${themeName}.icon`}
               tokens={inputTokens}
@@ -99,7 +97,7 @@ const TextInputField = (props: TTextInputProps) => {
               aria-hidden
             />
           )}
-          {errorMessage && errorIcon && (
+          {(errorMessage != null && errorIcon != null) && (
             <Icon
               themeName={`${themeName}.errorIcon`}
               tokens={inputTokens}
@@ -110,7 +108,7 @@ const TextInputField = (props: TTextInputProps) => {
           )}
         </Box>
       </FocusRing>
-      {errorMessage && (
+      {errorMessage != null && (
         <Typography
           themeName={`${themeName}.errorMessage`}
           tokens={inputTokens}
@@ -124,7 +122,7 @@ const TextInputField = (props: TTextInputProps) => {
   )
 }
 
-export const ReactHookFormInput = ({
+export function ReactHookFormInput({
   name,
   label,
   rules,
@@ -144,7 +142,7 @@ export const ReactHookFormInput = ({
   errorIcon,
   icon,
   ...rest
-}: TTextInputProps & { rules: RegisterOptions }) => {
+}: TTextInputProps & { rules: RegisterOptions }) {
   const { control } = useFormContext()
   const { t } = useTranslation()
 
@@ -228,4 +226,3 @@ export const ReactHookFormInput = ({
     />
   )
 }
-export default TextInputField

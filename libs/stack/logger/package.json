@@ -2,8 +2,10 @@
   "name": "@okam/logger",
   "version": "1.1.0",
   "license": "BUSL-1.1",
-  "main": "./index.js",
-  "types": "./index.d.ts",
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
+  },
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": {
@@ -16,11 +18,13 @@
       }
     }
   },
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": {
-    "url": "https://github.com/OKAMca/stack.git"
   },
   "nxrelease": {
     "repositoryUrl": "https://github.com/OKAMca/stack.git"

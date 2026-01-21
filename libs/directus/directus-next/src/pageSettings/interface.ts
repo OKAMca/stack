@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { Variables } from 'graphql-request'
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { Fragmentize } from '../types/Fragments'

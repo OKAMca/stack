@@ -1,4 +1,4 @@
-import type React from 'react'
+import type * as React from 'react'
 import type { AriaCheckboxGroupItemProps } from 'react-aria'
 import type { CheckboxGroupProps } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
@@ -13,6 +13,6 @@ export interface TCheckboxGroupProps<T = TToken> extends TDefaultComponent<T>, C
   label?: string
 }
 
-export type TCheckboxGroupItemProps = TDefaultComponent &
-  Omit<AriaCheckboxGroupItemProps, 'children'> &
-  Omit<TCheckboxProps, 'children'>
+export type TCheckboxGroupItemProps = TDefaultComponent
+  & Omit<AriaCheckboxGroupItemProps, 'children'>
+  & Omit<TCheckboxProps, 'children'>

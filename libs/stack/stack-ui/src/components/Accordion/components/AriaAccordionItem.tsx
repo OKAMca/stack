@@ -1,39 +1,76 @@
 'use client'
 
-import { useAccordionItem } from '@react-aria/accordion'
+import type { TButtonProps } from '../../Button/interface'
+import type { TAriaAccordionItemProps } from '../interface'
 import { useRef } from 'react'
-import { FocusRing, FocusScope } from 'react-aria'
+import { FocusRing, FocusScope, useDisclosure } from 'react-aria'
 import { useUpdateEffect } from 'react-use'
 import { useAccordionCtx } from '../../../providers/Accordion'
 import AccordionTransition from '../../../transitions/AccordionTransition'
-import Box from '../../Box'
+import { Box, BoxWithForwardRef } from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
-import type { TButtonProps } from '../../Button/interface'
 import Icon from '../../Icon'
-import type { TAriaAccordionItemProps } from '../interface'
 
-const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
+function AriaAccordionItem(props: TAriaAccordionItemProps) {
   const { item, tokens, customTheme } = props
   const { props: itemProps, rendered, key } = item
   const { icon, title, onOpenChange, tokens: itemTokens, themeName: itemThemeName } = itemProps ?? {}
   const { themeName = itemThemeName } = props
 
-  const ref = useRef(null)
+  const buttonRef = useRef<HTMLElement | null>(null)
+  const panelRef = useRef<HTMLElement | null>(null)
   const { state, TransitionAnimation = AccordionTransition } = useAccordionCtx()
 
-  const {
-    buttonProps: { onClick: onButtonClick, onKeyDown, onPointerDown, ...buttonProps },
-    regionProps,
-  } = useAccordionItem(props, state, ref)
+  const isDisabled = state.isDisabled || state.disabledKeys.has(key) || itemProps?.isDisabled
+  const isOpen = state.expandedKeys.has(key)
+  const disclosureState = {
+    isExpanded: isOpen,
+    setExpanded: (nextExpanded: boolean) => {
+      if (nextExpanded) {
+        if (state.allowsMultipleExpanded) {
+          const nextKeys = new Set(state.expandedKeys)
+          nextKeys.add(key)
+          state.setExpandedKeys(nextKeys)
+        }
+        else {
+          state.setExpandedKeys(new Set([key]))
+        }
+        return
+      }
 
-  const isOpen = state.selectionManager.selectedKeys.has(key)
+      const nextKeys = new Set(state.expandedKeys)
+      nextKeys.delete(key)
+      state.setExpandedKeys(nextKeys)
+    },
+    expand: () => {
+      if (state.expandedKeys.has(key))
+        return
+      if (state.allowsMultipleExpanded) {
+        const nextKeys = new Set(state.expandedKeys)
+        nextKeys.add(key)
+        state.setExpandedKeys(nextKeys)
+        return
+      }
+      state.setExpandedKeys(new Set([key]))
+    },
+    collapse: () => {
+      if (!state.expandedKeys.has(key))
+        return
+      const nextKeys = new Set(state.expandedKeys)
+      nextKeys.delete(key)
+      state.setExpandedKeys(nextKeys)
+    },
+    toggle: () => state.toggleKey(key),
+  }
+
+  const { buttonProps, panelProps } = useDisclosure({ isDisabled }, disclosureState, panelRef)
+  const { onPress, ...restButtonProps } = buttonProps
 
   const accordionItemTokens = { ...tokens, isOpen, ...itemTokens }
 
   const handlePress: TButtonProps['handlePress'] = (e) => {
     e.continuePropagation()
-    state.selectionManager.select(item.key)
-    state.toggleKey(item.key)
+    onPress?.(e)
   }
 
   useUpdateEffect(() => {
@@ -44,10 +81,9 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
     <Box themeName={`${themeName}.container`} tokens={accordionItemTokens} customTheme={customTheme}>
       <FocusRing focusRingClass="has-focus-ring">
         <ButtonWithForwardRef
-          {...buttonProps}
-          aria-expanded={isOpen}
+          {...restButtonProps}
           handlePress={handlePress}
-          ref={ref}
+          ref={buttonRef}
           themeName={`${themeName}.button`}
           tokens={accordionItemTokens}
         >
@@ -64,12 +100,16 @@ const AriaAccordionItem = (props: TAriaAccordionItemProps) => {
       <TransitionAnimation
         isVisible={isOpen}
         themeName={`${themeName}.region`}
-        {...regionProps}
         tokens={accordionItemTokens}
       >
-        <Box themeName={`${themeName}.content`} tokens={accordionItemTokens}>
+        <BoxWithForwardRef
+          {...panelProps}
+          ref={panelRef}
+          themeName={`${themeName}.content`}
+          tokens={accordionItemTokens}
+        >
           <FocusScope autoFocus>{rendered}</FocusScope>
-        </Box>
+        </BoxWithForwardRef>
       </TransitionAnimation>
     </Box>
   )

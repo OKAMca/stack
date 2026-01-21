@@ -1,11 +1,11 @@
 import type { TBlockSerializerConfig } from '@okam/directus-block'
-import { BlockDispatcher } from '@okam/directus-block/server'
 import type { TDefaultComponent } from '@okam/stack-ui'
-import { Mark, Node } from '@tiptap/core'
-import { injectDataIntoContent } from '../../functions'
-import type { JSONContent, Extensions, EditorNodes } from '../../functions/types'
+import type { EditorNodes, Extensions, JSONContent } from '../../functions/types'
 import type { RelationBlockProps } from '../../types'
 import type { TRenderingNodes } from '../nodes/types'
+import { BlockDispatcher } from '@okam/directus-block/server'
+import { Mark, Node } from '@tiptap/core'
+import { injectDataIntoContent } from '../../functions'
 import RenderNodes from '../RenderNodes'
 import extensions from './extensions'
 
@@ -19,7 +19,7 @@ interface FlexibleEditorContentProps extends TDefaultComponent {
   remappedAttributes?: Record<string, string>
 }
 
-const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
+function FlexibleEditorContent(props: FlexibleEditorContentProps) {
   const {
     jsonContent,
     editorNodes,
@@ -35,13 +35,13 @@ const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
 
   const content = injectDataIntoContent(editorNodes, jsonContent)
   // `.slice(0)` to clone the extensions array
-  const effectiveSerializers = serializers ?? [...extensions] ?? []
+  const effectiveSerializers = serializers ?? [...extensions]
 
   const renderRelationBlock = (block: RelationBlockProps, blockDispatcherConfig?: TBlockSerializerConfig) => {
     const { attrs } = block
     const blockKey = `${attrs?.collection?.replace('related_', '')}_id`
-    if (attrs?.data) {
-      if (!attrs?.data?.blocks) {
+    if (attrs?.data != null) {
+      if (attrs.data.blocks == null) {
         const properBlock = { collection: attrs.collection, item: { ...attrs?.data } }
         return <BlockDispatcher key={JSON.stringify(properBlock)} block={properBlock} config={blockDispatcherConfig} />
       }
@@ -69,7 +69,6 @@ const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
 
   const relationMarkSerializer = Mark.create({
     name: 'relation-mark',
-    type: 'relation-mark',
     renderHTML: () => ['relation-mark'],
     render: (block: RelationBlockProps) => {
       return renderRelationBlock(block, relationMarksConfig)
@@ -78,7 +77,7 @@ const FlexibleEditorContent = (props: FlexibleEditorContentProps) => {
 
   effectiveSerializers.push(relationBlockSerializer, relationInlineBlockSerializer, relationMarkSerializer)
 
-  if (!content) {
+  if (content == null) {
     return null
   }
 

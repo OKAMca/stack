@@ -11,9 +11,9 @@ export type TFieldReactHookForm<T = TToken> = TReactHookForm & Omit<TDefaultComp
 
 export interface TComboBoxProps<I extends object = object, T extends TToken = TToken>
   extends
-    Omit<TFieldReactHookForm<T>, keyof AriaComboBoxOptions<I>>,
-    Omit<AriaComboBoxOptions<I & TDefaultNodeComponent<I, T>>, 'inputRef' | 'buttonRef' | 'popoverRef' | 'listBoxRef'>,
-    ComboBoxStateOptions<I & TDefaultNodeComponent<I, T>> {
+  Omit<TFieldReactHookForm<T>, keyof AriaComboBoxOptions<I>>,
+  Omit<AriaComboBoxOptions<I & TDefaultNodeComponent<I, T>>, 'inputRef' | 'buttonRef' | 'popoverRef' | 'listBoxRef'>,
+  ComboBoxStateOptions<I & TDefaultNodeComponent<I, T>> {
   hookFormRef?: RefCallBack
   icon?: string | ReactNode
   closeIcon?: string | ReactNode

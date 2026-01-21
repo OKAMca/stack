@@ -1,20 +1,21 @@
 import type { Nullable, TAnchorProps } from '@okam/stack-ui'
-import Link from 'next/link'
-import { z } from 'zod'
 import type { TDirectusLinkPropsConfig, TGetDirectusLink } from '../../components/DirectusLink/interface'
 import type { TSearchParams } from '../../types/links'
+import Link from 'next/link'
+import { z } from 'zod'
 import { getDirectusFile } from '../getDirectusFile'
 import { getDirectusSearchParams } from '../getDirectusSearchParams'
 
 const absoluteUrlSchema = z.url({ protocol: /^(https?|mailto|tel)$/ })
 const relativeUrlSchema = z.string().regex(/^[/#?]/, {
-  error: (error) => `Invalid href ${error.input}. Must be a valid absolute URL or start with /, # or ?`,
+  error: error => `Invalid href ${error.input}. Must be a valid absolute URL or start with /, # or ?`,
 })
 
 const hrefSchema = z.union([absoluteUrlSchema, relativeUrlSchema]).transform((value) => {
   try {
     return new URL(value)
-  } catch (error) {
+  }
+  catch {
     return new URL(value, 'http://localhost')
   }
 })
@@ -31,7 +32,8 @@ function getCompleteHref(
   params: Nullable<Nullable<TSearchParams>[]>,
   type: 'relative' | 'absolute',
 ) {
-  if (!href) return null
+  if (href == null || href === '')
+    return null
 
   const searchParams = getDirectusSearchParams(params)
 
@@ -94,11 +96,11 @@ function getAnchor(props: TGetDirectusLink) {
 }
 
 const defaultPropsConfig: TDirectusLinkPropsConfig = {
-  collection: getCollection,
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+  'collection': getCollection,
+
   'external-link': getExternalLink,
-  file: getFile,
-  anchor: getAnchor,
+  'file': getFile,
+  'anchor': getAnchor,
 }
 
 export function getDirectusLink(props: TGetDirectusLink): TAnchorProps {
@@ -123,7 +125,8 @@ export function getDirectusLink(props: TGetDirectusLink): TAnchorProps {
     ...rest
   } = props
 
-  if (!type) return {}
+  if (type == null || type === '')
+    return {}
 
   const finalConfig = { ...defaultPropsConfig, ...(propsConfig ?? {}) }
 
@@ -131,14 +134,15 @@ export function getDirectusLink(props: TGetDirectusLink): TAnchorProps {
 
   const { href, ...restOfLinkProps } = linkProps
 
-  if (!href) return {}
+  if (href == null || href === '')
+    return {}
 
   return {
     ...rest,
     as,
-    ...(themeName ? { themeName } : {}),
-    ...(customTheme ? { customTheme } : {}),
-    ...(tokens ? { tokens } : {}),
+    ...(themeName != null ? { themeName } : {}),
+    ...(customTheme != null ? { customTheme } : {}),
+    ...(tokens != null ? { tokens } : {}),
     nextLinkProps: {
       href,
       prefetch: prefetch ?? undefined,

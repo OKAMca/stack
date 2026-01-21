@@ -1,7 +1,6 @@
-/* eslint-disable react/display-name */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import type { Meta, StoryObj } from '@storybook/react'
-import type { ComponentType } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { ComponentProps, ComponentType } from 'react'
+import Carousel from '.'
 import { Icon, Typography } from '../..'
 import CarouselNextNavigation from './navigation/CarouselNextNavigation'
 import CarouselPrevNavigation from './navigation/CarouselPrevNavigation'
@@ -9,11 +8,12 @@ import CarouselPagination from './pagination/CarouselPagination'
 import CarouselPaginationBullet from './pagination/CarouselPaginationBullet'
 import CarouselPaginationFraction from './pagination/CarouselPaginationFraction'
 import CarouselSwiper from './swiper/CarouselSwiper'
-import Carousel from '.'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
+
+type CarouselArgs = ComponentProps<typeof Carousel>
 
 const meta: Meta<typeof Carousel> = {
   title: 'Base Components/Carousel',
@@ -32,12 +32,12 @@ const meta: Meta<typeof Carousel> = {
         'Array of slides to display in the carousel. The slides get rendered as `SwiperSlide` components by the `CarouselSwiper` component.',
     },
     a11y: {
-      description: "React Swiper's accessibility module parameters",
+      description: 'React Swiper\'s accessibility module parameters',
     },
     modules: {
       table: {
         defaultValue: {
-          summary: "['A11y', 'Keyboard']",
+          summary: '[\'A11y\', \'Keyboard\']',
         },
         type: {
           summary:
@@ -80,7 +80,7 @@ const meta: Meta<typeof Carousel> = {
       console.log('Slide changed')
     },
   },
-  render: (args) => (
+  render: (args: CarouselArgs) => (
     <Carousel {...args}>
       <CarouselPrevNavigation aria-label="Previous slide">
         <Icon icon="ArrowLeft" />
@@ -175,14 +175,13 @@ export const PaginationBullets: Story = {
   args: {
     modules: ['Pagination'],
   },
-  render: (args) => (
+  render: (args: CarouselArgs) => (
     <Carousel {...args}>
       <CarouselSwiper />
       <CarouselPagination>
-        {(swiper) =>
-          // eslint-disable-next-line react/no-array-index-key
-          swiper?.slides?.map((slide, index) => <CarouselPaginationBullet key={`bullet-${index}`} index={index} />)
-        }
+        {swiper =>
+          // eslint-disable-next-line react/no-array-index-key -- pagination bullets map 1:1 with slide positions; index is the correct identifier
+          swiper?.slides?.map((slide, index) => <CarouselPaginationBullet key={`bullet-${index}`} index={index} />)}
       </CarouselPagination>
     </Carousel>
   ),
@@ -193,7 +192,7 @@ export const PaginationFraction: Story = {
   args: {
     modules: ['Pagination', 'Navigation'],
   },
-  render: (args) => (
+  render: (args: CarouselArgs) => (
     <Carousel {...args}>
       <CarouselPrevNavigation aria-label="Previous slide">
         <Icon icon="ArrowLeft" />

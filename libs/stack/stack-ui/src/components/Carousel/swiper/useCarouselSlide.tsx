@@ -1,14 +1,15 @@
 'use client'
 
-import { isEmpty } from 'radashi'
 import type { RefObject } from 'react'
+import type { Swiper } from 'swiper/types'
+import type { TCarouselSlide, TCarouselSlideProps } from './interface'
+import { isEmpty } from 'radashi'
 import { useMemo, useRef } from 'react'
 import { mergeProps } from 'react-aria'
-import type { Swiper } from 'swiper/types'
-import type { TCarouselSlideProps, TCarouselSlide } from './interface'
 
 function getClasses(swiper: Swiper | undefined, ref: RefObject<HTMLElement | null>) {
-  if (!ref.current || !swiper) return []
+  if (ref.current == null || swiper == null)
+    return []
   const { slideClass = 'swiper-slide' } = swiper.params
   const classes = ref.current?.className.split(' ').filter((className) => {
     return className.indexOf('swiper-slide') === 0 || className.indexOf(slideClass) === 0
@@ -39,7 +40,7 @@ export function useCarouselSlide(props: TCarouselSlideProps): TCarouselSlide {
       isPrev: classes?.includes('swiper-slide-prev'),
       isNext: classes?.includes('swiper-slide-next'),
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- ref.current triggers recalc when DOM element attaches; ref object is stable
   }, [ref.current])
 
   return {
@@ -47,8 +48,8 @@ export function useCarouselSlide(props: TCarouselSlideProps): TCarouselSlide {
     slideProps: mergeProps(rest, {
       ...(hasTitle ? { 'aria-labelledby': id } : { 'aria-label': legacyAriaLabel ?? ariaLabel }),
       'aria-roledescription': itemRoleDescriptionMessage ?? undefined,
-      role: slideRole,
-      inert: `!${swiperSlide.isVisible}`,
+      'role': slideRole,
+      'inert': `!${swiperSlide.isVisible}`,
     }),
     titleProps: {},
     ...swiperSlide,

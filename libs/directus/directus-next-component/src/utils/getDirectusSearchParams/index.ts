@@ -1,6 +1,6 @@
 import type { Nullable } from '@okam/stack-ui'
-import { isEmpty } from 'radashi'
 import type { TSearchParams } from '../../types/links'
+import { isEmpty } from 'radashi'
 
 export function getDirectusSearchParams(params: Nullable<Nullable<TSearchParams>[]>): URLSearchParams {
   const searchParams = new URLSearchParams()

@@ -1,9 +1,9 @@
-import type { Preview } from '@storybook/react'
-import '../src/tailwind.css' // replace with the name of your tailwind css file
+import type { Preview } from '@storybook/react-webpack5'
 import { NuqsAdapter } from 'nuqs/adapters/next'
 import { Suspense } from 'react'
 import { OverlayProvider } from 'react-aria'
 import BaseThemeProvider from '../src/theme'
+import '../src/tailwind.css' // replace with the name of your tailwind css file
 
 const preview: Preview = {
   parameters: {
@@ -13,19 +13,20 @@ const preview: Preview = {
     layout: 'centered',
     controls: { expanded: true },
     backgrounds: {
-      default: 'light',
-      values: [
-        {
+      options: {
+        light: {
           name: 'light',
           value: '#ffffff',
         },
-        {
+
+        dark: {
           name: 'dark',
           value: '#000000',
         },
-      ],
+      },
     },
   },
+
   decorators: [
     (Story) => {
       return (
@@ -50,6 +51,12 @@ const preview: Preview = {
       )
     },
   ],
+
+  initialGlobals: {
+    backgrounds: {
+      value: 'light',
+    },
+  },
 }
 
 export default preview

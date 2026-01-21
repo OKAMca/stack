@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/naming-convention */
-import type { TPageSettings, TFiles } from '@okam/directus-next'
+import type { TFiles, TPageSettings } from '@okam/directus-next'
 import type { Nullable } from '@okam/stack-ui'
 
 /**

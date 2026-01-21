@@ -1,10 +1,10 @@
+import type { TShareButtonProps } from '../../components/ShareButton/interface'
 import { useCopyToClipboard } from 'usehooks-ts'
 import LinkedIn from '../../components/icons/LinkedIn'
-import ShareButton from '../../components/ShareButton'
-import type { TShareButtonProps } from '../../components/ShareButton/interface'
-import Typography from '../../components/Typography'
+import { ShareButton } from '../../components/ShareButton'
+import { Typography } from '../../components/Typography'
 
-const ShareButtonExample = (props: TShareButtonProps) => {
+function ShareButtonExample(props: TShareButtonProps) {
   const { tokens } = props
   const [value, copy] = useCopyToClipboard()
   return (
@@ -54,11 +54,11 @@ const ShareButtonExample = (props: TShareButtonProps) => {
             ariaLabel: 'Copy to clipboard',
             icon: 'ArrowDown',
             key: 'copy',
-            onClick: (linkKey) => copy(linkKey),
+            onClick: linkKey => void copy(linkKey),
           },
         ]}
       />
-      <Typography>{value ? `Copied value: ${value}` : 'Nothing copied yet!'}</Typography>
+      <Typography>{(value != null && value !== '') ? `Copied value: ${value}` : 'Nothing copied yet!'}</Typography>
     </>
   )
 }

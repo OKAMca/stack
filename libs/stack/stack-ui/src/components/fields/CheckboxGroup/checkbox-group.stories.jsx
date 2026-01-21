@@ -1,7 +1,7 @@
-import CheckboxGroupItem from './components/CheckboxGroupItem'
+import { CheckboxGroupItem } from './components/CheckboxGroupItem'
 import CheckboxGroup from './index'
 
-const Template = (args) => {
+function Template(args) {
   return (
     <CheckboxGroup label="Question 1/12" {...args}>
       <CheckboxGroupItem id="item1" label="Item 1" name="item" value="1" ariaLabel="Item 1" />
@@ -11,7 +11,7 @@ const Template = (args) => {
   )
 }
 
-const TemplateError = (args) => {
+function TemplateError(args) {
   return (
     <CheckboxGroup label="Question 2/12" {...args}>
       <CheckboxGroupItem id="item4" label="Item 1" name="item" value="1" ariaLabel="Item 1" />

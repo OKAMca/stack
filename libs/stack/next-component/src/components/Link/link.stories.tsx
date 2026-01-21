@@ -1,5 +1,5 @@
+import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { Box, Typography } from '@okam/stack-ui'
-import type { Meta, StoryObj } from '@storybook/react'
 import { I18nProvider } from 'react-aria'
 import Link from './index'
 
@@ -23,7 +23,7 @@ const meta: Meta<typeof Link> = {
     },
   },
   decorators: [
-    (Story) => (
+    Story => (
       <I18nProvider locale="en">
         <Story />
       </I18nProvider>
@@ -34,12 +34,12 @@ const meta: Meta<typeof Link> = {
     children: 'Product 2',
     scroll: true,
     behavior: 'instant',
-    onClick: (e) => console.log('Click', e),
-    onMouseEnter: (e) => console.log('Mouse enter', e),
-    onTouchStart: (e) => console.log('Touch start', e),
-    onPathnameChange: (pathname) => console.log('Pathname change', pathname),
-    onSearchParamsChange: (searchParams) => console.log('Search params change', searchParams),
-    onHashChange: (hash) => console.log('Hash change', hash),
+    onClick: e => console.log('Click', e),
+    onMouseEnter: e => console.log('Mouse enter', e),
+    onTouchStart: e => console.log('Touch start', e),
+    onPathnameChange: pathname => console.log('Pathname change', pathname),
+    onSearchParamsChange: searchParams => console.log('Search params change', searchParams),
+    onHashChange: hash => console.log('Hash change', hash),
     tokens: { buttonStyle: 'default' },
   },
   argTypes: {
@@ -149,7 +149,10 @@ const meta: Meta<typeof Link> = {
         <Link href={href} {...args} />
       </Box>
       <Box customTheme="w-fit">
-        <Typography>Href: {href.toString()}</Typography>
+        <Typography>
+          Href:
+          {href.toString()}
+        </Typography>
       </Box>
     </Box>
   ),
@@ -161,7 +164,7 @@ type Story = StoryObj<typeof Link>
 
 export const ScrollDefault: Story = {
   decorators: [
-    (Story) => (
+    Story => (
       <>
         <Box customTheme="h-screen bg-gray-100 flex items-center justify-center mb-8">This is long content</Box>
         <Story />

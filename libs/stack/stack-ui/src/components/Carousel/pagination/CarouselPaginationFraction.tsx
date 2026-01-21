@@ -1,11 +1,11 @@
 'use client'
 
-import Box from '../../Box'
-import Typography from '../../Typography'
 import type { TCarouselPaginationFractionProps } from './interface'
+import { Box } from '../../Box'
+import { Typography } from '../../Typography'
 import { useCarouselPaginationFraction } from './useCarouselPaginationFraction'
 
-const CarouselPaginationFraction = (props: TCarouselPaginationFractionProps) => {
+function CarouselPaginationFraction(props: TCarouselPaginationFractionProps) {
   const { themeName = 'carousel.pagination', tokens, children = '/', customTheme } = props
   const { paginationFractionProps, current, total } = useCarouselPaginationFraction(props)
   return (
@@ -18,7 +18,7 @@ const CarouselPaginationFraction = (props: TCarouselPaginationFractionProps) => 
       <Typography themeName={`${themeName}.fraction.current`} tokens={tokens}>
         {current}
       </Typography>
-      {children && (
+      {children != null && children !== '' && children !== false && (
         <Typography themeName={`${themeName}.fraction.separator`} tokens={tokens}>
           {children}
         </Typography>

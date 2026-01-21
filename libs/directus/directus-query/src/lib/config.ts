@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 import type { RequestConfig } from 'node_modules/graphql-request/build/legacy/helpers/types'
 
 export const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_GRAPHQL_URL as string

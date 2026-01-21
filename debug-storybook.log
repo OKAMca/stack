@@ -1,0 +1,173 @@
+[16:50:56.038] [INFO] Storybook upgrade - v10.1.11
+[16:50:56.040] [INFO] Detecting projects...
+[16:50:56.040] [DEBUG] Finding Storybook projects...
+[16:50:56.512] [DEBUG] Found 3 Storybook projects
+[16:50:56.512] [INFO] Detecting projects: 1 projects
+[16:50:56.512] [DEBUG] Getting Storybook data...
+[16:50:56.513] [DEBUG] Getting Storybook info...
+[16:50:56.515] [INFO] Detecting projects: 2 projects
+[16:50:56.515] [DEBUG] Getting Storybook data...
+[16:50:56.515] [DEBUG] Getting Storybook info...
+[16:50:56.516] [INFO] Detecting projects: 3 projects
+[16:50:56.516] [DEBUG] Getting Storybook data...
+[16:50:56.516] [DEBUG] Getting Storybook info...
+[16:50:56.580] [DEBUG] SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/directus/directus-block/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/addon-styling' imported from /libs/directus/directus-block/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+[16:50:56.582] [DEBUG] SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/stack/next-component/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/addon-styling' imported from /libs/stack/next-component/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+[16:50:56.584] [DEBUG] SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/stack/stack-ui/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/nextjs' imported from /libs/stack/stack-ui/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+[16:50:56.584] [INFO] 3 projects detected
+[16:50:56.584] [DEBUG] Found 0 valid projects and 3 error projects
+[16:50:56.585] [ERROR] Failed to get projects
+[16:50:56.585] [ERROR] [38;2;241;97;97mError: ❌ Storybook found errors while collecting data for the following projects:
+/libs/directus/directus-block/.storybook:
+SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/directus/directus-block/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/addon-styling' imported from /libs/directus/directus-block/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+    at loadMainConfig (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11701:11)
+    at async getStorybookInfo (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11790:59)
+    at async getStorybookData (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:165:7)
+    at async processProject (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:296:9)
+/libs/stack/next-component/.storybook:
+SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/stack/next-component/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/addon-styling' imported from /libs/stack/next-component/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+    at loadMainConfig (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11701:11)
+    at async getStorybookInfo (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11790:59)
+    at async getStorybookData (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:165:7)
+    at async processProject (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:296:9)
+/libs/stack/stack-ui/.storybook:
+SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/stack/stack-ui/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/nextjs' imported from /libs/stack/stack-ui/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+    at loadMainConfig (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11701:11)
+    at async getStorybookInfo (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11790:59)
+    at async getStorybookData (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:165:7)
+    at async processProject (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:296:9)
+Please fix the errors and run the upgrade command again.[39m
+    at getProjects (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:468:13)
+    at async upgrade (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/run-4UWMWJJE.js:9360:24)
+    at async file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/run-4UWMWJJE.js:9558:70
+    at async withTelemetry (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-2372JZ52.js:209:12)
+    at async Command.<anonymous> (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/run-4UWMWJJE.js:9554:3)
+[16:50:56.589] [INFO] Storybook collects completely anonymous usage telemetry. We use it to shape Storybook's roadmap and prioritize features. You can learn more, including how to opt out, at https://storybook.js.org/telemetry
+[16:50:56.978] [ERROR] Error: ❌ Storybook found errors while collecting data for the following projects:
+/libs/directus/directus-block/.storybook:
+SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/directus/directus-block/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/addon-styling' imported from /libs/directus/directus-block/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+    at loadMainConfig (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11701:11)
+    at async getStorybookInfo (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11790:59)
+    at async getStorybookData (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:165:7)
+    at async processProject (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:296:9)
+/libs/stack/next-component/.storybook:
+SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/stack/next-component/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/addon-styling' imported from /libs/stack/next-component/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+    at loadMainConfig (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11701:11)
+    at async getStorybookInfo (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11790:59)
+    at async getStorybookData (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:165:7)
+    at async processProject (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:296:9)
+/libs/stack/stack-ui/.storybook:
+SB_CORE-SERVER_0007 (MainFileEvaluationError): Storybook couldn't evaluate your libs/stack/stack-ui/.storybook/main.ts file.
+
+Original error:
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@storybook/nextjs' imported from /libs/stack/stack-ui/.storybook/main.ts
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:316:9)
+    at packageResolve (node:internal/modules/esm/resolve:768:81)
+    at moduleResolve (node:internal/modules/esm/resolve:858:18)
+    at defaultResolve (node:internal/modules/esm/resolve:990:11)
+    at nextResolve (node:internal/modules/esm/hooks:785:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:269:30)
+    at MessagePort.handleMessage (node:internal/modules/esm/worker:251:24)
+    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:845:20)
+    at MessagePort.<anonymous> (node:internal/per_context/messageport:23:28)
+    at loadMainConfig (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11701:11)
+    at async getStorybookInfo (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/storybook/dist/_node-chunks/chunk-Q4DOC7HF.js:11790:59)
+    at async getStorybookData (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:165:7)
+    at async processProject (file:///Users/marie-maxime/.npm/_npx/6b8babe225378cdd/node_modules/@storybook/cli/dist/_node-chunks/chunk-7UZ7H5B2.js:296:9)
+Please fix the errors and run the upgrade command again.

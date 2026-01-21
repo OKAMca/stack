@@ -1,6 +1,6 @@
-import { PagesDocument } from '@demo/directus-data-query'
 import type { TBlockSerializerConfig } from '@okam/directus-block'
 import type { JSONContent } from '@okam/directus-flexible-content'
+import { PagesDocument } from '@demo/directus-data-query'
 import { FlexibleEditorContent } from '@okam/directus-flexible-content'
 import { queryGql } from '@okam/directus-query'
 import { Box, Typography } from '@okam/stack-ui'
@@ -8,7 +8,7 @@ import { Box, Typography } from '@okam/stack-ui'
 export default async function Index() {
   const flexibleContent = await queryGql(PagesDocument)
 
-  const pageFlexibleContent = flexibleContent.pages.find((p) => p.title === 'Team')
+  const pageFlexibleContent = flexibleContent.pages.find(p => p.title === 'Team')
 
   const editorNodes = pageFlexibleContent?.translations?.[0]?.editor_nodes
   const content = pageFlexibleContent?.translations?.[0]?.flexible_editor as JSONContent
@@ -16,16 +16,13 @@ export default async function Index() {
   const relationBlocks: TBlockSerializerConfig = {
     components: {
       block_button: {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        default: (props) => <Box as="span">Related Block Button</Box>,
+        default: _props => <Box as="span">Related Block Button</Box>,
       },
       related_block_faqs: {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        default: (props) => <Box as="span">Related Block FAQ</Box>,
+        default: _props => <Box as="span">Related Block FAQ</Box>,
       },
       block_quote: {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        default: (props) => <Box>Block Quotes</Box>,
+        default: _props => <Box>Block Quotes</Box>,
       },
     },
   }
@@ -49,12 +46,12 @@ export default async function Index() {
       relationMarksConfig={relationMarks}
       nodes={{
         // Used to remap default HTML nodes
-        table: (props) => (
+        table: props => (
           <Box as="table" themeName={props.themeName}>
             <Box as="tbody">{props.children}</Box>
           </Box>
         ),
-        sub: (props) => (
+        sub: props => (
           <Typography as="sub" {...props}>
             {props.children}
           </Typography>

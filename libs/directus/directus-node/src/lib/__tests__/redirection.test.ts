@@ -8,11 +8,11 @@ const redirectsFilename = 'dist/directus-node-redirects.test.json'
 const rewritesFilename = 'dist/directus-node-rewrites.test.json'
 
 describe('checking constants and config', () => {
-  test('redirectDefaultLimit is 2000', () => {
+  it('redirectDefaultLimit is 2000', () => {
     expect(redirectDefaultLimit).toBe(2000)
   })
 
-  test('getDefaultConfig returns a default configuration object', () => {
+  it('getDefaultConfig returns a default configuration object', () => {
     const config = getDefaultConfig()
     expect(config.limit).toBe(2000)
     expect(config.redirectsFilename).toBe('./redirect/redirects.json')
@@ -23,7 +23,7 @@ describe('checking constants and config', () => {
 })
 
 describe('fetching data', () => {
-  test('fetchRedirectsData returns data, using default .env config', async () => {
+  it('fetchRedirectsData returns data, using default .env config', async () => {
     const config = getDefaultConfig()
     const data = await fetchRedirectsData(config)
     expect(Array.isArray(data.redirects)).toBe(true)
@@ -37,23 +37,23 @@ describe('fetching data', () => {
 })
 
 describe('writing / reading file', () => {
-  test('writeRedirectFile', async () => {
+  it('writeRedirectFile', async () => {
     const data = [
-      {source:'a', destination: 'b'},
+      { source: 'a', destination: 'b' },
     ]
 
     await expect(writeRedirectFile(redirectsFilename, data)).resolves.toBe(true)
   })
 
-  test('readRedirectFile', async () => {
+  it('readRedirectFile', async () => {
     const data = await readRedirectFile(redirectsFilename, 'redirects')
     expect(data.length).toBe(1)
     expect(data[0].source).toBe('a')
   })
 })
 
-describe('Fetch redirect main function', () => {
-  test('fetchRedirect with dist/ output', async () => {
+describe('fetch redirect main function', () => {
+  it('fetchRedirect with dist/ output', async () => {
     const config = {
       ...getDefaultConfig(),
       redirectsFilename,

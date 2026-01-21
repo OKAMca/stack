@@ -1,20 +1,20 @@
 'use client'
 
-import { useTabPanel } from '@react-aria/tabs'
-import { useRef } from 'react'
 import type { TToken } from '../../../providers/Theme/interface'
+import type { TTabPanelProps } from '../interface'
+import { useRef } from 'react'
+import { useTabPanel } from 'react-aria'
 import RenderWithOpacity from '../../../transitions/RenderWithOpacity'
 import { BoxWithForwardRef } from '../../Box'
-import type { TTabPanelProps } from '../interface'
 
-const TabPanel = <I extends object, T extends TToken = TToken>(props: TTabPanelProps<I, T>) => {
+function TabPanel<I extends object, T extends TToken = TToken>(props: TTabPanelProps<I, T>) {
   const {
     state,
     customTheme,
     themeName = 'tabList.panel',
     tokens,
     panelTransition: PanelTransition = RenderWithOpacity,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
     id,
     ...rest
   } = props

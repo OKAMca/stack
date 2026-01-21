@@ -1,10 +1,10 @@
 'use client'
 
-import Button from '../Button'
-import Icon from '../Icon'
 import type { TPrintButtonProps } from './interface'
+import { Button } from '../Button'
+import Icon from '../Icon'
 
-const PrintButton = (props: TPrintButtonProps) => {
+function PrintButton(props: TPrintButtonProps) {
   const { ariaLabel, icon, customTheme, themeName = 'printButton', tokens, ...rest } = props
 
   const handleClick = () => {

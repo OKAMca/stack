@@ -1,4 +1,4 @@
-import type React from 'react'
+import type * as React from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 

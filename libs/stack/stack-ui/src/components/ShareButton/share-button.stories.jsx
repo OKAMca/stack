@@ -1,6 +1,6 @@
 import ShareButtonExample from '../../storybook/ShareButtonExample'
 
-const Template = (args) => <ShareButtonExample {...args} />
+const Template = args => <ShareButtonExample {...args} />
 
 export default {
   title: 'Base Components/Share Button',

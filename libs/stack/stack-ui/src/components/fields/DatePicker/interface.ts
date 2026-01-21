@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 import type { DateValue } from '@internationalized/date'
-import type React from 'react'
+import type * as React from 'react'
 import type { ReactNode } from 'react'
 import type { AriaDatePickerProps, AriaPopoverProps, DatePickerAria, DateRangePickerAria, Placement } from 'react-aria'
 import type {
@@ -61,9 +60,9 @@ export interface TCalendarPopoverProps extends Omit<AriaPopoverProps, 'popoverRe
 
 export interface TWrapperProps
   extends
-    TDefaultComponent,
-    Pick<DateRangePickerAria | DatePickerAria, 'groupProps' | 'buttonProps'>,
-    Pick<TDatePickerBase, 'icon' | 'buttonLabel' | 'buttonContent'> {
+  TDefaultComponent,
+  Pick<DateRangePickerAria | DatePickerAria, 'groupProps' | 'buttonProps'>,
+  Pick<TDatePickerBase, 'icon' | 'buttonLabel' | 'buttonContent'> {
   children: ReactNode
 }
 

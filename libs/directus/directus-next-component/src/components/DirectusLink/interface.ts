@@ -1,4 +1,4 @@
-import type { TDefaultComponent, TAnchorProps } from '@okam/stack-ui'
+import type { TAnchorProps, TDefaultComponent } from '@okam/stack-ui'
 import type { AriaAttributes, ComponentType } from 'react'
 import type { TLinks } from '../../types/links'
 
@@ -16,5 +16,5 @@ export type TDirectusLinkComponentsConfig = Record<string, ComponentType<TDirect
 
 export type TDirectusLinkPropsConfig<ReturnProps extends TAnchorProps = TAnchorProps> = Record<
   string,
-  (props: TGetDirectusLink) => ReturnProps
+  (_props: TGetDirectusLink) => ReturnProps
 >

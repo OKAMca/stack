@@ -1,6 +1,6 @@
+import type { FC } from 'react'
 import { render, screen } from '@testing-library/react'
 import { act, renderHook } from '@testing-library/react-hooks'
-import type { FC } from 'react'
 import { usePromise } from '../use-promise'
 
 describe('usePromise', () => {
@@ -86,9 +86,9 @@ describe('usePromise', () => {
 
   describe('component', () => {
     describe('react.FC usage', () => {
-      type Params = { query: string }
-      type LoaderPromise = (params: Params) => Promise<string>
-      type Props = {
+      interface Params { query: string }
+      type LoaderPromise = (_params: Params) => Promise<string>
+      interface Props {
         asyncFn: LoaderPromise
         params: Params
       }

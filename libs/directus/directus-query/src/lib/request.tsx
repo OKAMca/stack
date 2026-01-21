@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-/* eslint-disable no-console */
 import { QueryCache, QueryClient } from '@tanstack/react-query'
 import { GraphQLClient } from 'graphql-request'
 import { logger } from '../logger'
@@ -11,12 +9,12 @@ const AUTH_TOKEN = (process.env.NEXT_PUBLIC_API_TOKEN as string) ?? ''
 const AUTH_TOKEN_ADMIN = process.env.NEXT_PUBLIC_API_TOKEN as string
 
 // for debugging, display default client endpoint
-export const grapqhlGetDefaultEndpoint = () => {
+export function grapqhlGetDefaultEndpoint() {
   return GRAPHQL_ENDPOINT_SERVER || GRAPHQL_ENDPOINT_PUBLIC || ''
 }
 
 // for debugging, display admin client endpoint
-export const grapqhlGetDefaultAdminEndpoint = () => {
+export function grapqhlGetDefaultAdminEndpoint() {
   return GRAPHQL_ENDPOINT_ADMIN
 }
 

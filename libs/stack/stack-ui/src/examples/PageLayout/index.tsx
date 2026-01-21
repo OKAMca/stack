@@ -1,8 +1,8 @@
-import Box from '../../components/Box'
 import type { TBoxProps } from '../../components/Box/interface'
-import Typography from '../../components/Typography'
+import { Box } from '../../components/Box'
+import { Typography } from '../../components/Typography'
 
-const Main = ({ children }: TBoxProps) => {
+function Main({ children }: TBoxProps) {
   return (
     <Box as="main" themeName="main">
       {children}
@@ -10,7 +10,7 @@ const Main = ({ children }: TBoxProps) => {
   )
 }
 
-const Container = ({ children, ...props }: TBoxProps) => {
+function Container({ children, ...props }: TBoxProps) {
   return (
     <Box themeName="container" {...props}>
       {children}
@@ -18,7 +18,7 @@ const Container = ({ children, ...props }: TBoxProps) => {
   )
 }
 
-const Grid = ({ children, ...props }: TBoxProps) => {
+function Grid({ children, ...props }: TBoxProps) {
   return (
     <Box themeName="grid" {...props}>
       {children}
@@ -26,7 +26,7 @@ const Grid = ({ children, ...props }: TBoxProps) => {
   )
 }
 
-const GridItem = ({ children, ...props }: TBoxProps) => {
+function GridItem({ children, ...props }: TBoxProps) {
   return (
     <Box as="li" themeName="gridItem" {...props}>
       {children}
@@ -34,28 +34,30 @@ const GridItem = ({ children, ...props }: TBoxProps) => {
   )
 }
 
-const PageLayoutExample = () => (
-  <Main>
-    <Container tokens={{ spacing: 'small' }}>
-      <Typography as="h1" tokens={{ size: 'h1', align: 'center' }}>
-        Hello world
-      </Typography>
-    </Container>
-    <Container tokens={{ spacing: 'large' }}>
-      <Grid as="ul">
-        <GridItem tokens={{ size: 'medium' }}>1</GridItem>
-        <GridItem>2</GridItem>
-        <GridItem>3</GridItem>
-        <GridItem>4</GridItem>
-        <GridItem>5</GridItem>
-      </Grid>
-    </Container>
-    <Container tokens={{ fullWidth: true, className: 'bg-red-200 py-8' }}>
-      <Grid as="ul">
-        <GridItem tokens={{ size: 'large', className: 'h-96' }}>Large</GridItem>
-      </Grid>
-    </Container>
-  </Main>
-)
+function PageLayoutExample() {
+  return (
+    <Main>
+      <Container tokens={{ spacing: 'small' }}>
+        <Typography as="h1" tokens={{ size: 'h1', align: 'center' }}>
+          Hello world
+        </Typography>
+      </Container>
+      <Container tokens={{ spacing: 'large' }}>
+        <Grid as="ul">
+          <GridItem tokens={{ size: 'medium' }}>1</GridItem>
+          <GridItem>2</GridItem>
+          <GridItem>3</GridItem>
+          <GridItem>4</GridItem>
+          <GridItem>5</GridItem>
+        </Grid>
+      </Container>
+      <Container tokens={{ fullWidth: true, className: 'bg-red-200 py-8' }}>
+        <Grid as="ul">
+          <GridItem tokens={{ size: 'large', className: 'h-96' }}>Large</GridItem>
+        </Grid>
+      </Container>
+    </Main>
+  )
+}
 
 export default PageLayoutExample

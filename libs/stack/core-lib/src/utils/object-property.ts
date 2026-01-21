@@ -1,4 +1,4 @@
-const checkObjectProperty = (obj: Record<string, unknown>, property: string) => {
+function checkObjectProperty(obj: Record<string, unknown>, property: string) {
   const maybeObj = obj[property]
 
   if (maybeObj != null && typeof maybeObj === 'object' && Object.prototype.hasOwnProperty.call(obj, property)) {

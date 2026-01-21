@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 'use client'
 
-import { useSlotId } from '@react-aria/utils'
 import type { RefObject } from 'react'
 import type { OverlayTriggerProps } from 'react-aria'
-import { useOverlayTrigger } from 'react-aria'
 import type { OverlayTriggerState } from 'react-stately'
 import type { TLabelledOverlayAria } from './interface'
+import { useSlotId } from '@react-aria/utils'
+import { useOverlayTrigger } from 'react-aria'
 
 /**
  * Wrapper for react aria `useOverlayTrigger` that adds label props and reformats press events to work with `TButtonProps`
@@ -27,7 +25,7 @@ function useLabelledOverlay(
 
   const updatedTriggerProps = {
     'aria-labelledby': labelId,
-    handlePress: onPress,
+    'handlePress': onPress,
     ...triggerProps,
   }
 

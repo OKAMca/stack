@@ -1,11 +1,12 @@
 'use client'
 
-import { useQueryState, parseAsArrayOf, parseAsString } from 'nuqs'
+import type { Selection } from 'react-stately'
+import type { TFilter } from './interface'
+import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs'
 import { isEqual } from 'radashi'
 import { useMemo } from 'react'
-import { useListState, type Selection } from 'react-stately'
+import { useListState } from 'react-stately'
 import { useUpdateEffect } from 'react-use'
-import type { TFilter } from './interface'
 
 /**
  * Manages the selection state of a single filter.
@@ -24,7 +25,7 @@ export function useFilterState(props: TFilter) {
     ...rest
   } = props
 
-  const defaultValue = Array.from(defaultSelectedKeysProp).map((key) => key.toString())
+  const defaultValue = Array.from(defaultSelectedKeysProp).map(key => key.toString())
   const queryStateOptions = useMemo(
     () => parser.withOptions(options ?? {}).withDefault(defaultValue),
     [parser, options, defaultValue],
@@ -34,8 +35,8 @@ export function useFilterState(props: TFilter) {
 
   const onSelectedKeysChange = (keys: Selection) => {
     onSelectionChange?.(keys)
-    const stringKeys = Array.from(keys).map((key) => key.toString())
-    setSelectedKeys(stringKeys)
+    const stringKeys = Array.from(keys).map(key => key.toString())
+    void setSelectedKeys(stringKeys)
   }
 
   const defaultSelectedKeys = new Set([...defaultSelectedKeysProp, ...(selectedKeys ?? [])])
@@ -49,13 +50,16 @@ export function useFilterState(props: TFilter) {
     onSelectionChange: onSelectedKeysChange,
   })
 
+  // Sync react-stately selection state to URL query state.
+  // This is a bidirectional sync: URL -> useListState (via defaultSelectedKeys) and
+  // useListState -> URL (via this effect). The isEqual check prevents infinite loops.
   useUpdateEffect(() => {
     const next = [...state.selectionManager.selectedKeys].map(String)
     if (isEqual(next, selectedKeys)) {
       return
     }
-    setSelectedKeys(next)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- intentional state sync: URL query state must mirror react-stately selection state, guarded by isEqual check
+    void setSelectedKeys(next)
   }, [state.selectionManager.selectedKeys])
 
   return { ...state, onSelectionChange: onSelectedKeysChange, selectedKeys, defaultSelectedKeys }

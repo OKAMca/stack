@@ -1,14 +1,14 @@
 'use client'
 
-import React from 'react'
+import type { Item, TListBoxProps, TOptionProps } from './Listbox.interface'
+import * as React from 'react'
 import { FocusScope, useListBox, useOption } from 'react-aria'
 import useThemeContext from '../../../../providers/Theme/hooks'
-import Box, { BoxWithForwardRef } from '../../../Box'
-import Typography, { TypographyWithForwardRef } from '../../../Typography'
-import type { TListBoxProps, TOptionProps } from './Listbox.interface'
-import { useListboxSections } from './useListboxSections'
+import { Box, BoxWithForwardRef } from '../../../Box'
+import { Typography, TypographyWithForwardRef } from '../../../Typography'
+import { getListboxSections } from './getListboxSections'
 
-const Option = ({ item, state, themeName = 'li' }: TOptionProps) => {
+function Option<T extends object>({ item, state, themeName = 'li' }: TOptionProps<T>) {
   const ref = React.useRef(null)
   const { optionProps, isFocusVisible } = useOption({ key: item.key }, state, ref)
 
@@ -27,11 +27,11 @@ const Option = ({ item, state, themeName = 'li' }: TOptionProps) => {
 
 interface InnerListBoxProps extends React.HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode
-  listBoxRef: React.RefObject<HTMLUListElement>
+  listBoxRef: React.RefObject<HTMLUListElement | null>
   themeName: string | null
 }
 
-const InnerListBox = (props: InnerListBoxProps) => {
+function InnerListBox(props: InnerListBoxProps) {
   const { children, listBoxRef, themeName, ...domSafeProps } = props
   return (
     <FocusScope autoFocus restoreFocus contain>
@@ -42,19 +42,19 @@ const InnerListBox = (props: InnerListBoxProps) => {
   )
 }
 
-const ListBox = (props: TListBoxProps) => {
-  const ref = React.useRef(null)
+function ListBox<T extends object>(props: TListBoxProps<T>) {
+  const ref = React.useRef<HTMLUListElement>(null)
   const { listBoxRef = ref, state, themeName = 'option', optionsWithHeaders } = props
   const { listBoxProps } = useListBox(props, state, listBoxRef)
-  const collection = Array.from(state.collection) as { key: string; rendered: string }[]
+  const collection = Array.from(state.collection) as Item<T>[]
 
-  const sections = useListboxSections(collection, optionsWithHeaders || [])
-  const hasHeaders = optionsWithHeaders?.some((option) => option.key?.includes('header-'))
+  const sections = getListboxSections(collection, optionsWithHeaders ?? [])
+  const hasHeaders = optionsWithHeaders?.some(option => option.key?.includes('header-'))
 
   if (!hasHeaders) {
     return (
       <InnerListBox {...listBoxProps} listBoxRef={listBoxRef} themeName={themeName}>
-        {collection.map((item) => (
+        {collection.map(item => (
           <Option themeName={`${themeName}.li`} key={item.key} item={item} state={state} />
         ))}
       </InnerListBox>
@@ -64,20 +64,20 @@ const ListBox = (props: TListBoxProps) => {
   return (
     <InnerListBox {...listBoxProps} listBoxRef={listBoxRef} themeName={themeName}>
       {sections.map((section) => {
-        const sectionKey = section.header
+        const sectionKey = section.header != null
           ? `section-${section.header.key}`
-          : `section-${section.items[0]?.key || 'empty'}`
+          : `section-${section.items[0]?.key ?? 'empty'}`
 
         return (
           <Box key={sectionKey} as="li" themeName={`${themeName}.group`}>
             <Box as="section" themeName={`${themeName}.section`}>
-              {section.header && (
+              {section.header != null && (
                 <Typography as="header" themeName={`${themeName}.headerText`} key={section.header.key}>
                   {section.header.rendered}
                 </Typography>
               )}
               <Box as="ul" themeName={`${themeName}.list`}>
-                {section.items.map((item) => (
+                {section.items.map(item => (
                   <Option themeName={`${themeName}.li`} key={String(item.key)} item={item} state={state} />
                 ))}
               </Box>

@@ -1,12 +1,14 @@
 'use client'
 
+import type { IMenuProviderProps, TMenuContext } from './interface'
 import { createCtxNullable } from '@okam/core-lib'
 import { useMemo } from 'react'
 import { useTabListState } from 'react-stately'
 import { SidePanelContextProvider } from '../SidePanel'
-import type { IMenuProviderProps, TMenuContext } from './interface'
 
-export const [useMenu, MenuProvider] = createCtxNullable<TMenuContext>()
+const menuCtx = createCtxNullable<TMenuContext>()
+export const useMenu = menuCtx[0]
+const MenuProvider = menuCtx[1]
 
 export function MenuContextProvider({
   children,

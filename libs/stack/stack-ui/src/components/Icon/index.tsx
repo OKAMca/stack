@@ -1,23 +1,43 @@
 'use client'
 
-import React, { Suspense, lazy, useMemo } from 'react'
-import useThemeContext from '../../providers/Theme/hooks'
+import type { ComponentType } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
-import Fallback from '../icons/IconFallback'
 import type { TIconProps } from './interface'
+import * as React from 'react'
+import { lazy, Suspense } from 'react'
+import useThemeContext from '../../providers/Theme/hooks'
+import Fallback from '../icons/IconFallback'
 
-const Icon = (props: TIconProps) => {
+// Cache for dynamically imported icon components
+const iconCache = new Map<string, ComponentType<TIconProps>>()
+
+function getIconComponent(iconName: string) {
+  const cached = iconCache.get(iconName)
+  if (cached != null)
+    return cached
+
+  const LazyIcon = lazy(async () => import(`../icons/${iconName}.tsx`) as Promise<{ default: ComponentType<TIconProps> }>)
+  iconCache.set(iconName, LazyIcon)
+  return LazyIcon
+}
+
+function Icon(props: TIconProps & { icon: string }) {
   const { icon, ...rest } = props
-  const ImportedIcon = useMemo(() => lazy(() => import(`../icons/${icon || 'ArrowRight'}.tsx`)), [icon])
+  // eslint-disable-next-line ts/strict-boolean-expressions -- intentional fallback if empty string
+  const iconName = icon || 'ArrowRight'
+
+  // Use useMemo to get/create icon component - synchronous since getIconComponent
+  // either returns from cache or creates a lazy component (doesn't actually load it)
+  const IconComponent = React.useMemo(() => getIconComponent(iconName), [iconName])
 
   return (
     <Suspense fallback={<Fallback className="overflow-visible pointer-events-none" />}>
-      <ImportedIcon {...rest} className="overflow-visible pointer-events-none" {...props} />
+      <IconComponent {...rest} className="overflow-visible pointer-events-none" {...props} />
     </Suspense>
   )
 }
 
-const IconDispatcher = <T extends TToken>(props: TIconProps<T>) => {
+function IconDispatcher<T extends TToken>(props: TIconProps<T>) {
   const { icon, as: Component = 'span', tokens, customTheme, themeName = 'icon', children, ...rest } = props
   const theme = useThemeContext(themeName, tokens, customTheme)
 

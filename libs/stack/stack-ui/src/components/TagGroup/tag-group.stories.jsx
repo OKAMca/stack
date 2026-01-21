@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react'
 import { useListData } from 'react-stately'
-import Box from '../Box'
-import Typography from '../Typography'
+import TagGroup from '.'
+import { Box } from '../Box'
+import { Typography } from '../Typography'
 import Tag from './components/Tag'
 import { TagItem } from './components/TagItem'
-import TagGroup from '.'
 /**
- * @typedef {import('@storybook/react').Meta<typeof TagGroup>} Meta
- * @typedef {import('@storybook/react').StoryObj<Meta>} Story
+ * @typedef {import('@storybook/react-webpack5').Meta<typeof TagGroup>} Meta
+ * @typedef {import('@storybook/react-webpack5').StoryObj<Meta>} Story
  */
 
-const TemplateRemovable = (args) => {
+function TemplateRemovable(args) {
   const { items, ...rest } = args
   const list = useListData({ initialItems: items })
-  return <TagGroup {...rest} items={list.items} onRemove={(keys) => list.remove(...keys)} />
+  return <TagGroup {...rest} items={list.items} onRemove={keys => list.remove(...keys)} />
 }
 
 /**
@@ -25,7 +25,7 @@ function TemplateMaximalProps(args) {
   const { items, defaultSelectedKeys, ...rest } = args
   const list = useListData({ initialItems: items, initialSelectedKeys: defaultSelectedKeys })
   const selectedKeysRender = useMemo(() => {
-    return Array.from(list.selectedKeys?.keys?.() ?? []).map((key) => (
+    return Array.from(list.selectedKeys?.keys?.() ?? []).map(key => (
       <Box customTheme="rounded-full bg-color-1-800 text-white px-2 py-1" key={key}>
         {list.getItem(key)?.children}
       </Box>
@@ -47,7 +47,7 @@ function TemplateMaximalProps(args) {
   )
 }
 
-const TemplateErrorMessage = (args) => {
+function TemplateErrorMessage(args) {
   const { items, ...rest } = args
   const list = useListData({ initialItems: items })
   const errorMessageData = 'You must select at least one tag'
@@ -204,7 +204,7 @@ export const Removable = {
       { key: 'japan', children: 'Japan' },
       { key: 'korea', children: 'Korea' },
     ],
-    children: (item) => <TagItem {...item} key={item.key} />,
+    children: item => <TagItem key={item.key} {...item} />,
   },
 }
 
@@ -246,7 +246,7 @@ export const MaximalProps = {
       { key: 'portugal', children: 'Portugal' },
       { key: 'greece', children: 'Greece' },
     ],
-    children: (item) => <TagItem {...item} key={item.key} />,
+    children: item => <TagItem key={item.key} {...item} />,
     selectionMode: 'multiple',
     description: 'Select the places you want to visit',
     disabledKeys: ['italy', 'germany'],
@@ -285,6 +285,6 @@ export const CustomRemoveButton = {
       { key: 'japan', children: 'Japan', removeButtonProps: { children: '⚠️' } },
       { key: 'korea', children: 'Korea' },
     ],
-    children: (item) => <TagItem {...item} key={item.key} />,
+    children: item => <TagItem key={item.key} {...item} />,
   },
 }

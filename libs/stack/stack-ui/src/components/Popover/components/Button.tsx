@@ -1,14 +1,24 @@
 'use client'
 
-import { cloneElement, useRef } from 'react'
-import { useOverlayTrigger, useOverlayPosition, OverlayContainer, mergeProps } from 'react-aria'
-import { useOverlayTriggerState } from 'react-stately'
-import Popover from '..'
-import type { TToken } from '../../../providers/Theme/interface'
-import { ButtonWithForwardRef } from '../../Button'
-import type { TPopoverButtonProps } from '../interface'
+/**
+ * PopoverButton - react-aria overlay trigger button component
+ *
+ * Uses cloneElement to inject overlay props from useOverlayTrigger
+ * into children, following the react-aria overlay pattern.
+ *
+ * @see https://react-spectrum.adobe.com/react-aria/useOverlayTrigger.html
+ * @see docs/ADR/005_react-stately-eslint-exceptions.md
+ */
 
-const PopoverButton = <T extends TToken>(props: TPopoverButtonProps<T>) => {
+import type { TToken } from '../../../providers/Theme/interface'
+import type { TPopoverButtonProps } from '../interface'
+import { cloneElement, useRef } from 'react'
+import { mergeProps, OverlayContainer, useOverlayPosition, useOverlayTrigger } from 'react-aria'
+import { useOverlayTriggerState } from 'react-stately'
+import { Popover } from '..'
+import { ButtonWithForwardRef } from '../../Button'
+
+function PopoverButton<T extends TToken>(props: TPopoverButtonProps<T>) {
   const {
     children,
     buttonProps,

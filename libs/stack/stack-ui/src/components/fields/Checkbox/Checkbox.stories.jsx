@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import Button from '../../Button'
+import { Button } from '../../Button'
 import Check from '../../icons/Check'
-import Checkbox from './index'
+import { Checkbox } from './index'
 
-const Template = (args) => <Checkbox {...args} />
+const Template = args => <Checkbox {...args} />
 
-const TemplateWithButton = (args) => {
+function TemplateWithButton(args) {
   const [checked, setChecked] = useState(args?.defaultSelected ?? false)
   const { onChange, ...restOfArgs } = args
   return (
@@ -28,11 +28,11 @@ export default {
   component: Checkbox,
 
   args: {
-    label: 'This is a checkbox label',
+    'label': 'This is a checkbox label',
     'aria-label': 'checkbox-label',
-    name: 'checkbox',
-    ariaLabel: 'checkbox-label',
-    onChange: (isSelected) => console.log(`isSelected: ${isSelected}`),
+    'name': 'checkbox',
+    'ariaLabel': 'checkbox-label',
+    'onChange': isSelected => console.log(`isSelected: ${isSelected}`),
   },
 }
 

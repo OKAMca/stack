@@ -1,24 +1,25 @@
 'use client'
 
-import { isEmpty } from 'radashi'
 import type { RefObject } from 'react'
-import React, { useRef } from 'react'
-import { HiddenSelect, useSelect } from 'react-aria'
 import type { RegisterOptions } from 'react-hook-form'
-import { useFormContext, Controller } from 'react-hook-form'
-import { useSelectState } from 'react-stately'
 import type { TToken } from '../../../providers/Theme/interface'
+import type { TSelectProps } from './Select.interface'
+import { isEmpty } from 'radashi'
+import * as React from 'react'
+import { useRef } from 'react'
+import { HiddenSelect, useSelect } from 'react-aria'
+import { Controller, useFormContext } from 'react-hook-form'
+import { useSelectState } from 'react-stately'
 import { useTranslation } from '../../../providers/Translation'
-import Box from '../../Box'
+import { Box } from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
-import Typography from '../../Typography'
+import { Typography } from '../../Typography'
 import SelectItem from '../SelectItem/SelectItem'
 import { ListBox } from './components/Listbox'
 import Popover from './components/Popover'
-import type { TSelectProps } from './Select.interface'
 
-const Select = <T extends TToken>(props: TSelectProps<T>) => {
+export function Select<T extends TToken>(props: TSelectProps<T>) {
   const {
     name,
     placeholderLabel,
@@ -44,21 +45,21 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
   const inputRef = useRef<HTMLElement>(null)
   const buttonRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
 
-  const mergeRefs = (ref: HTMLElement) => {
-    if (ref) {
+  const mergeRefs = (ref: HTMLElement | null) => {
+    if (ref != null) {
       hookFormRef?.(ref)
       inputRef.current = ref
     }
   }
 
-  const filteredOptions = options?.filter((option) => !option.key?.includes('header-'))
+  const filteredOptions = options?.filter(option => !(option.key?.includes('header-') ?? false))
 
   const state = useSelectState({
     ...rest,
     children: SelectItem,
     selectedKey: value,
     defaultSelectedKey: defaultValue,
-    items: filteredOptions,
+    items: filteredOptions ?? [],
     onSelectionChange,
     isDisabled: disabled,
     isRequired: required,
@@ -75,7 +76,7 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
 
   return (
     <Box themeName={`${themeName}.wrapper`}>
-      {label && (
+      {label != null && (
         <Typography {...labelProps} as="label" themeName={`${themeName}.label`}>
           {label}
         </Typography>
@@ -93,10 +94,10 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
         >
-          <span {...valueProps}>{state.selectedItem ? state.selectedItem.rendered : placeholderLabel}</span>
+          <span {...valueProps}>{state.selectedItem != null ? state.selectedItem.rendered : placeholderLabel}</span>
           <Icon icon={icon ?? 'ArrowDown'} />
         </ButtonWithForwardRef>
-        {state.isOpen && buttonRef.current && (
+        {state.isOpen && buttonRef.current != null && (
           <Popover
             tokens={tokens}
             state={state}
@@ -118,7 +119,7 @@ const Select = <T extends TToken>(props: TSelectProps<T>) => {
   )
 }
 
-export const ReactHookFormSelect = ({
+export function ReactHookFormSelect({
   id,
   name,
   label,
@@ -134,7 +135,7 @@ export const ReactHookFormSelect = ({
   popoverMatchesWidth,
   value,
   ...rest
-}: TSelectProps & { rules?: RegisterOptions }) => {
+}: TSelectProps & { rules?: RegisterOptions }) {
   const { control } = useFormContext()
   const { t } = useTranslation()
 
@@ -201,5 +202,3 @@ export const ReactHookFormSelect = ({
     />
   )
 }
-
-export default Select

@@ -4,12 +4,12 @@ import { useDeepCompareMemoize } from './use-deep-compare-memoize'
 export type AsyncFnParams<TParams> = TParams
 
 export type AsyncFnWithParams<TResult, TParams extends Record<string, unknown>> = (
-  variables: TParams,
+  _variables: TParams,
 ) => Promise<TResult>
 export type AsyncFnWithoutParams<TResult> = () => Promise<TResult>
-export type AsyncFn<TResult, TParams extends Record<string, unknown> = Partial<Record<string, unknown>>> =
-  | AsyncFnWithParams<TResult, TParams>
-  | AsyncFnWithoutParams<TResult>
+export type AsyncFn<TResult, TParams extends Record<string, unknown> = Partial<Record<string, unknown>>>
+  = | AsyncFnWithParams<TResult, TParams>
+    | AsyncFnWithoutParams<TResult>
 
 export interface UsePromiseOptions<TResult> {
   initialData?: TResult
@@ -38,7 +38,9 @@ export function usePromise<TResult, TVariables extends Record<string, unknown> =
 
   const memoizedParams = useDeepCompareMemoize(params ?? emptyParams)
 
-  const promiseFn = useCallback(() => {
+  // Async data fetching pattern: setState calls in Promise handlers are intentional
+  // The mounted.current check prevents setState on unmounted components
+  const promiseFn = useCallback(async () => {
     if (mounted.current) {
       setIsLoading(true)
       setData(null)
@@ -53,18 +55,19 @@ export function usePromise<TResult, TVariables extends Record<string, unknown> =
       })
       .catch((catchedError: Error) => {
         if (mounted.current) {
+          // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- async fetch error handling
           setError(catchedError)
+          // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect -- async fetch completion
           setIsLoading(false)
         }
       })
-    // Caution: keep exhaustive deps off here
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- params excluded: memoizedParams provides deep comparison; including raw params causes infinite loops
   }, [promise, memoizedParams])
 
   useEffect(() => {
     mounted.current = true
     if (immediate) {
-      promiseFn()
+      void promiseFn()
     }
     return () => {
       // Loading cannot be safely determined here

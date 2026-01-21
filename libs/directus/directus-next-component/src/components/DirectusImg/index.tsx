@@ -1,16 +1,17 @@
-import { Img } from '@okam/next-component'
 import type { CSSProperties } from 'react'
+import type { TDirectusImgProps } from './interface'
+import { Img } from '@okam/next-component'
 import { createPngDataUri } from 'unlazy/thumbhash'
 import { getDirectusFile } from '../../utils/getDirectusFile'
-import type { TDirectusImgProps } from './interface'
 
-const DirectusImg = (props: TDirectusImgProps) => {
+function DirectusImg(props: TDirectusImgProps) {
   const { fit, baseUrl, focal_point_x: focalPointX, focal_point_y: focalPointY, thumbhash, width, height } = props
 
   const fileProps = getDirectusFile(props, baseUrl, { fit })
-  if (!fileProps) return null
+  if (fileProps == null)
+    return null
 
-  const hasFocalPoint = !!focalPointX && !!focalPointY && !!width && !!height
+  const hasFocalPoint = focalPointX != null && focalPointX !== 0 && focalPointY != null && focalPointY !== 0 && width != null && width !== 0 && height != null && height !== 0
 
   const style: CSSProperties | undefined = hasFocalPoint
     ? {
@@ -19,12 +20,10 @@ const DirectusImg = (props: TDirectusImgProps) => {
       }
     : undefined
 
-  if (!fileProps) return null
-
   return (
     <Img
       style={style}
-      {...(thumbhash ? { blurDataURL: createPngDataUri(thumbhash), placeholder: 'blur' } : {})}
+      {...(thumbhash != null && thumbhash !== '' ? { blurDataURL: createPngDataUri(thumbhash), placeholder: 'blur' } : {})}
       {...fileProps}
     />
   )

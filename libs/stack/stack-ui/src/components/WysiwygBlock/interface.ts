@@ -7,7 +7,7 @@ interface TWysiwygBlockProps<Tags extends string = string, T = TToken> extends T
   useSanitizerDefaultAllowedAttributes?: boolean
   allowedTags?: Tags[]
   allowedAttributes?: {
-    [K in Tags]?: string[]
+    [_K in Tags]?: string[]
   }
 }
 export default TWysiwygBlockProps

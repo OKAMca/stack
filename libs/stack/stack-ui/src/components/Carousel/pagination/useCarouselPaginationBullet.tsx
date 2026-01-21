@@ -1,12 +1,12 @@
 'use client'
 
+import type { TSwiperProps } from '../interface'
+import type { TCarouselPaginationBullet, TCarouselPaginationBulletProps } from './interface'
 import { get, isEmpty } from 'radashi'
 import { mergeProps, useFocusManager, useKeyboard, usePress } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
-import type { TSwiperProps } from '../interface'
-import type { TCarouselPaginationBullet, TCarouselPaginationBulletProps } from './interface'
 
-const directionKeys: Record<NonNullable<TSwiperProps['direction']>, { prev: string; next: string }> = {
+const directionKeys: Record<NonNullable<TSwiperProps['direction']>, { prev: string, next: string }> = {
   horizontal: {
     prev: 'ArrowLeft',
     next: 'ArrowRight',
@@ -48,18 +48,18 @@ export function useCarouselPaginationBullet(props: TCarouselPaginationBulletProp
 
   const slide = slides[index]
   const isActive = index === activeIndex
-  const { title, id } = slide
+  const { title, id } = slide ?? {}
 
   const hasTitle = !isEmpty(title)
 
   return {
     paginationBulletProps: mergeProps(keyboardProps, pressProps, {
-      tabIndex: 0,
-      role: 'button',
+      'tabIndex': 0,
+      'role': 'button',
       'aria-current': isActive ? 'true' : 'false',
       'aria-disabled': isActive,
-      isDisabled: isActive,
-      'aria-label': !hasTitle ? (get(props, 'aria-label') ?? `${index + 1} / ${slides.length}`) : undefined,
+      'isDisabled': isActive,
+      'aria-label': !hasTitle ? (get<string | undefined>(props, 'aria-label') ?? `${index + 1} / ${slides.length}`) : undefined,
       'aria-labelledby': hasTitle ? id : undefined,
     }),
     index,

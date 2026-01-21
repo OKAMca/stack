@@ -1,12 +1,12 @@
 'server-only'
 
-import { queryGql, defaultGraphqlRequestClient } from '@okam/directus-query'
 import type { Nullable } from '@okam/stack-ui'
 import type { Variables } from 'graphql-request'
-import { isEmpty } from 'radashi'
 import type { TBlockDocument, TBlockQuery, TBlockVariables, TCommonBlockFragment } from '../types/block'
+import { defaultGraphqlRequestClient, queryGql } from '@okam/directus-query'
+import { isEmpty } from 'radashi'
 
-type TGetBlockPropsParams<BlockFragment extends TCommonBlockFragment, BlockVariables extends Variables = Variables> = {
+interface TGetBlockPropsParams<BlockFragment extends TCommonBlockFragment, BlockVariables extends Variables = Variables> {
   document?: TBlockDocument<BlockFragment, BlockVariables>
   item?: Nullable<NonNullable<NonNullable<TBlockQuery<BlockFragment>[string]>[' $fragmentRefs']>[string]>
   blockKey?: string
@@ -34,11 +34,13 @@ async function queryFromVariables<
 >(params: TGetBlockPropsParams<BlockFragment, BlockVariables>, client = defaultGraphqlRequestClient) {
   const { document, blockKey, variables } = params
 
-  if (!document || !isVariables<BlockVariables>(variables)) return null
+  if (document == null || !isVariables<BlockVariables>(variables))
+    return null
 
   const queriedBlockProps = await queryGql(document, variables, client)
 
-  if (!queriedBlockProps || typeof queriedBlockProps !== 'object' || !blockKey) return null
+  if (queriedBlockProps == null || typeof queriedBlockProps !== 'object' || blockKey == null)
+    return null
 
   const queriedBlockFragment = queriedBlockProps[blockKey]
 
@@ -70,7 +72,8 @@ export default async function getBlockProps<
     // Otherwise, the id necessary to make the query might be inside the item. Just in case, we have a fallback
     const variablesWithFallback = { id: item.id, ...variables }
 
-    if (!isVariables<BlockVariables>(variablesWithFallback)) return null
+    if (!isVariables<BlockVariables>(variablesWithFallback))
+      return null
 
     return queryFromVariables({
       ...params,
@@ -78,11 +81,13 @@ export default async function getBlockProps<
     })
   }
 
-  if (!document || !isVariables(variables)) return null
+  if (document == null || !isVariables(variables))
+    return null
 
   const queriedBlockProps = await queryGql(document, variables, client)
 
-  if (!queriedBlockProps || typeof queriedBlockProps !== 'object' || !blockKey) return null
+  if (queriedBlockProps == null || typeof queriedBlockProps !== 'object' || blockKey == null)
+    return null
 
   const queriedBlockFragment = queriedBlockProps[blockKey]
 

@@ -1,12 +1,11 @@
 /// <reference types='vitest' />
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import dts from 'vite-plugin-dts';
-import * as path from 'path';
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
-import externalDeps from '../../../config/external-deps'
-
+import * as path from 'node:path'
+import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
+import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
+import { isExternal } from '../../../config/external-deps'
 
 export default defineConfig({
   root: __dirname,
@@ -22,20 +21,11 @@ export default defineConfig({
     }),
   ],
 
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [
-  //    viteTsConfigPaths({
-  //      root: '../../../',
-  //    }),
-  //  ],
-  // },
-
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
     outDir: '../../../dist/libs/logger',
-    emptyOutDir: true,
+    emptyOutDir: false,
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
@@ -51,7 +41,18 @@ export default defineConfig({
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
-      external: [...externalDeps, /^@okam\//],
+      external: isExternal,
+    },
+  },
+
+  test: {
+    globals: true,
+    environment: 'node',
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../../coverage/libs/stack/logger',
+      provider: 'v8',
     },
   },
 })

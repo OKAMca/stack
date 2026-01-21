@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react'
-import type React from 'react'
+import type * as React from 'react'
 
-export type TSearchListingContext = {
+export interface TSearchListingContext {
   userSearchQuery: string
   setUserSearchQuery: Dispatch<SetStateAction<string>>
 }

@@ -1,8 +1,9 @@
 'use client'
 
-import { Box, PopoverButton, TagGroup, type TToken } from '@okam/stack-ui'
-import { useFilterState } from '../../hooks/useFilterState'
+import type { TToken } from '@okam/stack-ui'
 import type { TFilterProps } from './interface'
+import { Box, PopoverButton, TagGroup } from '@okam/stack-ui'
+import { useFilterState } from '../../hooks/useFilterState'
 
 /**
  * ### Filter component for URL search params filtering.
@@ -25,7 +26,7 @@ import type { TFilterProps } from './interface'
  *
  * @returns
  */
-const Filter = <T extends TToken = TToken>(props: TFilterProps<T>) => {
+function Filter<T extends TToken = TToken>(props: TFilterProps<T>) {
   const {
     // TagGroup-specific props
     children,

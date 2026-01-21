@@ -1,22 +1,22 @@
 'use client'
 
-import { get } from 'radashi'
 import type { TCustomTheme, TToken } from './interface'
+import { get } from 'radashi'
 import { useTheme } from './index'
 
-const useThemeContext = (func?: string | null, props: TToken = {}, customTheme: TCustomTheme = null) => {
+function useThemeContext(func?: string | null, props: TToken = {}, customTheme: TCustomTheme = null) {
   const theme = useTheme()
   if (theme != null && func != null) {
     const { brandTheme } = theme
-    const themeFunc = get(brandTheme, func)
+    const themeFunc = get<((_props: TToken) => string | undefined) | undefined>(brandTheme, func)
     if (typeof themeFunc === 'function') {
-      const returnValue = themeFunc?.(props)
+      const returnValue = themeFunc(props)
       if (typeof returnValue === 'string') {
         return returnValue
       }
     }
   }
-  if (!customTheme) {
+  if (customTheme == null || customTheme === false) {
     return undefined
   }
   return customTheme

@@ -1,15 +1,15 @@
 'use client'
 
-import React from 'react'
+import * as React from 'react'
 
 /**
  * A helper to create a Context and Provider with no upfront default value, and
  * without having to check for undefined all the time.
  */
-function createCtx<A extends Record<string, unknown> | null>() {
+function createCtx<A extends object | null>() {
   const ctx = React.createContext<A | undefined>(undefined)
   function useCtx() {
-    const c = React.useContext(ctx)
+    const c = React.use(ctx)
 
     if (c === undefined) {
       throw new Error('useCtx must be inside a Provider')
@@ -20,10 +20,10 @@ function createCtx<A extends Record<string, unknown> | null>() {
   return [useCtx, ctx.Provider] as const // 'as const' makes TypeScript infer a tuple
 }
 
-export function createCtxNullable<A extends Record<string, unknown> | null>() {
+export function createCtxNullable<A extends object | null>() {
   const ctx = React.createContext<A | undefined>(undefined)
   function useCtx() {
-    const c = React.useContext(ctx)
+    const c = React.use(ctx)
 
     if (c === undefined) {
       return {} as A

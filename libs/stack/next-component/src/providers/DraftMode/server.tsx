@@ -1,8 +1,8 @@
-import { draftMode } from 'next/headers'
 import type { TDraftModeServerProviderProps } from './interface'
+import { draftMode } from 'next/headers'
 import { DraftModeContextProvider } from '.'
 
-const DraftModeServerContextProvider = async (props: TDraftModeServerProviderProps) => {
+async function DraftModeServerContextProvider(props: TDraftModeServerProviderProps) {
   const { children, ...rest } = props
   const { isEnabled } = await draftMode()
 

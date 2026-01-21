@@ -1,14 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import type { ComponentType } from 'react'
-import { useState } from 'react'
+import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { ComponentProps, ComponentType } from 'react'
 import type { Key } from 'react-aria'
-import Box from '../Box'
-import Button, { Anchor } from '../Button'
-import Typography from '../Typography'
+import { useState } from 'react'
+import TabList from '.'
+import { Box } from '../Box'
+import { Anchor, Button } from '../Button'
+import { Typography } from '../Typography'
 import Tab from './components/Tab'
 import { TabItem } from './components/TabItem'
 import TabPanel from './components/TabPanel'
-import TabList from '.'
+
+type TabListArgs = ComponentProps<typeof TabList>
 
 const meta: Meta<typeof TabList> = {
   title: 'Base Components/TabList',
@@ -172,19 +174,18 @@ export const ChildrenRenderFunction: Story = {
         children: 'English',
       },
     ],
-    children: (item) => <TabItem key={item.key}>{item.children}</TabItem>,
+    children: item => <TabItem key={item.key}>{item.children}</TabItem>,
   },
 }
 
 export const Controlled: Story = {
-  render: (args) => {
+  render: (args: TabListArgs) => {
     const { defaultSelectedKey, items, ...rest } = args
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [selectedKey, setSelectedKey] = useState<Key | undefined>(defaultSelectedKey)
     return (
       <Box customTheme="flex flex-col gap-4">
         <Box customTheme="flex gap-2">
-          {Array.from(items ?? []).map((item) => (
+          {Array.from(items ?? []).map((item: { key?: Key, children?: React.ReactNode }) => (
             <Button key={`button-${item.key}`} handlePress={() => setSelectedKey(item.key)}>
               {item.children}
             </Button>

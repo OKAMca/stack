@@ -1,5 +1,5 @@
-import { isPlainObject } from '../../utils/typeguards'
 import type { JsonApiError, JsonApiErrorResponse, JsonApiSuccessResponse } from './json-api-response.types'
+import { isPlainObject } from '../../utils/typeguards'
 
 export class JsonApiResponseFactory {
   static fromError = (
@@ -9,11 +9,13 @@ export class JsonApiResponseFactory {
   ): JsonApiErrorResponse => {
     let errs: JsonApiError[]
     if (typeof errors === 'string') {
-      errs = [{ title: errors, ...(httpStatus ? { status: httpStatus } : {}) }]
-    } else if (isPlainObject(errors)) {
-      errs = [errors]
-    } else {
+      errs = [{ title: errors, ...(httpStatus != null && httpStatus !== 0 ? { status: httpStatus } : {}) }]
+    }
+    else if (Array.isArray(errors)) {
       errs = errors
+    }
+    else {
+      errs = [errors]
     }
     return {
       success: false,

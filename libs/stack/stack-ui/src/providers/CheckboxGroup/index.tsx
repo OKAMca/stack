@@ -1,21 +1,22 @@
 'use client'
 
-import type { CheckboxGroupState } from '@react-stately/checkbox'
-import { createContext, useContext } from 'react'
+import type { CheckboxGroupState } from 'react-stately'
 import type { TCheckboxGroupContext } from './interface'
+import { createContext, use } from 'react'
 
 const CheckboxGroupContext = createContext<CheckboxGroupState | null>(null)
 
-const CheckboxGroupProvider = (props: TCheckboxGroupContext) => {
+function CheckboxGroupProvider(props: TCheckboxGroupContext) {
   const { children, state } = props
 
-  return <CheckboxGroupContext.Provider value={state}>{children}</CheckboxGroupContext.Provider>
+  return <CheckboxGroupContext value={state}>{children}</CheckboxGroupContext>
 }
 
 function useCheckboxGroupCtx() {
-  const context = useContext(CheckboxGroupContext)
+  const context = use(CheckboxGroupContext)
 
-  if (!context) return null
+  if (context == null)
+    return null
   return context
 }
 

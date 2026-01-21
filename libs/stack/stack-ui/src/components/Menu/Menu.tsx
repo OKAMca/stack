@@ -1,14 +1,14 @@
 'use client'
 
+import type { TToken } from '../../providers/Theme/interface'
+import type TMenuProps from './interface'
 import { useMenu } from '../../providers/Menu'
 import { useSidePanel } from '../../providers/SidePanel'
-import type { TToken } from '../../providers/Theme/interface'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'
-import Box from '../Box'
+import { Box } from '../Box'
 import InnerContent from './components/InnerContent'
-import type TMenuProps from './interface'
 
-const Menu = <T extends TToken>(props: TMenuProps<T>) => {
+function Menu<T extends TToken>(props: TMenuProps<T>) {
   const {
     id = 'main-menu',
     children,
@@ -24,7 +24,7 @@ const Menu = <T extends TToken>(props: TMenuProps<T>) => {
   return (
     <PanelTransition themeName={`${themeName}.panelTransition`} tokens={tokens} isVisible={overlayState?.isOpen}>
       <Box themeName={`${themeName}.wrapper`} tokens={tokens}>
-        {closeBtn && closeBtn()}
+        {closeBtn != null && closeBtn()}
         <Box themeName={`${themeName}.container`} tokens={tokens}>
           <InnerContent
             id={id}

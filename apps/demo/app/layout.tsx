@@ -1,6 +1,6 @@
-import './global.css'
 import Providers from './Providers'
-import 'tailwindcss/tailwind.css'
+import './global.css'
+import '../tailwind.css'
 
 export const metadata = {
   title: 'Welcome to demo',

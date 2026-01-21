@@ -1,13 +1,12 @@
 'use client'
 
-/* eslint-disable @typescript-eslint/naming-convention */
-import { filterDOMProps } from '@react-aria/utils'
 import type { DOMProps } from '@react-types/shared'
+import type { TSwiperModule } from '../interface'
+import type { TCarouselSwiper, TCarouselSwiperProps } from './interface'
+import { filterDOMProps } from '@react-aria/utils'
 import { mergeProps } from 'react-aria'
 import * as swiperModules from 'swiper/modules'
 import { useCarousel } from '../../../providers/Carousel'
-import type { TSwiperModule } from '../interface'
-import type { TCarouselSwiper, TCarouselSwiperProps } from './interface'
 
 const defaultModules: TSwiperModule[] = ['A11y', 'Controller']
 
@@ -29,36 +28,36 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
   } = useCarousel()
   const { a11y } = controller?.params ?? {}
 
-  const importedModules = [...(modules?.filter((module) => module !== paginationModule) ?? []), ...defaultModules].map(
-    (module) => swiperModules[module],
+  const importedModules = [...(modules?.filter(module => module !== paginationModule) ?? []), ...defaultModules].map(
+    module => swiperModules[module],
   )
 
   const { containerRoleDescriptionMessage = 'carousel' } = a11y ?? {}
 
   const swiperProps: TCarouselSwiper['swiperProps'] = {
-    navigation: {
+    'navigation': {
       nextEl: nextNavigationRef.current,
       prevEl: prevNavigationRef.current,
       enabled: modules?.includes('Navigation'),
     },
     id,
-    watchSlidesProgress: true,
-    role: 'group',
-    onSwiper: setController,
-    onSlideChange: (swiper) => {
+    'watchSlidesProgress': true,
+    'role': 'group',
+    'onSwiper': setController,
+    'onSlideChange': (swiper) => {
       setActiveIndex(swiper.activeIndex)
     },
-    modules: importedModules,
-    keyboard: {
+    'modules': importedModules,
+    'keyboard': {
       enabled: true,
       onlyInViewport: false,
     },
-    a11y: {
+    'a11y': {
       enabled: true,
       ...a11y,
     },
     'aria-roledescription': containerRoleDescriptionMessage ?? undefined,
-    tabIndex: 0,
+    'tabIndex': 0,
   }
 
   return {

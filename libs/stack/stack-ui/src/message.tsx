@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-type Props = {
+interface Props {
   message: string
   children?: never
 }

@@ -7,12 +7,12 @@ import type { TButtonProps } from '../Button/interface'
 
 export interface TPopoverButtonProps<T = TToken>
   extends
-    TDefaultComponent<T>,
-    TButtonProps<T>,
-    AriaOverlayTriggerProps,
-    Omit<AriaPositionProps, 'targetRef' | 'overlayRef'>,
-    OverlayTriggerProps,
-    Pick<AriaPopoverProps, 'shouldCloseOnInteractOutside' | 'isKeyboardDismissDisabled'> {
+  TDefaultComponent<T>,
+  TButtonProps<T>,
+  AriaOverlayTriggerProps,
+  Omit<AriaPositionProps, 'targetRef' | 'overlayRef'>,
+  OverlayTriggerProps,
+  Pick<AriaPopoverProps, 'shouldCloseOnInteractOutside' | 'isKeyboardDismissDisabled'> {
   /**
    * @deprecated Pass button props directly to the component. `buttonProps.children` can now be passed as `label` prop.
    */

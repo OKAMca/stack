@@ -1,26 +1,27 @@
 'use client'
 
-import { isEmpty } from 'radashi'
-import React, { useRef, useCallback, useMemo } from 'react'
-import { useComboBox, useFilter } from 'react-aria'
 import type { RegisterOptions } from 'react-hook-form'
-import { useFormContext, Controller } from 'react-hook-form'
+import type { TToken } from '../../../providers/Theme/interface'
+import type { TComboBoxProps } from './interface'
+import { isEmpty } from 'radashi'
+import * as React from 'react'
+import { useCallback, useMemo, useRef } from 'react'
+import { useComboBox, useFilter } from 'react-aria'
+import { Controller, useFormContext } from 'react-hook-form'
 import { useComboBoxState } from 'react-stately'
 import { useDebounce } from '../../../hooks/useDebounce'
 import useThemeContext from '../../../providers/Theme/hooks'
-import type { TToken } from '../../../providers/Theme/interface'
 import { useTranslation } from '../../../providers/Translation'
-import Box, { BoxWithForwardRef } from '../../Box'
+import { Box, BoxWithForwardRef } from '../../Box'
 import Icon from '../../Icon'
 import ArrowDown from '../../icons/ArrowDown'
 import CloseBtn from '../../icons/CloseBtn'
-import Popover from '../../Popover'
-import Typography from '../../Typography'
+import { Popover } from '../../Popover'
+import { Typography } from '../../Typography'
 import { ControlledListBox } from '../ListBox'
 import ComboBoxButton from './components/ComboBoxButton'
-import type { TComboBoxProps } from './interface'
 
-const ComboBox = (props: TComboBoxProps<object, TToken>) => {
+function ComboBox(props: TComboBoxProps<object, TToken>) {
   const {
     children,
     hookFormRef,
@@ -99,7 +100,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
 
   const handleInputRef = useCallback(
     (ref: HTMLInputElement | null) => {
-      if (ref) {
+      if (ref != null) {
         hookFormRef?.(ref)
         ;(inputRef as React.MutableRefObject<HTMLInputElement | null>).current = ref
       }
@@ -108,7 +109,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
   )
 
   const displayValue = useMemo(() => {
-    if (selectedItem && !isOpen) {
+    if (selectedItem != null && !isOpen) {
       return selectedItem.rendered as string
     }
     return state.inputValue
@@ -118,7 +119,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
 
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={comboBoxTokens} customTheme={customTheme}>
-      {label && (
+      {label != null && (
         <Typography {...labelProps} as="label" themeName={`${themeName}.label`} tokens={comboBoxTokens}>
           {label}
         </Typography>
@@ -140,7 +141,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
             <Icon themeName={`${themeName}.icon`} tokens={comboBoxTokens} icon={hasValue ? closeIcon : icon} />
           </ComboBoxButton>
         </BoxWithForwardRef>
-        {isOpen && inputWrapperRef.current && debouncedState.collection.size > 0 && (
+        {isOpen && inputWrapperRef.current != null && debouncedState.collection.size > 0 && (
           <Popover
             themeName={`${themeName}.popover`}
             tokens={comboBoxTokens}
@@ -162,7 +163,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
             </ControlledListBox>
           </Popover>
         )}
-        {isInvalid && errorMessage && (
+        {(isInvalid && errorMessage != null) && (
           <Typography tokens={comboBoxTokens} themeName={`${themeName}.errorMessage`} {...errorMessageProps}>
             {errorMessage}
           </Typography>
@@ -172,7 +173,7 @@ const ComboBox = (props: TComboBoxProps<object, TToken>) => {
   )
 }
 
-export const ReactHookFormComboBox = ({
+export function ReactHookFormComboBox({
   id,
   name,
   label,
@@ -190,7 +191,7 @@ export const ReactHookFormComboBox = ({
   allowsCustomValue,
   menuTrigger,
   ...rest
-}: TComboBoxProps & { rules?: RegisterOptions }) => {
+}: TComboBoxProps & { rules?: RegisterOptions }) {
   const { control } = useFormContext()
   const { t } = useTranslation()
 

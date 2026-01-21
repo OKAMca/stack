@@ -1,10 +1,10 @@
 'use client'
 
+import type { TSidePanelContext, TSidePanelProviderProps } from './interface'
 import { createCtx } from '@okam/core-lib'
 import { useMemo, useRef } from 'react'
 import { useOverlayTriggerState } from 'react-stately'
 import useLabelledOverlay from '../../hooks/useLabelledOverlay'
-import type { TSidePanelContext, TSidePanelProviderProps } from './interface'
 
 const [useSidePanel, SidePanelProvider] = createCtx<TSidePanelContext>()
 

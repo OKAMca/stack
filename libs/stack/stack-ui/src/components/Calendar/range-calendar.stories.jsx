@@ -1,10 +1,10 @@
 import { today } from '@internationalized/date'
 import { useState } from 'react'
-import Box from '../Box'
-import Typography from '../Typography'
+import { Box } from '../Box'
+import { Typography } from '../Typography'
 import RangeCalendar from './RangeCalendar'
 
-const TemplateControlled = (args) => {
+function TemplateControlled(args) {
   const { onChange, defaultValue, ...rest } = args
   const [value, setValue] = useState(defaultValue)
   return (
@@ -30,8 +30,8 @@ const TemplateControlled = (args) => {
 }
 
 /**
- * @typedef {import('@storybook/react').Meta<typeof RangeCalendar>} Meta
- * @typedef {import('@storybook/react').StoryObj<typeof RangeCalendar>} Story
+ * @typedef {import('@storybook/react-webpack5').Meta<typeof RangeCalendar>} Meta
+ * @typedef {import('@storybook/react-webpack5').StoryObj<typeof RangeCalendar>} Story
  */
 
 /**

@@ -1,10 +1,12 @@
 'use client'
 
+import type { TAccordionContext, TAccordionProviderProps } from './interface'
 import { createCtxNullable } from '@okam/core-lib'
 import { useMemo } from 'react'
-import type { TAccordionContext, TAccordionProviderProps } from './interface'
 
-export const [useAccordionCtx, AccordionProvider] = createCtxNullable<TAccordionContext>()
+const accordionCtx = createCtxNullable<TAccordionContext>()
+export const useAccordionCtx = accordionCtx[0]
+const AccordionProvider = accordionCtx[1]
 
 export function AccordionContextProvider(props: TAccordionProviderProps) {
   const { state, children, TransitionAnimation } = props

@@ -15,7 +15,7 @@ export interface TCarouselProviderProps extends Omit<TSwiperProps, 'children' | 
   slides: TCarouselSlideProps[]
 }
 
-export type TCarouselContext = {
+export interface TCarouselContext {
   slides: TCarouselSlideProps[]
   modules: TSwiperModule[] | undefined
   controller: SwiperClass | undefined

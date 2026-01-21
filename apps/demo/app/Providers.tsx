@@ -1,10 +1,10 @@
 'use client'
 
-import { ThemeProvider, IsClientContextProvider, SidePanelContextProvider } from '@okam/stack-ui'
+import { IsClientContextProvider, SidePanelContextProvider, ThemeProvider } from '@okam/stack-ui'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { OverlayProvider } from 'react-aria'
 
-const Providers = (props: { children: React.ReactNode }) => {
+function Providers(props: { children: React.ReactNode }) {
   const { children } = props
   return (
     <ThemeProvider>

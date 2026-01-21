@@ -1,10 +1,10 @@
 'use client'
 
+import type TImgProps from './interface'
 import { useThemeContext } from '@okam/stack-ui'
 import Image from 'next/image'
-import type TImgProps from './interface'
 
-const Img = (props: TImgProps) => {
+function Img(props: TImgProps) {
   const { src, width, height, themeName = 'img', tokens, customTheme, ...rest } = props
   const theme = useThemeContext(themeName, tokens, customTheme)
 

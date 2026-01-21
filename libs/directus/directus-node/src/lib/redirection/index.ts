@@ -1,5 +1,3 @@
-/* eslint-disable prefer-destructuring */
-
 import * as fetchRedirectsDataFile from './fetchRedirectsData'
 // Re-export with deprecation warnings
 /**
@@ -16,5 +14,5 @@ export const getDefaultConfig = fetchRedirectsDataFile.getDefaultConfig
 export const redirectDefaultLimit = fetchRedirectsDataFile.redirectDefaultLimit
 
 export type { TFetchRedirectsConfig, TFetchRedirectsResponse, TRedirectData, TRedirectType } from './interface'
-export * from './utils/validateRedirects'
 export * from './redirectsFile'
+export * from './utils/validateRedirects'

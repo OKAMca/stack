@@ -1,6 +1,6 @@
 import PrintButton from '.'
 
-const Template = (args) => <PrintButton {...args} />
+const Template = args => <PrintButton {...args} />
 
 export default {
   title: 'Base Components/Print Button',

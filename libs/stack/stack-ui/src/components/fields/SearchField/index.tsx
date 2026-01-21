@@ -1,19 +1,20 @@
 'use client'
 
-import React, { useCallback } from 'react'
+import type { TToken } from '../../../providers/Theme/interface'
+import type TSearchProps from './interface'
+import * as React from 'react'
+import { useCallback } from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
-import type { TToken } from '../../../providers/Theme/interface'
 import { useUserQueryValHook } from '../../../providers/UserSearchQuery'
-import Box from '../../Box'
-import Button from '../../Button'
+import { Box } from '../../Box'
+import { Button } from '../../Button'
 import Close from '../../icons/CloseBtn'
 import Search from '../../icons/Search'
-import Typography from '../../Typography'
-import type TSearchProps from './interface'
+import { Typography } from '../../Typography'
 
-const BuiltinIcon = ({ value }: { value: string }) => {
+function BuiltinIcon({ value }: { value: string }) {
   if (value === '') {
     return <Search width="16" height="16" />
   }
@@ -21,7 +22,7 @@ const BuiltinIcon = ({ value }: { value: string }) => {
   return <Close width="16" height="16" />
 }
 
-const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
+function SearchField<T extends TToken>(props: TSearchProps<T>) {
   const { setUserSearchQuery } = useUserQueryValHook()
   const {
     label,
@@ -34,6 +35,7 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
     icon,
     isDisabled,
   } = props
+  // eslint-disable-next-line ts/prefer-nullish-coalescing -- boolean OR is intended to combine two flags
   const internalIsDisabled = isDisabled || disabled
   const internalProps = { ...props, isDisabled: internalIsDisabled }
   const state = useSearchFieldState(internalProps)
@@ -56,8 +58,7 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
 
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={searchTokens} aria-disabled={internalIsDisabled ?? false}>
-      {label && (
-        // eslint-disable-next-line jsx-a11y/label-has-associated-control
+      {label != null && (
         <Box {...labelProps} as="label" themeName={`${themeName}.label`} tokens={searchTokens}>
           {label}
         </Box>
@@ -84,7 +85,7 @@ const SearchField = <T extends TToken>(props: TSearchProps<T>) => {
           </Button>
         </FocusRing>
       </Box>
-      {errorMessage && (
+      {errorMessage != null && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={searchTokens} {...errorMessageProps}>
           {errorMessage}
         </Typography>

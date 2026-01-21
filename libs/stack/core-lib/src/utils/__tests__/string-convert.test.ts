@@ -13,7 +13,7 @@ describe('stringConvert tests', () => {
       expect(StringConvert.toSafeInteger(undefined)).toStrictEqual(null)
       expect(StringConvert.toSafeInteger(null)).toStrictEqual(null)
       expect(StringConvert.toSafeInteger(false)).toStrictEqual(null)
-      expect(StringConvert.toSafeInteger(NaN)).toStrictEqual(null)
+      expect(StringConvert.toSafeInteger(Number.NaN)).toStrictEqual(null)
     })
   })
 
@@ -25,7 +25,7 @@ describe('stringConvert tests', () => {
       expect(StringConvert.toFloat('-10.234')).toStrictEqual(-10.234)
       expect(StringConvert.toFloat(undefined)).toStrictEqual(null)
       expect(StringConvert.toFloat(null)).toStrictEqual(null)
-      expect(StringConvert.toFloat(NaN)).toStrictEqual(null)
+      expect(StringConvert.toFloat(Number.NaN)).toStrictEqual(null)
       expect(StringConvert.toFloat(false)).toStrictEqual(null)
     })
   })

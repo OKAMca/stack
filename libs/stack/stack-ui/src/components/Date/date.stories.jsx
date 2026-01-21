@@ -3,13 +3,15 @@
 import { I18nProvider } from 'react-aria'
 import Date from './index'
 
-const Template = (args) => <Date {...args} />
+const Template = args => <Date {...args} />
 
-const FrenchTemplate = (args) => (
-  <I18nProvider locale="fr-FR">
-    <Date {...args} />
-  </I18nProvider>
-)
+function FrenchTemplate(args) {
+  return (
+    <I18nProvider locale="fr-FR">
+      <Date {...args} />
+    </I18nProvider>
+  )
+}
 
 export default {
   title: 'BASE COMPONENTS/Date',

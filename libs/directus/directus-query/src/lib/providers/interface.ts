@@ -1,16 +1,17 @@
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
-import type { UseQueryResult } from '@tanstack/react-query'
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
+import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import type { GraphQLClient, Variables } from 'graphql-request'
-import type React from 'react'
+import type * as React from 'react'
 
-export type TGQLQueryProviderProps = {
+export interface TGQLQueryProviderProps {
   children: React.ReactNode
   client: GraphQLClient
 }
 
-export type TGQLQueryContextProps = {
+export interface TGQLQueryContextProps {
   useGqlQuery: <TResult, TVariables extends Variables>(
-    document: TypedDocumentNode<TResult, TVariables>,
-    queryKey?: TVariables,
-  ) => UseQueryResult
+    _document: TypedDocumentNode<TResult, TVariables>,
+    _variables?: TVariables,
+    _options?: Omit<UseQueryOptions<TResult, Error, TResult>, 'queryKey' | 'queryFn'>,
+  ) => UseQueryResult<TResult, Error>
 }

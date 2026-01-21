@@ -1,0 +1,418 @@
+{
+  "generated": "2026-01-19",
+  "description": "Definitive inventory of ESLint rule bypasses and config-wide disables, categorized by code type",
+  "summary": {
+    "totalConfigBlocks": 23,
+    "ignorePatterns": 18,
+    "inlineDisableComments": 34,
+    "generatedCodeBlanketDisables": 6
+  },
+  "codeCategories": {
+    "description": "Separation of bypasses by code category (as required by inventory-bypasses-execute task)",
+    "generatedCode": {
+      "description": "Machine-generated code that should be completely excluded from linting",
+      "ignorePatterns": [
+        "apps/directus-data-query/src/lib/gql/generated/**",
+        "libs/directus/directus-block/src/generated/**",
+        "libs/directus/directus-query/src/lib/gql/admin/generated/**"
+      ],
+      "blanketDisables": [
+        "apps/directus-data-query/src/lib/gql/generated/fragment-masking.ts",
+        "apps/directus-data-query/src/lib/gql/generated/gql.ts",
+        "apps/directus-data-query/src/lib/gql/generated/graphql.ts",
+        "libs/directus/directus-block/src/generated/fragment-masking.ts",
+        "libs/directus/directus-block/src/generated/graphql.ts"
+      ],
+      "tools": ["graphql-codegen"],
+      "policy": "Completely ignored via eslint.config.js ignore patterns. Blanket disables in files are redundant."
+    },
+    "configAndInfrastructure": {
+      "description": "Build tooling, configuration files, and infrastructure code",
+      "configBlocks": ["config-files", "commonjs", "automation-lib"],
+      "ignorePatterns": [
+        "libs/**/vite.config.ts",
+        "libs/**/vitest.config.ts",
+        "apps/**/vitest.config.ts",
+        "libs/**/jest.config.ts",
+        "commitlint.config.cjs",
+        "jest.preset.cjs",
+        "tailwind.preset.cjs"
+      ],
+      "rulesRelaxed": {
+        "no-console": "off (debugging)",
+        "ts/no-require-imports": "off (CommonJS)",
+        "ts/prefer-nullish-coalescing": "off (no strictNullChecks)",
+        "ts/strict-boolean-expressions": "off (no strictNullChecks)",
+        "all type-aware rules": "off (not in tsconfig)"
+      },
+      "policy": "Infrastructure code has relaxed rules. Config files use require(), don't have type info."
+    },
+    "documentation": {
+      "description": "Documentation files (not linted)",
+      "paths": [
+        "docs/ADR/*.md",
+        "docs/SECURITY.md",
+        "README.md"
+      ],
+      "policy": "Markdown files are not linted by ESLint. ADRs document architectural decisions including lint exceptions."
+    },
+    "testCode": {
+      "description": "Test files with relaxed rules",
+      "configBlocks": ["test-files", "storybook"],
+      "patterns": [
+        "**/*.test.ts",
+        "**/*.test.tsx",
+        "**/*.spec.ts",
+        "**/*.spec.tsx",
+        "**/__tests__/**",
+        "**/*.stories.ts",
+        "**/*.stories.tsx",
+        "**/.storybook/**/*"
+      ],
+      "rulesRelaxed": {
+        "ts/no-explicit-any": "off (test mocking)",
+        "no-console": "off (test debugging)",
+        "react-hooks/rules-of-hooks": "off (Storybook decorators)",
+        "import/no-default-export": "off (Storybook CSF3)",
+        "all type-aware rules": "off (not in tsconfig)"
+      },
+      "inlineDisables": {
+        "react/no-array-index-key": 1,
+        "ts/no-explicit-any": 1
+      },
+      "policy": "Test code has relaxed type rules. Type safety less critical for mocks/fixtures."
+    },
+    "authoredAppLibCode": {
+      "description": "Main application and library source code - PRIMARY CONCERN",
+      "libraries": {
+        "stack-ui": {
+          "inlineDisables": 17,
+          "configBlockExceptions": [
+            "react-stately-items",
+            "react-stately-children-api",
+            "react-aria-unbound-method",
+            "react-stately-node-props",
+            "react-hook-form-integration",
+            "provider-files",
+            "theme-files"
+          ]
+        },
+        "directus-next": {
+          "inlineDisables": 5,
+          "configBlockExceptions": []
+        },
+        "directus-node": {
+          "inlineDisables": 2,
+          "configBlockExceptions": []
+        },
+        "directus-next-component": {
+          "inlineDisables": 1,
+          "configBlockExceptions": [
+            "graphql-cms-data-boundaries"
+          ]
+        },
+        "directus-flexible-content": {
+          "inlineDisables": 1,
+          "configBlockExceptions": [
+            "graphql-cms-data-boundaries"
+          ]
+        },
+        "directus-block": {
+          "inlineDisables": 0,
+          "configBlockExceptions": [
+            "graphql-cms-data-boundaries",
+            "wysiwyg-sanitized-html"
+          ]
+        },
+        "core-lib": {
+          "inlineDisables": 3,
+          "configBlockExceptions": []
+        },
+        "next-component": {
+          "inlineDisables": 1,
+          "configBlockExceptions": []
+        },
+        "logger": {
+          "inlineDisables": 1,
+          "configBlockExceptions": []
+        },
+        "directus-query": {
+          "inlineDisables": 0,
+          "configBlockExceptions": []
+        }
+      },
+      "apps": {
+        "demo": {
+          "inlineDisables": 0,
+          "configBlockExceptions": ["demo-app", "nextjs"]
+        }
+      },
+      "totalInlineDisables": 31,
+      "policy": "Strict rules enforced. Each inline disable requires documented rationale."
+    }
+  },
+  "hotspotsByRule": {
+    "description": "Rule bypass counts to identify improvement areas",
+    "inlineDisablesByRule": {
+      "ts/prefer-nullish-coalescing": {
+        "count": 13,
+        "locations": {
+          "libs/directus/directus-next": 5,
+          "libs/directus/directus-node": 2,
+          "libs/stack/stack-ui": 6
+        },
+        "rationale": "Intentional || behavior: empty string env vars, boolean OR for disabled state, falsy fallbacks"
+      },
+      "ts/strict-boolean-expressions": {
+        "count": 10,
+        "locations": {
+          "libs/directus/directus-next": 5,
+          "libs/directus/directus-node": 2,
+          "libs/stack/stack-ui": 3
+        },
+        "rationale": "Combined with ts/prefer-nullish-coalescing for intentional falsy fallback patterns"
+      },
+      "react-hooks-extra/no-direct-set-state-in-use-effect": {
+        "count": 7,
+        "locations": {
+          "libs/stack/core-lib": 2,
+          "libs/stack/stack-ui": 4,
+          "libs/stack/next-component": 1
+        },
+        "rationale": "Async fetch error/completion, SSR hydration, client detection, bidirectional state sync"
+      },
+      "ts/no-explicit-any": {
+        "count": 6,
+        "locations": {
+          "libs/stack/stack-ui": 4,
+          "libs/directus/directus-flexible-content": 1,
+          "libs/directus/directus-next-component": 1
+        },
+        "rationale": "React-hook-form callbacks, TipTap transitions, CMS boundaries, react-aria generics"
+      },
+      "react-hooks/exhaustive-deps": {
+        "count": 2,
+        "locations": {
+          "libs/stack/core-lib": 1,
+          "libs/stack/stack-ui": 1
+        },
+        "rationale": "Deep comparison memoization, ref.current triggering recalc"
+      },
+      "react/no-array-index-key": {
+        "count": 3,
+        "locations": {
+          "libs/stack/stack-ui": 3
+        },
+        "rationale": "Pagination bullets, calendar grid empty cells, date field segments without stable identifiers"
+      },
+      "no-console": {
+        "count": 1,
+        "locations": {
+          "libs/stack/logger": 1
+        },
+        "rationale": "Logger utility intentionally uses console"
+      }
+    },
+    "configBlocksByReason": {
+      "libraryApiLimitations": {
+        "description": "Third-party library type definitions using 'any'",
+        "count": 4,
+        "blocks": [
+          "react-stately-node-props (Node<T>.props is any)",
+          "react-hook-form-integration (watch/getValues return any)",
+          "theme-provider-hooks (theme tokens can be any JSON)",
+          "graphql-cms-data-boundaries (JSON scalars are any)"
+        ]
+      },
+      "reactAriaPatterns": {
+        "description": "Adobe react-aria/react-stately design patterns",
+        "count": 4,
+        "blocks": [
+          "react-stately-children-api (Children API for collections)",
+          "react-stately-items (getCollectionNode pattern)",
+          "react-aria-unbound-method (arrow function returns)",
+          "react-stately-node-props (Node.props typed as any)"
+        ]
+      },
+      "coLocationPatterns": {
+        "description": "Provider + hook and theme co-location",
+        "count": 3,
+        "blocks": [
+          "provider-files (Provider + useContext hook)",
+          "theme-files (theme utilities with components)",
+          "storybook-helpers (mock/helper files)"
+        ]
+      },
+      "securityExceptions": {
+        "description": "Approved security-related bypasses",
+        "count": 1,
+        "blocks": [
+          "wysiwyg-sanitized-html (dangerouslySetInnerHTML with sanitize-html)"
+        ]
+      }
+    }
+  },
+  "fullInlineDisableList": {
+    "description": "Complete list of inline eslint-disable comments in authored code",
+    "disables": [
+      {
+        "file": "libs/directus/directus-next/src/draft/env.ts",
+        "rules": ["ts/prefer-nullish-coalescing", "ts/strict-boolean-expressions"],
+        "rationale": "empty string env var should fallback to default"
+      },
+      {
+        "file": "libs/directus/directus-next/src/redirect/env.ts",
+        "rules": ["ts/prefer-nullish-coalescing", "ts/strict-boolean-expressions"],
+        "rationale": "empty string env var should fallback to default"
+      },
+      {
+        "file": "libs/directus/directus-next/src/router/router.ts",
+        "rules": ["ts/prefer-nullish-coalescing", "ts/strict-boolean-expressions"],
+        "rationale": "empty string idField should use default",
+        "count": 2
+      },
+      {
+        "file": "libs/directus/directus-next/src/router/utils/fetchPageSettingsTranslation.ts",
+        "rules": ["ts/prefer-nullish-coalescing", "ts/strict-boolean-expressions"],
+        "rationale": "empty string env var should fallback to next option"
+      },
+      {
+        "file": "libs/directus/directus-node/src/lib/redirection/fetchRedirectsData.ts",
+        "rules": ["ts/prefer-nullish-coalescing", "ts/strict-boolean-expressions"],
+        "rationale": "empty string env var should fallback to default/next option",
+        "count": 2
+      },
+      {
+        "file": "libs/directus/directus-flexible-content/src/lib/functions/renderView.ts",
+        "rules": ["ts/no-explicit-any"],
+        "rationale": "_node transitions between incompatible types"
+      },
+      {
+        "file": "libs/directus/directus-next-component/src/types/navigationItems.ts",
+        "rules": ["ts/no-explicit-any"],
+        "rationale": "CMS tokens can have null/undefined values"
+      },
+      {
+        "file": "libs/stack/core-lib/src/hooks/use-promise.ts",
+        "rules": ["react-hooks-extra/no-direct-set-state-in-use-effect"],
+        "rationale": "async fetch completion and error handling",
+        "count": 2
+      },
+      {
+        "file": "libs/stack/core-lib/src/hooks/use-promise.ts",
+        "rules": ["react-hooks/exhaustive-deps"],
+        "rationale": "params excluded: memoizedParams provides deep comparison"
+      },
+      {
+        "file": "libs/stack/logger/src/lib/logger.ts",
+        "rules": ["no-console"],
+        "rationale": "Logger utility intentionally uses console for dev output"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/Accordion/components/AccordionItem.tsx",
+        "rules": ["ts/prefer-nullish-coalescing", "ts/strict-boolean-expressions"],
+        "rationale": "intentionally fallback on empty strings for accessibility text"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/Carousel/carousel.stories.tsx",
+        "rules": ["react/no-array-index-key"],
+        "rationale": "pagination bullets map 1:1 with slide positions"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/Carousel/navigation/LegacyCarouselNavigationButton.tsx",
+        "rules": ["ts/strict-boolean-expressions", "ts/prefer-nullish-coalescing"],
+        "rationale": "render fallback icon if children is falsy"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/Carousel/navigation/useCarouselNextNavigation.ts",
+        "rules": ["ts/prefer-nullish-coalescing"],
+        "rationale": "boolean OR for disabled state logic"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/Carousel/navigation/useCarouselPrevNavigation.ts",
+        "rules": ["ts/prefer-nullish-coalescing"],
+        "rationale": "boolean OR for disabled state logic"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/Carousel/swiper/useCarouselSlide.tsx",
+        "rules": ["react-hooks/exhaustive-deps"],
+        "rationale": "ref.current triggers recalc when DOM element attaches"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/fields/ComboBox/combo-box.stories.tsx",
+        "rules": ["ts/no-explicit-any"],
+        "rationale": "useComboBoxFiltering returns generic type; cast needed for react-aria Item typing"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/fields/SearchField/index.tsx",
+        "rules": ["ts/prefer-nullish-coalescing"],
+        "rationale": "boolean OR for disabled state (either prop disables)"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/Icon/index.tsx",
+        "rules": ["ts/strict-boolean-expressions"],
+        "rationale": "intentional fallback if empty string"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/ShareButton/utils/useWindow.ts",
+        "rules": ["react-hooks-extra/no-direct-set-state-in-use-effect"],
+        "rationale": "SSR hydration pattern"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/TagGroup/components/TagItem.tsx",
+        "rules": ["ts/prefer-nullish-coalescing"],
+        "rationale": "intentional falsy check and accessibility text fallback",
+        "count": 2
+      },
+      {
+        "file": "libs/stack/stack-ui/src/providers/Client/index.tsx",
+        "rules": ["react-hooks-extra/no-direct-set-state-in-use-effect"],
+        "rationale": "client detection pattern"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/types/components.ts",
+        "rules": ["ts/no-explicit-any"],
+        "rationale": "react-aria callbacks have incompatible signatures",
+        "count": 2
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/Calendar/components/CalendarGrid.tsx",
+        "rules": ["react/no-array-index-key"],
+        "rationale": "empty calendar cells have no stable identifier; position-based key is correct"
+      },
+      {
+        "file": "libs/stack/stack-ui/src/components/fields/DatePicker/components/DateField.tsx",
+        "rules": ["react/no-array-index-key"],
+        "rationale": "react-stately segments lack stable IDs; position-based key matches library pattern"
+      },
+      {
+        "file": "libs/stack/next-component/src/hooks/useFilterState/index.ts",
+        "rules": ["react-hooks-extra/no-direct-set-state-in-use-effect"],
+        "rationale": "intentional state sync: URL query state must mirror react-stately selection state, guarded by isEqual check"
+      }
+    ]
+  },
+  "recommendations": {
+    "description": "Improvement opportunities identified from hotspot analysis",
+    "items": [
+      {
+        "rule": "ts/prefer-nullish-coalescing + ts/strict-boolean-expressions",
+        "currentCount": "11 combined (often together)",
+        "observation": "Most disables are for intentional empty string fallback behavior in env vars",
+        "recommendation": "Consider a helper function for env var retrieval that handles empty strings explicitly"
+      },
+      {
+        "rule": "react-hooks-extra/no-direct-set-state-in-use-effect",
+        "currentCount": 4,
+        "observation": "All are for legitimate async/SSR patterns",
+        "recommendation": "These are approved patterns - no action needed"
+      },
+      {
+        "rule": "ts/no-explicit-any",
+        "currentCount": 4,
+        "observation": "All are at library type boundaries (react-hook-form, TipTap, react-aria)",
+        "recommendation": "These are approved library API limitations - no action needed"
+      }
+    ]
+  }
+}

@@ -1,11 +1,13 @@
 'use client'
 
-import { createCtx } from '@okam/core-lib'
 import type { Nullable } from '@okam/stack-ui'
-import { useMemo, useState } from 'react'
 import type { TAdminBarContext, TAdminBarProviderProps } from './interface'
+import { createCtx } from '@okam/core-lib'
+import { useMemo, useState } from 'react'
 
-export const [useAdminBar, AdminBarProvider] = createCtx<TAdminBarContext>()
+const adminBarCtx = createCtx<TAdminBarContext>()
+export const useAdminBar = adminBarCtx[0]
+const AdminBarProvider = adminBarCtx[1]
 
 export function AdminBarContextProvider(props: TAdminBarProviderProps) {
   const { children } = props

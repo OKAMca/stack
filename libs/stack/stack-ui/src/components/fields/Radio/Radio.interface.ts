@@ -1,5 +1,5 @@
-import type React from 'react'
-import type { ChangeHandler, RefCallBack } from 'react-hook-form'
+import type * as React from 'react'
+import type { RefCallBack } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
 
@@ -15,7 +15,7 @@ export interface TRadioProps<T = TToken> extends TFieldReactHookForm<T> {
   errorMessage?: string
   ariaLabel?: string
   value: string
-  onChange?: ((isSelected: boolean) => void) | ChangeHandler
+  // onChange is inherited from TReactHookForm - no need to redeclare
   inputRef?: RefCallBack
   icon?: React.ReactNode
 }

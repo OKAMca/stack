@@ -1,12 +1,14 @@
 'use client'
 
-import { Box, Typography, type TDefaultComponent } from '@okam/stack-ui'
+import type { TDefaultComponent } from '@okam/stack-ui'
+import { Box, Typography } from '@okam/stack-ui'
 import { useAdminBar } from '../../../providers/AdminBar'
 
-const AdminBarError = ({ themeName = 'adminBar', tokens, customTheme }: TDefaultComponent) => {
+function AdminBarError({ themeName = 'adminBar', tokens, customTheme }: TDefaultComponent) {
   const { error } = useAdminBar()
 
-  if (!error) return null
+  if (error == null)
+    return null
 
   return (
     <Box themeName={`${themeName}.error`} tokens={tokens} customTheme={customTheme}>

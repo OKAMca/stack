@@ -1,15 +1,15 @@
 'use client'
 
+import type { TToken } from '../../providers/Theme/interface'
+import type { TTagGroupProps } from './interface'
 import { useRef } from 'react'
 import { useTagGroup } from 'react-aria'
 import { useListState } from 'react-stately'
-import type { TToken } from '../../providers/Theme/interface'
-import Box, { BoxWithForwardRef } from '../Box'
-import Typography from '../Typography'
+import { Box, BoxWithForwardRef } from '../Box'
+import { Typography } from '../Typography'
 import Tag from './components/Tag'
-import type { TTagGroupProps } from './interface'
 
-const TagGroup = <Item extends object, T extends TToken = TToken>(props: TTagGroupProps<Item, T>) => {
+function TagGroup<Item extends object, T extends TToken = TToken>(props: TTagGroupProps<Item, T>) {
   const {
     themeName = 'tagGroup',
     tokens,
@@ -25,13 +25,13 @@ const TagGroup = <Item extends object, T extends TToken = TToken>(props: TTagGro
   const { gridProps, labelProps, descriptionProps, errorMessageProps } = useTagGroup(props, state, ref)
   return (
     <Box as={as} themeName={`${themeName}.wrapper`} tokens={tokens} customTheme={customTheme}>
-      {label && (
+      {!!label && (
         <Typography themeName={`${themeName}.label`} tokens={tokens} {...labelProps}>
           {label}
         </Typography>
       )}
       <BoxWithForwardRef themeName={`${themeName}.tags`} tokens={tokens} ref={ref} {...gridProps}>
-        {[...state.collection].map((item) => (
+        {[...state.collection].map(item => (
           <Tag
             themeName={`${themeName}.tag`}
             key={item.key}
@@ -41,12 +41,12 @@ const TagGroup = <Item extends object, T extends TToken = TToken>(props: TTagGro
           />
         ))}
       </BoxWithForwardRef>
-      {description && (
+      {!!description && (
         <Typography themeName={`${themeName}.description`} tokens={tokens} {...descriptionProps}>
           {description}
         </Typography>
       )}
-      {errorMessage && (
+      {!!errorMessage && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={tokens} {...errorMessageProps}>
           {errorMessage}
         </Typography>

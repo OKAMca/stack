@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useMemo } from 'react'
-import type { TThemeProviderProps, TThemePanelContext, TDefaultTheme, TTheme } from './interface'
+import type { TTheme, TThemePanelContext, TThemeProviderProps } from './interface'
+import * as React from 'react'
+import { useMemo } from 'react'
 
-export function createCtxNullable<A extends Record<string, unknown> | null>() {
+export function createCtxNullable<A extends object | null>() {
   const ctx = React.createContext<A | undefined>(undefined)
   function useCtx() {
-    const c = React.useContext(ctx)
+    const c = React.use(ctx)
 
     if (c === undefined) {
       return null
@@ -17,18 +18,18 @@ export function createCtxNullable<A extends Record<string, unknown> | null>() {
   return [useCtx, ctx.Provider] as const // 'as const' makes TypeScript infer a tuple
 }
 
-const defaultTheme: TDefaultTheme = {
+const defaultTheme: TTheme = {
   typography: () => '',
 }
 
 const [useTheme, ThemeProvider] = createCtxNullable<TThemePanelContext<TTheme>>()
 
-export function ThemeContextProvider({ children, brandTheme = defaultTheme }: TThemeProviderProps) {
+export function ThemeContextProvider({ children, brandTheme = defaultTheme }: TThemeProviderProps<TTheme>) {
   const value = useMemo<TThemePanelContext>(() => ({ brandTheme }), [brandTheme])
   return <ThemeProvider value={value}>{children}</ThemeProvider>
 }
 
-export const createThemeProvider = (brandTheme: TTheme) => {
+export function createThemeProvider(brandTheme: TTheme) {
   const ThemeProviderContext = ({ children }: { children: React.ReactNode }) => (
     <ThemeContextProvider brandTheme={brandTheme}>{children}</ThemeContextProvider>
   )

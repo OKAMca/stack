@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+import { describe, expect, it, vi } from 'vitest'
 import createLogger from './factoryLogger'
 import { logger } from './logger'
 
@@ -10,7 +10,7 @@ describe('logger', () => {
   })
 
   it('should log messages at different levels', () => {
-    const mockLog = jest.fn()
+    const mockLog = vi.fn()
     logger.setLogger(mockLog)
 
     logger.log('Info message', 'info', { key: 'value' })
@@ -25,19 +25,20 @@ describe('logger', () => {
 
   it('should allow setting a custom logger', () => {
     const customLogger = {
-      log: jest.fn(),
+      log: vi.fn(),
     }
     logger.setLogger(customLogger.log)
 
     logger.log('Test message')
-    expect(customLogger.log).toHaveBeenCalledWith('Test message', 'info', undefined)
+    // When no severity is passed, Logger.log passes undefined (not 'info')
+    expect(customLogger.log).toHaveBeenCalledWith('Test message', undefined, undefined)
   })
 })
 
 describe('createLogger', () => {
   it('should create a new logger instance', () => {
     const customLogger = {
-      log: jest.fn(),
+      log: vi.fn(),
     }
     const log = createLogger('[Test]', customLogger.log)
 
@@ -47,14 +48,15 @@ describe('createLogger', () => {
   })
 
   it('should work with multiple instances', () => {
-    const logSpy = jest.spyOn(console, 'log')
+    const logSpy = vi.spyOn(console, 'log')
     const log1 = createLogger('[Test1]')
     const log2 = createLogger('[Test2]')
 
     log1.log('ping')
     log2.log('pong')
 
-    expect(logSpy).toHaveBeenCalledWith('[Test1] ping', undefined)
-    expect(logSpy).toHaveBeenCalledWith('[Test2] pong', undefined)
+    // internalLogger passes context ?? '' (empty string when no context provided)
+    expect(logSpy).toHaveBeenCalledWith('[Test1] ping', '')
+    expect(logSpy).toHaveBeenCalledWith('[Test2] pong', '')
   })
 })

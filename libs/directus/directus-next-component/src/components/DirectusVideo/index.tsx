@@ -1,13 +1,14 @@
+import type { TDirectusVideoProps } from './interface'
 import { Video } from '@okam/stack-ui'
 import { getDirectusFile } from '../../utils/getDirectusFile'
-import type { TDirectusVideoProps } from './interface'
 
-const DirectusVideo = (props: TDirectusVideoProps) => {
+function DirectusVideo(props: TDirectusVideoProps) {
   const { baseUrl } = props
 
   const fileProps = getDirectusFile(props, baseUrl)
 
-  if (!fileProps) return null
+  if (fileProps == null)
+    return null
 
   const { type } = fileProps
 

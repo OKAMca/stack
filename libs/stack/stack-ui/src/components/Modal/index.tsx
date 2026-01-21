@@ -1,13 +1,13 @@
 'use client'
 
-import { OverlayContainer } from 'react-aria'
 import type { TToken } from '../../providers/Theme/interface'
+import type { TModalProps } from './interface'
+import { OverlayContainer } from 'react-aria'
 import ModalTransition from '../../transitions/ModalTransition'
 import ModalDialog from './components/ModalDialog'
 import ModalOverlay from './components/ModalOverlay'
-import type { TModalProps } from './interface'
 
-const Modal = <T extends TToken>(props: TModalProps<T>) => {
+function Modal<T extends TToken>(props: TModalProps<T>) {
   const {
     children,
     transitionComponent: TransitionComponent = ModalTransition,

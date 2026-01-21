@@ -1,12 +1,13 @@
 import type { TDefaultComponent } from '@okam/stack-ui'
-import { Box } from '@okam/stack-ui'
-import React, { type ReactNode } from 'react'
-import { renderView, mergeSerializers } from '../../functions'
+import type { ReactNode } from 'react'
+import type { Extensions, JSONContent, ReactComponentSerializers } from '../../functions/types'
+import type { TRenderingNodes } from '../nodes/types'
 
-import type { JSONContent, Extensions, ReactComponentSerializers } from '../../functions/types'
+import { Box } from '@okam/stack-ui'
+import * as React from 'react'
+import { mergeSerializers, renderView } from '../../functions'
 import remapAttributes from '../attributes/remapAttributes'
 import nodes from '../nodes'
-import type { TRenderingNodes } from '../nodes/types'
 
 interface RenderNodesProps extends TDefaultComponent {
   content: JSONContent
@@ -16,7 +17,7 @@ interface RenderNodesProps extends TDefaultComponent {
   remappedAttributes?: Record<string, string>
 }
 
-const RenderNodes = (props: RenderNodesProps): ReactNode => {
+function RenderNodes(props: RenderNodesProps): ReactNode {
   const {
     content,
     serializers = [],
@@ -28,7 +29,7 @@ const RenderNodes = (props: RenderNodesProps): ReactNode => {
     customTheme,
   } = props
 
-  const clonedContent = JSON.parse(JSON.stringify(content))
+  const clonedContent = JSON.parse(JSON.stringify(content)) as JSONContent
 
   const mergedSerializers = mergeSerializers(serializers, componentSerializers)
 
@@ -43,10 +44,10 @@ const RenderNodes = (props: RenderNodesProps): ReactNode => {
       }
       const mappedAttributes = remapAttributes(remappedAttributes, defaultAttributes)
 
-      const tagKey = tag as keyof TRenderingNodes
+      const tagKey = tag
       const renderingNode = renderingNodes?.[tagKey] ?? nodes?.[tagKey]
 
-      if (renderingNode) {
+      if (renderingNode != null) {
         return renderingNode({ children, attrs: mappedAttributes, themeName, tokens, customTheme })
       }
 

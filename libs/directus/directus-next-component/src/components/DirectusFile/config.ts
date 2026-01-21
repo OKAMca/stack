@@ -1,7 +1,7 @@
 import type { ComponentType } from '@react-spring/web'
+import type { TDirectusFileProps } from './interface'
 import DirectusImg from '../DirectusImg'
 import DirectusVideo from '../DirectusVideo'
-import type { TDirectusFileProps } from './interface'
 
 const directusFileConfig: Record<string, ComponentType<TDirectusFileProps>> = {
   image: DirectusImg,

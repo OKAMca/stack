@@ -1,8 +1,8 @@
-import * as path from 'path'
 import type { Tree } from '@nx/devkit'
+import type { ComponentGeneratorSchema } from './schema'
+import * as path from 'node:path'
 import { formatFiles, generateFiles } from '@nx/devkit'
 import { capitalizeFirstLetter } from '@okam/core-lib'
-import type { ComponentGeneratorSchema } from './schema'
 
 export async function componentGenerator(tree: Tree, options: ComponentGeneratorSchema) {
   const componentName = capitalizeFirstLetter(options.name)

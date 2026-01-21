@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useEvent } from 'react-use'
 
 function getHash() {
-  if (typeof window === 'undefined') return ''
+  if (typeof window === 'undefined')
+    return ''
   return window.location.hash
 }
 
@@ -18,10 +19,12 @@ export function useHash() {
   const [hash, setHash] = useState(defaultHash)
 
   const handleHashChangeEvent = ({ newURL }: HashChangeEvent) => {
-    if (!URL.canParse(newURL)) return
+    if (!URL.canParse(newURL))
+      return
 
     const { hash: newHash } = new URL(newURL)
-    if (!newHash || newHash === hash) return
+    if (!newHash || newHash === hash)
+      return
 
     setHash(newHash)
   }

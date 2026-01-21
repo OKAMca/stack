@@ -1,10 +1,12 @@
 'use client'
 
+import type { TDraftModeContext, TDraftModeProviderProps } from './interface'
 import { createCtx } from '@okam/core-lib'
 import { useMemo } from 'react'
-import type { TDraftModeContext, TDraftModeProviderProps } from './interface'
 
-export const [useDraftMode, DraftModeProvider] = createCtx<TDraftModeContext>()
+const draftModeCtx = createCtx<TDraftModeContext>()
+export const useDraftMode = draftModeCtx[0]
+const DraftModeProvider = draftModeCtx[1]
 
 export function DraftModeContextProvider(props: TDraftModeProviderProps) {
   const { children, isEnabled } = props

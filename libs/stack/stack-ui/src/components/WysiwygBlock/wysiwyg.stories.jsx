@@ -1,7 +1,7 @@
 import WysiwygBlock from '.'
 
 // Define the Template component
-const Template = (args) => <WysiwygBlock {...args} />
+const Template = args => <WysiwygBlock {...args} />
 
 // Default export with component metadata
 export default {

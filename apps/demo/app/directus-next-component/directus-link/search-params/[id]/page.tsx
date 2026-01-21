@@ -1,10 +1,10 @@
 import type { FragmentType } from '@demo/directus-data-query'
 import {
+  useFragment as getFragment,
   LinkByIdDocument,
   LinksFragmentDoc,
   PageSettingsFragmentDoc,
   SearchParamsFragmentDoc,
-  useFragment as getFragment,
 } from '@demo/directus-data-query'
 import { DirectusLink, getDirectusSearchParams } from '@okam/directus-next-component'
 import { queryGql } from '@okam/directus-query'
@@ -13,7 +13,7 @@ import { Box, Typography } from '@okam/stack-ui'
 function getLinksFragment(linkFragment: FragmentType<typeof LinksFragmentDoc> | null | undefined) {
   const link = getFragment(LinksFragmentDoc, linkFragment)
   const collection = getFragment(PageSettingsFragmentDoc, link?.collection)
-  const params = link?.params?.map((param) => getFragment(SearchParamsFragmentDoc, param))
+  const params = link?.params?.map(param => getFragment(SearchParamsFragmentDoc, param))
 
   return {
     ...link,
@@ -36,7 +36,10 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         <Box customTheme="flex flex-col gap-2">
           {Array.from(searchParams.entries()).map(([name, value]) => (
             <Box key={name} customTheme="flex gap-2">
-              <Typography tokens={{ size: 'paragraph', weight: 'bold' }}>{name}:</Typography>
+              <Typography tokens={{ size: 'paragraph', weight: 'bold' }}>
+                {name}
+                :
+              </Typography>
               <Typography tokens={{ size: 'paragraph' }}>{value}</Typography>
             </Box>
           ))}

@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/naming-convention */
-export type TFiles = {
+export interface TFiles {
   id?: string | null
   title?: string | null
   description?: string | null
-  tags?: any | null
+  // Tags can be string[] or JSON depending on Directus field schema.
+  tags?: unknown
   location?: string | null
   storage?: string | null
   focal_point_divider?: string | null

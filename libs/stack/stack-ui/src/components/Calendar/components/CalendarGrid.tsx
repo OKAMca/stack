@@ -1,8 +1,8 @@
 'use client'
 
-import { useCalendarGrid } from 'react-aria'
-import Box from '../../Box'
 import type { AriaWeekdayStyle, TCalendarGridProps, TWeekdayStyle } from '../interface'
+import { useCalendarGrid } from 'react-aria'
+import { Box } from '../../Box'
 import { getIsDateOutsideRange } from '../utils/getIsDateOutsideRange'
 import CalendarCell from './CalendarCell'
 
@@ -10,7 +10,7 @@ const weekdayStyleMap: Record<
   TWeekdayStyle,
   {
     value: AriaWeekdayStyle
-    transform?: (weekdays: string[]) => string[]
+    transform?: (_weekdays: string[]) => string[]
   }
 > = {
   narrow: {
@@ -18,7 +18,7 @@ const weekdayStyleMap: Record<
   },
   abbreviated: {
     value: 'short',
-    transform: (weekdays) => weekdays.map((day) => day.slice(0, 2)),
+    transform: weekdays => weekdays.map(day => day.slice(0, 2)),
   },
   short: {
     value: 'short',
@@ -45,7 +45,7 @@ function CalendarGrid({
     <Box as="table" {...gridProps} themeName={`${themeName}.calendarTable`} tokens={tokens}>
       <Box as="thead" themeName={`${themeName}.calendarHeaderContainer`} {...headerProps} tokens={tokens}>
         <Box as="tr" themeName={`${themeName}.calendarHeaderRow`} tokens={tokens}>
-          {weekDays.map((day) => (
+          {weekDays.map(day => (
             <Box as="th" themeName={`${themeName}.calendarDayLabel`} key={`day-${day}`} tokens={tokens}>
               {day}
             </Box>
@@ -53,19 +53,20 @@ function CalendarGrid({
         </Box>
       </Box>
       <Box as="tbody" themeName={`${themeName}.calendarBody`} tokens={tokens}>
-        {[...new Array(weeksInMonth).keys()].map((weekIndex) => (
+        {[...Array.from({ length: weeksInMonth }).keys()].map(weekIndex => (
           <Box as="tr" themeName={`${themeName}.calendarWeekRow`} key={`week-${weekIndex}`} tokens={tokens}>
             {state.getDatesInWeek(weekIndex).map((date, i) => {
-              if (!date)
+              if (date == null) {
                 return (
                   <Box
                     themeName={`${themeName}.calendarCellContainer`}
                     tokens={{ isEmpty: true, ...tokens }}
                     as="td"
-                    // eslint-disable-next-line react/no-array-index-key
+                    // eslint-disable-next-line react/no-array-index-key -- empty calendar cells have no stable identifier; position-based key is correct
                     key={i}
                   />
                 )
+              }
               const isOutsideRange = getIsDateOutsideRange(date, state)
               return (
                 <CalendarCell

@@ -1,8 +1,7 @@
-/* eslint-disable import/no-unresolved */
-import type { TabListState } from '@react-stately/tabs'
-import type { AriaTabListProps, AriaTabPanelProps, AriaTabProps } from '@react-types/tabs'
 import type { ComponentType, ReactElement } from 'react'
-import type React from 'react'
+import type * as React from 'react'
+import type { AriaTabListProps, AriaTabPanelProps, AriaTabProps } from 'react-aria'
+import type { TabListState } from 'react-stately'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent, TTransition } from '../../types/components'
 import type { TDefaultItemComponent, TDefaultNode } from '../../types/react-stately'

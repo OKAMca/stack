@@ -1,18 +1,18 @@
 'use client'
 
+import type { TToken } from '../../providers/Theme/interface'
+import type { TMainProps, TSkipToMainProps } from './interface'
 import { useRef } from 'react'
 import { useLandmark } from 'react-aria'
-import type { TToken } from '../../providers/Theme/interface'
 import { BoxWithForwardRef } from '../Box'
-import Button from '../Button'
-import type { TSkipToMainProps, TMainProps } from './interface'
+import { Button } from '../Button'
 
 /**
  * SkipToMain Component
  * A skip link that allows keyboard users to quickly navigate to the main content.
  * Should be used at the top of the page layout.
  */
-const SkipToMain = <T extends TToken>({
+export function SkipToMain<T extends TToken>({
   href = '#main',
   themeName = 'skipToMain',
   tokens,
@@ -20,7 +20,7 @@ const SkipToMain = <T extends TToken>({
   children,
   ariaLabel,
   ...rest
-}: TSkipToMainProps<T>) => {
+}: TSkipToMainProps<T>) {
   return (
     <Button
       as="a"
@@ -41,7 +41,7 @@ const SkipToMain = <T extends TToken>({
  * The main content landmark region. Should wrap the primary content of the page.
  * Uses react-aria's useLandmark hook for enhanced keyboard navigation (F6/Shift+F6).
  */
-export const Main = <T extends TToken>({
+export function Main<T extends TToken>({
   as = 'main',
   id = 'main',
   tabIndex = -1,
@@ -50,7 +50,7 @@ export const Main = <T extends TToken>({
   customTheme,
   children,
   ...rest
-}: TMainProps<T>) => {
+}: TMainProps<T>) {
   const ref = useRef<HTMLElement>(null)
   const { landmarkProps } = useLandmark(
     {
@@ -78,5 +78,3 @@ export const Main = <T extends TToken>({
 
 SkipToMain.displayName = 'SkipToMain'
 Main.displayName = 'Main'
-
-export default SkipToMain

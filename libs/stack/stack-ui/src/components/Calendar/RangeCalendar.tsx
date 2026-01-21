@@ -1,15 +1,14 @@
 'use client'
 
+import type { TRangeCalendarProps } from './interface'
 import { createCalendar } from '@internationalized/date'
-import { useLocale } from '@react-aria/i18n'
 import { useRef } from 'react'
-import { useRangeCalendar } from 'react-aria'
+import { useLocale, useRangeCalendar } from 'react-aria'
 import { useRangeCalendarState } from 'react-stately'
-import Box, { BoxWithForwardRef } from '../Box'
-import Typography from '../Typography'
+import { Box, BoxWithForwardRef } from '../Box'
+import { Typography } from '../Typography'
 import CalendarGrid from './components/CalendarGrid'
 import NavigationButtons from './components/NavigationButtons'
-import type { TRangeCalendarProps } from './interface'
 
 function RangeCalendar(props: TRangeCalendarProps) {
   const { buttons, tokens, customTheme, themeName = 'calendar', gridProps, ...rest } = props

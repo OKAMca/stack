@@ -1,21 +1,21 @@
 'use client'
 
+import type { TToken } from '../../../providers/Theme/interface'
+import type { TRadioProps } from './Radio.interface'
 import { isEmpty } from 'radashi'
 import { useRef } from 'react'
-import { useRadio, VisuallyHidden, useFocusRing, FocusRing, mergeProps } from 'react-aria'
+import { FocusRing, mergeProps, useFocusRing, useRadio, VisuallyHidden } from 'react-aria'
 import { get, useFormContext } from 'react-hook-form'
 import { useRadioGroupCtx } from '../../../providers/RadioGroup/RadioGroup'
 import useThemeContext from '../../../providers/Theme/hooks'
-import type { TToken } from '../../../providers/Theme/interface'
 import { useTranslation } from '../../../providers/Translation'
-import Typography from '../../Typography'
-import type { TRadioProps } from './Radio.interface'
+import { Typography } from '../../Typography'
 
-const Radio = <T extends TToken>(props: TRadioProps<T>) => {
+export function Radio<T extends TToken>(props: TRadioProps<T>) {
   const { id, label, themeName = 'radio', tokens, customTheme, value, fieldRef } = props
   const state = useRadioGroupCtx()
   const ref = useRef<HTMLInputElement | null>(null)
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
   const { inputProps } = useRadio(props, state!, ref)
   const isSelected = state?.selectedValue === value
   const { focusProps } = useFocusRing()
@@ -49,7 +49,7 @@ const Radio = <T extends TToken>(props: TRadioProps<T>) => {
   )
 }
 
-export const ReactHookFormRadio = <T extends TToken>(props: TRadioProps<T>) => {
+export function ReactHookFormRadio<T extends TToken>(props: TRadioProps<T>) {
   const { name, required } = props
   const { register, formState } = useFormContext()
   const error: Error = get(formState.errors, name)
@@ -61,4 +61,3 @@ export const ReactHookFormRadio = <T extends TToken>(props: TRadioProps<T>) => {
 
   return <Radio fieldRef={refCallback} {...rest} {...props} isError={!isEmpty(errMsg)} errorMessage={errMsg} />
 }
-export default Radio

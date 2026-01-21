@@ -1,11 +1,11 @@
 'use client'
 
-import Box from '../../Box'
-import Typography from '../../Typography'
 import type { TCarouselSlideProps } from './interface'
+import { Box } from '../../Box'
+import { Typography } from '../../Typography'
 import { useCarouselSlide } from './useCarouselSlide'
 
-const CarouselSlide = (props: TCarouselSlideProps) => {
+function CarouselSlide(props: TCarouselSlideProps) {
   const { themeName = 'carousel.slide', title, tokens, children, customTheme } = props
   const { slideProps, titleProps, isActive, isVisible, isPrev, isNext } = useCarouselSlide(props)
 
@@ -13,7 +13,7 @@ const CarouselSlide = (props: TCarouselSlideProps) => {
 
   return (
     <Box {...slideProps} themeName={`${themeName}.container`} tokens={carouselSlideTokens} customTheme={customTheme}>
-      {title && (
+      {(title != null && title !== '') && (
         <Typography {...titleProps} themeName={`${themeName}.title`} tokens={carouselSlideTokens}>
           {title}
         </Typography>

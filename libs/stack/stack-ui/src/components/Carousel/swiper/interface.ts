@@ -1,6 +1,6 @@
 import type { DOMAttributes } from '@react-types/shared'
-import type { ReactNode, ReactElement, RefObject } from 'react'
-import type { useSwiperSlide, SwiperSlideProps, SwiperRef } from 'swiper/react'
+import type { ReactElement, ReactNode, RefObject } from 'react'
+import type { SwiperRef, SwiperSlideProps, useSwiperSlide } from 'swiper/react'
 import type { Swiper } from 'swiper/types'
 import type { TDefaultComponent } from '../../../types/components'
 import type { TSwiperProps } from '../interface'
@@ -11,7 +11,7 @@ export interface TCarouselSlideProps
   extends Omit<TDefaultComponent, 'children'>, Omit<SwiperSlideProps, 'children' | 'content'> {
   id: string
   ariaLabel?: string
-  children?: ReactNode | ((props: SlideData & TDefaultComponent) => ReactNode)
+  children?: ReactNode | ((_props: SlideData & TDefaultComponent) => ReactNode)
   /**
    * Automatically gets passed by the Swiper (components with 'SwiperSlide' as displayName)
    */
@@ -26,7 +26,7 @@ export interface TCarouselSwiperProps<TSlideProps extends TCarouselSlideProps = 
   TDefaultComponent,
   'children'
 > {
-  children?: ((props: TSlideProps) => ReactNode) | ReactElement<TSlideProps> | ReactElement<TSlideProps>[]
+  children?: ((_props: TSlideProps) => ReactNode) | ReactElement<TSlideProps> | ReactElement<TSlideProps>[]
 }
 export interface TCarouselSwiper<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps> {
   swiperProps: TSwiperProps & DOMAttributes

@@ -1,5 +1,5 @@
-import { tv } from 'tailwind-variants'
 import type { TToken } from '../../providers/Theme/interface'
+import { tv } from 'tailwind-variants'
 
 export const accordionContainer = tv({
   base: '[border-radius: 32px] p-1.5 focus:outline-none text-color-1-500',

@@ -1,17 +1,17 @@
 'use client'
 
+import type { TToken } from '../../../providers/Theme/interface'
+import type { TDatePickerProps } from './interface'
 import { useRef } from 'react'
 import { useDatePicker } from 'react-aria'
 import { useDatePickerState } from 'react-stately'
-import type { TToken } from '../../../providers/Theme/interface'
-import Box from '../../Box'
+import { Box } from '../../Box'
 import Calendar from '../../Calendar'
 import { Dialog } from '../../Dialog'
-import Typography from '../../Typography'
+import { Typography } from '../../Typography'
 import { CalendarPopover } from './components/CalendarPopover'
 import DateField from './components/DateField'
 import Wrapper from './components/Wrapper'
-import type { TDatePickerProps } from './interface'
 
 function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
   const {
@@ -45,8 +45,8 @@ function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
   const state = useDatePickerState(props)
   const { isInvalid, isOpen, hasTime } = state
   const ref = useRef(null)
-  const { groupProps, fieldProps, labelProps, descriptionProps, buttonProps, dialogProps, calendarProps } =
-    useDatePicker(props, state, ref)
+  const { groupProps, fieldProps, labelProps, descriptionProps, buttonProps, dialogProps, calendarProps }
+    = useDatePicker(props, state, ref)
 
   const datePickerTokens = {
     isInvalid,
@@ -60,12 +60,12 @@ function DatePicker<T extends TToken>(props: TDatePickerProps<T>) {
 
   return (
     <Box themeName={`${themeName}.container`} tokens={datePickerTokens} customTheme={customTheme}>
-      {label && (
+      {(label != null && label !== '') && (
         <Typography as="span" themeName={`${themeName}.label`} tokens={datePickerTokens} {...labelProps}>
           {label}
         </Typography>
       )}
-      {description && (
+      {(description != null && description !== '') && (
         <Box as="div" themeName={`${themeName}.description`} tokens={datePickerTokens} {...descriptionProps}>
           {description}
         </Box>

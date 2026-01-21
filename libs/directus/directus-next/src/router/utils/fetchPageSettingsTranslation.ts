@@ -1,5 +1,5 @@
-import { log } from '../../logger'
 import type { TPageSettingsTranslation } from '../../types'
+import { log } from '../../logger'
 
 const query = `
   query Languages_code($filter: page_settings_translations_filter) {
@@ -20,14 +20,15 @@ const query = `
 `
 
 export async function fetchPageSettingsTranslation(path: string): Promise<TPageSettingsTranslation[] | null> {
+  // eslint-disable-next-line ts/prefer-nullish-coalescing, ts/strict-boolean-expressions -- empty string env var should fallback to next option
   const graphqlEndpoint = process.env.NEXT_SERVER_GRAPHQL_URL || process.env.NEXT_PUBLIC_GRAPHQL_URL
   const graphqlApiKey = process.env.NEXT_PUBLIC_API_TOKEN
 
-  if (!graphqlEndpoint) {
+  if (graphqlEndpoint == null || graphqlEndpoint === '') {
     throw new Error('Missing GraphQL configuration `graphqlEndpoint`')
   }
 
-  if (!graphqlApiKey) {
+  if (graphqlApiKey == null || graphqlApiKey === '') {
     throw new Error('Missing GraphQL configuration `graphqlApiKey`')
   }
 
@@ -45,17 +46,18 @@ export async function fetchPageSettingsTranslation(path: string): Promise<TPageS
     const response = await fetch(graphqlEndpoint, {
       method: 'POST',
       headers: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
+
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${graphqlApiKey}`,
+        'Authorization': `Bearer ${graphqlApiKey}`,
       },
       body: JSON.stringify({ query, variables }),
     })
 
-    const { data } = await response.json()
-    log('GraphQL response:', data)
-    return data.page_settings_translations as TPageSettingsTranslation[]
-  } catch (error) {
+    const json = await response.json() as { data?: { page_settings_translations?: TPageSettingsTranslation[] } }
+    log('GraphQL response:', json.data)
+    return json.data?.page_settings_translations ?? null
+  }
+  catch (error) {
     log('GraphQL Error:', error)
     return null
   }

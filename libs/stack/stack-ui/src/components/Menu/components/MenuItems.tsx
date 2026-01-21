@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useCallback, useRef } from 'react'
-import { useMenu } from '../../../providers/Menu'
-import Box from '../../Box'
-import Button, { Anchor } from '../../Button'
 import type { TMenuItemProps, TMenuItemsProps } from '../interface'
+import * as React from 'react'
+import { useCallback, useRef } from 'react'
+import { useMenu } from '../../../providers/Menu'
+import { Box } from '../../Box'
+import { Anchor, Button } from '../../Button'
 
-const ButtonElement = (menuItem: TMenuItemProps) => {
+function ButtonElement(menuItem: TMenuItemProps) {
   const { tabState, defaultSelectedKey } = useMenu()
   const { setSelectedKey } = tabState
   const {
@@ -41,11 +42,11 @@ const ButtonElement = (menuItem: TMenuItemProps) => {
 
   return (
     <Button
+      key={`button-${id}`}
       {...rest}
       themeName={`${themeName}`}
       tokens={tokens}
       customTheme={customTheme}
-      key={`button-${id}`}
       handlePress={handlePress}
       as={as}
       aria-label={ariaLabel ?? legacyAriaLabel}
@@ -55,7 +56,7 @@ const ButtonElement = (menuItem: TMenuItemProps) => {
   )
 }
 
-const LinkElement = (menuItem: TMenuItemProps) => {
+function LinkElement(menuItem: TMenuItemProps) {
   const {
     id,
     target,
@@ -80,6 +81,7 @@ const LinkElement = (menuItem: TMenuItemProps) => {
 
   return (
     <Anchor
+      key={`link-${id}`}
       {...rest}
       themeName={`${themeName}`}
       tokens={tokens}
@@ -89,7 +91,6 @@ const LinkElement = (menuItem: TMenuItemProps) => {
         ...nextLinkProps,
       }}
       ref={ref}
-      key={`link-${id}`}
       target={target ?? '_self'}
       as={as}
       aria-label={ariaLabel ?? legacyAriaLabel}
@@ -99,7 +100,7 @@ const LinkElement = (menuItem: TMenuItemProps) => {
   )
 }
 
-const MenuItems = (props: TMenuItemsProps) => {
+function MenuItems(props: TMenuItemsProps) {
   const {
     menuItems,
     children,
@@ -130,25 +131,27 @@ const MenuItems = (props: TMenuItemsProps) => {
               customTheme={customTheme}
               key={`li-${menuItem.id}`}
             >
-              {elementType === 'button' ? (
-                <ButtonElement
-                  {...rest}
-                  {...menuItem}
-                  themeName={`${themeName}.button`}
-                  tokens={menuItemTokens}
-                  customTheme={customTheme}
-                  as={as ?? buttonLinkComponent}
-                />
-              ) : (
-                <LinkElement
-                  {...rest}
-                  {...menuItem}
-                  themeName={`${themeName}.anchor`}
-                  tokens={menuItemTokens}
-                  customTheme={customTheme}
-                  as={as ?? menuLinkComponent}
-                />
-              )}
+              {elementType === 'button'
+                ? (
+                    <ButtonElement
+                      {...rest}
+                      {...menuItem}
+                      themeName={`${themeName}.button`}
+                      tokens={menuItemTokens}
+                      customTheme={customTheme}
+                      as={as ?? buttonLinkComponent}
+                    />
+                  )
+                : (
+                    <LinkElement
+                      {...rest}
+                      {...menuItem}
+                      themeName={`${themeName}.anchor`}
+                      tokens={menuItemTokens}
+                      customTheme={customTheme}
+                      as={as ?? menuLinkComponent}
+                    />
+                  )}
             </Box>
           )
         })}

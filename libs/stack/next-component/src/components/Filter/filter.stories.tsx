@@ -1,6 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import { Anchor, Box } from '@okam/stack-ui'
-import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import { Item } from 'react-stately'
 import Filter from '.'
@@ -70,7 +69,7 @@ export const Controlled: Story = {
         <Anchor href="/iframe.html?globals=&id=fields-filter--controlled&viewMode=story&fruits=apple">
           Remove banana
         </Anchor>
-        <Filter {...args} selectedKeys={selectedKeys} onSelectionChange={(keys) => setSelectedKeys(Array.from(keys))} />
+        <Filter {...args} selectedKeys={selectedKeys} onSelectionChange={keys => setSelectedKeys(Array.from(keys))} />
       </Box>
     )
   },

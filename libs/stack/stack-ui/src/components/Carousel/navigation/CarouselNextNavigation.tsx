@@ -1,10 +1,10 @@
 'use client'
 
-import { ButtonWithForwardRef } from '../../Button'
 import type { TButtonProps } from '../../Button/interface'
+import { ButtonWithForwardRef } from '../../Button'
 import { useCarouselNextNavigation } from './useCarouselNextNavigation'
 
-const CarouselNextNavigation = (props: TButtonProps) => {
+function CarouselNextNavigation(props: TButtonProps) {
   const { children, themeName = 'carousel.navigation', tokens } = props
   const { navigationProps, ref, isDisabled } = useCarouselNextNavigation(props)
 

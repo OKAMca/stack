@@ -1,18 +1,28 @@
 'use client'
 
+/**
+ * Option - react-aria ListBox option component
+ *
+ * Uses React.Children API (Children.count, Children.toArray) to detect label/description pattern,
+ * and cloneElement to inject accessibility props from useOption.
+ *
+ * @see https://react-spectrum.adobe.com/react-aria/useListBox.html#option
+ * @see docs/ADR/005_react-stately-eslint-exceptions.md
+ */
+
+import type { TToken } from '../../../providers/Theme/interface'
+import type { TOptionProps } from './interface'
 import { Children, cloneElement, isValidElement, useRef } from 'react'
 import { FocusRing, mergeProps, useOption } from 'react-aria'
 import { mergeDefaultComponentProps } from '../../../helpers/mergeDefaultComponentProps'
-import type { TToken } from '../../../providers/Theme/interface'
-import Box, { BoxWithForwardRef } from '../../Box'
+import { Box, BoxWithForwardRef } from '../../Box'
 import { Anchor } from '../../Button'
-import type { TOptionProps } from './interface'
 
-const Option = <I extends object = object, T extends TToken = TToken>({
+function Option<I extends object = object, T extends TToken = TToken>({
   item,
   state,
   ...props
-}: TOptionProps<I, T>) => {
+}: TOptionProps<I, T>) {
   const { key, rendered, type } = item
   const {
     themeName = 'option',
@@ -56,7 +66,7 @@ const Option = <I extends object = object, T extends TToken = TToken>({
   const Component = isLink ? LinkElement : BoxWithForwardRef
   const elementType = isLink ? 'a' : as
 
-  const renderChildren = () => {
+  const renderChildren = async () => {
     if (Children.count(rendered) > 1) {
       const [label, description] = Children.toArray(rendered)
       const isLabelValid = isValidElement(label)

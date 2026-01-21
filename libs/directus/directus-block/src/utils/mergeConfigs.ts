@@ -12,7 +12,8 @@ export default function mergeConfigs(
   ...configs: Nullable<TBlockSerializerConfig>[]
 ): TBlockSerializerConfig {
   const finalConfig = configs.reduce<TBlockSerializerConfig>((mergedConfig, config) => {
-    if (!config) return mergedConfig
+    if (config == null)
+      return mergedConfig
 
     return { components: { ...mergedConfig.components, ...config.components } }
   }, baseConfig)

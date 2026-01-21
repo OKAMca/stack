@@ -1,6 +1,6 @@
-import type { UrlObject } from 'url'
+import type { UrlObject } from 'node:url'
 
-export type NextLinkProps = {
+export interface NextLinkProps {
   href: string | UrlObject
   replace?: boolean
   scroll?: boolean

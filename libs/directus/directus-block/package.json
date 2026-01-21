@@ -1,8 +1,10 @@
 {
   "name": "@okam/directus-block",
   "version": "1.7.7",
-  "main": "./index.js",
-  "types": "./index.d.ts",
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
+  },
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": {
@@ -25,11 +27,16 @@
       }
     }
   },
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "url": "https://github.com/OKAMca/stack.git"
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "3.2.0",
@@ -38,9 +45,6 @@
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.2",
     "radashi": "^12.3.0"
-  },
-  "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
     "react": "^19.0.0"

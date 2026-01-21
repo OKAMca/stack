@@ -3,11 +3,15 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/automation/src",
   "projectType": "library",
-  "tags": ["publishable"],
+  "tags": [
+    "publishable"
+  ],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/automation",
         "main": "libs/automation/src/index.ts",
@@ -38,13 +42,25 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/automation/**/*.{ts,tsx,js,jsx}",
+          "libs/automation/package.json",
+          "libs/automation/project.json"
+        ]
+      }
     },
     "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "executor": "@nx/vitest:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
       "options": {
-        "jestConfig": "libs/automation/jest.config.ts"
+        "reportsDirectory": "../../coverage/libs/automation"
       }
     },
     "nx-release-publish": {

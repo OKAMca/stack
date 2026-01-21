@@ -1,10 +1,12 @@
-import Box from './index'
+import { Box } from './index'
 
-const Template = (args) => (
-  <div className="bg-slate-200 p-4">
-    <Box {...args}>Hello world!</Box>
-  </div>
-)
+function Template(args) {
+  return (
+    <div className="bg-slate-200 p-4">
+      <Box {...args}>Hello world!</Box>
+    </div>
+  )
+}
 
 export default {
   title: 'BASE COMPONENTS/Box',

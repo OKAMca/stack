@@ -1,10 +1,9 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "ES2015"
+    "module": "CommonJS",
+    "moduleResolution": "node"
   },
-  "files": [],
-  "include": [],
   "references": [
     {
       "path": "./tsconfig.lib.json"
@@ -12,5 +11,7 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
+  "files": [],
+  "include": []
 }

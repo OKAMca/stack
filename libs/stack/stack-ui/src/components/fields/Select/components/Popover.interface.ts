@@ -1,4 +1,4 @@
-import type React from 'react'
+import type * as React from 'react'
 import type { AriaPopoverProps } from 'react-aria'
 import type { OverlayTriggerState } from 'react-stately'
 import type { TToken } from '../../../../providers/Theme/interface'

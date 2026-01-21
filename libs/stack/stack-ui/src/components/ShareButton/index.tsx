@@ -1,15 +1,16 @@
 'use client'
 
-import type { PressEvent } from '@react-types/shared'
-import React, { useState } from 'react'
+import type { PressEvent } from 'react-aria'
+import type { TToken } from '../../providers/Theme/interface'
+import type { TIconsContainerProps, TShareButtonProps } from './interface'
+import * as React from 'react'
+import { useState } from 'react'
 import { FocusScope, useFocusManager } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
-import type { TToken } from '../../providers/Theme/interface'
-import Button, { ButtonWithForwardRef } from '../Button'
+import { Button, ButtonWithForwardRef } from '../Button'
 import Icon from '../Icon'
-import type { TIconsContainerProps, TShareButtonProps } from './interface'
 
-export const IconsContainer = <T extends TToken>(props: TIconsContainerProps<T>) => {
+export function IconsContainer<T extends TToken>(props: TIconsContainerProps<T>) {
   const { sharingLinksList, id, isOpen, setIsOpen, onShare, themeName = 'shareButton', tokens, customTheme } = props
 
   const linksListTheme = useThemeContext(`${themeName}.linksList`, { ...tokens, isOpen }, customTheme)
@@ -59,7 +60,7 @@ export const IconsContainer = <T extends TToken>(props: TIconsContainerProps<T>)
               onClick?.(key)
             }}
             aria-label={ariaLabel}
-            {...(href ? { href, rel: 'noopener noreferrer', target: '_blank', as: 'a' } : {})}
+            {...((href != null && href !== '') ? { href, rel: 'noopener noreferrer', target: '_blank', as: 'a' } : {})}
             role="option"
           >
             <Icon themeName={`${themeName}.linkIcons`} icon={icon} />
@@ -70,7 +71,7 @@ export const IconsContainer = <T extends TToken>(props: TIconsContainerProps<T>)
   )
 }
 
-const ShareButton = (props: TShareButtonProps) => {
+export function ShareButton(props: TShareButtonProps) {
   const {
     ariaLabel,
     icon,
@@ -140,7 +141,6 @@ const ShareButton = (props: TShareButtonProps) => {
 
   return (
     <FocusScope autoFocus restoreFocus contain={isOpen}>
-      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
       <div className={containerTheme} onKeyDown={handleKeyDown}>
         <ButtonWithForwardRef
           themeName={`${themeName}.button`}
@@ -170,4 +170,3 @@ const ShareButton = (props: TShareButtonProps) => {
     </FocusScope>
   )
 }
-export default ShareButton

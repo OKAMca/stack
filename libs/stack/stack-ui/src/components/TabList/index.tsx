@@ -1,14 +1,14 @@
 'use client'
 
-import { useTabList } from '@react-aria/tabs'
-import { useTabListState } from '@react-stately/tabs'
-import { useRef } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
+import type { TTabListProps } from './interface'
+import { useRef } from 'react'
+import { useTabList } from 'react-aria'
+import { useTabListState } from 'react-stately'
 import RenderWithOpacity from '../../transitions/RenderWithOpacity'
-import Box, { BoxWithForwardRef } from '../Box'
+import { Box, BoxWithForwardRef } from '../Box'
 import Tab from './components/Tab'
 import TabPanel from './components/TabPanel'
-import type { TTabListProps } from './interface'
 
 function TabList<I extends object, T extends TToken = TToken>(props: TTabListProps<I, T>) {
   const {
@@ -33,14 +33,14 @@ function TabList<I extends object, T extends TToken = TToken>(props: TTabListPro
 
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={tabListTokens} customTheme={customTheme}>
-      {label && (
+      {label != null && label !== '' && (
         <Box themeName={`${themeName}.label`} tokens={tabListTokens}>
           {label}
         </Box>
       )}
       <Box themeName={`${themeName}.container`} tokens={tabListTokens}>
         <BoxWithForwardRef themeName={`${themeName}.list`} tokens={tabListTokens} {...tabListProps} ref={ref}>
-          {[...state.collection].map((item) => (
+          {[...state.collection].map(item => (
             <Tab
               key={item.key}
               item={item}

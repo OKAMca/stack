@@ -1,8 +1,10 @@
 {
   "name": "@okam/stack-ui",
-  "main": "./index.js",
   "version": "1.44.3",
-  "types": "./index.d.ts",
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
+  },
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": {
@@ -15,47 +17,36 @@
       }
     }
   },
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "url": "https://github.com/OKAMca/stack.git"
-  },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0"
+    "react": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "@internationalized/date": "^3.10.1",
     "@okam/core-lib": "1.17.1",
     "@okam/logger": "1.1.0",
-    "@react-aria/accordion": "^3.0.0-alpha.36",
-    "@react-aria/checkbox": "^3.16.3",
-    "@react-aria/focus": "^3.21.3",
-    "@react-aria/i18n": "^3.12.14",
-    "@react-aria/overlays": "^3.31.0",
-    "@react-aria/tabs": "^3.10.9",
+    "@react-aria/selection": "^3.27.0",
     "@react-aria/utils": "^3.32.0",
-    "@react-aria/visually-hidden": "^3.8.29",
     "@react-spring/web": "^10.0.3",
-    "@react-stately/checkbox": "^3.7.3",
     "@react-stately/collections": "^3.12.8",
-    "@react-stately/overlays": "^3.6.21",
-    "@react-stately/radio": "^3.11.3",
-    "@react-stately/tabs": "^3.8.7",
-    "@react-stately/toggle": "^3.9.3",
     "@react-types/radio": "^3.9.2",
     "@react-types/shared": "^3.29.0",
-    "@react-types/tabs": "^3.3.20",
     "radashi": "^12.3.0",
     "react-aria": "^3.45.0",
     "react-div-100vh": "0.7.0",
-    "react-hook-form": "7.54.0",
+    "react-hook-form": "^7.71.1",
     "react-stately": "^3.43.0",
-    "react-use": "17.5.1",
+    "react-use": "^17.6.0",
     "sanitize-html": "^2.13.1",
-    "swiper": "11.1.15",
-    "tailwind-variants": "^0.3.0",
+    "swiper": "^12.0.0",
+    "tailwind-variants": "^3.2.2",
     "usehooks-ts": "^3.1.0"
   }
 }

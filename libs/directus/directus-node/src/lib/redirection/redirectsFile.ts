@@ -1,8 +1,8 @@
-import { writeFile, readFile } from 'fs/promises'
-import * as path from 'path'
+import type { TFetchRedirectsConfig, TRedirectData, TRedirectType } from './interface'
+import { readFile, writeFile } from 'node:fs/promises'
+import * as path from 'node:path'
 import { logger } from '../../logger'
 import { fetchRedirectsData } from './fetchRedirectsData'
-import type { TFetchRedirectsConfig, TRedirectType, TRedirectData } from './interface'
 
 /**
  * Write Redirect Data
@@ -11,21 +11,23 @@ import type { TFetchRedirectsConfig, TRedirectType, TRedirectData } from './inte
  */
 export async function writeRedirectFile(filename: string, data: unknown): Promise<boolean> {
   try {
-    const writeData = JSON.stringify(data || [])
+    const writeData = JSON.stringify(data ?? [])
     await writeFile(filename, writeData)
     return true
-  } catch (e) {
+  }
+  catch (e) {
     logger.log(`Error writing redirect file ${filename}: ${(e as Error).message}`, 'error')
   }
   return false
 }
 
-export async function readRedirectFileData(filename: string): Promise<unknown> {
+export async function readRedirectFileData(filename: string): Promise<TRedirectData[]> {
   try {
     const file = await readFile(filename, { encoding: 'utf8' })
-    const data = JSON.parse(file)
+    const data = JSON.parse(file) as TRedirectData[]
     return data
-  } catch (e) {
+  }
+  catch (e) {
     logger.log(`Failed loading redirects JSON from ${filename}: ${(e as Error).message}`, 'error')
   }
   return []
@@ -40,16 +42,12 @@ export async function readRedirectFileData(filename: string): Promise<unknown> {
 export async function readRedirectFile(filePath: string, type: TRedirectType = 'redirects'): Promise<TRedirectData[]> {
   const absolutePath = path.resolve(process.cwd(), filePath)
   const data = await readRedirectFileData(absolutePath)
-  if (Array.isArray(data)) {
-    // check data integrity
-    const checkedData = data.filter((x) => {
-      return x && typeof x?.source === 'string' && typeof x?.destination === 'string'
-    })
-    logger.log(`Loading ${type} length: ${checkedData.length}`)
-    return checkedData
-  }
-  logger.log(`Failed loading ${type}, not a valid array`, 'error')
-  return [] as TRedirectData[]
+  // check data integrity
+  const checkedData = data.filter((x): x is TRedirectData => {
+    return x != null && typeof x.source === 'string' && typeof x.destination === 'string'
+  })
+  logger.log(`Loading ${type} length: ${checkedData.length}`)
+  return checkedData
 }
 
 /**
@@ -61,11 +59,11 @@ export async function readRedirectFile(filePath: string, type: TRedirectType = '
 export async function fetchRedirects(config: TFetchRedirectsConfig): Promise<boolean> {
   const { redirectsFilename, rewritesFilename } = config
 
-  if (!redirectsFilename) {
+  if (redirectsFilename == null || redirectsFilename === '') {
     throw new Error('Missing fetchRedirects configuration `redirectsFilename`')
   }
 
-  if (!rewritesFilename) {
+  if (rewritesFilename == null || rewritesFilename === '') {
     throw new Error('Missing fetchRedirects configuration `rewritesFilename`')
   }
 

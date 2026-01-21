@@ -1,13 +1,13 @@
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core'
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { Nullable, TDefaultComponent } from '@okam/stack-ui'
 import type { Variables as GraphQLVariables } from 'graphql-request'
 import type { FunctionComponent } from 'react'
 import type {
-  TCommonBlockFragment,
   TAdditionalProps,
+  TBlockDocument,
   TBlockQuery,
   TBlockVariables,
-  TBlockDocument,
+  TCommonBlockFragment,
 } from '../../types/block'
 
 /**
@@ -39,8 +39,8 @@ export type TBlockSerializerProps<
   Fragment extends TCommonBlockFragment = TCommonBlockFragment,
   Variables extends GraphQLVariables = TBlockVariables,
   AdditionalProps extends TAdditionalProps = TAdditionalProps,
-> = TBlock<Fragment, Variables> &
-  TDefaultComponent & {
+> = TBlock<Fragment, Variables>
+  & TDefaultComponent & {
     config?: TBlockSerializerConfig
     defaultVariant?: string
     additionalProps?: AdditionalProps
@@ -91,11 +91,11 @@ export type TBlockFunctionComponent<
  * }
  * ```
  */
-export type TBlockSerializerConfigComponent<
+export interface TBlockSerializerConfigComponent<
   Fragment extends TCommonBlockFragment = TCommonBlockFragment,
   Variables extends GraphQLVariables = TBlockVariables,
   AdditionalProps extends TAdditionalProps = TAdditionalProps,
-> = {
+> {
   [blockKey: string]: {
     default: TBlockFunctionComponent<Fragment, Variables, AdditionalProps>
     /**
@@ -109,7 +109,7 @@ export type TBlockSerializerConfigComponent<
     /**
      * A callback to specify a different variant path from the one in the block's settings.
      */
-    getVariant?: (props: TBlockSerializerProps<Fragment, Variables, AdditionalProps>) => Nullable<string>
+    getVariant?: (_props: TBlockSerializerProps<Fragment, Variables, AdditionalProps>) => Nullable<string>
     variants?: {
       [blockVariant: string]: TBlockFunctionComponent<Fragment, Variables, AdditionalProps>
     }

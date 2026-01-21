@@ -19,7 +19,9 @@
     "**/*.spec.jsx",
     "**/*.test.jsx",
     "**/*.stories.ts",
-    "**/*.stories.js"
+    "**/*.stories.tsx",
+    "**/*.stories.js",
+    "**/*.stories.jsx"
   ],
   "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
 }

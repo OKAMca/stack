@@ -1,11 +1,10 @@
 {
   "name": "@okam/directus-node",
-  "main": "./src/index.js",
   "version": "0.7.2",
-  "types": "./src/index.d.ts",
-  "publishConfig": {
-    "access": "public"
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
   },
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": {
@@ -28,13 +27,18 @@
       }
     }
   },
-  "repository": {
-    "url": "https://github.com/OKAMca/stack.git"
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
-    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/cli": "^6.1.1",
+    "@okam/core-lib": "1.17.1",
     "@okam/logger": "1.1.0",
-    "dotenv": "^16.4.7",
-    "@okam/core-lib": "1.17.1"
+    "dotenv": "^16.4.7"
   }
 }

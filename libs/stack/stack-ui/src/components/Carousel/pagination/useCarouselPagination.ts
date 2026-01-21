@@ -1,9 +1,8 @@
 'use client'
 
-/* eslint-disable @typescript-eslint/naming-convention */
+import type { TCarouselPagination, TCarouselPaginationProps } from './interface'
 import { get } from 'radashi'
 import { useCarousel } from '../../../providers/Carousel'
-import type { TCarouselPagination, TCarouselPaginationProps } from './interface'
 
 export function useCarouselPagination(props: TCarouselPaginationProps): TCarouselPagination {
   const { paginationGroupLabel } = props
@@ -11,7 +10,7 @@ export function useCarouselPagination(props: TCarouselPaginationProps): TCarouse
 
   return {
     paginationProps: {
-      role: 'group',
+      'role': 'group',
       'aria-label': get(props, 'aria-label') ?? paginationGroupLabel ?? swiperProps.a11y?.paginationGroupLabel,
     },
   }

@@ -1,39 +1,36 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import type { StorybookConfig } from '@storybook/nextjs'
+import type { StorybookConfig } from '@storybook/nextjs-vite'
+import { dirname } from 'node:path'
+
+import { fileURLToPath } from 'node:url'
+
+// To customize your Vite configuration you can use the viteFinal field.
+// Check https://storybook.js.org/docs/react/builders/vite#configuration
+// and https://nx.dev/packages/storybook/documents/custom-builder-configs
+
+function getAbsolutePath(value: string): string {
+  return dirname(fileURLToPath(import.meta.resolve(`${value}/package.json`)))
+}
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
 
   addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    {
-      name: '@storybook/addon-styling',
-      options: {
-        // Check out https://github.com/storybookjs/addon-styling/blob/main/docs/api.md
-        // For more details on this addon's options.
-        postCss: true,
-      },
-    },
-    '@chromatic-com/storybook'
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@chromatic-com/storybook'),
+    getAbsolutePath('@storybook/addon-docs'),
   ],
 
   framework: {
-    name: '@storybook/nextjs',
+    name: getAbsolutePath('@storybook/nextjs-vite'),
     options: {},
   },
 
   docs: {},
 
   typescript: {
-    reactDocgen: 'react-docgen-typescript'
-  }
+    reactDocgen: 'react-docgen-typescript',
+  },
 }
 
 export default config
-
-// To customize your Vite configuration you can use the viteFinal field.
-// Check https://storybook.js.org/docs/react/builders/vite#configuration
-// and https://nx.dev/packages/storybook/documents/custom-builder-configs

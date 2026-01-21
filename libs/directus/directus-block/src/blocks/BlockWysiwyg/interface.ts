@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import type { BlockSettingsFragment } from '../../generated/graphql'
 
 export type BlockWysiwygFragment = {

@@ -1,6 +1,6 @@
-import type { PressEvent } from '@react-types/shared'
-import type React from 'react'
+import type * as React from 'react'
 import type { Ref, RefAttributes } from 'react'
+import type { PressEvent } from 'react-aria'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
 import type { NextLinkProps } from '../../types/next-link'
@@ -15,7 +15,7 @@ export interface TButtonProps<T = TToken> extends TDefaultComponent<T> {
   download?: boolean | string
   target?: string
   rel?: string
-  handlePress?: ((e: PressEvent) => void) | undefined
+  handlePress?: ((_e: PressEvent) => void) | undefined
   tabIndex?: number
   role?: string
   isDisabled?: boolean

@@ -1,14 +1,13 @@
 import type { ReactNode } from 'react'
-import type { TreeState } from 'react-stately'
-import type { TAccordionItemProps, TAccordionProps } from '../../components/Accordion/interface'
+import type { TAccordionProps, TAccordionState } from '../../components/Accordion/interface'
 
 type TAccordion = NonNullable<Pick<TAccordionProps, 'TransitionAnimation'>>
 
 export interface TAccordionProviderProps extends TAccordion {
   children: ReactNode
-  state: TreeState<TAccordionItemProps>
+  state: TAccordionState
 }
 
 export type TAccordionContext = TAccordion & {
-  state: TreeState<TAccordionItemProps>
+  state: TAccordionState
 }

@@ -22,15 +22,16 @@ import * as zod from 'zod'
 import { getJsonErrorResponse } from '../response'
 import { getDraftSecretDefault } from './env'
 
-const jsonStringsArraySchema = (message: string, code: number) =>
-  zod
+function jsonStringsArraySchema(message: string, code: number) {
+  return zod
     .string()
     .transform((val, ctx) => {
       try {
         // Need to decode twice to handle nested URI components
         const decodedVal = decodeURIComponent(decodeURIComponent(val))
-        return JSON.parse(decodedVal)
-      } catch (error) {
+        return JSON.parse(decodedVal) as string[]
+      }
+      catch {
         ctx.addIssue({
           code: zod.ZodIssueCode.custom,
           message: 'Invalid JSON string',
@@ -40,6 +41,7 @@ const jsonStringsArraySchema = (message: string, code: number) =>
       }
     })
     .pipe(zod.array(zod.string(), { error: () => ({ message }) }))
+}
 
 const languagesSchema = jsonStringsArraySchema('Invalid languages argument', 400)
 
@@ -47,16 +49,17 @@ const commonSchema = zod.object({
   version: zod.string().optional(),
   enable: zod
     .enum(['true', 'false'])
-    .transform((val) => val === 'true')
+    .transform(val => val === 'true')
     .optional(),
   pk: zod.string().optional(),
 })
 
-const createSecretSchema = (expectedSecret: string) =>
-  zod.string({ error: () => ({ message: 'Invalid secret argument' }) }).refine((val) => val === expectedSecret, {
+function createSecretSchema(expectedSecret: string) {
+  return zod.string({ error: () => ({ message: 'Invalid secret argument' }) }).refine(val => val === expectedSecret, {
     message: 'Invalid secret argument',
     params: { code: 401 },
   })
+}
 
 const draftParamsSchema = zod.discriminatedUnion(
   'type',
@@ -114,29 +117,31 @@ export function getPathFromRoute(routeUrl: string, url: string, index = 0) {
   const matches = [...routeUrl.matchAll(/\{\{([a-z]+)\}\}/gi)]
   const map: Record<string, string> = {}
   matches.forEach((match) => {
-    const key = match[1] || ''
-    if (!key) {
+    const key = match[1] ?? ''
+    if (key == null || key === '') {
       return
     }
     const listkey = `${key}s`
     const listParam = searchParams.get(listkey)
-    if (listParam) {
+    if (listParam != null && listParam !== '') {
       try {
-        const list = JSON.parse(listParam)
-        map[key] = list[index] || ''
-      } catch (e) {
+        const list = JSON.parse(listParam) as string[]
+        map[key] = list[index] ?? ''
+      }
+      catch {
         map[key] = ''
       }
-    } else {
+    }
+    else {
       const param = searchParams.get(key)
-      map[key] = param || ''
+      map[key] = param ?? ''
     }
   })
 
   return template(routeUrl, map)
 }
 
-export type HandleDraftOptions = {
+export interface HandleDraftOptions {
   url: string
   getDirectusLanguage: () => string
   getDraftSecret?: (() => string) | undefined
@@ -162,14 +167,16 @@ export default async function handleDraftRoute({
   getDraftSecret,
   getJsonError,
 }: HandleDraftOptions): Promise<Response | undefined> {
-  const getSecretFunction = getDraftSecret || getDraftSecretDefault
-  const getJsonErrorResponseFunction = getJsonError || getJsonErrorResponse
+  const getSecretFunction = getDraftSecret ?? getDraftSecretDefault
+  const getJsonErrorResponseFunction = getJsonError ?? getJsonErrorResponse
   const { success, error, data } = parseDraftParams(url, getSecretFunction())
 
   if (!success) {
+    const issue = error.issues[0]
+    const statusCode = issue?.code === 'custom' && typeof issue.params?.code === 'number' ? issue.params.code : 400
     return getJsonErrorResponseFunction(
       { error: error.issues },
-      error.issues[0]?.code === 'custom' ? error.issues[0]?.params?.code : 400,
+      statusCode,
     )
   }
 
@@ -185,16 +192,17 @@ export default async function handleDraftRoute({
     const index = indexDefault !== -1 ? indexDefault : 0
     if (type === 'path') {
       const { urls } = data
-      const path = urls[index] || ''
+      const path = urls[index] ?? ''
 
       if (!path) {
         return getJsonErrorResponseFunction({ error: 'Invalid path' }, 400)
       }
 
       redirectUrl = path
-    } else if (type === 'route') {
+    }
+    else if (type === 'route') {
       const { routes } = data
-      const route = routes?.[index] || ''
+      const route = routes?.[index] ?? ''
 
       if (!route) {
         return getJsonErrorResponseFunction({ error: 'Invalid route' }, 400)
@@ -220,9 +228,9 @@ export default async function handleDraftRoute({
   // doesn't work: using cookies() from next/headers because it's readonly
   // doesn't work if (pk) { res.cookies.set('__draftmode_pk', pk); }
   // redirect generate an error with a mutableCookies from the store, used by draftMode
-  if (redirectUrl) {
-    if (version) {
-      const withParams = redirectUrl.indexOf('?') !== -1
+  if (redirectUrl != null && redirectUrl !== '') {
+    if (version != null && version !== '') {
+      const withParams = redirectUrl.includes('?')
       redirectUrl = `${redirectUrl}${withParams ? '&' : '?'}version=${encodeURIComponent(version)}`
     }
     redirect(redirectUrl)

@@ -9,6 +9,6 @@ export interface TDraftModeServerProviderProps {
   children: ReactNode
 }
 
-export type TDraftModeContext = {
+export interface TDraftModeContext {
   isEnabled: boolean
 }
