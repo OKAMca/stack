@@ -1,3 +1,10 @@
+## 1.3.5 (2026-01-21)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.44.4
+- Updated core-lib to 1.17.2
+
 ## 1.3.4 (2026-01-19)
 
 ### 🧱 Updated Dependencies

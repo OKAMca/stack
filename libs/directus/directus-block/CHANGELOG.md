@@ -1,3 +1,10 @@
+## 1.7.8 (2026-01-21)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.44.4
+- Updated directus-query to 1.5.3
+
 ## 1.7.5 (2026-01-19)
 
 ### 🧱 Updated Dependencies
