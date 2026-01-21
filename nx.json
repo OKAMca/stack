@@ -20,7 +20,7 @@
       }
     },
     "version": {
-      "preVersionCommand": "npx nx run-many -t build",
+      "preVersionCommand": "npx nx run-many -t build --projects=tag:publishable",
       "conventionalCommits": true
     },
     "releaseTag": {
