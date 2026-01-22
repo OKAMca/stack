@@ -91,7 +91,8 @@
       "id": "13",
       "title": "Build and verify",
       "description": "Run npx nx build ai, verify dist/libs/ai/cli.js --help works, scripts/ folder present",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Build successful. Verified: cli.js --help displays all commands (init, archive, ralph). scripts/prd-agent.sh present in dist. Lint passes. 22 tests pass."
     }
   ]
 }
