@@ -4,8 +4,7 @@ import { program } from 'commander'
 
 import { registerArchiveCommand } from './commands/archive'
 import { registerInitCommand } from './commands/init'
-// Commands will be imported here as they are created:
-// import { registerRalphCommand } from './commands/ralph'
+import { registerRalphCommand } from './commands/ralph'
 
 program
   .name('okam-ai')
@@ -15,6 +14,6 @@ program
 // Register commands
 registerInitCommand(program)
 registerArchiveCommand(program)
-// registerRalphCommand(program)
+registerRalphCommand(program)
 
 program.parse()
