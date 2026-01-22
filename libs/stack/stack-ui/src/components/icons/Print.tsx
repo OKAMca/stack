@@ -1,8 +1,8 @@
+import type { SVGProps } from 'react'
 import { isEqual } from 'radashi'
-import * as React from 'react'
 import { memo } from 'react'
 
-function SvgComponent(props: React.SVGProps<SVGSVGElement>) {
+function SvgComponent(props: SVGProps<SVGSVGElement>) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 18 18" fill="none" {...props}>
       <path
