@@ -185,12 +185,13 @@
     {
       "id": "21",
       "description": "Fix archive timestamp collision - add time (HH-mm-ss) to prevent same-day overwrites",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Update getTimestamp() to include time: YYYY-MM-DD_HH-mm-ss",
         "Update archive.spec.ts tests to match new timestamp format",
         "Test: multiple archives on same day create unique files"
-      ]
+      ],
+      "notes": "Updated getTimestamp() to return YYYY-MM-DD_HH-mm-ss format using toTimeString().slice(0,8).replace(/:/g, '-'). Updated 4 tests to match new timestamp regex pattern. Added new test 'should create unique filenames for multiple archives on the same day' that verifies sequential archives produce unique filenames. Build, lint, and 23 tests all pass."
     },
     {
       "id": "22",
@@ -224,13 +225,22 @@
     },
     {
       "id": "25",
-      "description": "Build and verify CodeRabbit fixes",
+      "description": "Update package version from 0.0.1 to 0.1.0 for initial release",
+      "status": "pending",
+      "steps": [
+        "Update version in libs/ai/package.json to 0.1.0",
+        "Verify CLI --version shows 0.1.0"
+      ]
+    },
+    {
+      "id": "26",
+      "description": "Build and verify all CodeRabbit fixes",
       "status": "pending",
       "steps": [
         "npx nx build ai",
         "npx nx test ai",
         "npx nx lint ai",
-        "Test CLI --version shows package.json version",
+        "Test CLI --version shows 0.1.0",
         "Test archive creates unique timestamps"
       ]
     }
