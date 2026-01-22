@@ -1,9 +1,30 @@
 {
   "name": "@okam/ai",
-  "type": "commonjs",
+  "type": "module",
   "version": "0.0.1",
-  "main": "./index.cjs",
+  "license": "BUSL-1.1",
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
+    }
+  },
+  "main": "./index.js",
   "types": "./index.d.ts",
+  "bin": {
+    "okam-ai": "./cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "commander": "^14.0.2"
   }
