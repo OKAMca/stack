@@ -28,7 +28,8 @@
       "id": "4",
       "title": "Create init command",
       "description": "Create libs/ai/src/commands/init.ts - creates prd.json template and progress.txt, errors if file exists",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Created init command with prd.json and progress.txt templates. Supports --force flag to overwrite. Uses process.stdout.write for CLI output (linter disallows console.log). Registered in cli.ts. Build, lint, and tests all pass."
     },
     {
       "id": "5",
