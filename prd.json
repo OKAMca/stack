@@ -10,12 +10,13 @@
     {
       "id": "fix-stack-ui-components",
       "description": "Convert ~20 component files in libs/stack/stack-ui/src/components/ (Accordion, Alerts, Box, Button, Carousel, Icon, Menu, ShareButton, TabList, TagGroup, Typography, fields/*)",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Find all React.* usages in each file",
         "Change 'import * as React from \"react\"' to named imports",
         "Update React.useState → useState, React.useRef → useRef, etc."
-      ]
+      ],
+      "notes": "Converted 20 component files: AccordionItem, AlertsItem, Box, Button, Carousel, Icon, MenuItems, ShareButton, TabItem, TagItem, Typography, Select, Popover, Listbox, TextArea, SearchField, CalendarPopover, combo-box.stories, useComboBoxFiltering, ComboBox. Replaced namespace imports with named imports (Children, createElement, isValidElement, cloneElement, useRef, useMemo, useState, useCallback, etc.) and type imports (JSX, Ref, RefObject, ReactElement, etc.). Lint and build pass."
     },
     {
       "id": "fix-stack-ui-icons",

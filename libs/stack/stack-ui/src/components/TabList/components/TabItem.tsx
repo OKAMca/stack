@@ -12,10 +12,10 @@
  */
 
 import type { CollectionBuilder, PartialNode } from '@react-stately/collections'
-import type { ReactElement } from 'react'
+import type { JSX, ReactElement } from 'react'
 import type { ItemProps } from 'react-stately'
 import type { TTabElement, TTabItemProps } from '../interface'
-import * as React from 'react'
+import { Children } from 'react'
 import { log } from '../../../logger'
 
 type CollectionContext = Parameters<CollectionBuilder<object>['build']>[1]
@@ -40,7 +40,7 @@ function hasChildItems<T>(props: ItemProps<T>) {
     return true
   }
 
-  if (props.title != null && React.Children.count(props.children) > 0) {
+  if (props.title != null && Children.count(props.children) > 0) {
     return true
   }
 
@@ -79,7 +79,7 @@ TabItem.getCollectionNode = function* getCollectionNode<T extends object>(
       }
       else if (title != null) {
         const items: PartialNode<T>[] = []
-        React.Children.forEach(children, (child) => {
+        Children.forEach(children, (child) => {
           items.push({
             type: 'item',
             element: child as TTabElement<T>,
@@ -94,5 +94,5 @@ TabItem.getCollectionNode = function* getCollectionNode<T extends object>(
 
 // We don't want getCollectionNode to show up in the type definition
 
-const _TabItem = TabItem as <T extends object>(_props: TTabItemProps<T>) => React.JSX.Element
+const _TabItem = TabItem as <T extends object>(_props: TTabItemProps<T>) => JSX.Element
 export { _TabItem as TabItem }
