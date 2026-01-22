@@ -10,9 +10,9 @@
  */
 
 import type { PartialNode } from '@react-stately/collections'
-import type { ReactElement, ReactNode } from 'react'
+import type { JSX, ReactElement, ReactNode } from 'react'
 import type { TAccordionItemProps } from '../interface'
-import * as React from 'react'
+import { Children } from 'react'
 
 function AccordionItem(_props: TAccordionItemProps): ReactNode {
   return null
@@ -42,7 +42,7 @@ AccordionItem.getCollectionNode = function* getCollectionNode(
       }
       else if (title != null) {
         const items: PartialNode<TAccordionItemProps>[] = []
-        React.Children.forEach(children, (child) => {
+        Children.forEach(children, (child) => {
           items.push({
             type: 'item',
             element: child as ReactElement<TAccordionItemProps>,
@@ -55,6 +55,6 @@ AccordionItem.getCollectionNode = function* getCollectionNode(
   }
 }
 
-const _AccordionItem = AccordionItem as (_props: TAccordionItemProps) => React.JSX.Element
+const _AccordionItem = AccordionItem as (_props: TAccordionItemProps) => JSX.Element
 
 export default _AccordionItem

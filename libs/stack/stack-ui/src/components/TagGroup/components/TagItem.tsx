@@ -12,10 +12,10 @@
  */
 
 import type { CollectionBuilder, PartialNode } from '@react-stately/collections'
-import type { ReactElement } from 'react'
+import type { JSX, ReactElement } from 'react'
 import type { ItemProps } from 'react-stately'
 import type { TTagElement, TTagItemProps } from '../interface'
-import * as React from 'react'
+import { Children } from 'react'
 import { log } from '../../../logger'
 
 type CollectionContext = Parameters<CollectionBuilder<object>['build']>[1]
@@ -40,7 +40,7 @@ function hasChildItems<T>(props: ItemProps<T>) {
     return true
   }
 
-  if (props.title && React.Children.count(props.children) > 0) {
+  if (props.title && Children.count(props.children) > 0) {
     return true
   }
 
@@ -81,7 +81,7 @@ TagItem.getCollectionNode = function* getCollectionNode<T extends object>(
       }
       else if (title) {
         const items: PartialNode<T>[] = []
-        React.Children.forEach(children, (child) => {
+        Children.forEach(children, (child) => {
           items.push({
             type: 'item',
             element: child as TTagElement<T>,
@@ -96,5 +96,5 @@ TagItem.getCollectionNode = function* getCollectionNode<T extends object>(
 
 // We don't want getCollectionNode to show up in the type definition
 
-const _TagItem = TagItem as <T extends object>(_props: TTagItemProps<T>) => React.JSX.Element
+const _TagItem = TagItem as <T extends object>(_props: TTagItemProps<T>) => JSX.Element
 export { _TagItem as TagItem }

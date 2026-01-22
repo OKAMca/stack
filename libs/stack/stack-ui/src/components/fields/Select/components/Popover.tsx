@@ -1,12 +1,12 @@
 'use client'
 
 import type { TPopoverProps } from './Popover.interface'
-import * as React from 'react'
+import { useRef } from 'react'
 import { DismissButton, Overlay, usePopover } from 'react-aria'
 import { Box, BoxWithForwardRef } from '../../../Box'
 
 function Popover(props: TPopoverProps) {
-  const ref = React.useRef(null)
+  const ref = useRef(null)
   const { popoverRef = ref, state, children, themeName = 'popover', tokens, customTheme, triggerRef, ...rest } = props
   const { popoverProps, underlayProps } = usePopover(
     {

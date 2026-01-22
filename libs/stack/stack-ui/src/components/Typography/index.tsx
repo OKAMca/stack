@@ -1,8 +1,8 @@
 'use client'
 
+import type { Ref } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TTypographyProps } from './interface'
-import * as React from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
 
 export function Typography<T extends TToken>({
@@ -22,7 +22,7 @@ export function Typography<T extends TToken>({
   )
 }
 
-export function TypographyWithForwardRef({ ref, ...props }: TTypographyProps & { ref?: React.Ref<HTMLElement> }) {
+export function TypographyWithForwardRef({ ref, ...props }: TTypographyProps & { ref?: Ref<HTMLElement> }) {
   const { as: Component = 'span', tokens, themeName = 'typography', customTheme, children, ...rest } = props
   const theme = useThemeContext(themeName, tokens, customTheme)
   return (

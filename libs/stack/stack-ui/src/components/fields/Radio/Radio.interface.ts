@@ -1,4 +1,4 @@
-import type * as React from 'react'
+import type { ReactNode } from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent, TReactHookForm } from '../../../types/components'
@@ -17,7 +17,7 @@ export interface TRadioProps<T = TToken> extends TFieldReactHookForm<T> {
   value: string
   // onChange is inherited from TReactHookForm - no need to redeclare
   inputRef?: RefCallBack
-  icon?: React.ReactNode
+  icon?: ReactNode
 }
 
 export interface TRadioLabelStyles {

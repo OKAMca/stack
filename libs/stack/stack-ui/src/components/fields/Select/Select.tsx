@@ -1,11 +1,10 @@
 'use client'
 
-import type { RefObject } from 'react'
+import type { CSSProperties, RefObject } from 'react'
 import type { RegisterOptions } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TSelectProps } from './Select.interface'
 import { isEmpty } from 'radashi'
-import * as React from 'react'
 import { useRef } from 'react'
 import { HiddenSelect, useSelect } from 'react-aria'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -104,7 +103,7 @@ export function Select<T extends TToken>(props: TSelectProps<T>) {
             triggerRef={buttonRef}
             placement="bottom"
             themeName={`${themeName}.popover`}
-            style={{ [`--${themeName}-container-width`]: `${buttonRef.current?.offsetWidth}px` } as React.CSSProperties}
+            style={{ [`--${themeName}-container-width`]: `${buttonRef.current?.offsetWidth}px` } as CSSProperties}
           >
             <ListBox {...menuProps} themeName={themeName} state={state} optionsWithHeaders={options ?? []} />
           </Popover>

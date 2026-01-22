@@ -1,8 +1,8 @@
+import type { SVGProps } from 'react'
 import { isEqual } from 'radashi'
-import * as React from 'react'
 import { memo } from 'react'
 
-function SvgComponent(props: React.SVGProps<SVGSVGElement>) {
+function SvgComponent(props: SVGProps<SVGSVGElement>) {
   return (
     <svg width="16" height="16" viewBox="16 14 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <g clipPath="url(#clip0_73015_2388)">

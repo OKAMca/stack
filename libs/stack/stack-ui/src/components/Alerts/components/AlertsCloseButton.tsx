@@ -1,11 +1,11 @@
-import type * as React from 'react'
+import type { Ref } from 'react'
 import type { TAnchorProps } from '../../Button/interface'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
 import CloseBtn from '../../icons/CloseBtn'
 
 interface AlertsCloseButtonProps extends TAnchorProps {
-  ref?: React.Ref<HTMLElement>
+  ref?: Ref<HTMLElement>
 }
 
 function AlertsCloseButton({ ref, ...props }: AlertsCloseButtonProps) {
