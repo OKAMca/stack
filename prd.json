@@ -1,0 +1,36 @@
+{
+  "project": "@okam/ai CLI Package",
+  "goal": "Create publishable CLI for AI automation tools, runnable via npx @okam/ai",
+  "statuses": [
+    "pending",
+    "in_progress",
+    "completed",
+    "blocked"
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Fix init.ts PRD_TEMPLATE schema alignment",
+      "description": "PRD_TEMPLATE uses old schema with statuses as object map and tasks without title field. Should match current PRD schema used by ralph/archive.",
+      "status": "completed",
+      "notes": "Updated PRD_TEMPLATE in init.ts: changed statuses from object map to array, added title field to task template. Updated corresponding test in init.spec.ts.",
+      "steps": [
+        "Change statuses from object map to array: ['pending', 'in_progress', 'completed', 'blocked']",
+        "Add 'title' field to task template",
+        "File: libs/ai/src/commands/init.ts (lines 5-27)"
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Resolve merge conflicts with main branch",
+      "description": "Branch has conflicts: package-lock.json (content) and prd.json (deleted in main, modified in branch).",
+      "status": "completed",
+      "notes": "Merged origin/main (d4182d8) into branch. Resolved package-lock.json by accepting main's version and running npm install. Kept branch version of prd.json. Verified: ai build/lint/test pass. Note: demo build has pre-existing Directus API schema issue unrelated to merge.",
+      "steps": [
+        "Merge origin/main into branch",
+        "Keep branch version of prd.json (main deleted it)",
+        "Regenerate package-lock.json after resolving dependencies"
+      ]
+    }
+  ]
+}
