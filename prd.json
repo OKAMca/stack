@@ -147,14 +147,15 @@
     {
       "id": "18",
       "description": "Fix grep -c output bug in prd-agent.sh task status counting",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Bug: grep -c outputs '0' with exit code 1 when no matches",
         "Current code: $(grep -c ... || echo '0') captures both '0\\n' and '0'",
         "Fix: use $(grep -c ... 2>/dev/null; true) then ${var:-0}",
         "Apply fix to pending, in_progress, and blocked counts",
         "Test output shows single line: 'Tasks: X pending, Y in progress, Z blocked'"
-      ]
+      ],
+      "notes": "Fixed by using '|| true' instead of '|| echo 0' to suppress exit code without appending extra output. Added ${var:-0} fallback for empty results. Tested with prd.json (has tasks) and empty file (no matches) - both show clean single-line output. Build, lint, and 22 tests all pass."
     },
     {
       "id": "19",
