@@ -134,5 +134,8 @@
     "vite-tsconfig-paths": "^6.0.4",
     "vitest": "^4.0.17"
   },
+  "overrides": {
+    "tar": "^7.5.6"
+  },
   "nx": {}
 }
