@@ -1,7 +1,7 @@
-import type * as React from 'react'
+import type { ReactNode } from 'react'
 
 export interface TClientProviderProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export interface TClientProps {

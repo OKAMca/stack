@@ -1,10 +1,10 @@
 'use client'
 
+import type { ChangeEvent } from 'react'
 import type { RegisterOptions } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TTextInputProps } from '../TextInputField/interface'
 import { isEmpty } from 'radashi'
-import * as React from 'react'
 import { useRef } from 'react'
 import { FocusRing, useTextField } from 'react-aria'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -166,11 +166,11 @@ export function ReactHookFormTextArea({
             isRequired={rules?.required === true || rules?.required === 'required'}
             isInvalid={fieldState.invalid}
             errorMessage={fieldState.error?.message}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
               field.onChange(e)
               onChange?.(e)
             }}
-            onBlur={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            onBlur={(e: ChangeEvent<HTMLTextAreaElement>) => {
               field.onBlur()
               onBlur?.(e)
             }}

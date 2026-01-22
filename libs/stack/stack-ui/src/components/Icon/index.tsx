@@ -3,8 +3,7 @@
 import type { ComponentType } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TIconProps } from './interface'
-import * as React from 'react'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useMemo } from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
 import Fallback from '../icons/IconFallback'
 
@@ -28,7 +27,7 @@ function Icon(props: TIconProps & { icon: string }) {
 
   // Use useMemo to get/create icon component - synchronous since getIconComponent
   // either returns from cache or creates a lazy component (doesn't actually load it)
-  const IconComponent = React.useMemo(() => getIconComponent(iconName), [iconName])
+  const IconComponent = useMemo(() => getIconComponent(iconName), [iconName])
 
   return (
     <Suspense fallback={<Fallback className="overflow-visible pointer-events-none" />}>

@@ -1,4 +1,4 @@
-import type * as React from 'react'
+import type { ReactNode } from 'react'
 
 export type TStyleValue = false | string
 export type TToken = Record<string, string | boolean>
@@ -14,7 +14,7 @@ export interface TDefaultTheme {
 }
 
 export interface TThemeProviderProps<T = TTheme> {
-  children: React.ReactNode
+  children: ReactNode
   brandTheme?: T
 }
 

@@ -1,5 +1,4 @@
-import type { ComponentType, ReactElement } from 'react'
-import type * as React from 'react'
+import type { ComponentType, ReactElement, ReactNode } from 'react'
 import type { AriaTabListProps, AriaTabPanelProps, AriaTabProps } from 'react-aria'
 import type { TabListState } from 'react-stately'
 import type { TToken } from '../../providers/Theme/interface'
@@ -23,6 +22,6 @@ export interface TTabPanelProps<I extends object, T extends TToken = TToken>
 
 export interface TTabListProps<I extends object, T extends TToken = TToken>
   extends AriaTabListProps<I & TDefaultItemComponent<I, T>>, Omit<TDefaultComponent<T>, 'children'> {
-  label?: React.ReactNode
+  label?: ReactNode
   panelTransition?: ComponentType<TTransition>
 }

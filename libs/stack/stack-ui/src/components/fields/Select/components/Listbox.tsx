@@ -1,7 +1,8 @@
 'use client'
 
+import type { HTMLAttributes, ReactNode, RefObject } from 'react'
 import type { Item, TListBoxProps, TOptionProps } from './Listbox.interface'
-import * as React from 'react'
+import { useRef } from 'react'
 import { FocusScope, useListBox, useOption } from 'react-aria'
 import useThemeContext from '../../../../providers/Theme/hooks'
 import { Box, BoxWithForwardRef } from '../../../Box'
@@ -9,7 +10,7 @@ import { Typography, TypographyWithForwardRef } from '../../../Typography'
 import { getListboxSections } from './getListboxSections'
 
 function Option<T extends object>({ item, state, themeName = 'li' }: TOptionProps<T>) {
-  const ref = React.useRef(null)
+  const ref = useRef(null)
   const { optionProps, isFocusVisible } = useOption({ key: item.key }, state, ref)
 
   const theme = useThemeContext(themeName)
@@ -25,9 +26,9 @@ function Option<T extends object>({ item, state, themeName = 'li' }: TOptionProp
   )
 }
 
-interface InnerListBoxProps extends React.HTMLAttributes<HTMLUListElement> {
-  children: React.ReactNode
-  listBoxRef: React.RefObject<HTMLUListElement | null>
+interface InnerListBoxProps extends HTMLAttributes<HTMLUListElement> {
+  children: ReactNode
+  listBoxRef: RefObject<HTMLUListElement | null>
   themeName: string | null
 }
 
@@ -43,7 +44,7 @@ function InnerListBox(props: InnerListBoxProps) {
 }
 
 function ListBox<T extends object>(props: TListBoxProps<T>) {
-  const ref = React.useRef<HTMLUListElement>(null)
+  const ref = useRef<HTMLUListElement>(null)
   const { listBoxRef = ref, state, themeName = 'option', optionsWithHeaders } = props
   const { listBoxProps } = useListBox(props, state, listBoxRef)
   const collection = Array.from(state.collection) as Item<T>[]

@@ -1,9 +1,9 @@
 'use client'
 
+import type { KeyboardEventHandler } from 'react'
 import type { PressEvent } from 'react-aria'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TIconsContainerProps, TShareButtonProps } from './interface'
-import * as React from 'react'
 import { useState } from 'react'
 import { FocusScope, useFocusManager } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
@@ -17,7 +17,7 @@ export function IconsContainer<T extends TToken>(props: TIconsContainerProps<T>)
 
   const focusManager = useFocusManager()
 
-  const handleKeyDown: React.KeyboardEventHandler = (e) => {
+  const handleKeyDown: KeyboardEventHandler = (e) => {
     if (e.key === 'Escape') {
       setIsOpen(false)
     }
@@ -99,7 +99,7 @@ export function ShareButton(props: TShareButtonProps) {
     })
   }
 
-  const handleKeyDown: React.KeyboardEventHandler = (e) => {
+  const handleKeyDown: KeyboardEventHandler = (e) => {
     const openShareButton = e.currentTarget.firstChild as HTMLElement
     const listBox = e.currentTarget.lastChild as HTMLElement
     const firstOption = listBox.firstChild as HTMLElement

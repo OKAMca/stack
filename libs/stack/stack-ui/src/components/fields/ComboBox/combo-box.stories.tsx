@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
-import type { ComponentType } from 'react'
-import * as React from 'react'
+import type { ButtonHTMLAttributes, ComponentType, ReactElement, ReactNode } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Item, Section } from 'react-stately'
 import ComboBox, { ReactHookFormComboBox } from '.'
@@ -204,7 +203,7 @@ export const ChildrenRenderingFunction: Story = {
     name: 'brand-children-rendering-function',
   },
   render(args) {
-    const metaChildren = meta.args?.children as React.ReactElement<{ children: React.ReactNode }>[]
+    const metaChildren = meta.args?.children as ReactElement<{ children: ReactNode }>[]
     const items
       = metaChildren?.map(child => ({
         key: child.key as string,
@@ -292,7 +291,7 @@ export const ReactHookForm: Story = {
   },
   render() {
     const methods = useForm<{ brand: string }>()
-    const children = meta.args?.children as React.ReactElement<{ children: React.ReactNode }>[]
+    const children = meta.args?.children as ReactElement<{ children: ReactNode }>[]
 
     return (
       <FormProvider {...methods}>
@@ -309,7 +308,7 @@ export const ReactHookForm: Story = {
             >
               {children}
             </ReactHookFormComboBox>
-            <Button {...({ type: 'submit' } as React.ButtonHTMLAttributes<HTMLButtonElement>)}>Submit</Button>
+            <Button {...({ type: 'submit' } as ButtonHTMLAttributes<HTMLButtonElement>)}>Submit</Button>
           </Box>
         </form>
       </FormProvider>
