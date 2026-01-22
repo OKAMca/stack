@@ -63,6 +63,12 @@ describe('init command', () => {
 
     expect(content).toHaveProperty('project', '')
     expect(content).toHaveProperty('goal', '')
+    expect(content).toHaveProperty('config')
+    expect(content.config).toEqual({
+      agent: 'claude',
+      context: '',
+      verification: 'Run your tests and type checks.',
+    })
     expect(content).toHaveProperty('statuses')
     expect(content.statuses).toEqual({
       pending: 'Not started',
