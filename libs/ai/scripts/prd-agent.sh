@@ -68,7 +68,6 @@ run_claude() {
   claude --dangerously-skip-permissions \
     --print \
     --verbose \
-    --model "claude-sonnet-4-20250514" \
     --output-format stream-json \
     "$PROMPT" \
     | grep --line-buffered '^{' \
@@ -86,7 +85,6 @@ run_codex() {
   # Use 'codex exec' for non-interactive mode with --json for JSONL output
   codex exec \
     --dangerously-bypass-approvals-and-sandbox \
-    --model "o3" \
     --json \
     "$PROMPT" \
     | tee "$tmpfile" \
