@@ -49,7 +49,10 @@ npx @okam/ai ralph 5            # Run 5 iterations
 npx @okam/ai ralph -a codex     # Use Codex CLI instead of Claude
 ```
 
-Requires either the `claude` CLI (for `--agent claude`) or the `codex` CLI (for `--agent codex`).
+**Prerequisites:**
+- `jq` - JSON processor for parsing AI responses
+- `bash` - Shell for running the orchestration script
+- Either `claude` CLI (for `--agent claude`) or `codex` CLI (for `--agent codex`)
 
 **Options:**
 
