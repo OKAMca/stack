@@ -14,32 +14,26 @@ describe('archive command', () => {
   let mockStderr: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
-    // Create temp directory for test isolation
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'archive-test-'))
     originalCwd = process.cwd()
     process.chdir(tempDir)
 
-    // Create fresh program instance
     program = new Command()
-    program.exitOverride() // Prevent actual process exit
+    program.exitOverride()
     registerArchiveCommand(program)
 
-    // Mock process.exit
     mockExit = vi.spyOn(process, 'exit').mockImplementation((code) => {
       throw new Error(`process.exit(${code})`)
     })
 
-    // Mock stdout/stderr
     mockStdout = vi.spyOn(process.stdout, 'write').mockImplementation(() => true)
     mockStderr = vi.spyOn(process.stderr, 'write').mockImplementation(() => true)
   })
 
   afterEach(() => {
-    // Restore cwd and clean up
     process.chdir(originalCwd)
     fs.rmSync(tempDir, { recursive: true, force: true })
 
-    // Restore mocks
     mockExit.mockRestore()
     mockStdout.mockRestore()
     mockStderr.mockRestore()
@@ -52,18 +46,15 @@ describe('archive command', () => {
   })
 
   it('should archive prd.json and progress.txt to archive/ folder', async () => {
-    // Create test files
     const prdContent = { project: 'Test Project', goal: 'Test goal' }
     fs.writeFileSync(path.join(tempDir, 'prd.json'), JSON.stringify(prdContent))
     fs.writeFileSync(path.join(tempDir, 'progress.txt'), '# Progress')
 
     await program.parseAsync(['node', 'test', 'archive'])
 
-    // Original files should be gone
     expect(fs.existsSync(path.join(tempDir, 'prd.json'))).toBe(false)
     expect(fs.existsSync(path.join(tempDir, 'progress.txt'))).toBe(false)
 
-    // Archive directory should exist with files
     const archiveDir = path.join(tempDir, 'archive')
     expect(fs.existsSync(archiveDir)).toBe(true)
 
@@ -92,7 +83,6 @@ describe('archive command', () => {
 
     await program.parseAsync(['node', 'test', 'archive'])
 
-    // Should not output "Created archive/ directory" message
     expect(mockStdout).not.toHaveBeenCalledWith('Created archive/ directory\n')
   })
 
@@ -128,7 +118,6 @@ describe('archive command', () => {
     await program.parseAsync(['node', 'test', 'archive'])
 
     const archivedFiles = fs.readdirSync(path.join(tempDir, 'archive'))
-    // Extract slug from filename: prd_{slug}_{date}_{time}.json
     const match = archivedFiles[0].match(/^prd_(.+)_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}\.json$/)
     expect(match).not.toBeNull()
     expect(match![1].length).toBeLessThanOrEqual(50)
@@ -184,7 +173,6 @@ describe('archive command', () => {
     await program.parseAsync(['node', 'test', 'archive'])
 
     const archivedFiles = fs.readdirSync(path.join(tempDir, 'archive'))
-    // Check for ISO date and time pattern: YYYY-MM-DD_HH-mm-ss
     expect(archivedFiles[0]).toMatch(/\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}\.json$/)
   })
 
@@ -225,26 +213,21 @@ describe('archive command', () => {
   it('should create unique filenames for multiple archives on the same day', async () => {
     const archiveDir = path.join(tempDir, 'archive')
 
-    // First archive
     const prdContent1 = { project: 'Test', goal: 'Goal 1' }
     fs.writeFileSync(path.join(tempDir, 'prd.json'), JSON.stringify(prdContent1))
     await program.parseAsync(['node', 'test', 'archive'])
 
-    // Wait a bit to ensure different timestamp (at least 1 second)
     await new Promise(resolve => setTimeout(resolve, 1100))
 
-    // Second archive - recreate files since they were moved
     const prdContent2 = { project: 'Test', goal: 'Goal 2' }
     fs.writeFileSync(path.join(tempDir, 'prd.json'), JSON.stringify(prdContent2))
     await program.parseAsync(['node', 'test', 'archive'])
 
-    // Both files should exist with unique timestamps
     const archivedFiles = fs.readdirSync(archiveDir)
     const prdFiles = archivedFiles.filter(f => f.startsWith('prd_'))
     expect(prdFiles).toHaveLength(2)
     expect(prdFiles[0]).not.toBe(prdFiles[1])
 
-    // Verify both have the new timestamp format with time
     for (const file of prdFiles) {
       expect(file).toMatch(/^prd_test_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}\.json$/)
     }

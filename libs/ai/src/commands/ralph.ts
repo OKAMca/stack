@@ -39,13 +39,9 @@ function readPrdConfig(prdPath: string): PrdConfig {
 }
 
 function resolveScriptPath(): string {
-  // Look for prd-agent.sh in the scripts directory relative to this file
-  // When built with esbuild bundling, cli.js is at: dist/libs/ai/cli.js
-  // Scripts are at: dist/libs/ai/scripts/prd-agent.sh
-  // So __dirname is dist/libs/ai/ and scripts is a direct subdirectory
   const possiblePaths = [
-    path.join(__dirname, 'scripts', 'prd-agent.sh'), // Bundled location (esbuild)
-    path.join(__dirname, '..', 'scripts', 'prd-agent.sh'), // Fallback
+    path.join(__dirname, 'scripts', 'prd-agent.sh'),
+    path.join(__dirname, '..', 'scripts', 'prd-agent.sh'),
   ]
 
   for (const scriptPath of possiblePaths) {
@@ -72,37 +68,29 @@ export function registerRalphCommand(program: Command): void {
     .action((iterations: string, options: RalphOptions) => {
       const cwd = process.cwd()
 
-      // Resolve PRD path
       const prdPath = path.isAbsolute(options.prd ?? 'prd.json')
         ? options.prd!
         : path.join(cwd, options.prd ?? 'prd.json')
 
-      // Resolve progress path
       const progressPath = path.isAbsolute(options.progress ?? 'progress.txt')
         ? options.progress!
         : path.join(cwd, options.progress ?? 'progress.txt')
 
-      // Resolve context path (defaults to cwd)
       const contextPath = options.context != null && options.context.length > 0
         ? (path.isAbsolute(options.context) ? options.context : path.join(cwd, options.context))
         : cwd
 
-      // Check if prd.json exists
       if (!fs.existsSync(prdPath)) {
         process.stderr.write(`Error: PRD file not found at ${prdPath}\n`)
         process.stderr.write('Run "okam-ai init" to create a new PRD project.\n')
         process.exit(1)
       }
 
-      // Read config from prd.json
       const prdConfig = readPrdConfig(prdPath)
 
-      // Resolution order: CLI flags > prd.json config > defaults
       const resolvedAgent = options.agent ?? prdConfig.agent ?? DEFAULTS.agent
       const resolvedVerification = options.verification ?? prdConfig.verification ?? DEFAULTS.verification
 
-      // Context resolution: CLI flag > prd.json config > cwd
-      // If prd.json config.context is non-empty, resolve it relative to prd.json location
       let resolvedContext = contextPath
       if (options.context == null && prdConfig.context != null && prdConfig.context.length > 0) {
         const prdDir = path.dirname(prdPath)
@@ -111,15 +99,12 @@ export function registerRalphCommand(program: Command): void {
           : path.join(prdDir, prdConfig.context)
       }
 
-      // Validate iterations is a positive integer
-      // Use Number() instead of parseInt for strict validation (rejects '1abc', '1.5')
       const iterationCount = Number(iterations)
       if (!Number.isInteger(iterationCount) || iterationCount < 1) {
         process.stderr.write('Error: iterations must be a positive integer\n')
         process.exit(1)
       }
 
-      // Resolve the prd-agent.sh script path
       let scriptPath: string
       try {
         scriptPath = resolveScriptPath()
@@ -129,7 +114,6 @@ export function registerRalphCommand(program: Command): void {
         process.exit(1)
       }
 
-      // Set up environment variables for prd-agent.sh
       const env = {
         ...process.env,
         RALPH_AGENT: resolvedAgent,
@@ -146,7 +130,6 @@ export function registerRalphCommand(program: Command): void {
       process.stdout.write(`Verification: ${resolvedVerification}\n`)
       process.stdout.write('\n')
 
-      // Spawn prd-agent.sh with the iteration count as argument
       const child = spawn('bash', [scriptPath, iterationCount.toString()], {
         cwd,
         env,

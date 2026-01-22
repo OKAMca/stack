@@ -14,32 +14,26 @@ describe('init command', () => {
   let mockStderr: ReturnType<typeof vi.spyOn>
 
   beforeEach(() => {
-    // Create temp directory for test isolation
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'init-test-'))
     originalCwd = process.cwd()
     process.chdir(tempDir)
 
-    // Create fresh program instance
     program = new Command()
-    program.exitOverride() // Prevent actual process exit
+    program.exitOverride()
     registerInitCommand(program)
 
-    // Mock process.exit
     mockExit = vi.spyOn(process, 'exit').mockImplementation((code) => {
       throw new Error(`process.exit(${code})`)
     })
 
-    // Mock stdout/stderr
     mockStdout = vi.spyOn(process.stdout, 'write').mockImplementation(() => true)
     mockStderr = vi.spyOn(console, 'error').mockImplementation(() => {})
   })
 
   afterEach(() => {
-    // Restore cwd and clean up
     process.chdir(originalCwd)
     fs.rmSync(tempDir, { recursive: true, force: true })
 
-    // Restore mocks
     mockExit.mockRestore()
     mockStdout.mockRestore()
     mockStderr.mockRestore()
@@ -98,7 +92,6 @@ describe('init command', () => {
   })
 
   it('should error when prd.json already exists', async () => {
-    // Create existing file
     fs.writeFileSync(path.join(tempDir, 'prd.json'), '{}')
 
     await expect(program.parseAsync(['node', 'test', 'init'])).rejects.toThrow('process.exit(1)')
@@ -108,7 +101,6 @@ describe('init command', () => {
   })
 
   it('should error when progress.txt already exists', async () => {
-    // Create existing file
     fs.writeFileSync(path.join(tempDir, 'progress.txt'), '')
 
     await expect(program.parseAsync(['node', 'test', 'init'])).rejects.toThrow('process.exit(1)')
@@ -117,7 +109,6 @@ describe('init command', () => {
   })
 
   it('should error when both files already exist', async () => {
-    // Create existing files
     fs.writeFileSync(path.join(tempDir, 'prd.json'), '{}')
     fs.writeFileSync(path.join(tempDir, 'progress.txt'), '')
 
@@ -127,7 +118,6 @@ describe('init command', () => {
   })
 
   it('should overwrite existing files with --force flag', async () => {
-    // Create existing files with different content
     fs.writeFileSync(path.join(tempDir, 'prd.json'), '{"old": "content"}')
     fs.writeFileSync(path.join(tempDir, 'progress.txt'), 'old content')
 

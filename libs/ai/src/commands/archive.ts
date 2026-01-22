@@ -32,13 +32,11 @@ export function registerArchiveCommand(program: Command): void {
       const progressPath = path.join(cwd, 'progress.txt')
       const archiveDir = path.join(cwd, 'archive')
 
-      // Check if prd.json exists
       if (!fs.existsSync(prdPath)) {
         process.stderr.write('Error: prd.json not found. Nothing to archive.\n')
         process.exit(1)
       }
 
-      // Read prd.json to get project name for slug
       let projectSlug = 'project'
       try {
         const prdContent = fs.readFileSync(prdPath, 'utf-8')
@@ -57,7 +55,6 @@ export function registerArchiveCommand(program: Command): void {
         process.stderr.write('Warning: Could not parse prd.json, using default slug.\n')
       }
 
-      // Create archive directory if it doesn't exist
       if (!fs.existsSync(archiveDir)) {
         fs.mkdirSync(archiveDir, { recursive: true })
         process.stdout.write('Created archive/ directory\n')
@@ -66,14 +63,12 @@ export function registerArchiveCommand(program: Command): void {
       const timestamp = getTimestamp()
       const archivedFiles: string[] = []
 
-      // Archive prd.json
       const archivePrdName = `prd_${projectSlug}_${timestamp}.json`
       const archivePrdPath = path.join(archiveDir, archivePrdName)
       fs.renameSync(prdPath, archivePrdPath)
       archivedFiles.push(archivePrdName)
       process.stdout.write(`Archived prd.json -> archive/${archivePrdName}\n`)
 
-      // Archive progress.txt if it exists
       if (fs.existsSync(progressPath)) {
         const archiveProgressName = `progress_${projectSlug}_${timestamp}.txt`
         const archiveProgressPath = path.join(archiveDir, archiveProgressName)
