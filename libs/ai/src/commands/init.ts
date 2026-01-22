@@ -14,7 +14,6 @@ const PRD_TEMPLATE = {
   tasks: [
     {
       id: '1',
-      title: '',
       description: '',
       status: 'pending',
       steps: [],
