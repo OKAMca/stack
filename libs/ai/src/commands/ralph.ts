@@ -111,8 +111,9 @@ export function registerRalphCommand(program: Command): void {
       }
 
       // Validate iterations is a positive integer
-      const iterationCount = Number.parseInt(iterations, 10)
-      if (Number.isNaN(iterationCount) || iterationCount < 1) {
+      // Use Number() instead of parseInt for strict validation (rejects '1abc', '1.5')
+      const iterationCount = Number(iterations)
+      if (!Number.isInteger(iterationCount) || iterationCount < 1) {
         process.stderr.write('Error: iterations must be a positive integer\n')
         process.exit(1)
       }
@@ -145,7 +146,7 @@ export function registerRalphCommand(program: Command): void {
       process.stdout.write('\n')
 
       // Spawn prd-agent.sh with the iteration count as argument
-      const child = spawn('bash', [scriptPath, iterations], {
+      const child = spawn('bash', [scriptPath, iterationCount.toString()], {
         cwd,
         env,
         stdio: 'inherit',
