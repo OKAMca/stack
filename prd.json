@@ -108,14 +108,15 @@
     {
       "id": "15",
       "description": "Update ralph.ts to read config from prd.json and support CLI flag overrides",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Add CLI flags: -a/--agent, -c/--context, -v/--verification",
         "Read prd.json config section",
         "Resolution order: CLI flags > prd.json config > defaults",
         "Remove --model flag, replace with --agent",
         "Pass resolved values to prd-agent.sh via ENV vars (internal)"
-      ]
+      ],
+      "notes": "Updated ralph.ts: Added readPrdConfig() to read config from prd.json. Replaced -m/--model with -a/--agent. Added -v/--verification flag. Resolution order: CLI flags > prd.json config > defaults. Env vars changed: RALPH_MODEL -> RALPH_AGENT, added RALPH_VERIFICATION. Build, lint, and 22 tests all pass."
     },
     {
       "id": "16",

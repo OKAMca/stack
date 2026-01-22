@@ -7,12 +7,35 @@ import { fileURLToPath } from 'node:url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-interface RalphOptions {
-  iterations?: string
-  model?: string
+interface PrdConfig {
+  agent?: string
   context?: string
+  verification?: string
+}
+
+interface RalphOptions {
+  agent?: string
+  context?: string
+  verification?: string
   prd?: string
   progress?: string
+}
+
+const DEFAULTS = {
+  agent: 'claude',
+  context: '',
+  verification: 'Run your tests and type checks.',
+}
+
+function readPrdConfig(prdPath: string): PrdConfig {
+  try {
+    const content = fs.readFileSync(prdPath, 'utf-8')
+    const prd = JSON.parse(content) as { config?: PrdConfig }
+    return prd.config ?? {}
+  }
+  catch {
+    return {}
+  }
 }
 
 function resolveScriptPath(): string {
@@ -40,8 +63,9 @@ export function registerRalphCommand(program: Command): void {
     .command('ralph')
     .description('Run the Ralph AI assistant to process PRD tasks')
     .argument('[iterations]', 'Number of iterations to run', '1')
-    .option('-m, --model <model>', 'Claude model to use', 'claude-sonnet-4-20250514')
+    .option('-a, --agent <agent>', 'AI agent to use (claude or codex)')
     .option('-c, --context <path>', 'Additional context file or directory path')
+    .option('-v, --verification <cmd>', 'Verification command to run after each task')
     .option('-p, --prd <path>', 'Path to prd.json file', 'prd.json')
     .option('--progress <path>', 'Path to progress.txt file', 'progress.txt')
     .action((iterations: string, options: RalphOptions) => {
@@ -69,6 +93,23 @@ export function registerRalphCommand(program: Command): void {
         process.exit(1)
       }
 
+      // Read config from prd.json
+      const prdConfig = readPrdConfig(prdPath)
+
+      // Resolution order: CLI flags > prd.json config > defaults
+      const resolvedAgent = options.agent ?? prdConfig.agent ?? DEFAULTS.agent
+      const resolvedVerification = options.verification ?? prdConfig.verification ?? DEFAULTS.verification
+
+      // Context resolution: CLI flag > prd.json config > cwd
+      // If prd.json config.context is non-empty, resolve it relative to prd.json location
+      let resolvedContext = contextPath
+      if (options.context == null && prdConfig.context != null && prdConfig.context.length > 0) {
+        const prdDir = path.dirname(prdPath)
+        resolvedContext = path.isAbsolute(prdConfig.context)
+          ? prdConfig.context
+          : path.join(prdDir, prdConfig.context)
+      }
+
       // Validate iterations is a positive integer
       const iterationCount = Number.parseInt(iterations, 10)
       if (Number.isNaN(iterationCount) || iterationCount < 1) {
@@ -89,16 +130,18 @@ export function registerRalphCommand(program: Command): void {
       // Set up environment variables for prd-agent.sh
       const env = {
         ...process.env,
-        RALPH_MODEL: options.model ?? 'claude-sonnet-4-20250514',
-        RALPH_CONTEXT: contextPath,
+        RALPH_AGENT: resolvedAgent,
+        RALPH_CONTEXT: resolvedContext,
+        RALPH_VERIFICATION: resolvedVerification,
         RALPH_PRD: prdPath,
         RALPH_PROGRESS: progressPath,
       }
 
       process.stdout.write(`Starting Ralph with ${iterationCount} iteration(s)...\n`)
       process.stdout.write(`PRD: ${prdPath}\n`)
-      process.stdout.write(`Context: ${contextPath}\n`)
-      process.stdout.write(`Model: ${env.RALPH_MODEL}\n`)
+      process.stdout.write(`Context: ${resolvedContext}\n`)
+      process.stdout.write(`Agent: ${resolvedAgent}\n`)
+      process.stdout.write(`Verification: ${resolvedVerification}\n`)
       process.stdout.write('\n')
 
       // Spawn prd-agent.sh with the iteration count as argument
