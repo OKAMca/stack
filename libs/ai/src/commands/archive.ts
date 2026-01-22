@@ -16,8 +16,10 @@ function slugify(text: string): string {
 }
 
 function getTimestamp(): string {
-  const isoString = new Date().toISOString()
-  return isoString.slice(0, 10)
+  const now = new Date()
+  const date = now.toISOString().slice(0, 10)
+  const time = now.toTimeString().slice(0, 8).replace(/:/g, '-')
+  return `${date}_${time}`
 }
 
 export function registerArchiveCommand(program: Command): void {
