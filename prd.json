@@ -282,14 +282,15 @@
     {
       "id": "29",
       "description": "Update libs/ai/README.md to reflect current implementation",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Review current README.md content against actual CLI behavior",
         "Update archive filename example to include time (YYYY-MM-DD_HH-mm-ss)",
         "Ensure all CLI flags and options are documented accurately",
         "Add any missing configuration details or usage examples",
         "Keep documentation concise and developer-friendly"
-      ]
+      ],
+      "notes": "Updated README to document default context/verification behavior, configuration priority, and relative context resolution. Added note about required CLI binaries for ralph. Updated archive filename pattern and example to include time. Added progress.txt creation note. Build, lint, and tests pass."
     }
   ]
 }

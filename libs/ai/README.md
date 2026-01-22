@@ -42,6 +42,8 @@ Creates a `prd.json` with the following structure:
 }
 ```
 
+Also creates a `progress.txt` log with a creation date header.
+
 ### `ralph`
 
 Run an AI agent to process PRD tasks iteratively.
@@ -52,17 +54,19 @@ npx @okam/ai ralph 5            # Run 5 iterations
 npx @okam/ai ralph -a codex     # Use Codex CLI instead of Claude
 ```
 
+Requires either the `claude` CLI (for `--agent claude`) or the `codex` CLI (for `--agent codex`).
+
 **Options:**
 
 | Flag | Description | Default |
 |------|-------------|---------|
 | `-a, --agent <agent>` | AI agent to use (`claude` or `codex`) | `claude` |
-| `-c, --context <path>` | Additional context file or directory | - |
-| `-v, --verification <cmd>` | Verification command after each task | - |
+| `-c, --context <path>` | Additional context file or directory | Current working directory |
+| `-v, --verification <cmd>` | Verification command after each task | `Run your tests and type checks.` |
 | `-p, --prd <path>` | Path to prd.json file | `prd.json` |
 | `--progress <path>` | Path to progress.txt file | `progress.txt` |
 
-**Configuration priority:** CLI flags > `prd.json` config > defaults
+**Configuration priority:** CLI flags > `prd.json` config > defaults. If `config.context` is a relative path, it is resolved relative to the PRD file.
 
 ### `archive`
 
@@ -72,9 +76,9 @@ Archive `prd.json` and `progress.txt` to `archive/` folder with timestamped file
 npx @okam/ai archive
 ```
 
-Files are renamed to: `{type}_{project-slug}_{date}.{ext}`
+Files are renamed to: `{type}_{project-slug}_{YYYY-MM-DD_HH-mm-ss}.{ext}`
 
-Example: `prd_my-project_2026-01-22.json`
+Example: `prd_my-project_2026-01-22_11-35-31.json`
 
 ## Configuration
 
