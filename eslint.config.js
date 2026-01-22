@@ -257,6 +257,24 @@ export default antfu(
     },
   },
 
+  // Prevent React namespace imports in publishable libraries
+  // Rollup minifies `import * as React` to `import * as u`, causing Next.js 15 + React 19
+  // webpack to fail resolving u.createContext. Named imports minify correctly.
+  // See: PR #396 for migration details
+  {
+    name: 'react/no-namespace-import',
+    files: ['libs/**/*.ts', 'libs/**/*.tsx', 'libs/**/*.js', 'libs/**/*.jsx'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ImportNamespaceSpecifier[local.name="React"]',
+          message: 'Avoid `import * as React`. Use named imports: `import { useState, useRef } from "react"`. Namespace imports cause minification issues with React 19 + Next.js 15.',
+        },
+      ],
+    },
+  },
+
   // General rule overrides - intentional deviations from @antfu/eslint-config defaults
   // Includes .mjs/.cjs for scripts like tools/scripts/publish.mjs
   {
