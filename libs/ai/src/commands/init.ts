@@ -48,7 +48,6 @@ export function registerInitCommand(program: Command): void {
       const prdPath = path.join(cwd, 'prd.json')
       const progressPath = path.join(cwd, 'progress.txt')
 
-      // Check if files exist (unless --force is used)
       if (!options.force) {
         const existingFiles: string[] = []
         if (fs.existsSync(prdPath)) {
@@ -65,11 +64,9 @@ export function registerInitCommand(program: Command): void {
         }
       }
 
-      // Create prd.json
       fs.writeFileSync(prdPath, `${JSON.stringify(PRD_TEMPLATE, null, 2)}\n`)
       process.stdout.write('Created prd.json\n')
 
-      // Create progress.txt
       fs.writeFileSync(progressPath, PROGRESS_TEMPLATE)
       process.stdout.write('Created progress.txt\n')
 

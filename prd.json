@@ -270,13 +270,14 @@
     {
       "id": "28",
       "description": "Remove unnecessary comments from libs/ai source files",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Review libs/ai/src/**/*.ts files for redundant or obvious comments",
         "Remove comments that just restate what the code does",
         "Keep comments that explain WHY something is done, not WHAT",
         "Run npx nx lint ai and npx nx test ai to verify no regressions"
-      ]
+      ],
+      "notes": "Removed redundant inline comments from CLI commands and unit tests. No logic changes. Lint and tests pass."
     },
     {
       "id": "29",

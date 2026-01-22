@@ -15,7 +15,6 @@ program
   .description('CLI for AI automation tools')
   .version(pkg.version)
 
-// Register commands
 registerInitCommand(program)
 registerArchiveCommand(program)
 registerRalphCommand(program)
