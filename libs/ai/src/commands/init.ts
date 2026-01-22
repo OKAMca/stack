@@ -5,13 +5,18 @@ import * as path from 'node:path'
 const PRD_TEMPLATE = {
   project: '',
   goal: '',
-  statuses: ['pending', 'in_progress', 'completed', 'blocked'],
+  statuses: {
+    pending: 'Not started',
+    in_progress: 'Currently being worked on',
+    completed: 'Done',
+    blocked: 'Waiting on external dependency',
+  },
   tasks: [
     {
       id: '1',
-      title: '',
       description: '',
       status: 'pending',
+      steps: [],
     },
   ],
 }

@@ -64,14 +64,19 @@ describe('init command', () => {
     expect(content).toHaveProperty('project', '')
     expect(content).toHaveProperty('goal', '')
     expect(content).toHaveProperty('statuses')
-    expect(content.statuses).toEqual(['pending', 'in_progress', 'completed', 'blocked'])
+    expect(content.statuses).toEqual({
+      pending: 'Not started',
+      in_progress: 'Currently being worked on',
+      completed: 'Done',
+      blocked: 'Waiting on external dependency',
+    })
     expect(content).toHaveProperty('tasks')
     expect(content.tasks).toHaveLength(1)
     expect(content.tasks[0]).toMatchObject({
       id: '1',
-      title: '',
       description: '',
       status: 'pending',
+      steps: [],
     })
   })
 
