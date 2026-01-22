@@ -1,7 +1,12 @@
 {
   "project": "@okam/ai CLI Package",
   "goal": "Create publishable CLI for AI automation tools, runnable via npx @okam/ai",
-  "statuses": ["pending", "in_progress", "completed", "blocked"],
+  "statuses": [
+    "pending",
+    "in_progress",
+    "completed",
+    "blocked"
+  ],
   "tasks": [
     {
       "id": "1",
@@ -248,6 +253,42 @@
         "Test archive creates unique timestamps"
       ],
       "notes": "All verification passed: Build successful, 24 tests pass, lint passes. CLI --version shows 0.1.0. Archive creates unique timestamps with format YYYY-MM-DD_HH-mm-ss (e.g., prd_project_2026-01-22_11-35-31.json)."
+    },
+    {
+      "id": "27",
+      "description": "Fix NX deprecation warning: replace generatePackageJson with @nx/dependency-checks ESLint rule",
+      "status": "completed",
+      "steps": [
+        "Remove generatePackageJson option from libs/ai/project.json build target",
+        "Configure @nx/dependency-checks ESLint rule for the ai project",
+        "Run npx nx build ai and verify no deprecation warning",
+        "Run npx nx lint ai and verify dependency checks pass",
+        "Run npx nx test ai to ensure nothing broke"
+      ],
+      "notes": "Removed generatePackageJson from libs/ai/project.json build target. Added lintFilePatterns to lint ai package.json/project.json so @nx/dependency-checks runs. Build, lint, and tests pass."
+    },
+    {
+      "id": "28",
+      "description": "Remove unnecessary comments from libs/ai source files",
+      "status": "pending",
+      "steps": [
+        "Review libs/ai/src/**/*.ts files for redundant or obvious comments",
+        "Remove comments that just restate what the code does",
+        "Keep comments that explain WHY something is done, not WHAT",
+        "Run npx nx lint ai and npx nx test ai to verify no regressions"
+      ]
+    },
+    {
+      "id": "29",
+      "description": "Update libs/ai/README.md to reflect current implementation",
+      "status": "pending",
+      "steps": [
+        "Review current README.md content against actual CLI behavior",
+        "Update archive filename example to include time (YYYY-MM-DD_HH-mm-ss)",
+        "Ensure all CLI flags and options are documented accurately",
+        "Add any missing configuration details or usage examples",
+        "Keep documentation concise and developer-friendly"
+      ]
     }
   ]
 }
