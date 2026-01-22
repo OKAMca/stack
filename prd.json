@@ -42,7 +42,8 @@
       "id": "6",
       "title": "Create ralph command",
       "description": "Create libs/ai/src/commands/ralph.ts - loads config, checks PRD exists, spawns ralph.sh with env vars",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Created ralph.ts with commander setup. Supports options: --model (default: claude-sonnet-4-20250514), --context (additional context path), --prd (prd.json path), --progress (progress.txt path). Validates PRD exists before spawning ralph.sh. Sets RALPH_MODEL, RALPH_CONTEXT, RALPH_PRD, RALPH_PROGRESS env vars. Registered in cli.ts. Build, lint, and tests all pass."
     },
     {
       "id": "7",
