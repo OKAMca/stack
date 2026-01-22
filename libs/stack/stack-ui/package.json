@@ -1,6 +1,6 @@
 {
   "name": "@okam/stack-ui",
-  "version": "1.44.4",
+  "version": "1.44.5",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.10.1",
-    "@okam/core-lib": "1.17.2",
+    "@okam/core-lib": "1.17.3",
     "@okam/logger": "1.1.0",
     "@react-aria/selection": "^3.27.0",
     "@react-aria/utils": "^3.32.0",
