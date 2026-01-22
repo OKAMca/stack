@@ -33,12 +33,14 @@
     {
       "id": "fix-next-component",
       "description": "Convert libs/stack/next-component/src/theme/index.ts",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Converted 1 file: replaced 'import * as React' with 'import { memo }' and changed React.memo to memo. Lint and build pass. Verified dist output shows named import."
     },
     {
       "id": "fix-directus-block",
       "description": "Convert libs/directus/directus-block/src/blocks/BlockWysiwyg/index.tsx",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Converted 1 file: replaced 'import * as React' with 'import { createElement }' and changed React.createElement to createElement. Lint and build pass. Verified dist output shows named import."
     },
     {
       "id": "fix-directus-flexible-content",
