@@ -24,7 +24,8 @@
       "id": "2",
       "title": "Resolve merge conflicts with main branch",
       "description": "Branch has conflicts: package-lock.json (content) and prd.json (deleted in main, modified in branch).",
-      "status": "pending",
+      "status": "completed",
+      "notes": "Merged origin/main (d4182d8) into branch. Resolved package-lock.json by accepting main's version and running npm install. Kept branch version of prd.json. Verified: ai build/lint/test pass. Note: demo build has pre-existing Directus API schema issue unrelated to merge.",
       "steps": [
         "Merge origin/main into branch",
         "Keep branch version of prd.json (main deleted it)",

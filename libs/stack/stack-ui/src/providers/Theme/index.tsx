@@ -1,13 +1,13 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import type { TTheme, TThemePanelContext, TThemeProviderProps } from './interface'
-import * as React from 'react'
-import { useMemo } from 'react'
+import { createContext, use, useMemo } from 'react'
 
 export function createCtxNullable<A extends object | null>() {
-  const ctx = React.createContext<A | undefined>(undefined)
+  const ctx = createContext<A | undefined>(undefined)
   function useCtx() {
-    const c = React.use(ctx)
+    const c = use(ctx)
 
     if (c === undefined) {
       return null
@@ -30,7 +30,7 @@ export function ThemeContextProvider({ children, brandTheme = defaultTheme }: TT
 }
 
 export function createThemeProvider(brandTheme: TTheme) {
-  const ThemeProviderContext = ({ children }: { children: React.ReactNode }) => (
+  const ThemeProviderContext = ({ children }: { children: ReactNode }) => (
     <ThemeContextProvider brandTheme={brandTheme}>{children}</ThemeContextProvider>
   )
   return ThemeProviderContext

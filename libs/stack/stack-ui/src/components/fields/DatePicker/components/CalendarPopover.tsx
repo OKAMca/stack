@@ -1,12 +1,12 @@
 'use client'
 
 import type { TCalendarPopoverProps } from '../interface'
-import * as React from 'react'
+import { useRef } from 'react'
 import { DismissButton, Overlay, usePopover } from 'react-aria'
 import { Box, BoxWithForwardRef } from '../../../Box'
 
 export function CalendarPopover({ themeName = 'datePicker', tokens, ...rest }: TCalendarPopoverProps) {
-  const ref = React.useRef(null)
+  const ref = useRef(null)
   const { state, children } = { ...rest }
 
   const { popoverProps, underlayProps } = usePopover(

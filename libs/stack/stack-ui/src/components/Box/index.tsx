@@ -1,8 +1,8 @@
 'use client'
 
+import type { Ref } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TBoxProps } from './interface'
-import * as React from 'react'
 import useThemeContext from '../../providers/Theme/hooks'
 
 export function Box<T extends TToken>({
@@ -24,7 +24,7 @@ export function Box<T extends TToken>({
 }
 
 export interface TBoxWithForwardRefProps<T = TToken> extends TBoxProps<T> {
-  ref?: React.Ref<HTMLElement>
+  ref?: Ref<HTMLElement>
 }
 
 export function BoxWithForwardRef<T extends TToken>({

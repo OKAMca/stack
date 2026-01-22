@@ -1,5 +1,4 @@
 import type { DateValue } from '@internationalized/date'
-import type * as React from 'react'
 import type { ReactNode } from 'react'
 import type { AriaDatePickerProps, AriaPopoverProps, DatePickerAria, DateRangePickerAria, Placement } from 'react-aria'
 import type {
@@ -54,7 +53,7 @@ export interface TDateRangePickerProps<T = TToken>
 }
 
 export interface TCalendarPopoverProps extends Omit<AriaPopoverProps, 'popoverRef'>, TDefaultComponent {
-  children: React.ReactNode
+  children: ReactNode
   state: OverlayTriggerState
 }
 

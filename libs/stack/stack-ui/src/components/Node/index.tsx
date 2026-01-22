@@ -3,7 +3,7 @@
 /**
  * Node - react-stately collection component for Items and Sections
  *
- * Uses React.Children API (Children.count, Children.forEach) as required by react-stately's
+ * Uses Children API (Children.count, Children.forEach) as required by react-stately's
  * collection pattern. Automatically dispatches children to Item or Section based on props.
  *
  * @see https://github.com/adobe/react-spectrum/blob/main/packages/@react-stately/collections/src/Item.ts
@@ -13,7 +13,7 @@
 
 import type { PartialNode } from '@react-stately/collections'
 import type { ItemElement } from '@react-types/shared'
-import type * as React from 'react'
+import type { JSX } from 'react'
 import type { ItemProps } from 'react-stately'
 import type { TDefaultItemComponent, TDefaultSectionComponent } from '../../types/react-stately'
 import type { TNodeProps } from './interface'
@@ -156,6 +156,6 @@ Node.getCollectionNode = function* getCollectionNode<T extends object = object>(
   }
 }
 
-const _Node = Node as unknown as (_props: TNodeProps<object>) => React.JSX.Element
+const _Node = Node as unknown as (_props: TNodeProps<object>) => JSX.Element
 
 export { _Node as Node }

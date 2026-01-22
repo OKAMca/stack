@@ -1,8 +1,8 @@
+import type { SVGProps } from 'react'
 import { isEqual } from 'radashi'
-import * as React from 'react'
 import { memo } from 'react'
 
-function SvgComponent(props: React.SVGProps<SVGSVGElement>) {
+function SvgComponent(props: SVGProps<SVGSVGElement>) {
   return (
     <svg height={48} width={48} fill="currentColor" {...props} xmlns="http://www.w3.org/2000/svg">
       <ellipse cx="26" cy="24.095" rx="26" ry="23.547" fill="#fff" />

@@ -1,7 +1,7 @@
 import type { TBlockSerializerProps } from '../../components/BlockSerializer/interface'
 import type { BlockWysiwygFragment } from './interface'
 import { Box, WysiwygBlock } from '@okam/stack-ui'
-import * as React from 'react'
+import { createElement } from 'react'
 import { getBlock } from '../../utils'
 
 async function BlockWysiwyg(props: TBlockSerializerProps<BlockWysiwygFragment>) {
@@ -16,7 +16,7 @@ async function BlockWysiwyg(props: TBlockSerializerProps<BlockWysiwygFragment>) 
     <>
       {(title != null && title !== '') && (level != null && level !== '') && (
         <Box as="span" themeName={themeName} tokens={{ ...tokens, ...cmsTokens }}>
-          {React.createElement(level, {}, title)}
+          {createElement(level, {}, title)}
         </Box>
       )}
       {(content != null && content !== '') && <WysiwygBlock themeName={themeName} tokens={{ ...tokens, ...cmsTokens }} content={content} />}

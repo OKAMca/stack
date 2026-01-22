@@ -1,5 +1,5 @@
 import type { AriaLabelingProps } from '@react-types/shared'
-import type * as React from 'react'
+import type { ElementType, JSX, ReactNode } from 'react'
 import type { AriaTabListProps } from 'react-aria'
 import type { TToken } from '../../providers/Theme/interface'
 import type { Maybe, TDefaultComponent, TTransition } from '../../types/components'
@@ -7,18 +7,18 @@ import type { NextLinkProps } from '../../types/next-link'
 
 export interface MenuProps {
   id: string
-  children: React.ReactNode
-  beforeTabContent?: React.ReactNode
-  afterTabContent?: React.ReactNode
+  children: ReactNode
+  beforeTabContent?: ReactNode
+  afterTabContent?: ReactNode
 
-  PanelTransition?: (_props: TTransition) => React.JSX.Element
+  PanelTransition?: (_props: TTransition) => JSX.Element
 }
 
 export type TMenuProps<T = TToken> = AriaTabListProps<MenuProps> & MenuProps & TDefaultComponent<T>
 
 export type TMenuSidePanelProps = TMenuProps & {
 
-  TransitionAnimation?: (_props: TTransition) => React.JSX.Element
+  TransitionAnimation?: (_props: TTransition) => JSX.Element
 }
 
 export type PartialHtmlBaseElement = Omit<Partial<HTMLBaseElement>, 'id' | 'onClick' | 'target' | 'role' | 'children'>
@@ -30,7 +30,7 @@ export interface IMenuItemProp {
   path?: string
   label?: string
   nextLinkProps?: NextLinkProps
-  as?: React.ElementType
+  as?: ElementType
   onClick?: () => void
 }
 
@@ -45,9 +45,9 @@ export type TMenuItemProps = IMenuItemProp
 
 export interface TMenuItemsProps extends TDefaultComponent {
   menuItems?: TMenuItemProps[] | null
-  menuLinkComponent?: React.ElementType
-  buttonLinkComponent?: React.ElementType
-  children?: React.ReactNode
+  menuLinkComponent?: ElementType
+  buttonLinkComponent?: ElementType
+  children?: ReactNode
 }
 
 export default TMenuProps
