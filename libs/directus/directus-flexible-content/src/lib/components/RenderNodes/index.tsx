@@ -1,10 +1,9 @@
 import type { TDefaultComponent } from '@okam/stack-ui'
-import type { ReactNode } from 'react'
+import type { ElementType, JSX, ReactNode } from 'react'
 import type { Extensions, JSONContent, ReactComponentSerializers } from '../../functions/types'
 import type { TRenderingNodes } from '../nodes/types'
 
 import { Box } from '@okam/stack-ui'
-import * as React from 'react'
 import { mergeSerializers, renderView } from '../../functions'
 import remapAttributes from '../attributes/remapAttributes'
 import nodes from '../nodes'
@@ -37,7 +36,7 @@ function RenderNodes(props: RenderNodesProps): ReactNode {
     clonedContent,
     mergedSerializers,
     // @ts-expect-error Expects ReactNode
-    (tag: keyof React.JSX.IntrinsicElements, attrs: JSONContent['attrs'], children: ReactNode) => {
+    (tag: keyof JSX.IntrinsicElements, attrs: JSONContent['attrs'], children: ReactNode) => {
       const defaultAttributes = {
         ...attrs,
         style: undefined,
@@ -54,7 +53,7 @@ function RenderNodes(props: RenderNodesProps): ReactNode {
       return (
         <Box
           key={JSON.stringify(children)}
-          as={tag as React.ElementType}
+          as={tag as ElementType}
           {...mappedAttributes}
           themeName={themeName}
           tokens={tokens}
