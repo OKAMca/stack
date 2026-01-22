@@ -77,7 +77,8 @@
       "id": "11",
       "title": "Add unit tests for archive command",
       "description": "Create libs/ai/src/commands/archive.spec.ts - test file move, timestamp format, error handling",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Created 13 unit tests covering: error when prd.json missing, archiving both files, archive directory creation, existing archive directory handling, skip missing progress.txt, slugify project name, truncate long project names, default slug for missing/empty project field, invalid JSON handling, ISO date format, file content preservation, success messages. All tests pass. Lint passes."
     },
     {
       "id": "12",
