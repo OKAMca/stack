@@ -268,8 +268,8 @@ export default antfu(
       'no-restricted-syntax': [
         'error',
         {
-          selector: 'ImportNamespaceSpecifier[local.name="React"]',
-          message: 'Avoid `import * as React`. Use named imports: `import { useState, useRef } from "react"`. Namespace imports cause minification issues with React 19 + Next.js 15.',
+          selector: 'ImportDeclaration[source.value="react"] > ImportNamespaceSpecifier',
+          message: 'Avoid namespace imports from "react". Use named imports: `import { useState, useRef } from "react"`. Namespace imports cause minification issues with React 19 + Next.js 15.',
         },
       ],
     },
