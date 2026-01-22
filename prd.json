@@ -170,6 +170,69 @@
         "DO NOT run ralph in this project - would loop on same tasks"
       ],
       "notes": "All verification passed: Build successful, 22 tests pass, lint passes. CLI ralph --help shows new flags (-a/--agent, -c/--context, -v/--verification). Init command creates prd.json with config section containing agent, context, and verification fields."
+    },
+    {
+      "id": "20",
+      "description": "Fix CLI version to read from package.json instead of hardcoded '0.0.1'",
+      "status": "completed",
+      "steps": [
+        "Import package.json in cli.ts using JSON module import",
+        "Replace .version('0.0.1') with .version(pkg.version)",
+        "Verify CLI --version shows correct version"
+      ],
+      "notes": "Used createRequire from node:module to dynamically import package.json at runtime. Path is './package.json' which resolves correctly in dist/libs/ai/ where both cli.js and package.json are located. Build, lint, and 22 tests all pass. CLI --version now shows dynamic version."
+    },
+    {
+      "id": "21",
+      "description": "Fix archive timestamp collision - add time (HH-mm-ss) to prevent same-day overwrites",
+      "status": "pending",
+      "steps": [
+        "Update getTimestamp() to include time: YYYY-MM-DD_HH-mm-ss",
+        "Update archive.spec.ts tests to match new timestamp format",
+        "Test: multiple archives on same day create unique files"
+      ]
+    },
+    {
+      "id": "22",
+      "description": "Fix archive slugify empty string fallback when project has only symbols",
+      "status": "pending",
+      "steps": [
+        "Check if slugify result is empty after processing",
+        "Fall back to 'project' default and emit warning",
+        "Add test case for project with only symbols"
+      ]
+    },
+    {
+      "id": "23",
+      "description": "Tighten iterations validation in ralph.ts to reject '1abc', '1.5'",
+      "status": "pending",
+      "steps": [
+        "Use Number() instead of parseInt for stricter validation",
+        "Check Number.isInteger() instead of Number.isNaN()",
+        "Pass validated iterationCount to spawn instead of raw string"
+      ]
+    },
+    {
+      "id": "24",
+      "description": "Validate iterations as positive integer in prd-agent.sh",
+      "status": "pending",
+      "steps": [
+        "Use regex [[ $1 =~ ^[1-9][0-9]*$ ]] for validation",
+        "Update usage message to clarify positive integer required",
+        "Test with 0, negative, and non-numeric inputs"
+      ]
+    },
+    {
+      "id": "25",
+      "description": "Build and verify CodeRabbit fixes",
+      "status": "pending",
+      "steps": [
+        "npx nx build ai",
+        "npx nx test ai",
+        "npx nx lint ai",
+        "Test CLI --version shows package.json version",
+        "Test archive creates unique timestamps"
+      ]
     }
   ]
 }
