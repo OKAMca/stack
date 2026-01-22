@@ -83,10 +83,12 @@ run_codex() {
   # jq filter for codex streaming - extract message text from agent_message items
   local stream_text='select(.item.type == "agent_message").item.content[]?.text // empty | gsub("\n"; "\r\n") | . + "\r\n\n"'
 
-  codex --full-auto \
+  # Use 'codex exec' for non-interactive mode with --json for JSONL output
+  codex exec \
+    --dangerously-bypass-approvals-and-sandbox \
     --model "o3" \
+    --json \
     "$PROMPT" \
-    | grep --line-buffered '^{' \
     | tee "$tmpfile" \
     | jq --unbuffered -rj "$stream_text"
 }
