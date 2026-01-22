@@ -44,7 +44,13 @@ export function registerArchiveCommand(program: Command): void {
         const prdContent = fs.readFileSync(prdPath, 'utf-8')
         const prd = JSON.parse(prdContent) as PrdFile
         if (typeof prd.project === 'string' && prd.project.length > 0) {
-          projectSlug = slugify(prd.project)
+          const slug = slugify(prd.project)
+          if (slug.length > 0) {
+            projectSlug = slug
+          }
+          else {
+            process.stderr.write('Warning: Project name contains no alphanumeric characters, using default slug.\n')
+          }
         }
       }
       catch {
