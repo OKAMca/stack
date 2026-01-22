@@ -129,7 +129,6 @@
     "tailwindcss-logical": "^4.1.0",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "verdaccio": "^6.0.5",
     "vite": "7.3.1",
     "vite-plugin-dts": "4.5.4",
     "vite-tsconfig-paths": "^6.0.4",
