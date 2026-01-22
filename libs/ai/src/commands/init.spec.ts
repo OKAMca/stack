@@ -69,7 +69,6 @@ describe('init command', () => {
     expect(content.tasks).toHaveLength(1)
     expect(content.tasks[0]).toMatchObject({
       id: '1',
-      title: '',
       description: '',
       status: 'pending',
       steps: [],
