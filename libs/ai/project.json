@@ -1,0 +1,59 @@
+{
+  "name": "ai",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ai/src",
+  "projectType": "library",
+  "release": {
+    "version": {
+      "manifestRootsToUpdate": ["dist/{projectRoot}"],
+      "currentVersionResolver": "git-tag",
+      "fallbackCurrentVersionResolver": "disk"
+    }
+  },
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/ai",
+        "main": "libs/ai/src/index.ts",
+        "additionalEntryPoints": ["libs/ai/src/cli.ts"],
+        "tsConfig": "libs/ai/tsconfig.lib.json",
+        "assets": [
+          "libs/ai/*.md",
+          {
+            "glob": "**/*",
+            "input": "libs/ai/scripts",
+            "output": "scripts"
+          }
+        ],
+        "format": ["esm"],
+        "esbuildConfig": "libs/ai/esbuild.config.cjs"
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/ai/**/*.{ts,tsx,js,jsx}",
+          "libs/ai/package.json",
+          "libs/ai/project.json"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/vitest:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../coverage/libs/ai"
+      }
+    }
+  }
+}

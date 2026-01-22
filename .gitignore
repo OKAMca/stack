@@ -120,3 +120,5 @@ yarn-error.log*
 progress.txt
 ralph.sh
 qa-ralph.sh
+
+vitest.config.*.timestamp*
