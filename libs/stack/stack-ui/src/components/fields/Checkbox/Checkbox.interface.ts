@@ -1,4 +1,4 @@
-import type * as React from 'react'
+import type { ReactNode } from 'react'
 import type { AriaCheckboxProps } from 'react-aria'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../../types/components'
@@ -8,7 +8,7 @@ export interface TCheckboxProps<T = TToken> extends TDefaultComponent<T>, AriaCh
   isError?: boolean
   errorMessage?: string
   ariaLabel?: string
-  icon?: React.ReactNode
+  icon?: ReactNode
 }
 
 export interface TCheckboxLabelStyles {

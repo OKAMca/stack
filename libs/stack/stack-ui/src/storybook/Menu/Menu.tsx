@@ -1,9 +1,8 @@
-import type { ComponentType } from 'react'
+import type { ComponentType, JSX, ReactNode } from 'react'
 import type { PressEvent } from 'react-aria'
 import type { TButtonProps } from '../../components/Button/interface'
 import type { TMenuItemProps, TMenuProps, TMenuSidePanelProps } from '../../components/Menu/interface'
 import { isEmpty } from 'radashi'
-import * as React from 'react'
 import { Item } from 'react-stately'
 import { Button, ButtonWithForwardRef } from '../../components/Button'
 import MenuItems from '../../components/Menu/components/MenuItems'
@@ -18,12 +17,12 @@ export interface TSubMenuTab {
   key: string
   title: string
   childItems?: TMenuItemProps[] | null
-  extra: React.ReactNode | undefined
+  extra: ReactNode | undefined
 }
 
 export interface TSubMenuExtraData {
   path: string
-  data: React.ReactNode
+  data: ReactNode
 }
 
 export function SidePanelControl() {
@@ -65,7 +64,7 @@ export function CloseBtn() {
   )
 }
 
-export function ShowTab({ children }: { children: React.ReactNode }) {
+export function ShowTab({ children }: { children: ReactNode }) {
   return (
     <div>
       <div>
@@ -87,11 +86,11 @@ export function MenuFactory({
   openBtn = null,
   MenuComponent,
 }: {
-  tabs: React.JSX.Element[]
+  tabs: JSX.Element[]
   id: string
   menuItems?: TMenuItemProps[] | null
   defaultIsOpen?: boolean
-  openBtn?: React.ReactNode | null
+  openBtn?: ReactNode | null
   MenuComponent: ComponentType<TMenuProps | TMenuSidePanelProps>
 }) {
   const { tabState, defaultSelectedKey } = useMenu()
@@ -113,7 +112,7 @@ export function MenuFactory({
     >
       <>
         {openBtn}
-        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (_props: unknown) => React.JSX.Element}>
+        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (_props: unknown) => JSX.Element}>
           <MenuItems menuLinkComponent="a" menuItems={menuItems} />
         </MenuComponent>
       </>

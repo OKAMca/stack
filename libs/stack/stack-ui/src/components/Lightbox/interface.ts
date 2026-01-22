@@ -1,6 +1,5 @@
 import type { DOMAttributes } from '@react-types/shared'
-import type * as React from 'react'
-import type { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import type { Dispatch, ForwardRefExoticComponent, FunctionComponent, ReactNode, RefAttributes, SetStateAction } from 'react'
 import type { OverlayTriggerProps as AriaOverlayTriggerProps } from 'react-aria'
 import type { OverlayTriggerProps } from 'react-stately'
 import type { TToken } from '../../providers/Theme/interface'
@@ -8,7 +7,7 @@ import type { TDefaultComponent, TTransition } from '../../types/components'
 import type { TButtonProps } from '../Button/interface'
 
 type TCloseButtonProps
-  = | React.ForwardRefExoticComponent<TButtonProps & React.RefAttributes<HTMLButtonElement & HTMLAnchorElement>>
+  = | ForwardRefExoticComponent<TButtonProps & RefAttributes<HTMLButtonElement & HTMLAnchorElement>>
     | FunctionComponent<TButtonProps>
 
 export interface LightboxProps<T = TToken>
@@ -23,7 +22,7 @@ export interface LightboxProps<T = TToken>
 
 export interface TLightboxProps<T = TToken> extends LightboxProps<T> {
   label: string
-  thumbnailContent: React.ReactNode
+  thumbnailContent: ReactNode
 }
 
 export interface LightboxAria {

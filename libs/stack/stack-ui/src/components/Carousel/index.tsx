@@ -1,12 +1,12 @@
 'use client'
 
+import type { JSX } from 'react'
 import type { TCarouselProps } from './interface'
-import * as React from 'react'
 import { CarouselContextProvider } from '../../providers/Carousel'
 import { Box } from '../Box'
 import CarouselA11yAnnouncer from './a11y/CarouselA11yAnnouncer'
 
-function Carousel(props: TCarouselProps): React.JSX.Element {
+function Carousel(props: TCarouselProps): JSX.Element {
   const { id, themeName = 'carousel', tokens, customTheme, slides, a11y, modules, children, ...rest } = props
 
   return (

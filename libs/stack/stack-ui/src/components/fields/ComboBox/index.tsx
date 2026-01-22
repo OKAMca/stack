@@ -1,10 +1,10 @@
 'use client'
 
+import type { MutableRefObject } from 'react'
 import type { RegisterOptions } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TComboBoxProps } from './interface'
 import { isEmpty } from 'radashi'
-import * as React from 'react'
 import { useCallback, useMemo, useRef } from 'react'
 import { useComboBox, useFilter } from 'react-aria'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -102,7 +102,7 @@ function ComboBox(props: TComboBoxProps<object, TToken>) {
     (ref: HTMLInputElement | null) => {
       if (ref != null) {
         hookFormRef?.(ref)
-        ;(inputRef as React.MutableRefObject<HTMLInputElement | null>).current = ref
+        ;(inputRef as MutableRefObject<HTMLInputElement | null>).current = ref
       }
     },
     [hookFormRef, inputRef],

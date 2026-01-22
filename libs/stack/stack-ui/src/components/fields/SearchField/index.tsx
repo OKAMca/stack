@@ -1,9 +1,9 @@
 'use client'
 
+import type { ChangeEvent } from 'react'
 import type { TToken } from '../../../providers/Theme/interface'
 import type TSearchProps from './interface'
-import * as React from 'react'
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 import { FocusRing, useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
@@ -39,11 +39,11 @@ function SearchField<T extends TToken>(props: TSearchProps<T>) {
   const internalIsDisabled = isDisabled || disabled
   const internalProps = { ...props, isDisabled: internalIsDisabled }
   const state = useSearchFieldState(internalProps)
-  const ref = React.useRef(null)
+  const ref = useRef(null)
   const { labelProps, inputProps, errorMessageProps, clearButtonProps } = useSearchField(internalProps, state, ref)
 
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       setUserSearchQuery(state.value)
       inputProps.onChange?.(e)
     },

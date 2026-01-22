@@ -1,7 +1,7 @@
 'use client'
 
 import { createThemeProvider, makeTheme } from '@okam/stack-ui'
-import * as React from 'react'
+import { memo } from 'react'
 import { adminBarTheme } from './AdminBar'
 import buttonTheme from './Button'
 import filterTheme from './Filter'
@@ -14,4 +14,4 @@ const BaseTheme = makeTheme({
   adminBar: adminBarTheme,
 })
 
-export default React.memo(createThemeProvider(BaseTheme))
+export default memo(createThemeProvider(BaseTheme))

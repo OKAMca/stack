@@ -1,15 +1,14 @@
 'use client'
 
-import type { RefObject } from 'react'
+import type { Ref, RefObject } from 'react'
 import type { TToken } from '../../providers/Theme/interface'
 import type { NextLinkProps } from '../../types/next-link'
 import type { TAnchorProps, TButtonProps } from './interface'
-import * as React from 'react'
 import { useRef } from 'react'
 import { FocusRing, useButton, useLink } from 'react-aria'
 import useThemeContext from '../../providers/Theme/hooks'
 
-export function Anchor({ ref: forwardRef, ...props }: TAnchorProps & { ref?: React.Ref<HTMLElement> }) {
+export function Anchor({ ref: forwardRef, ...props }: TAnchorProps & { ref?: Ref<HTMLElement> }) {
   const {
     as: Component = 'a',
     handlePress,
@@ -56,7 +55,7 @@ export function Anchor({ ref: forwardRef, ...props }: TAnchorProps & { ref?: Rea
   )
 }
 
-function Button({ ref: forwardRef, ...props }: TButtonProps & { ref?: React.Ref<HTMLElement> }) {
+function Button({ ref: forwardRef, ...props }: TButtonProps & { ref?: Ref<HTMLElement> }) {
   const {
     as: Component = 'button',
     handlePress,
@@ -89,7 +88,7 @@ function Button({ ref: forwardRef, ...props }: TButtonProps & { ref?: React.Ref<
   )
 }
 
-export function ButtonWithForwardRef({ ref, ...props }: TAnchorProps & { ref?: React.Ref<HTMLElement> }) {
+export function ButtonWithForwardRef({ ref, ...props }: TAnchorProps & { ref?: Ref<HTMLElement> }) {
   const { as } = props
   if (as === 'a')
     return <Anchor ref={ref} {...props} />

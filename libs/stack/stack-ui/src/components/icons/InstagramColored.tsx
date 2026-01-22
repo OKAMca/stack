@@ -1,8 +1,8 @@
+import type { SVGProps } from 'react'
 import { isEqual } from 'radashi'
-import * as React from 'react'
 import { memo } from 'react'
 
-function SvgComponent(props: React.SVGProps<SVGSVGElement>) {
+function SvgComponent(props: SVGProps<SVGSVGElement>) {
   return (
     <svg width={24} height={24} xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" viewBox="0 0 256 256" {...props}>
       <g fill="none" strokeMiterlimit="10" strokeWidth="0" transform="matrix(2.8 0 0 2.8 1.4 1.4)">
