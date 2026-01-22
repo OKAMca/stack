@@ -133,7 +133,7 @@
     {
       "id": "17",
       "description": "Filter completion signal detection to exclude thinking/reasoning output",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "For Claude: filter to only text content, exclude thinking blocks",
         "For Codex: filter to only agent_message items, exclude reasoning items",
@@ -141,10 +141,23 @@
         "Codex jq: select(.item.type == 'agent_message').item.text (not reasoning)",
         "Check <promise>COMPLETE</promise> only in filtered output",
         "Test with both CLIs to verify no false positives from thinking"
-      ]
+      ],
+      "notes": "Updated extract_result() in prd-agent.sh. Claude: filters to assistant messages and extracts only .type=='text' content (excludes thinking blocks). Codex: filters to agent_message items and extracts text/output_text content (excludes reasoning items). Completion signal now only detected in filtered output. Build, lint, and 22 tests all pass."
     },
     {
       "id": "18",
+      "description": "Fix grep -c output bug in prd-agent.sh task status counting",
+      "status": "pending",
+      "steps": [
+        "Bug: grep -c outputs '0' with exit code 1 when no matches",
+        "Current code: $(grep -c ... || echo '0') captures both '0\\n' and '0'",
+        "Fix: use $(grep -c ... 2>/dev/null; true) then ${var:-0}",
+        "Apply fix to pending, in_progress, and blocked counts",
+        "Test output shows single line: 'Tasks: X pending, Y in progress, Z blocked'"
+      ]
+    },
+    {
+      "id": "19",
       "description": "Build and verify new config system works",
       "status": "pending",
       "steps": [
