@@ -21,7 +21,8 @@
       "id": "3",
       "title": "Create CLI entry point",
       "description": "Create libs/ai/src/cli.ts with commander setup, imports for ralph/init/archive commands, and program.parse()",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Created cli.ts with commander setup. Command imports are commented out until commands are implemented. Added commander to libs/ai/package.json dependencies. Build, lint, and tests all pass."
     },
     {
       "id": "4",
