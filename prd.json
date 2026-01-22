@@ -54,13 +54,15 @@
       "id": "8",
       "title": "Configure project.json build",
       "description": "Update libs/ai/project.json - esbuild executor, platform node, format esm, bundle true, assets for scripts/",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Updated project.json: changed format from cjs to esm, added additionalEntryPoints for cli.ts. Build now outputs index.js and cli.js in ESM format. Completed as part of Task 9 since package.json config required matching build output."
     },
     {
       "id": "9",
       "title": "Configure package.json",
       "description": "Update libs/ai/package.json - add bin field, type module, publishConfig, engines node >=20",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Configured package.json with: type=module, bin field pointing to ./cli.js, exports for ESM, main/types, engines node>=20, publishConfig access=public, license BUSL-1.1, repository URL. Also updated project.json to build ESM format with CLI entry point. CLI --help verified working."
     },
     {
       "id": "10",
@@ -78,7 +80,8 @@
       "id": "12",
       "title": "Add to nx.json release config",
       "description": "Add ai to release.projects array in nx.json",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Already present in nx.json release.projects array (was added during initial scaffolding in Task 1)."
     },
     {
       "id": "13",
