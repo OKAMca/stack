@@ -28,6 +28,7 @@ node_modules
 
 # misc
 /.sass-cache
+/prd*.json
 /connect.lock
 /coverage
 /libpeerconnection.log
