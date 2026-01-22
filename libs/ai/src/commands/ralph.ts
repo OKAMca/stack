@@ -40,11 +40,12 @@ function readPrdConfig(prdPath: string): PrdConfig {
 
 function resolveScriptPath(): string {
   // Look for prd-agent.sh in the scripts directory relative to this file
-  // When built, the structure is: dist/libs/ai/commands/ralph.js
+  // When built with esbuild bundling, cli.js is at: dist/libs/ai/cli.js
   // Scripts are at: dist/libs/ai/scripts/prd-agent.sh
+  // So __dirname is dist/libs/ai/ and scripts is a direct subdirectory
   const possiblePaths = [
-    path.join(__dirname, '..', 'scripts', 'prd-agent.sh'), // Built location
-    path.join(__dirname, '..', '..', 'scripts', 'prd-agent.sh'), // Alternative
+    path.join(__dirname, 'scripts', 'prd-agent.sh'), // Bundled location (esbuild)
+    path.join(__dirname, '..', 'scripts', 'prd-agent.sh'), // Fallback
   ]
 
   for (const scriptPath of possiblePaths) {
