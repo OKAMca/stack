@@ -10,15 +10,11 @@ const PRD_TEMPLATE = {
     context: '',
     verification: 'Run your tests and type checks.',
   },
-  statuses: {
-    pending: 'Not started',
-    in_progress: 'Currently being worked on',
-    completed: 'Done',
-    blocked: 'Waiting on external dependency',
-  },
+  statuses: ['pending', 'in_progress', 'completed', 'blocked'],
   tasks: [
     {
       id: '1',
+      title: '',
       description: '',
       status: 'pending',
       steps: [],
