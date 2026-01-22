@@ -14,7 +14,8 @@
       "id": "2",
       "title": "Install commander dependency",
       "description": "Run: npm i commander",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Installed commander@14.0.2. Verified build, lint, and test all still pass."
     },
     {
       "id": "3",
