@@ -17,9 +17,13 @@ function slugify(text: string): string {
 
 function getTimestamp(): string {
   const now = new Date()
-  const date = now.toISOString().slice(0, 10)
-  const time = now.toTimeString().slice(0, 8).replace(/:/g, '-')
-  return `${date}_${time}`
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  const seconds = String(now.getSeconds()).padStart(2, '0')
+  return `${year}-${month}-${day}_${hours}-${minutes}-${seconds}`
 }
 
 export function registerArchiveCommand(program: Command): void {

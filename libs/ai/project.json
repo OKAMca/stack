@@ -28,7 +28,8 @@
             "output": "scripts"
           }
         ],
-        "format": ["esm"]
+        "format": ["esm"],
+        "esbuildConfig": "libs/ai/esbuild.config.cjs"
       }
     },
     "nx-release-publish": {
