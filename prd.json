@@ -218,12 +218,13 @@
     {
       "id": "24",
       "description": "Validate iterations as positive integer in prd-agent.sh",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Use regex [[ $1 =~ ^[1-9][0-9]*$ ]] for validation",
         "Update usage message to clarify positive integer required",
         "Test with 0, negative, and non-numeric inputs"
-      ]
+      ],
+      "notes": "Added regex validation [[ $1 =~ ^[1-9][0-9]*$ ]] after empty check. Updated usage message to clarify 'positive integer (1 or greater)' requirement. Tested rejection of: 0, -5, abc, 1.5, 1abc. Build, lint, and 24 tests all pass."
     },
     {
       "id": "25",

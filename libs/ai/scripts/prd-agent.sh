@@ -13,6 +13,13 @@ set -o pipefail  # Make pipes return exit code of first failing command
 
 if [ -z "$1" ]; then
   echo "Usage: $0 <iterations>"
+  echo "  iterations: positive integer (1 or greater)"
+  exit 1
+fi
+
+# Validate that iterations is a positive integer (1 or greater)
+if ! [[ $1 =~ ^[1-9][0-9]*$ ]]; then
+  echo "Error: iterations must be a positive integer (1 or greater), got: '$1'"
   exit 1
 fi
 
