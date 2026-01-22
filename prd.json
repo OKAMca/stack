@@ -27,7 +27,8 @@
     {
       "id": "fix-stack-ui-providers",
       "description": "Convert providers/Theme/index.tsx, theme/index.tsx, and storybook/Menu/Menu.tsx in stack-ui",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Converted 3 files: providers/Theme/index.tsx (replaced React.createContext, React.use, React.ReactNode with named imports), theme/index.tsx (replaced React.memo with named import), storybook/Menu/Menu.tsx (replaced React.ReactNode, React.JSX.Element with named type imports). Lint and build pass."
     },
     {
       "id": "fix-next-component",

@@ -1,6 +1,6 @@
 'use client'
 
-import * as React from 'react'
+import { memo } from 'react'
 import { createThemeProvider, makeTheme } from '../providers/Theme'
 import { accordionTheme } from './Accordion'
 import alertsTheme from './Alerts'
@@ -148,4 +148,4 @@ const BaseTheme = makeTheme({
   listBox: listBoxTheme,
 })
 
-export default React.memo(createThemeProvider(BaseTheme))
+export default memo(createThemeProvider(BaseTheme))
