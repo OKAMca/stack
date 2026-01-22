@@ -70,7 +70,8 @@
       "id": "10",
       "title": "Add unit tests for init command",
       "description": "Create libs/ai/src/commands/init.spec.ts - test file creation, error on existing file",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Created 8 unit tests covering: file creation, prd.json structure validation, progress.txt header, error on existing files (single and both), --force flag override, success message output. All tests pass. Lint passes."
     },
     {
       "id": "11",
