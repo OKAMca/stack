@@ -155,9 +155,13 @@ for ((i=1; i<=$1; i++)); do
   fi
 
   # Check prd.json directly for remaining tasks
-  pending=$(grep -c '"status": "pending"' "$PRD_PATH" 2>/dev/null || echo "0")
-  in_progress=$(grep -c '"status": "in_progress"' "$PRD_PATH" 2>/dev/null || echo "0")
-  blocked=$(grep -c '"status": "blocked"' "$PRD_PATH" 2>/dev/null || echo "0")
+  # Note: grep -c outputs count and exits 1 when no matches, so we use || true to suppress exit code
+  pending=$(grep -c '"status": "pending"' "$PRD_PATH" 2>/dev/null || true)
+  pending=${pending:-0}
+  in_progress=$(grep -c '"status": "in_progress"' "$PRD_PATH" 2>/dev/null || true)
+  in_progress=${in_progress:-0}
+  blocked=$(grep -c '"status": "blocked"' "$PRD_PATH" 2>/dev/null || true)
+  blocked=${blocked:-0}
   echo "Tasks: $pending pending, $in_progress in progress, $blocked blocked"
 
   if [ "$pending" -eq 0 ] && [ "$in_progress" -eq 0 ]; then
