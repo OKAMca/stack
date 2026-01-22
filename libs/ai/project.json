@@ -22,6 +22,7 @@
         "tsConfig": "libs/ai/tsconfig.lib.json",
         "assets": [
           "libs/ai/*.md",
+          "libs/ai/package.json",
           {
             "glob": "**/*",
             "input": "libs/ai/scripts",
