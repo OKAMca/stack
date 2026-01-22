@@ -45,7 +45,8 @@
     {
       "id": "fix-directus-flexible-content",
       "description": "Convert libs/directus/directus-flexible-content/src/lib/components/RenderNodes/index.tsx",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Converted 1 file: replaced 'import * as React' with type imports (ElementType, JSX, ReactNode). Changed React.JSX.IntrinsicElements to JSX.IntrinsicElements and React.ElementType to ElementType. Lint and build pass. Verified dist output shows no namespace imports."
     },
     {
       "id": "add-eslint-rule",
