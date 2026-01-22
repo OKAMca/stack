@@ -1,0 +1,8 @@
+{
+  "name": "@okam/ai",
+  "type": "commonjs",
+  "version": "0.0.1",
+  "main": "./index.cjs",
+  "types": "./index.d.ts",
+  "dependencies": {}
+}
