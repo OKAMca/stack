@@ -2,9 +2,9 @@
 
 import { program } from 'commander'
 
+import { registerArchiveCommand } from './commands/archive'
 import { registerInitCommand } from './commands/init'
 // Commands will be imported here as they are created:
-// import { registerArchiveCommand } from './commands/archive'
 // import { registerRalphCommand } from './commands/ralph'
 
 program
@@ -14,7 +14,7 @@ program
 
 // Register commands
 registerInitCommand(program)
-// registerArchiveCommand(program)
+registerArchiveCommand(program)
 // registerRalphCommand(program)
 
 program.parse()

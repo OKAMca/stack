@@ -35,7 +35,8 @@
       "id": "5",
       "title": "Create archive command",
       "description": "Create libs/ai/src/commands/archive.ts - moves prd.json and progress.txt to archive/ with timestamp",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Created archive command that moves prd.json and progress.txt to archive/ folder. Files are renamed with pattern: {type}_{project-slug}_{date}.{ext}. Creates archive/ directory if needed. Registered in cli.ts. Build, lint, and tests all pass."
     },
     {
       "id": "6",
