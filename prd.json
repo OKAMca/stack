@@ -93,6 +93,66 @@
       "description": "Run npx nx build ai, verify dist/libs/ai/cli.js --help works, scripts/ folder present",
       "status": "completed",
       "notes": "Build successful. Verified: cli.js --help displays all commands (init, archive, ralph). scripts/prd-agent.sh present in dist. Lint passes. 22 tests pass."
+    },
+    {
+      "id": "14",
+      "description": "Update prd.json init template to include config section with agent, context, verification fields",
+      "status": "completed",
+      "steps": [
+        "Add config object to PRD_TEMPLATE in init.ts",
+        "Include: agent (default: claude), context (empty), verification (default wording)",
+        "Update init.spec.ts tests to verify config section"
+      ],
+      "notes": "Added config object to PRD_TEMPLATE with agent='claude', context='', verification='Run your tests and type checks.' Updated init.spec.ts to verify config section. Build, lint, and 22 tests all pass."
+    },
+    {
+      "id": "15",
+      "description": "Update ralph.ts to read config from prd.json and support CLI flag overrides",
+      "status": "pending",
+      "steps": [
+        "Add CLI flags: -a/--agent, -c/--context, -v/--verification",
+        "Read prd.json config section",
+        "Resolution order: CLI flags > prd.json config > defaults",
+        "Remove --model flag, replace with --agent",
+        "Pass resolved values to prd-agent.sh via ENV vars (internal)"
+      ]
+    },
+    {
+      "id": "16",
+      "description": "Update prd-agent.sh to use RALPH_AGENT env var and support codex CLI",
+      "status": "pending",
+      "steps": [
+        "Rename RALPH_MODEL to RALPH_AGENT",
+        "Add RALPH_CONTEXT and RALPH_VERIFICATION env vars",
+        "Update PROMPT to use context and verification from env vars",
+        "Add conditional for claude vs codex CLI invocation"
+      ]
+    },
+    {
+      "id": "17",
+      "description": "Filter completion signal detection to exclude thinking/reasoning output",
+      "status": "pending",
+      "steps": [
+        "For Claude: filter to only text content, exclude thinking blocks",
+        "For Codex: filter to only agent_message items, exclude reasoning items",
+        "Claude jq: select(.type == 'text').text (not thinking)",
+        "Codex jq: select(.item.type == 'agent_message').item.text (not reasoning)",
+        "Check <promise>COMPLETE</promise> only in filtered output",
+        "Test with both CLIs to verify no false positives from thinking"
+      ]
+    },
+    {
+      "id": "18",
+      "description": "Build and verify new config system works",
+      "status": "pending",
+      "steps": [
+        "npx nx build ai",
+        "npx nx test ai",
+        "npx nx lint ai",
+        "Test: node dist/libs/ai/cli.js ralph --help (verify new flags shown)",
+        "Test: node dist/libs/ai/cli.js init in /tmp (verify config section created)",
+        "DO NOT run ralph in this project - would loop on same tasks"
+      ]
     }
   ]
 }

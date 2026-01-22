@@ -5,6 +5,11 @@ import * as path from 'node:path'
 const PRD_TEMPLATE = {
   project: '',
   goal: '',
+  config: {
+    agent: 'claude',
+    context: '',
+    verification: 'Run your tests and type checks.',
+  },
   statuses: {
     pending: 'Not started',
     in_progress: 'Currently being worked on',
