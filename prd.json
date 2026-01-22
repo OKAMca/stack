@@ -229,11 +229,12 @@
     {
       "id": "25",
       "description": "Update package version from 0.0.1 to 0.1.0 for initial release",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Update version in libs/ai/package.json to 0.1.0",
         "Verify CLI --version shows 0.1.0"
-      ]
+      ],
+      "notes": "Updated version in libs/ai/package.json from 0.0.1 to 0.1.0. Built package and verified CLI --version shows 0.1.0. Build, lint, and 24 tests all pass."
     },
     {
       "id": "26",
