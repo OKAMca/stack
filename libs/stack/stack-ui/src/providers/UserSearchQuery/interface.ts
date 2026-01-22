@@ -1,5 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react'
-import type * as React from 'react'
+import type { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface TSearchListingContext {
   userSearchQuery: string
@@ -7,6 +6,6 @@ export interface TSearchListingContext {
 }
 
 export interface TSearchProviderProps {
-  children: React.ReactNode
+  children: ReactNode
   userQuery: string
 }

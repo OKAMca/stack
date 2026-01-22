@@ -1,10 +1,10 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import type { GraphQLClient, Variables } from 'graphql-request'
-import type * as React from 'react'
+import type { ReactNode } from 'react'
 
 export interface TGQLQueryProviderProps {
-  children: React.ReactNode
+  children: ReactNode
   client: GraphQLClient
 }
 

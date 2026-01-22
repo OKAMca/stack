@@ -1,14 +1,13 @@
-import type * as React from 'react'
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { ElementType, HTMLAttributes, ReactNode } from 'react'
 import type { RefCallBack } from 'react-hook-form'
 import type { TCustomTheme, TToken } from '../providers/Theme/interface'
 
 export interface TDefaultComponent<T = TToken> {
-  as?: React.ElementType
+  as?: ElementType
   customTheme?: TCustomTheme
   tokens?: T
   themeName?: string | null
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
 export interface TReactHookFormValidity {
@@ -55,7 +54,7 @@ export type TReactHookForm = TReactHookFormValidity & {
 
 export interface TTransition extends TDefaultComponent, HTMLAttributes<HTMLElement> {
   isVisible: boolean
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export type Nullable<T> = T | undefined | null

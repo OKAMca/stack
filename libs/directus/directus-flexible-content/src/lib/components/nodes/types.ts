@@ -1,11 +1,11 @@
 import type { TDefaultComponent } from '@okam/stack-ui'
-import type * as React from 'react'
+import type { JSX, ReactNode } from 'react'
 
 export interface TBaseRenderingNode extends TDefaultComponent {
-  children: React.ReactNode
+  children: ReactNode
   attrs?: Record<string, number | string | boolean | undefined>
 }
 
 export type TRenderingNodes = {
-  [_key in keyof React.JSX.IntrinsicElements]?: (_props: TBaseRenderingNode) => React.JSX.Element
+  [_key in keyof JSX.IntrinsicElements]?: (_props: TBaseRenderingNode) => JSX.Element
 }

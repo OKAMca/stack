@@ -1,11 +1,10 @@
 import type { DOMProps } from '@react-types/shared'
-import type * as React from 'react'
-import type { ButtonHTMLAttributes } from 'react'
+import type { ButtonHTMLAttributes, HTMLAttributes, MutableRefObject, ReactNode } from 'react'
 import type { AriaButtonProps, OverlayTriggerProps as OverlayTriggerPropsAria } from 'react-aria'
 import type { OverlayTriggerProps, OverlayTriggerState } from 'react-stately'
 
 export interface TSidePanelProviderProps extends OverlayTriggerProps, Partial<OverlayTriggerPropsAria> {
-  children: React.ReactNode
+  children: ReactNode
   defaultSelectedKey: string
   /**
    * @deprecated Use `defaultOpen` instead
@@ -27,9 +26,9 @@ export type TSidePanelButtonProps = Omit<AriaButtonProps<'button'>, 'onPress'> &
 
 export interface TSidePanelButtons {
   closeButtonProps: TSidePanelButtonProps & ButtonHTMLAttributes<HTMLButtonElement>
-  closeButtonRef: React.MutableRefObject<null>
-  openButtonProps: TSidePanelButtonProps & React.HTMLAttributes<HTMLDivElement>
-  openButtonRef: React.MutableRefObject<null>
+  closeButtonRef: MutableRefObject<null>
+  openButtonProps: TSidePanelButtonProps & HTMLAttributes<HTMLDivElement>
+  openButtonRef: MutableRefObject<null>
 }
 
 /**
