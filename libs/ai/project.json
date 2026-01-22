@@ -28,8 +28,7 @@
             "output": "scripts"
           }
         ],
-        "format": ["esm"],
-        "generatePackageJson": true
+        "format": ["esm"]
       }
     },
     "nx-release-publish": {
@@ -38,7 +37,15 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint"
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/ai/**/*.{ts,tsx,js,jsx}",
+          "libs/ai/package.json",
+          "libs/ai/project.json"
+        ]
+      }
     },
     "test": {
       "executor": "@nx/vitest:test",
