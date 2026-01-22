@@ -20,7 +20,14 @@
         "main": "libs/ai/src/index.ts",
         "additionalEntryPoints": ["libs/ai/src/cli.ts"],
         "tsConfig": "libs/ai/tsconfig.lib.json",
-        "assets": ["libs/ai/*.md"],
+        "assets": [
+          "libs/ai/*.md",
+          {
+            "glob": "**/*",
+            "input": "libs/ai/scripts",
+            "output": "scripts"
+          }
+        ],
         "format": ["esm"],
         "generatePackageJson": true
       }

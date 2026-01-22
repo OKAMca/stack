@@ -49,7 +49,8 @@
       "id": "7",
       "title": "Create portable ralph.sh script",
       "description": "Create libs/ai/scripts/ralph.sh - reads config from env vars (RALPH_MODEL, RALPH_CONTEXT, RALPH_PRD, RALPH_PROGRESS)",
-      "status": "pending"
+      "status": "completed",
+      "notes": "Created libs/ai/scripts/prd-agent.sh (renamed from ralph.sh to avoid .gitignore conflict). Script reads RALPH_MODEL, RALPH_CONTEXT, RALPH_PRD, RALPH_PROGRESS env vars. Builds dynamic Claude prompt with context path and PRD references. Supports iteration loop with failure detection. Updated ralph.ts to spawn prd-agent.sh. Configured project.json to copy scripts/ to dist. Build, lint, and tests all pass."
     },
     {
       "id": "8",
