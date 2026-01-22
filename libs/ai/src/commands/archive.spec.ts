@@ -154,6 +154,18 @@ describe('archive command', () => {
     expect(archivedFiles[0]).toMatch(/^prd_project_/)
   })
 
+  it('should use default slug and warn when project contains only symbols', async () => {
+    const prdContent = { project: '@#$%^&*()', goal: 'Goal' }
+    fs.writeFileSync(path.join(tempDir, 'prd.json'), JSON.stringify(prdContent))
+
+    await program.parseAsync(['node', 'test', 'archive'])
+
+    expect(mockStderr).toHaveBeenCalledWith('Warning: Project name contains no alphanumeric characters, using default slug.\n')
+
+    const archivedFiles = fs.readdirSync(path.join(tempDir, 'archive'))
+    expect(archivedFiles[0]).toMatch(/^prd_project_/)
+  })
+
   it('should use default slug and warn when prd.json is invalid JSON', async () => {
     fs.writeFileSync(path.join(tempDir, 'prd.json'), 'not valid json {{{')
 
