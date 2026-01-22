@@ -1,8 +1,7 @@
 'use client'
 
 import type { TMenuItemProps, TMenuItemsProps } from '../interface'
-import * as React from 'react'
-import { useCallback, useRef } from 'react'
+import { isValidElement, useCallback, useRef } from 'react'
 import { useMenu } from '../../../providers/Menu'
 import { Box } from '../../Box'
 import { Anchor, Button } from '../../Button'
@@ -51,7 +50,7 @@ function ButtonElement(menuItem: TMenuItemProps) {
       as={as}
       aria-label={ariaLabel ?? legacyAriaLabel}
     >
-      {React.isValidElement(children) ? children : label}
+      {isValidElement(children) ? children : label}
     </Button>
   )
 }
@@ -95,7 +94,7 @@ function LinkElement(menuItem: TMenuItemProps) {
       as={as}
       aria-label={ariaLabel ?? legacyAriaLabel}
     >
-      {React.isValidElement(children) ? children : label}
+      {isValidElement(children) ? children : label}
     </Anchor>
   )
 }

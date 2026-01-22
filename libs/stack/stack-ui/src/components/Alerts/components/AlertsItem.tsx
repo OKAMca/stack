@@ -10,8 +10,9 @@
  * @see docs/ADR/005_react-stately-eslint-exceptions.md
  */
 
+import type { ReactElement } from 'react'
 import type { TAlertsItemProps } from '../interface'
-import * as React from 'react'
+import { cloneElement, isValidElement } from 'react'
 import { useCarousel } from '../../../providers/Carousel'
 import { Box } from '../../Box'
 import { Button } from '../../Button'
@@ -38,8 +39,8 @@ function AlertsItem(props: TAlertsItemProps) {
             <Button tabIndex={isActive ? 0 : -1} themeName={`${themeName}.button`} tokens={tokens} {...button} />
           )}
           {content != null
-            && (React.isValidElement(content)
-              ? React.cloneElement(content as React.ReactElement<Record<string, unknown>>, {
+            && (isValidElement(content)
+              ? cloneElement(content as ReactElement<Record<string, unknown>>, {
                   themeName: `${themeName}.content`,
                   tokens,
                 })

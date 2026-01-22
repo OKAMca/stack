@@ -1,8 +1,8 @@
 'use client'
 
+import type { ReactElement } from 'react'
 import type { TDefaultItemComponent, TDefaultSectionComponent } from '../../../../types/react-stately'
-import * as React from 'react'
-import { useMemo, useState } from 'react'
+import { createElement, useMemo, useState } from 'react'
 import { Node } from '../../../Node'
 
 // Simple input type for sections without render functions
@@ -15,7 +15,7 @@ interface SimpleSectionData<T extends object = object> {
 // Complex type for sections with render functions (after transformation)
 type SectionWithItems<T extends object = object> = TDefaultSectionComponent<T> & {
   items?: Array<TDefaultItemComponent<T>>
-  children?: (_props: TDefaultItemComponent<T>) => React.ReactElement
+  children?: (_props: TDefaultItemComponent<T>) => ReactElement
 }
 
 type FlatListItem<T extends object = object> = TDefaultItemComponent<T>
@@ -49,7 +49,7 @@ export function useComboBoxFiltering<T extends object = object>(
       return (items as SimpleSectionData<T>[]).map(section => ({
         ...section,
         children: ({ key, children, ...item }: TDefaultItemComponent<T>) =>
-          React.createElement(Node, { key, ...item }, children),
+          createElement(Node, { key, ...item }, children),
       }))
     }
 
