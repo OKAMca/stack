@@ -1,6 +1,6 @@
 'use client'
 
-import type * as React from 'react'
+import type { Ref } from 'react'
 import type { TAnchorProps } from '../../Button/interface'
 import { FocusRing, usePress } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
@@ -8,7 +8,7 @@ import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
 
 interface LegacyCarouselNavigationButtonProps extends TAnchorProps {
-  ref?: React.Ref<HTMLElement>
+  ref?: Ref<HTMLElement>
   onSubmit?: () => void
 }
 

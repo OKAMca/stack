@@ -1,5 +1,4 @@
-import type * as React from 'react'
-import type { Ref, RefAttributes } from 'react'
+import type { ReactNode, Ref, RefAttributes } from 'react'
 import type { PressEvent } from 'react-aria'
 import type { TToken } from '../../providers/Theme/interface'
 import type { TDefaultComponent } from '../../types/components'
@@ -8,7 +7,7 @@ import type { NextLinkProps } from '../../types/next-link'
 export type TButtonAnchorElement = HTMLAnchorElement & HTMLButtonElement
 
 export interface TButtonProps<T = TToken> extends TDefaultComponent<T> {
-  children?: React.ReactNode
+  children?: ReactNode
   id?: string
   href?: string
   disabled?: boolean

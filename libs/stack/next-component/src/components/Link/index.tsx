@@ -1,12 +1,12 @@
 'use client'
 
-import type * as React from 'react'
+import type { Ref } from 'react'
 import type { TLinkProps } from './interface'
 import { Anchor } from '@okam/stack-ui'
 import NextLink from 'next/link'
 import { useLink } from '../../hooks/useLink'
 
-function Link({ ref, ...props }: TLinkProps & { ref?: React.Ref<HTMLElement> }) {
+function Link({ ref, ...props }: TLinkProps & { ref?: Ref<HTMLElement> }) {
   const {
     themeName = 'link',
     tokens,
