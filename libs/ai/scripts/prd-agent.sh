@@ -85,16 +85,19 @@ run_codex() {
 }
 
 # Function to extract result from captured JSON based on agent
+# Filters to only actual response text, excluding thinking/reasoning blocks
 extract_result() {
   local tmpfile="$1"
   local agent="$2"
 
   if [ "$agent" = "codex" ]; then
-    # Codex: extract from agent_message items
-    jq -rs '[.[] | select(.item.type == "agent_message") | .item.content[]?.text // empty] | join("")' "$tmpfile"
+    # Codex: extract only from agent_message items (not reasoning items)
+    # Filter to agent_message type and extract text content
+    jq -rs '[.[] | select(.item.type == "agent_message") | .item.content[]? | select(.type == "text" or .type == "output_text" or has("text")) | .text // empty] | join("")' "$tmpfile"
   else
-    # Claude: extract final result
-    jq -r 'select(.type == "result").result // empty' "$tmpfile"
+    # Claude: extract text content from assistant messages, excluding thinking blocks
+    # Filter to text blocks only (not thinking blocks which have .type == "thinking")
+    jq -rs '[.[] | select(.type == "assistant") | .message.content[]? | select(.type == "text") | .text // empty] | join("")' "$tmpfile"
   fi
 }
 
