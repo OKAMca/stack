@@ -51,6 +51,12 @@
     {
       "id": "add-eslint-rule",
       "description": "Add no-restricted-syntax rule to eslint.config.mjs with selector ImportNamespaceSpecifier[local.name='React'] to prevent namespace React imports",
+      "status": "completed",
+      "notes": "Added ESLint rule 'no-restricted-syntax' with selector 'ImportNamespaceSpecifier[local.name=\"React\"]' to eslint.config.js in a new config block 'react/no-namespace-import'. Rule targets libs/**/*.{ts,tsx,js,jsx} files. Verified rule catches violations - found 31 remaining files in stack-ui with namespace imports (interface files not covered by previous migration tasks). Rule provides clear error message explaining the React 19 + Next.js 15 minification issue."
+    },
+    {
+      "id": "fix-remaining-namespace-imports",
+      "description": "Fix remaining 35 files with React namespace imports detected by new ESLint rule: 31 in stack-ui (interface files, types, AlertsCloseButton, LegacyCarouselNavigationButton, Node), 1 in next-component (Link), 1 in directus-query (interface), 1 in directus-block (interface), 1 in directus-flexible-content (types)",
       "status": "pending"
     },
     {
