@@ -16,12 +16,12 @@ interface RalphOptions {
 }
 
 function resolveScriptPath(): string {
-  // Look for ralph.sh in the scripts directory relative to this file
+  // Look for prd-agent.sh in the scripts directory relative to this file
   // When built, the structure is: dist/libs/ai/commands/ralph.js
-  // Scripts are at: dist/libs/ai/scripts/ralph.sh
+  // Scripts are at: dist/libs/ai/scripts/prd-agent.sh
   const possiblePaths = [
-    path.join(__dirname, '..', 'scripts', 'ralph.sh'), // Built location
-    path.join(__dirname, '..', '..', 'scripts', 'ralph.sh'), // Alternative
+    path.join(__dirname, '..', 'scripts', 'prd-agent.sh'), // Built location
+    path.join(__dirname, '..', '..', 'scripts', 'prd-agent.sh'), // Alternative
   ]
 
   for (const scriptPath of possiblePaths) {
@@ -31,7 +31,7 @@ function resolveScriptPath(): string {
   }
 
   throw new Error(
-    'ralph.sh script not found. Make sure the package is properly installed.',
+    'prd-agent.sh script not found. Make sure the package is properly installed.',
   )
 }
 
@@ -76,7 +76,7 @@ export function registerRalphCommand(program: Command): void {
         process.exit(1)
       }
 
-      // Resolve the ralph.sh script path
+      // Resolve the prd-agent.sh script path
       let scriptPath: string
       try {
         scriptPath = resolveScriptPath()
@@ -86,7 +86,7 @@ export function registerRalphCommand(program: Command): void {
         process.exit(1)
       }
 
-      // Set up environment variables for ralph.sh
+      // Set up environment variables for prd-agent.sh
       const env = {
         ...process.env,
         RALPH_MODEL: options.model ?? 'claude-sonnet-4-20250514',
@@ -101,7 +101,7 @@ export function registerRalphCommand(program: Command): void {
       process.stdout.write(`Model: ${env.RALPH_MODEL}\n`)
       process.stdout.write('\n')
 
-      // Spawn ralph.sh with the iteration count as argument
+      // Spawn prd-agent.sh with the iteration count as argument
       const child = spawn('bash', [scriptPath, iterations], {
         cwd,
         env,
