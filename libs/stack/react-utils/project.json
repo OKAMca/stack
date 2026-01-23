@@ -1,0 +1,53 @@
+{
+  "name": "react-utils",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/stack/react-utils/src",
+  "projectType": "library",
+  "tags": ["publishable"],
+  "targets": {
+    "semantic-release": {
+      "executor": "@theunderscorer/nx-semantic-release:semantic-release",
+      "options": {
+        "changelog": true,
+        "npm": true,
+        "github": true,
+        "repositoryUrl": "https://github.com/OKAMca/stack.git",
+        "branches": ["main"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/stack/react-utils/**/*.{ts,tsx,js,jsx}",
+          "libs/stack/react-utils/package.json",
+          "libs/stack/react-utils/project.json"
+        ]
+      }
+    },
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/libs/stack/react-utils"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/libs/stack/react-utils"
+      }
+    },
+    "project-dry-release": {},
+    "project-release": {}
+  }
+}

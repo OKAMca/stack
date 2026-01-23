@@ -17,13 +17,14 @@
       "id": "1",
       "title": "Create new @okam/react-utils library skeleton",
       "description": "Add a new publishable library under libs/stack/react-utils with Vite build, dts generation, and Nx project config.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Add libs/stack/react-utils/package.json with name @okam/react-utils and React peer dependency",
         "Add libs/stack/react-utils/project.json with build target outputPath dist/libs/stack/react-utils",
         "Add libs/stack/react-utils/tsconfig.json + tsconfig.lib.json",
         "Add libs/stack/react-utils/vite.config.ts mirroring core-lib patterns (nxCopyAssetsPlugin, dts, isExternal)"
-      ]
+      ],
+      "notes": "Created library skeleton with all configuration files. React peer dep and dequal dependency will be added in Task 2 when utilities are moved."
     },
     {
       "id": "2",

@@ -1,0 +1,32 @@
+{
+  "name": "@okam/react-utils",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/OKAMca/stack.git"
+  },
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./index.d.ts",
+        "default": "./index.mjs"
+      },
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
+    }
+  },
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "nxrelease": {
+    "repositoryUrl": "https://github.com/OKAMca/stack.git"
+  }
+}
