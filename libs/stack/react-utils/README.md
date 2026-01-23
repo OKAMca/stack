@@ -60,6 +60,25 @@ function Consumer() {
 }
 ```
 
+#### `createCtxNullableStrict<A>()`
+
+Creates a React context with an optional provider. Returns `null` if used outside of the provider, allowing explicit null checks.
+
+```typescript
+import { createCtxNullableStrict } from '@okam/react-utils'
+
+const [useOptionalContext, OptionalProvider] = createCtxNullableStrict<MyContextValue>()
+
+// In a consumer (won't throw if outside provider)
+function Consumer() {
+  const context = useOptionalContext() // Returns null if not in provider
+  if (context === null) {
+    return <div>No context available</div>
+  }
+  return <div>{context.count}</div>
+}
+```
+
 ### Hooks
 
 #### `useDeepCompareMemoize<T>(value: T): T`

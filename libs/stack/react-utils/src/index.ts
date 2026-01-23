@@ -20,4 +20,4 @@ export type {
 
 // Context utilities
 export { default as createCtx } from './utils/createContext'
-export { createCtxNullable } from './utils/createContext'
+export { createCtxNullable, createCtxNullableStrict } from './utils/createContext'

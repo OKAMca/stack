@@ -138,12 +138,13 @@
       "id": "11",
       "title": "Add null-returning context helper to react-utils",
       "description": "Add a createCtxNullable variant that returns null when the context is missing, then adopt it in stack-ui Theme provider.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Add a new helper export in @okam/react-utils (e.g., createCtxNullableOrNull)",
         "Update libs/stack/stack-ui/src/providers/Theme/index.tsx to use the new helper",
         "Document the new helper in react-utils README"
-      ]
+      ],
+      "notes": "Added createCtxNullableStrict helper to @okam/react-utils that returns null when the context is missing (vs createCtxNullable which returns {} as A). Updated stack-ui Theme provider to import createCtxNullableStrict from @okam/react-utils, removing the local implementation. Documented the new helper in react-utils README with usage examples. All react-utils tests pass (6 tests), react-utils and core-lib build and lint successfully. Pre-existing lint/build errors in stack-ui and directus packages are unrelated to this change."
     }
   ]
 }

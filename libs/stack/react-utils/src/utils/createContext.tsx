@@ -34,4 +34,23 @@ export function createCtxNullable<A extends object | null>() {
   return [useCtx, ctx.Provider] as const // 'as const' makes TypeScript infer a tuple
 }
 
+/**
+ * A helper to create a Context and Provider with no upfront default value.
+ * Returns `null` when used outside of a Provider, allowing consumers to check
+ * for context availability without throwing an error.
+ */
+export function createCtxNullableStrict<A extends object | null>() {
+  const ctx = createContext<A | undefined>(undefined)
+  function useCtx() {
+    const c = use(ctx)
+
+    if (c === undefined) {
+      return null
+    }
+
+    return c
+  }
+  return [useCtx, ctx.Provider] as const // 'as const' makes TypeScript infer a tuple
+}
+
 export default createCtx
