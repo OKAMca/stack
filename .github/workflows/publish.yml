@@ -17,33 +17,39 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Install Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
           registry-url: https://registry.npmjs.org/
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
         shell: bash
 
       - name: Print Environment Info
-        run: npx nx report
+        run: pnpm nx report
         shell: bash
 
       - name: Build packages
-        run: npx nx run-many -t=build --projects=tag:publishable
+        run: pnpm nx run-many -t=build --projects=tag:publishable
         shell: bash
 
       - name: Debug npm auth
         run: |
           echo "Token length: ${#NODE_AUTH_TOKEN}"
-          npm whoami || echo "whoami failed"
+          pnpm whoami || echo "whoami failed"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish packages
-        run: npx nx release publish
+        run: pnpm nx release publish
         shell: bash
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
