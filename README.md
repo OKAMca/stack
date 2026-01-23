@@ -108,7 +108,7 @@ You will need to be connected to github (GITHUB_TOKEN, GH_TOKEN) or with cli log
   ```
 
 Run `pnpm dry-release` to see the changes that will be made are all good.
-Run `pnpm release` to release every project independantly at once.
+Run `pnpm release` to release every project independently at once.
 
 If you want to release only one package specifically you can use the nx command available in each project called `project-release` and `project-dry-release`
 
@@ -123,6 +123,7 @@ pnpm nx run PROJECTNAME:project-dry-release
 # when you are ready
 # first time
 pnpm nx run PROJECTNAME:project-release --first-release
+# next time
 pnpm nx run PROJECTNAME:project-release
 ```
 
