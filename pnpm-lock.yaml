@@ -23,6 +23,9 @@ importers:
       '@react-spring/web':
         specifier: ^10.0.3
         version: 10.0.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@react-stately/selection':
+        specifier: ^3.20.0
+        version: 3.20.7(react@19.2.3)
       '@react-types/shared':
         specifier: ^3.32.1
         version: 3.32.1(react@19.2.3)

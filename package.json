@@ -50,6 +50,7 @@
     "react-div-100vh": "0.7.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.71.1",
+    "@react-stately/selection": "^3.20.0",
     "react-stately": "^3.43.0",
     "react-use": "^17.6.0",
     "sanitize-html": "^2.17.0",
