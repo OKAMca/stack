@@ -1,6 +1,11 @@
 {
-  "project": "@okam/ai CLI Package",
-  "goal": "Create publishable CLI for AI automation tools, runnable via npx @okam/ai",
+  "project": "npm-to-pnpm-migration",
+  "goal": "Migrate the Nx monorepo from npm to pnpm package manager",
+  "config": {
+    "agent": "claude",
+    "context": "Nx monorepo with multiple publishable packages under libs/. Uses GitHub Actions for CI.",
+    "verification": "pnpm install && pnpm nx run-many -t build lint --projects=tag:publishable"
+  },
   "statuses": [
     "pending",
     "in_progress",
@@ -10,26 +15,68 @@
   "tasks": [
     {
       "id": "1",
-      "title": "Fix init.ts PRD_TEMPLATE schema alignment",
-      "description": "PRD_TEMPLATE uses old schema with statuses as object map and tasks without title field. Should match current PRD schema used by ralph/archive.",
+      "description": "Create pnpm-workspace.yaml configuration file",
       "status": "completed",
-      "notes": "Updated PRD_TEMPLATE in init.ts: changed statuses from object map to array, added title field to task template. Updated corresponding test in init.spec.ts.",
       "steps": [
-        "Change statuses from object map to array: ['pending', 'in_progress', 'completed', 'blocked']",
-        "Add 'title' field to task template",
-        "File: libs/ai/src/commands/init.ts (lines 5-27)"
+        "Create pnpm-workspace.yaml at project root",
+        "Define packages glob patterns for apps/* and libs/*"
       ]
     },
     {
       "id": "2",
-      "title": "Resolve merge conflicts with main branch",
-      "description": "Branch has conflicts: package-lock.json (content) and prd.json (deleted in main, modified in branch).",
-      "status": "completed",
-      "notes": "Merged origin/main (d4182d8) into branch. Resolved package-lock.json by accepting main's version and running npm install. Kept branch version of prd.json. Verified: ai build/lint/test pass. Note: demo build has pre-existing Directus API schema issue unrelated to merge.",
+      "description": "Remove package-lock.json and migrate to pnpm-lock.yaml",
+      "status": "pending",
       "steps": [
-        "Merge origin/main into branch",
-        "Keep branch version of prd.json (main deleted it)",
-        "Regenerate package-lock.json after resolving dependencies"
+        "Delete package-lock.json",
+        "Run pnpm import to convert lock file (or pnpm install if import fails)",
+        "Verify pnpm-lock.yaml is created"
+      ]
+    },
+    {
+      "id": "3",
+      "description": "Update .npmrc for pnpm compatibility",
+      "status": "pending",
+      "steps": [
+        "Check existing .npmrc settings",
+        "Add pnpm-specific settings if needed (e.g., shamefully-hoist, strict-peer-dependencies)"
+      ]
+    },
+    {
+      "id": "4",
+      "description": "Update GitHub Actions CI workflows to use pnpm",
+      "status": "pending",
+      "steps": [
+        "Update ci.yml to use pnpm/action-setup",
+        "Update publish.yml to use pnpm",
+        "Update chromatic.yml if it uses npm",
+        "Replace npm ci with pnpm install --frozen-lockfile"
+      ]
+    },
+    {
+      "id": "5",
+      "description": "Update package.json scripts that reference npm",
+      "status": "pending",
+      "steps": [
+        "Search for npm references in package.json scripts",
+        "Replace npm commands with pnpm equivalents"
+      ]
+    },
+    {
+      "id": "6",
+      "description": "Update documentation to reference pnpm",
+      "status": "pending",
+      "steps": [
+        "Update README.md with pnpm commands",
+        "Update any contributing guides"
+      ]
+    },
+    {
+      "id": "7",
+      "description": "Add .gitignore entries for pnpm",
+      "status": "pending",
+      "steps": [
+        "Ensure node_modules is ignored",
+        "Add .pnpm-store if needed"
       ]
     }
   ]
