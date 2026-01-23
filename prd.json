@@ -115,11 +115,12 @@
       "id": "9",
       "title": "Mark react-utils entry as client-only",
       "description": "Add an explicit client boundary to react-utils to prevent accidental use in server components.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Add 'use client' to libs/stack/react-utils/src/index.ts or per-module as appropriate",
         "Confirm Next.js server builds fail fast if react-utils is imported in RSC"
-      ]
+      ],
+      "notes": "Added 'use client' directive to all react-utils source files: index.ts (main entry point), use-deep-compare-memoize.ts, and use-promise.ts. createContext.tsx already had 'use client' directive. This ensures Next.js bundlers will properly detect these as client-only modules and fail fast if accidentally imported in React Server Components. All tests pass (6 tests), build and lint succeed."
     },
     {
       "id": "10",

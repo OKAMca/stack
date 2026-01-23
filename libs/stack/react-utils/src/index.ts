@@ -1,3 +1,5 @@
+'use client'
+
 /**
  * @okam/react-utils
  *
