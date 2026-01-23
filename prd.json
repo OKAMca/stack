@@ -113,6 +113,49 @@
         "Optionally adjust schedule interval and add ignore patterns"
       ],
       "notes": "Configured dependabot.yml with: npm ecosystem (works with pnpm-lock.yaml), weekly schedule, grouping for minor/patch updates to reduce PR noise, ignoring major version updates for manual review, and added github-actions ecosystem for workflow updates."
+    },
+    {
+      "id": "11",
+      "description": "Fix CI: Remove pnpm version conflict in ci.yml",
+      "status": "completed",
+      "steps": [
+        "Remove 'with: version: 10' block from lint job (lines 29-30)",
+        "Remove 'with: version: 10' block from test job (lines 55-56)",
+        "Remove 'with: version: 10' block from build job (lines 82-83)",
+        "pnpm/action-setup@v4 will automatically read version from packageManager in package.json"
+      ],
+      "notes": "Removed 'with: version: 10' blocks from all three jobs (lint, test, build) in ci.yml. pnpm/action-setup@v4 will now automatically read the pnpm version from the packageManager field in package.json (pnpm@10.10.0), eliminating the version conflict."
+    },
+    {
+      "id": "12",
+      "description": "Fix CI: Remove pnpm version conflict in publish.yml",
+      "status": "pending",
+      "steps": [
+        "Remove 'with: version: 10' block from publish job (lines 22-23)",
+        "pnpm/action-setup@v4 will automatically read version from packageManager in package.json"
+      ],
+      "notes": "Same issue as ci.yml - version conflict will cause publish workflow to fail"
+    },
+    {
+      "id": "13",
+      "description": "Fix CI: Change npx nx to pnpm nx in ci.yml",
+      "status": "pending",
+      "steps": [
+        "Change 'npx nx run-many -t lint' to 'pnpm nx run-many -t lint' (line 42)",
+        "Change 'npx nx run-many -t test --passWithNoTests' to 'pnpm nx run-many -t test --passWithNoTests' (line 68)",
+        "Change 'npx nx run-many -t build --projects=tag:publishable' to 'pnpm nx run-many -t build --projects=tag:publishable' (line 94)"
+      ],
+      "notes": "CodeRabbit suggestion: Using pnpm nx ensures the locally pinned Nx version is used, whereas npx could pull a different version"
+    },
+    {
+      "id": "14",
+      "description": "Fix README.md typos and formatting",
+      "status": "pending",
+      "steps": [
+        "Fix typo 'independantly' -> 'independently' (line 111)",
+        "Add missing '# next time' comment before second project-release command (line 126)"
+      ],
+      "notes": "CodeRabbit actionable comment: Fix typo and clarify command sequence"
     }
   ]
 }
