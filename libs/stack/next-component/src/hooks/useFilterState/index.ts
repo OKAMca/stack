@@ -1,18 +1,28 @@
 'use client'
 
-import type { Selection } from 'react-stately'
-import type { TFilter } from './interface'
+import type { SelectionManager } from '@react-stately/selection'
+import type { Collection, Key, Node, Selection } from 'react-stately'
+import type { TFilter, TFilterItem } from './interface'
 import { parseAsArrayOf, parseAsString, useQueryState } from 'nuqs'
 import { isEqual } from 'radashi'
 import { useMemo } from 'react'
 import { useListState } from 'react-stately'
 import { useUpdateEffect } from 'react-use'
 
+export interface UseFilterStateReturn {
+  collection: Collection<Node<TFilterItem>>
+  disabledKeys: Set<Key>
+  selectionManager: SelectionManager
+  onSelectionChange: (keys: Selection) => void
+  selectedKeys: string[] | undefined
+  defaultSelectedKeys: Set<Key | string>
+}
+
 /**
  * Manages the selection state of a single filter.
  * The state is managed by `useListState` from `react-stately`, which controls `useQueryState` from `nuqs` to display the selected keys in the URL search params.
  */
-export function useFilterState(props: TFilter) {
+export function useFilterState(props: TFilter): UseFilterStateReturn {
   const {
     id,
     defaultSelectedKeys: defaultSelectedKeysProp = [],
@@ -62,5 +72,5 @@ export function useFilterState(props: TFilter) {
     void setSelectedKeys(next)
   }, [state.selectionManager.selectedKeys])
 
-  return { ...state, onSelectionChange: onSelectedKeysChange, selectedKeys, defaultSelectedKeys }
+  return { ...state, onSelectionChange: onSelectedKeysChange, selectedKeys: selectedKeys ?? undefined, defaultSelectedKeys }
 }
