@@ -8,6 +8,11 @@
   "sideEffects": false,
   "exports": {
     ".": {
+      "react-server": {
+        "types": "./server.d.ts",
+        "import": "./server.mjs",
+        "require": "./server.js"
+      },
       "import": {
         "types": "./index.d.ts",
         "default": "./index.mjs"
