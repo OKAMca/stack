@@ -67,11 +67,12 @@
     {
       "id": "6",
       "description": "Update package.json scripts that reference npm",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Search for npm references in package.json scripts",
         "Replace npm commands with pnpm equivalents"
-      ]
+      ],
+      "notes": "Searched all package.json files in the workspace. No npm, npm run, npm ci, npm install, or npx references were found in any scripts. The existing scripts use nx commands directly (e.g., nx run-many, nx run, nx release) which are package manager agnostic and work with pnpm."
     },
     {
       "id": "7",
