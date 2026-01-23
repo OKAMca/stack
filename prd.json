@@ -55,12 +55,13 @@
       "id": "4",
       "title": "Adjust dependencies and exports",
       "description": "Shift React peer dependency to react-utils and keep core-lib server-safe for Node consumers.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Remove react peer dependency from libs/stack/core-lib/package.json (or mark optional for transition)",
         "Add react peer dependency to libs/stack/react-utils/package.json",
         "Confirm exports field for core-lib includes react-server server-safe entry (keep existing fix)"
-      ]
+      ],
+      "notes": "Made React peer dependency optional in core-lib via peerDependenciesMeta. Added react-server export condition and server.ts entry point for server-safe builds (excludes createCtx/createCtxNullable re-exports). Updated vite.config.ts for multiple entry points. react-utils already had correct React peer dependency."
     },
     {
       "id": "5",
