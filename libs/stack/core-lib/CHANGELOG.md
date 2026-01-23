@@ -1,3 +1,20 @@
+## 1.18.0 (Unreleased)
+
+### 🚀 Features
+
+- **core-lib:** Add `react-server` export condition for server-safe builds (excludes React-dependent utilities)
+
+### ⚠️ Deprecations
+
+- **core-lib:** `createCtx` and `createCtxNullable` are now deprecated. Import from `@okam/react-utils` instead. These exports will be removed in a future major version.
+
+### 📦 Dependencies
+
+- Added `@okam/react-utils` as a dependency for deprecated re-exports
+- Made `react` peer dependency optional via `peerDependenciesMeta`
+
+---
+
 ## 1.17.2 (2026-01-21)
 
 ### 🩹 Fixes

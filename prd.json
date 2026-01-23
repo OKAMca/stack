@@ -79,13 +79,14 @@
       "id": "6",
       "title": "Build and release validation",
       "description": "Verify outputs, Next.js build, and document migration.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Run npx nx build core-lib and npx nx build react-utils",
         "Verify @okam/core-lib server build avoids React imports",
         "Run npx nx build vanier-nextjs with workarounds removed",
         "Update README/CHANGELOG with migration note and deprecation"
-      ]
+      ],
+      "notes": "All 13 publishable projects build and lint successfully. Verified server.mjs has no React imports while index.mjs includes React for deprecated createCtx/createCtxNullable re-exports. Added migration documentation to core-lib README.md and CHANGELOG.md. Created comprehensive README.md for react-utils with API documentation."
     }
   ]
 }
