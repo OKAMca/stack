@@ -43,17 +43,27 @@
     },
     {
       "id": "4",
-      "description": "Update GitHub Actions CI workflows to use pnpm",
-      "status": "pending",
+      "description": "Update .github/workflows/ci.yml to use pnpm",
+      "status": "completed",
       "steps": [
-        "Update ci.yml to use pnpm/action-setup",
-        "Update publish.yml to use pnpm",
-        "Update chromatic.yml if it uses npm",
-        "Replace npm ci with pnpm install --frozen-lockfile"
-      ]
+        "Add pnpm/action-setup@v4 step with version 10 before actions/setup-node in each job (lint, test, build)",
+        "Change cache: 'npm' to cache: 'pnpm' in actions/setup-node",
+        "Replace 'npm ci' with 'pnpm install --frozen-lockfile'"
+      ],
+      "notes": "Updated all three jobs (lint, test, build) to use pnpm/action-setup@v4 with version 10, changed cache to pnpm, and replaced npm ci with pnpm install --frozen-lockfile"
     },
     {
       "id": "5",
+      "description": "Update .github/workflows/publish.yml to use pnpm",
+      "status": "pending",
+      "steps": [
+        "Add pnpm/action-setup@v4 step with version 10 before actions/setup-node",
+        "Replace 'npm ci' with 'pnpm install --frozen-lockfile'",
+        "Update 'npm whoami' debug command to 'pnpm whoami'"
+      ]
+    },
+    {
+      "id": "6",
       "description": "Update package.json scripts that reference npm",
       "status": "pending",
       "steps": [
@@ -62,7 +72,7 @@
       ]
     },
     {
-      "id": "6",
+      "id": "7",
       "description": "Update documentation to reference pnpm",
       "status": "pending",
       "steps": [
@@ -71,7 +81,7 @@
       ]
     },
     {
-      "id": "7",
+      "id": "8",
       "description": "Add .gitignore entries for pnpm",
       "status": "pending",
       "steps": [
