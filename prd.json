@@ -87,6 +87,60 @@
         "Update README/CHANGELOG with migration note and deprecation"
       ],
       "notes": "All 13 publishable projects build and lint successfully. Verified server.mjs has no React imports while index.mjs includes React for deprecated createCtx/createCtxNullable re-exports. Added migration documentation to core-lib README.md and CHANGELOG.md. Created comprehensive README.md for react-utils with API documentation."
+    },
+    {
+      "id": "7",
+      "title": "Decouple core-lib from react-utils dependency",
+      "description": "Avoid forcing React peer requirements on server-only consumers by revisiting how core-lib references react-utils.",
+      "status": "pending",
+      "steps": [
+        "Decide whether core-lib should depend on react-utils or use optional/peer dependency + re-export guard",
+        "If keeping re-exports, document that server-only environments should use the react-server condition",
+        "Update core-lib package.json dependency strategy accordingly"
+      ]
+    },
+    {
+      "id": "8",
+      "title": "Remove duplicated React hook sources from core-lib",
+      "description": "Eliminate dead code and drift risk by deleting core-lib hook implementations after moving them to react-utils.",
+      "status": "completed",
+      "steps": [
+        "Remove libs/stack/core-lib/src/hooks and related tests",
+        "Ensure no exports reference the removed files",
+        "Verify builds still pass"
+      ],
+      "notes": "Removed entire hooks directory from core-lib including: use-deep-compare-memoize.ts, use-promise.ts, index.ts, and their test files. Verified no exports in index.ts or server.ts referenced these files. Removed unused dequal dependency and react peer/dev dependencies from package.json since React is now handled transitively through @okam/react-utils. core-lib and react-utils build and lint successfully."
+    },
+    {
+      "id": "9",
+      "title": "Mark react-utils entry as client-only",
+      "description": "Add an explicit client boundary to react-utils to prevent accidental use in server components.",
+      "status": "pending",
+      "steps": [
+        "Add 'use client' to libs/stack/react-utils/src/index.ts or per-module as appropriate",
+        "Confirm Next.js server builds fail fast if react-utils is imported in RSC"
+      ]
+    },
+    {
+      "id": "10",
+      "title": "Add react-utils test target",
+      "description": "Ensure react-utils tests are runnable via Nx.",
+      "status": "pending",
+      "steps": [
+        "Add a test target in libs/stack/react-utils/project.json",
+        "Verify tests execute via nx run react-utils:test"
+      ]
+    },
+    {
+      "id": "11",
+      "title": "Add null-returning context helper to react-utils",
+      "description": "Add a createCtxNullable variant that returns null when the context is missing, then adopt it in stack-ui Theme provider.",
+      "status": "pending",
+      "steps": [
+        "Add a new helper export in @okam/react-utils (e.g., createCtxNullableOrNull)",
+        "Update libs/stack/stack-ui/src/providers/Theme/index.tsx to use the new helper",
+        "Document the new helper in react-utils README"
+      ]
     }
   ]
 }
