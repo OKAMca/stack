@@ -136,7 +136,13 @@
     "vitest": "^4.0.17"
   },
   "overrides": {
-    "tar": "^7.5.6"
+    "tar": "^7.5.6",
+    "dotenv": "^16.4.7"
+  },
+  "pnpm": {
+    "overrides": {
+      "dotenv": "^16.4.7"
+    }
   },
   "nx": {}
 }
