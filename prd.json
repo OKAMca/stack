@@ -164,9 +164,22 @@
       "steps": [
         "Create vercel.json at project root",
         "Add ENABLE_EXPERIMENTAL_COREPACK=1 environment variable for build",
+        "Add installCommand to explicitly use pnpm install",
         "This tells Vercel to use corepack which reads packageManager from package.json"
       ],
-      "notes": "Vercel was defaulting to pnpm@9.x and running 'npm install' instead of 'pnpm install', causing Nx to fail because it couldn't find pnpm's .modules.yaml file. Enabling corepack ensures Vercel uses the correct pnpm version (10.10.0) specified in package.json's packageManager field."
+      "notes": "Vercel was defaulting to pnpm@9.x and running 'npm install' instead of 'pnpm install', causing Nx to fail because it couldn't find pnpm's .modules.yaml file. Enabling corepack and setting installCommand ensures Vercel uses the correct pnpm version (10.10.0) specified in package.json's packageManager field."
+    },
+    {
+      "id": "16",
+      "description": "Fix TypeScript: useFilterState return type for pnpm compatibility",
+      "status": "completed",
+      "steps": [
+        "Add explicit UseFilterStateReturn interface in useFilterState/index.ts",
+        "Import SelectionManager from @react-stately/selection directly",
+        "Add @react-stately/selection to next-component peerDependencies",
+        "Convert selectedKeys from null to undefined for AriaTagGroupProps compatibility"
+      ],
+      "notes": "pnpm's strict node_modules structure causes TypeScript to reference internal .pnpm paths in generated .d.ts files. Fixed by defining explicit return type that imports SelectionManager directly from @react-stately/selection, making the type portable."
     }
   ]
 }
