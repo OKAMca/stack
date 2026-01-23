@@ -67,12 +67,13 @@
       "id": "5",
       "title": "Update internal consumers to use @okam/react-utils",
       "description": "Migrate stack-ui and next-component to import React helpers from the new package.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Update imports in libs/stack/stack-ui to use @okam/react-utils",
         "Update imports in libs/stack/next-component to use @okam/react-utils",
         "Run typecheck/build for affected packages"
-      ]
+      ],
+      "notes": "Updated 7 provider files in stack-ui and 2 provider files in next-component to import createCtx/createCtxNullable from @okam/react-utils instead of @okam/core-lib. Added @okam/react-utils as dependency to both packages. Removed @okam/core-lib dependency from both packages (no longer needed). Theme provider in stack-ui keeps its local createCtxNullable implementation due to different behavior (returns null vs {} as A)."
     },
     {
       "id": "6",

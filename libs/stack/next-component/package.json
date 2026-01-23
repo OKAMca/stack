@@ -42,7 +42,7 @@
     "react-stately": "^3.43.0"
   },
   "dependencies": {
-    "@okam/core-lib": "1.17.3",
+    "@okam/react-utils": "0.0.1",
     "@okam/stack-ui": "1.44.5",
     "next": "^15.1.0 || ^16.0.0",
     "nuqs": "^2.4.3",
