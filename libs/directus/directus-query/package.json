@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-query",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -31,7 +31,7 @@
   "dependencies": {
     "@graphql-codegen/cli": "^6.1.1",
     "@graphql-typed-document-node/core": "3.2.0",
-    "@okam/core-lib": "1.17.3",
+    "@okam/core-lib": "1.17.4",
     "@okam/logger": "1.1.0",
     "@tanstack/react-query": "^5.62.3",
     "graphql-request": "^7.1.2",
