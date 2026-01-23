@@ -1,35 +1,85 @@
 {
-  "project": "@okam/ai CLI Package",
-  "goal": "Create publishable CLI for AI automation tools, runnable via npx @okam/ai",
+  "project": "@okam/react-utils extraction",
+  "goal": "Extract React-dependent helpers into @okam/react-utils, keep @okam/core-lib server-safe, and provide non-breaking re-exports with deprecation.",
   "statuses": [
     "pending",
     "in_progress",
     "completed",
     "blocked"
   ],
+  "config": {
+    "agent": "claude",
+    "context": "Nx monorepo with multiple publishable packages under libs/. Uses GitHub Actions for CI.",
+    "verification": "pnpm install && pnpm nx run-many -t build lint --projects=tag:publishable"
+  },
   "tasks": [
     {
       "id": "1",
-      "title": "Fix init.ts PRD_TEMPLATE schema alignment",
-      "description": "PRD_TEMPLATE uses old schema with statuses as object map and tasks without title field. Should match current PRD schema used by ralph/archive.",
-      "status": "completed",
-      "notes": "Updated PRD_TEMPLATE in init.ts: changed statuses from object map to array, added title field to task template. Updated corresponding test in init.spec.ts.",
+      "title": "Create new @okam/react-utils library skeleton",
+      "description": "Add a new publishable library under libs/stack/react-utils with Vite build, dts generation, and Nx project config.",
+      "status": "pending",
       "steps": [
-        "Change statuses from object map to array: ['pending', 'in_progress', 'completed', 'blocked']",
-        "Add 'title' field to task template",
-        "File: libs/ai/src/commands/init.ts (lines 5-27)"
+        "Add libs/stack/react-utils/package.json with name @okam/react-utils and React peer dependency",
+        "Add libs/stack/react-utils/project.json with build target outputPath dist/libs/stack/react-utils",
+        "Add libs/stack/react-utils/tsconfig.json + tsconfig.lib.json",
+        "Add libs/stack/react-utils/vite.config.ts mirroring core-lib patterns (nxCopyAssetsPlugin, dts, isExternal)"
       ]
     },
     {
       "id": "2",
-      "title": "Resolve merge conflicts with main branch",
-      "description": "Branch has conflicts: package-lock.json (content) and prd.json (deleted in main, modified in branch).",
-      "status": "completed",
-      "notes": "Merged origin/main (d4182d8) into branch. Resolved package-lock.json by accepting main's version and running npm install. Kept branch version of prd.json. Verified: ai build/lint/test pass. Note: demo build has pre-existing Directus API schema issue unrelated to merge.",
+      "title": "Move React utilities into react-utils",
+      "description": "Relocate createCtx/createCtxNullable and hooks into the new package and expose a clean public API.",
+      "status": "pending",
       "steps": [
-        "Merge origin/main into branch",
-        "Keep branch version of prd.json (main deleted it)",
-        "Regenerate package-lock.json after resolving dependencies"
+        "Move src/utils/createContext.tsx to libs/stack/react-utils/src/utils/createContext.tsx",
+        "Move hooks: usePromise and useDeepCompareMemoize into libs/stack/react-utils/src/hooks",
+        "Create libs/stack/react-utils/src/index.ts exporting createCtx, createCtxNullable, usePromise, useDeepCompareMemoize",
+        "Move or update tests to live under libs/stack/react-utils/src/hooks/__tests__"
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Keep non-breaking re-exports in @okam/core-lib",
+      "description": "Re-export React utilities from @okam/core-lib with deprecation JSDoc so existing consumers keep working.",
+      "status": "pending",
+      "steps": [
+        "Update libs/stack/core-lib/src/index.ts to re-export from @okam/react-utils",
+        "Add @deprecated JSDoc on createCtx/createCtxNullable exports in core-lib",
+        "Ensure server-safe exports remain in core-lib default entry"
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Adjust dependencies and exports",
+      "description": "Shift React peer dependency to react-utils and keep core-lib server-safe for Node consumers.",
+      "status": "pending",
+      "steps": [
+        "Remove react peer dependency from libs/stack/core-lib/package.json (or mark optional for transition)",
+        "Add react peer dependency to libs/stack/react-utils/package.json",
+        "Confirm exports field for core-lib includes react-server server-safe entry (keep existing fix)"
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Update internal consumers to use @okam/react-utils",
+      "description": "Migrate stack-ui and next-component to import React helpers from the new package.",
+      "status": "pending",
+      "steps": [
+        "Update imports in libs/stack/stack-ui to use @okam/react-utils",
+        "Update imports in libs/stack/next-component to use @okam/react-utils",
+        "Run typecheck/build for affected packages"
+      ]
+    },
+    {
+      "id": "6",
+      "title": "Build and release validation",
+      "description": "Verify outputs, Next.js build, and document migration.",
+      "status": "pending",
+      "steps": [
+        "Run npx nx build core-lib and npx nx build react-utils",
+        "Verify @okam/core-lib server build avoids React imports",
+        "Run npx nx build vanier-nextjs with workarounds removed",
+        "Update README/CHANGELOG with migration note and deprecation"
       ]
     }
   ]
