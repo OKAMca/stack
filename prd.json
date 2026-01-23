@@ -30,13 +30,14 @@
       "id": "2",
       "title": "Move React utilities into react-utils",
       "description": "Relocate createCtx/createCtxNullable and hooks into the new package and expose a clean public API.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Move src/utils/createContext.tsx to libs/stack/react-utils/src/utils/createContext.tsx",
         "Move hooks: usePromise and useDeepCompareMemoize into libs/stack/react-utils/src/hooks",
         "Create libs/stack/react-utils/src/index.ts exporting createCtx, createCtxNullable, usePromise, useDeepCompareMemoize",
         "Move or update tests to live under libs/stack/react-utils/src/hooks/__tests__"
-      ]
+      ],
+      "notes": "Copied createContext.tsx, usePromise.ts, useDeepCompareMemoize.ts and their tests to react-utils. Added dequal dependency and react peer dependency. Original files kept in core-lib for Task 3 deprecation re-exports."
     },
     {
       "id": "3",
