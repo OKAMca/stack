@@ -139,13 +139,13 @@
     {
       "id": "13",
       "description": "Fix CI: Change npx nx to pnpm nx in ci.yml",
-      "status": "pending",
+      "status": "completed",
       "steps": [
-        "Change 'npx nx run-many -t lint' to 'pnpm nx run-many -t lint' (line 42)",
-        "Change 'npx nx run-many -t test --passWithNoTests' to 'pnpm nx run-many -t test --passWithNoTests' (line 68)",
-        "Change 'npx nx run-many -t build --projects=tag:publishable' to 'pnpm nx run-many -t build --projects=tag:publishable' (line 94)"
+        "Change 'npx nx run-many -t lint' to 'pnpm nx run-many -t lint' (line 40)",
+        "Change 'npx nx run-many -t test --passWithNoTests' to 'pnpm nx run-many -t test --passWithNoTests' (line 64)",
+        "Change 'npx nx run-many -t build --projects=tag:publishable' to 'pnpm nx run-many -t build --projects=tag:publishable' (line 88)"
       ],
-      "notes": "CodeRabbit suggestion: Using pnpm nx ensures the locally pinned Nx version is used, whereas npx could pull a different version"
+      "notes": "Changed all three npx nx commands to pnpm nx in ci.yml (lint, test, build jobs). Using pnpm nx ensures the locally pinned Nx version from node_modules is used, whereas npx could pull a different version. Verification passed: all 12 projects built and linted successfully."
     },
     {
       "id": "14",
