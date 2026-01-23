@@ -35,11 +35,12 @@
     {
       "id": "3",
       "description": "Update .npmrc for pnpm compatibility",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Check existing .npmrc settings",
         "Add pnpm-specific settings if needed (e.g., shamefully-hoist, strict-peer-dependencies)"
-      ]
+      ],
+      "notes": "Created .npmrc with shamefully-hoist=true, auto-install-peers=true, and strict-peer-dependencies=false for Nx monorepo compatibility"
     },
     {
       "id": "4",
@@ -87,6 +88,24 @@
       "steps": [
         "Ensure node_modules is ignored",
         "Add .pnpm-store if needed"
+      ]
+    },
+    {
+      "id": "9",
+      "description": "Add packageManager field to package.json for corepack",
+      "status": "pending",
+      "steps": [
+        "Add \"packageManager\": \"pnpm@10.10.0\" to root package.json",
+        "This enables corepack to automatically use the correct pnpm version"
+      ]
+    },
+    {
+      "id": "10",
+      "description": "Configure dependabot.yml for pnpm dependency updates",
+      "status": "pending",
+      "steps": [
+        "Update .github/dependabot.yml package-ecosystem to 'npm' (works for pnpm)",
+        "Optionally adjust schedule interval and add ignore patterns"
       ]
     }
   ]
