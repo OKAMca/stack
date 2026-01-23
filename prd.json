@@ -43,12 +43,13 @@
       "id": "3",
       "title": "Keep non-breaking re-exports in @okam/core-lib",
       "description": "Re-export React utilities from @okam/core-lib with deprecation JSDoc so existing consumers keep working.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Update libs/stack/core-lib/src/index.ts to re-export from @okam/react-utils",
         "Add @deprecated JSDoc on createCtx/createCtxNullable exports in core-lib",
         "Ensure server-safe exports remain in core-lib default entry"
-      ]
+      ],
+      "notes": "Updated core-lib/src/index.ts to re-export createCtx and createCtxNullable from @okam/react-utils with @deprecated JSDoc. Removed the local createContext.tsx file from core-lib. Added @okam/react-utils as a dependency to core-lib package.json. All server-safe exports (ArrayUtils, Asserts, typeguards, etc.) remain unchanged."
     },
     {
       "id": "4",
