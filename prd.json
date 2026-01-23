@@ -77,20 +77,22 @@
     {
       "id": "7",
       "description": "Update documentation to reference pnpm",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Update README.md with pnpm commands",
         "Update any contributing guides"
-      ]
+      ],
+      "notes": "Updated README.md: Added 'Getting Started' section with pnpm install instructions, replaced all npm/npx commands with pnpm equivalents (npm run -> pnpm, npx nx -> pnpm nx). No project-level CONTRIBUTING.md files exist (only node_modules)."
     },
     {
       "id": "8",
       "description": "Add .gitignore entries for pnpm",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Ensure node_modules is ignored",
         "Add .pnpm-store if needed"
-      ]
+      ],
+      "notes": "Added .pnpm-store to ignore pnpm's content-addressable store and pnpm-debug.log* for pnpm debug logs. node_modules was already ignored. Note: directus-node build failure is a pre-existing issue on main branch (missing @types/dotenv), unrelated to .gitignore changes."
     },
     {
       "id": "9",
