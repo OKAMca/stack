@@ -25,7 +25,7 @@
     {
       "id": "2",
       "description": "Remove package-lock.json and migrate to pnpm-lock.yaml",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Delete package-lock.json",
         "Run pnpm import to convert lock file (or pnpm install if import fails)",
