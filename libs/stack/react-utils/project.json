@@ -47,6 +47,13 @@
         "packageRoot": "dist/libs/stack/react-utils"
       }
     },
+    "test": {
+      "executor": "@nx/vitest:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "../../../coverage/libs/stack/react-utils"
+      }
+    },
     "project-dry-release": {},
     "project-release": {}
   }

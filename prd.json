@@ -125,11 +125,12 @@
       "id": "10",
       "title": "Add react-utils test target",
       "description": "Ensure react-utils tests are runnable via Nx.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Add a test target in libs/stack/react-utils/project.json",
         "Verify tests execute via nx run react-utils:test"
-      ]
+      ],
+      "notes": "Added test target using @nx/vitest:test executor to project.json. Added vitest test configuration to vite.config.ts with jsdom environment for React testing. Updated tests from deprecated @testing-library/react-hooks to @testing-library/react, replaced jest.fn() with vi.fn(), and migrated from waitForNextUpdate to waitFor API. All 6 tests pass via nx run react-utils:test."
     },
     {
       "id": "11",

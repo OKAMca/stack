@@ -1,9 +1,8 @@
-/// <reference types="vitest" />
 import * as path from 'node:path'
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import dts from 'vite-plugin-dts'
 import { isExternal } from '../../../config/external-deps'
 
@@ -23,6 +22,17 @@ export default defineConfig({
 
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../../coverage/libs/stack/react-utils',
+      provider: 'v8',
+    },
+  },
+
   build: {
     emptyOutDir: false,
     lib: {
