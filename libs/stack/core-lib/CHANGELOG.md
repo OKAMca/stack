@@ -10,8 +10,7 @@
 
 ### 📦 Dependencies
 
-- Added `@okam/react-utils` as a dependency for deprecated re-exports
-- Made `react` peer dependency optional via `peerDependenciesMeta`
+- Changed `@okam/react-utils` from a direct dependency to an optional peer dependency. This decouples the install-time dependency for server-only consumers who don't use the deprecated `createCtx`/`createCtxNullable` exports.
 
 ---
 

@@ -92,12 +92,13 @@
       "id": "7",
       "title": "Decouple core-lib from react-utils dependency",
       "description": "Avoid forcing React peer requirements on server-only consumers by revisiting how core-lib references react-utils.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Decide whether core-lib should depend on react-utils or use optional/peer dependency + re-export guard",
         "If keeping re-exports, document that server-only environments should use the react-server condition",
         "Update core-lib package.json dependency strategy accordingly"
-      ]
+      ],
+      "notes": "Changed @okam/react-utils from a direct dependency to an optional peer dependency in core-lib/package.json. This decouples the install-time dependency - server-only consumers who use the react-server export condition won't need to install react-utils. Consumers using the deprecated createCtx/createCtxNullable exports must explicitly install @okam/react-utils as a peer. Updated README.md with a note about peer dependency requirement. Updated CHANGELOG.md to reflect dependency change. Build output verified: server.mjs has no React imports, index.mjs includes the React-based helpers."
     },
     {
       "id": "8",

@@ -20,6 +20,8 @@ import { createCtx, createCtxNullable } from '@okam/core-lib'
 import { createCtx, createCtxNullable } from '@okam/react-utils'
 ```
 
+**Note:** If you continue using the deprecated exports from `@okam/core-lib`, you must install `@okam/react-utils` as a peer dependency in your project, since it is now an optional peer dependency rather than a direct dependency.
+
 ### Server-Safe Usage
 
 For Node.js/server environments that don't have React available, use the `react-server` export condition which excludes React-dependent utilities:

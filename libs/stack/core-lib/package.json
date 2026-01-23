@@ -34,8 +34,15 @@
   "nxrelease": {
     "repositoryUrl": "https://github.com/OKAMca/stack.git"
   },
+  "peerDependencies": {
+    "@okam/react-utils": "^0.0.1"
+  },
+  "peerDependenciesMeta": {
+    "@okam/react-utils": {
+      "optional": true
+    }
+  },
   "dependencies": {
-    "@okam/react-utils": "^0.0.1",
     "@tsed/exceptions": "^8.3.1"
   }
 }
