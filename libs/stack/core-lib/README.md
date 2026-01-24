@@ -2,41 +2,36 @@
 
 This library was generated with [Nx](https://nx.dev).
 
-## Migration Notice
+## Breaking Change: v2.0.0
 
-### React Context Utilities (`createCtx`, `createCtxNullable`)
+### React Context Utilities Removed
 
-**Deprecated:** The React context utilities `createCtx` and `createCtxNullable` have been moved to `@okam/react-utils`.
+The React context utilities `createCtx` and `createCtxNullable` have been **removed** from `@okam/core-lib`. These utilities are now only available in `@okam/react-utils`.
 
-The exports from `@okam/core-lib` are now deprecated and will be removed in a future major version.
+**Migration:**
 
-**Before (deprecated):**
 ```typescript
+// Before (no longer works in v2.0.0)
 import { createCtx, createCtxNullable } from '@okam/core-lib'
-```
 
-**After (recommended):**
-```typescript
+// After
 import { createCtx, createCtxNullable } from '@okam/react-utils'
 ```
 
-**Note:** If you continue using the deprecated exports from `@okam/core-lib`, you must install `@okam/react-utils` as a peer dependency in your project, since it is now an optional peer dependency rather than a direct dependency.
+### Server-Safe by Default
 
-### Server-Safe Usage
+`@okam/core-lib` is now fully server-safe and can be used in any environment without React dependencies. The `react-server` export condition has been removed since it is no longer needed - the default export is server-safe.
 
-For Node.js/server environments that don't have React available, use the `react-server` export condition which excludes React-dependent utilities:
+## Available Exports
 
-```json
-{
-  "exports": {
-    ".": {
-      "react-server": "./server.mjs"
-    }
-  }
-}
-```
-
-This export is automatically used by bundlers that support the `react-server` condition (like Next.js).
+- `ArrayUtils` - Array manipulation utilities
+- `Asserts` - Assertion helpers
+- `normalizePath` - Path normalization utility
+- `getNestedObjectValueOfKey` - Deep object property access
+- `checkObjectProperty` - Object property checking
+- `capitalizeFirstLetter` - String capitalization
+- `UnPromisify` - Type utility for unwrapping Promise types
+- `typeguards` - TypeScript type guards
 
 ## Running unit tests
 

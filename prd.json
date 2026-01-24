@@ -150,76 +150,96 @@
       "id": "12",
       "title": "Reinstall workspace dependencies and re-run lint",
       "description": "Ensure local node_modules matches lockfile so lint uses real types (not error types).",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Run npm ci (or the repo-standard install) at the workspace root",
         "Run npx nx run-many --all --target=lint --skip-nx-cache",
         "If errors remain, proceed with tasks 13-18"
-      ]
+      ],
+      "notes": "Ran npm ci to sync node_modules and removed a stray pnpm-lock.yaml that was breaking the Nx project graph. After that, npx nx run-many --all --target=lint --skip-nx-cache passed for all 14 projects."
     },
     {
       "id": "13",
       "title": "Fix directus-query lint error",
       "description": "Resolve ts/no-unsafe-argument in query.ts by typing the GraphQL client usage correctly.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Inspect libs/directus/directus-query/src/lib/query.ts and related request client types",
         "Ensure graphqlRequestClient is typed so document argument is safe",
         "Re-run directus-query:lint"
-      ]
+      ],
+      "notes": "No code changes needed; the error disappeared after reinstalling dependencies and removing pnpm-lock.yaml."
     },
     {
       "id": "14",
       "title": "Fix directus-node lint errors",
       "description": "Resolve dependency-check and unsafe-call errors in directus-node.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Remove unused dotenv dependency or wire it into codegen usage",
         "Fix unsafe-call errors in libs/directus/directus-node/src/lib/codegen.ts by typing inputs",
         "Re-run directus-node:lint"
-      ]
+      ],
+      "notes": "No code changes needed; dependency-checks error was caused by Nx project graph failing due to pnpm-lock.yaml. After cleanup, directus-node lint passed."
     },
     {
       "id": "15",
       "title": "Fix stack-ui lint errors",
       "description": "Resolve unsafe-* errors in stack-ui components caused by unresolved or implicit any types.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Identify modules with error-typed values (Accordion, Calendar, Carousel, Dialog, DateField, useLabelledOverlay)",
         "Add proper typings or type guards to eliminate unsafe assignments/calls",
         "Re-run stack-ui:lint"
-      ]
+      ],
+      "notes": "No code changes needed; lint passed after dependency reinstall and pnpm-lock cleanup."
     },
     {
       "id": "16",
       "title": "Fix directus-block lint errors",
       "description": "Resolve unsafe assignments and redundant type constituent errors in directus-block.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Fix BlockSerializer typing issues to avoid error-typed values",
         "Resolve TypedDocumentNode union type errors in getBlock.ts",
         "Re-run directus-block:lint"
-      ]
+      ],
+      "notes": "No code changes needed; lint passed after dependency reinstall and pnpm-lock cleanup."
     },
     {
       "id": "17",
       "title": "Fix directus-next lint errors",
       "description": "Resolve unsafe assignments in getPageSettings.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Add explicit typing or guards in libs/directus/directus-next/src/pageSettings/getPageSettings.ts",
         "Re-run directus-next:lint"
-      ]
+      ],
+      "notes": "No code changes needed; lint passed after dependency reinstall and pnpm-lock cleanup."
     },
     {
       "id": "18",
       "title": "Fix demo app lint errors",
       "description": "Resolve unsafe-* errors in demo pages by typing API results and narrowing unknowns.",
-      "status": "pending",
+      "status": "completed",
       "steps": [
         "Add explicit typings in demo Directus examples",
         "Re-run demo:lint"
-      ]
+      ],
+      "notes": "No code changes needed; lint passed after dependency reinstall and pnpm-lock cleanup."
+    },
+    {
+      "id": "19",
+      "title": "Remove deprecated React re-exports from core-lib (breaking)",
+      "description": "Make core-lib server-safe by default by removing createCtx/createCtxNullable re-exports and React deps.",
+      "status": "completed",
+      "steps": [
+        "Remove createCtx/createCtxNullable re-exports from libs/stack/core-lib/src/index.ts",
+        "Remove @okam/react-utils dependency and React peer/dev deps from libs/stack/core-lib/package.json",
+        "Update core-lib README/CHANGELOG to note the breaking change",
+        "Ensure all consumers import React helpers from @okam/react-utils"
+      ],
+      "notes": "Removed deprecated createCtx/createCtxNullable re-exports from core-lib index.ts. Removed @okam/react-utils peer dependency and peerDependenciesMeta from package.json. Removed react-server export condition and server.ts (no longer needed since core-lib is now server-safe by default). Updated directus-query to import createCtx from @okam/react-utils instead of @okam/core-lib. Updated README.md with breaking change documentation. Updated CHANGELOG.md with v2.0.0 breaking changes. All 13 publishable projects build and lint successfully."
     }
   ]
 }

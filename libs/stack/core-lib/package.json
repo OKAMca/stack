@@ -8,11 +8,6 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "react-server": {
-        "types": "./server.d.ts",
-        "import": "./server.mjs",
-        "require": "./server.js"
-      },
       "import": {
         "types": "./index.d.ts",
         "default": "./index.mjs"
@@ -33,14 +28,6 @@
   },
   "nxrelease": {
     "repositoryUrl": "https://github.com/OKAMca/stack.git"
-  },
-  "peerDependencies": {
-    "@okam/react-utils": "^0.0.1"
-  },
-  "peerDependenciesMeta": {
-    "@okam/react-utils": {
-      "optional": true
-    }
   },
   "dependencies": {
     "@tsed/exceptions": "^8.3.1"

@@ -35,12 +35,10 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
     lib: {
-      // Multiple entry points: full client bundle + server-safe bundle.
-      entry: {
-        index: 'src/index.ts',
-        server: 'src/server.ts',
-      },
+      // Could be also the curved brackets: index.ts
+      entry: 'src/index.ts',
       name: 'core-lib',
+      fileName: 'index',
     },
     rollupOptions: {
       // External packages that should not be bundled into your library.
