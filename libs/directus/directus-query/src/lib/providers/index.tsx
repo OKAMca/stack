@@ -4,7 +4,7 @@ import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
 import type { UseQueryOptions, UseQueryResult } from '@tanstack/react-query'
 import type { GraphQLClient, Variables } from 'graphql-request'
 import type { TGQLQueryContextProps, TGQLQueryProviderProps } from './interface'
-import { createCtx } from '@okam/core-lib'
+import { createCtx } from '@okam/react-utils'
 import { useMemo, useRef } from 'react'
 import { useGqlQuery } from '../hooks'
 

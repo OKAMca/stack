@@ -1,7 +1,7 @@
 'use client'
 
 import type { TDraftModeContext, TDraftModeProviderProps } from './interface'
-import { createCtx } from '@okam/core-lib'
+import { createCtx } from '@okam/react-utils'
 import { useMemo } from 'react'
 
 const draftModeCtx = createCtx<TDraftModeContext>()

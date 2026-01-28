@@ -1,3 +1,5 @@
+'use client'
+
 import { dequal } from 'dequal'
 import { useRef } from 'react'
 

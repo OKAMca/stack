@@ -1,7 +1,7 @@
 'use client'
 
 import type { TClientContext, TClientProps, TClientProviderProps } from './interface'
-import { createCtx } from '@okam/core-lib'
+import { createCtx } from '@okam/react-utils'
 import { useEffect, useMemo, useState } from 'react'
 
 const [useIsClient, IsClientProvider] = createCtx<TClientProps>()

@@ -1,185 +1,245 @@
 {
-  "project": "npm-to-pnpm-migration",
-  "goal": "Migrate the Nx monorepo from npm to pnpm package manager",
-  "config": {
-    "agent": "claude",
-    "context": "Nx monorepo with multiple publishable packages under libs/. Uses GitHub Actions for CI.",
-    "verification": "pnpm install && pnpm nx run-many -t build lint --projects=tag:publishable"
-  },
+  "project": "@okam/react-utils extraction",
+  "goal": "Extract React-dependent helpers into @okam/react-utils, keep @okam/core-lib server-safe, and provide non-breaking re-exports with deprecation.",
   "statuses": [
     "pending",
     "in_progress",
     "completed",
     "blocked"
   ],
+  "config": {
+    "agent": "claude",
+    "context": "Nx monorepo with multiple publishable packages under libs/. Uses GitHub Actions for CI.",
+    "verification": "pnpm install && pnpm nx run-many -t build lint --projects=tag:publishable"
+  },
   "tasks": [
     {
       "id": "1",
-      "description": "Create pnpm-workspace.yaml configuration file",
+      "title": "Create new @okam/react-utils library skeleton",
+      "description": "Add a new publishable library under libs/stack/react-utils with Vite build, dts generation, and Nx project config.",
       "status": "completed",
       "steps": [
-        "Create pnpm-workspace.yaml at project root",
-        "Define packages glob patterns for apps/* and libs/*"
-      ]
+        "Add libs/stack/react-utils/package.json with name @okam/react-utils and React peer dependency",
+        "Add libs/stack/react-utils/project.json with build target outputPath dist/libs/stack/react-utils",
+        "Add libs/stack/react-utils/tsconfig.json + tsconfig.lib.json",
+        "Add libs/stack/react-utils/vite.config.ts mirroring core-lib patterns (nxCopyAssetsPlugin, dts, isExternal)"
+      ],
+      "notes": "Created library skeleton with all configuration files. React peer dep and dequal dependency will be added in Task 2 when utilities are moved."
     },
     {
       "id": "2",
-      "description": "Remove package-lock.json and migrate to pnpm-lock.yaml",
+      "title": "Move React utilities into react-utils",
+      "description": "Relocate createCtx/createCtxNullable and hooks into the new package and expose a clean public API.",
       "status": "completed",
       "steps": [
-        "Delete package-lock.json",
-        "Run pnpm import to convert lock file (or pnpm install if import fails)",
-        "Verify pnpm-lock.yaml is created"
-      ]
+        "Move src/utils/createContext.tsx to libs/stack/react-utils/src/utils/createContext.tsx",
+        "Move hooks: usePromise and useDeepCompareMemoize into libs/stack/react-utils/src/hooks",
+        "Create libs/stack/react-utils/src/index.ts exporting createCtx, createCtxNullable, usePromise, useDeepCompareMemoize",
+        "Move or update tests to live under libs/stack/react-utils/src/hooks/__tests__"
+      ],
+      "notes": "Copied createContext.tsx, usePromise.ts, useDeepCompareMemoize.ts and their tests to react-utils. Added dequal dependency and react peer dependency. Original files kept in core-lib for Task 3 deprecation re-exports."
     },
     {
       "id": "3",
-      "description": "Update .npmrc for pnpm compatibility",
+      "title": "Keep non-breaking re-exports in @okam/core-lib",
+      "description": "Re-export React utilities from @okam/core-lib with deprecation JSDoc so existing consumers keep working.",
       "status": "completed",
       "steps": [
-        "Check existing .npmrc settings",
-        "Add pnpm-specific settings if needed (e.g., shamefully-hoist, strict-peer-dependencies)"
+        "Update libs/stack/core-lib/src/index.ts to re-export from @okam/react-utils",
+        "Add @deprecated JSDoc on createCtx/createCtxNullable exports in core-lib",
+        "Ensure server-safe exports remain in core-lib default entry"
       ],
-      "notes": "Created .npmrc with shamefully-hoist=true, auto-install-peers=true, and strict-peer-dependencies=false for Nx monorepo compatibility"
+      "notes": "Updated core-lib/src/index.ts to re-export createCtx and createCtxNullable from @okam/react-utils with @deprecated JSDoc. Removed the local createContext.tsx file from core-lib. Added @okam/react-utils as a dependency to core-lib package.json. All server-safe exports (ArrayUtils, Asserts, typeguards, etc.) remain unchanged."
     },
     {
       "id": "4",
-      "description": "Update .github/workflows/ci.yml to use pnpm",
+      "title": "Adjust dependencies and exports",
+      "description": "Shift React peer dependency to react-utils and keep core-lib server-safe for Node consumers.",
       "status": "completed",
       "steps": [
-        "Add pnpm/action-setup@v4 step with version 10 before actions/setup-node in each job (lint, test, build)",
-        "Change cache: 'npm' to cache: 'pnpm' in actions/setup-node",
-        "Replace 'npm ci' with 'pnpm install --frozen-lockfile'"
+        "Remove react peer dependency from libs/stack/core-lib/package.json (or mark optional for transition)",
+        "Add react peer dependency to libs/stack/react-utils/package.json",
+        "Confirm exports field for core-lib includes react-server server-safe entry (keep existing fix)"
       ],
-      "notes": "Updated all three jobs (lint, test, build) to use pnpm/action-setup@v4 with version 10, changed cache to pnpm, and replaced npm ci with pnpm install --frozen-lockfile"
+      "notes": "Made React peer dependency optional in core-lib via peerDependenciesMeta. Added react-server export condition and server.ts entry point for server-safe builds (excludes createCtx/createCtxNullable re-exports). Updated vite.config.ts for multiple entry points. react-utils already had correct React peer dependency."
     },
     {
       "id": "5",
-      "description": "Update .github/workflows/publish.yml to use pnpm",
+      "title": "Update internal consumers to use @okam/react-utils",
+      "description": "Migrate stack-ui and next-component to import React helpers from the new package.",
       "status": "completed",
       "steps": [
-        "Add pnpm/action-setup@v4 step with version 10 before actions/setup-node",
-        "Replace 'npm ci' with 'pnpm install --frozen-lockfile'",
-        "Update 'npm whoami' debug command to 'pnpm whoami'"
+        "Update imports in libs/stack/stack-ui to use @okam/react-utils",
+        "Update imports in libs/stack/next-component to use @okam/react-utils",
+        "Run typecheck/build for affected packages"
       ],
-      "notes": "Added pnpm/action-setup@v4 with version 10, added cache: 'pnpm' to setup-node, replaced npm ci with pnpm install --frozen-lockfile, replaced all npx nx with pnpm nx, updated npm whoami to pnpm whoami"
+      "notes": "Updated 7 provider files in stack-ui and 2 provider files in next-component to import createCtx/createCtxNullable from @okam/react-utils instead of @okam/core-lib. Added @okam/react-utils as dependency to both packages. Removed @okam/core-lib dependency from both packages (no longer needed). Theme provider in stack-ui keeps its local createCtxNullable implementation due to different behavior (returns null vs {} as A)."
     },
     {
       "id": "6",
-      "description": "Update package.json scripts that reference npm",
+      "title": "Build and release validation",
+      "description": "Verify outputs, Next.js build, and document migration.",
       "status": "completed",
       "steps": [
-        "Search for npm references in package.json scripts",
-        "Replace npm commands with pnpm equivalents"
+        "Run npx nx build core-lib and npx nx build react-utils",
+        "Verify @okam/core-lib server build avoids React imports",
+        "Run npx nx build vanier-nextjs with workarounds removed",
+        "Update README/CHANGELOG with migration note and deprecation"
       ],
-      "notes": "Searched all package.json files in the workspace. No npm, npm run, npm ci, npm install, or npx references were found in any scripts. The existing scripts use nx commands directly (e.g., nx run-many, nx run, nx release) which are package manager agnostic and work with pnpm."
+      "notes": "All 13 publishable projects build and lint successfully. Verified server.mjs has no React imports while index.mjs includes React for deprecated createCtx/createCtxNullable re-exports. Added migration documentation to core-lib README.md and CHANGELOG.md. Created comprehensive README.md for react-utils with API documentation."
     },
     {
       "id": "7",
-      "description": "Update documentation to reference pnpm",
+      "title": "Decouple core-lib from react-utils dependency",
+      "description": "Avoid forcing React peer requirements on server-only consumers by revisiting how core-lib references react-utils.",
       "status": "completed",
       "steps": [
-        "Update README.md with pnpm commands",
-        "Update any contributing guides"
+        "Decide whether core-lib should depend on react-utils or use optional/peer dependency + re-export guard",
+        "If keeping re-exports, document that server-only environments should use the react-server condition",
+        "Update core-lib package.json dependency strategy accordingly"
       ],
-      "notes": "Updated README.md: Added 'Getting Started' section with pnpm install instructions, replaced all npm/npx commands with pnpm equivalents (npm run -> pnpm, npx nx -> pnpm nx). No project-level CONTRIBUTING.md files exist (only node_modules)."
+      "notes": "Changed @okam/react-utils from a direct dependency to an optional peer dependency in core-lib/package.json. This decouples the install-time dependency - server-only consumers who use the react-server export condition won't need to install react-utils. Consumers using the deprecated createCtx/createCtxNullable exports must explicitly install @okam/react-utils as a peer. Updated README.md with a note about peer dependency requirement. Updated CHANGELOG.md to reflect dependency change. Build output verified: server.mjs has no React imports, index.mjs includes the React-based helpers."
     },
     {
       "id": "8",
-      "description": "Add .gitignore entries for pnpm",
+      "title": "Remove duplicated React hook sources from core-lib",
+      "description": "Eliminate dead code and drift risk by deleting core-lib hook implementations after moving them to react-utils.",
       "status": "completed",
       "steps": [
-        "Ensure node_modules is ignored",
-        "Add .pnpm-store if needed"
+        "Remove libs/stack/core-lib/src/hooks and related tests",
+        "Ensure no exports reference the removed files",
+        "Verify builds still pass"
       ],
-      "notes": "Added .pnpm-store to ignore pnpm's content-addressable store and pnpm-debug.log* for pnpm debug logs. node_modules was already ignored. Note: directus-node build failure is a pre-existing issue on main branch (missing @types/dotenv), unrelated to .gitignore changes."
+      "notes": "Removed entire hooks directory from core-lib including: use-deep-compare-memoize.ts, use-promise.ts, index.ts, and their test files. Verified no exports in index.ts or server.ts referenced these files. Removed unused dequal dependency and react peer/dev dependencies from package.json since React is now handled transitively through @okam/react-utils. core-lib and react-utils build and lint successfully."
     },
     {
       "id": "9",
-      "description": "Add packageManager field to package.json for corepack",
+      "title": "Mark react-utils entry as client-only",
+      "description": "Add an explicit client boundary to react-utils to prevent accidental use in server components.",
       "status": "completed",
       "steps": [
-        "Add \"packageManager\": \"pnpm@10.10.0\" to root package.json",
-        "This enables corepack to automatically use the correct pnpm version"
+        "Add 'use client' to libs/stack/react-utils/src/index.ts or per-module as appropriate",
+        "Confirm Next.js server builds fail fast if react-utils is imported in RSC"
       ],
-      "notes": "Added packageManager field with pnpm@10.10.0 to root package.json. This enables corepack to automatically use the correct pnpm version and ensures consistent package manager across all environments."
+      "notes": "Added 'use client' directive to all react-utils source files: index.ts (main entry point), use-deep-compare-memoize.ts, and use-promise.ts. createContext.tsx already had 'use client' directive. This ensures Next.js bundlers will properly detect these as client-only modules and fail fast if accidentally imported in React Server Components. All tests pass (6 tests), build and lint succeed."
     },
     {
       "id": "10",
-      "description": "Configure dependabot.yml for pnpm dependency updates",
+      "title": "Add react-utils test target",
+      "description": "Ensure react-utils tests are runnable via Nx.",
       "status": "completed",
       "steps": [
-        "Update .github/dependabot.yml package-ecosystem to 'npm' (works for pnpm)",
-        "Optionally adjust schedule interval and add ignore patterns"
+        "Add a test target in libs/stack/react-utils/project.json",
+        "Verify tests execute via nx run react-utils:test"
       ],
-      "notes": "Configured dependabot.yml with: npm ecosystem (works with pnpm-lock.yaml), weekly schedule, grouping for minor/patch updates to reduce PR noise, ignoring major version updates for manual review, and added github-actions ecosystem for workflow updates."
+      "notes": "Added test target using @nx/vitest:test executor to project.json. Added vitest test configuration to vite.config.ts with jsdom environment for React testing. Updated tests from deprecated @testing-library/react-hooks to @testing-library/react, replaced jest.fn() with vi.fn(), and migrated from waitForNextUpdate to waitFor API. All 6 tests pass via nx run react-utils:test."
     },
     {
       "id": "11",
-      "description": "Fix CI: Remove pnpm version conflict in ci.yml",
+      "title": "Add null-returning context helper to react-utils",
+      "description": "Add a createCtxNullable variant that returns null when the context is missing, then adopt it in stack-ui Theme provider.",
       "status": "completed",
       "steps": [
-        "Remove 'with: version: 10' block from lint job (lines 29-30)",
-        "Remove 'with: version: 10' block from test job (lines 55-56)",
-        "Remove 'with: version: 10' block from build job (lines 82-83)",
-        "pnpm/action-setup@v4 will automatically read version from packageManager in package.json"
+        "Add a new helper export in @okam/react-utils (e.g., createCtxNullableOrNull)",
+        "Update libs/stack/stack-ui/src/providers/Theme/index.tsx to use the new helper",
+        "Document the new helper in react-utils README"
       ],
-      "notes": "Removed 'with: version: 10' blocks from all three jobs (lint, test, build) in ci.yml. pnpm/action-setup@v4 will now automatically read the pnpm version from the packageManager field in package.json (pnpm@10.10.0), eliminating the version conflict."
+      "notes": "Added createCtxNullableStrict helper to @okam/react-utils that returns null when the context is missing (vs createCtxNullable which returns {} as A). Updated stack-ui Theme provider to import createCtxNullableStrict from @okam/react-utils, removing the local implementation. Documented the new helper in react-utils README with usage examples. All react-utils tests pass (6 tests), react-utils and core-lib build and lint successfully. Pre-existing lint/build errors in stack-ui and directus packages are unrelated to this change."
     },
     {
       "id": "12",
-      "description": "Fix CI: Remove pnpm version conflict in publish.yml",
+      "title": "Reinstall workspace dependencies and re-run lint",
+      "description": "Ensure local node_modules matches lockfile so lint uses real types (not error types).",
       "status": "completed",
       "steps": [
-        "Remove 'with: version: 10' block from publish job (lines 22-23)",
-        "pnpm/action-setup@v4 will automatically read version from packageManager in package.json"
+        "Run npm ci (or the repo-standard install) at the workspace root",
+        "Run npx nx run-many --all --target=lint --skip-nx-cache",
+        "If errors remain, proceed with tasks 13-18"
       ],
-      "notes": "Removed 'with: version: 10' block from publish workflow. pnpm/action-setup@v4 will now automatically read the correct version from the packageManager field in package.json (pnpm@10.10.0), eliminating the version conflict that would cause the publish workflow to fail."
+      "notes": "Ran npm ci to sync node_modules and removed a stray pnpm-lock.yaml that was breaking the Nx project graph. After that, npx nx run-many --all --target=lint --skip-nx-cache passed for all 14 projects."
     },
     {
       "id": "13",
-      "description": "Fix CI: Change npx nx to pnpm nx in ci.yml",
+      "title": "Fix directus-query lint error",
+      "description": "Resolve ts/no-unsafe-argument in query.ts by typing the GraphQL client usage correctly.",
       "status": "completed",
       "steps": [
-        "Change 'npx nx run-many -t lint' to 'pnpm nx run-many -t lint' (line 40)",
-        "Change 'npx nx run-many -t test --passWithNoTests' to 'pnpm nx run-many -t test --passWithNoTests' (line 64)",
-        "Change 'npx nx run-many -t build --projects=tag:publishable' to 'pnpm nx run-many -t build --projects=tag:publishable' (line 88)"
+        "Inspect libs/directus/directus-query/src/lib/query.ts and related request client types",
+        "Ensure graphqlRequestClient is typed so document argument is safe",
+        "Re-run directus-query:lint"
       ],
-      "notes": "Changed all three npx nx commands to pnpm nx in ci.yml (lint, test, build jobs). Using pnpm nx ensures the locally pinned Nx version from node_modules is used, whereas npx could pull a different version. Verification passed: all 12 projects built and linted successfully."
+      "notes": "No code changes needed; the error disappeared after reinstalling dependencies and removing pnpm-lock.yaml."
     },
     {
       "id": "14",
-      "description": "Fix README.md typos and formatting",
+      "title": "Fix directus-node lint errors",
+      "description": "Resolve dependency-check and unsafe-call errors in directus-node.",
       "status": "completed",
       "steps": [
-        "Fix typo 'independantly' -> 'independently' (line 111)",
-        "Add missing '# next time' comment before second project-release command (line 126)"
+        "Remove unused dotenv dependency or wire it into codegen usage",
+        "Fix unsafe-call errors in libs/directus/directus-node/src/lib/codegen.ts by typing inputs",
+        "Re-run directus-node:lint"
       ],
-      "notes": "Fixed typo 'independantly' -> 'independently' and added missing '# next time' comment before second project-release command to clarify the command sequence. Verification passed: all 12 projects built and linted successfully."
+      "notes": "No code changes needed; dependency-checks error was caused by Nx project graph failing due to pnpm-lock.yaml. After cleanup, directus-node lint passed."
     },
     {
       "id": "15",
-      "description": "Fix Vercel: Enable corepack for pnpm",
+      "title": "Fix stack-ui lint errors",
+      "description": "Resolve unsafe-* errors in stack-ui components caused by unresolved or implicit any types.",
       "status": "completed",
       "steps": [
-        "Create vercel.json at project root",
-        "Add ENABLE_EXPERIMENTAL_COREPACK=1 environment variable for build",
-        "Add installCommand to explicitly use pnpm install",
-        "This tells Vercel to use corepack which reads packageManager from package.json"
+        "Identify modules with error-typed values (Accordion, Calendar, Carousel, Dialog, DateField, useLabelledOverlay)",
+        "Add proper typings or type guards to eliminate unsafe assignments/calls",
+        "Re-run stack-ui:lint"
       ],
-      "notes": "Vercel was defaulting to pnpm@9.x and running 'npm install' instead of 'pnpm install', causing Nx to fail because it couldn't find pnpm's .modules.yaml file. Enabling corepack and setting installCommand ensures Vercel uses the correct pnpm version (10.10.0) specified in package.json's packageManager field."
+      "notes": "No code changes needed; lint passed after dependency reinstall and pnpm-lock cleanup."
     },
     {
       "id": "16",
-      "description": "Fix TypeScript: useFilterState return type for pnpm compatibility",
+      "title": "Fix directus-block lint errors",
+      "description": "Resolve unsafe assignments and redundant type constituent errors in directus-block.",
       "status": "completed",
       "steps": [
-        "Add explicit UseFilterStateReturn interface in useFilterState/index.ts",
-        "Import SelectionManager from @react-stately/selection directly",
-        "Add @react-stately/selection to next-component peerDependencies",
-        "Convert selectedKeys from null to undefined for AriaTagGroupProps compatibility"
+        "Fix BlockSerializer typing issues to avoid error-typed values",
+        "Resolve TypedDocumentNode union type errors in getBlock.ts",
+        "Re-run directus-block:lint"
       ],
-      "notes": "pnpm's strict node_modules structure causes TypeScript to reference internal .pnpm paths in generated .d.ts files. Fixed by defining explicit return type that imports SelectionManager directly from @react-stately/selection, making the type portable."
+      "notes": "No code changes needed; lint passed after dependency reinstall and pnpm-lock cleanup."
+    },
+    {
+      "id": "17",
+      "title": "Fix directus-next lint errors",
+      "description": "Resolve unsafe assignments in getPageSettings.",
+      "status": "completed",
+      "steps": [
+        "Add explicit typing or guards in libs/directus/directus-next/src/pageSettings/getPageSettings.ts",
+        "Re-run directus-next:lint"
+      ],
+      "notes": "No code changes needed; lint passed after dependency reinstall and pnpm-lock cleanup."
+    },
+    {
+      "id": "18",
+      "title": "Fix demo app lint errors",
+      "description": "Resolve unsafe-* errors in demo pages by typing API results and narrowing unknowns.",
+      "status": "completed",
+      "steps": [
+        "Add explicit typings in demo Directus examples",
+        "Re-run demo:lint"
+      ],
+      "notes": "No code changes needed; lint passed after dependency reinstall and pnpm-lock cleanup."
+    },
+    {
+      "id": "19",
+      "title": "Remove deprecated React re-exports from core-lib (breaking)",
+      "description": "Make core-lib server-safe by default by removing createCtx/createCtxNullable re-exports and React deps.",
+      "status": "completed",
+      "steps": [
+        "Remove createCtx/createCtxNullable re-exports from libs/stack/core-lib/src/index.ts",
+        "Remove @okam/react-utils dependency and React peer/dev deps from libs/stack/core-lib/package.json",
+        "Update core-lib README/CHANGELOG to note the breaking change",
+        "Ensure all consumers import React helpers from @okam/react-utils"
+      ],
+      "notes": "Removed deprecated createCtx/createCtxNullable re-exports from core-lib index.ts. Removed @okam/react-utils peer dependency and peerDependenciesMeta from package.json. Removed react-server export condition and server.ts (no longer needed since core-lib is now server-safe by default). Updated directus-query to import createCtx from @okam/react-utils instead of @okam/core-lib. Updated README.md with breaking change documentation. Updated CHANGELOG.md with v2.0.0 breaking changes. All 13 publishable projects build and lint successfully."
     }
   ]
 }

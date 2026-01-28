@@ -1,7 +1,7 @@
 'use client'
 
 import type { TTranslateFunc, TTranslationContext, TTranslationProps } from './interface'
-import { createCtx } from '@okam/core-lib'
+import { createCtx } from '@okam/react-utils'
 import { get } from 'radashi'
 import { useCallback, useMemo } from 'react'
 import { log } from '../../logger'

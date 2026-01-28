@@ -2,27 +2,14 @@
 
 import type { ReactNode } from 'react'
 import type { TTheme, TThemePanelContext, TThemeProviderProps } from './interface'
-import { createContext, use, useMemo } from 'react'
-
-export function createCtxNullable<A extends object | null>() {
-  const ctx = createContext<A | undefined>(undefined)
-  function useCtx() {
-    const c = use(ctx)
-
-    if (c === undefined) {
-      return null
-    }
-
-    return c
-  }
-  return [useCtx, ctx.Provider] as const // 'as const' makes TypeScript infer a tuple
-}
+import { createCtxNullableStrict } from '@okam/react-utils'
+import { useMemo } from 'react'
 
 const defaultTheme: TTheme = {
   typography: () => '',
 }
 
-const [useTheme, ThemeProvider] = createCtxNullable<TThemePanelContext<TTheme>>()
+const [useTheme, ThemeProvider] = createCtxNullableStrict<TThemePanelContext<TTheme>>()
 
 export function ThemeContextProvider({ children, brandTheme = defaultTheme }: TThemeProviderProps<TTheme>) {
   const value = useMemo<TThemePanelContext>(() => ({ brandTheme }), [brandTheme])

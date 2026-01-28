@@ -1,3 +1,5 @@
+'use client'
+
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react'
 import { useDeepCompareMemoize } from './use-deep-compare-memoize'
 

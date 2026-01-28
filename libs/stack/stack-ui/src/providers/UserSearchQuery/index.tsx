@@ -1,7 +1,7 @@
 'use client'
 
 import type { TSearchListingContext, TSearchProviderProps } from './interface'
-import { createCtx } from '@okam/core-lib'
+import { createCtx } from '@okam/react-utils'
 import { useMemo, useState } from 'react'
 
 const searchCtx = createCtx<TSearchListingContext>()
