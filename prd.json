@@ -1,6 +1,11 @@
 {
-  "project": "@okam/ai CLI Package",
-  "goal": "Create publishable CLI for AI automation tools, runnable via npx @okam/ai",
+  "project": "npm-to-pnpm-migration",
+  "goal": "Migrate the Nx monorepo from npm to pnpm package manager",
+  "config": {
+    "agent": "claude",
+    "context": "Nx monorepo with multiple publishable packages under libs/. Uses GitHub Actions for CI.",
+    "verification": "pnpm install && pnpm nx run-many -t build lint --projects=tag:publishable"
+  },
   "statuses": [
     "pending",
     "in_progress",
@@ -10,27 +15,171 @@
   "tasks": [
     {
       "id": "1",
-      "title": "Fix init.ts PRD_TEMPLATE schema alignment",
-      "description": "PRD_TEMPLATE uses old schema with statuses as object map and tasks without title field. Should match current PRD schema used by ralph/archive.",
+      "description": "Create pnpm-workspace.yaml configuration file",
       "status": "completed",
-      "notes": "Updated PRD_TEMPLATE in init.ts: changed statuses from object map to array, added title field to task template. Updated corresponding test in init.spec.ts.",
       "steps": [
-        "Change statuses from object map to array: ['pending', 'in_progress', 'completed', 'blocked']",
-        "Add 'title' field to task template",
-        "File: libs/ai/src/commands/init.ts (lines 5-27)"
+        "Create pnpm-workspace.yaml at project root",
+        "Define packages glob patterns for apps/* and libs/*"
       ]
     },
     {
       "id": "2",
-      "title": "Resolve merge conflicts with main branch",
-      "description": "Branch has conflicts: package-lock.json (content) and prd.json (deleted in main, modified in branch).",
+      "description": "Remove package-lock.json and migrate to pnpm-lock.yaml",
       "status": "completed",
-      "notes": "Merged origin/main (d4182d8) into branch. Resolved package-lock.json by accepting main's version and running npm install. Kept branch version of prd.json. Verified: ai build/lint/test pass. Note: demo build has pre-existing Directus API schema issue unrelated to merge.",
       "steps": [
-        "Merge origin/main into branch",
-        "Keep branch version of prd.json (main deleted it)",
-        "Regenerate package-lock.json after resolving dependencies"
+        "Delete package-lock.json",
+        "Run pnpm import to convert lock file (or pnpm install if import fails)",
+        "Verify pnpm-lock.yaml is created"
       ]
+    },
+    {
+      "id": "3",
+      "description": "Update .npmrc for pnpm compatibility",
+      "status": "completed",
+      "steps": [
+        "Check existing .npmrc settings",
+        "Add pnpm-specific settings if needed (e.g., shamefully-hoist, strict-peer-dependencies)"
+      ],
+      "notes": "Created .npmrc with shamefully-hoist=true, auto-install-peers=true, and strict-peer-dependencies=false for Nx monorepo compatibility"
+    },
+    {
+      "id": "4",
+      "description": "Update .github/workflows/ci.yml to use pnpm",
+      "status": "completed",
+      "steps": [
+        "Add pnpm/action-setup@v4 step with version 10 before actions/setup-node in each job (lint, test, build)",
+        "Change cache: 'npm' to cache: 'pnpm' in actions/setup-node",
+        "Replace 'npm ci' with 'pnpm install --frozen-lockfile'"
+      ],
+      "notes": "Updated all three jobs (lint, test, build) to use pnpm/action-setup@v4 with version 10, changed cache to pnpm, and replaced npm ci with pnpm install --frozen-lockfile"
+    },
+    {
+      "id": "5",
+      "description": "Update .github/workflows/publish.yml to use pnpm",
+      "status": "completed",
+      "steps": [
+        "Add pnpm/action-setup@v4 step with version 10 before actions/setup-node",
+        "Replace 'npm ci' with 'pnpm install --frozen-lockfile'",
+        "Update 'npm whoami' debug command to 'pnpm whoami'"
+      ],
+      "notes": "Added pnpm/action-setup@v4 with version 10, added cache: 'pnpm' to setup-node, replaced npm ci with pnpm install --frozen-lockfile, replaced all npx nx with pnpm nx, updated npm whoami to pnpm whoami"
+    },
+    {
+      "id": "6",
+      "description": "Update package.json scripts that reference npm",
+      "status": "completed",
+      "steps": [
+        "Search for npm references in package.json scripts",
+        "Replace npm commands with pnpm equivalents"
+      ],
+      "notes": "Searched all package.json files in the workspace. No npm, npm run, npm ci, npm install, or npx references were found in any scripts. The existing scripts use nx commands directly (e.g., nx run-many, nx run, nx release) which are package manager agnostic and work with pnpm."
+    },
+    {
+      "id": "7",
+      "description": "Update documentation to reference pnpm",
+      "status": "completed",
+      "steps": [
+        "Update README.md with pnpm commands",
+        "Update any contributing guides"
+      ],
+      "notes": "Updated README.md: Added 'Getting Started' section with pnpm install instructions, replaced all npm/npx commands with pnpm equivalents (npm run -> pnpm, npx nx -> pnpm nx). No project-level CONTRIBUTING.md files exist (only node_modules)."
+    },
+    {
+      "id": "8",
+      "description": "Add .gitignore entries for pnpm",
+      "status": "completed",
+      "steps": [
+        "Ensure node_modules is ignored",
+        "Add .pnpm-store if needed"
+      ],
+      "notes": "Added .pnpm-store to ignore pnpm's content-addressable store and pnpm-debug.log* for pnpm debug logs. node_modules was already ignored. Note: directus-node build failure is a pre-existing issue on main branch (missing @types/dotenv), unrelated to .gitignore changes."
+    },
+    {
+      "id": "9",
+      "description": "Add packageManager field to package.json for corepack",
+      "status": "completed",
+      "steps": [
+        "Add \"packageManager\": \"pnpm@10.10.0\" to root package.json",
+        "This enables corepack to automatically use the correct pnpm version"
+      ],
+      "notes": "Added packageManager field with pnpm@10.10.0 to root package.json. This enables corepack to automatically use the correct pnpm version and ensures consistent package manager across all environments."
+    },
+    {
+      "id": "10",
+      "description": "Configure dependabot.yml for pnpm dependency updates",
+      "status": "completed",
+      "steps": [
+        "Update .github/dependabot.yml package-ecosystem to 'npm' (works for pnpm)",
+        "Optionally adjust schedule interval and add ignore patterns"
+      ],
+      "notes": "Configured dependabot.yml with: npm ecosystem (works with pnpm-lock.yaml), weekly schedule, grouping for minor/patch updates to reduce PR noise, ignoring major version updates for manual review, and added github-actions ecosystem for workflow updates."
+    },
+    {
+      "id": "11",
+      "description": "Fix CI: Remove pnpm version conflict in ci.yml",
+      "status": "completed",
+      "steps": [
+        "Remove 'with: version: 10' block from lint job (lines 29-30)",
+        "Remove 'with: version: 10' block from test job (lines 55-56)",
+        "Remove 'with: version: 10' block from build job (lines 82-83)",
+        "pnpm/action-setup@v4 will automatically read version from packageManager in package.json"
+      ],
+      "notes": "Removed 'with: version: 10' blocks from all three jobs (lint, test, build) in ci.yml. pnpm/action-setup@v4 will now automatically read the pnpm version from the packageManager field in package.json (pnpm@10.10.0), eliminating the version conflict."
+    },
+    {
+      "id": "12",
+      "description": "Fix CI: Remove pnpm version conflict in publish.yml",
+      "status": "completed",
+      "steps": [
+        "Remove 'with: version: 10' block from publish job (lines 22-23)",
+        "pnpm/action-setup@v4 will automatically read version from packageManager in package.json"
+      ],
+      "notes": "Removed 'with: version: 10' block from publish workflow. pnpm/action-setup@v4 will now automatically read the correct version from the packageManager field in package.json (pnpm@10.10.0), eliminating the version conflict that would cause the publish workflow to fail."
+    },
+    {
+      "id": "13",
+      "description": "Fix CI: Change npx nx to pnpm nx in ci.yml",
+      "status": "completed",
+      "steps": [
+        "Change 'npx nx run-many -t lint' to 'pnpm nx run-many -t lint' (line 40)",
+        "Change 'npx nx run-many -t test --passWithNoTests' to 'pnpm nx run-many -t test --passWithNoTests' (line 64)",
+        "Change 'npx nx run-many -t build --projects=tag:publishable' to 'pnpm nx run-many -t build --projects=tag:publishable' (line 88)"
+      ],
+      "notes": "Changed all three npx nx commands to pnpm nx in ci.yml (lint, test, build jobs). Using pnpm nx ensures the locally pinned Nx version from node_modules is used, whereas npx could pull a different version. Verification passed: all 12 projects built and linted successfully."
+    },
+    {
+      "id": "14",
+      "description": "Fix README.md typos and formatting",
+      "status": "completed",
+      "steps": [
+        "Fix typo 'independantly' -> 'independently' (line 111)",
+        "Add missing '# next time' comment before second project-release command (line 126)"
+      ],
+      "notes": "Fixed typo 'independantly' -> 'independently' and added missing '# next time' comment before second project-release command to clarify the command sequence. Verification passed: all 12 projects built and linted successfully."
+    },
+    {
+      "id": "15",
+      "description": "Fix Vercel: Enable corepack for pnpm",
+      "status": "completed",
+      "steps": [
+        "Create vercel.json at project root",
+        "Add ENABLE_EXPERIMENTAL_COREPACK=1 environment variable for build",
+        "Add installCommand to explicitly use pnpm install",
+        "This tells Vercel to use corepack which reads packageManager from package.json"
+      ],
+      "notes": "Vercel was defaulting to pnpm@9.x and running 'npm install' instead of 'pnpm install', causing Nx to fail because it couldn't find pnpm's .modules.yaml file. Enabling corepack and setting installCommand ensures Vercel uses the correct pnpm version (10.10.0) specified in package.json's packageManager field."
+    },
+    {
+      "id": "16",
+      "description": "Fix TypeScript: useFilterState return type for pnpm compatibility",
+      "status": "completed",
+      "steps": [
+        "Add explicit UseFilterStateReturn interface in useFilterState/index.ts",
+        "Import SelectionManager from @react-stately/selection directly",
+        "Add @react-stately/selection to next-component peerDependencies",
+        "Convert selectedKeys from null to undefined for AriaTagGroupProps compatibility"
+      ],
+      "notes": "pnpm's strict node_modules structure causes TypeScript to reference internal .pnpm paths in generated .d.ts files. Fixed by defining explicit return type that imports SelectionManager directly from @react-stately/selection, making the type portable."
     }
   ]
 }
