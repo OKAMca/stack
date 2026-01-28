@@ -1,3 +1,18 @@
+## 1.44.6 (2026-01-23)
+
+### 🩹 Fixes
+
+- **stack-ui:** prevent infinite loop in MenuSidePanel with React 19 ([fdba160](https://github.com/OKAMca/stack/commit/fdba160))
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.4
+
+### ❤️ Thank You
+
+- Claude Opus 4.5
+- Marie-Maxime Tanguay
+
 ## 1.44.4 (2026-01-21)
 
 ### 🧱 Updated Dependencies

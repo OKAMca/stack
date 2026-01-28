@@ -66,6 +66,7 @@ node_modules
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+.pnpm-store
 
 # testing
 /coverage
@@ -90,6 +91,7 @@ tmp/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # IDE
 .idea/*
