@@ -2,7 +2,6 @@
 import * as path from 'node:path'
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import { isExternal } from '../../../config/external-deps'
@@ -11,7 +10,6 @@ export default defineConfig({
   cacheDir: '../../../node_modules/.vite/core-lib',
   root: __dirname,
   plugins: [
-    react(),
     nxViteTsPaths(),
     nxCopyAssetsPlugin(['*.md']),
     dts({
