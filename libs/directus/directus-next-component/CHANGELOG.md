@@ -1,3 +1,11 @@
+## 1.8.16 (2026-01-23)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 1.44.6
+- Updated next-component to 1.3.7
+- Updated directus-next to 1.2.29
+
 ## 1.8.14 (2026-01-21)
 
 ### 🧱 Updated Dependencies

@@ -1,3 +1,7 @@
+## 1.17.4 (2026-01-23)
+
+This was a version bump only for core-lib to align it with other projects, there were no code changes.
+
 ## 1.17.2 (2026-01-21)
 
 ### 🩹 Fixes

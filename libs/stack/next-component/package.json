@@ -1,6 +1,6 @@
 {
   "name": "@okam/next-component",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -43,8 +43,8 @@
     "react-stately": "^3.43.0"
   },
   "dependencies": {
-    "@okam/core-lib": "1.17.3",
-    "@okam/stack-ui": "1.44.5",
+    "@okam/core-lib": "1.17.4",
+    "@okam/stack-ui": "1.44.6",
     "next": "^15.1.0 || ^16.0.0",
     "nuqs": "^2.4.3",
     "radashi": "^12.3.0",

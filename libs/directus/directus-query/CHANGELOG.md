@@ -1,3 +1,9 @@
+## 1.5.5 (2026-01-23)
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 1.17.4
+
 ## 1.5.3 (2026-01-21)
 
 ### 🧱 Updated Dependencies
