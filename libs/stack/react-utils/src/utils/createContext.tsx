@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, use } from 'react'
+import { createContext, useContext } from 'react'
 
 /**
  * A helper to create a Context and Provider with no upfront default value, and
@@ -9,7 +9,7 @@ import { createContext, use } from 'react'
 function createCtx<A extends object | null>() {
   const ctx = createContext<A | undefined>(undefined)
   function useCtx() {
-    const c = use(ctx)
+    const c = useContext(ctx)
 
     if (c === undefined) {
       throw new Error('useCtx must be inside a Provider')
@@ -23,7 +23,7 @@ function createCtx<A extends object | null>() {
 export function createCtxNullable<A extends object | null>() {
   const ctx = createContext<A | undefined>(undefined)
   function useCtx() {
-    const c = use(ctx)
+    const c = useContext(ctx)
 
     if (c === undefined) {
       return {} as A
@@ -42,7 +42,7 @@ export function createCtxNullable<A extends object | null>() {
 export function createCtxNullableStrict<A extends object | null>() {
   const ctx = createContext<A | undefined>(undefined)
   function useCtx() {
-    const c = use(ctx)
+    const c = useContext(ctx)
 
     if (c === undefined) {
       return null
