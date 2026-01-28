@@ -8,7 +8,3 @@ export { default as checkObjectProperty } from './utils/object-property'
 export { capitalizeFirstLetter } from './utils/string-transform'
 export type { UnPromisify } from './utils/type-utils'
 export * from './utils/typeguards'
-
-export function sayHello(name: string): string {
-  return `I'm the @okam/shared-ui component telling ${name} !`
-}
