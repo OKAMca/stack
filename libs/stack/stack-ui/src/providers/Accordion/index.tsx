@@ -1,7 +1,7 @@
 'use client'
 
 import type { TAccordionContext, TAccordionProviderProps } from './interface'
-import { createCtxNullable } from '@okam/core-lib'
+import { createCtxNullable } from '@okam/react-utils'
 import { useMemo } from 'react'
 
 const accordionCtx = createCtxNullable<TAccordionContext>()

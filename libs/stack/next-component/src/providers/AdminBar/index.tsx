@@ -2,7 +2,7 @@
 
 import type { Nullable } from '@okam/stack-ui'
 import type { TAdminBarContext, TAdminBarProviderProps } from './interface'
-import { createCtx } from '@okam/core-lib'
+import { createCtx } from '@okam/react-utils'
 import { useMemo, useState } from 'react'
 
 const adminBarCtx = createCtx<TAdminBarContext>()

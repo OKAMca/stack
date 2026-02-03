@@ -1,3 +1,24 @@
+## 2.0.0 (Unreleased)
+
+### ⚠️ Breaking Changes
+
+- **core-lib:** Removed `createCtx` and `createCtxNullable` exports. These React context utilities are now only available in `@okam/react-utils`. Update your imports:
+  ```typescript
+  // Before (no longer works)
+  import { createCtx, createCtxNullable } from '@okam/core-lib'
+
+  // After
+  import { createCtx, createCtxNullable } from '@okam/react-utils'
+  ```
+- **core-lib:** Removed the `react-server` export condition since core-lib is now server-safe by default (no React dependencies)
+- **core-lib:** Removed `@okam/react-utils` peer dependency - core-lib no longer has any React-related dependencies
+
+### 🚀 Features
+
+- **core-lib:** Now fully server-safe by default - can be used in Node.js, Edge runtimes, and React Server Components without any special configuration
+
+---
+
 ## 1.17.4 (2026-01-23)
 
 This was a version bump only for core-lib to align it with other projects, there were no code changes.

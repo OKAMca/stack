@@ -1,6 +1,6 @@
 {
-  "name": "@okam/core-lib",
-  "version": "1.17.4",
+  "name": "@okam/react-utils",
+  "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
@@ -29,7 +29,13 @@
   "nxrelease": {
     "repositoryUrl": "https://github.com/OKAMca/stack.git"
   },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0"
+  },
   "dependencies": {
-    "@tsed/exceptions": "^8.3.1"
+    "dequal": "^2.0.3"
+  },
+  "devDependencies": {
+    "react": "^19.0.0"
   }
 }

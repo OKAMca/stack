@@ -2,7 +2,7 @@
 
 import type { SwiperClass, SwiperRef } from 'swiper/react'
 import type { TCarouselContext, TCarouselProviderProps } from './interface'
-import { createCtxNullable } from '@okam/core-lib'
+import { createCtxNullable } from '@okam/react-utils'
 import { useMemo, useRef, useState } from 'react'
 
 const [useCarousel, CarouselProvider] = createCtxNullable<TCarouselContext>()

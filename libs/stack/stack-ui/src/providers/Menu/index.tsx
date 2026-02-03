@@ -1,7 +1,7 @@
 'use client'
 
 import type { IMenuProviderProps, TMenuContext } from './interface'
-import { createCtxNullable } from '@okam/core-lib'
+import { createCtxNullable } from '@okam/react-utils'
 import { useMemo } from 'react'
 import { useTabListState } from 'react-stately'
 import { SidePanelContextProvider } from '../SidePanel'

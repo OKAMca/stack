@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.10.1",
-    "@okam/core-lib": "1.17.4",
     "@okam/logger": "1.1.0",
+    "@okam/react-utils": "0.0.1",
     "@react-aria/selection": "^3.27.0",
     "@react-aria/utils": "^3.32.0",
     "@react-spring/web": "^10.0.3",
