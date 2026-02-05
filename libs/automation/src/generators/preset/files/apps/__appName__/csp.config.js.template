@@ -1,0 +1,31 @@
+/**
+ * Content Security Policy configuration.
+ * Add service-specific rules as the project grows.
+ */
+
+/** @type {Record<string, string[]>} */
+const directives = {
+  'default-src': ['\'self\''],
+  'script-src': ['\'self\'', '\'unsafe-eval\'', '\'unsafe-inline\''],
+  'style-src': ['\'self\'', '\'unsafe-inline\'', 'https://fonts.googleapis.com'],
+  'img-src': [
+    '\'self\'',
+    'blob:',
+    'data:',
+    `https://${process.env.NEXT_PUBLIC_IMG_DOMAIN ?? 'localhost:8055'}`,
+  ],
+  'font-src': ['\'self\'', 'https://fonts.gstatic.com'],
+  'connect-src': [
+    '\'self\'',
+    `https://${process.env.NEXT_PUBLIC_IMG_DOMAIN ?? 'localhost:8055'}`,
+  ],
+  'frame-ancestors': ['\'none\''],
+  'base-uri': ['\'self\''],
+  'form-action': ['\'self\''],
+}
+
+export function buildCsp() {
+  return Object.entries(directives)
+    .map(([key, values]) => `${key} ${values.join(' ')}`)
+    .join('; ')
+}
