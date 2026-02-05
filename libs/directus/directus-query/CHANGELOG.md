@@ -1,3 +1,7 @@
+# 2.0.0 (2026-02-05)
+
+This was a version bump only for directus-query to align it with other projects, there were no code changes.
+
 ## 1.5.5 (2026-01-23)
 
 ### 🧱 Updated Dependencies

@@ -1,3 +1,12 @@
+# 2.0.0 (2026-02-05)
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 2.0.0
+- Updated next-component to 2.0.0
+- Updated directus-node to 1.0.0
+- Updated directus-query to 2.0.0
+
 ## 1.2.29 (2026-01-23)
 
 ### 🧱 Updated Dependencies

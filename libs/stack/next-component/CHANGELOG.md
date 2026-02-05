@@ -1,3 +1,18 @@
+# 2.0.0 (2026-02-05)
+
+### 🚀 Features
+
+- **workspace:** migrate from npm to pnpm ([#399](https://github.com/OKAMca/stack/pull/399))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.0.0
+
+### ❤️ Thank You
+
+- Claude Opus 4.5
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 1.3.7 (2026-01-23)
 
 ### 🧱 Updated Dependencies

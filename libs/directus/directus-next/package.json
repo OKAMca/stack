@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-next",
-  "version": "1.2.29",
+  "version": "2.0.0",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -42,11 +42,11 @@
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "3.2.0",
-    "@okam/core-lib": "1.17.4",
-    "@okam/directus-node": "0.7.5",
-    "@okam/directus-query": "1.5.5",
+    "@okam/core-lib": "2.0.0",
+    "@okam/directus-node": "1.0.0",
+    "@okam/directus-query": "2.0.0",
     "@okam/logger": "1.1.0",
-    "@okam/next-component": "1.3.7",
+    "@okam/next-component": "2.0.0",
     "graphql-request": "^7.1.2",
     "next": "^15.1.0 || ^16.0.0",
     "radashi": "^12.3.0",

@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-block",
-  "version": "1.7.10",
+  "version": "2.0.0",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "@graphql-typed-document-node/core": "3.2.0",
-    "@okam/directus-query": "1.5.5",
-    "@okam/stack-ui": "1.44.6",
+    "@okam/directus-query": "2.0.0",
+    "@okam/stack-ui": "2.0.0",
     "graphql": "^16.9.0",
     "graphql-request": "^7.1.2",
     "radashi": "^12.3.0"

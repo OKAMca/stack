@@ -1,3 +1,7 @@
+# 1.0.0 (2026-02-05)
+
+This was a version bump only for ai to align it with other projects, there were no code changes.
+
 ## 0.2.0 (2026-01-23)
 
 ### 🚀 Features

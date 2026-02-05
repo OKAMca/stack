@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-flexible-content",
-  "version": "1.3.10",
+  "version": "2.0.0",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@nx/vite": "20.2.2",
-    "@okam/directus-block": "1.7.10",
-    "@okam/stack-ui": "1.44.6",
+    "@okam/directus-block": "2.0.0",
+    "@okam/stack-ui": "2.0.0",
     "@tiptap/core": "^3.15.3",
     "@tiptap/extension-subscript": "^3.15.3",
     "@tiptap/extension-superscript": "^3.15.3",

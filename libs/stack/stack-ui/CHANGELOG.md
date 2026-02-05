@@ -1,3 +1,7 @@
+# 2.0.0 (2026-02-05)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
 ## 1.44.6 (2026-01-23)
 
 ### 🩹 Fixes

@@ -1,13 +1,13 @@
 {
   "name": "@okam/automation",
   "type": "commonjs",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "typings": "./src/index.d.ts",
   "private": true,
   "main": "./src/index.js",
   "dependencies": {
     "@nx/devkit": "22.3.3",
-    "@okam/core-lib": "1.17.4",
+    "@okam/core-lib": "2.0.0",
     "radashi": "^12.3.0",
     "tslib": "^2.3.0"
   },
