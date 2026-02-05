@@ -22,7 +22,10 @@
     },
     "version": {
       "preVersionCommand": "npx nx run-many -t build --projects=tag:publishable",
-      "conventionalCommits": true
+      "conventionalCommits": true,
+      "versionActionsOptions": {
+        "skipLockFileUpdate": true
+      }
     },
     "releaseTag": {
       "pattern": "{projectName}-v{version}"
