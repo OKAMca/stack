@@ -1,0 +1,33 @@
+{
+  "name": "queries",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/queries/src",
+  "projectType": "library",
+  "tags": ["type:data"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/queries/**/*.{ts,tsx,js,jsx,json}"
+        ]
+      }
+    },
+    "codegen": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "graphql-codegen --config libs/queries/codegen.ts",
+        "cwd": "{workspaceRoot}"
+      },
+      "cache": true,
+      "inputs": [
+        "libs/queries/src/graphql/**/*.graphql",
+        "libs/queries/codegen.ts"
+      ],
+      "outputs": [
+        "libs/queries/src/gql/generated"
+      ]
+    }
+  }
+}

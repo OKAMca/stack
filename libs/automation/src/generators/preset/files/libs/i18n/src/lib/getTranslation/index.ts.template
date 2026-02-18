@@ -1,0 +1,33 @@
+import type { ResourceKey } from 'i18next'
+import type { SupportedLocale } from '../../config'
+import { createInstance } from 'i18next'
+import resourcesToBackend from 'i18next-resources-to-backend'
+import { defaultNS, getOptions } from '../../config'
+
+/**
+ * Get a translation function for server components.
+ * Creates a new i18next instance per call to avoid shared state in SSR.
+ * Uses i18next-resources-to-backend for dynamic translation loading.
+ *
+ * Note: initReactI18next is intentionally omitted here — it calls
+ * React.createContext() at import time, which is unavailable in the
+ * Next.js SSR runtime.  The React plugin is only needed for the
+ * client-side useTranslation hook; getFixedT works without it.
+ */
+export async function getTranslation(ns: string | string[] = defaultNS, locale: SupportedLocale) {
+  const i18n = createInstance()
+
+  await i18n
+    .use(
+      resourcesToBackend(
+        async (lang: string, namespace: string) =>
+          import(`../../locales/${lang}/${namespace}.json`) as Promise<ResourceKey>,
+      ),
+    )
+    .init(getOptions(locale, ns))
+
+  return {
+    t: i18n.getFixedT(locale, Array.isArray(ns) ? ns[0] : ns),
+    i18n,
+  }
+}

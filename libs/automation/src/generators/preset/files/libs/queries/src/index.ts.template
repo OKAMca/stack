@@ -1,0 +1,2 @@
+// Queries barrel export — client-side utilities
+export { graphqlClient, graphqlRequest } from './lib/client'

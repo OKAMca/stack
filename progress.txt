@@ -1,0 +1,1446 @@
+## Task 2: Create Nx preset generator skeleton — COMPLETED
+
+### What was done:
+- Created `libs/automation/src/generators/preset/schema.json` with `projectName` and `scope` options
+- Created `libs/automation/src/generators/preset/schema.d.ts` with TypeScript interface
+- Created `libs/automation/src/generators/preset/generator.ts` as the orchestrator:
+  - Normalizes scope (ensures `@` prefix)
+  - Derives `appName` as `{projectName}-nextjs`
+  - Calls `generateFiles` for each section (root, app, libs, directus) with existence checks
+  - Adds ALL pinned dependencies via `addDependenciesToPackageJson` (core, styling, okam, graphql, i18n, react-aria, forms, data as deps; nx, linting, storybook, git-hooks, graphql-codegen as devDeps)
+  - Calls `formatFiles` and returns install callback with `installPackagesTask`
+- Registered the `preset` generator in `libs/automation/generators.json`
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/schema.json
+- NEW: libs/automation/src/generators/preset/schema.d.ts
+- NEW: libs/automation/src/generators/preset/generator.ts
+- NEW: libs/automation/src/generators/preset/files/ (empty dir for future template files)
+- MODIFIED: libs/automation/generators.json (added preset entry)
+- MODIFIED: prd.json (task 2 status → completed)
+
+### Notes:
+- The generator skeleton is ready. Template files directories (files/root, files/apps, files/libs) will be populated by tasks 3-12.
+- The `generateFilesIfExists` helper gracefully skips sections that don't have template files yet.
+
+## Task 3: Scaffold root configuration and dependencies — COMPLETED
+
+### What was done:
+- Created all root template files under `libs/automation/src/generators/preset/files/root/`:
+  - `nx.json.template`: target defaults (build, test, lint, build-storybook, codegen), named inputs, generator defaults, inference disabled
+  - `tsconfig.base.json.template`: path aliases for all libs (brand-ui, blocks, queries, i18n), strict mode, moduleResolution bundler, target ES2022
+  - `pnpm-workspace.yaml`: packages for apps/* and libs/*
+  - `package.json.template`: @<scope>/source, private, ESM type, scripts (dev, build, lint, lint:affected, storybook, codegen, typegen, prepare), engines node >=22, packageManager pnpm@10.10.0
+  - `eslint.config.js.template`: @antfu/eslint-config with TypeScript type-aware, React, stylistic. NX plugin (dependency-checks, enforce-module-boundaries). Strict TS rules (no-explicit-any, no-floating-promises, strict-boolean-expressions, no-unsafe-* family). Config blocks for test files, config files, storybook, Next.js, declaration files, providers, theme
+  - `tailwind.preset.js`: minimal Tailwind preset
+  - `prettier.config.js`: single quotes, no semicolons, trailing commas, 100 print width
+  - `__dot__gitignore.template`: node_modules, dist, .nx, .next, .env.local, coverage, storybook-static, etc.
+  - `__dot__nvmrc`: Node 22
+  - `__dot__editorconfig`: 2-space indent, UTF-8, final newline, trim trailing whitespace
+- Updated `generator.ts`:
+  - Added `dot: '.'` to template variables for dotfile name substitution (__dot__ → .)
+  - Added `lint-staged: '15.5.2'` to PINNED_DEV_VERSIONS.gitHooks
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all template files appear in dist/libs/automation/src/generators/preset/files/root/
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/root/nx.json.template
+- NEW: libs/automation/src/generators/preset/files/root/tsconfig.base.json.template
+- NEW: libs/automation/src/generators/preset/files/root/pnpm-workspace.yaml
+- NEW: libs/automation/src/generators/preset/files/root/package.json.template
+- NEW: libs/automation/src/generators/preset/files/root/eslint.config.js.template
+- NEW: libs/automation/src/generators/preset/files/root/tailwind.preset.js
+- NEW: libs/automation/src/generators/preset/files/root/prettier.config.js
+- NEW: libs/automation/src/generators/preset/files/root/__dot__gitignore.template
+- NEW: libs/automation/src/generators/preset/files/root/__dot__nvmrc
+- NEW: libs/automation/src/generators/preset/files/root/__dot__editorconfig
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (added dot var, lint-staged dep)
+- MODIFIED: prd.json (task 3 status → completed)
+
+## Task 4: Scaffold Next.js app — COMPLETED
+
+### What was done:
+- Created all Next.js app template files under `libs/automation/src/generators/preset/files/apps/__appName__/`:
+  - `project.json.template`: build (@nx/next:build with dev/prod configs), serve (@nx/next:server), lint (@nx/eslint:lint), type-check (tsc --noEmit) targets
+  - `next.config.js.template`: standalone output, reactStrictMode, transpile @okam packages, Directus image remote patterns, security headers (HSTS, X-Frame-Options DENY, X-Content-Type-Options nosniff, Referrer-Policy strict-origin-when-cross-origin), CSP integration via csp.config.ts
+  - `csp.config.ts.template`: Content Security Policy builder with service-based directives (self, Directus API, Google Fonts), exported `buildCsp()` function
+  - `tailwind.config.js.template`: extends root preset, content paths include brand-ui and blocks libs
+  - `tsconfig.json.template`: extends ../../tsconfig.base.json, jsx preserve, Next.js plugin, React experimental types
+  - `src/app/layout.tsx.template`: root layout with html lang, metadata export (project name), Providers wrapper
+  - `src/app/Providers.tsx.template`: 'use client' component with QueryClientProvider from @tanstack/react-query (staleTime 60s, no refetchOnWindowFocus)
+  - `src/app/page.tsx.template`: minimal home page server component
+  - `src/app/not-found.tsx.template`: 404 page
+  - `src/lib/env.ts.template`: @t3-oss/env-nextjs with zod schemas — server vars (NEXT_SERVER_GRAPHQL_URL, API_SECRET), client vars (NEXT_PUBLIC_API_TOKEN, NEXT_PUBLIC_IMG_DOMAIN), skipValidation for Storybook/test/CI
+  - `middleware.ts.template`: i18n routing middleware — locale detection from URL path and Accept-Language header, cookie-based locale persistence, redirect to default locale, draft mode support, matcher pattern for non-static paths
+- No changes needed to generator.ts — it already handles `apps/__appName__` directory
+- All `.tsx` template files use `.template` extension to avoid type-aware linting conflicts
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 11 template files appear in dist/libs/automation/src/generators/preset/files/apps/__appName__/
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/project.json.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/next.config.js.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/csp.config.ts.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/tailwind.config.js.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/tsconfig.json.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/src/app/layout.tsx.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/src/app/Providers.tsx.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/src/app/page.tsx.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/src/app/not-found.tsx.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/src/lib/env.ts.template
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/middleware.ts.template
+- MODIFIED: prd.json (task 4 status → completed)
+
+## Task 5: Scaffold brand-ui library — COMPLETED
+
+### What was done:
+- Created all brand-ui template files under `libs/automation/src/generators/preset/files/libs/brand-ui/`:
+  - `project.json.template`: build (@nx/vite:build with outputs dist/libs/brand-ui), lint (@nx/eslint:lint) targets, tagged type:ui
+  - `package.json.template`: name @<scope>/brand-ui, ESM type, main/module/types all pointing to src/index.ts for in-monorepo dev
+  - `vite.config.ts.template`: library mode build targeting src/index.ts, ES format, externalize react/react-dom/react-jsx-runtime/@okam/stack-ui, preserveModules for tree-shaking, vite-plugin-dts for type generation
+  - `tsconfig.json.template`: extends ../../tsconfig.base.json, jsx react-jsx, vite/client types, references tsconfig.lib.json
+  - `tsconfig.lib.json.template`: extends tsconfig.json, declaration + declarationMap enabled, includes src/**/*.ts and src/**/*.tsx, excludes specs and stories
+  - `tailwind.config.js.template`: extends root preset, brand-specific primary/secondary color scales (50-950), custom font families (sans, heading) using CSS custom properties
+  - `src/index.ts.template`: re-exports all of @okam/stack-ui as base layer, then exports local theme object and ThemeProvider
+  - `src/theme/index.ts.template`: typed theme token object with colors (primary, secondary, neutral), typography (fontFamily, fontSize), spacing, and borderRadius — all as const for type safety
+  - `src/providers/Theme/index.tsx.template`: 'use client' ThemeProvider component that applies brand theme tokens via CSS custom properties (--color-primary, --color-secondary, --font-family-sans, --font-family-heading) on a wrapper div with data-theme="brand"
+  - `src/components/__dot__gitkeep`: empty directory placeholder for project-specific components
+- No changes needed to generator.ts — it already iterates over libs including brand-ui
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 10 template files appear in dist/libs/automation/src/generators/preset/files/libs/brand-ui/
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/project.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/package.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/vite.config.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/tsconfig.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/tsconfig.lib.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/tailwind.config.js.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/src/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/src/theme/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/src/providers/Theme/index.tsx.template
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/src/components/__dot__gitkeep
+- MODIFIED: prd.json (task 5 status → completed)
+
+## Task 6: Scaffold Storybook library — COMPLETED
+
+### What was done:
+- Created all Storybook template files under `libs/automation/src/generators/preset/files/libs/storybook/`:
+  - `project.json.template`: storybook target (@nx/storybook:storybook, port 4200), build-storybook target (@nx/storybook:build, output to dist/storybook/storybook), tagged type:storybook
+  - `package.json.template`: name @<scope>/storybook, private, ESM type
+  - `tsconfig.json.template`: extends ../../tsconfig.base.json, jsx react-jsx, vite/client types, includes .storybook/**/*.ts and .storybook/**/*.tsx
+  - `.storybook/main.ts.template`: @storybook/nextjs-vite framework, story globs from ../../brand-ui/**/*.stories.* and ../../blocks/**/*.stories.*, @storybook/addon-essentials addon, vite-tsconfig-paths plugin for monorepo path alias resolution (rooted at workspace root)
+  - `.storybook/preview.ts.template`: ThemeProvider decorator from @<scope>/brand-ui wrapping all stories, centered layout parameter, light/dark background options
+- No changes needed to generator.ts — `'storybook'` was already in the `libDirs` array at line 124
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 5 template files appear in dist/libs/automation/src/generators/preset/files/libs/storybook/
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/project.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/package.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/tsconfig.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/main.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/preview.ts.template
+- MODIFIED: prd.json (task 6 status → completed)
+
+## Task 7: Scaffold blocks library — COMPLETED
+
+### What was done:
+- Created all blocks template files under `libs/automation/src/generators/preset/files/libs/blocks/`:
+  - `project.json.template`: lint target (@nx/eslint:lint with lintFilePatterns), tagged type:blocks
+  - `package.json.template`: name @<scope>/blocks, private, ESM type, main/module/types all pointing to src/index.ts
+  - `tsconfig.json.template`: extends ../../tsconfig.base.json, jsx react-jsx, vite/client types, references tsconfig.lib.json
+  - `tsconfig.lib.json.template`: extends tsconfig.json, declaration + declarationMap enabled, includes src/**/*.ts and src/**/*.tsx, excludes specs and stories
+  - `src/index.ts.template`: empty barrel export (`export {}`) ready for block component exports
+  - `src/blocks/__dot__gitkeep`: empty directory placeholder for Directus block components
+  - `src/configs/__dot__gitkeep`: empty directory placeholder for block serializer configs
+- No changes needed to generator.ts — `'blocks'` was already in the `libDirs` array at line 124
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 7 template files appear in dist/libs/automation/src/generators/preset/files/libs/blocks/
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/libs/blocks/project.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/blocks/package.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/blocks/tsconfig.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/blocks/tsconfig.lib.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/blocks/src/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/blocks/src/blocks/__dot__gitkeep
+- NEW: libs/automation/src/generators/preset/files/libs/blocks/src/configs/__dot__gitkeep
+- MODIFIED: prd.json (task 7 status → completed)
+
+## Task 8: Scaffold queries library — COMPLETED
+
+### What was done:
+- Created all queries template files under `libs/automation/src/generators/preset/files/libs/queries/`:
+  - `project.json.template`: lint target (@nx/eslint:lint with lintFilePatterns), codegen target (nx:run-commands running graphql-codegen --config, cacheable with inputs from src/graphql/**/*.graphql and codegen.ts, outputs to src/gql/generated), tagged type:data
+  - `package.json.template`: name @<scope>/queries, private, ESM type, main/module/types all pointing to src/index.ts
+  - `tsconfig.json.template`: extends ../../tsconfig.base.json, jsx react-jsx, vite/client types, references tsconfig.lib.json
+  - `tsconfig.lib.json.template`: extends tsconfig.json, declaration + declarationMap enabled, includes src/**/*.ts and src/**/*.tsx, excludes specs
+  - `codegen.ts.template`: @graphql-codegen/cli config — schema from NEXT_SERVER_GRAPHQL_URL env var (fallback localhost:8055/graphql), documents from src/graphql/**/*.graphql, output to src/gql/generated/ using client preset with documentMode string
+  - `src/index.ts.template`: barrel export re-exporting graphqlClient and graphqlRequest from lib/client
+  - `src/server.ts.template`: server-side exports re-exporting serverGraphqlRequest from lib/client
+  - `src/lib/client.ts.template`: GraphQLClient instance from graphql-request, typed request wrapper (graphqlRequest) using TypedDocumentString generics from codegen, serverGraphqlRequest with separate client that includes Bearer auth from API_SECRET env var
+  - `src/gql/generated/graphql.ts.template`: placeholder TypedDocumentString class and DocumentTypeDecoration interface so the library compiles before codegen runs — will be overwritten by graphql-codegen
+  - `src/gql/__dot__gitkeep`: generated types output dir placeholder
+  - `src/graphql/__dot__gitkeep`: ready for .graphql query files
+- No changes needed to generator.ts — `'queries'` was already in the `libDirs` array at line 124
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 11 template files appear in dist/libs/automation/src/generators/preset/files/libs/queries/
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/libs/queries/project.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/package.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/tsconfig.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/tsconfig.lib.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/codegen.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/src/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/src/server.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/src/lib/client.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/src/gql/generated/graphql.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/queries/src/gql/__dot__gitkeep
+- NEW: libs/automation/src/generators/preset/files/libs/queries/src/graphql/__dot__gitkeep
+- MODIFIED: prd.json (task 8 status → completed)
+
+## Task 9: Scaffold i18n library — COMPLETED
+
+### What was done:
+- Created all i18n template files under `libs/automation/src/generators/preset/files/libs/i18n/`:
+  - `project.json.template`: lint target (@nx/eslint:lint with lintFilePatterns), tagged type:i18n
+  - `package.json.template`: name @<scope>/i18n, private, ESM type, main/module/types all pointing to src/index.ts
+  - `tsconfig.json.template`: extends ../../tsconfig.base.json, jsx react-jsx, vite/client types, references tsconfig.lib.json
+  - `tsconfig.lib.json.template`: extends tsconfig.json, declaration + declarationMap enabled, includes src/**/*.ts and src/**/*.tsx, excludes specs
+  - `src/config.ts.template`: i18nConfig object with supportedLngs ['en', 'fr'], defaultNS 'common', fallbackLng 'en', ns ['common']. Typed SupportedLocale union type and defaultLocale export
+  - `src/index.ts.template`: 'use client' directive. I18nProvider component using dynamic imports for locale JSON loading, singleton i18next init with language change support. Re-exports useTranslation hook from react-i18next. Exports config types from ./config
+  - `src/server.ts.template`: server-side i18n using createInstance (new instance per request for SSR safety). initI18n function that loads resources and initializes instance. getTranslation convenience wrapper returning { t, i18n } for server components. Re-exports config types
+  - `src/locales/en/common.json`: { "welcome": "Welcome", "notFound": "Page not found" }
+  - `src/locales/fr/common.json`: { "welcome": "Bienvenue", "notFound": "Page non trouvée" }
+- No changes needed to generator.ts — `'i18n'` was already in the `libDirs` array at line 124
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 9 template files appear in dist/libs/automation/src/generators/preset/files/libs/i18n/
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/project.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/package.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/tsconfig.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/tsconfig.lib.json.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/config.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/server.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/locales/en/common.json
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/locales/fr/common.json
+- MODIFIED: prd.json (task 9 status → completed)
+
+## Task 10: Scaffold Directus Docker setup — COMPLETED
+
+### What was done:
+- Created all Directus template files under `libs/automation/src/generators/preset/files/apps/directus/`:
+  - `docker-compose.yml.template`: 3 services — postgres (pgautoupgrade:16-alpine with persistent volume `pgdata`, healthcheck via pg_isready), redis (6-alpine with healthcheck via redis-cli ping), directus (directus/directus:latest with depends_on conditions for healthy postgres and redis, port 8055, env_file .env.local, environment vars for DB connection, CORS enabled for localhost:3000, cache via redis, GraphQL introspection enabled). All services have `restart: unless-stopped`
+  - `__dot__env.local.sample`: all required environment variables with comments — KEY, SECRET (security, must be changed), ADMIN_EMAIL, ADMIN_PASSWORD (admin account), DB_CLIENT/HOST/PORT/DATABASE/USER/PASSWORD (database matching docker-compose), PUBLIC_URL (http://localhost:8055), FRONTEND_URL (http://localhost:3000), CACHE_ENABLED, CACHE_STORE, REDIS_HOST, REDIS_PORT (cache), GRAPHQL_INTROSPECTION (GraphQL)
+  - `package.json.template`: scoped name @<scope>/directus, private, convenience scripts: `up` (docker compose up -d), `down` (docker compose down), `rebuild` (docker compose up -d --build), `migrate` (docker compose exec directus npx directus database migrate:latest), `log` (docker compose logs -f directus)
+- No changes needed to generator.ts — Directus app scaffold was already wired at line 130
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 3 template files appear in dist/libs/automation/src/generators/preset/files/apps/directus/
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/apps/directus/docker-compose.yml.template
+- NEW: libs/automation/src/generators/preset/files/apps/directus/__dot__env.local.sample
+- NEW: libs/automation/src/generators/preset/files/apps/directus/package.json.template
+- MODIFIED: prd.json (task 10 status → completed)
+
+## Task 11: Scaffold commitlint, Husky, and lint-staged — COMPLETED
+
+### What was done:
+- Created all git hooks template files under `libs/automation/src/generators/preset/files/root/`:
+  - `commitlint.config.js`: extends `@commitlint/config-conventional` with custom type-enum including standard types (feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert) plus project-specific types (security, changeset, translation)
+  - `__dot__husky/pre-commit`: runs `pnpm lint-staged` to lint and format staged files before commit
+  - `__dot__husky/commit-msg`: runs `pnpm commitlint --edit "$1"` to validate commit messages against conventional commit format
+  - `lint-staged.config.js`: runs `eslint --fix` on `*.{ts,tsx}` files and `prettier --write` on `*.{ts,tsx,js,json,md}` files
+- No changes needed to generator.ts — root section at line 118 already handles all files under `files/root/` via `generateFilesIfExists`, and the `__dot__` prefix is resolved to `.` via the `dot` template variable
+- Dependencies already added in task 3 via `PINNED_DEV_VERSIONS.gitHooks`: @commitlint/cli 20.3.1, @commitlint/config-conventional 20.3.1, husky 9.1.7, lint-staged 15.5.2
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 4 template files appear in dist/libs/automation/src/generators/preset/files/root/
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/root/commitlint.config.js
+- NEW: libs/automation/src/generators/preset/files/root/__dot__husky/pre-commit
+- NEW: libs/automation/src/generators/preset/files/root/__dot__husky/commit-msg
+- NEW: libs/automation/src/generators/preset/files/root/lint-staged.config.js
+- MODIFIED: prd.json (task 11 status → completed)
+
+## Task 12: Scaffold GitHub Actions CI workflows — COMPLETED
+
+### What was done:
+- Created all CI template files under `libs/automation/src/generators/preset/files/root/__dot__github/`:
+  - `workflows/lint.yml`: checkout (fetch-depth 0), pnpm/action-setup v4, Node 22, pnpm cache, frozen-lockfile install, concurrency group with cancel-in-progress. PR: `pnpm lint:affected --base=origin/main`. Main push: `pnpm lint`. Env secrets: NEXT_SERVER_GRAPHQL_URL, NEXT_PUBLIC_API_TOKEN
+  - `workflows/type-check.yml`: same setup as lint, runs `pnpm codegen` first. PR: `nx affected --target=type-check --base=origin/main`. Main: `nx run-many --target=type-check`. Same env secrets
+  - `workflows/clickup.yml`: triggered on PR events (opened, closed, reopened, synchronize, ready_for_review), pull_request_review (submitted), issue_comment (created). Determines action emoji per event type (including merged vs closed detection). Posts to ClickUp API v3 chat channel. `continue-on-error: true`. Secrets: CLICKUP_API_TOKEN, CLICKUP_WORKSPACE_ID, CLICKUP_CHANNEL_ID
+  - `dependabot.yml`: npm ecosystem, daily schedule, production-dependencies group, open-pull-requests-limit 10
+- No changes needed to generator.ts — root section at line 118 already handles all files under `files/root/` via `generateFilesIfExists`, and the `__dot__` prefix is resolved to `.` via the `dot` template variable
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+- Verified: all 4 template files appear in dist/libs/automation/src/generators/preset/files/root/__dot__github/
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/root/__dot__github/workflows/lint.yml
+- NEW: libs/automation/src/generators/preset/files/root/__dot__github/workflows/type-check.yml
+- NEW: libs/automation/src/generators/preset/files/root/__dot__github/workflows/clickup.yml
+- NEW: libs/automation/src/generators/preset/files/root/__dot__github/dependabot.yml
+- MODIFIED: prd.json (task 12 status → completed)
+
+## Task 13: Add unit tests for the preset generator — COMPLETED
+
+### What was done:
+- Created comprehensive vitest test suite at `libs/automation/src/generators/preset/generator.spec.ts`
+- 70 tests across 12 describe blocks covering every scaffold section:
+  - **root config** (12 tests): nx.json, tsconfig.base.json (scope aliases, strict mode), pnpm-workspace.yaml, package.json (scope, scripts, all pinned deps), eslint.config.js, tailwind.preset.js, prettier.config.js, .gitignore, .nvmrc, .editorconfig
+  - **next.js app** (11 tests): project.json (build/serve/lint/type-check targets), next.config.js (security headers), csp.config.ts, tailwind.config.js (brand-ui/blocks content paths), tsconfig.json (extends base), layout.tsx, Providers.tsx (use client, QueryClientProvider), page.tsx, not-found.tsx, env.ts (zod schemas, skipValidation), middleware.ts
+  - **brand-ui** (8 tests): index.ts re-exports @okam/stack-ui, ThemeProvider component, theme tokens, vite.config.ts externals, project.json (build/lint), package.json scope, .gitkeep
+  - **storybook** (5 tests): main.ts story globs (brand-ui, blocks), preview.ts ThemeProvider decorator, project.json targets, package.json, tsconfig.json
+  - **blocks** (5 tests): index.ts empty export, project.json lint, package.json, .gitkeep dirs, tsconfig files
+  - **queries** (8 tests): codegen.ts env var, client.ts GraphQLClient, project.json codegen target with cache, barrel exports, server.ts, placeholder graphql.ts (TypedDocumentString), .gitkeep dirs, package.json
+  - **i18n** (6 tests): config.ts locales (en/fr), index.ts use client + I18nProvider, server.ts getTranslation, locale JSON content, project.json, package.json
+  - **directus** (3 tests): docker-compose.yml (3 services), .env.local.sample vars, package.json docker scripts
+  - **git hooks** (4 tests): commitlint.config.js, husky pre-commit/commit-msg hooks, lint-staged.config.js
+  - **ci workflows** (4 tests): lint.yml, type-check.yml, clickup.yml, dependabot.yml
+  - **scope normalization** (2 tests): with/without @ prefix
+  - **app name derivation** (1 test): projectName-nextjs pattern
+- All 70 tests pass via `pnpm nx run automation:test`
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/generator.spec.ts
+- MODIFIED: prd.json (task 13 status → completed)
+
+## Task 14: Update build config and package exports — COMPLETED
+
+### What was done:
+- Created `libs/automation/src/index.ts` as a barrel export file for the preset generator:
+  - Exports `presetGenerator` function from `./generators/preset/generator`
+  - Exports `PresetGeneratorSchema` type from `./generators/preset/schema`
+  - This was missing — `package.json` `main` field pointed to `./src/index.js` but no source index.ts existed
+- Verified existing `project.json` build assets configuration correctly handles all file types:
+  - `**/!(*.ts)` glob captures all non-TypeScript files (templates, yml, json, gitkeep, extensionless files like husky hooks)
+  - `**/*.d.ts` glob captures TypeScript declaration files
+  - `generators.json` and `executors.json` are explicitly copied to dist root
+- Verified `package.json` has correct fields: `main`, `typings`, and `generators` all point to correct paths
+- Comprehensive dist verification confirms:
+  - `src/index.js` and `src/index.d.ts` now present (new)
+  - `generators.json` at dist root with preset generator registered
+  - All 74 template files in dist match source 100%:
+    - Root: 18 files (nx.json, tsconfig.base.json, package.json, eslint, prettier, tailwind, gitignore, nvmrc, editorconfig, commitlint, lint-staged, husky hooks, github workflows, dependabot)
+    - Next.js app: 11 files (project.json, next.config, csp.config, tailwind, tsconfig, layout, Providers, page, not-found, env, middleware)
+    - Directus: 3 files (docker-compose, .env.local.sample, package.json)
+    - Brand-UI: 10 files (project.json, package.json, vite.config, tsconfigs, tailwind, index, theme, ThemeProvider, .gitkeep)
+    - Storybook: 5 files (project.json, package.json, tsconfig, main.ts, preview.ts)
+    - Blocks: 7 files (project.json, package.json, tsconfigs, index, .gitkeeps)
+    - Queries: 11 files (project.json, package.json, tsconfigs, codegen, index, server, client, placeholder graphql, .gitkeeps)
+    - I18n: 9 files (project.json, package.json, tsconfigs, config, index, server, locale JSONs)
+  - All dotfiles present: __dot__editorconfig, __dot__gitignore, __dot__nvmrc, __dot__husky/pre-commit, __dot__husky/commit-msg, __dot__github/workflows/*, __dot__env.local.sample, __dot__gitkeep files
+  - Schema.json files for all 3 generators (preset, block, component) in dist
+  - Compiled JS and declaration files for all generators and the new index
+- CLI entry point (cli.ts) and bin field deferred to task 1 (not yet implemented)
+- Build, lint, and all 70 tests pass
+
+### Files created/modified:
+- NEW: libs/automation/src/index.ts
+- MODIFIED: prd.json (task 14 status → completed)
+
+## Task 1: Add CLI entry point to @okam/automation — COMPLETED
+
+### What was done:
+- Created `libs/automation/src/cli.ts` as the CLI entry point using `commander`:
+  - Shebang `#!/usr/bin/env node` at top for direct execution
+  - `okam-automation` binary name with version from package.json
+  - `project-setup` command with `-n/--name` and `-s/--scope` flags
+  - Interactive prompts via `node:readline` when flags not provided (used instead of `@inquirer/prompts` which is ESM-only, incompatible with the CJS automation package)
+  - Input validation: project name must be `^[a-z][a-z0-9-]*$`, scope similarly validated
+  - Scope normalization: ensures `@` prefix before passing to preset
+  - Spawns `npx create-nx-workspace <name> --preset=@okam/automation --pm=pnpm --scope=<scope> --nxCloud=skip` via `execSync` with inherited stdio
+  - Success/error messaging with next-steps output
+- Updated `libs/automation/package.json`:
+  - Added `bin` field: `{ "okam-automation": "./src/cli.js" }`
+  - Added `commander: "^14.0.0"` to dependencies
+- No changes needed to `project.json` — `@nx/js:tsc` executor compiles all `src/**/*.ts` files per `tsconfig.lib.json` include pattern, so `cli.ts` is compiled automatically
+- Verified dist output:
+  - `dist/libs/automation/src/cli.js` exists with shebang preserved (`#!/usr/bin/env node` at line 1)
+  - `dist/libs/automation/src/cli.d.ts` type declarations generated
+  - `dist/libs/automation/package.json` has correct `bin` field
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 70 tests pass
+
+### Files created/modified:
+- NEW: libs/automation/src/cli.ts
+- MODIFIED: libs/automation/package.json (added bin field, commander dependency)
+- MODIFIED: prd.json (task 1 status → completed)
+
+## Task 15: End-to-end smoke test — COMPLETED
+
+### What was done:
+- Created comprehensive e2e smoke test at `libs/automation/src/generators/preset/e2e-smoke.spec.ts`
+- 159 tests across 18 describe blocks covering full generator output validation:
+  - **template resolution** (4 tests): no leftover EJS tags (`<% %>`), no `__dot__` prefix in paths, no `__appName__` in paths, no `__tmpl__` in paths
+  - **file existence — root config** (12 tests): nx.json, tsconfig.base.json, pnpm-workspace.yaml, package.json, eslint.config.js, tailwind.preset.js, prettier.config.js, .gitignore, .nvmrc, .editorconfig, commitlint.config.js, lint-staged.config.js
+  - **file existence — husky hooks** (2 tests): .husky/pre-commit, .husky/commit-msg
+  - **file existence — github workflows** (4 tests): lint.yml, type-check.yml, clickup.yml, dependabot.yml
+  - **file existence — Next.js app** (11 tests): project.json, next.config.js, csp.config.ts, tailwind.config.js, tsconfig.json, layout.tsx, Providers.tsx, page.tsx, not-found.tsx, env.ts, middleware.ts
+  - **file existence — brand-ui** (10 tests): project.json, package.json, vite.config.ts, tsconfig.json, tsconfig.lib.json, tailwind.config.js, src/index.ts, theme/index.ts, ThemeProvider, .gitkeep
+  - **file existence — storybook** (5 tests): project.json, package.json, tsconfig.json, main.ts, preview.ts
+  - **file existence — blocks** (7 tests): project.json, package.json, tsconfig.json, tsconfig.lib.json, index.ts, blocks/.gitkeep, configs/.gitkeep
+  - **file existence — queries** (11 tests): project.json, package.json, tsconfig.json, tsconfig.lib.json, codegen.ts, index.ts, server.ts, client.ts, graphql.ts placeholder, gql/.gitkeep, graphql/.gitkeep
+  - **file existence — i18n** (9 tests): project.json, package.json, tsconfig.json, tsconfig.lib.json, config.ts, index.ts, server.ts, en/common.json, fr/common.json
+  - **file existence — directus** (3 tests): docker-compose.yml, .env.local.sample, package.json
+  - **json validity** (27 tests): all JSON files parse without errors
+  - **yaml validity** (6 tests): pnpm-workspace, docker-compose, lint.yml, type-check.yml, clickup.yml, dependabot.yml
+  - **next.js app content** (9 tests): security headers (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy), Directus image patterns, @okam transpile, CSP config, t3-env with zod, i18n middleware, QueryClientProvider, Providers layout, build/serve/lint/type-check targets
+  - **root config content** (9 tests): scope/scripts/engines/packageManager in package.json, all pinned deps verified, tsconfig path aliases with scope, nx.json target defaults, eslint config, .gitignore, .nvmrc, .editorconfig
+  - **brand-ui/storybook/queries/i18n/directus/git hooks content** (18 tests each section): content correctness for re-exports, GraphQLClient, codegen target, locales, docker services, env vars, lint-staged, commitlint
+  - **scope consistency** (6 tests): all lib/app package.json names use @smoketest scope
+  - **total file count** (1 test): at least 74 files generated
+- Test flushes virtual tree to temp directory on disk, validates, then cleans up via afterAll hook
+- Fixed 8 lint errors (import ordering, lowercase test names, single quotes)
+- All 229 tests pass (70 unit + 159 e2e)
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/e2e-smoke.spec.ts
+- MODIFIED: prd.json (task 15 status → completed)
+
+## Task 17: Fix preset schema to match create-nx-workspace contract — COMPLETED
+
+### What was done:
+- Fixed a blocking bug where `create-nx-workspace` passes the workspace name as `name` to the preset generator, but the schema required `projectName`, causing the preset to fail with "Required property projectName is missing"
+- Renamed the schema property from `projectName` to `name` across all files:
+  - `schema.json`: renamed property and updated required array
+  - `schema.d.ts`: renamed `projectName: string` to `name: string` in `PresetGeneratorSchema` interface
+  - `generator.ts`: changed `options.projectName` to `options.name`; kept `projectName: options.name` in `templateVars` so all EJS templates (`<%= projectName %>`) continue working unchanged
+  - `generator.spec.ts`: updated 4 call sites from `{ projectName: ... }` to `{ name: ... }`
+  - `e2e-smoke.spec.ts`: updated 1 call site from `{ projectName: ... }` to `{ name: ... }`
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 229 tests pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/schema.json (projectName → name)
+- MODIFIED: libs/automation/src/generators/preset/schema.d.ts (projectName → name)
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (options.projectName → options.name)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (4 call sites updated)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (1 call site updated)
+- MODIFIED: prd.json (task 17 status → completed)
+
+## Task 16: Align i18n templates with reference project production pattern — COMPLETED
+
+### What was done:
+- Replaced the simplified i18n scaffold with the production-grade pattern used in reference project projects
+- **Config (`config.ts`)**: Restructured to use `i18nConfig = { locales, defaultLocale }` shape. Added `localeMap` (empty by default, opt-in for regional locale codes like `en-CA → en`). Added `getOptions(lng, ns)` function returning full `InitOptions`. Exports: `defaultNS`, `i18nConfig`, `localeMap`, `defaultLocale`, `getOptions`, `SupportedLocale` type
+- **Index (`index.ts`)**: Complete rewrite. Exports `useTranslationAdapter` from hooks, routing utilities (`getMappedLocale`, `getValidLocale`, `splitLocaleFromPathname`, `getLocalizedPath`), and config re-exports. Removed old `I18nProvider` component and `initClientI18n`
+- **Server (`server.ts`)**: Exports `getTranslation` and `getLocale` from lib modules, plus config re-exports. Removed old `createInstance`/`initI18n` pattern
+- **6 lib modules created**:
+  - `lib/getLocale/index.ts`: Uses `createServerContext` from `@okam/next-component/server` for request-scoped locale state
+  - `lib/getTranslation/index.ts`: Uses `createInstance()` + `initReactI18next` + `resourcesToBackend` for SSR-safe per-request i18next instances
+  - `lib/getValidLocale/index.ts`: Validates a string against configured locales
+  - `lib/getMappedLocale/index.ts`: Bidirectional locale mapping (regional ↔ simple), no-op when localeMap is empty
+  - `lib/splitLocaleFromPathname/index.ts`: Extracts locale segment from URL pathname
+  - `lib/getLocalizedPath/index.ts`: Prepends locale prefix to path, skips prefix for default locale
+- **`hooks/useTranslationAdapter/index.ts`**: `'use client'` hook that initializes singleton i18next with `resourcesToBackend`, preloads all locales, syncs language with `react-aria` `useLocale()`, uses `['common', 'components']` namespaces
+- **Components namespace locales**: Added `src/locales/en/components.json` and `src/locales/fr/components.json` with minimal placeholder translations
+- **Next.js app middleware.ts**: Updated to import `splitLocaleFromPathname`, `getValidLocale`, `getLocalizedPath` from `@<scope>/i18n` instead of inline locale logic
+- **Next.js app Providers.tsx**: Updated to wrap with `react-aria` `I18nProvider` and `TranslationContextProvider` from `@okam/stack-ui`, passing `useTranslationAdapter` as the translation function
+- **Next.js app layout.tsx**: Updated to use `getLocale` from `@<scope>/i18n/server` for the `html lang` attribute
+- **Generator (`generator.ts`)**: Added `i18next-resources-to-backend: '1.2.1'` to `PINNED_VERSIONS.i18n`
+- **i18n `package.json` template**: Added `exports` map with `"."` and `"./server"` paths
+- **Unit tests (`generator.spec.ts`)**: Updated i18n tests to verify localeMap, getOptions, useTranslationAdapter, lib module files, components namespace, server export path. Updated Next.js tests for middleware i18n imports, Providers I18nProvider/TranslationContextProvider, layout getLocale. Added i18next-resources-to-backend dep check
+- **E2e smoke tests (`e2e-smoke.spec.ts`)**: Added 9 new i18n file existence checks (lib modules, hooks, components.json). Updated i18n content tests for new patterns. Updated Next.js content tests. Added i18next-resources-to-backend dep check. Updated total file count to 82+
+- All 247 tests pass (70 unit + 177 e2e). Build and lint pass
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/lib/getLocale/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/lib/getTranslation/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/lib/getValidLocale/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/lib/getMappedLocale/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/lib/splitLocaleFromPathname/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/lib/getLocalizedPath/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/hooks/useTranslationAdapter/index.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/locales/en/components.json
+- NEW: libs/automation/src/generators/preset/files/libs/i18n/src/locales/fr/components.json
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/src/config.ts.template (restructured with localeMap, getOptions)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/src/index.ts.template (replaced with routing utilities and useTranslationAdapter exports)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/src/server.ts.template (replaced with getTranslation/getLocale re-exports)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/package.json.template (added exports map)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/middleware.ts.template (uses i18n lib utilities)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/Providers.tsx.template (I18nProvider, TranslationContextProvider)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/layout.tsx.template (getLocale from i18n/server)
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (added i18next-resources-to-backend dep)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (updated i18n and Next.js tests)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (new i18n file checks, content tests, dep check)
+- MODIFIED: prd.json (task 16 status → completed)
+
+## Task 18: End-to-end CLI verification with create-nx-workspace — COMPLETED
+
+### What was done:
+- Full end-to-end verification of the preset generator via create-nx-workspace
+- Workflow: build → pack → create bare Nx workspace → install tarball → nx generate preset → pnpm install → nx lint
+- Multiple issues discovered and fixed during real-world testing:
+
+### Issues fixed:
+1. **@okam/react-utils not on npm** (ERR_PNPM_FETCH_404): Removed from PINNED_VERSIONS.okam and next.config.js transpilePackages
+2. **Storybook preview.ts JSX format error**: Renamed preview.ts.template → preview.tsx.template (JSX requires .tsx extension)
+3. **@tanstack/react-query@5.90.0 doesn't exist**: Updated to 5.90.20 in generator.ts, prd.json, generator.spec.ts, e2e-smoke.spec.ts
+4. **Missing ESLint peer deps**: @antfu/eslint-config hung waiting for interactive install prompt. Added @eslint-react/eslint-plugin@2.9.4, eslint-plugin-react-hooks@7.0.1, eslint-plugin-react-refresh@0.4.19, @next/eslint-plugin-next@16.1.2 to PINNED_DEV_VERSIONS.linting
+5. **formatFiles breaking template formatting**: Templates pre-formatted with single quotes/no semicolons, but formatFiles applied host prettier defaults (double quotes/semicolons). Removed formatFiles call and import entirely
+6. **~62 lint errors across templates**: Fixed in multiple rounds:
+   - perfectionist/sort-imports: Reordered imports to match @antfu/eslint-config sorting (type before value, alphabetical within groups)
+   - perfectionist/sort-exports: Reordered exports (local paths before external, alphabetical)
+   - perfectionist/sort-named-imports/exports: Alphabetized named imports/exports
+   - style/quote-props: Quoted all property keys consistently in objects with mixed numeric keys (fontSize, spacing)
+   - style/quotes: Replaced double-quoted CSP strings with escaped single quotes ('\'self\'')
+   - ts/no-unsafe-*: Added eslint-disable comments with descriptions for @okam package types not available at install time
+   - ts/promise-function-async: Added async keyword to arrow functions returning Promise from dynamic imports
+   - ts/no-unsafe-call: Added eslint-disable for i18next and useEffect calls with unresolved types
+   - antfu/if-newline: Converted single-line if-return to multi-line
+   - eslint-comments/require-description: Added descriptions to all eslint-disable comments
+   - eslint-comments/no-unused-disable: Removed unused eslint-disable directives
+
+### Final verification:
+- All 5 lintable projects (brand-ui, i18n, queries, blocks, test-starter-nextjs) pass lint cleanly
+- automation:build and automation:lint pass
+- All template files correctly generate with scope substitution (@teststarter)
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (removed @okam/react-utils, updated @tanstack/react-query version, added ESLint peer deps, removed formatFiles)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (updated preview.tsx, @tanstack/react-query version)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (updated preview.tsx, @tanstack/react-query version)
+- RENAMED: preview.ts.template → preview.tsx.template
+- MODIFIED: 14 template files for lint compliance (brand-ui index/theme/ThemeProvider, i18n index/server/useTranslationAdapter/getLocale/getTranslation/getValidLocale, app csp.config/middleware/Providers/layout/env)
+- MODIFIED: prd.json (task 18 status → completed)
+
+## Task 19: Fix missing dependencies in preset generator — COMPLETED
+
+### What was done:
+- Added 8 missing dependencies to `generator.ts` that were discovered during end-to-end testing:
+  - **@okam/next-component 1.3.7** → `PINNED_VERSIONS.okam` (i18n getLocale uses `createServerContext` from `@okam/next-component/server`)
+  - **@storybook/react 10.1.11** → `PINNED_DEV_VERSIONS.storybook` (preview.tsx imports `type Preview`)
+  - **@storybook/addon-a11y 10.1.11** → `PINNED_DEV_VERSIONS.storybook` (replacement for addon-essentials in Storybook 10)
+  - **@storybook/addon-docs 10.1.11** → `PINNED_DEV_VERSIONS.storybook`
+  - **vite 6.4.1** → new `PINNED_DEV_VERSIONS.vite` group (brand-ui vite.config.ts needs it; 6.x compatible with @nx/vite@22.3.3)
+  - **@vitejs/plugin-react 4.7.0** → `PINNED_DEV_VERSIONS.vite` (brand-ui vite.config.ts imports it)
+  - **vite-plugin-dts 4.5.4** → `PINNED_DEV_VERSIONS.vite` (brand-ui vite.config.ts imports it)
+  - **vite-tsconfig-paths 5.1.4** → `PINNED_DEV_VERSIONS.vite` (storybook main.ts imports it, matches reference project)
+- Updated `prd.json` pinned_versions.vite with actual pinned versions (was "latest")
+- Updated `generator.spec.ts` with 8 new dependency version assertions
+- Updated `e2e-smoke.spec.ts` with 8 new dependency version assertions
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 247 tests pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (added @okam/next-component to PINNED_VERSIONS.okam, added @storybook/react, addon-a11y, addon-docs to PINNED_DEV_VERSIONS.storybook, added new PINNED_DEV_VERSIONS.vite group with vite, @vitejs/plugin-react, vite-plugin-dts, vite-tsconfig-paths)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added 8 dependency version assertions)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added 8 dependency version assertions)
+- MODIFIED: prd.json (task 19 status → completed, pinned_versions.vite updated with actual versions)
+
+## Task 20: Fix Next.js app template issues — COMPLETED
+
+### What was done:
+- Removed `"types": ["react/experimental"]` from the Next.js app `tsconfig.json.template` — this type definition doesn't exist in React 19 stable (was only available during the RC phase). No reference project uses it
+- Added `public/__dot__gitkeep` directory placeholder to the Next.js app template at `files/apps/__appName__/public/__dot__gitkeep` — Next.js build expects the `public/` directory to exist
+- No `generator.ts` changes needed — `generateFiles` at line 134 already handles the `__appName__` directory recursively, so the new `public/__dot__gitkeep` file is automatically included
+- Updated unit tests (`generator.spec.ts`):
+  - Renamed tsconfig test to verify `compilerOptions.types` is undefined (no `react/experimental`)
+  - Added new test: `should generate public/.gitkeep directory placeholder`
+  - Total: 71 unit tests (was 70)
+- Updated e2e-smoke tests (`e2e-smoke.spec.ts`):
+  - Added `apps/${appName}/public/.gitkeep` to the Next.js app file existence list
+  - Updated tsconfig content test to verify `compilerOptions.types` is undefined
+  - Updated total file count assertion from 82 to 83
+  - Total: 176 e2e tests (was 177, consolidated tsconfig test)
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 249 tests pass
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/public/__dot__gitkeep
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/tsconfig.json.template (removed "types": ["react/experimental"])
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (updated tsconfig test, added public/.gitkeep test)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added public/.gitkeep file check, tsconfig content check, updated file count)
+- MODIFIED: prd.json (task 20 status → completed)
+
+## Task 22: Fix Storybook template for Storybook 10 compatibility — COMPLETED
+
+### What was done:
+- Replaced `@storybook/addon-essentials` with `@storybook/addon-a11y` and `@storybook/addon-docs` in the Storybook `main.ts` template
+  - `addon-essentials` was removed in Storybook 10 — the replacement addons match the reference project production pattern
+  - Updated the `addons` array from a single `getAbsolutePath('@storybook/addon-essentials')` to two entries: `getAbsolutePath('@storybook/addon-a11y')` and `getAbsolutePath('@storybook/addon-docs')`
+- Verified `preview.tsx` template import `import type { Preview } from '@storybook/react'` is correct for Storybook 10 — `type Preview` is exported from `@storybook/react`, not `@storybook/types`
+- Verified storybook `package.json` template does not list addon dependencies — they're managed in the root `package.json` via the generator's `addDependenciesToPackageJson` call (added in task 19)
+- Updated unit tests (`generator.spec.ts`):
+  - Extended the main.ts test to verify `@storybook/addon-a11y` and `@storybook/addon-docs` are present, and `addon-essentials` is absent
+  - Renamed test to: "should generate main.ts with correct story globs and Storybook 10 addons"
+- Updated e2e-smoke tests (`e2e-smoke.spec.ts`):
+  - Added new test: "main.ts should use Storybook 10 addons (addon-a11y and addon-docs, not addon-essentials)"
+  - Verifies `@storybook/addon-a11y`, `@storybook/addon-docs` present and `addon-essentials` absent
+- All 250 tests pass (71 unit + 177 e2e + 2 existing). Build and lint pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/main.ts.template (addon-essentials → addon-a11y + addon-docs)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added addon-a11y/addon-docs assertions, negative addon-essentials check)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added Storybook 10 addon verification test)
+- MODIFIED: prd.json (task 22 status → completed)
+
+## Task 23: Update pinned @okam package versions in generator to match latest published releases — COMPLETED
+
+### What was done:
+- Updated all @okam package versions in `PINNED_VERSIONS.okam` in `generator.ts`:
+  - `@okam/stack-ui`: `1.44.3` → `2.0.0`
+  - `@okam/directus-next`: `1.2.26` → `2.0.0`
+  - `@okam/directus-query`: `1.5.2` → `2.0.0`
+  - `@okam/directus-block`: `1.7.7` → `2.0.0`
+  - `@okam/core-lib`: `1.17.1` → `2.0.0`
+  - `@okam/next-component`: `1.3.7` → `2.0.0`
+- Added two new @okam packages to `PINNED_VERSIONS.okam`:
+  - `@okam/react-utils`: `0.0.1` (new package — used by i18n, brand-ui ThemeProvider via stack-ui)
+  - `@okam/logger`: `1.1.0` (logging utility)
+- Updated `next.config.js` template `transpilePackages` to include `@okam/react-utils` and `@okam/logger`, sorted alphabetically
+- Updated `generator.spec.ts`: expanded @okam assertions from 3 to 8, covering all 8 @okam packages with correct version strings
+- Updated `e2e-smoke.spec.ts`: expanded @okam assertions from 3 to 8, covering all 8 @okam packages with correct version strings
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 250 tests pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (updated all @okam versions, added react-utils and logger)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/next.config.js.template (added @okam/react-utils, @okam/logger to transpilePackages, sorted alphabetically)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (expanded @okam version assertions from 3 to 8)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (expanded @okam version assertions from 3 to 8)
+- MODIFIED: prd.json (task 23 status → completed)
+
+## Task 21: Re-run end-to-end CLI verification after fixes — COMPLETED
+
+### What was done:
+- Full end-to-end verification of the preset generator via create-nx-workspace on a clean workspace
+- Workflow: build → pack → create bare Nx workspace → install tarball → nx generate preset → pnpm install → verify all targets
+- Multiple issues discovered and fixed during real-world verification:
+
+### Issues fixed:
+1. **Missing @types/react and @types/react-dom** (TS7016): React 19 no longer ships built-in types. Added `@types/react: '19.2.11'` and `@types/react-dom: '19.2.3'` to `PINNED_DEV_VERSIONS.types` in generator.ts
+2. **Wrong TranslationContextProvider prop name** (TS2322): `useTranslation` should be `useTranslationFunc` in Providers.tsx template
+3. **createServerContext returns tuple, not object** (TS2339): Changed `{ get: getLocaleContext, set: setLocaleContext }` to `[getLocaleContext, setLocaleContext]` in getLocale template
+4. **vite-plugin-dts build failure** (`Cannot read properties of undefined`): Changed `tsconfigPath` from relative `'./tsconfig.lib.json'` to absolute `resolve(__dirname, 'tsconfig.lib.json')` in brand-ui vite.config.ts template. Also added `include` patterns to brand-ui tsconfig.json
+5. **Next.js SSR createContext error** (`(0, g.createContext) is not a function`): Root cause was `getTranslation/index.ts` importing `initReactI18next` from `react-i18next`, which calls `React.createContext()` at module evaluation time. The SSR runtime doesn't expose `createContext`. Fix: removed `initReactI18next` from server-side `getTranslation` — it's only needed for client-side `useTranslation` hook, not for `getFixedT`
+6. **Next.js SSG useMemo error** (`Cannot read properties of null (reading 'useMemo')`): Caused by `serverExternalPackages` for react-aria packages, which made react-aria use a separate React instance. Fix: removed `serverExternalPackages` from next.config.js template
+7. **Storybook ESM compatibility** (`require is not defined in ES module scope`): `require.resolve` and `__dirname` are CJS globals unavailable in ESM. Fix: added `createRequire(import.meta.url)` and `dirname(fileURLToPath(import.meta.url))` in storybook main.ts template
+8. **Storybook tailwind-merge missing** (`"twMerge" is not exported`): `tailwind-variants` optionally peers on `tailwind-merge`. Fix: added `tailwind-merge: '3.4.0'` to `PINNED_VERSIONS.styling`
+9. **Unused eslint-disable directives** (6 warnings across 4 files): Removed unnecessary directives from brand-ui ThemeProvider, layout.tsx, getLocale, and Providers templates after the underlying type errors were fixed
+
+### Final verification (clean workspace):
+- ✅ Lint: All 5 projects pass (0 errors, 0 warnings)
+- ✅ Type-check: Passes
+- ✅ Brand-ui build: Passes
+- ✅ Next.js build: Passes (static pages generated successfully)
+- ✅ Storybook build: Passes
+- ✅ All 250 automation tests pass
+- ✅ Automation build and lint pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (added @types/react, @types/react-dom, tailwind-merge)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/src/providers/Theme/index.tsx.template (removed unused eslint-disable directives)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/vite.config.ts.template (absolute tsconfigPath)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/tsconfig.json.template (added include patterns)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/src/lib/getLocale/index.ts.template (tuple destructuring)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/src/lib/getTranslation/index.ts.template (removed initReactI18next)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/src/hooks/useTranslationAdapter/index.ts.template (useRef singleton init)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/main.ts.template (ESM createRequire, fileURLToPath)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/Providers.tsx.template (useTranslationFunc prop)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/layout.tsx.template (removed unused eslint-disable)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/next.config.js.template (removed serverExternalPackages)
+- MODIFIED: prd.json (task 21 status → completed)
+
+## Task 25: Make Directus scaffolding optional via includeDirectus flag — COMPLETED
+
+### What was done:
+- Added `includeDirectus` boolean option (default `true`) to the preset generator, allowing teams to opt out of Directus CMS setup when using a different CMS or no CMS at all
+- When `includeDirectus` is `false`:
+  - `apps/directus/` directory is NOT generated (docker-compose.yml, .env.local.sample, package.json)
+  - `@okam/directus-next`, `@okam/directus-query`, `@okam/directus-block` are NOT added to root package.json dependencies
+  - Those 3 packages are NOT included in `next.config.js` `transpilePackages`
+- When `includeDirectus` is `true` (default): no change from previous behavior
+
+### Implementation details:
+1. **schema.json**: Added `includeDirectus` boolean property with `"default": true`, not required
+2. **schema.d.ts**: Added `includeDirectus?: boolean` to `PresetGeneratorSchema` interface
+3. **generator.ts**:
+   - Extracted `@okam/directus-next`, `@okam/directus-query`, `@okam/directus-block` from `PINNED_VERSIONS.okam` into a new `PINNED_VERSIONS.directus` group
+   - Derives `includeDirectus` from `options.includeDirectus !== false` (default true)
+   - Passes `includeDirectus` as string template variable for EJS usage in next.config.js
+   - Wrapped Section 4 (Directus app) in `if (includeDirectus)` conditional
+   - Conditionally deletes `directus` group from version groups before `flattenVersions` when `includeDirectus` is false
+4. **next.config.js.template**: Wrapped the 3 `@okam/directus-*` entries in `transpilePackages` with EJS conditional `<% if (includeDirectus === 'true') { %> ... <% } %>`
+5. **cli.ts**: Added `--no-directus` option to the `project-setup` command. When `opts.directus === false`, appends `--includeDirectus=false` to the `create-nx-workspace` args array
+
+### Verification:
+- All 250 existing tests pass unchanged (default behavior preserved — includeDirectus defaults to true)
+- `pnpm nx run automation:build` passes
+- `pnpm nx run automation:lint` passes
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/schema.json (added includeDirectus property)
+- MODIFIED: libs/automation/src/generators/preset/schema.d.ts (added includeDirectus?: boolean)
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (extracted PINNED_VERSIONS.directus, conditional Section 4, conditional dep merge)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/next.config.js.template (EJS conditional for @okam/directus-* transpilePackages)
+- MODIFIED: libs/automation/src/cli.ts (added --no-directus option)
+- MODIFIED: prd.json (task 25 status → completed)
+
+## Task 26: Add unit and E2E tests for includeDirectus option — COMPLETED
+
+### What was done:
+- Added 10 unit tests in `generator.spec.ts` under a new `describe('when includeDirectus is false')` block:
+  - Directus files NOT generated (docker-compose.yml, .env.local.sample, package.json)
+  - @okam/directus-* NOT in root package.json dependencies
+  - @okam/directus-* NOT in next.config.js transpilePackages
+  - Non-directus @okam packages still present in dependencies (@okam/stack-ui, core-lib, next-component, react-utils, logger)
+  - Non-directus @okam packages still in next.config.js transpilePackages
+  - All root config files still generated (nx.json, tsconfig.base.json, eslint, .gitignore, etc.)
+  - Next.js app still generated
+  - All library directories still generated (brand-ui, storybook, blocks, queries, i18n)
+  - CI workflows still generated
+- Added 50 E2E smoke tests in `e2e-smoke.spec.ts` under a new top-level describe block `'preset generator — e2e smoke test (includeDirectus: false)'`:
+  - Separate generator run with `{ name: 'no-directus', scope: '@nodirectus', includeDirectus: false }`
+  - Flushes to temp directory on disk, validates, cleans up via afterAll
+  - Directus files absent (3 tests)
+  - Directus deps absent + non-directus @okam deps present (2 tests)
+  - next.config.js without directus transpilePackages + with non-directus (2 tests)
+  - Template resolution clean: no EJS tags, no __dot__ prefixes (2 tests)
+  - All non-directus files exist: 18 root files, 6 app files, 5 lib files (29 tests)
+  - JSON validity for 7 key files (7 tests)
+  - Scope consistency across 5 lib package.json files (5 tests)
+- All 309 tests pass (80 unit + 227 e2e + 2 existing). Build and lint pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added 'when includeDirectus is false' describe block with 10 tests)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added second top-level suite with 50 tests for includeDirectus: false)
+- MODIFIED: prd.json (task 26 status → completed)
+
+## Task 27: Fix brand-ui ThemeProvider to follow stack-ui theme structure — COMPLETED
+
+### What was done:
+- Replaced the brand-ui template's ThemeProvider and theme with the correct @okam/stack-ui pattern
+- **Old pattern** (wrong): Plain design-token object (`theme = { colors, spacing, typography }` as values) + CSS-variable-based ThemeProvider that set `--color-primary` etc. via inline styles on a `<div>`
+- **New pattern** (correct): `makeTheme()` + `createThemeProvider()` + `tv()` from tailwind-variants — each theme key maps to a function that accepts variant tokens and returns Tailwind CSS classes, matching how stack-ui components look up themes via `useThemeContext(themeName, tokens)`
+
+### Implementation details:
+1. **Deleted `theme/index.ts.template`** (plain design-token object)
+2. **Deleted `providers/Theme/index.tsx.template`** (CSS-variable-based ThemeProvider)
+3. **Created `theme/index.tsx.template`**:
+   - `'use client'` directive
+   - Imports `memo` from React, `createThemeProvider`/`makeTheme` from `@okam/stack-ui`, `tv` from `tailwind-variants`
+   - `typography` tv() with `size` (h1-h6, leading, paragraph, footnotes, xs), `font` (body), `weight` (normal, light, bold), `isError` variants — matching stack-ui's Typography theme
+   - `button` tv() with base flex/transition/disabled styles, `buttonStyle` (default, outline, hollow), `size` (default, large), `shape` (rounded, circular) variants — matching stack-ui's Button theme
+   - `BrandTheme = makeTheme({ typography, button, link })` — `link` reuses `button` (stack-ui pattern)
+   - `export default memo(createThemeProvider(BrandTheme))`
+   - Comment explaining how to add more component themes by referencing `@okam/stack-ui/src/theme/`
+4. **Updated `index.ts.template`**: Changed from `export { ThemeProvider } from './providers/Theme'` + `export { theme } from './theme'` to `export { default as ThemeProvider } from './theme'` (shadows stack-ui's ThemeProvider with brand overrides)
+5. **Updated `vite.config.ts.template`**: Added `'tailwind-variants'` to `rollupOptions.external` array (already a root dependency, avoids bundling duplicate)
+6. **Updated `Providers.tsx.template`**: Added `import { ThemeProvider } from '<scope>/brand-ui'` and wrapped entire provider chain with `<ThemeProvider>` as outermost wrapper
+7. **Updated `generator.spec.ts`**:
+   - Theme test checks `theme/index.tsx` exists (was `theme/index.ts`), verifies `makeTheme`, `createThemeProvider`, `tv`, `tailwind-variants`, `typography`, `button`
+   - Added negative test: `providers/Theme/index.tsx` should NOT exist
+   - Updated vite externals test to include `tailwind-variants`
+   - Updated Providers.tsx test to check for `ThemeProvider` and `@acme/brand-ui`
+8. **Updated `e2e-smoke.spec.ts`**:
+   - Brand-ui file list: replaced `theme/index.ts` + `providers/Theme/index.tsx` with `theme/index.tsx` (net -1 file)
+   - Content tests verify `makeTheme`/`createThemeProvider`/`tv`/`tailwind-variants`/`use client` in `theme/index.tsx`
+   - Added negative test for old `providers/Theme/index.tsx` path
+   - Vite externals test includes `tailwind-variants`
+   - Providers.tsx test checks for `ThemeProvider` and `@smoketest/brand-ui`
+   - Total file count assertion: 83 → 82
+
+### Verification:
+- All 309 tests pass (80 unit + 227 e2e + 2 existing)
+- `pnpm nx run automation:build` passes
+- `pnpm nx run automation:lint` passes
+- Dist output verified: `theme/index.tsx.template` present, old `providers/` directory absent
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/src/theme/index.tsx.template
+
+### Files deleted:
+- DELETED: libs/automation/src/generators/preset/files/libs/brand-ui/src/theme/index.ts.template
+- DELETED: libs/automation/src/generators/preset/files/libs/brand-ui/src/providers/Theme/index.tsx.template
+- DELETED: libs/automation/src/generators/preset/files/libs/brand-ui/src/providers/Theme/ (empty dir)
+- DELETED: libs/automation/src/generators/preset/files/libs/brand-ui/src/providers/ (empty dir)
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/src/index.ts.template (export { default as ThemeProvider } from './theme')
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/vite.config.ts.template (added tailwind-variants to externals)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/Providers.tsx.template (ThemeProvider wrapper from brand-ui)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (updated brand-ui and Providers tests)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (updated brand-ui files, content, and total count)
+- MODIFIED: prd.json (task 27 status → completed)
+
+## Task 28: E2E build verification after brand-ui ThemeProvider fix — COMPLETED
+
+### What was done:
+- Full end-to-end verification of the generated workspace after the brand-ui ThemeProvider migration to stack-ui's makeTheme/createThemeProvider pattern
+- Workflow: build → pack → create bare Nx workspace → install tarball → nx generate preset → pnpm install → verify all targets
+
+### Issues fixed:
+1. **brand-ui theme/index.tsx import ordering** (perfectionist/sort-imports): `@okam/stack-ui` import must come before `react` import (alphabetical: `@o` < `r`)
+2. **Providers.tsx import ordering** (perfectionist/sort-imports): `@tanstack/react-query` must come before scoped `@<scope>/*` imports (alphabetical: `@tanstack` < `@teststarter`), and `@<scope>/brand-ui` must come before `@<scope>/i18n`
+
+### Final verification (clean workspace):
+- Lint: All 5 projects pass (0 errors, 0 warnings)
+- brand-ui:build: Passes (vite resolves tailwind-variants, @okam/stack-ui makeTheme/createThemeProvider)
+- Next.js build: Passes (static pages generated, ThemeProvider from brand-ui resolves correctly in Providers.tsx)
+- Storybook build: Passes (preview.tsx ThemeProvider from brand-ui works with createThemeProvider-based export)
+- All 309 automation tests pass (80 unit + 227 e2e + 2 existing)
+- automation:build and automation:lint pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/src/theme/index.tsx.template (fixed import ordering: @okam/stack-ui before react)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/Providers.tsx.template (fixed import ordering: @tanstack before scoped, brand-ui before i18n)
+- MODIFIED: prd.json (task 28 status → completed)
+
+## Task 29: Add JSON to lintFilePatterns in all project.json templates — COMPLETED
+
+### What was done:
+- Updated all 6 project.json templates to include `json` in the lintFilePatterns glob pattern
+- Changed `**/*.{ts,tsx,js,jsx}` to `**/*.{ts,tsx,js,jsx,json}` in:
+  - `libs/brand-ui/project.json.template`
+  - `libs/blocks/project.json.template`
+  - `libs/queries/project.json.template`
+  - `libs/i18n/project.json.template`
+  - `apps/__appName__/project.json.template`
+- Added a new `lint` target to `libs/storybook/project.json.template` — it previously only had `storybook` and `build-storybook` targets, so JSON files were never linted
+- This ensures jsonc/sort-keys rules on tsconfig.json files and @nx/dependency-checks on package.json files are now enforced via `nx lint` in generated workspaces
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 309 tests pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/project.json.template (added json to lintFilePatterns)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/blocks/project.json.template (added json to lintFilePatterns)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/queries/project.json.template (added json to lintFilePatterns)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/project.json.template (added json to lintFilePatterns)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/project.json.template (added lint target with json in lintFilePatterns)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/project.json.template (added json to lintFilePatterns)
+- MODIFIED: prd.json (task 29 status → completed)
+
+## Task 30: Fix tsconfig template issues across all libs — COMPLETED
+
+### What was done:
+- Added `"composite": true` to `compilerOptions` in all 4 lib `tsconfig.lib.json` templates:
+  - `brand-ui/tsconfig.lib.json.template`
+  - `blocks/tsconfig.lib.json.template`
+  - `queries/tsconfig.lib.json.template`
+  - `i18n/tsconfig.lib.json.template`
+- `composite: true` is required when a tsconfig is referenced via `"references"` in the parent tsconfig.json — without it, the IDE shows errors like "Referenced project must have setting 'composite': true"
+- Positioned `composite` before `declaration` to maintain ascending alphabetical key ordering (c < d), which satisfies `jsonc/sort-keys`
+- Also reordered brand-ui `tsconfig.lib.json` keys: `outDir` was positioned before `declaration` and `declarationMap`, moved it after them to maintain alphabetical order: `composite`, `declaration`, `declarationMap`, `outDir`, `types`
+- Fixed i18n `package.json.template`: moved `exports` field before `main`/`module`/`types` to match `jsonc/sort-package-json` convention (exports should come before main in standard package.json field ordering)
+- Audited all other package.json templates (root, brand-ui, storybook, blocks, queries, directus) — they already follow correct ordering
+- Brand-ui `tsconfig.json` compilerOptions key order (`jsx`, `outDir`, `types`) is already alphabetically correct — no change needed
+- All 309 tests pass. Build and lint pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/tsconfig.lib.json.template (added composite: true, reordered keys alphabetically)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/blocks/tsconfig.lib.json.template (added composite: true)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/queries/tsconfig.lib.json.template (added composite: true)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/tsconfig.lib.json.template (added composite: true)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/package.json.template (moved exports before main/module/types)
+- MODIFIED: prd.json (task 30 status → completed)
+
+## Task 31: Fix storybook preview.tsx arrow-parens lint error — COMPLETED
+
+### What was done:
+- Changed `(Story) =>` to `Story =>` on line 6 of the storybook `preview.tsx.template` decorator function
+- The `style/arrow-parens` ESLint rule requires no parentheses around a single parameter when the body has no curly braces (only a parenthesized JSX expression)
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 309 tests pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/preview.tsx.template (changed `(Story) =>` to `Story =>`)
+- MODIFIED: prd.json (task 31 status → completed)
+
+## Task 32: E2E build verification after lint and tsconfig fixes — COMPLETED
+
+### What was done:
+- Full end-to-end verification of the generated workspace after JSON lintFilePatterns, tsconfig composite, and storybook arrow-parens fixes
+- Workflow: build → pack → create bare Nx workspace → install tarball → nx generate preset → pnpm install → verify all targets
+
+### Issues found and fixed:
+1. **jsonc/sort-keys in 5 lib package.json templates**: `type` should come before `version` per @antfu/eslint-config's package.json sort order. Fixed in: queries, brand-ui, i18n, blocks, storybook
+2. **jsonc/sort-keys in 4 lib tsconfig.json templates**: `references` should come before `include` per tsconfig sort order (`extends`, `compilerOptions`, `references`, `files`, `include`, `exclude`). Fixed in: queries, brand-ui, i18n, blocks
+3. **jsonc/sort-keys in brand-ui tsconfig.json**: `outDir` should come after `types` per compilerOptions sort order. Fixed to: `jsx`, `types`, `outDir`
+4. **jsonc/sort-keys in brand-ui tsconfig.lib.json**: `types` should come before `declaration` per compilerOptions sort order. Fixed to: `composite`, `types`, `declaration`, `declarationMap`, `outDir`
+5. **jsonc/sort-keys in storybook tsconfig.json**: same as #3 — `outDir` after `types`
+6. **jsonc/sort-keys in Next.js tsconfig.json**: reordered compilerOptions to match tsconfig sort spec: `incremental`, `jsx`, `resolveJsonModule`, `allowJs`, `strict`, `noEmit`, `allowSyntheticDefaultImports`, `esModuleInterop`, `isolatedModules`, `plugins`
+7. **@nx/dependency-checks in brand-ui package.json**: brand-ui imports `@okam/stack-ui`, `react`, `tailwind-variants` but had no dependency sections. Added `peerDependencies` with `"*"` versions for all three
+8. **ts/require-await in storybook main.ts**: `viteFinal: async (config) =>` had no `await` expression. Removed `async` keyword
+
+### Final verification (clean workspace):
+- Lint: All 6 projects pass (0 errors, 0 warnings) — JSON files now included in lint scope
+- brand-ui:build: Passes
+- Next.js build: Passes (static pages generated)
+- Storybook build: Passes
+- All 309 automation tests pass
+- automation:build and automation:lint pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/queries/package.json.template (type before version)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/package.json.template (type before version, added peerDependencies)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/package.json.template (type before version)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/blocks/package.json.template (type before version)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/package.json.template (type before version)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/queries/tsconfig.json.template (references before include)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/tsconfig.json.template (types before outDir, references before include)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/tsconfig.lib.json.template (types before declaration)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/tsconfig.json.template (references before include)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/blocks/tsconfig.json.template (references before include)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/tsconfig.json.template (types before outDir)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/tsconfig.json.template (compilerOptions reordered per tsconfig sort spec)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/main.ts.template (removed async from viteFinal)
+- MODIFIED: prd.json (task 32 status → completed)
+
+## Task 33: Fix jsonc/sort-keys ordering in root tsconfig.base.json template — COMPLETED
+
+### What was done:
+- Reordered `compilerOptions` keys in `libs/automation/src/generators/preset/files/root/tsconfig.base.json.template` to alphabetical order
+- Previous order had keys scattered (rootDir, sourceMap, declaration, moduleResolution, emitDecoratorMetadata, experimentalDecorators, importHelpers, target, module, lib, skipLibCheck, skipDefaultLibCheck, strict, noUncheckedIndexedAccess, baseUrl, paths)
+- New alphabetical order: baseUrl, declaration, emitDecoratorMetadata, experimentalDecorators, importHelpers, lib, module, moduleResolution, noUncheckedIndexedAccess, paths, rootDir, skipDefaultLibCheck, skipLibCheck, sourceMap, strict, target
+- This eliminates 11 jsonc/sort-keys violations that the IDE catches in generated workspaces
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 309 tests pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/root/tsconfig.base.json.template (compilerOptions keys reordered alphabetically)
+- MODIFIED: prd.json (task 33 status → completed)
+
+## Task 36: Fix root package.json template jsonc/sort-keys ordering — COMPLETED
+
+### What was done:
+- Reordered top-level keys in `libs/automation/src/generators/preset/files/root/package.json.template` to match the `jsonc/sort-package-json` convention
+- Previous order: `name`, `version`, `private`, `type`, `scripts`, `engines`, `packageManager`
+- New order: `name`, `type`, `version`, `private`, `packageManager`, `engines`, `scripts`
+- This eliminates jsonc/sort-keys violations in generated workspaces where the root package.json would fail lint with JSON linting enabled
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 309 tests pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/root/package.json.template (top-level keys reordered to match sort-package-json convention)
+- MODIFIED: prd.json (task 36 status → completed)
+
+## Task 34: Add root-level lint coverage for workspace config files — COMPLETED
+
+### What was done:
+- Added root workspace config files (`package.json`, `tsconfig.base.json`, `nx.json`) to the Next.js app's `lintFilePatterns` in `project.json.template`
+- Evaluated three approaches: (a) root-level project in nx.json, (b) separate eslint command in lint script, (c) expand Next.js app's lintFilePatterns
+- Chose approach (c) — simplest, Nx-idiomatic, no new projects/targets needed. The Next.js app is always present, so root files are linted whenever `nx run-many -t lint` runs
+- Added unit test verifying root config file patterns are present in the lint target
+- Added e2e smoke test verifying root config file patterns are present in the lint target
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and all 311 tests pass (81 unit + 228 e2e + 2 existing)
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/project.json.template (added package.json, tsconfig.base.json, nx.json to lintFilePatterns)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added root config lint patterns test)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added root config lint patterns test)
+- MODIFIED: prd.json (task 34 status → completed)
+
+## Task 35: E2E verification after root tsconfig and lint coverage fixes — COMPLETED
+
+### What was done:
+- Built automation package, packed to tarball, created clean workspace via `create-nx-workspace` + `nx generate @okam/automation:preset`
+- Initial lint run found 9 `jsonc/sort-keys` errors in `tsconfig.base.json` — task 33's fix used simple alphabetical ordering, but @antfu/eslint-config's `jsonc/sort-keys` rule enforces a tsconfig-specific key order (target, jsx, lib, emitDecoratorMetadata, experimentalDecorators, baseUrl, rootDir, module, moduleResolution, paths, ..., strict, ..., declaration, importHelpers, ..., sourceMap, ..., skipDefaultLibCheck, skipLibCheck)
+- Fixed `tsconfig.base.json.template` to use the correct tsconfig compilerOptions key order per the ESLint rule
+- After fix: all 6 projects pass lint (0 errors), root-level files (tsconfig.base.json, package.json, nx.json) linted via Next.js app's lintFilePatterns
+- `brand-ui:build` passes (vite + plugins resolved)
+- `test-starter-nextjs:build` passes (static pages generated)
+- `storybook:build-storybook` passes
+- All 311 automation tests pass (81 unit + 228 e2e + 2 existing)
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/root/tsconfig.base.json.template (reordered compilerOptions keys to match tsconfig-specific sort order)
+- MODIFIED: prd.json (task 35 status → completed)
+
+## Task 37: Fix layout.tsx metadata description mentioning Directus when excluded — COMPLETED
+
+### What was done:
+- Updated `libs/automation/src/generators/preset/files/apps/__appName__/src/app/layout.tsx.template`
+- Added EJS conditional to the metadata description: when `includeDirectus` is true, description reads "powered by Next.js and Directus"; when false, it reads "powered by Next.js"
+- Template change: `'<%= projectName %> — powered by Next.js<% if (includeDirectus) { %> and Directus<% } %>'`
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and `pnpm nx run automation:test` all pass (311 tests)
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/layout.tsx.template (conditional Directus mention in metadata description)
+- MODIFIED: prd.json (task 37 status → completed)
+
+## Task 38: Make queries lib conditional on includeDirectus — COMPLETED
+
+### What was done:
+- Made the queries lib (libs/queries/) fully conditional on the `includeDirectus` flag
+- When `includeDirectus` is false, the following are now excluded:
+  - **Queries lib directory**: moved from unconditional `libDirs` array to a separate conditional block in generator.ts
+  - **GraphQL dependencies**: `graphql` and `graphql-request` from PINNED_VERSIONS.graphql, `@graphql-codegen/cli` from PINNED_DEV_VERSIONS.graphql — both groups conditionally deleted alongside the directus group
+  - **Path aliases**: `@scope/queries` and `@scope/queries/server` in tsconfig.base.json.template wrapped with EJS conditional
+  - **Codegen script**: `codegen` script in root package.json.template wrapped with EJS conditional
+  - **CI codegen step**: `Run codegen` step in type-check.yml CI workflow wrapped with EJS conditional to prevent failure when codegen script doesn't exist
+- Added 7 new unit tests in `includeDirectus: false` describe block:
+  - Queries files absent, graphql/graphql-request deps absent, @graphql-codegen/cli devDep absent, queries path aliases absent, non-queries path aliases still present, codegen script absent
+- Updated existing unit test to remove queries from library directories assertion
+- Added ~16 new e2e smoke tests in `includeDirectus: false` suite:
+  - Queries files absent (6 files), graphql deps absent, codegen devDep absent, tsconfig paths checks, codegen script absent, type-check workflow without codegen step
+- Removed queries from e2e JSON validity, scope consistency, and lib file existence lists
+- All 328 tests pass (87 unit + 239 e2e + 2 existing). Build and lint pass.
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (queries lib conditional on includeDirectus, graphql deps conditional)
+- MODIFIED: libs/automation/src/generators/preset/files/root/tsconfig.base.json.template (EJS conditional for queries path aliases)
+- MODIFIED: libs/automation/src/generators/preset/files/root/package.json.template (EJS conditional for codegen script)
+- MODIFIED: libs/automation/src/generators/preset/files/root/__dot__github/workflows/type-check.yml (EJS conditional for codegen step)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (7 new tests + 1 updated test for includeDirectus=false)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (~16 new tests + updated existing tests for includeDirectus=false)
+- MODIFIED: prd.json (task 38 status → completed)
+
+## Task 39: Clean up csp.config.ts Directus fallback when includeDirectus is false — COMPLETED
+
+### What was done:
+- Updated csp.config.ts.template with EJS conditional for the NEXT_PUBLIC_IMG_DOMAIN fallback
+- Both img-src and connect-src directives now use `localhost:8055` when includeDirectus is true (Directus default port), and `localhost` when includeDirectus is false (generic fallback)
+- Used inline EJS ternary: `<%= includeDirectus ? "localhost:8055" : "localhost" %>`
+- All 328 tests pass. Build and lint pass.
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/csp.config.ts.template (EJS conditional for Directus fallback)
+- MODIFIED: prd.json (task 39 status → completed)
+
+## Task 40: E2E verification after queries conditional and Directus cleanup — COMPLETED
+
+### What was done:
+- Built, packed, and ran E2E tests to verify both includeDirectus=true and includeDirectus=false configurations
+- Discovered two template bugs where EJS conditionals used truthy checks on the string `"false"` instead of strict string comparison `=== 'true'`
+- The string `"false"` is truthy in JavaScript, so both conditionals always evaluated to true regardless of the includeDirectus flag
+
+### Bugs fixed:
+1. **csp.config.ts.template** (lines 18, 23): `<%= includeDirectus ? "localhost:8055" : "localhost" %>` → `<%= includeDirectus === 'true' ? "localhost:8055" : "localhost" %>` — now correctly uses `localhost` (without port 8055) when Directus is excluded
+2. **layout.tsx.template** (line 8): `<% if (includeDirectus) { %> and Directus<% } %>` → `<% if (includeDirectus === 'true') { %> and Directus<% } %>` — now correctly omits "and Directus" from metadata description when Directus is excluded
+
+### Tests added:
+- 6 new E2E test assertions:
+  - WITH Directus: csp.config uses localhost:8055 fallback, layout description mentions Directus
+  - WITHOUT Directus: csp.config does NOT use localhost:8055, uses localhost instead, layout does NOT mention Directus, still mentions Next.js
+- All 334 tests pass (87 unit + 245 e2e + 2 existing). Build and lint pass.
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/csp.config.ts.template (fixed EJS ternary to use strict string comparison)
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/layout.tsx.template (fixed EJS conditional to use strict string comparison)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added 6 new assertions for CSP and layout Directus conditionals)
+- MODIFIED: prd.json (task 40 status → completed)
+
+## Task 41: Make next.config.js image remotePatterns conditional on includeDirectus — COMPLETED
+
+### What was done:
+- Wrapped the `images.remotePatterns` block in `next.config.js.template` with an EJS conditional `<% if (includeDirectus === 'true') { %>`
+- When `includeDirectus` is false, the entire `images` config section (remotePatterns with port 8055, pathname `/assets/**`) is omitted — no remote patterns are needed without a CMS serving image assets
+- When `includeDirectus` is true (default), behavior is unchanged — Directus image patterns remain
+
+### Tests added:
+- 1 new unit test in `generator.spec.ts` (`includeDirectus is false` block): verifies next.config.js does NOT contain `remotePatterns`, `8055`, or `/assets/**`
+- 1 new e2e smoke test in `e2e-smoke.spec.ts` (`includeDirectus: false` suite): same assertions for generated file on disk
+- Enhanced existing e2e Directus-enabled test to also assert `8055` and `/assets/**` presence (was only checking `remotePatterns`)
+- All 336 tests pass (88 unit + 246 e2e + 2 existing). Build and lint pass.
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/next.config.js.template (EJS conditional for images.remotePatterns)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added remotePatterns test in includeDirectus=false block)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added remotePatterns test in includeDirectus=false suite, enhanced Directus-enabled test)
+- MODIFIED: prd.json (task 41 status → completed)
+
+## Task 42: Add storybook test-runner.ts template with axe-playwright a11y testing — COMPLETED
+
+### What was done:
+- Created `libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/test-runner.ts.template`:
+  - Imports `TestRunnerConfig` from `@storybook/test-runner`, `injectAxe`/`getViolations` from `axe-playwright`, `fs`/`path` from Node
+  - `getHttpHeaders`: reads `VERCEL_AUTOMATION_BYPASS_SECRET` from `process.env` for Vercel protection bypass (returns `x-vercel-protection-bypass` header when set)
+  - `preVisit`: injects axe into the page
+  - `postVisit`: collects a11y violations via `getViolations`, writes per-story JSON reports to `reports/` directory (creates directory with `recursive: true` if needed)
+- Updated `libs/automation/src/generators/preset/files/libs/storybook/project.json.template`:
+  - Added `test-storybook` target using `nx:run-commands` executor with command `test-storybook --ci --url http://localhost:4200 --config-dir libs/storybook/.storybook`
+- Updated `libs/automation/src/generators/preset/generator.ts`:
+  - Added `@storybook/test-runner: '0.24.2'` and `axe-playwright: '2.2.2'` to `PINNED_DEV_VERSIONS.storybook`
+- Created `libs/automation/src/generators/preset/files/libs/storybook/reports/__dot__gitkeep` as empty placeholder so the reports directory is tracked in git
+- Updated unit tests (`generator.spec.ts`):
+  - Added test: `should generate project.json with test-storybook target` (verifies executor and command)
+  - Added test: `should generate test-runner.ts with axe-playwright a11y testing` (verifies @storybook/test-runner, axe-playwright, injectAxe, getViolations, getHttpHeaders, preVisit, postVisit, VERCEL_AUTOMATION_BYPASS_SECRET)
+  - Added test: `should generate reports/.gitkeep directory placeholder`
+  - Added 2 dependency assertions: `@storybook/test-runner` at `0.24.2`, `axe-playwright` at `2.2.2`
+  - Total: 91 unit tests (was 88)
+- Updated e2e smoke tests (`e2e-smoke.spec.ts`):
+  - Added `libs/storybook/.storybook/test-runner.ts` and `libs/storybook/reports/.gitkeep` to file existence list
+  - Added test: `project.json should have test-storybook target` (verifies target and executor)
+  - Added test: `test-runner.ts should have axe-playwright a11y testing` (verifies all key imports and functions)
+  - Added 2 dependency assertions: `@storybook/test-runner` at `0.24.2`, `axe-playwright` at `2.2.2`
+  - Updated total file count assertion from 82 to 84
+  - Total: 250 e2e tests (was 246)
+- All 343 tests pass (91 unit + 250 e2e + 2 existing). Build and lint pass.
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/test-runner.ts.template
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/reports/__dot__gitkeep
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/project.json.template (added test-storybook target)
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (added @storybook/test-runner and axe-playwright to PINNED_DEV_VERSIONS.storybook)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added 3 storybook tests + 2 dependency assertions)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added 2 file existence + 2 content tests + 2 dependency assertions, updated file count)
+- MODIFIED: prd.json (task 42 status → completed)
+
+## Task 43: Add storybook a11y report helper scripts (merge-reports + axe-to-markdown) — COMPLETED
+
+### What was done:
+- Created `libs/automation/src/generators/preset/files/libs/storybook/merge-reports.js.template`:
+  - CJS script using `require('node:fs')` and `require('node:path')`
+  - Reads all `.json` files from `reports/` directory (excludes `violations-report.json`)
+  - Attaches `storyId` from filename to each violation entry
+  - Merges all violation arrays into a single array
+  - Writes merged result to `reports/violations-report.json`
+  - Graceful handling: exits cleanly if no reports dir or no report files
+- Created `libs/automation/src/generators/preset/files/libs/storybook/axe-to-markdown.js.template`:
+  - ESM script using `import fs from 'node:fs/promises'`
+  - Reads input JSON file path from `process.argv[2]`
+  - Writes output to `process.argv[3]` or stdout
+  - Generates markdown with two sections:
+    - **Summary table**: description, axe rule ID, story ID, WCAG info, impact, element count
+    - **Details section**: per-violation with element target, source HTML, fix suggestions (failureSummary)
+  - WCAG tag formatting: `wcag2a` → `WCAG 2 Level A`, `wcag21aa` → `WCAG 2.1 Level AA`, `wcag412` → `WCAG 4.1.2`
+  - Groups summary by rule ID + story ID with element counts
+- Updated unit tests (`generator.spec.ts`):
+  - Added test: `should generate merge-reports.js helper script` (verifies reportsDir, violations-report.json, .json)
+  - Added test: `should generate axe-to-markdown.js helper script` (verifies formatWcagTag, Accessibility Report, Summary, Details)
+  - Total: 93 unit tests (was 91)
+- Updated e2e smoke tests (`e2e-smoke.spec.ts`):
+  - Added `libs/storybook/merge-reports.js` and `libs/storybook/axe-to-markdown.js` to storybook file existence list
+  - Added test: `merge-reports.js should read reports dir and write violations-report.json` (verifies reportsDir, violations-report.json, storyId)
+  - Added test: `axe-to-markdown.js should generate markdown with summary table and details` (verifies formatWcagTag, Accessibility Report, Summary, Details, WCAG, Impact, failureSummary)
+  - Total: 254 e2e tests (was 250)
+- All 349 tests pass (93 unit + 254 e2e + 2 existing). Build and lint pass.
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/merge-reports.js.template
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/axe-to-markdown.js.template
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added 2 storybook tests)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added 2 file existence + 2 content tests)
+- MODIFIED: prd.json (task 43 status → completed)
+
+## Task 44: Add storybook-test.yml CI workflow for a11y testing on Vercel deployments — COMPLETED
+
+### What was done:
+- Created `libs/automation/src/generators/preset/files/root/__dot__github/workflows/storybook-test.yml.template`
+- Workflow triggers on `deployment_status` events, filters by `success` state and EJS-templated environment name (`<%= projectName %>-storybook`)
+- Steps:
+  1. **Checkout** via `actions/checkout@v4`
+  2. **Setup pnpm** via `pnpm/action-setup@v4`
+  3. **Setup Node.js** via `actions/setup-node@v4` with `.nvmrc` for version
+  4. **Install dependencies** with `pnpm install --frozen-lockfile`
+  5. **Install Playwright** with `pnpm playwright install --with-deps`
+  6. **Run Storybook tests** via `pnpm nx run storybook:test-storybook --ci --url=<deployment_url>` with `VERCEL_AUTOMATION_BYPASS_SECRET` env secret, `continue-on-error: true` to allow report collection
+  7. **Merge a11y reports** via `pnpm exec node libs/storybook/merge-reports.js`
+  8. **Convert to Markdown** via `pnpm exec node libs/storybook/axe-to-markdown.js` outputting to `libs/storybook/reports/a11y-report.md`
+  9. **Find associated PR** via `actions/github-script@v7` — matches deployment SHA to open PRs
+  10. **Post/update PR comment** via `actions/github-script@v7` — reads markdown report, uses `<!-- storybook-a11y-report -->` comment identifier for upsert
+  11. **Fail if violations found** — checks `violations-report.json` length, exits with error if > 0
+
+### Tests added:
+- 1 unit test in `generator.spec.ts` (ci workflows block): verifies `deployment_status`, `test-storybook`, `merge-reports`, `axe-to-markdown`, `VERCEL_AUTOMATION_BYPASS_SECRET`, `storybook-a11y-report`
+- Updated `includeDirectus: false` CI workflows test to include `storybook-test.yml`
+- 1 e2e file existence test: `storybook-test.yml` added to github workflows list
+- 1 e2e content test: verifies `deployment_status`, `test-storybook`, `merge-reports`, `axe-to-markdown`, `VERCEL_AUTOMATION_BYPASS_SECRET`, `storybook-a11y-report`, `smoke-test-storybook` (resolved project name)
+- Updated `includeDirectus: false` root files list to include `storybook-test.yml`
+- Updated total file count assertion from 84 to 85
+
+### Verification:
+- All 353 tests pass (94 unit + 257 e2e + 2 existing)
+- `pnpm nx run automation:build` passes
+- `pnpm nx run automation:lint` passes
+- Dist output verified: `storybook-test.yml.template` present in dist workflows directory
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/root/__dot__github/workflows/storybook-test.yml.template
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added storybook-test workflow test + updated includeDirectus=false CI test)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added storybook-test.yml to file existence + content test + includeDirectus=false list + updated total file count)
+- MODIFIED: prd.json (task 44 status → completed)
+
+## Task 45: Add Directus deploy workflow and DigitalOcean App Platform specs — COMPLETED
+
+### What was done:
+- Created `deploy.yml.template` CI workflow with 4 jobs via `workflow_dispatch`:
+  - `create-staging`: Manual trigger, envsubst `.do/app-staging.yaml`, create new DO app with project_id
+  - `deploy-staging`: Push to main OR manual trigger, envsubst + deploy to existing app
+  - `create-production`: Manual trigger only, envsubst `.do/app.yaml`, create new DO app
+  - `deploy-production`: Manual trigger only, envsubst + deploy to existing production app
+  - All jobs use GitHub environment protection rules (`Directus - Staging` / `Directus - Production`)
+  - Secrets injected via envsubst: DIRECTUS_KEY/SECRET, SPACES_KEY/SECRET, AUTH_GOOGLE_CLIENT_ID/SECRET
+  - Uses `digitalocean/app_action/deploy@v2` with `DIGITALOCEAN_ACCESS_TOKEN`
+- Created `.do/app-staging.yaml.template` (DigitalOcean App Platform spec for staging):
+  - App name via EJS (`<%= projectName %>-staging`), region `tor1`
+  - Directus service: Dockerfile path, port 8055, health check `/server/health`, `apps-s-1vcpu-1gb` instance
+  - Envs with `${VAR}` placeholders for envsubst (DB, Redis, Spaces, OAuth)
+  - Postgres DB + Redis (production: false), cluster names via EJS
+  - DO Spaces for file storage with staging bucket name
+  - LOG_LEVEL: debug, EXTENSIONS_AUTO_RELOAD: true
+- Created `.do/app.yaml.template` (DigitalOcean App Platform spec for production):
+  - Larger instance (`apps-s-1vcpu-2gb`), both DBs `production: true`
+  - Separate production bucket name, LOG_LEVEL: warn, EXTENSIONS_AUTO_RELOAD: false
+  - GRAPHQL_INTROSPECTION: false (locked down in production)
+- Template files placed in separate `files/root-directus/` directory tree (not `files/root/`)
+  to enable conditional generation — `generateFilesIfExists` called only when `includeDirectus` is true
+- Updated `generator.ts` Section 4: added `generateFilesIfExists` for `root-directus` directory
+- Added 5 unit tests: deploy workflow 4 jobs + content, staging spec, production spec, negative deploy absent, negative .do/ absent
+- Added 7 e2e smoke tests: deploy workflow content, staging spec content, production spec content, file existence (3 files), negative absence (3 files in includeDirectus=false)
+
+### Verification:
+- All 367 tests pass (99 unit + 266 e2e + 2 existing)
+- `pnpm nx run automation:build` passes
+- `pnpm nx run automation:lint` passes
+- Dist output verified: all 3 new template files present in dist
+
+### Files created:
+- NEW: libs/automation/src/generators/preset/files/root-directus/__dot__github/workflows/deploy.yml.template
+- NEW: libs/automation/src/generators/preset/files/root-directus/__dot__do/app-staging.yaml.template
+- NEW: libs/automation/src/generators/preset/files/root-directus/__dot__do/app.yaml.template
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/generator.ts (added root-directus generateFilesIfExists in Section 4)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added 5 tests: deploy workflow, staging spec, production spec, 2 negative tests)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added 7 tests: deploy/staging/production content, 3 file existence, 3 negative absence)
+- MODIFIED: prd.json (task 45 status → completed)
+
+## Task 46: E2E verification after CI workflow additions — COMPLETED
+
+### What was done:
+- Full end-to-end verification of the preset generator after tasks 42-45 (storybook test-runner, a11y helper scripts, storybook-test.yml CI workflow, deploy workflow + DigitalOcean specs)
+- Workflow: build → pack → create-nx-workspace → install tarball → nx generate preset → pnpm install → verify files → lint all → build all
+- Tested both `includeDirectus=true` (default) and `includeDirectus=false` configurations
+
+### Bugs fixed during E2E:
+1. **Providers.tsx.template**: Import order violation — `perfectionist/sort-imports` required scope-prefixed `@scope/brand-ui` import before `@tanstack/react-query`. Moved `ThemeProvider` import above `QueryClientProvider` import.
+2. **test-runner.ts.template**: `ts/strict-boolean-expressions` violation — `process.env.VERCEL_AUTOMATION_BYPASS_SECRET` (nullable string) used directly in conditional. Replaced ternary with explicit null/empty check (`!= null && !== ''`).
+
+### WITH-directus verification:
+- All 8 new files confirmed present: storybook-test.yml, deploy.yml, app-staging.yaml, app.yaml, merge-reports.js, axe-to-markdown.js, test-runner.ts, reports/.gitkeep
+- deploy.yml contains workflow_dispatch with 4 jobs (create-staging, deploy-staging, create-production, deploy-production)
+- storybook-test.yml contains deployment_status trigger, test-storybook/merge-reports/axe-to-markdown steps, VERCEL_AUTOMATION_BYPASS_SECRET, resolved project name (smoke-test-storybook)
+- app-staging.yaml has smoke-test-staging name with production: false DBs
+- app.yaml has smoke-test-production name with production: true DBs
+- All 6 projects pass lint
+- brand-ui:build, smoke-test-nextjs:build, storybook:build-storybook all succeed
+
+### WITHOUT-directus verification:
+- Storybook files present: storybook-test.yml, merge-reports.js, axe-to-markdown.js, test-runner.ts, reports/.gitkeep (not Directus-dependent)
+- Directus files absent: deploy.yml does NOT exist, .do/ directory does NOT exist
+- All 5 projects pass lint (no queries project)
+- brand-ui:build, smoke-test-nextjs:build, storybook:build-storybook all succeed
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/Providers.tsx.template (fixed import order for perfectionist/sort-imports)
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/test-runner.ts.template (fixed strict-boolean-expressions for VERCEL_AUTOMATION_BYPASS_SECRET)
+- MODIFIED: prd.json (task 46 status → completed)
+
+## Task 48: Fix getTranslation template: unsafe return type from dynamic import — COMPLETED
+
+### What was done:
+- Updated `libs/automation/src/generators/preset/files/libs/i18n/src/lib/getTranslation/index.ts.template`:
+  - Removed `eslint-disable-next-line ts/no-unsafe-return` comment that only covered one line while prettier formatted the arrow function across two lines
+  - Added `as Promise<ResourceKey>` type assertion on the dynamic `import()` call to properly type the return value
+  - Added `import type { ResourceKey } from 'i18next'` at the top of the file
+  - Fixed import ordering to satisfy `perfectionist/sort-imports`: type imports first (`ResourceKey`, `SupportedLocale`), then value imports alphabetically (`createInstance`, `resourcesToBackend`, `defaultNS`/`getOptions`)
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/libs/i18n/src/lib/getTranslation/index.ts.template (replaced eslint-disable with type assertion, added ResourceKey import, fixed import order)
+- MODIFIED: prd.json (task 48 status → completed)
+
+## Task 49: Fix lint-staged: remove prettier from TS/TSX files (antfu stylistic conflict) — COMPLETED
+
+### What was done:
+- Updated `libs/automation/src/generators/preset/files/root/lint-staged.config.js` to separate TS/TSX linting from prettier formatting:
+  - `*.{ts,tsx}` → only runs `eslint --no-warn-ignored --fix` (no prettier)
+  - `*.{js,json,md,css}` → only runs `prettier --write` (no eslint)
+- This resolves the conflict where prettier reformatted antfu-styled code (single quotes → double quotes, arrow-parens, operator-linebreak, etc.) causing ~23 CI lint errors on every commit in generated projects
+- Added `--no-warn-ignored` flag to eslint to suppress warnings about ignored files during staged linting
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/root/lint-staged.config.js (separated TS/TSX eslint-only from other files prettier-only)
+- MODIFIED: prd.json (task 49 status → completed)
+
+## Task 50: Fix CI workflow templates: use .nvmrc for Node version — COMPLETED
+
+### What was done:
+- Updated `lint.yml` template: replaced `node-version: 22` with `node-version-file: .nvmrc` so CI uses the same Node version as the project's `.nvmrc`
+- Updated `type-check.yml` template: same change — `node-version: 22` → `node-version-file: .nvmrc`
+- Updated `.nvmrc` template: changed content from `22` to `24` to match the project's `engines` constraint (Node >=24.0.0)
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files modified:
+- MODIFIED: libs/automation/src/generators/preset/files/root/__dot__github/workflows/lint.yml (node-version → node-version-file: .nvmrc)
+- MODIFIED: libs/automation/src/generators/preset/files/root/__dot__github/workflows/type-check.yml (node-version → node-version-file: .nvmrc)
+- MODIFIED: libs/automation/src/generators/preset/files/root/__dot__nvmrc (22 → 24)
+- MODIFIED: prd.json (task 50 status → completed)
+
+## Task 52: Make Next.js standalone output conditional for Vercel compatibility — COMPLETED
+
+### What was done:
+- Verified that the `next.config.js.template` already contains the fix: `output: process.env.VERCEL ? undefined : 'standalone'`
+- The change was applied in a previous iteration but the task was never marked as completed in prd.json
+- When deploying to Vercel, `process.env.VERCEL` is set automatically, so `output` becomes `undefined` (Vercel's default serverless format)
+- For non-Vercel deployments (Docker), `output` is `'standalone'` which produces a self-contained Node.js server
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files modified:
+- MODIFIED: prd.json (task 52 status → completed)
+
+## Task 51: Make env.ts template conditional on includeDirectus — COMPLETED
+
+### What was done:
+- Verified that `env.ts.template` already has all required EJS conditionals in place:
+  - `import { z } from 'zod'` wrapped in `<% if (includeDirectus === 'true') { -%>` (line 2)
+  - Server vars (`NEXT_SERVER_GRAPHQL_URL`, `API_SECRET`) wrapped in conditional (line 8)
+  - Client vars (`NEXT_PUBLIC_API_TOKEN`, `NEXT_PUBLIC_IMG_DOMAIN`) wrapped in conditional (line 15)
+  - Runtime env vars wrapped in conditional (line 22)
+- Confirmed `includeDirectus` is properly passed as `String(includeDirectus)` from `generator.ts` line 138
+- The changes were applied in a previous iteration but the task was never marked as completed in prd.json
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files modified:
+- MODIFIED: prd.json (task 51 status → completed)
+
+## Task 53: Add storybook and @storybook/* to dependabot ignore list — COMPLETED
+
+### What was done:
+- Verified that `dependabot.yml` template already has storybook entries in the ignore list:
+  - `storybook` (line 13)
+  - `@storybook/*` (line 14)
+  - These sit alongside the existing `nx` and `@nx/*` ignore entries
+- The changes were applied in a previous iteration but the task was never marked as completed in prd.json
+- Verified: `pnpm nx run automation:build` and `pnpm nx run automation:lint` both pass
+
+### Files modified:
+- MODIFIED: prd.json (task 53 status → completed)
+
+## Task 54: Migrate Next.js app to Tailwind CSS v4 CSS-based configuration — COMPLETED
+
+### What was done:
+- Created `globals.css.template` under `files/apps/__appName__/src/app/` with Tailwind v4 CSS-based configuration:
+  - `@import 'tailwindcss'` (v4 CSS import replaces v3 JS config)
+  - `@source` directives for brand-ui and blocks libs (`../../../../libs/brand-ui/src/**/*.{ts,tsx}` and `../../../../libs/blocks/src/**/*.{ts,tsx}`)
+- Updated `layout.tsx.template` to import `'./globals.css'`
+- Deleted the v3-style `tailwind.config.js.template` from the Next.js app (was using JS presets, content array, JSDoc type annotation)
+- Updated `generator.spec.ts`:
+  - Replaced tailwind.config.js content test with globals.css assertions (@import 'tailwindcss', @source, brand-ui, blocks)
+  - Added negative test for v3 tailwind.config.js absence
+  - Added layout.tsx globals.css import test
+- Updated `e2e-smoke.spec.ts`:
+  - Replaced `tailwind.config.js` in app file existence list with `globals.css`
+  - Added 3 content tests (layout imports globals.css, globals.css has v4 directives, v3 tailwind.config.js absent)
+  - Added `globals.css` to includeDirectus=false app file list
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and `pnpm nx run automation:test` all pass (373 tests)
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/apps/__appName__/src/app/globals.css.template
+- DELETED: libs/automation/src/generators/preset/files/apps/__appName__/tailwind.config.js.template
+- MODIFIED: libs/automation/src/generators/preset/files/apps/__appName__/src/app/layout.tsx.template (added globals.css import)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (replaced tailwind.config.js tests with globals.css tests)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (updated file lists and added content tests)
+- MODIFIED: prd.json (task 54 status → completed)
+
+## Task 55: Migrate brand-ui to Tailwind CSS v4 CSS-based theme — COMPLETED
+
+### What was done:
+- Created `libs/automation/src/generators/preset/files/libs/brand-ui/src/theme.css.template` with Tailwind v4 `@theme` block containing:
+  - `--color-primary-*` tokens (50-950) matching the v3 `theme.extend.colors.primary` palette
+  - `--color-secondary-*` tokens (50-950) matching the v3 `theme.extend.colors.secondary` palette
+  - `--font-sans` and `--font-heading` custom properties matching the v3 `theme.extend.fontFamily` values
+- Updated `libs/automation/src/generators/preset/files/libs/brand-ui/src/index.ts.template`:
+  - Added `import './theme.css'` at the top to import the Tailwind v4 theme CSS
+- Deleted `libs/automation/src/generators/preset/files/libs/brand-ui/tailwind.config.js.template`:
+  - Was a v3-style config using JS presets, `theme.extend.colors`, `theme.extend.fontFamily`
+  - No longer needed — theme tokens are now in CSS via `@theme` block
+- The tv()-based component themes in `theme/index.tsx` remain unchanged (tailwind-variants is CSS-framework-agnostic)
+- Updated `generator.spec.ts` (3 new tests → 103 total unit tests):
+  - Added theme.css `@theme` block test (--color-primary, --color-secondary, --font-sans, --font-heading)
+  - Added `import './theme.css'` assertion to index.ts test
+  - Added v3 tailwind.config.js absence test
+- Updated `e2e-smoke.spec.ts` (3 new tests → 272 total e2e tests):
+  - Replaced `tailwind.config.js` in brand-ui file existence list with `src/theme.css`
+  - Added theme.css content test (@theme, --color-primary, --color-secondary, --font-sans, --font-heading)
+  - Added v3 tailwind.config.js absence test
+  - Added `import './theme.css'` assertion to index.ts content test
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and `pnpm nx run automation:test` all pass (377 tests)
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/libs/brand-ui/src/theme.css.template
+- DELETED: libs/automation/src/generators/preset/files/libs/brand-ui/tailwind.config.js.template
+- MODIFIED: libs/automation/src/generators/preset/files/libs/brand-ui/src/index.ts.template (added theme.css import)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (added 3 brand-ui Tailwind v4 tests)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (updated file lists and added content tests)
+- MODIFIED: prd.json (task 55 status → completed)
+
+## Task 56: Migrate root tailwind.preset.js to Tailwind v4 or remove it — COMPLETED
+
+### What was done:
+- Deleted the v3-style `tailwind.preset.js` template from `files/root/`
+- The file was a minimal Tailwind v3 preset (`export default { theme: { extend: {} }, plugins: [] }`) that was previously used by the app and brand-ui tailwind.config.js files as a shared base
+- With Tailwind v4, shared configuration is done via CSS imports — brand-ui now owns the theme via `theme.css` (@theme block) and the app imports it via `globals.css`, making the JS preset obsolete
+- No changes needed to `generator.ts` — the file was picked up automatically by the root `generateFiles` call
+- Removed 1 unit test assertion (`should generate tailwind.preset.js`) from `generator.spec.ts`
+- Removed `tailwind.preset.js` from both `rootFiles` arrays in `e2e-smoke.spec.ts` (default and includeDirectus=false suites)
+- Verified: `pnpm nx run automation:build`, `pnpm nx run automation:lint`, and `pnpm nx run automation:test` all pass (374 tests)
+
+### Files deleted/modified:
+- DELETED: libs/automation/src/generators/preset/files/root/tailwind.preset.js
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (removed tailwind.preset.js test)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (removed tailwind.preset.js from 2 file lists)
+- MODIFIED: prd.json (task 56 status → completed)
+
+## Task 57: Update storybook preview to import Tailwind v4 CSS — COMPLETED
+
+### What was done:
+- Created `libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/storybook.css.template` with Tailwind v4 CSS directives:
+  - `@import 'tailwindcss'` for Tailwind utility classes
+  - `@import '../../brand-ui/src/theme.css'` for brand-specific @theme tokens
+  - `@source '../../brand-ui/src/**/*.{ts,tsx}'` for brand-ui component class scanning
+  - `@source '../../blocks/src/**/*.{ts,tsx}'` for blocks component class scanning
+- Updated `preview.tsx.template` to import `./storybook.css` so stories have access to Tailwind utilities and brand tokens
+- Updated generator.spec.ts: preview.tsx test now also asserts `./storybook.css` import, added new test for storybook.css content verification
+- Updated e2e-smoke.spec.ts: added storybook.css to file existence list, added content verification test, added storybook.css to includeDirectus=false lib files list, updated total file count from 85 to 86
+- All 378 tests pass (103 unit + 273 e2e + 2 existing). Build and lint pass.
+
+### Files created/modified:
+- NEW: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/storybook.css.template
+- MODIFIED: libs/automation/src/generators/preset/files/libs/storybook/__dot__storybook/preview.tsx.template (added storybook.css import)
+- MODIFIED: libs/automation/src/generators/preset/generator.spec.ts (updated preview.tsx test, added storybook.css test)
+- MODIFIED: libs/automation/src/generators/preset/e2e-smoke.spec.ts (added storybook.css file existence + content tests, updated file count)
+- MODIFIED: prd.json (task 57 status → completed)
+
+## Task 58: E2E verification of Tailwind v4 migration — COMPLETED
+
+### What was done:
+- Built automation package, packed to tarball (okam-automation-3.0.0.tgz)
+- Created test workspace WITHOUT Directus via create-nx-workspace@22.3.3 with --includeDirectus=false
+  - Verified: globals.css has @import 'tailwindcss' and @source directives for brand-ui/blocks
+  - Verified: NO tailwind.config.js files exist anywhere (v3 fully removed)
+  - Verified: brand-ui theme.css has @theme block with --color-primary-*, --color-secondary-*, --font-sans, --font-heading
+  - Verified: storybook.css has @import 'tailwindcss', brand-ui theme import, @source directives
+  - Verified: layout.tsx imports globals.css
+  - Verified: No queries lib, no apps/directus (correct for includeDirectus=false)
+  - Lint: all 5 projects pass (0 errors)
+  - Builds: brand-ui (CSS output 0.77 kB), Next.js (compiled, static pages generated), Storybook — all pass
+- Created test workspace WITH Directus (default) via create-nx-workspace@22.3.3
+  - Same Tailwind v4 verifications — all pass
+  - Verified: queries lib and directus app present
+  - Lint: all 6 projects pass (0 errors)
+  - Builds: brand-ui, Next.js, Storybook — all pass
+- Cleaned up test workspaces
+- No template fixes needed — everything passed on first try
+
+### Verification results:
+- Tailwind v4 CSS-based configuration works correctly in all 3 build targets
+- 3 CSS files per workspace: globals.css (app), theme.css (brand-ui), storybook.css (storybook)
+- No v3 tailwind.config.js files remain
+- Both includeDirectus=true and includeDirectus=false configurations verified
+- All 378 automation tests pass
+
+### Files modified:
+- MODIFIED: prd.json (task 58 status → completed)

@@ -1,0 +1,56 @@
+{
+  "name": "<%= appName %>",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/<%= appName %>/src",
+  "projectType": "application",
+  "tags": ["type:app"],
+  "targets": {
+    "build": {
+      "executor": "@nx/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/<%= appName %>"
+      },
+      "configurations": {
+        "development": {
+          "outputPath": "apps/<%= appName %>"
+        },
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/next:server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "<%= appName %>:build",
+        "dev": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "<%= appName %>:build:development",
+          "dev": true
+        },
+        "production": {
+          "buildTarget": "<%= appName %>:build:production",
+          "dev": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/<%= appName %>/**/*.{ts,tsx,js,jsx,json}",
+          "package.json",
+          "tsconfig.base.json",
+          "nx.json"
+        ]
+      }
+    },
+    "type-check": {
+      "command": "tsc --noEmit -p apps/<%= appName %>/tsconfig.json"
+    }
+  }
+}

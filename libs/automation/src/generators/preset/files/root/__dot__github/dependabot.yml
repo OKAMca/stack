@@ -1,0 +1,15 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+    groups:
+      production-dependencies:
+        dependency-type: production
+    ignore:
+      - dependency-name: 'nx'
+      - dependency-name: '@nx/*'
+      - dependency-name: 'storybook'
+      - dependency-name: '@storybook/*'
+    open-pull-requests-limit: 10

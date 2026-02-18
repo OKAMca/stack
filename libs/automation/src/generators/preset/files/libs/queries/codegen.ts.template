@@ -1,0 +1,18 @@
+import type { CodegenConfig } from '@graphql-codegen/cli'
+
+const config: CodegenConfig = {
+  overwrite: true,
+  // eslint-disable-next-line ts/no-unsafe-member-access, ts/no-unsafe-assignment -- process.env types not available
+  schema: process.env.NEXT_SERVER_GRAPHQL_URL ?? 'http://localhost:8055/graphql',
+  documents: 'libs/queries/src/graphql/**/*.graphql',
+  generates: {
+    'libs/queries/src/gql/generated/': {
+      preset: 'client',
+      config: {
+        documentMode: 'string',
+      },
+    },
+  },
+}
+
+export default config

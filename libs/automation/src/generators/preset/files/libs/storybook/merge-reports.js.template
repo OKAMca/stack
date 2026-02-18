@@ -1,0 +1,37 @@
+const fs = require('node:fs')
+const path = require('node:path')
+
+const reportsDir = path.resolve(__dirname, 'reports')
+
+if (!fs.existsSync(reportsDir)) {
+  console.log('No reports directory found — nothing to merge.')
+  process.exit(0)
+}
+
+const files = fs.readdirSync(reportsDir).filter(
+  f => f.endsWith('.json') && f !== 'violations-report.json',
+)
+
+if (files.length === 0) {
+  console.log('No individual report files found — nothing to merge.')
+  process.exit(0)
+}
+
+const merged = []
+
+for (const file of files) {
+  const filePath = path.join(reportsDir, file)
+  const content = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+
+  if (Array.isArray(content)) {
+    const storyId = path.basename(file, '.json')
+    for (const violation of content) {
+      merged.push({ ...violation, storyId })
+    }
+  }
+}
+
+const outputPath = path.join(reportsDir, 'violations-report.json')
+fs.writeFileSync(outputPath, JSON.stringify(merged, null, 2))
+
+console.log(`Merged ${files.length} report(s) into ${outputPath} (${merged.length} violation(s))`)

@@ -1,0 +1,57 @@
+name: ClickUp Notifications
+
+on:
+  pull_request:
+    types: [opened, closed, reopened, synchronize, ready_for_review]
+  pull_request_review:
+    types: [submitted]
+  issue_comment:
+    types: [created]
+
+jobs:
+  notify:
+    name: Notify ClickUp
+    runs-on: ubuntu-latest
+    if: github.event.pull_request != null || github.event.issue.pull_request != null
+    continue-on-error: true
+    steps:
+      - name: Determine action emoji
+        id: emoji
+        run: |
+          EVENT="${{ github.event_name }}"
+          ACTION="${{ github.event.action }}"
+          if [ "$EVENT" = "pull_request" ]; then
+            case "$ACTION" in
+              opened) echo "emoji=🆕" >> "$GITHUB_OUTPUT" && echo "action=opened" >> "$GITHUB_OUTPUT" ;;
+              closed)
+                if [ "${{ github.event.pull_request.merged }}" = "true" ]; then
+                  echo "emoji=✅" >> "$GITHUB_OUTPUT" && echo "action=merged" >> "$GITHUB_OUTPUT"
+                else
+                  echo "emoji=❌" >> "$GITHUB_OUTPUT" && echo "action=closed" >> "$GITHUB_OUTPUT"
+                fi
+                ;;
+              reopened) echo "emoji=🔄" >> "$GITHUB_OUTPUT" && echo "action=reopened" >> "$GITHUB_OUTPUT" ;;
+              synchronize) echo "emoji=📝" >> "$GITHUB_OUTPUT" && echo "action=updated" >> "$GITHUB_OUTPUT" ;;
+              ready_for_review) echo "emoji=👀" >> "$GITHUB_OUTPUT" && echo "action=ready for review" >> "$GITHUB_OUTPUT" ;;
+            esac
+          elif [ "$EVENT" = "pull_request_review" ]; then
+            echo "emoji=💬" >> "$GITHUB_OUTPUT" && echo "action=reviewed" >> "$GITHUB_OUTPUT"
+          elif [ "$EVENT" = "issue_comment" ]; then
+            echo "emoji=💭" >> "$GITHUB_OUTPUT" && echo "action=commented on" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post to ClickUp
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title || github.event.issue.title }}"
+          PR_URL="${{ github.event.pull_request.html_url || github.event.issue.html_url }}"
+          ACTOR="${{ github.actor }}"
+          ACTION="${{ steps.emoji.outputs.action }}"
+          EMOJI="${{ steps.emoji.outputs.emoji }}"
+
+          MESSAGE="${EMOJI} **${ACTOR}** ${ACTION} PR: [${PR_TITLE}](${PR_URL})"
+
+          curl -s -X POST \
+            "https://api.clickup.com/api/v3/workspaces/${{ secrets.CLICKUP_WORKSPACE_ID }}/chat/channels/${{ secrets.CLICKUP_CHANNEL_ID }}/messages" \
+            -H "Authorization: Bearer ${{ secrets.CLICKUP_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"content\": \"${MESSAGE}\"}"

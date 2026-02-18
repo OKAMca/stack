@@ -1,0 +1,127 @@
+name: Deploy Directus
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Deployment action
+        required: true
+        type: choice
+        options:
+          - create-staging
+          - deploy-staging
+          - create-production
+          - deploy-production
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.inputs.action || 'deploy-staging' }}
+  cancel-in-progress: false
+
+jobs:
+  create-staging:
+    name: Create Staging App
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'create-staging'
+    runs-on: ubuntu-latest
+    environment: Directus - Staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Substitute env vars in app spec
+        run: envsubst < .do/app-staging.yaml > /tmp/app-spec.yaml
+        env:
+          DIRECTUS_KEY: ${{ secrets.DIRECTUS_KEY }}
+          DIRECTUS_SECRET: ${{ secrets.DIRECTUS_SECRET }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
+          AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
+
+      - name: Create App
+        uses: digitalocean/app_action/deploy@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          app_spec_location: /tmp/app-spec.yaml
+          project_id: ${{ secrets.DIGITALOCEAN_PROJECT_ID }}
+
+  deploy-staging:
+    name: Deploy Staging
+    if: >-
+      (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'deploy-staging')
+    runs-on: ubuntu-latest
+    environment: Directus - Staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Substitute env vars in app spec
+        run: envsubst < .do/app-staging.yaml > /tmp/app-spec.yaml
+        env:
+          DIRECTUS_KEY: ${{ secrets.DIRECTUS_KEY }}
+          DIRECTUS_SECRET: ${{ secrets.DIRECTUS_SECRET }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
+          AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
+
+      - name: Deploy to Staging
+        uses: digitalocean/app_action/deploy@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          app_name: <%= projectName %>-staging
+          app_spec_location: /tmp/app-spec.yaml
+
+  create-production:
+    name: Create Production App
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'create-production'
+    runs-on: ubuntu-latest
+    environment: Directus - Production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Substitute env vars in app spec
+        run: envsubst < .do/app.yaml > /tmp/app-spec.yaml
+        env:
+          DIRECTUS_KEY: ${{ secrets.DIRECTUS_KEY }}
+          DIRECTUS_SECRET: ${{ secrets.DIRECTUS_SECRET }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
+          AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
+
+      - name: Create App
+        uses: digitalocean/app_action/deploy@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          app_spec_location: /tmp/app-spec.yaml
+          project_id: ${{ secrets.DIGITALOCEAN_PROJECT_ID }}
+
+  deploy-production:
+    name: Deploy Production
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.action == 'deploy-production'
+    runs-on: ubuntu-latest
+    environment: Directus - Production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Substitute env vars in app spec
+        run: envsubst < .do/app.yaml > /tmp/app-spec.yaml
+        env:
+          DIRECTUS_KEY: ${{ secrets.DIRECTUS_KEY }}
+          DIRECTUS_SECRET: ${{ secrets.DIRECTUS_SECRET }}
+          SPACES_KEY: ${{ secrets.SPACES_KEY }}
+          SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
+          AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
+          AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
+
+      - name: Deploy to Production
+        uses: digitalocean/app_action/deploy@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          app_name: <%= projectName %>-production
+          app_spec_location: /tmp/app-spec.yaml

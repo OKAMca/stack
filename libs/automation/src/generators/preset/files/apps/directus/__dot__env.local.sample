@@ -1,0 +1,31 @@
+## Directus configuration
+## Copy this file to .env.local and update values before running docker compose up
+
+# Security — generate unique values for each environment
+KEY=CHANGE_ME
+SECRET=CHANGE_ME
+
+# Admin account — update after first boot
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=CHANGE_ME
+
+# Database — must match docker-compose postgres service
+DB_CLIENT=pg
+DB_HOST=postgres
+DB_PORT=5432
+DB_DATABASE=directus
+DB_USER=directus
+DB_PASSWORD=directus
+
+# URLs
+PUBLIC_URL=http://localhost:8055
+FRONTEND_URL=http://localhost:3000
+
+# Cache
+CACHE_ENABLED=true
+CACHE_STORE=redis
+REDIS_HOST=redis
+REDIS_PORT=6379
+
+# GraphQL
+GRAPHQL_INTROSPECTION=true

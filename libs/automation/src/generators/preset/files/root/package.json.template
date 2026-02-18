@@ -1,0 +1,20 @@
+{
+  "name": "<%= scope %>/source",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "nx serve <%= appName %>",
+    "build": "nx build <%= appName %>",
+    "lint": "nx run-many -t lint",
+    "lint:affected": "nx affected -t lint",
+    "storybook": "nx storybook storybook",<% if (includeDirectus === 'true') { %>
+    "codegen": "nx run queries:codegen",<% } %>
+    "typegen": "nx run-many -t type-check",
+    "prepare": "husky"
+  }
+}

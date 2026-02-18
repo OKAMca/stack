@@ -1,0 +1,111 @@
+name: <%= projectName %>-staging
+region: tor1
+
+services:
+  - name: directus
+    github:
+      repo: <%= scope %>/<%= projectName %>
+      branch: main
+      deploy_on_push: false
+    dockerfile_path: apps/directus/Dockerfile
+    http_port: 8055
+    instance_count: 1
+    instance_size_slug: apps-s-1vcpu-1gb
+    health_check:
+      http_path: /server/health
+      initial_delay_seconds: 30
+      period_seconds: 10
+      timeout_seconds: 5
+      success_threshold: 1
+      failure_threshold: 3
+    envs:
+      - key: KEY
+        value: ${DIRECTUS_KEY}
+        type: SECRET
+      - key: SECRET
+        value: ${DIRECTUS_SECRET}
+        type: SECRET
+      - key: ADMIN_EMAIL
+        value: admin@example.com
+      - key: ADMIN_PASSWORD
+        value: ${DIRECTUS_SECRET}
+        type: SECRET
+      - key: DB_CLIENT
+        value: pg
+      - key: DB_HOST
+        value: ${db.HOSTNAME}
+      - key: DB_PORT
+        value: ${db.PORT}
+      - key: DB_DATABASE
+        value: ${db.DATABASE}
+      - key: DB_USER
+        value: ${db.USERNAME}
+      - key: DB_PASSWORD
+        value: ${db.PASSWORD}
+      - key: DB_SSL
+        value: "true"
+      - key: CACHE_ENABLED
+        value: "true"
+      - key: CACHE_STORE
+        value: redis
+      - key: REDIS_HOST
+        value: ${redis.HOSTNAME}
+      - key: REDIS_PORT
+        value: ${redis.PORT}
+      - key: REDIS_PASSWORD
+        value: ${redis.PASSWORD}
+      - key: STORAGE_LOCATIONS
+        value: s3
+      - key: STORAGE_S3_DRIVER
+        value: s3
+      - key: STORAGE_S3_KEY
+        value: ${SPACES_KEY}
+        type: SECRET
+      - key: STORAGE_S3_SECRET
+        value: ${SPACES_SECRET}
+        type: SECRET
+      - key: STORAGE_S3_BUCKET
+        value: <%= projectName %>-staging-assets
+      - key: STORAGE_S3_REGION
+        value: tor1
+      - key: STORAGE_S3_ENDPOINT
+        value: https://tor1.digitaloceanspaces.com
+      - key: CORS_ENABLED
+        value: "true"
+      - key: CORS_ORIGIN
+        value: "true"
+      - key: GRAPHQL_INTROSPECTION
+        value: "true"
+      - key: AUTH_PROVIDERS
+        value: google
+      - key: AUTH_GOOGLE_CLIENT_ID
+        value: ${AUTH_GOOGLE_CLIENT_ID}
+        type: SECRET
+      - key: AUTH_GOOGLE_CLIENT_SECRET
+        value: ${AUTH_GOOGLE_CLIENT_SECRET}
+        type: SECRET
+      - key: AUTH_GOOGLE_ALLOW_PUBLIC_REGISTRATION
+        value: "true"
+      - key: LOG_LEVEL
+        value: debug
+      - key: EXTENSIONS_AUTO_RELOAD
+        value: "true"
+      - key: PUBLIC_URL
+        value: ${APP_URL}
+
+databases:
+  - name: db
+    engine: PG
+    version: "16"
+    size: db-s-1vcpu-1gb
+    num_nodes: 1
+    production: false
+    cluster_name: <%= projectName %>-staging-db
+
+  - name: redis
+    engine: REDIS
+    version: "7"
+    size: db-s-1vcpu-1gb
+    num_nodes: 1
+    production: false
+    cluster_name: <%= projectName %>-staging-redis

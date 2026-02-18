@@ -1,0 +1,47 @@
+# compiled output
+dist
+tmp
+/out-tsc
+.nx
+.nx/
+
+# dependencies
+node_modules
+.pnpm-store
+
+# IDEs and editors
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/coverage
+npm-debug.log
+yarn-error.log
+pnpm-debug.log*
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Next.js
+.next
+
+# env files
+.env.local
+.env.*.local
+.env
+
+# Storybook
+storybook-static
+
+# Cache
+**/tsconfig.tsbuildinfo
+**/.eslintcache
+.cache/*
+
+# Docker overrides
+docker-compose.override.yml

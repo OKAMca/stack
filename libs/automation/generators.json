@@ -1,5 +1,10 @@
 {
   "generators": {
+    "preset": {
+      "factory": "./src/generators/preset/generator",
+      "schema": "./src/generators/preset/schema.json",
+      "description": "Scaffolds a production-ready Nx monorepo with Next.js, Directus, brand-ui, blocks, queries, i18n, Storybook, and ESLint"
+    },
     "brand-ui": {
       "factory": "./src/generators/brand-ui/generator",
       "schema": "./src/generators/brand-ui/schema.json",

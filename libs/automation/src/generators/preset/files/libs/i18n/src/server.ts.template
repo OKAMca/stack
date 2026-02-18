@@ -1,0 +1,4 @@
+export { defaultLocale, defaultNS, getOptions, i18nConfig, localeMap } from './config'
+export type { SupportedLocale } from './config'
+export { getLocale } from './lib/getLocale'
+export { getTranslation } from './lib/getTranslation'

@@ -1,0 +1,369 @@
+import antfu from '@antfu/eslint-config'
+import nxPlugin from '@nx/eslint-plugin'
+
+export default antfu(
+  {
+    // Core configuration
+    type: 'app',
+
+    // Enable TypeScript with type-aware linting
+    typescript: {
+      tsconfigPath: './tsconfig.base.json',
+      ignoresTypeAware: [
+        '**/__tests__/**',
+        '**/*.d.ts',
+        '**/*.md/**',
+      ],
+    },
+
+    // Enable React
+    react: true,
+
+    // Stylistic formatting
+    stylistic: {
+      indent: 2,
+      quotes: 'single',
+      semi: false,
+    },
+
+    // JSON linting
+    jsonc: true,
+    yaml: false,
+
+    // Ignore patterns
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
+      '**/.nx/**',
+      '**/.next/**',
+      '**/coverage/**',
+      '**/.cache/**',
+      '**/storybook-static/**',
+      '**/next-env.d.ts',
+      '**/.next/**/*.d.ts',
+      '**/src/gql/generated/**',
+      'libs/**/vite.config.ts',
+      'libs/**/vitest.config.ts',
+      'apps/**/vitest.config.ts',
+      'apps/**/src/**/*.js',
+      'apps/**/src/**/*.js.map',
+      'libs/**/src/**/*.js',
+      'libs/**/src/**/*.js.map',
+      'apps/**/*.js',
+      'apps/**/*.js.map',
+      'libs/**/*.js',
+      'libs/**/*.js.map',
+    ],
+  },
+
+  // NX Plugin configuration
+  {
+    name: 'nx/setup',
+    plugins: {
+      '@nx': nxPlugin,
+    },
+  },
+
+  // NX dependency-checks
+  {
+    name: 'nx/dependency-checks',
+    files: ['libs/**/package.json'],
+    rules: {
+      '@nx/dependency-checks': [
+        'error',
+        {
+          buildTargets: ['build'],
+          checkMissingDependencies: true,
+          checkObsoleteDependencies: true,
+          checkVersionMismatches: true,
+          ignoredDependencies: [
+            '@nx/vite',
+            '@nx/react',
+            '@vitejs/plugin-react',
+            'vite',
+            'vite-plugin-dts',
+            'vitest',
+          ],
+          includeTransitiveDependencies: false,
+        },
+      ],
+    },
+  },
+
+  // NX enforce-module-boundaries
+  {
+    name: 'nx/module-boundaries',
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
+    rules: {
+      '@nx/enforce-module-boundaries': [
+        'error',
+        {
+          enforceBuildableLibDependency: true,
+          allowCircularSelfDependency: true,
+          allow: [],
+          depConstraints: [
+            {
+              sourceTag: '*',
+              onlyDependOnLibsWithTags: ['*'],
+            },
+          ],
+        },
+      ],
+    },
+  },
+
+  // TypeScript-specific overrides
+  {
+    name: 'typescript/overrides',
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      'ts/no-explicit-any': 'error',
+      'ts/no-unused-vars': 'off',
+      'ts/no-floating-promises': 'error',
+      'ts/no-misused-promises': 'error',
+      'ts/await-thenable': 'error',
+      'ts/require-await': 'error',
+      'ts/no-unsafe-argument': 'error',
+      'ts/no-unsafe-assignment': 'error',
+      'ts/no-unsafe-call': 'error',
+      'ts/no-unsafe-member-access': 'error',
+      'ts/no-unsafe-return': 'error',
+      'ts/consistent-type-exports': 'error',
+      'ts/explicit-function-return-type': 'off',
+      'ts/strict-boolean-expressions': ['error', {
+        allowString: true,
+        allowNumber: true,
+        allowNullableBoolean: true,
+        allowNullableObject: false,
+        allowAny: false,
+        allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
+      }],
+      'ts/unbound-method': 'error',
+      'ts/naming-convention': 'off',
+      'ts/no-unnecessary-type-assertion': 'error',
+      'ts/no-redundant-type-constituents': 'error',
+      'ts/prefer-nullish-coalescing': 'error',
+      'ts/ban-ts-comment': [
+        'error',
+        {
+          'ts-expect-error': 'allow-with-description',
+          'minimumDescriptionLength': 10,
+          'ts-ignore': true,
+          'ts-nocheck': true,
+          'ts-check': false,
+        },
+      ],
+    },
+  },
+
+  // React namespace import prevention
+  {
+    name: 'react/no-namespace-import',
+    files: ['libs/**/*.ts', 'libs/**/*.tsx', 'libs/**/*.js', 'libs/**/*.jsx'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'ImportDeclaration[source.value="react"] > ImportNamespaceSpecifier',
+          message: 'Avoid namespace imports from "react". Use named imports instead.',
+        },
+      ],
+    },
+  },
+
+  // General rule overrides
+  {
+    name: 'general/overrides',
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.mjs', '**/*.cjs'],
+    rules: {
+      'node/prefer-global/process': 'off',
+      'node/prefer-global/buffer': 'off',
+      'jsdoc/require-returns-description': 'off',
+      'jsdoc/check-param-names': 'off',
+      'jsdoc/require-param': 'off',
+      'unused-imports/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', ignoreRestSiblings: true }],
+      'eslint-comments/require-description': ['error', { ignore: [] }],
+      'eslint-comments/no-unused-disable': 'error',
+    },
+  },
+
+  // React-specific overrides
+  {
+    name: 'react/overrides',
+    files: ['**/*.tsx', '**/*.jsx'],
+    rules: {
+      'react-dom/no-unknown-property': ['error', { ignore: ['css', 'tw'] }],
+    },
+  },
+
+  // React type-aware rules
+  {
+    name: 'react/type-aware',
+    files: ['**/*.tsx'],
+    rules: {
+      'react/no-leaked-conditional-rendering': 'error',
+    },
+  },
+
+  // Config files - relaxed rules
+  {
+    name: 'config-files',
+    files: [
+      '**/*.config.ts',
+      '**/*.config.js',
+      '**/*.config.mjs',
+      '**/*.config.cjs',
+      '**/*.preset.ts',
+      '**/*.preset.js',
+      '**/vite.config.*',
+      '**/vitest.config.*',
+      '**/next.config.*',
+      '**/tailwind.config.*',
+    ],
+    rules: {
+      'no-console': 'off',
+      'ts/no-require-imports': 'off',
+      'ts/no-floating-promises': 'off',
+      'ts/no-misused-promises': 'off',
+      'ts/await-thenable': 'off',
+      'ts/require-await': 'off',
+      'ts/no-unsafe-argument': 'off',
+      'ts/no-unsafe-assignment': 'off',
+      'ts/no-unsafe-call': 'off',
+      'ts/no-unsafe-member-access': 'off',
+      'ts/no-unsafe-return': 'off',
+    },
+  },
+
+  // CommonJS files
+  {
+    name: 'commonjs',
+    files: ['**/*.js', '**/*.cjs'],
+    rules: {
+      'ts/no-require-imports': 'off',
+    },
+  },
+
+  // Declaration files
+  {
+    name: 'declaration-files',
+    files: ['**/*.d.ts'],
+    rules: {
+      'ts/no-explicit-any': 'off',
+      'ts/no-unused-vars': 'off',
+      'unused-imports/no-unused-vars': 'off',
+      'ts/no-floating-promises': 'off',
+      'ts/no-misused-promises': 'off',
+      'ts/await-thenable': 'off',
+      'ts/require-await': 'off',
+      'ts/no-unsafe-argument': 'off',
+      'ts/no-unsafe-assignment': 'off',
+      'ts/no-unsafe-call': 'off',
+      'ts/no-unsafe-member-access': 'off',
+      'ts/no-unsafe-return': 'off',
+      'ts/strict-boolean-expressions': 'off',
+      'ts/consistent-type-exports': 'off',
+      'ts/no-unnecessary-type-assertion': 'off',
+      'ts/no-redundant-type-constituents': 'off',
+      'ts/prefer-nullish-coalescing': 'off',
+      'ts/unbound-method': 'off',
+      'ts/triple-slash-reference': 'off',
+    },
+  },
+
+  // Test files - relaxed rules
+  {
+    name: 'test-files',
+    files: [
+      '**/*.test.ts',
+      '**/*.test.tsx',
+      '**/*.spec.ts',
+      '**/*.spec.tsx',
+      '**/__tests__/**',
+    ],
+    rules: {
+      'ts/no-explicit-any': 'off',
+      'no-console': 'off',
+      'ts/no-floating-promises': 'off',
+      'ts/no-misused-promises': 'off',
+      'ts/await-thenable': 'off',
+      'ts/require-await': 'off',
+      'ts/no-unsafe-argument': 'off',
+      'ts/no-unsafe-assignment': 'off',
+      'ts/no-unsafe-call': 'off',
+      'ts/no-unsafe-member-access': 'off',
+      'ts/no-unsafe-return': 'off',
+      'ts/unbound-method': 'off',
+      'ts/consistent-type-exports': 'off',
+      'ts/strict-boolean-expressions': 'off',
+      'ts/no-unnecessary-type-assertion': 'off',
+      'ts/no-redundant-type-constituents': 'off',
+      'ts/prefer-nullish-coalescing': 'off',
+    },
+  },
+
+  // Storybook files
+  {
+    name: 'storybook',
+    files: ['**/*.stories.ts', '**/*.stories.tsx', '**/.storybook/**/*.ts', '**/.storybook/**/*.js'],
+    rules: {
+      'import/no-default-export': 'off',
+      'no-console': 'off',
+      'react-hooks/rules-of-hooks': 'off',
+      'ts/no-unsafe-argument': 'off',
+      'ts/no-unsafe-assignment': 'off',
+      'ts/no-unsafe-call': 'off',
+      'ts/no-unsafe-member-access': 'off',
+      'ts/no-unsafe-return': 'off',
+      'ts/no-misused-promises': 'off',
+    },
+  },
+
+  // Next.js app directory files
+  {
+    name: 'nextjs',
+    files: [
+      '**/app/**/page.tsx',
+      '**/app/**/layout.tsx',
+      '**/app/**/loading.tsx',
+      '**/app/**/error.tsx',
+      '**/app/**/not-found.tsx',
+      '**/app/**/template.tsx',
+      '**/pages/**/*.tsx',
+    ],
+    rules: {
+      'import/no-default-export': 'off',
+    },
+  },
+
+  // Provider files
+  {
+    name: 'provider-files',
+    files: [
+      '**/providers/**/index.tsx',
+      '**/providers/**/*.tsx',
+    ],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+
+  // Theme files
+  {
+    name: 'theme-files',
+    files: ['**/theme/index.tsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+
+  // Storybook mock/helper files
+  {
+    name: 'storybook-helpers',
+    files: ['**/storybook/**/*.tsx', '**/storybook/**/*.ts'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+)

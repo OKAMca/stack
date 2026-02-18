@@ -5,9 +5,13 @@
   "typings": "./src/index.d.ts",
   "private": true,
   "main": "./src/index.js",
+  "bin": {
+    "okam-automation": "./src/cli.js"
+  },
   "dependencies": {
     "@nx/devkit": "22.3.3",
     "@okam/core-lib": "2.0.0",
+    "commander": "^14.0.0",
     "radashi": "^12.3.0",
     "tslib": "^2.3.0"
   },

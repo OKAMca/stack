@@ -1,0 +1,12 @@
+{
+  "name": "<%= scope %>/directus",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "up": "docker compose up -d",
+    "down": "docker compose down",
+    "rebuild": "docker compose up -d --build",
+    "migrate": "docker compose exec directus npx directus database migrate:latest",
+    "log": "docker compose logs -f directus"
+  }
+}

@@ -1,0 +1,18 @@
+import type { SupportedLocale } from '../../config'
+import { createServerContext } from '@okam/next-component/server'
+import { i18nConfig } from '../../config'
+
+const [getLocaleContext, setLocaleContext] = createServerContext<SupportedLocale>(i18nConfig.defaultLocale)
+
+/**
+ * Get or set the current request locale via React server context.
+ * When called with a locale argument, it sets the context and returns the locale.
+ * When called without arguments, it reads the current locale from context.
+ */
+export function getLocale(locale?: SupportedLocale): SupportedLocale {
+  if (locale !== undefined) {
+    setLocaleContext(locale)
+    return locale
+  }
+  return getLocaleContext()
+}
