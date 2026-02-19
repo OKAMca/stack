@@ -4,7 +4,10 @@ const path = require('node:path')
 const reportsDir = path.resolve(__dirname, 'reports')
 
 if (!fs.existsSync(reportsDir)) {
-  console.log('No reports directory found — nothing to merge.')
+  fs.mkdirSync(reportsDir, { recursive: true })
+  const outputPath = path.join(reportsDir, 'violations-report.json')
+  fs.writeFileSync(outputPath, JSON.stringify([], null, 2))
+  console.log('No reports directory found — no violations. Wrote empty violations-report.json.')
   process.exit(0)
 }
 
@@ -13,7 +16,9 @@ const files = fs.readdirSync(reportsDir).filter(
 )
 
 if (files.length === 0) {
-  console.log('No individual report files found — nothing to merge.')
+  const outputPath = path.join(reportsDir, 'violations-report.json')
+  fs.writeFileSync(outputPath, JSON.stringify([], null, 2))
+  console.log('No individual report files found — no violations. Wrote empty violations-report.json.')
   process.exit(0)
 }
 
