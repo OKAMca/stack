@@ -17,14 +17,16 @@ jobs:
     steps:
       - name: Determine action emoji
         id: emoji
+        env:
+          EVENT: ${{ github.event_name }}
+          ACTION: ${{ github.event.action }}
+          PR_MERGED: ${{ github.event.pull_request.merged }}
         run: |
-          EVENT="${{ github.event_name }}"
-          ACTION="${{ github.event.action }}"
           if [ "$EVENT" = "pull_request" ]; then
             case "$ACTION" in
               opened) echo "emoji=🆕" >> "$GITHUB_OUTPUT" && echo "action=opened" >> "$GITHUB_OUTPUT" ;;
               closed)
-                if [ "${{ github.event.pull_request.merged }}" = "true" ]; then
+                if [ "$PR_MERGED" = "true" ]; then
                   echo "emoji=✅" >> "$GITHUB_OUTPUT" && echo "action=merged" >> "$GITHUB_OUTPUT"
                 else
                   echo "emoji=❌" >> "$GITHUB_OUTPUT" && echo "action=closed" >> "$GITHUB_OUTPUT"
@@ -41,17 +43,22 @@ jobs:
           fi
 
       - name: Post to ClickUp
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title || github.event.issue.title }}
+          PR_URL: ${{ github.event.pull_request.html_url || github.event.issue.html_url }}
+          ACTOR: ${{ github.actor }}
+          ACTION: ${{ steps.emoji.outputs.action }}
+          EMOJI: ${{ steps.emoji.outputs.emoji }}
+          CLICKUP_WORKSPACE_ID: ${{ secrets.CLICKUP_WORKSPACE_ID }}
+          CLICKUP_CHANNEL_ID: ${{ secrets.CLICKUP_CHANNEL_ID }}
+          CLICKUP_API_TOKEN: ${{ secrets.CLICKUP_API_TOKEN }}
         run: |
-          PR_TITLE="${{ github.event.pull_request.title || github.event.issue.title }}"
-          PR_URL="${{ github.event.pull_request.html_url || github.event.issue.html_url }}"
-          ACTOR="${{ github.actor }}"
-          ACTION="${{ steps.emoji.outputs.action }}"
-          EMOJI="${{ steps.emoji.outputs.emoji }}"
-
           MESSAGE="${EMOJI} **${ACTOR}** ${ACTION} PR: [${PR_TITLE}](${PR_URL})"
 
+          PAYLOAD=$(jq -n --arg content "$MESSAGE" '{"content": $content}')
+
           curl -s -X POST \
-            "https://api.clickup.com/api/v3/workspaces/${{ secrets.CLICKUP_WORKSPACE_ID }}/chat/channels/${{ secrets.CLICKUP_CHANNEL_ID }}/messages" \
-            -H "Authorization: Bearer ${{ secrets.CLICKUP_API_TOKEN }}" \
+            "https://api.clickup.com/api/v3/workspaces/${CLICKUP_WORKSPACE_ID}/chat/channels/${CLICKUP_CHANNEL_ID}/messages" \
+            -H "Authorization: Bearer ${CLICKUP_API_TOKEN}" \
             -H "Content-Type: application/json" \
-            -d "{\"content\": \"${MESSAGE}\"}"
+            -d "$PAYLOAD"
