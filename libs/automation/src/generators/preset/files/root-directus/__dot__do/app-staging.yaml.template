@@ -28,7 +28,7 @@ services:
       - key: ADMIN_EMAIL
         value: admin@example.com
       - key: ADMIN_PASSWORD
-        value: ${DIRECTUS_SECRET}
+        value: ${DIRECTUS_ADMIN_PASSWORD}
         type: SECRET
       - key: DB_CLIENT
         value: pg

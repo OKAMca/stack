@@ -34,6 +34,7 @@ jobs:
         env:
           DIRECTUS_KEY: ${{ secrets.DIRECTUS_KEY }}
           DIRECTUS_SECRET: ${{ secrets.DIRECTUS_SECRET }}
+          DIRECTUS_ADMIN_PASSWORD: ${{ secrets.DIRECTUS_ADMIN_PASSWORD }}
           SPACES_KEY: ${{ secrets.SPACES_KEY }}
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
@@ -62,6 +63,7 @@ jobs:
         env:
           DIRECTUS_KEY: ${{ secrets.DIRECTUS_KEY }}
           DIRECTUS_SECRET: ${{ secrets.DIRECTUS_SECRET }}
+          DIRECTUS_ADMIN_PASSWORD: ${{ secrets.DIRECTUS_ADMIN_PASSWORD }}
           SPACES_KEY: ${{ secrets.SPACES_KEY }}
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
@@ -88,6 +90,7 @@ jobs:
         env:
           DIRECTUS_KEY: ${{ secrets.DIRECTUS_KEY }}
           DIRECTUS_SECRET: ${{ secrets.DIRECTUS_SECRET }}
+          DIRECTUS_ADMIN_PASSWORD: ${{ secrets.DIRECTUS_ADMIN_PASSWORD }}
           SPACES_KEY: ${{ secrets.SPACES_KEY }}
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
@@ -114,6 +117,7 @@ jobs:
         env:
           DIRECTUS_KEY: ${{ secrets.DIRECTUS_KEY }}
           DIRECTUS_SECRET: ${{ secrets.DIRECTUS_SECRET }}
+          DIRECTUS_ADMIN_PASSWORD: ${{ secrets.DIRECTUS_ADMIN_PASSWORD }}
           SPACES_KEY: ${{ secrets.SPACES_KEY }}
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
