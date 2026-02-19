@@ -39,6 +39,7 @@ jobs:
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
           AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
+          APP_URL: ${{ vars.APP_URL }}
 
       - name: Create App
         uses: digitalocean/app_action/deploy@v2
@@ -68,6 +69,7 @@ jobs:
           SPACES_SECRET: ${{ secrets.SPACES_SECRET }}
           AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
           AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
+          APP_URL: ${{ vars.APP_URL }}
 
       - name: Deploy to Staging
         uses: digitalocean/app_action/deploy@v2
@@ -96,6 +98,7 @@ jobs:
           AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
           AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
           CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+          APP_URL: ${{ vars.APP_URL }}
 
       - name: Create App
         uses: digitalocean/app_action/deploy@v2
@@ -124,6 +127,7 @@ jobs:
           AUTH_GOOGLE_CLIENT_ID: ${{ secrets.AUTH_GOOGLE_CLIENT_ID }}
           AUTH_GOOGLE_CLIENT_SECRET: ${{ secrets.AUTH_GOOGLE_CLIENT_SECRET }}
           CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+          APP_URL: ${{ vars.APP_URL }}
 
       - name: Deploy to Production
         uses: digitalocean/app_action/deploy@v2
