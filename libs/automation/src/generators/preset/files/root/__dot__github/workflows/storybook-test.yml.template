@@ -43,6 +43,7 @@ jobs:
         run: pnpm exec node libs/storybook/merge-reports.js
 
       - name: Convert to Markdown
+        if: hashFiles('libs/storybook/reports/violations-report.json') != ''
         run: >-
           pnpm exec node libs/storybook/axe-to-markdown.js
           libs/storybook/reports/violations-report.json
