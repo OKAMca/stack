@@ -1,0 +1,62 @@
+'use client'
+
+import i18next from 'i18next'
+import resourcesToBackend from 'i18next-resources-to-backend'
+import { useEffect, useRef } from 'react'
+import { useLocale } from 'react-aria'
+import { initReactI18next, useTranslation } from 'react-i18next'
+import { getOptions, i18nConfig } from '../../config'
+
+const NS = ['common', 'components']
+
+let initialized = false
+
+/**
+ * Initialize the global i18next instance for client-side usage.
+ * Uses i18next-resources-to-backend for lazy translation loading.
+ * This is a singleton — multiple calls are no-ops after init.
+ */
+function initClientI18n() {
+  if (!initialized && !i18next.isInitialized) {
+    initialized = true
+    void i18next
+      .use(initReactI18next)
+      .use(
+        resourcesToBackend(
+          // eslint-disable-next-line ts/no-unsafe-return -- dynamic import returns untyped JSON module
+          async (lang: string, ns: string) => import(`../../locales/${lang}/${ns}.json`),
+        ),
+      )
+      .init({
+        ...getOptions(i18nConfig.defaultLocale, NS),
+        detection: {
+          order: ['path', 'htmlTag', 'cookie', 'navigator'],
+        },
+        preload: i18nConfig.locales as unknown as string[],
+      })
+  }
+}
+
+/**
+ * Client-side translation hook that syncs i18next language with react-aria locale.
+ * Wraps react-i18next useTranslation, keeping the language in sync with
+ * the react-aria I18nProvider.
+ */
+export function useTranslationAdapter(ns: string | string[] = 'common') {
+  const initRef = useRef(false)
+  if (!initRef.current) {
+    initRef.current = true
+    initClientI18n()
+  }
+
+  const { locale: ariaLocale } = useLocale()
+  const result = useTranslation(ns)
+
+  useEffect(() => {
+    if (i18next.language !== ariaLocale) {
+      void i18next.changeLanguage(ariaLocale)
+    }
+  }, [ariaLocale])
+
+  return result
+}

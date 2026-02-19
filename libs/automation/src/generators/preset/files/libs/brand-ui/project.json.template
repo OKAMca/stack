@@ -1,0 +1,25 @@
+{
+  "name": "brand-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/brand-ui/src",
+  "projectType": "library",
+  "tags": ["type:ui"],
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/brand-ui"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/brand-ui/**/*.{ts,tsx,js,jsx,json}"
+        ]
+      }
+    }
+  }
+}

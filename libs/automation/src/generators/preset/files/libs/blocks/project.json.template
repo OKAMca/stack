@@ -1,0 +1,18 @@
+{
+  "name": "blocks",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/blocks/src",
+  "projectType": "library",
+  "tags": ["type:blocks"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/blocks/**/*.{ts,tsx,js,jsx,json}"
+        ]
+      }
+    }
+  }
+}

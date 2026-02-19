@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: pgautoupgrade/pgautoupgrade:16-alpine
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: directus
+      POSTGRES_USER: directus
+      POSTGRES_PASSWORD: directus
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U directus']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  directus:
+    image: directus/directus:latest
+    restart: unless-stopped
+    ports:
+      - '8055:8055'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    env_file:
+      - .env.local
+    environment:
+      DB_CLIENT: pg
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      DB_DATABASE: directus
+      DB_USER: directus
+      DB_PASSWORD: directus
+      CACHE_ENABLED: 'true'
+      CACHE_STORE: redis
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: 'http://localhost:3000'
+      GRAPHQL_INTROSPECTION: 'true'
+
+volumes:
+  pgdata:

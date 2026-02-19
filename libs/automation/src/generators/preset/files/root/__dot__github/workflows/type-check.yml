@@ -1,0 +1,53 @@
+name: Type Check
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  type-check:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+<% if (includeDirectus === 'true') { %>
+      - name: Run codegen
+        run: pnpm codegen
+        env:
+          NEXT_SERVER_GRAPHQL_URL: ${{ secrets.NEXT_SERVER_GRAPHQL_URL }}
+          NEXT_PUBLIC_API_TOKEN: ${{ secrets.NEXT_PUBLIC_API_TOKEN }}
+<% } %>
+      - name: Type check (PR)
+        if: github.event_name == 'pull_request'
+        run: pnpm nx affected --target=type-check --base=origin/main
+        env:
+          NEXT_SERVER_GRAPHQL_URL: ${{ secrets.NEXT_SERVER_GRAPHQL_URL }}
+          NEXT_PUBLIC_API_TOKEN: ${{ secrets.NEXT_PUBLIC_API_TOKEN }}
+
+      - name: Type check (main)
+        if: github.event_name == 'push'
+        run: pnpm nx run-many --target=type-check
+        env:
+          NEXT_SERVER_GRAPHQL_URL: ${{ secrets.NEXT_SERVER_GRAPHQL_URL }}
+          NEXT_PUBLIC_API_TOKEN: ${{ secrets.NEXT_PUBLIC_API_TOKEN }}

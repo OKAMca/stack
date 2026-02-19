@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "<%= scope %>/brand-ui": ["libs/brand-ui/src/index.ts"],
+      "<%= scope %>/blocks": ["libs/blocks/src/index.ts"],<% if (includeDirectus === 'true') { %>
+      "<%= scope %>/queries": ["libs/queries/src/index.ts"],
+      "<%= scope %>/queries/server": ["libs/queries/src/server.ts"],<% } %>
+      "<%= scope %>/i18n": ["libs/i18n/src/index.ts"],
+      "<%= scope %>/i18n/server": ["libs/i18n/src/server.ts"]
+    },
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "declaration": false,
+    "importHelpers": true,
+    "sourceMap": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules", "tmp"]
+}

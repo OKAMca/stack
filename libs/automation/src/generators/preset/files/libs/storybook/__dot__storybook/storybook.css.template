@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+@import '../../brand-ui/src/theme.css';
+
+@source '../../brand-ui/src/**/*.{ts,tsx}';
+@source '../../blocks/src/**/*.{ts,tsx}';

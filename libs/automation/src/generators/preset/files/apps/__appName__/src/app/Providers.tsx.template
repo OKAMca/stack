@@ -1,0 +1,41 @@
+'use client'
+
+import type { ReactNode } from 'react'
+import { TranslationContextProvider } from '@okam/stack-ui'
+<% if (scope.localeCompare('@tanstack') < 0) { -%>
+import { ThemeProvider } from '<%= scope %>/brand-ui'
+import { useTranslationAdapter } from '<%= scope %>/i18n'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+<% } else { -%>
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ThemeProvider } from '<%= scope %>/brand-ui'
+import { useTranslationAdapter } from '<%= scope %>/i18n'
+<% } -%>
+import { useState } from 'react'
+import { I18nProvider } from 'react-aria'
+
+export function Providers({ children, locale }: { children: ReactNode, locale: string }) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 60 * 1000,
+            refetchOnWindowFocus: false,
+          },
+        },
+      }),
+  )
+
+  return (
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <I18nProvider locale={locale}>
+          <TranslationContextProvider useTranslationFunc={useTranslationAdapter}>
+            {children}
+          </TranslationContextProvider>
+        </I18nProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
+  )
+}

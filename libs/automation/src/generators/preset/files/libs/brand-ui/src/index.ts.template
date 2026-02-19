@@ -1,0 +1,8 @@
+// Import brand theme CSS (Tailwind v4 @theme tokens)
+import './theme.css'
+
+// Export brand ThemeProvider (shadows stack-ui's ThemeProvider with brand overrides)
+export { default as ThemeProvider } from './theme'
+
+// Re-export all stack-ui components as the base layer
+export * from '@okam/stack-ui'

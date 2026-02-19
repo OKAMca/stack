@@ -1,0 +1,88 @@
+'use client'
+
+import { createThemeProvider, makeTheme } from '@okam/stack-ui'
+import { memo } from 'react'
+import { tv } from 'tailwind-variants'
+
+/**
+ * Brand-specific theme using @okam/stack-ui's theme system.
+ *
+ * Each key maps to a component name that stack-ui components look up
+ * via `useThemeContext(themeName, tokens)`. The function receives variant
+ * tokens and returns Tailwind CSS classes via `tv()`.
+ *
+ * To add more component themes, look at the available components in
+ * @okam/stack-ui/src/theme/ and add matching entries here.
+ * Nested themes (e.g. `select: { button, ul, errorMessage }`) are also
+ * supported — see @okam/stack-ui/src/theme/index.tsx for the full
+ * BaseTheme structure.
+ */
+
+const typography = tv({
+  variants: {
+    size: {
+      h1: 'text-5xl',
+      h2: 'text-4xl',
+      h3: 'text-3xl',
+      h4: 'text-2xl',
+      h5: 'text-xl',
+      h6: 'text-lg',
+      leading: 'text-md font-bold leading-normal',
+      paragraph: 'text-md inline',
+      footnotes: 'text-sm',
+      xs: 'text-xs',
+    },
+    font: {
+      body: 'font-body',
+    },
+    weight: {
+      normal: 'font-normal',
+      light: 'font-light',
+      bold: 'font-bold',
+    },
+    isError: {
+      true: 'text-sm text-error',
+    },
+  },
+  defaultVariants: {
+    size: 'paragraph',
+    font: 'body',
+  },
+})
+
+const button = tv({
+  base: `
+    flex items-center justify-center gap-4
+    transition duration-300 ease-in-out
+    disabled:pointer-events-none disabled:opacity-30
+    h-fit
+  `,
+  defaultVariants: {
+    buttonStyle: 'default',
+    size: 'default',
+    shape: 'rounded',
+  },
+  variants: {
+    buttonStyle: {
+      default: 'px-4 py-2 text-white bg-color-1-500 hover:bg-color-1-400 active:bg-color-1-400',
+      outline: 'px-4 py-2 bg-transparent border-color-1-500 text-color-1-500 hover:bg-color-1-500 hover:text-white active:bg-color-1-500 active:text-white',
+      hollow: 'px-2 bg-transparent text-color-1-500 hover:border-b-color-1-500 active:border-b-color-1-500 focus:border-b-color-1-500',
+    },
+    size: {
+      default: 'min-w-12 min-h-6',
+      large: 'min-w-36 min-h-18',
+    },
+    shape: {
+      rounded: 'rounded-md',
+      circular: 'rounded-full',
+    },
+  },
+})
+
+const BrandTheme = makeTheme({
+  typography: (props: Record<string, string | boolean>) => typography(props),
+  button: (props: Record<string, string | boolean>) => button(props),
+  link: (props: Record<string, string | boolean>) => button(props),
+})
+
+export default memo(createThemeProvider(BrandTheme))

@@ -1,0 +1,28 @@
+/* eslint-disable -- placeholder file replaced by graphql-codegen output */
+// This file is a placeholder for graphql-codegen generated types.
+// Run `pnpm codegen` to generate actual types from your GraphQL schema.
+
+/**
+ * A typed document string produced by graphql-codegen.
+ *
+ * This placeholder allows the queries library to compile before
+ * codegen has been run. Once you run `pnpm codegen`, this file
+ * will be overwritten with the real generated types.
+ */
+export class TypedDocumentString<TResult = Record<string, unknown>, TVariables = Record<string, unknown>>
+  extends String
+  implements DocumentTypeDecoration<TResult, TVariables> {
+  __apiType?: DocumentTypeDecoration<TResult, TVariables>['__apiType']
+
+  constructor(private value: string) {
+    super(value)
+  }
+
+  override toString(): string {
+    return this.value
+  }
+}
+
+export interface DocumentTypeDecoration<TResult = Record<string, unknown>, _TVariables = Record<string, unknown>> {
+  __apiType?: (variables: _TVariables) => TResult
+}

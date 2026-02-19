@@ -1,0 +1,29 @@
+import { localeMap } from '../../config'
+
+/**
+ * Bidirectional locale mapping using localeMap from config.
+ *
+ * When localeMap is empty (default), returns the locale as-is.
+ * When populated (e.g. `{ 'en-CA': 'en', 'fr-CA': 'fr' }`):
+ * - Forward: 'en-CA' → 'en' (regional to simple)
+ * - Inverse: 'en' → 'en-CA' (simple to regional)
+ *
+ * Returns the mapped locale, or the original if no mapping exists.
+ */
+export function getMappedLocale(locale: string): string {
+  // Forward lookup: regional → simple (e.g. en-CA → en)
+  const mapped = localeMap[locale]
+  if (mapped !== undefined) {
+    return mapped
+  }
+
+  // Inverse lookup: simple → regional (e.g. en → en-CA)
+  const invertedEntries = Object.entries(localeMap)
+  for (const [regional, simple] of invertedEntries) {
+    if (simple === locale) {
+      return regional
+    }
+  }
+
+  return locale
+}
