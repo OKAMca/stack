@@ -3,7 +3,7 @@
   "type": "commonjs",
   "version": "3.0.0",
   "typings": "./src/index.d.ts",
-  "private": true,
+  "private": false,
   "main": "./src/index.js",
   "bin": {
     "okam-automation": "./src/cli.js"
