@@ -7,6 +7,10 @@ jobs:
   test:
     name: Storybook Accessibility Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
     if: >-
       github.event.deployment_status.state == 'success' &&
       github.event.deployment_status.environment == '<%= projectName %>-storybook'
