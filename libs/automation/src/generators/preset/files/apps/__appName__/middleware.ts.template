@@ -48,7 +48,7 @@ export function middleware(request: NextRequest) {
   }
 
   const response = NextResponse.next()
-  response.cookies.set('NEXT_LOCALE', pathnameLocale, { path: '/' })
+  response.cookies.set('NEXT_LOCALE', pathnameLocale, { path: '/', sameSite: 'lax', secure: process.env.NODE_ENV === 'production' })
   return response
 }
 
