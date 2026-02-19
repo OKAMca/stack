@@ -73,7 +73,7 @@ services:
       - key: CORS_ENABLED
         value: "true"
       - key: CORS_ORIGIN
-        value: "true"
+        value: ${CORS_ALLOWED_ORIGINS}
       - key: GRAPHQL_INTROSPECTION
         value: "false"
       - key: AUTH_PROVIDERS
