@@ -9,6 +9,8 @@ interface CspDirectives {
 
 const directives: CspDirectives = {
   'default-src': ['\'self\''],
+  // TODO: Replace 'unsafe-eval' and 'unsafe-inline' with nonce-based CSP before production.
+  // See: https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
   'script-src': ['\'self\'', '\'unsafe-eval\'', '\'unsafe-inline\''],
   'style-src': ['\'self\'', '\'unsafe-inline\'', 'https://fonts.googleapis.com'],
   'img-src': [
