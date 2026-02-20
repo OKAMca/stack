@@ -1,3 +1,19 @@
+## 2.0.1 (2026-02-20)
+
+### 🚀 Features
+
+- **workspace:** migrate from npm to pnpm ([#399](https://github.com/OKAMca/stack/pull/399))
+
+### 🩹 Fixes
+
+- **next-component:** link doesnt localize anchor href anymore ([f960c993](https://github.com/OKAMca/stack/commit/f960c993))
+
+### ❤️ Thank You
+
+- Claude Opus 4.5
+- Marie-Maxime Tanguay @marie-maxime
+- poclerson
+
 # 2.0.0 (2026-02-05)
 
 ### 🚀 Features
