@@ -40,8 +40,9 @@ export function useLinkLocale(props: TLink) {
 export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale']): string {
   const hrefString = href.toString()
 
+  const isAnchor = hrefString.startsWith('#')
   const isExternal = /^[a-z]+:\/\//i.test(hrefString) || hrefString.startsWith('//')
-  if (isExternal)
+  if (isExternal || isAnchor)
     return hrefString
 
   if (locale != null && locale !== false) {
