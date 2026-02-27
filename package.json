@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.10.0",
   "license": "BUSL-1.1",
   "scripts": {
-    "codegen": "NODE_TLS_REJECT_UNAUTHORIZED=0 graphql-codegen --config ./codegen.ts",
+    "codegen": "graphql-codegen --config ./codegen.ts",
     "g:lint": "nx run-many --all --target=lint",
     "g:lint:fix": "nx run-many --all --target=lint --fix",
     "g:build": "nx run-many --all --target=build",
