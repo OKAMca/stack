@@ -1,3 +1,13 @@
+## 2.0.1 (2026-02-27)
+
+### 🩹 Fixes
+
+- remove async from option render ([#418](https://github.com/OKAMca/stack/pull/418))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 # 2.0.0 (2026-02-05)
 
 This was a version bump only for stack-ui to align it with other projects, there were no code changes.
