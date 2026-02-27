@@ -1,0 +1,43 @@
+{
+  "collection": "page_settings",
+  "field": "settings",
+  "type": "alias",
+  "meta": {
+    "collection": "page_settings",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "settings",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": null,
+    "options": {
+      "headerColor": "#00549A",
+      "headerIcon": "travel_explore",
+      "start": "closed"
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 7,
+    "special": [
+      "alias",
+      "group",
+      "no-data"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Paramètres URL et SEO"
+      },
+      {
+        "language": "en-CA",
+        "translation": " Routing and SEO Settings"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

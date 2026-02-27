@@ -1,0 +1,990 @@
+[
+  {
+    "name": "Check Null Page Settings",
+    "key": "check_null_page_settings",
+    "type": "exec",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n\tif (data.item.page_settings !== null) {\n        throw Error('Page settings already set');\n    }\n    \n    return true\n}"
+    },
+    "resolve": "6c93d562-c709-4bcc-b02c-6f7d1c1dd6ea",
+    "reject": null,
+    "flow": "6b0f60d9-6ae1-464c-8e82-d6dddf3aea4f",
+    "_syncId": "4ad987ce-5c50-4ae3-8f08-9a4716789af0"
+  },
+  {
+    "name": "Condition",
+    "key": "condition_61n80",
+    "type": "condition",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "filter": {
+        "count(merge)": {
+          "_gt": 0
+        }
+      }
+    },
+    "resolve": "2dd9d19a-d00c-414a-afed-dbb07553a902",
+    "reject": "1aa24343-f8de-4530-800e-93e29a68b436",
+    "flow": "62085c6d-3d26-4d2f-bc0e-98c0771ad891",
+    "_syncId": "e25994f3-fcf7-484b-a5ee-adc63d6f7788"
+  },
+  {
+    "name": "Not Brand",
+    "key": "condition_mbc8v",
+    "type": "condition",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "filter": {
+        "$trigger": {
+          "collection": {
+            "_neq": "brands"
+          }
+        }
+      }
+    },
+    "resolve": "f9beac66-d3b0-4dae-9698-9973bfd8e75b",
+    "reject": "1328028a-8260-4297-98e6-af625eebc641",
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "a45d3898-79eb-40d5-ba00-1ddcc56b47b6"
+  },
+  {
+    "name": "Lancer le script",
+    "key": "exec_2baou",
+    "type": "exec",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n    const item = data.$last\n    const paths = item?.page_settings?.translations\n        ?.map(({path, languages_code}) => {\n            const newpath = path && languages_code && languages_code != 'fr-CA' ? `/${languages_code.substring(0, 2)}${path}` : path\n            return {\n                path: newpath,\n                languages_code\n            }\n        })\n        ?.filter((item) => item.path)\n    \n\treturn paths || [];\n}"
+    },
+    "resolve": "8f8bcf92-d1de-4f30-922c-6e6de5b0bb10",
+    "reject": null,
+    "flow": "9797bb78-add3-4247-9798-129015bff396",
+    "_syncId": "9cfa43aa-436a-4761-98a3-dd15dab72657"
+  },
+  {
+    "name": "Lancer le script",
+    "key": "exec_33jvf",
+    "type": "exec",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n    const { payload, collection } = data.$trigger\n    console.log(data.$trigger)\n    if (!payload || !Array.isArray(payload) || !collection) {\n        return []\n    }\n    console.log(payload, collection)\n    \n    return payload.map((key) => ({\n        key,\n        collection,\n    }))\n}"
+    },
+    "resolve": "a48ffb14-6d2d-44a8-84fe-bf6b5a7f8196",
+    "reject": null,
+    "flow": "e2e41bdf-db58-4007-b193-e2d0e7f697f1",
+    "_syncId": "d1fc8a0b-bc43-4916-999d-fc53a70ff37b"
+  },
+  {
+    "name": "Run Script",
+    "key": "exec_ab5mw",
+    "type": "exec",
+    "position_x": 73,
+    "position_y": 17,
+    "options": {
+      "code": "module.exports = async function(data) {\n\t// Do nothing, but don't throw an exception\n\treturn true\n}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "62085c6d-3d26-4d2f-bc0e-98c0771ad891",
+    "_syncId": "1aa24343-f8de-4530-800e-93e29a68b436"
+  },
+  {
+    "name": "Lancer le script",
+    "key": "exec_os171",
+    "type": "exec",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n    const server = data.$env.REVALIDATE_URL || data.$env.FRONTEND_URL || ''\n    const secret = data.$env.REVALIDATE_SECRET || data.$env.PREVIEW_SECRET || ''\n    const path = data.$trigger.path\n    if (!server) {\n        throw new Error('Missing path server var, check FRONTEND_URL/PREVIEW_SECRET env' + JSON.stringify(data.$env))\n    }\n    if (!path || !server) {\n        throw new Error('Missing path')\n    }\n\tconst url = `${server}/api/revalidate?secret=${encodeURIComponent(secret)}&path=${encodeURIComponent(path)}`\n\treturn {\n        url\n    };\n}"
+    },
+    "resolve": "78321926-fa2e-4b7b-bcf7-b3a8aaf3fe3e",
+    "reject": null,
+    "flow": "f3584897-174b-457d-b6fe-876b92d21977",
+    "_syncId": "1f593f3b-a857-457d-97dc-d4494fdb661e"
+  },
+  {
+    "name": "Check page_settings not null",
+    "key": "exec_y22gi",
+    "type": "exec",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n\tif (!data.item.page_settings) {\n        throw new Error('Missing page_settings')\n    }\n}"
+    },
+    "resolve": "196a8079-22ea-4040-bc17-71475a2711fc",
+    "reject": null,
+    "flow": "348c63be-ddd7-435b-88b3-d58bc55326a3",
+    "_syncId": "e4c21ea2-4245-4616-a7e8-ceea8fa84695"
+  },
+  {
+    "name": "Extract Title",
+    "key": "extract_title",
+    "type": "exec",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n    // fieldname inside the translation\n    const fieldName = 'title'\n    const mapTranslation = (item) => {\n        const language = item?.languages_code?.code\n        const from = item[fieldName] || ''\n        return {language, from}\n    }\n    \n    // extract title and code\n    const translationsCreate = data.$trigger.payload?.translations?.create || []\n    const translationsUpdate = data.$trigger.payload?.translations?.update || []\n    const list = [...translationsCreate, ...translationsUpdate]\n     .map(mapTranslation)\n    \n    return list\n}"
+    },
+    "resolve": "60c1a291-a4ea-4639-886b-8b211cbf11e9",
+    "reject": null,
+    "flow": "8b4bcdff-de73-4837-9cc0-ad9bc08bd083",
+    "_syncId": "c67972b9-243e-4ba6-90b1-daf725ffeeb4"
+  },
+  {
+    "name": "extract titles",
+    "key": "extract_titles",
+    "type": "exec",
+    "position_x": 36,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n    //const collection = data?.$trigger.collection\n    const fieldName = 'title'\n\n    const mapTranslation = (item) => {\n        const language = item?.languages_code\n        const from = item[fieldName] || ''\n        return {language, from}\n    }\n    \n    // extract title and code\n    const translationsCreate = data.$trigger.payload?.translations?.create || []\n    const translationsUpdate = data.$trigger.payload?.translations?.update || []\n    const list = data.$last.translations.map(mapTranslation)\n    return list\n}"
+    },
+    "resolve": "e802bb52-f48a-409c-b4ee-a8d15b7929ac",
+    "reject": null,
+    "flow": "e6e832b0-94de-4e31-a0ff-bcc95887aafd",
+    "_syncId": "37de2678-e871-4b5a-ab01-2f4af9a4bbd9"
+  },
+  {
+    "name": "Get Page Settings Id",
+    "key": "get_page_settings_id",
+    "type": "exec",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n\tif (!data?.item?.page_settings?.id) {\n\t\tthrow new Error('Missing Page Settings Id')\n\t}\n    return data.item.page_settings.id\n}"
+    },
+    "resolve": "d4e11d43-1129-44f6-8477-c33dcb1dd8c9",
+    "reject": null,
+    "flow": "cf6c059e-fb79-4a16-884d-f47c7ab4be17",
+    "_syncId": "5a0c83ce-e369-450d-9ee1-401ffc9b8e4f"
+  },
+  {
+    "name": "Read Item",
+    "key": "item",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "permissions": "$full",
+      "emitEvents": false,
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "query": {
+        "fields": "*.*"
+      }
+    },
+    "resolve": "a45d3898-79eb-40d5-ba00-1ddcc56b47b6",
+    "reject": null,
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "2f337f42-43eb-46c9-be2e-bfe00c90e182"
+  },
+  {
+    "name": "Item",
+    "key": "item",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}"
+    },
+    "resolve": "4ad987ce-5c50-4ae3-8f08-9a4716789af0",
+    "reject": null,
+    "flow": "6b0f60d9-6ae1-464c-8e82-d6dddf3aea4f",
+    "_syncId": "3e869314-1172-4043-b1f3-1aa1ff08a740"
+  },
+  {
+    "name": "item",
+    "key": "item",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "query": {
+        "fields": "page_settings.*"
+      }
+    },
+    "resolve": "5a0c83ce-e369-450d-9ee1-401ffc9b8e4f",
+    "reject": null,
+    "flow": "cf6c059e-fb79-4a16-884d-f47c7ab4be17",
+    "_syncId": "935ec1d7-a3b2-40fb-900d-1376ff573c17"
+  },
+  {
+    "name": "Lire les données",
+    "key": "item",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "query": {
+        "fields": "page_settings"
+      }
+    },
+    "resolve": "e4c21ea2-4245-4616-a7e8-ceea8fa84695",
+    "reject": null,
+    "flow": "348c63be-ddd7-435b-88b3-d58bc55326a3",
+    "_syncId": "9aec703a-94dc-4116-9b79-24fe605550ff"
+  },
+  {
+    "name": "Delete Data",
+    "key": "item_delete_dw3fq",
+    "type": "item-delete",
+    "position_x": 73,
+    "position_y": 1,
+    "options": {
+      "collection": "page_settings",
+      "key": "{{merge}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "62085c6d-3d26-4d2f-bc0e-98c0771ad891",
+    "_syncId": "2dd9d19a-d00c-414a-afed-dbb07553a902"
+  },
+  {
+    "name": "Suppression des données",
+    "key": "item_delete_nqp3d",
+    "type": "item-delete",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "collection": "page_settings",
+      "key": "{{item.page_settings}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "348c63be-ddd7-435b-88b3-d58bc55326a3",
+    "_syncId": "196a8079-22ea-4040-bc17-71475a2711fc"
+  },
+  {
+    "name": "Read Data",
+    "key": "item_read_2ugi5",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "query": {
+        "fields": "*.*"
+      }
+    },
+    "resolve": "37de2678-e871-4b5a-ab01-2f4af9a4bbd9",
+    "reject": null,
+    "flow": "e6e832b0-94de-4e31-a0ff-bcc95887aafd",
+    "_syncId": "c255c7d7-2537-471f-b8ce-8a18b93d7650"
+  },
+  {
+    "name": "Lire les données",
+    "key": "item_read_ow0k0",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "query": {
+        "fields": [
+          "page_settings.translations.path",
+          "page_settings.translations.languages_code"
+        ]
+      }
+    },
+    "resolve": "9cfa43aa-436a-4761-98a3-dd15dab72657",
+    "reject": null,
+    "flow": "9797bb78-add3-4247-9798-129015bff396",
+    "_syncId": "9c8dc3b3-09b6-4f8e-9130-64aebeb29c39"
+  },
+  {
+    "name": "Update Data",
+    "key": "item_update_1u50g",
+    "type": "item-update",
+    "position_x": 73,
+    "position_y": 1,
+    "options": {
+      "collection": "page_settings",
+      "key": "{{item.page_settings.id}}",
+      "payload": {
+        "route": "{{ routes[0].id }}"
+      },
+      "query": null
+    },
+    "resolve": "0520a2d0-3162-4cb8-8dd3-8eef747c81c2",
+    "reject": "ad373dfd-c691-4c28-8a2d-c1dc1a419b7f",
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "14d0f849-3d77-4a78-9fac-ab0bd3570a09"
+  },
+  {
+    "name": "Update Data",
+    "key": "item_update_1u50g_znnut",
+    "type": "item-update",
+    "position_x": 72,
+    "position_y": 25,
+    "options": {
+      "permissions": "$trigger",
+      "emitEvents": false,
+      "collection": "page_settings",
+      "key": "{{item.page_settings.id}}",
+      "payload": {
+        "route": "{{ routes_brand[0].id }}"
+      },
+      "query": null
+    },
+    "resolve": "c44a794e-aa44-4582-a450-bcf99edcab55",
+    "reject": null,
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "1a6a4308-94f0-4ab1-a93a-168941c291cf"
+  },
+  {
+    "name": "Update Data",
+    "key": "item_update_56j3u",
+    "type": "item-update",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "payload": {
+        "page_settings": {}
+      }
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "6b0f60d9-6ae1-464c-8e82-d6dddf3aea4f",
+    "_syncId": "6c93d562-c709-4bcc-b02c-6f7d1c1dd6ea"
+  },
+  {
+    "name": "Mettre à jour les données",
+    "key": "item_update_6oia5",
+    "type": "item-update",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "payload": "{{update}}"
+    },
+    "resolve": "56793a05-4ecf-47f7-98d0-1a64364b82ce",
+    "reject": null,
+    "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+    "_syncId": "241ba37b-735f-402b-b6bc-8ca55768ea03"
+  },
+  {
+    "name": "Update Data",
+    "key": "item_update_x67iy",
+    "type": "item-update",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "payload": "{{$last}}",
+      "key": "{{$trigger.key}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "5b0bd7fa-4662-4595-b3a1-61ac538bb5e6",
+    "_syncId": "6df996bd-26d8-48f1-9b4e-107679fd0492"
+  },
+  {
+    "name": "Send Email",
+    "key": "mail_9qqt2",
+    "type": "mail",
+    "position_x": 106,
+    "position_y": 16,
+    "options": {
+      "subject": "Error on updating route",
+      "body": "Please check the logs for the page_settings flow.",
+      "to": [
+        "dev@okam.ca"
+      ]
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "ad373dfd-c691-4c28-8a2d-c1dc1a419b7f"
+  },
+  {
+    "name": "merge",
+    "key": "merge",
+    "type": "exec",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n\tif (!data.$last) {\n        return []\n    }\n    // one item\n    if ('page_settings' in data.$last) {\n        return data.$last.page_settings ? [data.$last.page_settings] : []\n    }\n    // invalid array or empty object\n    if (!('length' in data.$last) || !data.$last.length) {\n        return\n    }\n\treturn data.$last.map(({page_settings}) => page_settings);\n}"
+    },
+    "resolve": "e25994f3-fcf7-484b-a5ee-adc63d6f7788",
+    "reject": null,
+    "flow": "62085c6d-3d26-4d2f-bc0e-98c0771ad891",
+    "_syncId": "b9234dd8-4eeb-4cd8-a7b1-7ce57e8b1d0e"
+  },
+  {
+    "name": "Okam Extract Collection/Key into an array",
+    "key": "okam_extract_keys_p9585",
+    "type": "okam-extract-keys",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "input": "{{$trigger.body}}"
+    },
+    "resolve": "46925f61-2188-4771-ae03-06d0733a715d",
+    "reject": null,
+    "flow": "6eb743d1-bb36-4665-ab79-58594c6a76de",
+    "_syncId": "11c95750-d890-4515-9407-135e66272a42"
+  },
+  {
+    "name": "Update Page Settings Slugs",
+    "key": "okam_update_slug_h6jxr",
+    "type": "okam-update-slug",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "list": "{{$trigger.list}}",
+      "override": false
+    },
+    "resolve": "6df996bd-26d8-48f1-9b4e-107679fd0492",
+    "reject": null,
+    "flow": "5b0bd7fa-4662-4595-b3a1-61ac538bb5e6",
+    "_syncId": "ef2e1db2-c001-4b8e-b8eb-05a5c7062e33"
+  },
+  {
+    "name": "Prepare Set Path",
+    "key": "prepare_set_path",
+    "type": "exec",
+    "position_x": 73,
+    "position_y": 17,
+    "options": {
+      "code": "module.exports = async function(data) {\n    const collection = data.$trigger.collection\n    if (data.$trigger.key) {\n        return [{\n            collection,\n            key: data.$trigger.key\n        }]\n    } else if (Array.isArray(data.$trigger.keys)) {\n        return data.$trigger.keys.map(key => {\n            return {\n                collection,\n                key\n            }\n        })\n\t}    \n    return [];\n}"
+    },
+    "resolve": "12a5700d-68d7-4c11-b225-8a2c7d15e0f2",
+    "reject": null,
+    "flow": "8b4bcdff-de73-4837-9cc0-ad9bc08bd083",
+    "_syncId": "eab1cf91-ab1e-47d5-b95e-39913fb510af"
+  },
+  {
+    "name": "Read",
+    "key": "read",
+    "type": "item-read",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "query": {
+        "fields": "page_settings"
+      },
+      "key": "{{$trigger.payload}}"
+    },
+    "resolve": "b9234dd8-4eeb-4cd8-a7b1-7ce57e8b1d0e",
+    "reject": null,
+    "flow": "62085c6d-3d26-4d2f-bc0e-98c0771ad891",
+    "_syncId": "d99fb11c-8ec4-40e2-aa11-7a16167988a0"
+  },
+  {
+    "name": "Webhook / URL de requête",
+    "key": "request_u9ehl",
+    "type": "request",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "method": "POST",
+      "url": "{{$last.url}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "f3584897-174b-457d-b6fe-876b92d21977",
+    "_syncId": "78321926-fa2e-4b7b-bcf7-b3a8aaf3fe3e"
+  },
+  {
+    "name": "Revalidation (err)",
+    "key": "revalidation_err",
+    "type": "trigger",
+    "position_x": 55,
+    "position_y": 17,
+    "options": {
+      "flow": "9797bb78-add3-4247-9798-129015bff396",
+      "payload": "{{$trigger}}"
+    },
+    "resolve": "e690c0c4-ec0d-4043-9ae0-2e6dfebe336f",
+    "reject": null,
+    "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+    "_syncId": "bb7c8887-1303-4d73-902f-9bc235979d67"
+  },
+  {
+    "name": "Revalidation (OK)",
+    "key": "revalidation_ok",
+    "type": "trigger",
+    "position_x": 73,
+    "position_y": 1,
+    "options": {
+      "flow": "9797bb78-add3-4247-9798-129015bff396",
+      "payload": "{{$trigger}}"
+    },
+    "resolve": "a94c99b2-8613-42e3-831a-35a9cfbfb693",
+    "reject": null,
+    "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+    "_syncId": "7353f247-5c9e-4300-8193-cef90fa8f73e"
+  },
+  {
+    "name": "routes",
+    "key": "routes",
+    "type": "item-read",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "permissions": "$full",
+      "collection": "routes",
+      "query": {
+        "limit": 1,
+        "sort": [
+          "sort"
+        ],
+        "filter": {
+          "collection_name": {
+            "_eq": "{{$trigger.collection}}"
+          }
+        }
+      }
+    },
+    "resolve": "14d0f849-3d77-4a78-9fac-ab0bd3570a09",
+    "reject": null,
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "f9beac66-d3b0-4dae-9698-9973bfd8e75b"
+  },
+  {
+    "name": "routes",
+    "key": "routes_brand",
+    "type": "item-read",
+    "position_x": 55,
+    "position_y": 18,
+    "options": {
+      "permissions": "$full",
+      "emitEvents": false,
+      "collection": "routes",
+      "query": {
+        "limit": 1,
+        "sort": [
+          "sort"
+        ],
+        "filter": {
+          "collection_name": {
+            "_eq": "{{$trigger.collection}}"
+          },
+          "collection_type": {
+            "_eq": "{{item.brand_type}}"
+          }
+        }
+      }
+    },
+    "resolve": "1a6a4308-94f0-4ab1-a93a-168941c291cf",
+    "reject": null,
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "1328028a-8260-4297-98e6-af625eebc641"
+  },
+  {
+    "name": "Set Path",
+    "key": "set_path",
+    "type": "trigger",
+    "position_x": 91,
+    "position_y": 17,
+    "options": {
+      "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+      "payload": "{{$last}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "8b4bcdff-de73-4837-9cc0-ad9bc08bd083",
+    "_syncId": "12a5700d-68d7-4c11-b225-8a2c7d15e0f2"
+  },
+  {
+    "name": "Set Path",
+    "key": "set_path",
+    "type": "trigger",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+      "payload": "{{split_items}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "617af66b-852e-4e6c-845e-efdeed3d2ec0",
+    "_syncId": "9d52cf97-b5b4-4b4b-bbbe-6d53ade05a94"
+  },
+  {
+    "name": "Slugify list",
+    "key": "slugify_list",
+    "type": "okam-slugify-list",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "list": "{{$last}}"
+    },
+    "resolve": "c9cdce3f-1c4f-4559-a143-0322c9e21577",
+    "reject": null,
+    "flow": "8b4bcdff-de73-4837-9cc0-ad9bc08bd083",
+    "_syncId": "60c1a291-a4ea-4639-886b-8b211cbf11e9"
+  },
+  {
+    "name": "slugify list",
+    "key": "slugify_list",
+    "type": "okam-slugify-list",
+    "position_x": 1,
+    "position_y": 18,
+    "options": {
+      "list": "{{$last}}"
+    },
+    "resolve": "be1d7b6b-6f00-4196-acc9-39ad4ee8735e",
+    "reject": null,
+    "flow": "e6e832b0-94de-4e31-a0ff-bcc95887aafd",
+    "_syncId": "e802bb52-f48a-409c-b4ee-a8d15b7929ac"
+  },
+  {
+    "name": "Okam Extract Collection/Key into an array",
+    "key": "split_items",
+    "type": "okam-extract-keys",
+    "position_x": 20,
+    "position_y": 1,
+    "options": {
+      "input": "{{$trigger.body}}"
+    },
+    "resolve": "64ac3c84-3b14-4d94-b4c5-7bbdfa0b850e",
+    "reject": null,
+    "flow": "b7ed8338-9e3e-49ce-8afc-2b5f23bd5612",
+    "_syncId": "102cc1a1-a915-421b-99d8-f022656aaf60"
+  },
+  {
+    "name": "Split Items",
+    "key": "split_items",
+    "type": "exec",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n    const collection = data.$trigger.body.collection\n    if (data.$trigger.body.key) {\n        return [{\n            collection,\n            key: data.$trigger.body.key\n        }]\n    } else if (Array.isArray(data.$trigger.body.keys)) {\n        return data.$trigger.body.keys.map(key => {\n            return {\n                collection,\n                key\n            }\n        })\n\t}    \n    return [];\n}"
+    },
+    "resolve": "e0ec3d85-bb54-48a1-8035-044b4ab7db2d",
+    "reject": null,
+    "flow": "e1b8f8f3-b1f5-447d-9a24-98e0a5a3ab3d",
+    "_syncId": "158c6635-5d16-463a-8e8a-7c5e78daecbb"
+  },
+  {
+    "name": "Okam Extract Collection/Key into an array",
+    "key": "split_items",
+    "type": "okam-extract-keys",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "input": "{{$trigger.body}}"
+    },
+    "resolve": "63137935-0c3e-493f-8186-0295f02b275f",
+    "reject": null,
+    "flow": "617af66b-852e-4e6c-845e-efdeed3d2ec0",
+    "_syncId": "6f8c06fc-b38a-4a32-81cf-bb50f94da212"
+  },
+  {
+    "name": "split items",
+    "key": "split_items",
+    "type": "exec",
+    "position_x": 19,
+    "position_y": 18,
+    "options": {
+      "code": "module.exports = async function(data) {\n    const collection = data.$trigger.collection\n    if (!data.$last || !data.$last.length) {\n        return []\n    }\n    if (data.$trigger.key) {\n        return [{\n            collection,\n            key: data.$trigger.key,\n            list: data.$last\n        }]\n    } else if (Array.isArray(data.$trigger.keys)) {\n        return data.$trigger.keys.map(key => {\n            return {\n                collection,\n                key,\n                list: data.$last\n            }\n        })\n\t}    \n    return [];\n}"
+    },
+    "resolve": "aa5664d7-aa04-4017-97bf-fbb05d8c8ff1",
+    "reject": null,
+    "flow": "e6e832b0-94de-4e31-a0ff-bcc95887aafd",
+    "_syncId": "be1d7b6b-6f00-4196-acc9-39ad4ee8735e"
+  },
+  {
+    "name": "split items",
+    "key": "split_items",
+    "type": "exec",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "code": "module.exports = async function(data) {\n    const collection = data.$trigger.collection\n    if (!data.$last || !data.$last.length) {\n        return []\n    }\n    if (data.$trigger.key) {\n        return [{\n            collection,\n            key: data.$trigger.key,\n            list: data.$last\n        }]\n    } else if (Array.isArray(data.$trigger.keys)) {\n        return data.$trigger.keys.map(key => {\n            return {\n                collection,\n                key,\n                list: data.$last\n            }\n        })\n\t}    \n    return [];\n}"
+    },
+    "resolve": "82c7efce-56c8-435b-a35e-c72c98144e22",
+    "reject": null,
+    "flow": "8b4bcdff-de73-4837-9cc0-ad9bc08bd083",
+    "_syncId": "c9cdce3f-1c4f-4559-a143-0322c9e21577"
+  },
+  {
+    "name": "Trigger Flow",
+    "key": "trigger_3oo76",
+    "type": "trigger",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "flow": "9b8e6bbe-4b11-49a8-96c9-6427fb1e724c",
+      "payload": "{{$last}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "6eb743d1-bb36-4665-ab79-58594c6a76de",
+    "_syncId": "46925f61-2188-4771-ae03-06d0733a715d"
+  },
+  {
+    "name": "Trigger Flow",
+    "key": "trigger_3qewe",
+    "type": "trigger",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+      "payload": "{{$trigger}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "d8c61036-7c3e-48ca-89cd-544e792f0dbb",
+    "_syncId": "a3440480-ab14-4b03-aac3-d600ab8b00ad"
+  },
+  {
+    "name": "Trigger Flow",
+    "key": "trigger_4ryjt",
+    "type": "trigger",
+    "position_x": 91,
+    "position_y": 1,
+    "options": {
+      "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+      "payload": {
+        "collection": "{{$trigger.collection}}",
+        "key": "{{$trigger.key}}"
+      }
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "0520a2d0-3162-4cb8-8dd3-8eef747c81c2"
+  },
+  {
+    "name": "Trigger Flow",
+    "key": "trigger_4ryjt_jrxgc",
+    "type": "trigger",
+    "position_x": 90,
+    "position_y": 25,
+    "options": {
+      "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+      "payload": {
+        "collection": "{{$trigger.collection}}",
+        "key": "{{$trigger.key}}"
+      }
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+    "_syncId": "c44a794e-aa44-4582-a450-bcf99edcab55"
+  },
+  {
+    "name": "Déclencher le Flux",
+    "key": "trigger_eb8bz",
+    "type": "trigger",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "flow": "f3584897-174b-457d-b6fe-876b92d21977",
+      "payload": "{{$last}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "9797bb78-add3-4247-9798-129015bff396",
+    "_syncId": "8f8bcf92-d1de-4f30-922c-6e6de5b0bb10"
+  },
+  {
+    "name": "Trigger Flow",
+    "key": "trigger_fqzmw",
+    "type": "trigger",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "flow": "6b0f60d9-6ae1-464c-8e82-d6dddf3aea4f",
+      "payload": "{{$last}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "e1b8f8f3-b1f5-447d-9a24-98e0a5a3ab3d",
+    "_syncId": "e0ec3d85-bb54-48a1-8035-044b4ab7db2d"
+  },
+  {
+    "name": "Déclencher le Flux",
+    "key": "trigger_heg1z",
+    "type": "trigger",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "flow": "348c63be-ddd7-435b-88b3-d58bc55326a3",
+      "payload": "{{$last}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "e2e41bdf-db58-4007-b193-e2d0e7f697f1",
+    "_syncId": "a48ffb14-6d2d-44a8-84fe-bf6b5a7f8196"
+  },
+  {
+    "name": "Trigger Flow",
+    "key": "trigger_ndwxg",
+    "type": "trigger",
+    "position_x": 41,
+    "position_y": 1,
+    "options": {
+      "flow": "02f05740-0afe-41ca-b2f6-c28119bd578f",
+      "payload": "{{split_items}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "b7ed8338-9e3e-49ce-8afc-2b5f23bd5612",
+    "_syncId": "64ac3c84-3b14-4d94-b4c5-7bbdfa0b850e"
+  },
+  {
+    "name": "Indexation (err)",
+    "key": "trigger_oi7oi",
+    "type": "trigger",
+    "position_x": 37,
+    "position_y": 17,
+    "options": {
+      "flow": "9b8e6bbe-4b11-49a8-96c9-6427fb1e724c",
+      "payload": "{{$trigger}}"
+    },
+    "resolve": "bb7c8887-1303-4d73-902f-9bc235979d67",
+    "reject": null,
+    "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+    "_syncId": "84c5c990-6535-4cc6-a6a1-ba6fb1cdee60"
+  },
+  {
+    "name": "Indexation (OK)",
+    "key": "trigger_prmih",
+    "type": "trigger",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "flow": "9b8e6bbe-4b11-49a8-96c9-6427fb1e724c",
+      "payload": "{{$trigger}}"
+    },
+    "resolve": "7353f247-5c9e-4300-8193-cef90fa8f73e",
+    "reject": null,
+    "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+    "_syncId": "56793a05-4ecf-47f7-98d0-1a64364b82ce"
+  },
+  {
+    "name": "Modifier l'identifiant",
+    "key": "trigger_ygb9y",
+    "type": "trigger",
+    "position_x": 37,
+    "position_y": 1,
+    "options": {
+      "flow": "e6e832b0-94de-4e31-a0ff-bcc95887aafd",
+      "payload": "{{split_items}}"
+    },
+    "resolve": "9d52cf97-b5b4-4b4b-bbbe-6d53ade05a94",
+    "reject": null,
+    "flow": "617af66b-852e-4e6c-845e-efdeed3d2ec0",
+    "_syncId": "63137935-0c3e-493f-8186-0295f02b275f"
+  },
+  {
+    "name": "Set Page Settings Path",
+    "key": "update",
+    "type": "okam-page-settings-path",
+    "position_x": 19,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection\t}}",
+      "key": "{{$trigger.key}}"
+    },
+    "resolve": "241ba37b-735f-402b-b6bc-8ca55768ea03",
+    "reject": "84c5c990-6535-4cc6-a6a1-ba6fb1cdee60",
+    "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+    "_syncId": "571ea3e2-4e36-401c-8fb8-d531f9bee7d7"
+  },
+  {
+    "name": "Update Belongs Fields",
+    "key": "update_belongs_fields",
+    "type": "item-update",
+    "position_x": 55,
+    "position_y": 1,
+    "options": {
+      "collection": "{{$trigger.collection}}",
+      "key": "{{$trigger.key}}",
+      "payload": {
+        "page_settings": {
+          "id": "{{item.page_settings.id}}",
+          "belongs_to_collection": "{{ $trigger.collection }}",
+          "belongs_to_key": "{{ $trigger.key }}"
+        }
+      }
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "cf6c059e-fb79-4a16-884d-f47c7ab4be17",
+    "_syncId": "d4e11d43-1129-44f6-8477-c33dcb1dd8c9"
+  },
+  {
+    "name": "update page settings",
+    "key": "update_page_settings",
+    "type": "trigger",
+    "position_x": 36,
+    "position_y": 18,
+    "options": {
+      "flow": "5b0bd7fa-4662-4595-b3a1-61ac538bb5e6",
+      "payload": "{{ $last }}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "e6e832b0-94de-4e31-a0ff-bcc95887aafd",
+    "_syncId": "aa5664d7-aa04-4017-97bf-fbb05d8c8ff1"
+  },
+  {
+    "name": "Update page settings on each",
+    "key": "update_page_settings_on_each",
+    "type": "trigger",
+    "position_x": 55,
+    "position_y": 17,
+    "options": {
+      "flow": "5b0bd7fa-4662-4595-b3a1-61ac538bb5e6",
+      "payload": "{{$last}}"
+    },
+    "resolve": "eab1cf91-ab1e-47d5-b95e-39913fb510af",
+    "reject": null,
+    "flow": "8b4bcdff-de73-4837-9cc0-ad9bc08bd083",
+    "_syncId": "82c7efce-56c8-435b-a35e-c72c98144e22"
+  },
+  {
+    "name": "Update shortlinks (err)",
+    "key": "update_shortlinks_err",
+    "type": "trigger",
+    "position_x": 73,
+    "position_y": 17,
+    "options": {
+      "iterationMode": "parallel",
+      "flow": "014a124e-bd7d-4149-9bc0-edd2ce6adcd1",
+      "payload": "{{$trigger}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+    "_syncId": "e690c0c4-ec0d-4043-9ae0-2e6dfebe336f"
+  },
+  {
+    "name": "Update shortlinks (OK)",
+    "key": "update_shortlinks_ok",
+    "type": "trigger",
+    "position_x": 91,
+    "position_y": 1,
+    "options": {
+      "iterationMode": "parallel",
+      "flow": "014a124e-bd7d-4149-9bc0-edd2ce6adcd1",
+      "payload": "{{$trigger}}"
+    },
+    "resolve": null,
+    "reject": null,
+    "flow": "0ab950bd-4002-4e22-a31c-a972decd1203",
+    "_syncId": "a94c99b2-8613-42e3-831a-35a9cfbfb693"
+  }
+]

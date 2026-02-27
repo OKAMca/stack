@@ -1,0 +1,37 @@
+{
+  "collection": "navigation_items",
+  "field": "advanced",
+  "type": "alias",
+  "meta": {
+    "collection": "navigation_items",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "advanced",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": null,
+    "options": {
+      "start": "closed"
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 11,
+    "special": [
+      "alias",
+      "group",
+      "no-data"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Avancé"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

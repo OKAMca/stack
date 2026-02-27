@@ -1,0 +1,378 @@
+[
+  {
+    "name": "Paramètres des pages - champ route - tâche générique",
+    "icon": "bolt",
+    "color": null,
+    "description": "Changement du champ route des paramètres de pages",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": null,
+    "options": {
+      "return": "$last"
+    },
+    "operation": "2f337f42-43eb-46c9-be2e-bfe00c90e182",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "02f05740-0afe-41ca-b2f6-c28119bd578f"
+  },
+  {
+    "name": "Paramètres des pages - champ chemin - tâche",
+    "icon": "bolt",
+    "color": null,
+    "description": "Changement du champ chemin des paramètres de pages (path)",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": "all",
+    "options": {
+      "return": "$last"
+    },
+    "operation": "571ea3e2-4e36-401c-8fb8-d531f9bee7d7",
+    "flow_manager_last_run_at": "2026-02-17T17:42:18",
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 27,
+    "_syncId": "0ab950bd-4002-4e22-a31c-a972decd1203"
+  },
+  {
+    "name": "Supprimer Paramètres des pages (item)",
+    "icon": "bolt",
+    "color": null,
+    "description": "Supprime les paramètres des pages associées à un objet (parent)",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": null,
+    "options": {
+      "return": "$last"
+    },
+    "operation": "9aec703a-94dc-4116-9b79-24fe605550ff",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "348c63be-ddd7-435b-88b3-d58bc55326a3"
+  },
+  {
+    "name": "Paramètres des pages - champ identifiant - tâche",
+    "icon": "bolt",
+    "color": null,
+    "description": "Changement du champ identifiant des paramètres de pages (slug)",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": null,
+    "options": {
+      "return": "$last"
+    },
+    "operation": "ef2e1db2-c001-4b8e-b8eb-05a5c7062e33",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "5b0bd7fa-4662-4595-b3a1-61ac538bb5e6"
+  },
+  {
+    "name": "Paramètres des pages - regénération des identifiants",
+    "icon": "bolt",
+    "color": null,
+    "description": "Force la création ou la mise à jour des identifiants (champ slug) [ADMINONLY]",
+    "status": "active",
+    "trigger": "manual",
+    "accountability": null,
+    "options": {
+      "collections": [
+        "pages",
+        "press_releases",
+        "brands",
+        "tv_shows"
+      ]
+    },
+    "operation": "6f8c06fc-b38a-4a32-81cf-bb50f94da212",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "617af66b-852e-4e6c-845e-efdeed3d2ec0"
+  },
+  {
+    "name": "Delete Page Setting Cascade",
+    "icon": "bolt",
+    "color": null,
+    "description": null,
+    "status": "active",
+    "trigger": "event",
+    "accountability": null,
+    "options": {
+      "type": "filter",
+      "scope": [
+        "items.delete"
+      ],
+      "collections": [
+        "brands",
+        "categories",
+        "pages",
+        "press_releases",
+        "tv_shows"
+      ]
+    },
+    "operation": "d99fb11c-8ec4-40e2-aa11-7a16167988a0",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "62085c6d-3d26-4d2f-bc0e-98c0771ad891"
+  },
+  {
+    "name": "Création des Paramètres des pages - Tâche",
+    "icon": "bolt",
+    "color": null,
+    "description": "Internal task to create an empty page settings",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": null,
+    "options": {
+      "return": "$last"
+    },
+    "operation": "3e869314-1172-4043-b1f3-1aa1ff08a740",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "6b0f60d9-6ae1-464c-8e82-d6dddf3aea4f"
+  },
+  {
+    "name": "Réindexer le moteur de recherche",
+    "icon": "bolt",
+    "color": null,
+    "description": "[NOTEDITOR]",
+    "status": "active",
+    "trigger": "manual",
+    "accountability": null,
+    "options": {
+      "collections": [
+        "pages",
+        "press_releases",
+        "tv_shows",
+        "brands"
+      ]
+    },
+    "operation": "11c95750-d890-4515-9407-135e66272a42",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "6eb743d1-bb36-4665-ab79-58594c6a76de"
+  },
+  {
+    "name": "Paramètres des pages - champ identifiant - évènement",
+    "icon": "bolt",
+    "color": null,
+    "description": "Changement du champ identifiant des paramètres de page à la création et modification",
+    "status": "active",
+    "trigger": "event",
+    "accountability": null,
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.create",
+        "items.update"
+      ],
+      "collections": [
+        "pages",
+        "press_releases",
+        "brands",
+        "tv_shows"
+      ]
+    },
+    "operation": "c67972b9-243e-4ba6-90b1-daf725ffeeb4",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "8b4bcdff-de73-4837-9cc0-ad9bc08bd083"
+  },
+  {
+    "name": "Revalidation Next.js (tâche)",
+    "icon": "bolt",
+    "color": null,
+    "description": null,
+    "status": "active",
+    "trigger": "operation",
+    "accountability": null,
+    "options": {
+      "return": "$last"
+    },
+    "operation": "9c8dc3b3-09b6-4f8e-9130-64aebeb29c39",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "9797bb78-add3-4247-9798-129015bff396"
+  },
+  {
+    "name": "Générer Route/Path",
+    "icon": "bolt",
+    "color": "#E35169",
+    "description": "Changement du champ route des paramètres de page de façon manuelle [ADMINONLY]",
+    "status": "active",
+    "trigger": "manual",
+    "accountability": null,
+    "options": {
+      "collections": [
+        "pages",
+        "press_releases",
+        "brands"
+      ],
+      "requireConfirmation": true
+    },
+    "operation": "102cc1a1-a915-421b-99d8-f022656aaf60",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "b7ed8338-9e3e-49ce-8afc-2b5f23bd5612"
+  },
+  {
+    "name": "Paramètres des pages - champs Belongs To",
+    "icon": "settings_suggest",
+    "color": null,
+    "description": "Modification des champs Belongs To dans la collection Page Settings.",
+    "status": "active",
+    "trigger": "event",
+    "accountability": null,
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.create"
+      ],
+      "collections": [
+        "pages",
+        "press_releases",
+        "brands",
+        "categories",
+        "tv_shows"
+      ]
+    },
+    "operation": "935ec1d7-a3b2-40fb-900d-1376ff573c17",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "cf6c059e-fb79-4a16-884d-f47c7ab4be17"
+  },
+  {
+    "name": "Paramètres des pages - champ route - création",
+    "icon": "bolt",
+    "color": null,
+    "description": "Changement du champ route des paramètres de page à la création",
+    "status": "active",
+    "trigger": "event",
+    "accountability": null,
+    "options": {
+      "type": "action",
+      "scope": [
+        "items.create"
+      ],
+      "collections": [
+        "pages",
+        "press_releases",
+        "brands",
+        "tv_shows"
+      ]
+    },
+    "operation": "a3440480-ab14-4b03-aac3-d600ab8b00ad",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "d8c61036-7c3e-48ca-89cd-544e792f0dbb"
+  },
+  {
+    "name": "Créer Param Page",
+    "icon": "bolt",
+    "color": "#FF0000",
+    "description": "Create a page settings if not set [ADMINONLY]",
+    "status": "active",
+    "trigger": "manual",
+    "accountability": null,
+    "options": {
+      "collections": [
+        "pages",
+        "press_releases",
+        "brands",
+        "categories",
+        "tv_shows"
+      ],
+      "requireConfirmation": true
+    },
+    "operation": "158c6635-5d16-463a-8e8a-7c5e78daecbb",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "e1b8f8f3-b1f5-447d-9a24-98e0a5a3ab3d"
+  },
+  {
+    "name": "Supprimer Paramètres des pages (évènement)",
+    "icon": "bolt",
+    "color": null,
+    "description": "Supprime les items pages setting associés à un item",
+    "status": "active",
+    "trigger": "event",
+    "accountability": null,
+    "options": {
+      "type": "filter",
+      "scope": [
+        "items.delete"
+      ],
+      "return": "$last",
+      "collections": [
+        "pages",
+        "press_releases",
+        "brands"
+      ]
+    },
+    "operation": "d1fc8a0b-bc43-4916-999d-fc53a70ff37b",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "e2e41bdf-db58-4007-b193-e2d0e7f697f1"
+  },
+  {
+    "name": "Paramètres des pages - champ identifiant - préparation",
+    "icon": "bolt",
+    "color": null,
+    "description": "Préparation du champ identifiant des paramètres de pages (slug)",
+    "status": "active",
+    "trigger": "operation",
+    "accountability": null,
+    "options": {
+      "return": "$last"
+    },
+    "operation": "c255c7d7-2537-471f-b8ce-8a18b93d7650",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "e6e832b0-94de-4e31-a0ff-bcc95887aafd"
+  },
+  {
+    "name": "Revalidation Next.js (requête)",
+    "icon": "bolt",
+    "color": null,
+    "description": null,
+    "status": "active",
+    "trigger": "operation",
+    "accountability": null,
+    "options": {
+      "return": "$last"
+    },
+    "operation": "1f593f3b-a857-457d-97dc-d4494fdb661e",
+    "flow_manager_last_run_at": null,
+    "flow_manager_last_run_message": "",
+    "flow_manager_last_run_operation": "",
+    "flow_manager_run_counter": 0,
+    "_syncId": "f3584897-174b-457d-b6fe-876b92d21977"
+  }
+]

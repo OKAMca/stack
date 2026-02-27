@@ -1,0 +1,55 @@
+{
+  "collection": "pages_translations",
+  "field": "featured_image",
+  "type": "uuid",
+  "meta": {
+    "collection": "pages_translations",
+    "conditions": null,
+    "display": "related-values",
+    "display_options": {
+      "template": "{{$thumbnail}}"
+    },
+    "field": "featured_image",
+    "group": null,
+    "hidden": false,
+    "interface": "file-image",
+    "note": "The featured image is used in the context of search results on the Advertising Sales and Corporate sections of the website.",
+    "options": {
+      "crop": false
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 6,
+    "special": [
+      "file"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Image mise en avant"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  },
+  "schema": {
+    "name": "featured_image",
+    "table": "pages_translations",
+    "data_type": "uuid",
+    "default_value": null,
+    "max_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": "directus_files",
+    "foreign_key_column": "id"
+  }
+}

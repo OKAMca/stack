@@ -14,7 +14,33 @@ fragment PageSettings on page_settings {
 
 fragment Page on pages {
   translations(filter: { languages_code: { code: { _eq: $locale } } }) {
-    name
+    title
+    blocks {
+      collection
+      item {
+        ...on block_files {
+          id
+          ...BlockFiles
+          settings {
+            ...BlockSettings
+          }
+        }
+        ...on block_wysiwygs {
+          id
+          ...BlockWysiwygs
+          settings {
+            ...BlockSettings
+          }
+        }
+        ...on block_custom_components {
+          id
+          ...BlockCustomComponents
+          settings {
+            ...BlockSettings
+          }
+        }
+      }
+    }
   }
   page_settings(filter: { belongs_to_key: { _nnull: true } }) {
     ...PageSettings
@@ -30,7 +56,7 @@ query PageById($id: ID!, $locale: String!) {
 query PageByIdWithoutFragment($id: ID!, $locale: String!) {
   pages_by_id(id: $id) {
      translations(filter: { languages_code: { code: { _eq: $locale } } }) {
-      name
+      title
     }
     page_settings(filter: { belongs_to_key: { _nnull: true } }) {
       ...PageSettings

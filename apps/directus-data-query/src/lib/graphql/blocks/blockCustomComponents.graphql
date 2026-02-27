@@ -1,0 +1,13 @@
+fragment BlockCustomComponents on block_custom_components {
+  name
+  props
+  settings {
+    ...BlockSettings
+  }
+}
+
+query BlockCustomComponentsById($id: ID!) {
+  block_custom_components_by_id(id: $id) {
+    ...BlockCustomComponents
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "collection": "pages",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "pages",
+    "color": null,
+    "display_template": "{{translations.title}}",
+    "group": "content",
+    "hidden": false,
+    "icon": "edit_document",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": "/preview/?languages={{page_settings.translations.languages_code.code}}&urls={{page_settings.translations.path}}&enable=true&type=path",
+    "singleton": false,
+    "sort": 3,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "fr-CA",
+        "plural": "pages",
+        "singular": "page",
+        "translation": "Pages"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": true
+  },
+  "schema": {
+    "name": "pages"
+  }
+}

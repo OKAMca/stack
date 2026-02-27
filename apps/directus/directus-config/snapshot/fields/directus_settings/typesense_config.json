@@ -1,0 +1,30 @@
+{
+  "collection": "directus_settings",
+  "field": "typesense_config",
+  "type": "alias",
+  "meta": {
+    "collection": "directus_settings",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "typesense_config",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 5,
+    "special": [
+      "alias",
+      "group",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

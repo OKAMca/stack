@@ -1,0 +1,37 @@
+{
+  "collection": "category_types",
+  "field": "categories",
+  "type": "alias",
+  "meta": {
+    "collection": "category_types",
+    "conditions": null,
+    "display": "related-values",
+    "display_options": {
+      "template": "{{description}}"
+    },
+    "field": "categories",
+    "group": null,
+    "hidden": false,
+    "interface": "list-o2m",
+    "note": null,
+    "options": {
+      "template": "{{translations.title}} ({{friendly_id}})"
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 11,
+    "special": [
+      "o2m"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Catégories"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  }
+}

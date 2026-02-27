@@ -1,0 +1,38 @@
+{
+  "collection": "page_settings",
+  "field": "links-znaznt",
+  "type": "alias",
+  "meta": {
+    "collection": "page_settings",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "links-znaznt",
+    "group": "settings",
+    "hidden": false,
+    "interface": "presentation-links",
+    "note": null,
+    "options": {
+      "links": [
+        {
+          "icon": "find_in_page",
+          "label": "$t:page_settings_button_go_to_parent",
+          "type": "normal",
+          "url": "/content/{{belongs_to_collection}}/{{belongs_to_key}}"
+        }
+      ]
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 4,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "collection": "block_settings",
+  "field": "advanced",
+  "type": "alias",
+  "meta": {
+    "collection": "block_settings",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "advanced",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 4,
+    "special": [
+      "alias",
+      "no-data",
+      "group"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

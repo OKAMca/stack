@@ -1,0 +1,23 @@
+{
+  "name": "directus",
+  "engines": {
+    "node": ">=22.0"
+  },
+  "scripts": {
+    "create-proxy-network": "docker network create proxy",
+    "up-postgres": "docker compose -f ./docker-compose.yml --env-file .env.local up -d postgres",
+    "start": "npm run up",
+    "stop": "npm run down",
+    "up": "docker compose -f ./docker-compose.yml --env-file .env.local up -d ; echo 'Website: https://cms.stack.localhost/admin/'",
+    "down": "docker compose -f ./docker-compose.yml --env-file .env.local down",
+    "rebuild-directus": "docker compose -f ./docker-compose.yml --env-file .env.local build --no-cache --progress=plain directus",
+    "log-directus": "docker logs -f stack_local-directus-1",
+    "migrate-directus": "docker exec -i stack_local-directus-1 npx directus database migrate:latest",
+    "up-directus": "docker compose -f ./docker-compose.yml --env-file .env.local up -d directus",
+    "down-directus": "docker compose -f ./docker-compose.yml --env-file .env.local down directus",
+    "reload-directus": "npm run down-directus && npm run up-directus",
+    "diff-local": "npx directus-sync diff -c directus-sync.config.local.js -t \"$DIRECTUS_LOCAL_API_TOKEN\"",
+    "pull-local": "npx directus-sync pull -c directus-sync.config.local.js -t \"$DIRECTUS_LOCAL_API_TOKEN\"",
+    "push-local": "npx directus-sync push -c directus-sync.config.local.js -t \"$DIRECTUS_LOCAL_API_TOKEN\""
+  }
+}

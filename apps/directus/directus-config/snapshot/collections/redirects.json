@@ -1,0 +1,35 @@
+{
+  "collection": "redirects",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "redirects",
+    "color": null,
+    "display_template": null,
+    "group": null,
+    "hidden": false,
+    "icon": "switch_access_shortcut",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 7,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "fr-CA",
+        "plural": "Redirections",
+        "singular": "Redirection",
+        "translation": "Redirections"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "redirects"
+  }
+}

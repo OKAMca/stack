@@ -1,0 +1,113 @@
+{
+  "collection": "links",
+  "field": "target",
+  "type": "string",
+  "meta": {
+    "collection": "links",
+    "conditions": [
+      {
+        "hidden": true,
+        "name": "Hidden",
+        "options": {
+          "allowOther": false,
+          "iconOff": "radio_button_unchecked",
+          "iconOn": "radio_button_checked"
+        },
+        "rule": {
+          "_or": [
+            {
+              "type": {
+                "_eq": "files"
+              }
+            },
+            {
+              "type": {
+                "_eq": "anchor"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Default Value Internal Link",
+        "options": {
+          "allowOther": false,
+          "defaultValue": "_self",
+          "default_value": "_self",
+          "iconOff": "radio_button_unchecked",
+          "iconOn": "radio_button_checked"
+        },
+        "rule": {
+          "_and": [
+            {
+              "type": {
+                "_eq": "collection"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Default Value External Link",
+        "options": {
+          "allowOther": false,
+          "defaultValue": "_blank",
+          "default_value": "_blank",
+          "iconOff": "radio_button_unchecked",
+          "iconOn": "radio_button_checked"
+        }
+      }
+    ],
+    "display": null,
+    "display_options": null,
+    "field": "target",
+    "group": null,
+    "hidden": false,
+    "interface": "select-radio",
+    "note": null,
+    "options": {
+      "choices": [
+        {
+          "text": "$t:links_target_cur_win",
+          "value": "_self"
+        },
+        {
+          "text": "$t:links_target_new_win",
+          "value": "_blank"
+        }
+      ]
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 15,
+    "special": null,
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Méthode d'ouverture"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  },
+  "schema": {
+    "name": "target",
+    "table": "links",
+    "data_type": "character varying",
+    "default_value": "_self",
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

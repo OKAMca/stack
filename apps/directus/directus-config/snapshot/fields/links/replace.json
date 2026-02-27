@@ -1,0 +1,51 @@
+{
+  "collection": "links",
+  "field": "replace",
+  "type": "boolean",
+  "meta": {
+    "collection": "links",
+    "conditions": null,
+    "display": "boolean",
+    "display_options": null,
+    "field": "replace",
+    "group": "settings",
+    "hidden": false,
+    "interface": "boolean",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 1,
+    "special": [
+      "cast-boolean"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Remplacement"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "replace",
+    "table": "links",
+    "data_type": "boolean",
+    "default_value": false,
+    "max_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

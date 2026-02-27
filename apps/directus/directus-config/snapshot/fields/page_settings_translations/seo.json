@@ -1,0 +1,30 @@
+{
+  "collection": "page_settings_translations",
+  "field": "seo",
+  "type": "alias",
+  "meta": {
+    "collection": "page_settings_translations",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "seo",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": "$t:page_settings_field_description_seo",
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 6,
+    "special": [
+      "alias",
+      "group",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "collection": "page_settings",
+  "field": "header-wmyyti",
+  "type": "alias",
+  "meta": {
+    "collection": "page_settings",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "header-wmyyti",
+    "group": null,
+    "hidden": false,
+    "interface": "header",
+    "note": null,
+    "options": {
+      "color": "#00549A",
+      "icon": "published_with_changes",
+      "subtitle": "The revision flow is not yet activated",
+      "title": "Revision Flow"
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 10,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

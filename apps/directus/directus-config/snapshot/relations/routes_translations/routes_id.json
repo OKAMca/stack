@@ -1,0 +1,25 @@
+{
+  "collection": "routes_translations",
+  "field": "routes_id",
+  "related_collection": "routes",
+  "meta": {
+    "junction_field": "languages_code",
+    "many_collection": "routes_translations",
+    "many_field": "routes_id",
+    "one_allowed_collections": null,
+    "one_collection": "routes",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "translations",
+    "sort_field": null
+  },
+  "schema": {
+    "table": "routes_translations",
+    "column": "routes_id",
+    "foreign_key_table": "routes",
+    "foreign_key_column": "id",
+    "constraint_name": "routes_translations_routes_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

@@ -1,0 +1,459 @@
+[
+  {
+    "collection": "directus_files",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "_sync_default_public_policy",
+    "_syncId": "eb05628b-00ff-4757-a7d8-55ca313dd568"
+  },
+  {
+    "collection": "block_custom_components",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "986d73cf-216c-4cfa-94df-1e65d02e75e8"
+  },
+  {
+    "collection": "block_files",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "settings",
+      "file",
+      "date_updated",
+      "user_updated",
+      "date_created",
+      "user_created",
+      "sort",
+      "id",
+      "status"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "de9e0933-2800-4daf-9fcf-c06c09017d50"
+  },
+  {
+    "collection": "block_settings",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "fc867c22-5ca5-48ca-95dc-7923503f1a24"
+  },
+  {
+    "collection": "block_wysiwygs",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "13e95515-a992-495f-9394-7c125e9390c3"
+  },
+  {
+    "collection": "categories_translations",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "90a0809b-44ef-418b-acd5-15b67f4d8b20"
+  },
+  {
+    "collection": "categories",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "ade8b6d6-a0dd-4868-8852-de64b86c4403"
+  },
+  {
+    "collection": "category_types_translations",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "3261cefb-470b-45c0-ba19-a8d7b1b4968d"
+  },
+  {
+    "collection": "category_types",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "f8789939-76f9-4057-ab94-6b065802b26a"
+  },
+  {
+    "collection": "languages",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "12ad955b-cdf1-4e51-874a-db5ec872c016"
+  },
+  {
+    "collection": "links",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "id",
+      "status",
+      "sort",
+      "user_created",
+      "date_created",
+      "user_updated",
+      "date_updated",
+      "label",
+      "type",
+      "collection",
+      "external_link",
+      "file",
+      "anchor",
+      "target",
+      "description",
+      "replace",
+      "scroll",
+      "prefetch",
+      "settings",
+      "_search_config",
+      "params"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "530a835e-0884-431a-9e30-899da7d5893c"
+  },
+  {
+    "collection": "navigation_items",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "3a2b59da-1ebb-4b99-b347-1bf3e69dedce"
+  },
+  {
+    "collection": "navigations_translations_items",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "ca330c75-63b4-4ac2-b459-bf6e6955d078"
+  },
+  {
+    "collection": "navigations_translations_navigation_items",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "0f04de59-de40-4149-b750-fc8b9651d790"
+  },
+  {
+    "collection": "navigations_translations",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "be153fd8-eedd-4dbc-bff1-a184d3cdd3ec"
+  },
+  {
+    "collection": "navigations",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "id",
+      "status",
+      "sort",
+      "user_created",
+      "date_created",
+      "user_updated",
+      "date_updated",
+      "location",
+      "description",
+      "translations"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "e373645f-888b-42d0-9fdc-4e92bf9fc625"
+  },
+  {
+    "collection": "page_settings_translations",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "619fbd83-f62e-453e-96e1-410bbf025eae"
+  },
+  {
+    "collection": "page_settings",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "c9676858-a3e6-416e-964a-43cfac3f4738"
+  },
+  {
+    "collection": "page_template_defaults",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "442d1822-b2eb-4795-8af7-d51cece05981"
+  },
+  {
+    "collection": "pages_translations_blocks",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "dde9a052-bd4c-4565-a054-71c8366431a4"
+  },
+  {
+    "collection": "pages_translations",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "a1c82ed4-c5be-440c-8eea-f2a40cab81d8"
+  },
+  {
+    "collection": "pages",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "id",
+      "status",
+      "parent",
+      "sort",
+      "user_created",
+      "date_created",
+      "user_updated",
+      "date_updated",
+      "friendly_id",
+      "published_at",
+      "translations",
+      "page_settings",
+      "_search_config",
+      "wordpress_id"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "936a91b6-64c3-405d-a9c9-843b1cdbcd0e"
+  },
+  {
+    "collection": "redirects",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "id",
+      "status",
+      "sort",
+      "date_updated",
+      "date_created",
+      "source",
+      "destination",
+      "isrewrite",
+      "permanent",
+      "locale",
+      "user_updated",
+      "user_created"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "62a5ea30-fa24-4357-902e-d9ee51f83708"
+  },
+  {
+    "collection": "routes_translations",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "c4983b37-c1e9-4a50-a9d2-24a532b3331c"
+  },
+  {
+    "collection": "routes",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "9cb8bd09-d0d3-4d5d-b85f-67ec98497987"
+  },
+  {
+    "collection": "search_params",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "0eb978dc-ff32-4edc-a393-3e7983a5d6ac"
+  },
+  {
+    "collection": "site_settings_translations",
+    "action": "read",
+    "permissions": null,
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "*"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "d015fc30-c3ed-4172-8d80-a9fd480b64c8"
+  }
+]
