@@ -1,0 +1,14 @@
+fragment BlockFiles on block_files {
+  file {
+    ...DirectusFiles
+  }
+  settings {
+    ...BlockSettings
+  }
+}
+
+query BlockFilesById($id: ID!) {
+  block_files_by_id(id: $id) {
+    ...BlockFiles
+  }
+}
