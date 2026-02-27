@@ -13,19 +13,35 @@ export interface TDirectusRouteRedirectsModule {
   apiRoute?: string
 }
 
-export interface TDirectusRouteOptions {
+export enum DirectusRouteLocalePrefix {
   /**
-   * If set to true, a path starting with the default locale will have no locale at all.
-   * It is then inferred that when no locale is passed in the URL, the default locale will be used
-   * @default true
+   * The pathname will be prefixed with the locale only when it is not the default locale
    */
-  excludeDefaultLocaleFromPathname?: boolean
+  AsNeeded = 'as-needed',
+  /**
+   * The pathname will always be prefixed by the locale
+   */
+  Always = 'always',
 }
 
-export interface TDirectusRouteConfig {
-  localeMap?: Record<string, string>
-  defaultLocale?: string
-  options?: TDirectusRouteOptions
+export type TDirectusRouteI18n<Locales extends string>
+  = | {
+    defaultLocale: Locales
+    /**
+     * {@link DirectusRouteLocalePrefix}
+     */
+    localePrefix: `${DirectusRouteLocalePrefix.AsNeeded}`
+  }
+  | {
+    defaultLocale?: Locales
+    /**
+     * {@link DirectusRouteLocalePrefix}
+     */
+    localePrefix?: `${DirectusRouteLocalePrefix.Always}` | undefined
+  }
+
+export type TDirectusRouteConfig<Locales extends string = string> = {
+  localeMap?: Record<Locales, string>
   collectionSettings: {
     [collection: string]: {
       idField: string
@@ -38,4 +54,4 @@ export interface TDirectusRouteConfig {
   modules?: {
     redirects?: TDirectusRouteRedirectsModule
   }
-}
+} & TDirectusRouteI18n<Locales>

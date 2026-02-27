@@ -5,6 +5,7 @@ import { NextResponse as NextResponseClass } from 'next/server'
 import { isEmpty } from 'radashi'
 import { log } from '../logger'
 import { handleRedirect } from '../redirect/utils/handleRedirect'
+import { DirectusRouteLocalePrefix } from '../types/directusRouteConfig'
 import { fetchPageSettingsTranslation } from './utils/fetchPageSettingsTranslation'
 import { splitLocaleFromPathname } from './utils/locale'
 
@@ -92,23 +93,28 @@ export async function directusRouteRouter(
     return NextResponse.next()
   }
 
-  const { localeMap, collectionSettings, options } = config
-  const { excludeDefaultLocaleFromPathname = true } = options ?? {}
+  const { localeMap, collectionSettings, localePrefix = DirectusRouteLocalePrefix.Always, defaultLocale } = config
 
   // eslint-disable-next-line ts/prefer-nullish-coalescing, ts/strict-boolean-expressions -- empty string locale mapping should use original locale
   const mappedLocale = localeMap?.[directusLocale] || directusLocale
-  const displayLocale = excludeDefaultLocaleFromPathname ? '' : `/${mappedLocale}`
+
+  const isDirectusRouteLocalePrefixedMap = {
+    [DirectusRouteLocalePrefix.Always]: true,
+    [DirectusRouteLocalePrefix.AsNeeded]: directusLocale !== defaultLocale,
+  }
+  const isDirectusRouteLocalePrefixed = isDirectusRouteLocalePrefixedMap[localePrefix]
+  const displayedLocale = isDirectusRouteLocalePrefixed ? `/${mappedLocale}` : ''
+
   // eslint-disable-next-line ts/prefer-nullish-coalescing, ts/strict-boolean-expressions -- empty string idField should use default
   const idField = collectionSettings[collection]?.idField || collectionSettings.default.idField
 
   log('Directus locale:', directusLocale)
   log('Mapped locale:', mappedLocale)
-  log('Display locale:', displayLocale)
   log('Collection:', collection)
   log('ID Field:', idField)
   log('ID:', id)
 
-  const newPath = `${displayLocale}/${collection}/${id}`
+  const newPath = `${displayedLocale}/${collection}/${id}`
   log(`Rewriting path: ${pathname} -> ${newPath}`)
 
   const url = request.nextUrl.clone()
