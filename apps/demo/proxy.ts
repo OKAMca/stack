@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server'
 import { directusRouteRouter } from '@okam/directus-next'
 
 export const directusConfig: TDirectusRouteConfig = {
+  defaultLocale: 'fr-CA',
   localeMap: {
     'fr-CA': 'fr',
     'en-CA': 'en',
