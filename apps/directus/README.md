@@ -73,7 +73,7 @@ npm run reload-directus
 ```
 
 ## Using Directus
-You can open directus in your browser at: `https://cms.stack.localhost/` or `http://cms.stack.localhost:8055/`.
+You can open directus in your browser at: `https://cms.stack.localhost/` or `http://localhost:8055/`.
 
 If your system don't associate .localhost domain to 127.0.0.1,
 you can edit your /etc/hosts file with:
@@ -176,6 +176,16 @@ Use the Front End token in main project /.env.local file
 - start next.js with `pnpm install` then `pnpm run dev`
 - open `http://localhost:4200/` in your browser.
 - stop next.js with CTRL-C
+
+## Minimal setup for directus routing
+
+### Required collection items
+
+- `languages`: Create at least one valid item
+- `routes`: Create one item like so:
+  - `collection_name`: `pages`
+  - `translations.route`: `/{{slug}}`
+- `pages`: Create an item with required fields. The page settings should get created automatically.
 
 ## backup/operations/ directory
 
