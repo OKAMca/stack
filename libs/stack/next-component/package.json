@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@okam/react-utils": "0.0.1",
-    "@okam/stack-ui": "2.0.1",
+    "@okam/stack-ui": "2.0.2",
     "next": "^15.1.0 || ^16.0.0",
     "nuqs": "^2.4.3",
     "radashi": "^12.3.0",
