@@ -32,6 +32,34 @@
     "_syncId": "986d73cf-216c-4cfa-94df-1e65d02e75e8"
   },
   {
+    "collection": "block_files",
+    "action": "read",
+    "permissions": {
+      "_and": [
+        {
+          "status": {
+            "_eq": "published"
+          }
+        }
+      ]
+    },
+    "validation": null,
+    "presets": null,
+    "fields": [
+      "settings",
+      "file",
+      "date_updated",
+      "user_updated",
+      "date_created",
+      "user_created",
+      "sort",
+      "id",
+      "status"
+    ],
+    "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
+    "_syncId": "de9e0933-2800-4daf-9fcf-c06c09017d50"
+  },
+  {
     "collection": "block_settings",
     "action": "read",
     "permissions": null,
@@ -173,7 +201,8 @@
       "scroll",
       "prefetch",
       "settings",
-      "_search_config"
+      "_search_config",
+      "params"
     ],
     "policy": "f44573b3-2056-4be3-b99c-cf34bacbd3fa",
     "_syncId": "530a835e-0884-431a-9e30-899da7d5893c"

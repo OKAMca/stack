@@ -8,7 +8,8 @@
     "many_field": "item",
     "one_allowed_collections": [
       "block_wysiwygs",
-      "block_custom_components"
+      "block_custom_components",
+      "block_files"
     ],
     "one_collection": null,
     "one_collection_field": "collection",
