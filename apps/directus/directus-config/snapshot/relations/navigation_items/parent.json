@@ -1,0 +1,25 @@
+{
+  "collection": "navigation_items",
+  "field": "parent",
+  "related_collection": "navigation_items",
+  "meta": {
+    "junction_field": null,
+    "many_collection": "navigation_items",
+    "many_field": "parent",
+    "one_allowed_collections": null,
+    "one_collection": "navigation_items",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "children",
+    "sort_field": "sort"
+  },
+  "schema": {
+    "table": "navigation_items",
+    "column": "parent",
+    "foreign_key_table": "navigation_items",
+    "foreign_key_column": "id",
+    "constraint_name": "navigation_items_parent_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "NO ACTION"
+  }
+}

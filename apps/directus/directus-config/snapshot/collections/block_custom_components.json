@@ -1,0 +1,35 @@
+{
+  "collection": "block_custom_components",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "block_custom_components",
+    "color": null,
+    "display_template": "{{name}} ({{settings.description}})",
+    "group": "blocks",
+    "hidden": false,
+    "icon": "code_blocks",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 5,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "en-CA",
+        "plural": "Custom Components",
+        "singular": "Custom Component",
+        "translation": "Custom Components"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "block_custom_components"
+  }
+}

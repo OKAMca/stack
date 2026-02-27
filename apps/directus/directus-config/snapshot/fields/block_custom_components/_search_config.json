@@ -1,0 +1,64 @@
+{
+  "collection": "block_custom_components",
+  "field": "_search_config",
+  "type": "alias",
+  "meta": {
+    "collection": "block_custom_components",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "_search_config",
+    "group": null,
+    "hidden": false,
+    "interface": "search-configuration",
+    "note": null,
+    "options": {
+      "search_config": {
+        "_and": [
+          {
+            "_or": [
+              {
+                "name": {
+                  "_icontains": "$SEARCH"
+                }
+              },
+              {
+                "settings": {
+                  "description": {
+                    "_icontains": "$SEARCH"
+                  }
+                }
+              },
+              {
+                "settings": {
+                  "anchor": {
+                    "_icontains": "$SEARCH"
+                  }
+                }
+              },
+              {
+                "settings": {
+                  "friendly_id": {
+                    "_icontains": "$SEARCH"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 11,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

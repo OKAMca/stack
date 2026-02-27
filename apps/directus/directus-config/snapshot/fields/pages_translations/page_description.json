@@ -1,0 +1,53 @@
+{
+  "collection": "pages_translations",
+  "field": "page_description",
+  "type": "string",
+  "meta": {
+    "collection": "pages_translations",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "page_description",
+    "group": null,
+    "hidden": false,
+    "interface": "input",
+    "note": "Add a short description to help giving more context to editors and help finding the page in the CMS.<br>This field is only used in the CMS, not on the website.",
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 8,
+    "special": null,
+    "translations": [
+      {
+        "language": "en-CA",
+        "translation": "Page Description (CMS)"
+      },
+      {
+        "language": "fr-CA",
+        "translation": "Description de la page (CMS)"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  },
+  "schema": {
+    "name": "page_description",
+    "table": "pages_translations",
+    "data_type": "character varying",
+    "default_value": null,
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

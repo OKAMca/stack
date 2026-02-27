@@ -1,0 +1,68 @@
+{
+  "collection": "links",
+  "field": "params",
+  "type": "alias",
+  "meta": {
+    "collection": "links",
+    "conditions": [
+      {
+        "hidden": false,
+        "name": "Is Link",
+        "rule": {
+          "_and": [
+            {
+              "_or": [
+                {
+                  "type": {
+                    "_eq": "anchor"
+                  }
+                },
+                {
+                  "type": {
+                    "_eq": "external-link"
+                  }
+                },
+                {
+                  "type": {
+                    "_eq": "collection"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "display": null,
+    "display_options": null,
+    "field": "params",
+    "group": null,
+    "hidden": true,
+    "interface": "list-o2m",
+    "note": null,
+    "options": {
+      "enableSelect": false,
+      "sort": "sort"
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 14,
+    "special": [
+      "o2m"
+    ],
+    "translations": [
+      {
+        "language": "en-CA",
+        "translation": "Search Parameters"
+      },
+      {
+        "language": "fr-CA",
+        "translation": "Paramètres de recherche"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  }
+}

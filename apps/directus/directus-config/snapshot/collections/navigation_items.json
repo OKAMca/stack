@@ -1,0 +1,35 @@
+{
+  "collection": "navigation_items",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": null,
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "navigation_items",
+    "color": null,
+    "display_template": "{{link.label}} ",
+    "group": null,
+    "hidden": false,
+    "icon": "call_split",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 5,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "fr-CA",
+        "plural": "items de navigation",
+        "singular": "item de navigation",
+        "translation": "Items de navigation"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "navigation_items"
+  }
+}

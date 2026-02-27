@@ -1,0 +1,35 @@
+{
+  "collection": "links",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "links",
+    "color": null,
+    "display_template": "{{label}}",
+    "group": null,
+    "hidden": false,
+    "icon": "link",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 1,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "fr-CA",
+        "plural": "liens",
+        "singular": "lien",
+        "translation": "Liens"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "links"
+  }
+}

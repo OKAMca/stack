@@ -1,0 +1,45 @@
+{
+  "collection": "navigation_items",
+  "field": "_search_config",
+  "type": "alias",
+  "meta": {
+    "collection": "navigation_items",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "_search_config",
+    "group": null,
+    "hidden": false,
+    "interface": "search-configuration",
+    "note": null,
+    "options": {
+      "search_config": {
+        "_and": [
+          {
+            "_or": [
+              {
+                "link": {
+                  "label": {
+                    "_icontains": "$SEARCH"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 12,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "collection": "categories",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "categories",
+    "color": null,
+    "display_template": "{{description}} ({{friendly_id}})",
+    "group": null,
+    "hidden": false,
+    "icon": "category",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": "",
+    "singleton": false,
+    "sort": 8,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "fr-CA",
+        "plural": "catégories",
+        "singular": "catégorie",
+        "translation": "Catégories"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "categories"
+  }
+}

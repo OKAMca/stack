@@ -1,0 +1,41 @@
+{
+  "collection": "navigations",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "navigations",
+    "color": null,
+    "display_template": "{{description}}",
+    "group": null,
+    "hidden": false,
+    "icon": "account_tree",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 2,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "en-US",
+        "plural": "navigations",
+        "singular": "navigation",
+        "translation": "Navigations"
+      },
+      {
+        "language": "fr-CA",
+        "plural": "navigations",
+        "singular": "navigation",
+        "translation": "Navigations"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "navigations"
+  }
+}

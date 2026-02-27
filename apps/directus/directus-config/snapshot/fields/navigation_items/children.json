@@ -1,0 +1,37 @@
+{
+  "collection": "navigation_items",
+  "field": "children",
+  "type": "alias",
+  "meta": {
+    "collection": "navigation_items",
+    "conditions": null,
+    "display": "related-values",
+    "display_options": {
+      "template": "{{link}}"
+    },
+    "field": "children",
+    "group": null,
+    "hidden": false,
+    "interface": "list-o2m",
+    "note": null,
+    "options": {
+      "limit": 30
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 9,
+    "special": [
+      "o2m"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Enfants"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  }
+}

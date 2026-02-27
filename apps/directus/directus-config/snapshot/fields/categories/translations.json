@@ -1,0 +1,33 @@
+{
+  "collection": "categories",
+  "field": "translations",
+  "type": "alias",
+  "meta": {
+    "collection": "categories",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "translations",
+    "group": null,
+    "hidden": false,
+    "interface": "translations",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 11,
+    "special": [
+      "translations"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Traductions"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

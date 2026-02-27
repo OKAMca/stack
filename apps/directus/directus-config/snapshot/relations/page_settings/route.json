@@ -1,0 +1,25 @@
+{
+  "collection": "page_settings",
+  "field": "route",
+  "related_collection": "routes",
+  "meta": {
+    "junction_field": null,
+    "many_collection": "page_settings",
+    "many_field": "route",
+    "one_allowed_collections": null,
+    "one_collection": "routes",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": null,
+    "sort_field": null
+  },
+  "schema": {
+    "table": "page_settings",
+    "column": "route",
+    "foreign_key_table": "routes",
+    "foreign_key_column": "id",
+    "constraint_name": "page_settings_route_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}
