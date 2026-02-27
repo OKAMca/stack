@@ -92,18 +92,23 @@ export async function directusRouteRouter(
     return NextResponse.next()
   }
 
+  const { localeMap, collectionSettings, options } = config
+  const { excludeDefaultLocaleFromPathname = true } = options ?? {}
+
   // eslint-disable-next-line ts/prefer-nullish-coalescing, ts/strict-boolean-expressions -- empty string locale mapping should use original locale
-  const mappedLocale = config.localeMap?.[directusLocale] || directusLocale
+  const mappedLocale = localeMap?.[directusLocale] || directusLocale
+  const displayLocale = excludeDefaultLocaleFromPathname ? '' : `/${mappedLocale}`
   // eslint-disable-next-line ts/prefer-nullish-coalescing, ts/strict-boolean-expressions -- empty string idField should use default
-  const idField = config.collectionSettings[collection]?.idField || config.collectionSettings.default.idField
+  const idField = collectionSettings[collection]?.idField || collectionSettings.default.idField
 
   log('Directus locale:', directusLocale)
   log('Mapped locale:', mappedLocale)
+  log('Display locale:', mappedLocale)
   log('Collection:', collection)
   log('ID Field:', idField)
   log('ID:', id)
 
-  const newPath = `/${mappedLocale}/${collection}/${id}`
+  const newPath = `${displayLocale}/${collection}/${id}`
   log(`Rewriting path: ${pathname} -> ${newPath}`)
 
   const url = request.nextUrl.clone()

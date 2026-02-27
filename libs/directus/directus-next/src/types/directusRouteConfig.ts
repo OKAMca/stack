@@ -13,8 +13,19 @@ export interface TDirectusRouteRedirectsModule {
   apiRoute?: string
 }
 
+export interface TDirectusRouteOptions {
+  /**
+   * If set to true, a path starting with the default locale will have no locale at all.
+   * It is then inferred that when no locale is passed in the URL, the default locale will be used
+   * @default true
+   */
+  excludeDefaultLocaleFromPathname?: boolean
+}
+
 export interface TDirectusRouteConfig {
   localeMap?: Record<string, string>
+  defaultLocale?: string
+  options?: TDirectusRouteOptions
   collectionSettings: {
     [collection: string]: {
       idField: string
