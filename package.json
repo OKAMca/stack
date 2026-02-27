@@ -3,10 +3,10 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "license": "BUSL-1.1",
   "packageManager": "pnpm@10.10.0",
+  "license": "BUSL-1.1",
   "scripts": {
-    "codegen": "graphql-codegen --config ./codegen.ts",
+    "codegen": "NODE_TLS_REJECT_UNAUTHORIZED=0 graphql-codegen --config ./codegen.ts",
     "g:lint": "nx run-many --all --target=lint",
     "g:lint:fix": "nx run-many --all --target=lint --fix",
     "g:build": "nx run-many --all --target=build",
@@ -25,6 +25,7 @@
     "@nx/next": "22.3.3",
     "@nx/plugin": "22.3.3",
     "@react-spring/web": "^10.0.3",
+    "@react-stately/selection": "^3.20.0",
     "@react-types/shared": "^3.32.1",
     "@tanstack/react-query": "^5.90.0",
     "@tiptap/core": "^3.15.3",
@@ -50,7 +51,6 @@
     "react-div-100vh": "0.7.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.71.1",
-    "@react-stately/selection": "^3.20.0",
     "react-stately": "^3.43.0",
     "react-use": "^17.6.0",
     "sanitize-html": "^2.17.0",
@@ -136,14 +136,14 @@
     "vite-tsconfig-paths": "^6.0.4",
     "vitest": "^4.0.17"
   },
-  "overrides": {
-    "tar": "^7.5.6",
-    "dotenv": "^16.4.7"
-  },
   "pnpm": {
     "overrides": {
       "dotenv": "^16.4.7"
     }
+  },
+  "overrides": {
+    "dotenv": "^16.4.7",
+    "tar": "^7.5.6"
   },
   "nx": {}
 }
