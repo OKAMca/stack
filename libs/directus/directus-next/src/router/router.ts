@@ -103,7 +103,7 @@ export async function directusRouteRouter(
 
   log('Directus locale:', directusLocale)
   log('Mapped locale:', mappedLocale)
-  log('Display locale:', mappedLocale)
+  log('Display locale:', displayLocale)
   log('Collection:', collection)
   log('ID Field:', idField)
   log('ID:', id)
