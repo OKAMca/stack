@@ -1,3 +1,4 @@
+export { DirectusRouteLocalePrefix } from './directusRouteConfig'
 export type { TDirectusRouteConfig, TDirectusRouteRedirectsModule } from './directusRouteConfig'
 export type {
   TPageSettings,

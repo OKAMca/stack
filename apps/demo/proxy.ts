@@ -2,11 +2,15 @@ import type { TDirectusRouteConfig } from '@okam/directus-next'
 import type { NextRequest } from 'next/server'
 import { directusRouteRouter } from '@okam/directus-next'
 
-export const directusConfig: TDirectusRouteConfig = {
-  localeMap: {
-    'fr-CA': 'fr',
-    'en-CA': 'en',
-  },
+const localeMap = {
+  'fr-CA': 'fr',
+  'en-CA': 'en',
+}
+
+export const directusConfig: TDirectusRouteConfig<keyof typeof localeMap> = {
+  localeMap,
+  localePrefix: 'as-needed',
+  defaultLocale: 'fr-CA',
   collectionSettings: {
     default: {
       idField: 'id',
