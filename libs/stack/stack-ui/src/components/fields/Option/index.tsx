@@ -10,6 +10,7 @@
  * @see docs/ADR/005_react-stately-eslint-exceptions.md
  */
 
+import type { ReactNode } from 'react'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TOptionProps } from './interface'
 import { Children, cloneElement, isValidElement, useRef } from 'react'
@@ -66,7 +67,7 @@ function Option<I extends object = object, T extends TToken = TToken>({
   const Component = isLink ? LinkElement : BoxWithForwardRef
   const elementType = isLink ? 'a' : as
 
-  const renderChildren = async () => {
+  const renderChildren = (): ReactNode => {
     if (Children.count(rendered) > 1) {
       const [label, description] = Children.toArray(rendered)
       const isLabelValid = isValidElement(label)

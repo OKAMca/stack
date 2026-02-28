@@ -1,3 +1,9 @@
+## 2.0.1 (2026-02-27)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.0.1
+
 # 2.0.0 (2026-02-05)
 
 ### 🧱 Updated Dependencies

@@ -382,7 +382,7 @@ importers:
         specifier: 2.0.0
         version: link:../directus-query
       '@okam/stack-ui':
-        specifier: 2.0.0
+        specifier: 2.0.1
         version: link:../../stack/stack-ui
       graphql:
         specifier: ^16.9.0
@@ -401,10 +401,10 @@ importers:
   libs/directus/directus-flexible-content:
     dependencies:
       '@okam/directus-block':
-        specifier: 2.0.0
+        specifier: 2.0.1
         version: link:../directus-block
       '@okam/stack-ui':
-        specifier: 2.0.0
+        specifier: 2.0.1
         version: link:../../stack/stack-ui
       '@tiptap/core':
         specifier: ^3.15.3
@@ -456,7 +456,7 @@ importers:
         specifier: 1.1.0
         version: link:../../stack/logger
       '@okam/next-component':
-        specifier: 2.0.0
+        specifier: 2.0.2
         version: link:../../stack/next-component
       graphql-request:
         specifier: ^7.1.2
@@ -477,16 +477,16 @@ importers:
   libs/directus/directus-next-component:
     dependencies:
       '@okam/directus-next':
-        specifier: 2.0.0
+        specifier: 2.0.1
         version: link:../directus-next
       '@okam/logger':
         specifier: 1.1.0
         version: link:../../stack/logger
       '@okam/next-component':
-        specifier: 2.0.0
+        specifier: 2.0.2
         version: link:../../stack/next-component
       '@okam/stack-ui':
-        specifier: 2.0.0
+        specifier: 2.0.1
         version: link:../../stack/stack-ui
       '@react-spring/web':
         specifier: ^10.0.3
@@ -565,7 +565,7 @@ importers:
         specifier: 0.0.1
         version: link:../react-utils
       '@okam/stack-ui':
-        specifier: 2.0.0
+        specifier: 2.0.1
         version: link:../stack-ui
       '@react-stately/selection':
         specifier: ^3.20.0

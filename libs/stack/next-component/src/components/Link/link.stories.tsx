@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { Box, Typography } from '@okam/stack-ui'
 import { I18nProvider } from 'react-aria'
 import Link from './index'
@@ -25,7 +25,9 @@ const meta: Meta<typeof Link> = {
   decorators: [
     Story => (
       <I18nProvider locale="en">
-        <Story />
+        <Box customTheme="flex flex-col gap-4">
+          <Story />
+        </Box>
       </I18nProvider>
     ),
   ],
@@ -144,7 +146,7 @@ const meta: Meta<typeof Link> = {
     },
   },
   render: ({ href, ...args }) => (
-    <Box customTheme="flex flex-col gap-4">
+    <>
       <Box customTheme="w-fit">
         <Link href={href} {...args} />
       </Box>
@@ -154,7 +156,7 @@ const meta: Meta<typeof Link> = {
           {href.toString()}
         </Typography>
       </Box>
-    </Box>
+    </>
   ),
 }
 
@@ -210,5 +212,12 @@ export const ContextLocale: Story = {
   args: {
     href: '/products/2',
     locale: undefined,
+  },
+}
+
+export const Anchor: Story = {
+  args: {
+    href: '#products-2',
+    as: 'a',
   },
 }
