@@ -55,10 +55,10 @@ jobs:
         run: |
           MESSAGE="${EMOJI} **${ACTOR}** ${ACTION} PR: [${PR_TITLE}](${PR_URL})"
 
-          PAYLOAD=$(jq -n --arg content "$MESSAGE" '{"content": $content}')
+          PAYLOAD=$(jq -n --arg content "$MESSAGE" '{"content": $content, "content_format": "text/md"}')
 
           curl -s -X POST \
             "https://api.clickup.com/api/v3/workspaces/${CLICKUP_WORKSPACE_ID}/chat/channels/${CLICKUP_CHANNEL_ID}/messages" \
-            -H "Authorization: Bearer ${CLICKUP_API_TOKEN}" \
+            -H "Authorization: ${CLICKUP_API_TOKEN}" \
             -H "Content-Type: application/json" \
             -d "$PAYLOAD"
