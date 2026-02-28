@@ -363,6 +363,9 @@ importers:
       '@okam/core-lib':
         specifier: 2.0.0
         version: link:../stack/core-lib
+      commander:
+        specifier: ^14.0.0
+        version: 14.0.2
       radashi:
         specifier: ^12.3.0
         version: 12.7.1

@@ -1,0 +1,150 @@
+import fs from 'node:fs/promises'
+
+const inputPath = process.argv[2]
+const outputPath = process.argv[3]
+
+if (!inputPath) {
+  console.error('Usage: node axe-to-markdown.js <input.json> [output.md]')
+  process.exit(1)
+}
+
+const raw = await fs.readFile(inputPath, 'utf-8')
+const violations = JSON.parse(raw)
+
+if (!Array.isArray(violations) || violations.length === 0) {
+  const msg = '# Accessibility Report\n\nNo violations found.\n'
+  if (outputPath) {
+    await fs.writeFile(outputPath, msg)
+  }
+  else {
+    process.stdout.write(msg)
+  }
+  process.exit(0)
+}
+
+/**
+ * Format WCAG tags into human-readable labels.
+ *
+ * - `wcag2a`   → `WCAG 2 Level A`
+ * - `wcag2aa`  → `WCAG 2 Level AA`
+ * - `wcag21a`  → `WCAG 2.1 Level A`
+ * - `wcag412`  → `WCAG 4.1.2`
+ * - Other tags are returned as-is.
+ */
+function formatWcagTag(tag) {
+  // Level tags: wcag2a, wcag2aa, wcag21a, wcag21aa, wcag22aa, etc.
+  const levelMatch = tag.match(/^wcag(\d)(\d)?(a{1,3})$/i)
+  if (levelMatch) {
+    const major = levelMatch[1]
+    const minor = levelMatch[2] || ''
+    const level = levelMatch[3].toUpperCase()
+    const version = minor ? `${major}.${minor}` : major
+    return `WCAG ${version} Level ${level}`
+  }
+
+  // Criterion tags: wcag111, wcag412, wcag131, etc.
+  const criterionMatch = tag.match(/^wcag(\d)(\d)(\d+)$/i)
+  if (criterionMatch) {
+    return `WCAG ${criterionMatch[1]}.${criterionMatch[2]}.${criterionMatch[3]}`
+  }
+
+  return tag
+}
+
+function getWcagInfo(tags) {
+  if (!Array.isArray(tags))
+    return ''
+  return tags
+    .filter(t => t.startsWith('wcag'))
+    .map(formatWcagTag)
+    .join(', ')
+}
+
+// Build summary rows: group by rule ID + story ID
+const summaryMap = new Map()
+
+for (const v of violations) {
+  const key = `${v.id}|${v.storyId || 'unknown'}`
+  if (summaryMap.has(key)) {
+    const entry = summaryMap.get(key)
+    entry.count += v.nodes ? v.nodes.length : 1
+  }
+  else {
+    summaryMap.set(key, {
+      description: v.description || v.help || '',
+      ruleId: v.id,
+      storyId: v.storyId || 'unknown',
+      wcag: getWcagInfo(v.tags),
+      impact: v.impact || 'unknown',
+      count: v.nodes ? v.nodes.length : 1,
+    })
+  }
+}
+
+const summaryRows = Array.from(summaryMap.values())
+const totalElements = summaryRows.reduce((sum, r) => sum + r.count, 0)
+
+// Build markdown
+const lines = []
+
+lines.push('# Accessibility Report')
+lines.push('')
+lines.push(`**${summaryRows.length}** unique violation(s) affecting **${totalElements}** element(s).`)
+lines.push('')
+
+// Summary table
+lines.push('## Summary')
+lines.push('')
+lines.push('| Description | Rule ID | Story | WCAG | Impact | Count |')
+lines.push('| --- | --- | --- | --- | --- | --- |')
+
+for (const row of summaryRows) {
+  lines.push(`| ${row.description} | ${row.ruleId} | ${row.storyId} | ${row.wcag} | ${row.impact} | ${row.count} |`)
+}
+
+lines.push('')
+
+// Detailed section
+lines.push('## Details')
+lines.push('')
+
+for (const v of violations) {
+  lines.push(`### ${v.id} — ${v.help || v.description || 'No description'}`)
+  lines.push('')
+
+  if (v.storyId) {
+    lines.push(`**Story:** ${v.storyId}`)
+    lines.push('')
+  }
+
+  if (v.helpUrl) {
+    lines.push(`**Help:** ${v.helpUrl}`)
+    lines.push('')
+  }
+
+  if (Array.isArray(v.nodes)) {
+    for (const node of v.nodes) {
+      lines.push(`- **Element:** \`${node.target ? node.target.join(' > ') : 'unknown'}\``)
+
+      if (node.html) {
+        lines.push(`  - **Source:** \`${node.html}\``)
+      }
+
+      if (node.failureSummary) {
+        lines.push(`  - **Fix:** ${node.failureSummary.replace(/\n/g, ' ')}`)
+      }
+    }
+
+    lines.push('')
+  }
+}
+
+const markdown = lines.join('\n')
+
+if (outputPath) {
+  await fs.writeFile(outputPath, markdown)
+  console.log(`Report written to ${outputPath}`)
+}
+else {
+  process.stdout.write(markdown)
+}

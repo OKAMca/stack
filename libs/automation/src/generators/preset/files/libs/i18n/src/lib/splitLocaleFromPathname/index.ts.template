@@ -1,0 +1,27 @@
+import { i18nConfig } from '../../config'
+
+/**
+ * Extract the locale segment from a pathname.
+ * Returns the locale and the pathname with the locale prefix removed.
+ *
+ * Example:
+ *   splitLocaleFromPathname('/fr/about') → { locale: 'fr', pathname: '/about' }
+ *   splitLocaleFromPathname('/about') → { locale: undefined, pathname: '/about' }
+ */
+export function splitLocaleFromPathname(pathname: string): {
+  locale: string | undefined
+  pathname: string
+} {
+  const segments = pathname.split('/')
+  const maybeLocale = segments[1]
+
+  if (maybeLocale !== undefined && maybeLocale !== '' && (i18nConfig.locales as readonly string[]).includes(maybeLocale)) {
+    const rest = segments.slice(2).join('/')
+    return {
+      locale: maybeLocale,
+      pathname: rest !== '' ? `/${rest}` : '/',
+    }
+  }
+
+  return { locale: undefined, pathname }
+}

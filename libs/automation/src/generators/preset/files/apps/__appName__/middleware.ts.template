@@ -1,0 +1,57 @@
+import type { NextRequest } from 'next/server'
+import { getLocalizedPath, getValidLocale, i18nConfig, splitLocaleFromPathname } from '<%= scope %>/i18n'
+import { NextResponse } from 'next/server'
+
+function getPreferredLocale(request: NextRequest): string {
+  const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value
+  if (cookieLocale !== undefined && cookieLocale !== '' && getValidLocale(cookieLocale) !== undefined) {
+    return cookieLocale
+  }
+
+  const acceptLanguage = request.headers.get('accept-language')
+  if (acceptLanguage !== null && acceptLanguage !== '') {
+    const preferred = acceptLanguage
+      .split(',')
+      .map(lang => lang.split(';')[0]?.trim().split('-')[0] ?? '')
+      .find(lang => getValidLocale(lang) !== undefined)
+    if (preferred !== undefined && preferred !== '')
+      return preferred
+  }
+
+  return i18nConfig.defaultLocale
+}
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+
+  // Skip internal paths
+  if (
+    pathname.startsWith('/_next')
+    || pathname.startsWith('/api')
+    || pathname.includes('.')
+  ) {
+    return NextResponse.next()
+  }
+
+  // Draft mode support
+  if (request.nextUrl.searchParams.has('draft')) {
+    return NextResponse.next()
+  }
+
+  const { locale: pathnameLocale } = splitLocaleFromPathname(pathname)
+
+  if (pathnameLocale === undefined) {
+    const locale = getPreferredLocale(request)
+    const url = request.nextUrl.clone()
+    url.pathname = getLocalizedPath(pathname, locale)
+    return NextResponse.redirect(url)
+  }
+
+  const response = NextResponse.next()
+  response.cookies.set('NEXT_LOCALE', pathnameLocale, { path: '/', sameSite: 'lax', secure: process.env.NODE_ENV === 'production' })
+  return response
+}
+
+export const config = {
+  matcher: ['/((?!_next|api|favicon.ico|assets|images).*)'],
+}

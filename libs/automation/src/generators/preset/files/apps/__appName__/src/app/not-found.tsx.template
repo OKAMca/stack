@@ -1,0 +1,10 @@
+import type { JSX } from 'react'
+
+export default function NotFound(): JSX.Element {
+  return (
+    <main>
+      <h1>404</h1>
+      <p>Page not found</p>
+    </main>
+  )
+}
