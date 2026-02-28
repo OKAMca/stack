@@ -10,7 +10,8 @@ export function useCarouselNextNavigation(props: TButtonProps): TCarouselNavigat
   const { controller, nextNavigationRef, id, activeIndex } = useCarousel()
   const { params, slides } = controller ?? {}
   const { slidesPerView, loop } = params ?? {}
-  const { a11y } = params ?? {}
+  const a11yRaw = params?.a11y
+  const a11y = typeof a11yRaw === 'object' ? a11yRaw : undefined
 
   const slidesGroupIndex = Math.round(
     typeof slidesPerView === 'number' ? (activeIndex + 1) / slidesPerView : activeIndex,

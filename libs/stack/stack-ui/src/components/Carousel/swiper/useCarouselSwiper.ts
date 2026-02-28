@@ -26,7 +26,8 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
     swiperRef,
     setActiveIndex,
   } = useCarousel()
-  const { a11y } = controller?.params ?? {}
+  const a11yRaw = controller?.params?.a11y
+  const a11y = typeof a11yRaw === 'object' ? a11yRaw : undefined
 
   const importedModules = [...(modules?.filter(module => module !== paginationModule) ?? []), ...defaultModules].map(
     module => swiperModules[module],

@@ -10,7 +10,8 @@ export function useCarouselPrevNavigation(props: TButtonProps): TCarouselNavigat
   const { controller, prevNavigationRef, id, activeIndex } = useCarousel()
 
   const { params } = controller ?? {}
-  const { a11y } = controller?.params ?? {}
+  const a11yRaw = controller?.params?.a11y
+  const a11y = typeof a11yRaw === 'object' ? a11yRaw : undefined
   const { loop } = params ?? {}
 
   const allowNavigatePrev = activeIndex > 0
