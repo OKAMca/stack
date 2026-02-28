@@ -7,7 +7,8 @@ import { useCarousel } from '../../../providers/Carousel'
 export function useCarouselA11yAnnouncer(props: TCarouselA11yAnnouncerProps) {
   const { controller, activeIndex, slides } = useCarousel()
   const { params } = controller ?? {}
-  const { a11y } = params ?? {}
+  const a11yRaw = params?.a11y
+  const a11y = typeof a11yRaw === 'object' ? a11yRaw : undefined
 
   return {
     a11y,
