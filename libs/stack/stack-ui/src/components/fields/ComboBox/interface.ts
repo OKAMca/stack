@@ -25,11 +25,12 @@ export interface TComboBoxProps<I extends object = object, T extends TToken = TT
   listBoxRef?: RefObject<HTMLElement>
   /**
    * @description Defines in milliseconds the amount of time the items in the listbox have to wait before being updated.
-   * @default 200
+   * @default 250
    */
   debounceDelay?: number
 }
 
 export interface TComboBoxButtonProps<T extends TToken = TToken> extends TButtonProps<T> {
   state: ComboBoxState<object & TDefaultNodeComponent<object, TToken>>
+  preventFocusOnPress?: boolean
 }

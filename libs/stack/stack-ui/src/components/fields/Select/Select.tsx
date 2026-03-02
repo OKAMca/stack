@@ -93,7 +93,7 @@ export function Select<T extends TToken>(props: TSelectProps<T>) {
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
         >
-          <span {...valueProps}>{state.selectedItem != null ? state.selectedItem.rendered : placeholderLabel}</span>
+          <span {...valueProps}>{state.selectionManager.firstSelectedKey != null ? state.collection.getItem(state.selectionManager.firstSelectedKey)?.rendered : placeholderLabel}</span>
           <Icon icon={icon ?? 'ArrowDown'} />
         </ButtonWithForwardRef>
         {state.isOpen && buttonRef.current != null && (
