@@ -25,9 +25,14 @@ export interface TComboBoxProps<I extends object = object, T extends TToken = TT
   listBoxRef?: RefObject<HTMLElement>
   /**
    * @description Defines in milliseconds the amount of time the items in the listbox have to wait before being updated.
-   * @default 250
+   * @default 200
    */
   debounceDelay?: number
+  /**
+   * @description When true, the popover does not prevent scrolling and does not trap focus.
+   * @default true
+   */
+  isNonModal?: boolean
 }
 
 export interface TComboBoxButtonProps<T extends TToken = TToken> extends TButtonProps<T> {

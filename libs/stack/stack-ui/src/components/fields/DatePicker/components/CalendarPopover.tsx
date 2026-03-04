@@ -19,12 +19,14 @@ export function CalendarPopover({ themeName = 'datePicker', tokens, ...rest }: T
 
   return (
     <Overlay>
-      <Box themeName={`${themeName}.calendarUnderlay`} tokens={tokens} {...underlayProps} />
-      <BoxWithForwardRef themeName={`${themeName}.calendarPopover`} tokens={tokens} {...popoverProps} ref={ref}>
-        <DismissButton onDismiss={state.close} />
-        {children}
-        <DismissButton onDismiss={state.close} />
-      </BoxWithForwardRef>
+      <Box themeName={`${themeName}.calendarPopoverWrapper`} tokens={tokens}>
+        <Box themeName={`${themeName}.calendarUnderlay`} tokens={tokens} {...underlayProps} />
+        <BoxWithForwardRef themeName={`${themeName}.calendarPopover`} tokens={tokens} {...popoverProps} ref={ref}>
+          <DismissButton onDismiss={state.close} />
+          {children}
+          <DismissButton onDismiss={state.close} />
+        </BoxWithForwardRef>
+      </Box>
     </Overlay>
   )
 }

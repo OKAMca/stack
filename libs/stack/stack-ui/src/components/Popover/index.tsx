@@ -61,7 +61,8 @@ export function Popover(props: TPopoverProps) {
     [`--${themeName?.replace('.', '-')}-container-width`]: `${sizeRef?.current?.offsetWidth}px`,
     ...popoverProps.style,
   }
-  const scrollableRegionTabIndex = props.isNonModal === true && contain === false ? 0 : popoverProps.tabIndex
+
+  const scrollableRegionTabIndex = props.isNonModal === true ? 0 : popoverProps.tabIndex
 
   return (
     <Overlay>

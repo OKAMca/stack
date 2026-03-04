@@ -41,7 +41,8 @@ function ComboBox(props: TComboBoxProps<object, TToken>) {
     buttonRef: buttonRefProp,
     popoverRef: popoverRefProp,
     listBoxRef: listBoxRefProp,
-    debounceDelay = 250,
+    debounceDelay = 200,
+    isNonModal = true,
   } = props
 
   const innerInputRef = useRef<HTMLInputElement>(null)
@@ -172,9 +173,9 @@ function ComboBox(props: TComboBoxProps<object, TToken>) {
             placement="bottom"
             sizeRef={inputWrapperRef}
             popoverRef={popoverRef}
-            isNonModal
+            isNonModal={isNonModal}
             autoFocus={false}
-            contain={false}
+            contain={!isNonModal}
           >
             <ControlledListBox
               {...listBoxProps}
