@@ -28,6 +28,7 @@ const itemComponents: Record<string, ElementType> = {
 
 export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledListBoxFormProps<object, TToken> & { ref?: React.Ref<HTMLElement | null> }) {
   const {
+    state,
     themeName = 'listBox',
     tokens,
     customTheme,
@@ -43,7 +44,6 @@ export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledList
     fieldRef,
     ...rest
   } = props
-  const state = useListState(props)
   const keys = state.collection.getKeys()
   const mergeRefs = (newRef: HTMLElement | null) => {
     if (newRef != null) {

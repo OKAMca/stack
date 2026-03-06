@@ -28,8 +28,14 @@ export interface TComboBoxProps<I extends object = object, T extends TToken = TT
    * @default 200
    */
   debounceDelay?: number
+  /**
+   * @description When true, the popover does not prevent scrolling and does not trap focus.
+   * @default true
+   */
+  isNonModal?: boolean
 }
 
 export interface TComboBoxButtonProps<T extends TToken = TToken> extends TButtonProps<T> {
   state: ComboBoxState<object & TDefaultNodeComponent<object, TToken>>
+  preventFocusOnPress?: boolean
 }
