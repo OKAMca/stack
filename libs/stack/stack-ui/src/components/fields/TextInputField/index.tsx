@@ -3,6 +3,7 @@
 import type { ChangeEvent } from 'react'
 import type { RegisterOptions } from 'react-hook-form'
 import type { TTextInputProps } from './interface'
+import { filterDOMProps } from '@react-aria/utils'
 import { isEmpty } from 'radashi'
 import { useRef } from 'react'
 import { FocusRing, useTextField } from 'react-aria'
@@ -12,6 +13,7 @@ import { useTranslation } from '../../../providers/Translation'
 import { Box } from '../../Box'
 import Icon from '../../Icon'
 import { Typography } from '../../Typography'
+import { inputAttributes } from './attributes'
 
 export function TextInputField(props: TTextInputProps) {
   const {
@@ -146,11 +148,6 @@ export function ReactHookFormInput({
   const { control } = useFormContext()
   const { t } = useTranslation()
 
-  const getAriaFields = () => {
-    const ariaFields = Object.entries(rest).filter(([key, _value]) => key.startsWith('aria-'))
-    return Object.fromEntries(ariaFields)
-  }
-
   const ruleMerged = {
     required: (required ?? isRequired) ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
     ...(minLength != null && {
@@ -196,7 +193,7 @@ export function ReactHookFormInput({
           <TextInputField
             {...fieldProps}
             {...validityField}
-            {...getAriaFields()}
+            {...filterDOMProps(rest, { events: true, labelable: true, isLink: false, global: true, propNames: new Set([...inputAttributes]) })}
             fieldRef={ref}
             name={name}
             placeholder={placeholder}
