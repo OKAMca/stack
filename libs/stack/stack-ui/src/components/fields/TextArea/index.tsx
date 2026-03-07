@@ -4,6 +4,7 @@ import type { ChangeEvent } from 'react'
 import type { RegisterOptions } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TTextInputProps } from '../TextInputField/interface'
+import { filterDOMProps } from '@react-aria/utils'
 import { isEmpty } from 'radashi'
 import { useRef } from 'react'
 import { FocusRing, useTextField } from 'react-aria'
@@ -104,11 +105,6 @@ export function ReactHookFormTextArea({
   const { control } = useFormContext()
   const { t } = useTranslation()
 
-  const getAriaFields = () => {
-    const ariaFields = Object.entries(rest).filter(([key, _value]) => key.startsWith('aria-'))
-    return Object.fromEntries(ariaFields)
-  }
-
   const ruleMerged = {
     required: (required ?? isRequired) ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
     ...(minLength != null && {
@@ -154,7 +150,7 @@ export function ReactHookFormTextArea({
           <TextArea
             {...fieldProps}
             {...validityField}
-            {...getAriaFields()}
+            {...filterDOMProps(rest, { events: true, labelable: true, isLink: false, global: true, propNames: new Set(['type']) })}
             fieldRef={ref}
             name={name}
             placeholder={placeholder}
