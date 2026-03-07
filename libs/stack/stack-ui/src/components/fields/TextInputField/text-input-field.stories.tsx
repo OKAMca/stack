@@ -146,6 +146,8 @@ export const Email: StoryObj<typeof TextInputField> = {
     name: 'email',
     placeholder: 'example@example.com',
     type: 'email',
+    autoCapitalize: 'characters',
+    autoComplete: 'email',
   },
 }
 
