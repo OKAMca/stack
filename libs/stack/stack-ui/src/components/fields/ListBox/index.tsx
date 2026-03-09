@@ -141,7 +141,6 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
     ...rest,
     selectionMode,
     selectedKeys,
-    defaultSelectedKeys,
     children: props.children,
     onSelectionChange: (keys: Selection) => {
       setValue(name, keys)
