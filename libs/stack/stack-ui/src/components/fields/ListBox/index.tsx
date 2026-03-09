@@ -125,7 +125,7 @@ export function ListBox(props: TListBoxFormProps<object, TToken>) {
 }
 
 export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TControlledReactHookFormListBoxProps<object, TToken> & { ref?: React.Ref<HTMLElement | null> }) {
-  const { name, rules, isRequired, isDisabled, tokens, selectionMode = 'single', errorMessage, state: _state, ...rest } = props
+  const { name, rules, isRequired, isDisabled, tokens, selectionMode = 'single', errorMessage, ...rest } = props
   const { control, setValue, watch, getValues } = useFormContext()
 
   const { selectedKeys = watch(name), defaultSelectedKeys = getValues(name) } = rest

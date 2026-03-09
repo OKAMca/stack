@@ -43,4 +43,4 @@ export interface TReactHookFormListBoxProps<I extends object = object, T extends
 export interface TControlledReactHookFormListBoxProps<I extends object = object, T extends TToken = TToken>
   extends
   TReactHookFormListBoxProps<I, T>,
-  Omit<TControlledListBoxFormProps<I, T>, 'children' | 'onBlur' | 'selectionMode'> {}
+  Omit<TControlledListBoxFormProps<I, T>, 'children' | 'onBlur' | 'selectionMode' | 'state'> {}
