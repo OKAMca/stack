@@ -125,7 +125,7 @@ export function ListBox(props: TListBoxFormProps<object, TToken>) {
 }
 
 export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TControlledReactHookFormListBoxProps<object, TToken> & { ref?: React.Ref<HTMLElement | null> }) {
-  const { name, rules, isRequired, isDisabled, tokens, selectionMode = 'single', errorMessage, ...rest } = props
+  const { name, rules, isRequired, isDisabled, tokens, selectionMode = 'single', errorMessage, state: _state, ...rest } = props
   const { control, setValue, watch, getValues } = useFormContext()
 
   const { selectedKeys = watch(name), defaultSelectedKeys = getValues(name) } = rest
@@ -136,6 +136,17 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
     disabled: isDisabled,
     ...rules,
   }
+
+  const state = useListState({
+    ...rest,
+    selectionMode,
+    selectedKeys,
+    defaultSelectedKeys,
+    children: props.children,
+    onSelectionChange: (keys: Selection) => {
+      setValue(name, keys)
+    },
+  })
 
   return (
     <Controller
@@ -163,11 +174,8 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
 
         return (
           <ControlledListBox
-            {...mergeProps(rest, fieldProps, validityField, {
-              onSelectionChange: (keys: Selection) => {
-                setValue(name, keys)
-              },
-            })}
+            {...mergeProps(rest, fieldProps, validityField)}
+            state={state}
             tokens={validityTokens}
             selectionMode={selectionMode}
             selectedKeys={selectedKeys}
@@ -184,7 +192,6 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
 ControlledReactHookFormListBox.displayName = 'ControlledReactHookFormListBox'
 
 export function ReactHookFormListBox(props: TReactHookFormListBoxProps<object, TToken>) {
-  const state = useListState(props)
   const ref = useRef<HTMLElement>(null)
-  return <ControlledReactHookFormListBox {...props} state={state} ref={ref} />
+  return <ControlledReactHookFormListBox {...props} ref={ref} />
 }
