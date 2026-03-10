@@ -143,7 +143,8 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
     selectedKeys,
     children: props.children,
     onSelectionChange: (keys: Selection) => {
-      setValue(name, keys)
+      rest.onSelectionChange?.(keys)
+      setValue(name, keys, { shouldDirty: true, shouldTouch: true, shouldValidate: true })
     },
   })
 
