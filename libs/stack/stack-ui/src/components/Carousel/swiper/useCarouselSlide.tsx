@@ -28,7 +28,8 @@ export function useCarouselSlide(props: TCarouselSlideProps): TCarouselSlide {
     swiper,
     ...rest
   } = props
-  const { itemRoleDescriptionMessage = 'slide', slideRole = 'group' } = swiper?.params?.a11y ?? {}
+  const a11yParams = typeof swiper?.params?.a11y === 'object' ? swiper.params.a11y : undefined
+  const { itemRoleDescriptionMessage = 'slide', slideRole = 'group' } = a11yParams ?? {}
   const hasTitle = !isEmpty(title)
   const ref = useRef<HTMLElement>(null)
 
