@@ -4,15 +4,13 @@ import { useCallback } from 'react'
 import { ButtonWithForwardRef } from '../../../Button'
 
 function ComboBoxButton({ ref, ...props }: TComboBoxButtonProps & { ref?: React.RefObject<HTMLButtonElement & HTMLAnchorElement | null> }) {
-  const { state, handlePress: handlePressProp, ...rest } = props
+  const { state: _state, handlePress: handlePressProp, ...rest } = props
 
   const handlePress = useCallback(
     (e: PressEvent) => {
-      state.setInputValue('')
-      state.selectionManager.clearSelection()
       handlePressProp?.(e)
     },
-    [handlePressProp, state],
+    [handlePressProp],
   )
 
   return <ButtonWithForwardRef {...rest} ref={ref} handlePress={handlePress} />
