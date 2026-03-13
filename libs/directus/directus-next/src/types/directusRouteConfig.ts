@@ -44,7 +44,7 @@ export enum DirectusRouteLocalePrefix {
    * @example
    * ```ts
    * const directusConfig = {
-   *   defautLocale: 'en-CA',
+   *   defaultLocale: 'en-CA',
    *   localeMap: {
    *     'fr-CA': 'fr',
    *     'en-CA': 'en',
@@ -55,7 +55,7 @@ export enum DirectusRouteLocalePrefix {
    * // output: /en/products/1 with english language
    *
    * // navigate to /products/1
-   * // output: /products/1 with english language
+   * // output: /en/products/1 with english language
    *
    * // navigate to /fr/produits/1
    * // output: /fr/produits/1 with french language
