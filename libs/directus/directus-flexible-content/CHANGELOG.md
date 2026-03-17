@@ -1,3 +1,9 @@
+## 2.0.2 (2026-03-17)
+
+### 🧱 Updated Dependencies
+
+- Updated directus-block to 2.0.2
+
 ## 2.0.1 (2026-02-27)
 
 ### 🧱 Updated Dependencies
