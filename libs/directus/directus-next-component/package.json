@@ -36,7 +36,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "next": "^15.1.0 || ^16.0.0",
+    "next": "^16.1.7",
     "react": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
@@ -45,7 +45,7 @@
     "@okam/next-component": "2.0.3",
     "@okam/stack-ui": "2.0.3",
     "@react-spring/web": "^10.0.3",
-    "next": "^15.1.0 || ^16.0.0",
+    "next": "^16.1.7",
     "radashi": "^12.3.0",
     "unlazy": "^1.0.0",
     "zod": "^4.2.1"
