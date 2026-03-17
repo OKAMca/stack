@@ -1,3 +1,13 @@
+## 2.0.3 (2026-03-17)
+
+### 🩹 Fixes
+
+- resolve high-severity dependabot alerts ([#429](https://github.com/OKAMca/stack/pull/429))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.0.2 (2026-02-27)
 
 ### 🧱 Updated Dependencies
