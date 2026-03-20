@@ -20,6 +20,7 @@ export enum DirectusRouteLocalePrefix {
    * @example
    * ```ts
    * const directusConfig = {
+   *   localePrefix: 'as-needed',
    *   defaultLocale: 'en-CA',
    *   localeMap: {
    *     'fr-CA': 'fr',
@@ -44,6 +45,7 @@ export enum DirectusRouteLocalePrefix {
    * @example
    * ```ts
    * const directusConfig = {
+   *   localePrefix: 'always',
    *   defaultLocale: 'en-CA',
    *   localeMap: {
    *     'fr-CA': 'fr',
