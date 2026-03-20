@@ -7,9 +7,11 @@ packages:
 overrides:
   dotenv: ^16.4.7
   axios: ">=1.13.5"
+  flatted: ">=3.4.0"
   immutable: ">=5.1.5"
   koa: ">=3.1.2"
   minimatch: ">=10.2.3"
   rollup: ">=4.59.0"
   serialize-javascript: ">=7.0.3"
   svgo: ">=3.3.3"
+  tar: ">=7.5.11"
