@@ -178,3 +178,9 @@ Then run codegen
 ```
 pnpm codegen
 ```
+
+## Next.JS
+
+### `"use server"` VS `import 'server-only'`
+- `"use server"` should be strictly used for server actions, and we should make sure it does not contaminate any files, as any function exported from a `"use server"` file must be async.
+- `import 'server-only'` is only a code barrier to prevent bugs coming from server-side files getting imported in client-side ones

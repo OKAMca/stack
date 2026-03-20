@@ -48,14 +48,14 @@ export default defineConfig({
           format: 'es',
           entryFileNames: '[name].mjs',
           preserveModules: false,
-          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
+          banner: chunk => chunk.name === 'server' ? "import 'server-only';" : '',
         },
         {
           format: 'cjs',
           entryFileNames: '[name].js',
           preserveModules: false,
-          banner: (chunk) => chunk.name === 'server' ? '"use server";' : '',
-        }
+          banner: chunk => chunk.name === 'server' ? "require('server-only');" : '',
+        },
       ],
       // External packages that should not be bundled into your library.
       external: [...externalDeps, /^@okam\//],
