@@ -1,0 +1,33 @@
+{
+  "collection": "page_settings",
+  "field": "translations",
+  "type": "alias",
+  "meta": {
+    "collection": "page_settings",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "translations",
+    "group": "settings",
+    "hidden": false,
+    "interface": "translations",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 1,
+    "special": [
+      "translations"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Traductions"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

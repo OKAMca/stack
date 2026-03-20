@@ -1,11 +1,10 @@
 'use client'
 
-import type { MutableRefObject } from 'react'
 import type { RegisterOptions } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TComboBoxProps } from './interface'
 import { isEmpty } from 'radashi'
-import { useCallback, useMemo, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useComboBox, useFilter } from 'react-aria'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useComboBoxState } from 'react-stately'
@@ -36,11 +35,14 @@ function ComboBox(props: TComboBoxProps<object, TToken>) {
     isRequired = false,
     isReadOnly = false,
     defaultFilter: defaultFilterProp,
+    onInputChange: onInputChangeProp,
+    onSelectionChange: onSelectionChangeProp,
     inputRef: inputRefProp,
     buttonRef: buttonRefProp,
     popoverRef: popoverRefProp,
     listBoxRef: listBoxRefProp,
     debounceDelay = 200,
+    isNonModal = true,
   } = props
 
   const innerInputRef = useRef<HTMLInputElement>(null)
@@ -59,26 +61,36 @@ function ComboBox(props: TComboBoxProps<object, TToken>) {
 
   const { contains } = useFilter({ sensitivity: 'base' })
   const defaultFilter = defaultFilterProp ?? contains
-  const state = useComboBoxState({ ...props, defaultFilter })
+  const isInputValueControlled = props.inputValue !== undefined
+
+  const state = useComboBoxState({
+    ...props,
+    defaultFilter,
+    onInputChange: isInputValueControlled ? onInputChangeProp : undefined,
+    onSelectionChange: onSelectionChangeProp,
+  })
+
+  const debouncedInputValue = useDebounce(state.inputValue, debounceDelay)
+
+  useEffect(() => {
+    if (isInputValueControlled)
+      return
+    onInputChangeProp?.(debouncedInputValue)
+  }, [debouncedInputValue, isInputValueControlled, onInputChangeProp])
 
   const { inputProps, listBoxProps, labelProps, buttonProps, errorMessageProps, isInvalid } = useComboBox(
     { ...props, inputRef, buttonRef, popoverRef, listBoxRef },
     state,
   )
 
-  // Only debounce the collection to avoid infinite re-renders
-  const debouncedCollection = useDebounce(state.collection, debounceDelay)
-
-  // Create a debounced state object that keeps all state properties but uses debounced collection
-  const debouncedState = useMemo(
-    () => ({
-      ...state,
-      collection: debouncedCollection,
-    }),
-    [state, debouncedCollection],
-  )
-
-  const { onPress, onPressStart, preventFocusOnPress, ...restOfButtonProps } = buttonProps
+  const {
+    onPress,
+    onPressStart,
+    onPressEnd,
+    onPressChange,
+    preventFocusOnPress,
+    ...restOfButtonProps
+  } = buttonProps
 
   const { isOpen, selectedItem, selectionManager } = state
   const { isFocused, isSelectAll, isEmpty: isEmptySelection } = selectionManager
@@ -102,7 +114,7 @@ function ComboBox(props: TComboBoxProps<object, TToken>) {
     (ref: HTMLInputElement | null) => {
       if (ref != null) {
         hookFormRef?.(ref)
-        ;(inputRef as MutableRefObject<HTMLInputElement | null>).current = ref
+        inputRef.current = ref
       }
     },
     [hookFormRef, inputRef],
@@ -132,16 +144,27 @@ function ComboBox(props: TComboBoxProps<object, TToken>) {
             themeName={`${themeName}.button`}
             tokens={comboBoxTokens}
             {...restOfButtonProps}
+            preventFocusOnPress={preventFocusOnPress}
             ref={buttonRef}
             handlePress={(e) => {
-              onPress?.(e)
-              onPressStart?.(e)
+              if (hasValue || hasSelectedItem) {
+                state.setSelectedKey(null)
+                state.selectionManager.clearSelection()
+                state.setInputValue('')
+                return
+              }
+              if (onPressStart != null) {
+                onPressStart(e)
+              }
+              else {
+                onPress?.(e)
+              }
             }}
           >
             <Icon themeName={`${themeName}.icon`} tokens={comboBoxTokens} icon={hasValue ? closeIcon : icon} />
           </ComboBoxButton>
         </BoxWithForwardRef>
-        {isOpen && inputWrapperRef.current != null && debouncedState.collection.size > 0 && (
+        {isOpen && inputWrapperRef.current != null && state.collection.size > 0 && (
           <Popover
             themeName={`${themeName}.popover`}
             tokens={comboBoxTokens}
@@ -150,13 +173,15 @@ function ComboBox(props: TComboBoxProps<object, TToken>) {
             placement="bottom"
             sizeRef={inputWrapperRef}
             popoverRef={popoverRef}
+            isNonModal={isNonModal}
             autoFocus={false}
+            contain={!isNonModal}
           >
             <ControlledListBox
               {...listBoxProps}
               themeName={`${themeName}.list`}
               tokens={comboBoxTokens}
-              state={debouncedState}
+              state={state}
               ref={listBoxRef}
             >
               {children}

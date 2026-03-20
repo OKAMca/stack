@@ -1,0 +1,53 @@
+{
+  "collection": "pages",
+  "field": "page_settings",
+  "type": "uuid",
+  "meta": {
+    "collection": "pages",
+    "conditions": null,
+    "display": "related-values",
+    "display_options": null,
+    "field": "page_settings",
+    "group": null,
+    "hidden": false,
+    "interface": "inline-form-m2o",
+    "note": null,
+    "options": {
+      "createRelatedItem": "always"
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 12,
+    "special": [
+      "m2o"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Paramètres de page"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "page_settings",
+    "table": "pages",
+    "data_type": "uuid",
+    "default_value": null,
+    "max_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": "page_settings",
+    "foreign_key_column": "id"
+  }
+}

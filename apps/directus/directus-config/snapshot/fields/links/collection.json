@@ -1,0 +1,91 @@
+{
+  "collection": "links",
+  "field": "collection",
+  "type": "uuid",
+  "meta": {
+    "collection": "links",
+    "conditions": [
+      {
+        "hidden": true,
+        "name": "Hidden",
+        "options": {
+          "enableCreate": false,
+          "enableSelect": true
+        },
+        "rule": {
+          "_and": [
+            {
+              "type": {
+                "_neq": "collection"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Required",
+        "options": {
+          "enableCreate": false,
+          "enableSelect": true
+        },
+        "required": true,
+        "rule": {
+          "_and": [
+            {
+              "type": {
+                "_eq": "collection"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "display": "related-values",
+    "display_options": {
+      "template": "{{translations.path}}"
+    },
+    "field": "collection",
+    "group": null,
+    "hidden": false,
+    "interface": "select-dropdown-m2o",
+    "note": null,
+    "options": {
+      "enableCreate": false,
+      "template": "{{translations.path}}"
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 10,
+    "special": [
+      "m2o"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Lien interne"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  },
+  "schema": {
+    "name": "collection",
+    "table": "links",
+    "data_type": "uuid",
+    "default_value": null,
+    "max_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": "page_settings",
+    "foreign_key_column": "id"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "collection": "page_settings_translations",
+  "field": "page_settings_id",
+  "related_collection": "page_settings",
+  "meta": {
+    "junction_field": "languages_code",
+    "many_collection": "page_settings_translations",
+    "many_field": "page_settings_id",
+    "one_allowed_collections": null,
+    "one_collection": "page_settings",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "translations",
+    "sort_field": null
+  },
+  "schema": {
+    "table": "page_settings_translations",
+    "column": "page_settings_id",
+    "foreign_key_table": "page_settings",
+    "foreign_key_column": "id",
+    "constraint_name": "page_settings_translations_page_settings_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "CASCADE"
+  }
+}

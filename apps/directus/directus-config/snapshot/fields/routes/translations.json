@@ -1,0 +1,38 @@
+{
+  "collection": "routes",
+  "field": "translations",
+  "type": "alias",
+  "meta": {
+    "collection": "routes",
+    "conditions": null,
+    "display": "translations",
+    "display_options": {
+      "template": "{{route}}"
+    },
+    "field": "translations",
+    "group": null,
+    "hidden": false,
+    "interface": "translations",
+    "note": null,
+    "options": {
+      "languageField": "name",
+      "userLanguage": true
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 10,
+    "special": [
+      "translations"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Traductions"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

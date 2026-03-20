@@ -1,0 +1,28 @@
+{
+  "collection": "pages_translations",
+  "field": "blocks",
+  "type": "alias",
+  "meta": {
+    "collection": "pages_translations",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "blocks",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2a",
+    "note": "Content blocks that will be displayed on the page.",
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 7,
+    "special": [
+      "m2a"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

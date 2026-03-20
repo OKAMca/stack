@@ -28,6 +28,7 @@ const itemComponents: Record<string, ElementType> = {
 
 export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledListBoxFormProps<object, TToken> & { ref?: React.Ref<HTMLElement | null> }) {
   const {
+    state,
     themeName = 'listBox',
     tokens,
     customTheme,
@@ -43,7 +44,6 @@ export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledList
     fieldRef,
     ...rest
   } = props
-  const state = useListState(props)
   const keys = state.collection.getKeys()
   const mergeRefs = (newRef: HTMLElement | null) => {
     if (newRef != null) {
@@ -74,7 +74,6 @@ export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledList
     isDisabled,
     isRequired,
     isInvalid,
-    isError,
   }
 
   return (
@@ -108,7 +107,7 @@ export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledList
         })}
       </BoxWithForwardRef>
       {(isError && errorMessage != null) && (
-        <Typography themeName={`${themeName}.errorMessage`} tokens={listBoxTokens}>
+        <Typography themeName={`${themeName}.errorMessage`} tokens={{ ...listBoxTokens, isError }}>
           {errorMessage}
         </Typography>
       )}
@@ -130,12 +129,25 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
 
   const { selectedKeys = watch(name), defaultSelectedKeys = getValues(name) } = rest
   const { t } = useTranslation()
+  const fieldOnChangeRef = useRef<((value: Selection) => void) | null>(null)
 
   const mergedRules: typeof rules = {
     required: isRequired ? (t('FORM.ERROR.REQUIRED') ?? 'required') : false,
     disabled: isDisabled,
     ...rules,
   }
+
+  const state = useListState({
+    ...rest,
+    selectionMode,
+    selectedKeys,
+    children: props.children,
+    onSelectionChange: (keys: Selection) => {
+      rest.onSelectionChange?.(keys)
+      setValue(name, keys, { shouldDirty: true, shouldTouch: true })
+      fieldOnChangeRef.current?.(keys)
+    },
+  })
 
   return (
     <Controller
@@ -146,7 +158,8 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
       rules={mergedRules}
       disabled={mergedRules?.disabled}
       render={({ field, fieldState }) => {
-        const { ref, ...fieldProps } = field
+        const { ref, onChange, ...fieldProps } = field
+        fieldOnChangeRef.current = onChange
         const isError = !isEmpty(fieldState.error)
 
         const validityField = {
@@ -156,19 +169,19 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
           isError,
         }
 
+        const { isError: _isError, ...validityFieldWithoutError } = validityField
+
         const validityTokens = {
           ...tokens,
-          ...validityField,
+          ...validityFieldWithoutError,
         }
 
         return (
           <ControlledListBox
-            {...mergeProps(rest, fieldProps, validityField, {
-              onSelectionChange: (keys: Selection) => {
-                setValue(name, keys)
-              },
-            })}
+            {...mergeProps(rest, fieldProps, validityField)}
+            state={state}
             tokens={validityTokens}
+            isError={isError}
             selectionMode={selectionMode}
             selectedKeys={selectedKeys}
             defaultSelectedKeys={defaultSelectedKeys}
@@ -184,7 +197,6 @@ export function ControlledReactHookFormListBox({ ref: listBoxRef, ...props }: TC
 ControlledReactHookFormListBox.displayName = 'ControlledReactHookFormListBox'
 
 export function ReactHookFormListBox(props: TReactHookFormListBoxProps<object, TToken>) {
-  const state = useListState(props)
   const ref = useRef<HTMLElement>(null)
-  return <ControlledReactHookFormListBox {...props} state={state} ref={ref} />
+  return <ControlledReactHookFormListBox {...props} ref={ref} />
 }

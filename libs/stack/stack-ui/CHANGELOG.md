@@ -1,3 +1,38 @@
+## 2.0.3 (2026-03-11)
+
+### 🩹 Fixes
+
+- resolve high-severity dependabot alerts ([#429](https://github.com/OKAMca/stack/pull/429))
+- **stack-ui:** error message and validation fixes ([6e4d9f21](https://github.com/OKAMca/stack/commit/6e4d9f21))
+- **stack-ui:** validation fix ([fc54df32](https://github.com/OKAMca/stack/commit/fc54df32))
+- **stack-ui:** selection change fixes ([89bf4c0e](https://github.com/OKAMca/stack/commit/89bf4c0e))
+- **stack-ui:** controlled state fix ([431d9b63](https://github.com/OKAMca/stack/commit/431d9b63))
+- **stack-ui:** remove state from typing ([e3bbfc49](https://github.com/OKAMca/stack/commit/e3bbfc49))
+- **stack-ui:** listbox clear all fix ([0fb6428a](https://github.com/OKAMca/stack/commit/0fb6428a))
+- **stack-ui:** revert select change ([f884b2fa](https://github.com/OKAMca/stack/commit/f884b2fa))
+- **stack-ui:** revert debounce delay, modal fixes ([b8422eb4](https://github.com/OKAMca/stack/commit/b8422eb4))
+- **stack-ui:** add cursor-pointer ([cfce38fb](https://github.com/OKAMca/stack/commit/cfce38fb))
+- **stack-ui:** combobox migration fixes ([69a02a6c](https://github.com/OKAMca/stack/commit/69a02a6c))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Max Hilland
+
+## 2.0.2 (2026-02-27)
+
+This was a version bump only for stack-ui to align it with other projects, there were no code changes.
+
+## 2.0.1 (2026-02-27)
+
+### 🩹 Fixes
+
+- remove async from option render ([#418](https://github.com/OKAMca/stack/pull/418))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 # 2.0.0 (2026-02-05)
 
 This was a version bump only for stack-ui to align it with other projects, there were no code changes.

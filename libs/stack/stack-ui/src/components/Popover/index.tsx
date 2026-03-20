@@ -62,6 +62,8 @@ export function Popover(props: TPopoverProps) {
     ...popoverProps.style,
   }
 
+  const scrollableRegionTabIndex = props.isNonModal === true ? 0 : popoverProps.tabIndex
+
   return (
     <Overlay>
       <Box themeName={`${themeName}.underlay`} tokens={popoverTokens} {...underlayProps} />
@@ -72,6 +74,7 @@ export function Popover(props: TPopoverProps) {
           tokens={popoverTokens}
           ref={popoverRef}
           {...popoverProps}
+          tabIndex={scrollableRegionTabIndex}
           style={style}
         >
           {arrow != null && cloneElement(arrow, { ...arrowProps, themeName: `${themeName}.arrow`, tokens: popoverTokens })}

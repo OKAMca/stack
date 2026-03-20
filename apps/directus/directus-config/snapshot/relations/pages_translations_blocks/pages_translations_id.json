@@ -1,0 +1,25 @@
+{
+  "collection": "pages_translations_blocks",
+  "field": "pages_translations_id",
+  "related_collection": "pages_translations",
+  "meta": {
+    "junction_field": "item",
+    "many_collection": "pages_translations_blocks",
+    "many_field": "pages_translations_id",
+    "one_allowed_collections": null,
+    "one_collection": "pages_translations",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "blocks",
+    "sort_field": "sort"
+  },
+  "schema": {
+    "table": "pages_translations_blocks",
+    "column": "pages_translations_id",
+    "foreign_key_table": "pages_translations",
+    "foreign_key_column": "id",
+    "constraint_name": "pages_translations_blocks_pages_translations_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

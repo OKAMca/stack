@@ -10,6 +10,7 @@ const comboBoxButton = tv({
     `
       px-4
       py-2
+      cursor-pointer
       text-white
       bg-color-1-500
     `,

@@ -1,0 +1,126 @@
+services:
+  traefik:
+    image: traefik:v2.11
+    command:
+      - '--api.insecure=true' # Enable dashboard for local dev
+      - '--providers.docker=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--entrypoints.web.address=:80'
+      - '--entrypoints.websecure.address=:443'
+      - '--log.level=DEBUG'
+    ports:
+      - '80:80'
+      - '443:443'
+      - '8080:8080' # Traefik dashboard
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    networks:
+      - proxy
+
+  postgres:
+    image: pgautoupgrade/pgautoupgrade:17-alpine
+    platform: linux/amd64
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal
+
+  redis:
+    image: redis:8-alpine
+    restart: unless-stopped
+    networks:
+      - internal
+
+  directus:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - traefik
+      - postgres
+      - redis
+    environment:
+      ASSETS_TRANSFORM_IMAGE_MAX_DIMENSION: 10000
+      GRAPHQL_SCHEMA_CACHE_CAPACITY: 200
+      MAX_RELATIONAL_DEPTH: ${MAX_RELATIONAL_DEPTH}
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
+      DB_CLIENT: 'pg' # or postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      CACHE_ENABLED: 'true'
+      REDIS_ENABLED: 'true'
+      # directus 10.4
+      REDIS: redis://redis:6379
+      CACHE_STORE: redis
+      RATE_LIMITER_STORE: redis
+      SYNCHRONIZATION_STORE: redis
+      MESSENGER_STORE: redis
+      PUBLIC_URL: ${PUBLIC_URL}
+      FRONTEND_URL: ${FRONTEND_URL}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+      MAX_PAYLOAD_SIZE: ${MAX_PAYLOAD_SIZE:-10mb}
+      PM2_INSTANCES: ${PM2_INSTANCES}
+      FLOWS_ENV_ALLOW_LIST: ${FLOWS_ENV_ALLOW_LIST}
+      DIRECTUS_FRONTEND_URL: ${DIRECTUS_FRONTEND_URL}
+      REVALIDATE_URL: ${REVALIDATE_URL}
+      # Secrets linking to NextJS
+      PREVIEW_SECRET: ${PREVIEW_SECRET}
+      DRAFT_SECRET: ${DRAFT_SECRET}
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET}
+      CORS_ENABLED: ${CORS_ENABLED}
+      CORS_ORIGIN: ${CORS_ORIGIN}
+      CACHE_AUTO_PURGE: ${CACHE_AUTO_PURGE}
+      CACHE_STATUS_HEADER: 'true'
+      CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC: ${CONTENT_SECURITY_POLICY_DIRECTIVES__FRAME_SRC}
+      TZ: ${TZ}
+      # bm-shortlink-update-operation
+      BM_SHORTLINK_FETCH_TIMEOUT: 2000
+      BM_SHORTLINK_SHORTIO_APIKEY: 'some-key'
+      BM_SHORTLINK_SHORTIO_DOMAIN: 'some-domain'
+      BM_SHORTLINK_SHORTIO_DOMAINID: 'some-domain-id'
+      BM_SHORTLINK_SHORTIO_APIURL: 'https://shortio.okam.io/'
+      BM_SHORTLINK_DUMMY_CLIENT: '1'
+      EXTENSION_AUTO_RELOAD: true
+    ports:
+      - '8055:8055'
+    networks:
+      - internal
+      - proxy
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=proxy'
+      - 'traefik.http.routers.${COMPOSE_PROJECT_NAME}-directus.rule=Host(`${DIRECTUS_HOSTNAME}`)'
+      - 'traefik.http.routers.${COMPOSE_PROJECT_NAME}-directus.tls=true'
+      - 'traefik.http.services.${COMPOSE_PROJECT_NAME}-directus.loadbalancer.server.port=8055'
+      - 'traefik.http.routers.cms.entrypoints=web'
+    volumes:
+      - directus_uploads:/directus/uploads
+      - directus_extensions:/directus/extensions
+
+networks:
+  internal:
+    name: ${COMPOSE_PROJECT_NAME}_internal
+    internal: true
+  proxy:
+    external: true
+
+volumes:
+  postgres_data:
+    name: ${COMPOSE_PROJECT_NAME}_postgres_data
+  directus_uploads:
+    name: ${COMPOSE_PROJECT_NAME}_directus_uploads
+  directus_extensions:
+    name: ${COMPOSE_PROJECT_NAME}_directus_extensions

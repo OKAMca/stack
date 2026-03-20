@@ -1,0 +1,25 @@
+{
+  "collection": "navigations_translations",
+  "field": "navigations_id",
+  "related_collection": "navigations",
+  "meta": {
+    "junction_field": "languages_code",
+    "many_collection": "navigations_translations",
+    "many_field": "navigations_id",
+    "one_allowed_collections": null,
+    "one_collection": "navigations",
+    "one_collection_field": null,
+    "one_deselect_action": "nullify",
+    "one_field": "translations",
+    "sort_field": null
+  },
+  "schema": {
+    "table": "navigations_translations",
+    "column": "navigations_id",
+    "foreign_key_table": "navigations",
+    "foreign_key_column": "id",
+    "constraint_name": "navigations_translations_navigations_id_foreign",
+    "on_update": "NO ACTION",
+    "on_delete": "SET NULL"
+  }
+}

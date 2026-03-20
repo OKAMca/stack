@@ -5,10 +5,14 @@ Configure your .env (at the root of the monorepo) with at least theses variables
 
 .env
 ```
-NEXT_PUBLIC_GRAPHQL_URL=https://website.com/graphql/
-NEXT_PUBLIC_IMG_DOMAIN=website.com
+NEXT_PUBLIC_GRAPHQL_URL=http://localhost:8055/graphql/
+NEXT_PUBLIC_IMG_DOMAIN=localhost
+NEXT_PUBLIC_IMG_PORT=8055
+NEXT_PUBLIC_IMG_PROTOCOL=http
 NEXT_API_DRAFT_SECRET=123
 ```
+
+See [../../.env.sample] for more information
 
 ## Starting or Running Dev Mode
 

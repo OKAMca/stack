@@ -1,0 +1,5 @@
+.env.local
+.env.dev
+*.sql
+.directus-sync.local.token
+.directus-sync.dev.token

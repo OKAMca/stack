@@ -1,0 +1,18 @@
+{
+  "collection": "navigations_translations_items",
+  "field": "item",
+  "related_collection": null,
+  "meta": {
+    "junction_field": "navigations_translations_id",
+    "many_collection": "navigations_translations_items",
+    "many_field": "item",
+    "one_allowed_collections": [
+      "navigation_items"
+    ],
+    "one_collection": null,
+    "one_collection_field": "collection",
+    "one_deselect_action": "nullify",
+    "one_field": null,
+    "sort_field": null
+  }
+}
