@@ -1,0 +1,53 @@
+{
+  "collection": "category_types",
+  "field": "friendly_id",
+  "type": "string",
+  "meta": {
+    "collection": "category_types",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "friendly_id",
+    "group": null,
+    "hidden": false,
+    "interface": "input",
+    "note": "This field is used only for development purpose and is not used on the website.",
+    "options": null,
+    "readonly": false,
+    "required": true,
+    "searchable": true,
+    "sort": 3,
+    "special": null,
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Identifiant (DEV)"
+      },
+      {
+        "language": "en-CA",
+        "translation": "Friendly ID (DEV ONLY)"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  },
+  "schema": {
+    "name": "friendly_id",
+    "table": "category_types",
+    "data_type": "character varying",
+    "default_value": null,
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

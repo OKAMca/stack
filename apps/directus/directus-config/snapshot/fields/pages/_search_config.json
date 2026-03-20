@@ -1,0 +1,66 @@
+{
+  "collection": "pages",
+  "field": "_search_config",
+  "type": "alias",
+  "meta": {
+    "collection": "pages",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "_search_config",
+    "group": null,
+    "hidden": false,
+    "interface": "search-configuration",
+    "note": null,
+    "options": {
+      "search_config": {
+        "_and": [
+          {
+            "_or": [
+              {
+                "translations": {
+                  "title": {
+                    "_icontains": "$SEARCH"
+                  }
+                }
+              },
+              {
+                "friendly_id": {
+                  "_icontains": "$SEARCH"
+                }
+              },
+              {
+                "page_settings": {
+                  "translations": {
+                    "path": {
+                      "_icontains": "$SEARCH"
+                    }
+                  }
+                }
+              },
+              {
+                "translations": {
+                  "page_description": {
+                    "_icontains": "$SEARCH"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 13,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

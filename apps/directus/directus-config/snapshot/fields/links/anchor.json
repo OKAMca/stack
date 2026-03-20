@@ -1,0 +1,109 @@
+{
+  "collection": "links",
+  "field": "anchor",
+  "type": "string",
+  "meta": {
+    "collection": "links",
+    "conditions": [
+      {
+        "hidden": true,
+        "name": "Hidden",
+        "options": {
+          "clear": false,
+          "font": "sans-serif",
+          "masked": false,
+          "slug": false,
+          "trim": false
+        },
+        "rule": {
+          "_and": [
+            {
+              "type": {
+                "_neq": "anchor"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "Required",
+        "options": {
+          "clear": false,
+          "font": "sans-serif",
+          "masked": false,
+          "slug": false,
+          "trim": false
+        },
+        "required": true,
+        "rule": {
+          "_and": [
+            {
+              "type": {
+                "_eq": "anchor"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "display": "raw",
+    "display_options": null,
+    "field": "anchor",
+    "group": null,
+    "hidden": false,
+    "interface": "input",
+    "note": null,
+    "options": {
+      "iconLeft": null
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 13,
+    "special": null,
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Balise d'ancrage"
+      }
+    ],
+    "validation": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "type": {
+                "_neq": "anchor"
+              }
+            },
+            {
+              "anchor": {
+                "_regex": "^#.+$"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "validation_message": "$t:links_anchor_validation",
+    "width": "half"
+  },
+  "schema": {
+    "name": "anchor",
+    "table": "links",
+    "data_type": "character varying",
+    "default_value": "#",
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

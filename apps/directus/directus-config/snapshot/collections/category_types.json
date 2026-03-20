@@ -1,0 +1,35 @@
+{
+  "collection": "category_types",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": "status",
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "category_types",
+    "color": null,
+    "display_template": "{{description}}",
+    "group": null,
+    "hidden": false,
+    "icon": "vertical_split",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 8,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "fr-CA",
+        "plural": "types de catégorie",
+        "singular": "type de catégorie",
+        "translation": "Types de catégorie"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "category_types"
+  }
+}

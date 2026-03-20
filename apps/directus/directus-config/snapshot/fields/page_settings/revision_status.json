@@ -1,0 +1,92 @@
+{
+  "collection": "page_settings",
+  "field": "revision_status",
+  "type": "string",
+  "meta": {
+    "collection": "page_settings",
+    "conditions": null,
+    "display": "labels",
+    "display_options": {
+      "choices": [
+        {
+          "color": "#FFFFFF",
+          "icon": "note",
+          "text": "Hors révision",
+          "value": "none"
+        },
+        {
+          "color": "#2ECDA7",
+          "icon": "check",
+          "text": "À réviser",
+          "value": "for_review"
+        },
+        {
+          "color": "#FFC23B",
+          "icon": "cached",
+          "text": "En révision",
+          "value": "in_review"
+        }
+      ],
+      "defaultColor": "#FFFFFF"
+    },
+    "field": "revision_status",
+    "group": null,
+    "hidden": false,
+    "interface": "select-dropdown",
+    "note": null,
+    "options": {
+      "choices": [
+        {
+          "color": "#FFFFFF",
+          "icon": "note",
+          "text": "Hors révision",
+          "value": "none"
+        },
+        {
+          "color": "#2ECDA7",
+          "icon": "check",
+          "text": "À réviser",
+          "value": "for_review"
+        },
+        {
+          "color": "#FFC23B",
+          "icon": "cached",
+          "text": "En révision",
+          "value": "in_review"
+        }
+      ]
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 11,
+    "special": null,
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Statut de la révision"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  },
+  "schema": {
+    "name": "revision_status",
+    "table": "page_settings",
+    "data_type": "character varying",
+    "default_value": "none",
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

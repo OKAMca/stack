@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "directus": "11.14.1",
+  "vendor": "postgres",
+  "systemFields": [
+    {
+      "collection": "directus_revisions",
+      "field": "activity",
+      "schema": {
+        "is_indexed": true
+      }
+    }
+  ]
+}

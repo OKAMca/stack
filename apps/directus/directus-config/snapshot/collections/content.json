@@ -1,0 +1,30 @@
+{
+  "collection": "content",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": null,
+    "archive_value": null,
+    "collapse": "open",
+    "collection": "content",
+    "color": "#33A3FF",
+    "display_template": null,
+    "group": null,
+    "hidden": false,
+    "icon": "folder_special",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 1,
+    "sort_field": null,
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Contenu"
+      }
+    ],
+    "unarchive_value": null,
+    "versioning": false
+  }
+}

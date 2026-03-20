@@ -1,0 +1,66 @@
+#!/bin/bash
+
+containerpg=stack_local-postgres-1
+containerdirectus=stack_local-directus-1
+fileprefix=stack-local-pg
+dbuser=postgres
+dbname=stack
+
+usage()
+{
+  echo "$0 import file.sql"
+  echo "$0 export"
+  echo "$0 update-password email password"
+  echo "$0 list-roles"
+  echo "$0 list-users [--short]"
+}
+
+COMMAND="$1"
+
+case "$1" in
+  import)
+   filename="$2"
+   if [ -z "$filename" ]; then
+     echo "Missing filename to import"
+     exit 1
+   fi
+   if [ ! -f "$filename" ]; then
+     echo "Missing file [${filename}] to import"
+     exit 1
+   fi
+   docker exec -i "${containerpg}" psql -U "${dbuser}" -d template1 -c "DROP DATABASE ${dbname} WITH (FORCE);"
+   docker exec -i "${containerpg}" psql -U "${dbuser}" -d template1 -c "CREATE DATABASE ${dbname};"
+   docker exec -i "${containerpg}" psql -U "${dbuser}" -d "${dbname}" < "$filename"
+  ;;
+
+  export)
+   datenow=`date +%Y%m%d%H%M%S`
+   filename="${fileprefix}-${datenow}.sql"
+   echo "Exporting database to $filename"
+   docker exec "${containerpg}" pg_dump -U "${dbuser}" -d "${dbname}" > "$filename"
+  ;;
+
+  update-password)
+    docker exec "${containerdirectus}" npx directus users passwd \
+     --email "$2" --password="$3"
+  ;;
+
+  list-roles)
+    docker exec -i "${containerpg}" psql -U "${dbuser}" -d "${dbname}" \
+      -c "SELECT id, name from public.directus_roles"
+  ;;
+
+  list-users)
+    fields="*"
+    if [ "$2" == "--short" ]; then
+      fields="id, first_name, last_name, email, password, token"
+    fi
+    docker exec -i "${containerpg}" psql -U "${dbuser}" -d "${dbname}" \
+      -c "SELECT ${fields} from public.directus_users"
+  ;;
+
+  *)
+  usage
+  ;;
+esac
+

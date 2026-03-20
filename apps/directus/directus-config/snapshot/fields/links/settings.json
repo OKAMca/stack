@@ -1,0 +1,39 @@
+{
+  "collection": "links",
+  "field": "settings",
+  "type": "alias",
+  "meta": {
+    "collection": "links",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "settings",
+    "group": null,
+    "hidden": false,
+    "interface": "group-detail",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 17,
+    "special": [
+      "alias",
+      "group",
+      "no-data"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Réglages avancés"
+      },
+      {
+        "language": "en-US",
+        "translation": "Advanced Settings"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

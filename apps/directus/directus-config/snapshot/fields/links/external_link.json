@@ -1,0 +1,107 @@
+{
+  "collection": "links",
+  "field": "external_link",
+  "type": "string",
+  "meta": {
+    "collection": "links",
+    "conditions": [
+      {
+        "hidden": true,
+        "name": "Hidden",
+        "options": {
+          "clear": false,
+          "font": "sans-serif",
+          "masked": false,
+          "slug": false,
+          "trim": false
+        },
+        "rule": {
+          "_and": [
+            {
+              "type": {
+                "_neq": "external-link"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "hidden": false,
+        "name": "Required",
+        "options": {
+          "clear": false,
+          "font": "sans-serif",
+          "masked": false,
+          "slug": false,
+          "trim": false
+        },
+        "required": true,
+        "rule": {
+          "_and": [
+            {
+              "type": {
+                "_eq": "external-link"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "display": "raw",
+    "display_options": null,
+    "field": "external_link",
+    "group": null,
+    "hidden": false,
+    "interface": "input",
+    "note": "$t:links_external_link_note",
+    "options": {
+      "iconLeft": null,
+      "placeholder": "https://",
+      "slug": true
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 11,
+    "special": null,
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Lien manuel"
+      }
+    ],
+    "validation": {
+      "_and": [
+        {
+          "_or": [
+            {
+              "external_link": {
+                "_regex": "(mailto:[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)|(((?:https?)|(?:ftp)):\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,}|^\\/[^\\s]*)|(tel:[0-9+\\-()]+)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "validation_message": "$t:links_external_validation",
+    "width": "half"
+  },
+  "schema": {
+    "name": "external_link",
+    "table": "links",
+    "data_type": "character varying",
+    "default_value": null,
+    "max_length": 255,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": null,
+    "foreign_key_column": null
+  }
+}

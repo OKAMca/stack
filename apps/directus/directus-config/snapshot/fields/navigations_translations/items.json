@@ -1,0 +1,28 @@
+{
+  "collection": "navigations_translations",
+  "field": "items",
+  "type": "alias",
+  "meta": {
+    "collection": "navigations_translations",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "items",
+    "group": null,
+    "hidden": false,
+    "interface": "list-m2a",
+    "note": null,
+    "options": null,
+    "readonly": false,
+    "required": true,
+    "searchable": true,
+    "sort": 5,
+    "special": [
+      "m2a"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "half"
+  }
+}

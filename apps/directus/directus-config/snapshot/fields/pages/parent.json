@@ -1,0 +1,59 @@
+{
+  "collection": "pages",
+  "field": "parent",
+  "type": "uuid",
+  "meta": {
+    "collection": "pages",
+    "conditions": null,
+    "display": "related-values",
+    "display_options": {
+      "template": "{{friendly_id}}"
+    },
+    "field": "parent",
+    "group": null,
+    "hidden": false,
+    "interface": "select-dropdown-m2o",
+    "note": "Select the parent page (if applicable).",
+    "options": {
+      "template": "{{translations.title}} ({{page_settings.translations.path}})"
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 4,
+    "special": [
+      "m2o"
+    ],
+    "translations": [
+      {
+        "language": "fr-CA",
+        "translation": "Page Parent"
+      },
+      {
+        "language": "en-CA",
+        "translation": "Parent page"
+      }
+    ],
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  },
+  "schema": {
+    "name": "parent",
+    "table": "pages",
+    "data_type": "uuid",
+    "default_value": null,
+    "max_length": null,
+    "numeric_precision": null,
+    "numeric_scale": null,
+    "is_nullable": true,
+    "is_unique": false,
+    "is_indexed": false,
+    "is_primary_key": false,
+    "is_generated": false,
+    "generation_expression": null,
+    "has_auto_increment": false,
+    "foreign_key_table": "pages",
+    "foreign_key_column": "id"
+  }
+}

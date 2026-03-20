@@ -1,0 +1,67 @@
+{
+  "collection": "links",
+  "field": "_search_config",
+  "type": "alias",
+  "meta": {
+    "collection": "links",
+    "conditions": null,
+    "display": null,
+    "display_options": null,
+    "field": "_search_config",
+    "group": null,
+    "hidden": false,
+    "interface": "search-configuration",
+    "note": null,
+    "options": {
+      "search_config": {
+        "_and": [
+          {
+            "_or": [
+              {
+                "label": {
+                  "_icontains": "$SEARCH"
+                }
+              },
+              {
+                "type": {
+                  "_icontains": "$SEARCH"
+                }
+              },
+              {
+                "external_link": {
+                  "_icontains": "$SEARCH"
+                }
+              },
+              {
+                "collection": {
+                  "translations": {
+                    "path": {
+                      "_icontains": "$SEARCH"
+                    }
+                  }
+                }
+              },
+              {
+                "description": {
+                  "_icontains": "$SEARCH"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "readonly": false,
+    "required": false,
+    "searchable": true,
+    "sort": 18,
+    "special": [
+      "alias",
+      "no-data"
+    ],
+    "translations": null,
+    "validation": null,
+    "validation_message": null,
+    "width": "full"
+  }
+}

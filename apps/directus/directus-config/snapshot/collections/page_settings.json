@@ -1,0 +1,35 @@
+{
+  "collection": "page_settings",
+  "meta": {
+    "accountability": "all",
+    "archive_app_filter": true,
+    "archive_field": null,
+    "archive_value": "archived",
+    "collapse": "open",
+    "collection": "page_settings",
+    "color": null,
+    "display_template": null,
+    "group": "content",
+    "hidden": false,
+    "icon": "settings_applications",
+    "item_duplication_fields": null,
+    "note": null,
+    "preview_url": null,
+    "singleton": false,
+    "sort": 1,
+    "sort_field": "sort",
+    "translations": [
+      {
+        "language": "fr-CA",
+        "plural": "paramètres de page",
+        "singular": "paramètres de page",
+        "translation": "Paramètres de page"
+      }
+    ],
+    "unarchive_value": "draft",
+    "versioning": false
+  },
+  "schema": {
+    "name": "page_settings"
+  }
+}

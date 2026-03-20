@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Administrator",
+    "icon": "verified",
+    "description": "$t:admin_description",
+    "parent": null,
+    "_syncId": "_sync_default_admin_role"
+  },
+  {
+    "name": "Website API",
+    "icon": "supervised_user_circle",
+    "description": "Queries data from the frontend",
+    "parent": null,
+    "_syncId": "33734b5a-a6e9-479d-a224-702f57bb4173"
+  },
+  {
+    "name": "Frontend preview",
+    "icon": "preview",
+    "description": null,
+    "parent": null,
+    "_syncId": "3d224cfa-e94b-4d19-ad57-00763be360c7"
+  }
+]
