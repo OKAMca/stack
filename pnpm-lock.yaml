@@ -355,6 +355,8 @@ importers:
         specifier: ^4.0.17
         version: 4.0.18(@types/node@25.0.10)(@vitest/ui@4.0.18)(jiti@2.6.1)(jsdom@27.4.0)(less@4.5.1)(lightningcss@1.30.2)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)(yaml@2.8.2)
 
+  apps/directus: {}
+
   libs/ai:
     dependencies:
       commander:
@@ -480,7 +482,7 @@ importers:
   libs/directus/directus-next-component:
     dependencies:
       '@okam/directus-next':
-        specifier: 2.0.2
+        specifier: 2.0.3
         version: link:../directus-next
       '@okam/logger':
         specifier: 1.1.0
