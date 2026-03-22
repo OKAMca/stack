@@ -12,7 +12,7 @@ import { Controller, useFormContext } from 'react-hook-form'
 import useThemeContext from '../../../providers/Theme/hooks'
 import { useTranslation } from '../../../providers/Translation'
 import { Typography } from '../../Typography'
-import { inputAttributes } from '../TextInputField/attributes'
+import { textAreaAttributes } from './attributes'
 
 export function TextArea<T extends TToken>(props: TTextInputProps<T>) {
   const {
@@ -151,7 +151,7 @@ export function ReactHookFormTextArea({
           <TextArea
             {...fieldProps}
             {...validityField}
-            {...filterDOMProps(rest, { events: true, labelable: true, isLink: false, global: true, propNames: new Set([...inputAttributes]) })}
+            {...filterDOMProps(rest, { events: true, labelable: true, isLink: false, global: true, propNames: new Set([...textAreaAttributes]) })}
             fieldRef={ref}
             name={name}
             placeholder={placeholder}

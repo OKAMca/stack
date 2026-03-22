@@ -13,7 +13,7 @@ import { useTranslation } from '../../../providers/Translation'
 import { Box } from '../../Box'
 import Icon from '../../Icon'
 import { Typography } from '../../Typography'
-import { inputAttributes } from './attributes'
+import { textInputAttributes } from './attributes'
 
 export function TextInputField(props: TTextInputProps) {
   const {
@@ -193,7 +193,7 @@ export function ReactHookFormInput({
           <TextInputField
             {...fieldProps}
             {...validityField}
-            {...filterDOMProps(rest, { events: true, labelable: true, isLink: false, global: true, propNames: new Set([...inputAttributes]) })}
+            {...filterDOMProps(rest, { events: true, labelable: true, isLink: false, global: true, propNames: new Set([...textInputAttributes]) })}
             fieldRef={ref}
             name={name}
             placeholder={placeholder}

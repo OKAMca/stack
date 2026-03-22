@@ -1,10 +1,9 @@
-export const textInputAttributes = [
+export const textAreaAttributes = [
   'autoComplete',
   'autoFocus',
   'autoCorrect',
   'autoCapitalize',
   'enterKeyHint',
-  'type',
   'description',
   'width',
   'inputMode',
