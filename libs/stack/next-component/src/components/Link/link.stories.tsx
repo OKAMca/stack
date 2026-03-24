@@ -113,7 +113,7 @@ const meta: Meta<typeof Link> = {
     },
     locale: {
       description:
-        'The active locale is automatically prepended to `href`. locale allows for providing a different locale. When `false` href has to include the locale as the default behavior is disabled. By default, the locale will try to be set via the `locale` prop, then the `useParams` hook with the `locale` dynamic route segment.',
+        'The active locale is automatically prepended to `href`. locale allows for providing a different locale. When `false` href has to include the locale as the default behavior is disabled. By default, the locale will try to be set via the `locale` prop, then the `useLocale` hook from react-aria, then the `useParams` hook with the `locale` dynamic route segment.',
       table: {
         category: 'next/link',
       },
