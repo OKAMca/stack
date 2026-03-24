@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5'
+import type { Meta, StoryObj } from '@storybook/react'
 import type { ComponentProps } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { Button as ButtonComponent } from '../../Button'
@@ -133,5 +133,33 @@ export const ErrorWithIcon: StoryObj<typeof TextInputField> = {
     isError: true,
     name: 'email-error-icon',
     errorIcon: <ErrorIcon width={16} height={16} />,
+  },
+}
+
+export const Email: StoryObj<typeof TextInputField> = {
+  render: Template.bind({}),
+  name: 'Email',
+
+  args: {
+    id: 'email',
+    label: 'Email',
+    name: 'email',
+    placeholder: 'example@example.com',
+    type: 'email',
+    autoCapitalize: 'characters',
+    autoComplete: 'email',
+  },
+}
+
+export const Password: StoryObj<typeof TextInputField> = {
+  render: Template.bind({}),
+  name: 'Password',
+
+  args: {
+    id: 'password',
+    label: 'Password',
+    name: 'password',
+    placeholder: 'Enter your password',
+    type: 'password',
   },
 }
