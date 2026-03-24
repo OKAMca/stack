@@ -11,15 +11,15 @@ import { pageSettingsContext, pageSettingsVariablesContext } from './context'
 const [getPageSettingsContext, setPageSettingsContext] = pageSettingsContext()
 const [getVariables, setVariables] = pageSettingsVariablesContext()
 
-function isTDirectusRouteConfig(config: TGetPageSettingsConfig | undefined): config is TDirectusRouteConfig {
-  return config != null && 'localeMap' in config
+function isDirectusRouteConfig(config: TGetPageSettingsConfig | undefined): config is TDirectusRouteConfig {
+  return config != null && 'collectionSettings' in config
 }
 
 function getDirectusVariables<QueryVariables extends Variables>(
   variables: QueryVariables | undefined,
   config: TGetPageSettingsConfig | undefined,
 ) {
-  const localeMap = isTDirectusRouteConfig(config) ? config.localeMap : config
+  const localeMap = isDirectusRouteConfig(config) ? config.localeMap : config
   if (localeMap == null) {
     return variables
   }

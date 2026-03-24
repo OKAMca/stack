@@ -13,8 +13,77 @@ export interface TDirectusRouteRedirectsModule {
   apiRoute?: string
 }
 
-export interface TDirectusRouteConfig {
-  localeMap?: Record<string, string>
+export enum DirectusRouteLocalePrefix {
+  /**
+   * The pathname will be prefixed with the locale only when it is not the default locale
+   *
+   * @example
+   * ```ts
+   * const directusConfig = {
+   *   localePrefix: 'as-needed',
+   *   defaultLocale: 'en-CA',
+   *   localeMap: {
+   *     'fr-CA': 'fr',
+   *     'en-CA': 'en',
+   *   }
+   * }
+   *
+   * // navigate to /en/products/1
+   * // output: /products/1 with english language
+   *
+   * // navigate to /products/1
+   * // output: /products/1 with english language
+   *
+   * // navigate to /fr/produits/1
+   * // output: /fr/produits/1 with french language
+   * ```
+   */
+  AsNeeded = 'as-needed',
+  /**
+   * The pathname will always be prefixed by the locale
+   *
+   * @example
+   * ```ts
+   * const directusConfig = {
+   *   localePrefix: 'always',
+   *   defaultLocale: 'en-CA',
+   *   localeMap: {
+   *     'fr-CA': 'fr',
+   *     'en-CA': 'en',
+   *   }
+   * }
+   *
+   * // navigate to /en/products/1
+   * // output: /en/products/1 with english language
+   *
+   * // navigate to /products/1
+   * // output: /en/products/1 with english language
+   *
+   * // navigate to /fr/produits/1
+   * // output: /fr/produits/1 with french language
+   * ```
+   */
+  Always = 'always',
+}
+
+export type TDirectusRouteI18n<Locales extends string>
+  = | {
+    defaultLocale: Locales
+    /**
+     * {@link DirectusRouteLocalePrefix}
+     */
+    localePrefix: `${DirectusRouteLocalePrefix.AsNeeded}`
+  }
+  | {
+    defaultLocale?: Locales
+    /**
+     * {@link DirectusRouteLocalePrefix}
+     */
+    localePrefix?: `${DirectusRouteLocalePrefix.Always}` | undefined
+  }
+
+export type TDirectusRouteConfig<Locales extends string = string> = {
+  localeMap?: Record<Locales, string>
   collectionSettings: {
     [collection: string]: {
       idField: string
@@ -27,4 +96,4 @@ export interface TDirectusRouteConfig {
   modules?: {
     redirects?: TDirectusRouteRedirectsModule
   }
-}
+} & TDirectusRouteI18n<Locales>
