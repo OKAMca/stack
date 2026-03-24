@@ -2,8 +2,8 @@
 
 import type { LinkProps } from 'next/link'
 import type { TLink, TUseLinkReturn } from './interface'
-import { useParams, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
+import { useParams, usePathname, useSearchParams } from 'next/navigation'
+import { useCallback, useEffect, useRef } from 'react'
 import { useLocale } from 'react-aria'
 import { useHash } from '../useHash'
 
@@ -62,6 +62,7 @@ export function useLink(props: TLink): TUseLinkReturn {
     onTouchStart,
     onClick,
     onNavigate,
+    onPathnameChange,
     onHashChange,
     onSearchParamsChange,
     href,
@@ -76,8 +77,10 @@ export function useLink(props: TLink): TUseLinkReturn {
 
   const locale = useLinkLocale(props)
   const localizedHref = localizeHref(href, locale)
+  const pathname = usePathname()
   const searchParams = useSearchParams()
   const hash = useHash()
+  const hasWarnedOnPathnameChangeRef = useRef(false)
 
   const isNextScroll = typeof scroll === 'boolean'
   const nextScroll = isNextScroll ? scroll : false
@@ -98,6 +101,18 @@ export function useLink(props: TLink): TUseLinkReturn {
     onTouchStart?.(event)
     handleScroll()
   }
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'production' || onPathnameChange == null || hasWarnedOnPathnameChangeRef.current)
+      return
+
+    console.warn('[next-component/Link] `onPathnameChange` is deprecated and will be removed in the next major version. Use `onNavigate` from next/link instead.')
+    hasWarnedOnPathnameChangeRef.current = true
+  }, [onPathnameChange])
+
+  useEffect(() => {
+    onPathnameChange?.(pathname)
+  }, [onPathnameChange, pathname])
 
   useEffect(() => {
     onSearchParamsChange?.(searchParams)
