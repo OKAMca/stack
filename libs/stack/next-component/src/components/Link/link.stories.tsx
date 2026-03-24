@@ -37,9 +37,9 @@ const meta: Meta<typeof Link> = {
     scroll: true,
     behavior: 'instant',
     onClick: e => console.log('Click', e),
+    onNavigate: e => console.log('Navigate', e),
     onMouseEnter: e => console.log('Mouse enter', e),
     onTouchStart: e => console.log('Touch start', e),
-    onPathnameChange: pathname => console.log('Pathname change', pathname),
     onSearchParamsChange: searchParams => console.log('Search params change', searchParams),
     onHashChange: hash => console.log('Hash change', hash),
     tokens: { buttonStyle: 'default' },
@@ -66,13 +66,15 @@ const meta: Meta<typeof Link> = {
         type: { summary: 'ReactNode' },
       },
     },
-    onPathnameChange: {
-      control: false,
-      description: 'Callback function that is called when the pathname changes. Relies on `usePathname` hook.',
-    },
     onSearchParamsChange: {
       control: false,
       description: 'Callback function that is called when the search params change. Relies on `useSearchParams` hook.',
+    },
+    onNavigate: {
+      control: false,
+      table: {
+        category: 'next/link',
+      },
     },
     onHashChange: {
       control: false,
@@ -111,7 +113,7 @@ const meta: Meta<typeof Link> = {
     },
     locale: {
       description:
-        'The active locale is automatically prepended. locale allows for providing a different locale. When `false` href has to include the locale as the default behavior is disabled. By default, the locale will try to be set via the `locale` prop, then the `useParams` hook. with the `locale` dynamic route segment.',
+        'The active locale is automatically prepended to `href`. locale allows for providing a different locale. When `false` href has to include the locale as the default behavior is disabled. By default, the locale will try to be set via the `locale` prop, then the `useParams` hook with the `locale` dynamic route segment.',
       table: {
         category: 'next/link',
       },

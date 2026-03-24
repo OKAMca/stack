@@ -2,7 +2,7 @@
 
 import type { LinkProps } from 'next/link'
 import type { TLink, TUseLinkReturn } from './interface'
-import { useParams, usePathname, useSearchParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import { useLocale } from 'react-aria'
 import { useHash } from '../useHash'
@@ -61,7 +61,7 @@ export function useLink(props: TLink): TUseLinkReturn {
     onMouseEnter,
     onTouchStart,
     onClick,
-    onPathnameChange,
+    onNavigate,
     onHashChange,
     onSearchParamsChange,
     href,
@@ -76,7 +76,6 @@ export function useLink(props: TLink): TUseLinkReturn {
 
   const locale = useLinkLocale(props)
   const localizedHref = localizeHref(href, locale)
-  const pathname = usePathname()
   const searchParams = useSearchParams()
   const hash = useHash()
 
@@ -101,10 +100,6 @@ export function useLink(props: TLink): TUseLinkReturn {
   }
 
   useEffect(() => {
-    onPathnameChange?.(pathname)
-  }, [onPathnameChange, pathname])
-
-  useEffect(() => {
     onSearchParamsChange?.(searchParams)
   }, [onSearchParamsChange, searchParams])
 
@@ -116,10 +111,10 @@ export function useLink(props: TLink): TUseLinkReturn {
     href: localizedHref.toString(),
     as: urlDecorator,
     replace,
-    locale,
     prefetch,
     shallow,
     onClick: handleClick,
+    onNavigate,
     onTouchStart: handleTouchStart,
     onMouseEnter,
     scroll: nextScroll,

@@ -14,7 +14,6 @@ function Link({ ref, ...props }: TLinkProps & { ref?: Ref<HTMLElement> }) {
     as = NextLink,
     children,
     scroll,
-    onPathnameChange,
     onSearchParamsChange,
     onHashChange,
     behavior,
