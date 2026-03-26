@@ -1,3 +1,23 @@
+## 2.1.0 (2026-03-26)
+
+### 🚀 Features
+
+- **next-component:** deprecate onPathnameChange in favor of onNavigate ([#445](https://github.com/OKAMca/stack/pull/445))
+  * fix(next-component): keep deprecated onPathnameChange bridge
+  * fix(next-component): prevent prop leakage and align locale docs
+
+### 🩹 Fixes
+
+- resolve dependabot security alerts and clean up published package dependencies ([#441](https://github.com/OKAMca/stack/pull/441))
+- replace use server by server-only in server chunks ([#437](https://github.com/OKAMca/stack/pull/437))
+
+### ❤️ Thank You
+
+- Claude Opus 4.6 (1M context)
+- GabrielAuclair7
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.0.3 (2026-03-17)
 
 ### 🩹 Fixes
