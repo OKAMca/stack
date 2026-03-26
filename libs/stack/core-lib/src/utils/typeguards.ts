@@ -1,6 +1,6 @@
 export type IsoDateString = string
 
-const ISO_DATE_RE = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/
+const ISO_DATE_RE = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/
 
 export function isIsoDateString(dateStr: unknown): dateStr is IsoDateString {
   if (typeof dateStr !== 'string' || !ISO_DATE_RE.test(dateStr)) {
