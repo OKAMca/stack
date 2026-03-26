@@ -54,7 +54,7 @@
         "{options.reportsDirectory}"
       ],
       "options": {
-        "reportsDirectory": "../../coverage/apps/demo",
+        "reportsDirectory": "{projectRoot}/../../coverage/apps/demo",
         "passWithNoTests": true
       },
       "configurations": {

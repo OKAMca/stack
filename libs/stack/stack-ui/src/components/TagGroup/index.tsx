@@ -31,7 +31,7 @@ function TagGroup<Item extends object, T extends TToken = TToken>(props: TTagGro
         </Typography>
       )}
       <BoxWithForwardRef themeName={`${themeName}.tags`} tokens={tokens} ref={ref} {...gridProps}>
-        {[...state.collection].map(item => (
+        {Array.from(state.collection, item => (
           <Tag
             themeName={`${themeName}.tag`}
             key={item.key}

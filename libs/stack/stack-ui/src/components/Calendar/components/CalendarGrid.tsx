@@ -53,7 +53,7 @@ function CalendarGrid({
         </Box>
       </Box>
       <Box as="tbody" themeName={`${themeName}.calendarBody`} tokens={tokens}>
-        {[...Array.from({ length: weeksInMonth }).keys()].map(weekIndex => (
+        {Array.from({ length: weeksInMonth }, (_, weekIndex) => (
           <Box as="tr" themeName={`${themeName}.calendarWeekRow`} key={`week-${weekIndex}`} tokens={tokens}>
             {state.getDatesInWeek(weekIndex).map((date, i) => {
               if (date == null) {

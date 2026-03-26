@@ -44,7 +44,7 @@
         "{options.reportsDirectory}"
       ],
       "options": {
-        "reportsDirectory": "../../../coverage/libs/directus/directus-flexible-content",
+        "reportsDirectory": "{projectRoot}/../../../coverage/libs/directus/directus-flexible-content",
         "passWithNoTests": true
       }
     },
