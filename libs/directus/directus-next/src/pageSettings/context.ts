@@ -1,4 +1,4 @@
-import type { Variables } from 'graphql-request'
+import type { GraphQLClient, Variables } from 'graphql-request'
 import type { TPageSettingsQueryItem } from '../types/pageSettings'
 import type { TGetPageSettingsReturn } from './interface'
 import { createServerContext } from '@okam/next-component/server'
@@ -14,4 +14,10 @@ export function pageSettingsVariablesContext(variables?: Variables) {
   const [pageSettingsVariables, setPageSettingsVariables] = createServerContext(variables)
 
   return [pageSettingsVariables, setPageSettingsVariables] as const
+}
+
+export function pageSettingsClientContext(client?: GraphQLClient) {
+  const [pageSettingsClient, setPageSettingsClient] = createServerContext(client)
+
+  return [pageSettingsClient, setPageSettingsClient] as const
 }

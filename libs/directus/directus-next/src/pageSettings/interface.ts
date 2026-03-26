@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
-import type { Variables } from 'graphql-request'
+import type { GraphQLClient, Variables } from 'graphql-request'
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { Fragmentize } from '../types/Fragments'
 import type { TPageSettings, TPageSettingsItemQuery, TPageSettingsQueryItem } from '../types/pageSettings'
@@ -30,6 +30,10 @@ export interface TGetPageSettingsProps<
    * Either a directus route config or directly a locale map. Not passing a config while passing a document will result in direct usage of the `locale` variable.
    */
   config?: TGetPageSettingsConfig
+  /**
+   * GraphQL client to use for the query done via {@link queryGql}. Gets memorized in server context, so passing no client will result in the last set client to be used (or, if none were ever set, the default `queryGql` client)
+   */
+  client?: GraphQLClient
 }
 
 export type TGetPageSettingsReturn<Item extends TPageSettingsQueryItem> = Omit<Item, 'page_settings'> & {

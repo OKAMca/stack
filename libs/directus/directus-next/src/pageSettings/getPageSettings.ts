@@ -1,15 +1,16 @@
-import type { Variables } from 'graphql-request'
+import type { GraphQLClient, Variables } from 'graphql-request'
 
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { TPageSettingsQueryItem } from '../types/pageSettings'
 import type { TGetPageSettingsConfig, TGetPageSettingsProps, TGetPageSettingsReturn } from './interface'
 import { queryGql } from '@okam/directus-query'
-import { get, invert, isEqual } from 'radashi'
+import { get, invert, isEmpty, isEqual } from 'radashi'
 import { log } from '../logger'
-import { pageSettingsContext, pageSettingsVariablesContext } from './context'
+import { pageSettingsClientContext, pageSettingsContext, pageSettingsVariablesContext } from './context'
 
 const [getPageSettingsContext, setPageSettingsContext] = pageSettingsContext()
 const [getVariables, setVariables] = pageSettingsVariablesContext()
+const [getClient, setClient] = pageSettingsClientContext()
 
 function isDirectusRouteConfig(config: TGetPageSettingsConfig | undefined): config is TDirectusRouteConfig {
   return config != null && 'collectionSettings' in config
@@ -26,6 +27,17 @@ function getDirectusVariables<QueryVariables extends Variables>(
   const locale = get<string>(variables, 'locale')
   const directusLocale = invert(localeMap)[locale] ?? locale
   return { ...variables, locale: directusLocale } as QueryVariables
+}
+
+function handleClient(client: GraphQLClient | undefined) {
+  const contextClient = getClient()
+  if (isEmpty(client) || isEqual(client, contextClient)) {
+    return contextClient
+  }
+
+  setClient(client)
+
+  return client
 }
 
 /**
@@ -63,9 +75,11 @@ export async function getPageSettings<
   props?: TGetPageSettingsProps<Item, ItemKey, QueryVariables>,
   itemKey?: Exclude<ItemKey, '__typename'>,
 ): Promise<TGetPageSettingsReturn<Item>> {
-  const { variables, config } = props ?? {}
+  const { variables, config, client } = props ?? {}
   const directusVariables = getDirectusVariables(variables, config)
   const defaultReturn = getPageSettingsContext() as Exclude<TGetPageSettingsReturn<Item>, undefined>
+
+  handleClient(client)
 
   if (props == null || isEqual(getVariables(), directusVariables)) {
     log('Using cached page settings', { path: defaultReturn.page_settings?.translations?.[0]?.path })
