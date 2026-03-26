@@ -31,9 +31,29 @@ export interface TGetPageSettingsProps<
    */
   config?: TGetPageSettingsConfig
   /**
-   * GraphQL client to use for the query done via {@link queryGql}.
+   * GraphQL client to use for the query done via {@link queryGql}. Defaults to `@okam/directus-query` `defaultGraphqlRequestClient`
+   * @default defaultGraphqlRequestClient
    */
   client?: GraphQLClient
+  /**
+   * Query function to replace the default {@link queryGql}. Note that `document`, `variables` and `client` still get passed to this function, but they can be overriden easily.
+   *
+   * @example
+   * ```ts
+   * const customGqlClient = new GraphQLClient()
+   *
+   * const product = await getPageSettings({
+   *   queryFn: async (document, variables) => {
+   *     // ignore the `client` argument passed in the callback
+   *     const result = await queryGql(document, variables, customGqlClient)
+   *     return result
+   *   }
+   * })
+   * ```
+   *
+   * @default queryGql
+   */
+  queryGqlFn?: (document: TPageSettingsItemDocument<Item, ItemKey, QueryVariables>, queryKey?: QueryVariables | undefined, client?: GraphQLClient) => Promise<TPageSettingsItemQuery<Item, ItemKey>>
 }
 
 export type TGetPageSettingsReturn<Item extends TPageSettingsQueryItem> = Omit<Item, 'page_settings'> & {
