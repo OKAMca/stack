@@ -4,6 +4,7 @@ import { blockWysiwygConfig, getFragment } from '@okam/directus-block'
 import { BlockDispatcher, getBlock } from '@okam/directus-block/server'
 import { DirectusFile } from '@okam/directus-next-component'
 import { getPageSettings } from '@okam/directus-next/server'
+import { defaultGraphqlRequestAdmin } from '@okam/directus-query'
 import { Accordion, AccordionItem, Box } from '@okam/stack-ui'
 import { BlockFilesByIdDocument, DirectusFilesFragmentDoc, PageByIdDocument } from 'apps/directus-data-query/src'
 import { isEmpty } from 'radashi'
@@ -28,15 +29,22 @@ const blockFilesConfig: TBlockSerializerConfigComponent<BlockFilesFragment> = {
   },
 }
 
-export default async function Page(props: { params: Promise<{ id: string, locale: string }> }) {
-  const params = await props.params
-  const data = await getPageSettings({
-    document: PageByIdDocument,
-    variables: params,
-    config: directusConfig,
-  })
+async function PublicPage(props: { id: string, locale: string }) {
+  let data
+  try {
+    const page = await getPageSettings({
+      document: PageByIdDocument,
+      variables: props,
+      config: directusConfig,
+    })
+    data = page
+  }
+  catch (e) {
+    console.error('[PublicPage]', e)
+    return null
+  }
 
-  const { blocks } = data?.translations?.[0] ?? {}
+  const { blocks, title } = data?.translations?.[0] ?? {}
 
   // If the query has no main fragment, the type parameters must be passed.
   // const dataWithoutFragment = await getPageSettings<PageFragment, 'pages_by_id', typeof props.params>({
@@ -48,6 +56,8 @@ export default async function Page(props: { params: Promise<{ id: string, locale
 
   return (
     <div>
+      <h1 style={{ fontSize: '4rem' }}>Public Page</h1>
+      {!isEmpty(title) && <h2 style={{ fontSize: '3rem' }}>{title}</h2>}
       <Accordion id="page-data" customTheme="mb-8">
         <AccordionItem title="JSON Page Data">
           <pre>{JSON.stringify(data, null, 2)}</pre>
@@ -65,5 +75,66 @@ export default async function Page(props: { params: Promise<{ id: string, locale
         />
       )}
     </div>
+  )
+}
+
+async function AdminPage(props: { id: string, locale: string }) {
+  let data
+  try {
+    const page = await getPageSettings({
+      document: PageByIdDocument,
+      variables: props,
+      config: directusConfig,
+      client: defaultGraphqlRequestAdmin,
+    })
+    data = page
+  }
+  catch (e) {
+    console.error('[AdminPage]', e)
+    return null
+  }
+
+  const { blocks, title } = data?.translations?.[0] ?? {}
+
+  // If the query has no main fragment, the type parameters must be passed.
+  // const dataWithoutFragment = await getPageSettings<PageFragment, 'pages_by_id', typeof props.params>({
+  //   document: PageByIdWithoutFragmentDocument,
+  //   variables: props.params,
+  //   config: directusConfig,
+  // })
+  // const { translations, page_settings } = dataWithoutFragment ?? {}
+
+  return (
+    <div>
+      <h1 style={{ fontSize: '4rem' }}>Admin Page</h1>
+      {!isEmpty(title) && <h2 style={{ fontSize: '3rem' }}>{title}</h2>}
+      <Accordion id="page-data" customTheme="mb-8">
+        <AccordionItem title="JSON Page Data">
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </AccordionItem>
+      </Accordion>
+      {!isEmpty(blocks) && (
+        <BlockDispatcher
+          blocks={blocks}
+          config={{
+            components: {
+              ...blockWysiwygConfig,
+              ...blockFilesConfig,
+            },
+          }}
+        />
+      )}
+    </div>
+  )
+}
+
+export default async function Page(props: { params: Promise<{ id: string, locale: string }> }) {
+  const params = await props.params
+
+  return (
+    <>
+      <PublicPage {...params} />
+      <AdminPage {...params} />
+    </>
   )
 }
