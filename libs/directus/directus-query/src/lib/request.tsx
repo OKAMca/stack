@@ -34,7 +34,7 @@ export const graphqlRequestAdmin = new GraphQLClient(GRAPHQL_ENDPOINT_ADMIN || G
   mode: 'cors',
   fetch,
   headers: {
-    Authorization: `Bearer ${AUTH_TOKEN_ADMIN}`,
+    Authorization: `Bearer ${AUTH_TOKEN_ADMIN || AUTH_TOKEN}`,
   },
 })
 
