@@ -1,3 +1,14 @@
+## 2.0.1 (2026-03-26)
+
+### 🩹 Fixes
+
+- **directus-query:** admin client token falls back to regular token ([83444996](https://github.com/OKAMca/stack/commit/83444996))
+- **directus-query:** default admin client uses correct env vars/fallbacks ([f551345d](https://github.com/OKAMca/stack/commit/f551345d))
+
+### ❤️ Thank You
+
+- poclerson
+
 # 2.0.0 (2026-02-05)
 
 This was a version bump only for directus-query to align it with other projects, there were no code changes.

@@ -1,3 +1,9 @@
+## 2.0.3 (2026-03-26)
+
+### 🧱 Updated Dependencies
+
+- Updated directus-query to 2.0.1
+
 ## 2.0.2 (2026-03-17)
 
 ### 🩹 Fixes
