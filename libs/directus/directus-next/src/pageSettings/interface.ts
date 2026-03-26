@@ -43,7 +43,7 @@ export interface TGetPageSettingsProps<
    * const customGqlClient = new GraphQLClient()
    *
    * const product = await getPageSettings({
-   *   queryFn: async (document, variables) => {
+   *   queryGqlFn: async (document, variables) => {
    *     // ignore the `client` argument passed in the callback
    *     const result = await queryGql(document, variables, customGqlClient)
    *     return result
