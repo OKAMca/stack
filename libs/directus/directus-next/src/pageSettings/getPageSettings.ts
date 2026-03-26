@@ -1,16 +1,14 @@
-import type { GraphQLClient, Variables } from 'graphql-request'
-
+import type { Variables } from 'graphql-request'
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { TPageSettingsQueryItem } from '../types/pageSettings'
 import type { TGetPageSettingsConfig, TGetPageSettingsProps, TGetPageSettingsReturn } from './interface'
 import { queryGql } from '@okam/directus-query'
-import { get, invert, isEmpty, isEqual } from 'radashi'
+import { get, invert, isEqual } from 'radashi'
 import { log } from '../logger'
-import { pageSettingsClientContext, pageSettingsContext, pageSettingsVariablesContext } from './context'
+import { pageSettingsContext, pageSettingsVariablesContext } from './context'
 
 const [getPageSettingsContext, setPageSettingsContext] = pageSettingsContext()
 const [getVariables, setVariables] = pageSettingsVariablesContext()
-const [getClient, setClient] = pageSettingsClientContext()
 
 function isDirectusRouteConfig(config: TGetPageSettingsConfig | undefined): config is TDirectusRouteConfig {
   return config != null && 'collectionSettings' in config
@@ -27,17 +25,6 @@ function getDirectusVariables<QueryVariables extends Variables>(
   const locale = get<string>(variables, 'locale')
   const directusLocale = invert(localeMap)[locale] ?? locale
   return { ...variables, locale: directusLocale } as QueryVariables
-}
-
-function handleClient(client: GraphQLClient | undefined) {
-  const contextClient = getClient()
-  if (isEmpty(client) || isEqual(client, contextClient)) {
-    return contextClient
-  }
-
-  setClient(client)
-
-  return client
 }
 
 /**
@@ -79,8 +66,6 @@ export async function getPageSettings<
   const directusVariables = getDirectusVariables(variables, config)
   const defaultReturn = getPageSettingsContext() as Exclude<TGetPageSettingsReturn<Item>, undefined>
 
-  handleClient(client)
-
   if (props == null || isEqual(getVariables(), directusVariables)) {
     log('Using cached page settings', { path: defaultReturn.page_settings?.translations?.[0]?.path })
     return defaultReturn
@@ -90,7 +75,7 @@ export async function getPageSettings<
   const key = itemKey ?? get<ItemKey>(document, 'definitions[0].selectionSet.selections[0].name.value')
 
   log('Querying new page settings', directusVariables)
-  const result = await queryGql(document, directusVariables)
+  const result = await queryGql(document, directusVariables, client)
 
   const items = result?.[key]
   const currentItem = (Array.isArray(items) ? items?.[0] : items) as TGetPageSettingsReturn<Item> | undefined

@@ -31,7 +31,7 @@ export interface TGetPageSettingsProps<
    */
   config?: TGetPageSettingsConfig
   /**
-   * GraphQL client to use for the query done via {@link queryGql}. Gets memorized in server context, so passing no client will result in the last set client to be used (or, if none were ever set, the default `queryGql` client)
+   * GraphQL client to use for the query done via {@link queryGql}.
    */
   client?: GraphQLClient
 }
