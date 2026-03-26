@@ -15,11 +15,14 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as'> {
    * @default instant
    */
   behavior?: ScrollBehavior
+  /**
+   * @deprecated Use `onNavigate` from next/link instead.
+   */
   onPathnameChange?: (_pathname: string) => void
   onSearchParamsChange?: (_searchParams: ReadonlyURLSearchParams) => void
   onHashChange?: (_hash: string) => void
 }
 
-export interface TUseLinkReturn extends Omit<NextLinkProps, 'href'> {
+export interface TUseLinkReturn extends Omit<NextLinkProps, 'href' | 'locale'> {
   href: string
 }

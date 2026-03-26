@@ -13,6 +13,7 @@ function Link({ ref, ...props }: TLinkProps & { ref?: Ref<HTMLElement> }) {
     customTheme,
     as = NextLink,
     children,
+    locale,
     scroll,
     onPathnameChange,
     onSearchParamsChange,
