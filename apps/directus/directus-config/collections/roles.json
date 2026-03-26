@@ -19,5 +19,12 @@
     "description": null,
     "parent": null,
     "_syncId": "3d224cfa-e94b-4d19-ad57-00763be360c7"
+  },
+  {
+    "name": "Preview API",
+    "icon": "supervised_user_circle",
+    "description": null,
+    "parent": null,
+    "_syncId": "f5d923f3-b0a4-465d-8cc2-a67565d0fc6f"
   }
 ]
