@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core'
-import type { Variables } from 'graphql-request'
+import type { GraphQLClient, Variables } from 'graphql-request'
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { Fragmentize } from '../types/Fragments'
 import type { TPageSettings, TPageSettingsItemQuery, TPageSettingsQueryItem } from '../types/pageSettings'
@@ -30,6 +30,30 @@ export interface TGetPageSettingsProps<
    * Either a directus route config or directly a locale map. Not passing a config while passing a document will result in direct usage of the `locale` variable.
    */
   config?: TGetPageSettingsConfig
+  /**
+   * GraphQL client to use for the query done via {@link queryGql}. Defaults to `@okam/directus-query` `defaultGraphqlRequestClient`
+   * @default defaultGraphqlRequestClient
+   */
+  client?: GraphQLClient
+  /**
+   * Query function to replace the default {@link queryGql}. Note that `document`, `variables` and `client` still get passed to this function, but they can be overriden easily.
+   *
+   * @example
+   * ```ts
+   * const customGqlClient = new GraphQLClient()
+   *
+   * const product = await getPageSettings({
+   *   queryGqlFn: async (document, variables) => {
+   *     // ignore the `client` argument passed in the callback
+   *     const result = await queryGql(document, variables, customGqlClient)
+   *     return result
+   *   }
+   * })
+   * ```
+   *
+   * @default queryGql
+   */
+  queryGqlFn?: (document: TPageSettingsItemDocument<Item, ItemKey, QueryVariables>, queryKey?: QueryVariables | undefined, client?: GraphQLClient) => Promise<TPageSettingsItemQuery<Item, ItemKey>>
 }
 
 export type TGetPageSettingsReturn<Item extends TPageSettingsQueryItem> = Omit<Item, 'page_settings'> & {

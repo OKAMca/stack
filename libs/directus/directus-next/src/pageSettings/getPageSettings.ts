@@ -1,9 +1,8 @@
 import type { Variables } from 'graphql-request'
-
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
 import type { TPageSettingsQueryItem } from '../types/pageSettings'
 import type { TGetPageSettingsConfig, TGetPageSettingsProps, TGetPageSettingsReturn } from './interface'
-import { queryGql } from '@okam/directus-query'
+import { defaultGraphqlRequestClient, queryGql } from '@okam/directus-query'
 import { get, invert, isEqual } from 'radashi'
 import { log } from '../logger'
 import { pageSettingsContext, pageSettingsVariablesContext } from './context'
@@ -63,7 +62,7 @@ export async function getPageSettings<
   props?: TGetPageSettingsProps<Item, ItemKey, QueryVariables>,
   itemKey?: Exclude<ItemKey, '__typename'>,
 ): Promise<TGetPageSettingsReturn<Item>> {
-  const { variables, config } = props ?? {}
+  const { variables, config, client = defaultGraphqlRequestClient, queryGqlFn = queryGql } = props ?? {}
   const directusVariables = getDirectusVariables(variables, config)
   const defaultReturn = getPageSettingsContext() as Exclude<TGetPageSettingsReturn<Item>, undefined>
 
@@ -76,7 +75,7 @@ export async function getPageSettings<
   const key = itemKey ?? get<ItemKey>(document, 'definitions[0].selectionSet.selections[0].name.value')
 
   log('Querying new page settings', directusVariables)
-  const result = await queryGql(document, directusVariables)
+  const result = await queryGqlFn(document, directusVariables, client)
 
   const items = result?.[key]
   const currentItem = (Array.isArray(items) ? items?.[0] : items) as TGetPageSettingsReturn<Item> | undefined
