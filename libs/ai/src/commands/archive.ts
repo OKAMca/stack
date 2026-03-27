@@ -7,11 +7,14 @@ interface PrdFile {
   [key: string]: unknown
 }
 
+const NON_ALPHANUM_RE = /[^a-z0-9]+/g
+const LEADING_TRAILING_DASH_RE = /^-+|-+$/g
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
+    .replace(NON_ALPHANUM_RE, '-')
+    .replace(LEADING_TRAILING_DASH_RE, '')
     .substring(0, 50)
 }
 

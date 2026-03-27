@@ -90,7 +90,7 @@ export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledList
         themeName={`${themeName}.list`}
         tokens={listBoxTokens}
       >
-        {[...state.collection].map((item) => {
+        {Array.from(state.collection, (item) => {
           const { key } = item
           const type = item.type ?? 'item'
           const Component = itemComponents[type] ?? Option

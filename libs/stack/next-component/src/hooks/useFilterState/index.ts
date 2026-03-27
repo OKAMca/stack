@@ -64,7 +64,7 @@ export function useFilterState(props: TFilter): UseFilterStateReturn {
   // This is a bidirectional sync: URL -> useListState (via defaultSelectedKeys) and
   // useListState -> URL (via this effect). The isEqual check prevents infinite loops.
   useUpdateEffect(() => {
-    const next = [...state.selectionManager.selectedKeys].map(String)
+    const next = Array.from(state.selectionManager.selectedKeys, String)
     if (isEqual(next, selectedKeys)) {
       return
     }

@@ -40,7 +40,7 @@ function TabList<I extends object, T extends TToken = TToken>(props: TTabListPro
       )}
       <Box themeName={`${themeName}.container`} tokens={tabListTokens}>
         <BoxWithForwardRef themeName={`${themeName}.list`} tokens={tabListTokens} {...tabListProps} ref={ref}>
-          {[...state.collection].map(item => (
+          {Array.from(state.collection, item => (
             <Tab
               key={item.key}
               item={item}
