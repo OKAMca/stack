@@ -17,4 +17,13 @@ export const searchIcon = tv({
     focus-ring-black
     outline-0
   `,
+  variants: {
+    cursor: {
+      default: 'pointer-events-none',
+      pointer: 'cursor-pointer',
+    },
+  },
+  defaultVariants: {
+    cursor: 'default',
+  },
 })

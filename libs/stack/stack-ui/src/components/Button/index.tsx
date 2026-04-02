@@ -74,7 +74,7 @@ function Button({ ref: forwardRef, ...props }: TButtonProps & { ref?: Ref<HTMLEl
   )
 
   const theme = useThemeContext(themeName, tokens, customTheme)
-  const { onPress, onFocusChange, excludeFromTabOrder, preventFocusOnPress, ...allProps } = rest as Record<
+  const { onPress, onPressStart, onFocusChange, excludeFromTabOrder, preventFocusOnPress, ...allProps } = rest as Record<
     string,
     unknown
   >

@@ -4,7 +4,7 @@ import type { ChangeEvent } from 'react'
 import type { TToken } from '../../../providers/Theme/interface'
 import type TSearchProps from './interface'
 import { useCallback, useRef } from 'react'
-import { FocusRing, useSearchField } from 'react-aria'
+import { useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
 import useThemeContext from '../../../providers/Theme/hooks'
 import { useUserQueryValHook } from '../../../providers/UserSearchQuery'
@@ -72,18 +72,17 @@ function SearchField<T extends TToken>(props: TSearchProps<T>) {
           className={inputTheme}
           disabled={internalIsDisabled}
         />
-        <FocusRing focusRingClass="has-focus-ring">
-          <Button
-            isDisabled={internalIsDisabled}
-            handlePress={clearButtonProps.onPress}
-            tokens={{ isIconOnly: true, buttonStyle: 'hollow', isDisabled: internalIsDisabled ?? false }}
-            themeName={`${themeName}.icon`}
-            aria-label="clear"
-          >
-            {icon == null && <BuiltinIcon value={state.value} />}
-            {icon != null && icon}
-          </Button>
-        </FocusRing>
+        <Button
+          {...clearButtonProps}
+          isDisabled={internalIsDisabled}
+          handlePress={clearButtonProps.onPress}
+          tokens={{ ...searchTokens, isIconOnly: true, buttonStyle: 'hollow', cursor: state.value ? 'pointer' : 'default' }}
+          themeName={`${themeName}.icon`}
+        >
+          {icon == null && <BuiltinIcon value={state.value} />}
+          {icon != null && typeof icon === 'function' && icon(state.value)}
+          {icon != null && typeof icon !== 'function' && icon}
+        </Button>
       </Box>
       {errorMessage != null && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={searchTokens} {...errorMessageProps}>
