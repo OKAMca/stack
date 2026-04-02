@@ -6,6 +6,7 @@ import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useRef } from 'react'
 import { useLocale } from 'react-aria'
 import { useHash } from '../useHash'
+import { LocalePrefix } from './interface'
 
 // Define Params type locally to avoid Next.js internal import path changes
 type Params = Record<string, string | string[] | undefined>
@@ -29,12 +30,21 @@ function getParamsLocale(params: Params | undefined): string | undefined {
  * @returns The best matched locale
  */
 export function useLinkLocale(props: TLink) {
-  const { locale } = props
+  const { locale, i18n } = props
+  const { defaultLocale, localePrefix = 'always' } = i18n ?? {}
   const params = useParams()
   const paramsLocale = getParamsLocale(params)
   const { locale: ctxLocale } = useLocale()
+  const finalLocale = locale ?? ctxLocale ?? paramsLocale ?? false
 
-  return locale ?? ctxLocale ?? paramsLocale ?? false
+  const shouldDisplayLocale = {
+    [LocalePrefix.Always]: true,
+    [LocalePrefix.AsNeeded]: finalLocale !== defaultLocale,
+  }[localePrefix]
+
+  const displayLocale = shouldDisplayLocale ? finalLocale : false
+
+  return displayLocale
 }
 
 export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale']): string {
