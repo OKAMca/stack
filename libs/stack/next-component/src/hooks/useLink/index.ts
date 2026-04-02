@@ -49,17 +49,18 @@ export function useLinkLocale(props: TLink) {
 
 export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale']): string {
   const hrefString = href.toString()
+  const hasTrailingSlash = hrefString.endsWith('/')
 
   const isAnchor = hrefString.startsWith('#')
   const isExternal = /^[a-z]+:\/\//i.test(hrefString) || hrefString.startsWith('//')
-  if (isExternal || isAnchor)
-    return hrefString
+  let finalHref: string
 
-  if (locale != null && locale !== false) {
-    return `/${locale}${hrefString}`
+  if (locale != null && locale !== false && !isExternal && !isAnchor) {
+    finalHref = `/${locale}${hrefString}`
   }
 
-  return hrefString
+  finalHref = hrefString
+  return (hasTrailingSlash || isAnchor) ? finalHref : `${finalHref}/`
 }
 
 /**
