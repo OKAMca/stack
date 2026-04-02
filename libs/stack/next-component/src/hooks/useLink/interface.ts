@@ -1,5 +1,6 @@
 import type { LinkProps as NextLinkProps } from 'next/link'
 import type { ReadonlyURLSearchParams } from 'next/navigation'
+import type { UrlObject } from 'node:url'
 
 export enum LocalePrefix {
   /**
@@ -62,7 +63,8 @@ export type TLinkI18nConfig
     localePrefix?: `${LocalePrefix.Always}` | undefined
   })
 
-export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as'> {
+export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'hre'> {
+  href: string | UrlObject
   /**
    * @default true
    * - `true`: Scrolls to the top of the clicked anchor (default Next.js behavior)

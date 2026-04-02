@@ -37,9 +37,9 @@ function Accordion<T extends TToken>(props: TAccordionProps<T>) {
         id={id}
         {...accordionProps}
       >
-        {[...state.collection].map((item: Node<TAccordionItemProps>) => {
-          return <AriaAccordionItem key={item.key} item={item} themeName={themeName} tokens={tokens} />
-        })}
+        {Array.from(state.collection, (item: Node<TAccordionItemProps>) => (
+          <AriaAccordionItem key={item.key} item={item} themeName={themeName} tokens={tokens} />
+        ))}
       </BoxWithForwardRef>
     </AccordionContextProvider>
   )

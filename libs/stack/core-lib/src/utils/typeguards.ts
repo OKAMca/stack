@@ -1,6 +1,9 @@
 export type IsoDateString = string
+
+const ISO_DATE_RE = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/
+
 export function isIsoDateString(dateStr: unknown): dateStr is IsoDateString {
-  if (typeof dateStr !== 'string' || !/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/.test(dateStr)) {
+  if (typeof dateStr !== 'string' || !ISO_DATE_RE.test(dateStr)) {
     return false
   }
   try {
@@ -36,8 +39,10 @@ export function isParsableNumeric(v: unknown): v is number | string {
   return !Number.isNaN(Number.parseInt(v, 10) || Number.isNaN(Number.parseFloat(v)))
 }
 
+const INTEGER_RE = /^-?\d+$/
+
 export function isParsableSafeInteger(v: unknown): v is number | string {
-  const value = typeof v === 'string' && /^-?\d+$/.test(v) ? Number.parseInt(v, 10) : v
+  const value = typeof v === 'string' && INTEGER_RE.test(v) ? Number.parseInt(v, 10) : v
   return isSafeInteger(value)
 }
 

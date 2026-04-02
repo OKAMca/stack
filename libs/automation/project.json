@@ -60,7 +60,7 @@
         "{options.reportsDirectory}"
       ],
       "options": {
-        "reportsDirectory": "../../coverage/libs/automation"
+        "reportsDirectory": "{projectRoot}/../../coverage/libs/automation"
       }
     },
     "nx-release-publish": {

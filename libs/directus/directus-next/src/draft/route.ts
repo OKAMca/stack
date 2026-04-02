@@ -22,6 +22,8 @@ import * as zod from 'zod'
 import { getJsonErrorResponse } from '../response'
 import { getDraftSecretDefault } from './env'
 
+const TEMPLATE_VAR_RE = /\{\{([a-z]+)\}\}/gi
+
 function jsonStringsArraySchema(message: string, code: number) {
   return zod
     .string()
@@ -114,7 +116,7 @@ export function parseDraftParams(url: string, expectedSecret: string) {
  */
 export function getPathFromRoute(routeUrl: string, url: string, index = 0) {
   const { searchParams } = new URL(url)
-  const matches = [...routeUrl.matchAll(/\{\{([a-z]+)\}\}/gi)]
+  const matches = [...routeUrl.matchAll(TEMPLATE_VAR_RE)]
   const map: Record<string, string> = {}
   matches.forEach((match) => {
     const key = match[1] ?? ''

@@ -11,6 +11,8 @@ import { LocalePrefix } from './interface'
 // Define Params type locally to avoid Next.js internal import path changes
 type Params = Record<string, string | string[] | undefined>
 
+const EXTERNAL_URL_RE = /^[a-z]+:\/\//i
+
 function scrollToTop(behavior: ScrollBehavior) {
   window?.scrollTo?.({ top: 0, behavior })
 }
@@ -52,7 +54,7 @@ export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale'
   const hasTrailingSlash = hrefString.endsWith('/')
 
   const isAnchor = hrefString.startsWith('#')
-  const isExternal = /^[a-z]+:\/\//i.test(hrefString) || hrefString.startsWith('//')
+  const isExternal = EXTERNAL_URL_RE.test(hrefString) || hrefString.startsWith('//')
   let finalHref: string
   if (locale != null && locale !== false && !isExternal && !isAnchor) {
     finalHref = `/${locale}${hrefString}`

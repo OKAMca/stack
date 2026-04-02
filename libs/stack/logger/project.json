@@ -58,7 +58,7 @@
         "{options.reportsDirectory}"
       ],
       "options": {
-        "reportsDirectory": "../../../coverage/libs/stack/logger"
+        "reportsDirectory": "{projectRoot}/../../../coverage/libs/stack/logger"
       }
     }
   }

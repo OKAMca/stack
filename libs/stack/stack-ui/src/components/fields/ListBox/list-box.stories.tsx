@@ -248,7 +248,8 @@ export const Controlled: Story = {
     return (
       <Box>
         <Box customTheme="m-4 flex flex-wrap gap-2">
-          {[...(items ?? [])].map(
+          {Array.from(
+            items ?? [],
             item =>
               isValidElement(item.children) && (
                 <Button key={item.key} handlePress={() => handleButtonPress(item.key)}>
