@@ -54,12 +54,13 @@ export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale'
   const isAnchor = hrefString.startsWith('#')
   const isExternal = /^[a-z]+:\/\//i.test(hrefString) || hrefString.startsWith('//')
   let finalHref: string
-
   if (locale != null && locale !== false && !isExternal && !isAnchor) {
     finalHref = `/${locale}${hrefString}`
   }
+  else {
+    finalHref = hrefString
+  }
 
-  finalHref = hrefString
   return (hasTrailingSlash || isAnchor) ? finalHref : `${finalHref}/`
 }
 
