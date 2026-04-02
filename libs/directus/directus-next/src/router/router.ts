@@ -1,11 +1,11 @@
 import type { NextRequest, NextResponse as NextResponseType } from 'next/server'
 import type { TPageSettingsTranslation } from '../types'
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
+import { LocalePrefix } from '@okam/next-component/server'
 import { NextResponse as NextResponseClass } from 'next/server'
 import { isEmpty } from 'radashi'
 import { log } from '../logger'
 import { handleRedirect } from '../redirect/utils/handleRedirect'
-import { DirectusRouteLocalePrefix } from '../types/directusRouteConfig'
 import { fetchPageSettingsTranslation } from './utils/fetchPageSettingsTranslation'
 import { splitLocaleFromPathname } from './utils/locale'
 
@@ -93,14 +93,14 @@ export async function directusRouteRouter(
     return NextResponse.next()
   }
 
-  const { localeMap, collectionSettings, localePrefix = DirectusRouteLocalePrefix.Always, defaultLocale } = config
+  const { localeMap, collectionSettings, localePrefix = LocalePrefix.Always, defaultLocale } = config
 
   // eslint-disable-next-line ts/prefer-nullish-coalescing, ts/strict-boolean-expressions -- empty string locale mapping should use original locale
   const mappedLocale = localeMap?.[directusLocale] || directusLocale
 
   const isDirectusRouteLocalePrefixedMap = {
-    [DirectusRouteLocalePrefix.Always]: true,
-    [DirectusRouteLocalePrefix.AsNeeded]: directusLocale !== defaultLocale,
+    [LocalePrefix.Always]: true,
+    [LocalePrefix.AsNeeded]: directusLocale !== defaultLocale,
   }
   const isDirectusRouteLocalePrefixed = isDirectusRouteLocalePrefixedMap[localePrefix]
   const displayedLocale = isDirectusRouteLocalePrefixed ? `/${mappedLocale}` : ''
