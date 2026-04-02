@@ -1,3 +1,5 @@
+import type { LocalePrefix } from '@okam/next-component/server'
+
 export interface TDirectusRouteRedirectsModule {
   /**
    * @default process.env.NEXT_API_REDIRECT_SECRET
@@ -13,6 +15,10 @@ export interface TDirectusRouteRedirectsModule {
   apiRoute?: string
 }
 
+/**
+ * @deprecated
+ * Use `LocalePrefix` from `@okam/next-component` instead.
+ */
 export enum DirectusRouteLocalePrefix {
   /**
    * The pathname will be prefixed with the locale only when it is not the default locale
@@ -69,17 +75,11 @@ export enum DirectusRouteLocalePrefix {
 export type TDirectusRouteI18n<Locales extends string>
   = | {
     defaultLocale: Locales
-    /**
-     * {@link DirectusRouteLocalePrefix}
-     */
-    localePrefix: `${DirectusRouteLocalePrefix.AsNeeded}`
+    localePrefix: `${LocalePrefix.AsNeeded}`
   }
   | {
     defaultLocale?: Locales
-    /**
-     * {@link DirectusRouteLocalePrefix}
-     */
-    localePrefix?: `${DirectusRouteLocalePrefix.Always}` | undefined
+    localePrefix?: `${LocalePrefix.Always}` | undefined
   }
 
 export type TDirectusRouteConfig<Locales extends string = string> = {
