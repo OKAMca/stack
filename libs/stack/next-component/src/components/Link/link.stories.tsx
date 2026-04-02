@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { Box } from '@okam/stack-ui'
-import { useLocale } from 'react-aria'
 import Link from './index'
 
 const meta: Meta<typeof Link> = {
@@ -145,7 +144,6 @@ const meta: Meta<typeof Link> = {
     },
   },
   render: ({ href, ...args }) => {
-    console.log(useLocale())
     return (
       <Box customTheme="w-fit">
         <Link href={href} {...args} />
