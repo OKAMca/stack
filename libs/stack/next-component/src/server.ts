@@ -1,7 +1,5 @@
 export { default as AdminBar } from './components/AdminBar'
-
-// lib
+export { LocalePrefix } from './hooks/useLink/interface'
 export { createServerContext } from './lib/createServerContext'
 
-// providers
 export { default as DraftModeServerContextProvider } from './providers/DraftMode/server'
