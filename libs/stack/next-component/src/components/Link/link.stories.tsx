@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite'
-import { Box, Typography } from '@okam/stack-ui'
-import { I18nProvider } from 'react-aria'
+import { Box } from '@okam/stack-ui'
+import { useLocale } from 'react-aria'
 import Link from './index'
 
 const meta: Meta<typeof Link> = {
@@ -22,15 +22,6 @@ const meta: Meta<typeof Link> = {
       },
     },
   },
-  decorators: [
-    Story => (
-      <I18nProvider locale="en">
-        <Box customTheme="flex flex-col gap-4">
-          <Story />
-        </Box>
-      </I18nProvider>
-    ),
-  ],
   args: {
     href: '/products/2',
     children: 'Product 2',
@@ -146,20 +137,21 @@ const meta: Meta<typeof Link> = {
         category: 'next/link',
       },
     },
+    i18n: {
+      control: false,
+      table: {
+        category: '',
+      },
+    },
   },
-  render: ({ href, ...args }) => (
-    <>
+  render: ({ href, ...args }) => {
+    console.log(useLocale())
+    return (
       <Box customTheme="w-fit">
         <Link href={href} {...args} />
       </Box>
-      <Box customTheme="w-fit">
-        <Typography>
-          Href:
-          {href.toString()}
-        </Typography>
-      </Box>
-    </>
-  ),
+    )
+  },
 }
 
 export default meta
@@ -221,5 +213,25 @@ export const Anchor: Story = {
   args: {
     href: '#products-2',
     as: 'a',
+  },
+}
+
+export const LocalePrefixAlways: Story = {
+  args: {
+    href: '/products/2',
+    i18n: {
+      defaultLocale: 'en',
+      localePrefix: 'always',
+    },
+  },
+}
+
+export const LocalePrefixAsNeeded: Story = {
+  args: {
+    href: '/products/2',
+    i18n: {
+      defaultLocale: 'en',
+      localePrefix: 'as-needed',
+    },
   },
 }
