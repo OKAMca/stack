@@ -3,6 +3,7 @@
 import type { ChangeEvent } from 'react'
 import type { TToken } from '../../../providers/Theme/interface'
 import type TSearchProps from './interface'
+import type { TSearchActionProps } from './interface'
 import { useCallback, useRef } from 'react'
 import { useSearchField } from 'react-aria'
 import { useSearchFieldState } from 'react-stately'
@@ -14,16 +15,31 @@ import Close from '../../icons/CloseBtn'
 import Search from '../../icons/Search'
 import { Typography } from '../../Typography'
 
-function BuiltinIcon({ value }: { value: string }) {
+function DefaultAction({ value, clearButtonProps, isDisabled, tokens, themeName }: TSearchActionProps) {
   if (value === '') {
-    return <Search width="16" height="16" />
+    return (
+      <Box as="span" themeName={`${themeName}.icon`} tokens={tokens} aria-hidden="true">
+        <Search width="16" height="16" />
+      </Box>
+    )
   }
 
-  return <Close width="16" height="16" />
+  return (
+    <Button
+      {...clearButtonProps}
+      isDisabled={isDisabled}
+      handlePress={clearButtonProps.onPress}
+      tokens={{ ...tokens, isIconOnly: true, buttonStyle: 'hollow' }}
+      themeName={`${themeName}.button`}
+    >
+      <Close width="16" height="16" />
+    </Button>
+  )
 }
 
 function SearchField<T extends TToken>(props: TSearchProps<T>) {
   const { setUserSearchQuery } = useUserQueryValHook()
+
   const {
     label,
     themeName = 'search',
@@ -32,9 +48,10 @@ function SearchField<T extends TToken>(props: TSearchProps<T>) {
     disabled,
     errorMessage,
     placeholder,
-    icon,
+    renderAction,
     isDisabled,
   } = props
+
   // eslint-disable-next-line ts/prefer-nullish-coalescing -- boolean OR is intended to combine two flags
   const internalIsDisabled = isDisabled || disabled
   const internalProps = { ...props, isDisabled: internalIsDisabled }
@@ -51,10 +68,17 @@ function SearchField<T extends TToken>(props: TSearchProps<T>) {
   )
 
   const isError = errorMessage != null
-
   const searchTokens = { ...tokens, isError, isDisabled: internalIsDisabled ?? false }
-
   const inputTheme = useThemeContext(`${themeName}.input`, searchTokens, customTheme)
+  const Action = renderAction ?? DefaultAction
+
+  const actionProps: TSearchActionProps = {
+    value: state.value,
+    clearButtonProps,
+    isDisabled: internalIsDisabled ?? false,
+    tokens: searchTokens,
+    themeName: themeName ?? 'search',
+  }
 
   return (
     <Box themeName={`${themeName}.wrapper`} tokens={searchTokens} aria-disabled={internalIsDisabled ?? false}>
@@ -72,17 +96,7 @@ function SearchField<T extends TToken>(props: TSearchProps<T>) {
           className={inputTheme}
           disabled={internalIsDisabled}
         />
-        <Button
-          {...clearButtonProps}
-          isDisabled={internalIsDisabled}
-          handlePress={clearButtonProps.onPress}
-          tokens={{ ...searchTokens, isIconOnly: true, buttonStyle: 'hollow', cursor: state.value ? 'pointer' : 'default' }}
-          themeName={`${themeName}.icon`}
-        >
-          {icon == null && <BuiltinIcon value={state.value} />}
-          {icon != null && typeof icon === 'function' && icon(state.value)}
-          {icon != null && typeof icon !== 'function' && icon}
-        </Button>
+        <Action {...actionProps} />
       </Box>
       {errorMessage != null && (
         <Typography themeName={`${themeName}.errorMessage`} tokens={searchTokens} {...errorMessageProps}>

@@ -11,19 +11,15 @@ export const searchInput = tv({
 
 export const searchIcon = tv({
   base: `
-    box-border 
-    absolute 
-    right-4 
+    box-border
+    absolute
+    right-4
     focus-ring-black
     outline-0
   `,
-  variants: {
-    cursor: {
-      default: 'pointer-events-none',
-      pointer: 'cursor-pointer',
-    },
-  },
-  defaultVariants: {
-    cursor: 'default',
-  },
+})
+
+export const searchButton = tv({
+  extend: searchIcon,
+  base: 'cursor-pointer',
 })
