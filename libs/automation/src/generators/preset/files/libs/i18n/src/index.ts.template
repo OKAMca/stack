@@ -1,0 +1,7 @@
+export { defaultLocale, defaultNS, i18nConfig, localeMap } from './config'
+export type { SupportedLocale } from './config'
+export { useTranslationAdapter } from './hooks/useTranslationAdapter'
+export { getLocalizedPath } from './lib/getLocalizedPath'
+export { getMappedLocale } from './lib/getMappedLocale'
+export { getValidLocale } from './lib/getValidLocale'
+export { splitLocaleFromPathname } from './lib/splitLocaleFromPathname'

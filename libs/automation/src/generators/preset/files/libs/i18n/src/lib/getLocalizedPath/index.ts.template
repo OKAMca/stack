@@ -1,0 +1,21 @@
+import { i18nConfig } from '../../config'
+
+/**
+ * Prepend the locale prefix to a path.
+ * Skips the prefix for the default locale to keep URLs clean.
+ *
+ * Example:
+ *   getLocalizedPath('/about', 'fr') → '/fr/about'
+ *   getLocalizedPath('/about', 'en') → '/about' (default locale, no prefix)
+ *   getLocalizedPath('/about') → '/about' (defaults to defaultLocale)
+ */
+export function getLocalizedPath(path: string, locale?: string): string {
+  const targetLocale = locale ?? i18nConfig.defaultLocale
+
+  if (targetLocale === i18nConfig.defaultLocale) {
+    return path
+  }
+
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  return `/${targetLocale}${normalizedPath}`
+}

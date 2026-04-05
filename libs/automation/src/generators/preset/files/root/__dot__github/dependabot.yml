@@ -1,0 +1,28 @@
+version: 2
+updates:
+  # Disable version update PRs (limit: 0)
+  # Security updates still open PRs automatically (separate internal limit of 10)
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+    ignore:
+      # Nx-managed: update these via `nx migrate`
+      - dependency-name: 'nx'
+      - dependency-name: '@nx/*'
+      - dependency-name: 'vite'
+      - dependency-name: '@vitejs/*'
+      - dependency-name: 'next'
+      - dependency-name: '@next/*'
+      - dependency-name: 'storybook'
+      - dependency-name: '@storybook/*'
+      - dependency-name: 'typescript'
+    # Group security updates into batched PRs instead of one per dep
+    groups:
+      production-security:
+        applies-to: security-updates
+        dependency-type: production
+      dev-security:
+        applies-to: security-updates
+        dependency-type: development

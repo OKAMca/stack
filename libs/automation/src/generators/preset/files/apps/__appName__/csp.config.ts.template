@@ -1,0 +1,36 @@
+/**
+ * Content Security Policy configuration.
+ * Add service-specific rules as the project grows.
+ */
+
+interface CspDirectives {
+  [key: string]: string[]
+}
+
+const directives: CspDirectives = {
+  'default-src': ['\'self\''],
+  // TODO: Replace 'unsafe-eval' and 'unsafe-inline' with nonce-based CSP before production.
+  // See: https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
+  'script-src': ['\'self\'', '\'unsafe-eval\'', '\'unsafe-inline\''],
+  'style-src': ['\'self\'', '\'unsafe-inline\'', 'https://fonts.googleapis.com'],
+  'img-src': [
+    '\'self\'',
+    'blob:',
+    'data:',
+    `https://\${process.env.NEXT_PUBLIC_IMG_DOMAIN ?? '<%= includeDirectus === 'true' ? "localhost:8055" : "localhost" %>'}`,
+  ],
+  'font-src': ['\'self\'', 'https://fonts.gstatic.com'],
+  'connect-src': [
+    '\'self\'',
+    `https://\${process.env.NEXT_PUBLIC_IMG_DOMAIN ?? '<%= includeDirectus === 'true' ? "localhost:8055" : "localhost" %>'}`,
+  ],
+  'frame-ancestors': ['\'none\''],
+  'base-uri': ['\'self\''],
+  'form-action': ['\'self\''],
+}
+
+export function buildCsp(): string {
+  return Object.entries(directives)
+    .map(([key, values]) => `${key} ${values.join(' ')}`)
+    .join('; ')
+}

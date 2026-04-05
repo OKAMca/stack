@@ -1,0 +1,14 @@
+import type { SupportedLocale } from '../../config'
+import { i18nConfig } from '../../config'
+
+/**
+ * Validate a string against the configured supported locales.
+ * Returns the locale if valid, or undefined if not recognized.
+ */
+export function getValidLocale(locale: string | undefined): SupportedLocale | undefined {
+  if (locale === undefined || locale === '')
+    return undefined
+  return (i18nConfig.locales as readonly string[]).includes(locale)
+    ? (locale as SupportedLocale)
+    : undefined
+}

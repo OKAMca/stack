@@ -1,0 +1,39 @@
+{
+  "name": "storybook",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/storybook",
+  "projectType": "library",
+  "tags": ["type:storybook"],
+  "targets": {
+    "storybook": {
+      "executor": "@nx/storybook:storybook",
+      "options": {
+        "port": 4200,
+        "configDir": "libs/storybook/.storybook"
+      }
+    },
+    "build-storybook": {
+      "executor": "@nx/storybook:build",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/storybook",
+        "configDir": "libs/storybook/.storybook"
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook --ci --url http://localhost:4200 --config-dir libs/storybook/.storybook"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/storybook/**/*.{ts,tsx,js,jsx,json}"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,128 @@
+name: Storybook A11y Tests
+
+on:
+  deployment_status:
+
+jobs:
+  test:
+    name: Storybook Accessibility Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    if: >-
+      github.event.deployment_status.state == 'success' &&
+      github.event.deployment_status.environment == '<%= projectName %>-storybook'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright
+        run: pnpm playwright install --with-deps
+
+      - name: Run Storybook tests
+        run: >-
+          pnpm nx run storybook:test-storybook
+          --ci
+          --url=${{ github.event.deployment_status.target_url }}
+        env:
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        continue-on-error: true
+
+      - name: Merge a11y reports
+        run: pnpm exec node libs/storybook/merge-reports.js
+
+      - name: Convert to Markdown
+        if: hashFiles('libs/storybook/reports/violations-report.json') != ''
+        run: >-
+          pnpm exec node libs/storybook/axe-to-markdown.js
+          libs/storybook/reports/violations-report.json
+          libs/storybook/reports/a11y-report.md
+
+      - name: Find associated PR
+        id: find-pr
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const sha = context.payload.deployment.sha
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              sort: 'updated',
+              direction: 'desc',
+              per_page: 100,
+            })
+            const pr = prs.find(p => p.head.sha === sha)
+            if (pr) {
+              core.setOutput('pr-number', pr.number)
+            }
+
+      - name: Post a11y report to PR
+        if: steps.find-pr.outputs.pr-number
+        uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.find-pr.outputs.pr-number }}
+        with:
+          script: |
+            const fs = require('node:fs')
+            const reportPath = 'libs/storybook/reports/a11y-report.md'
+            let body = '## Storybook Accessibility Report\n\nNo report generated.'
+
+            if (fs.existsSync(reportPath)) {
+              body = fs.readFileSync(reportPath, 'utf-8')
+            }
+
+            const commentIdentifier = '<!-- storybook-a11y-report -->'
+            body = `${commentIdentifier}\n${body}`
+
+            const prNumber = Number(process.env.PR_NUMBER)
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              per_page: 100,
+            })
+
+            const existing = comments.find(c => c.body.includes(commentIdentifier))
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              })
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body,
+              })
+            }
+
+      - name: Fail if violations found
+        run: |
+          REPORT="libs/storybook/reports/violations-report.json"
+          if [ -f "$REPORT" ]; then
+            COUNT=$(node -e "const d=require('./$REPORT'); console.log(d.length)")
+            if [ "$COUNT" != "0" ]; then
+              echo "::error::Found $COUNT accessibility violation(s). See PR comment for details."
+              exit 1
+            fi
+          fi

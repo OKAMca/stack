@@ -1,0 +1,31 @@
+import type { InitOptions } from 'i18next'
+
+export const defaultNS = 'common'
+
+export const i18nConfig = {
+  locales: ['en', 'fr'] as const,
+  defaultLocale: 'en' as const,
+}
+
+/**
+ * Optional locale mapping for projects that need regional locale codes.
+ * Default is empty — projects add mappings like `{ 'en-CA': 'en', 'fr-CA': 'fr' }` when needed.
+ * The i18n lib uses simple `en`/`fr` codes by default.
+ */
+export const localeMap: Record<string, string> = {}
+
+export type SupportedLocale = (typeof i18nConfig.locales)[number]
+
+export const defaultLocale: SupportedLocale = i18nConfig.defaultLocale
+
+export function getOptions(lng: SupportedLocale = defaultLocale, ns: string | string[] = defaultNS): InitOptions {
+  return {
+    supportedLngs: i18nConfig.locales as unknown as string[],
+    fallbackLng: defaultLocale,
+    lng,
+    fallbackNS: defaultNS,
+    defaultNS,
+    ns: Array.isArray(ns) ? ns : [ns],
+    interpolation: { escapeValue: false },
+  }
+}

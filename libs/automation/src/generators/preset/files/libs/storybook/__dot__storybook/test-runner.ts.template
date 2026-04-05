@@ -1,0 +1,36 @@
+import type { TestRunnerConfig } from '@storybook/test-runner'
+
+import fs from 'node:fs'
+import path from 'node:path'
+import { getViolations, injectAxe } from 'axe-playwright'
+
+const reportsDir = path.resolve(__dirname, '..', 'reports')
+
+const config: TestRunnerConfig = {
+  getHttpHeaders: () => {
+    const bypassSecret = process.env.VERCEL_AUTOMATION_BYPASS_SECRET
+    if (bypassSecret != null && bypassSecret !== '') {
+      return { 'x-vercel-protection-bypass': bypassSecret }
+    }
+    return {}
+  },
+
+  async preVisit(page) {
+    await injectAxe(page)
+  },
+
+  async postVisit(page, context) {
+    const violations = await getViolations(page)
+
+    if (violations.length > 0) {
+      fs.mkdirSync(reportsDir, { recursive: true })
+
+      const storyId = context.id ?? 'unknown'
+      const reportPath = path.join(reportsDir, `${storyId}.json`)
+
+      fs.writeFileSync(reportPath, JSON.stringify(violations, null, 2))
+    }
+  },
+}
+
+export default config
