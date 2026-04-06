@@ -1,3 +1,17 @@
+## 2.1.0 (2026-04-06)
+
+### 🩹 Fixes
+
+- **stack-ui:** linting fix ([83553d64](https://github.com/OKAMca/stack/commit/83553d64))
+- **stack-ui:** render icon and button separately ([b7e3bc12](https://github.com/OKAMca/stack/commit/b7e3bc12))
+- **stack-ui:** remove focus, pass props, tokens ([7b0b1224](https://github.com/OKAMca/stack/commit/7b0b1224))
+- **stack-ui:** textinput/textarea accept general input attributes ([#427](https://github.com/OKAMca/stack/pull/427))
+
+### ❤️ Thank You
+
+- Max Hilland
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.0.3 (2026-03-11)
 
 ### 🩹 Fixes

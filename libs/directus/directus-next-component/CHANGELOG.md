@@ -1,3 +1,20 @@
+## 2.1.0 (2026-04-06)
+
+### 🩹 Fixes
+
+- resolve dependabot security alerts and clean up published package dependencies ([#441](https://github.com/OKAMca/stack/pull/441))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.1.0
+- Updated next-component to 2.1.0
+- Updated directus-next to 2.2.0
+
+### ❤️ Thank You
+
+- Claude Opus 4.6 (1M context)
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.0.3 (2026-03-20)
 
 ### 🩹 Fixes

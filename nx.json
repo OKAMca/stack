@@ -3,6 +3,7 @@
     "projects": [
       "stack-ui",
       "core-lib",
+      "react-utils",
       "next-component",
       "directus-next",
       "directus-node",
