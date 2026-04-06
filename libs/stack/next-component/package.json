@@ -18,7 +18,7 @@
       },
       "require": {
         "types": "./index.d.ts",
-        "default": "./index.mjs"
+        "default": "./index.js"
       }
     },
     "./server": {
@@ -28,7 +28,7 @@
       },
       "require": {
         "types": "./server.d.ts",
-        "default": "./server.mjs"
+        "default": "./server.js"
       }
     }
   },
