@@ -464,7 +464,7 @@ importers:
         version: link:../../stack/logger
       '@okam/next-component':
         specifier: 2.1.0
-        version: link:../../stack/next-component
+        version: 2.1.0(@react-stately/selection@3.20.7(react@19.2.3))(next@16.1.7(@babel/core@7.28.6)(babel-plugin-macros@3.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3))(nuqs@2.8.6(next@16.1.7(@babel/core@7.28.6)(babel-plugin-macros@3.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-stately@3.43.0(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
       graphql-request:
         specifier: ^7.1.2
         version: 7.4.0(graphql@16.12.0)
@@ -491,7 +491,7 @@ importers:
         version: link:../../stack/logger
       '@okam/next-component':
         specifier: 2.1.0
-        version: link:../../stack/next-component
+        version: 2.1.0(@react-stately/selection@3.20.7(react@19.2.3))(next@16.1.7(@babel/core@7.28.6)(babel-plugin-macros@3.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3))(nuqs@2.8.6(next@16.1.7(@babel/core@7.28.6)(babel-plugin-macros@3.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-stately@3.43.0(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
       '@okam/stack-ui':
         specifier: 2.1.0
         version: link:../../stack/stack-ui
@@ -3304,6 +3304,31 @@ packages:
 
   '@nx/workspace@22.6.1':
     resolution: {integrity: sha512-mrvGubfownO/m0CtFvtRwQxQm//UoBRgrT0WCxrQi5tGlgViTYFSDRumhy94EuU00OGiAHNa3yeXWFd72O981A==}
+
+  '@okam/logger@1.1.0':
+    resolution: {integrity: sha512-QlQCuf6qWYxlxYszNboye+cdNOZfXWkRhuhrFjO4GLahFWbMfc6/mqu6VprsNtJKujTlih0/UNqmMqCcl6HToQ==}
+
+  '@okam/next-component@2.1.0':
+    resolution: {integrity: sha512-1HpKwXvFeSAoa+qD2ODxfwlhsk2i55Ac9ykJpxvvzd+dLnE/aX9T3uM+WT9fjdeoq1tT7jgErStVqAZXIRhH3w==}
+    engines: {node: '>=20.19.0'}
+    peerDependencies:
+      '@react-stately/selection': ^3.20.0
+      next: '>=15.5.13 <16.0.0 || ^16.1.7'
+      nuqs: ^2.4.0
+      react: ^18.0.0 || ^19.0.0
+      react-stately: ^3.43.0
+
+  '@okam/react-utils@0.0.1':
+    resolution: {integrity: sha512-Bg3hxdD1f7bKLCfSx5/sFk+lxDjfcztlvy/Kfsz0Pn87urVfQ/gV6NKZ0/uKFeyOb2uZeqxa1pUwPk9nlPB5dA==}
+    engines: {node: '>=20.19.0'}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+
+  '@okam/stack-ui@2.0.3':
+    resolution: {integrity: sha512-pAKh1hBkrddLfVJFoHKUJAUPu71d8KwJ+r76vNPjZyPFEG0GWs3T5tM1xTpcX/ifJIaIuQWdoGSNp878RPUSyA==}
+    engines: {node: '>=20.19.0'}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
 
   '@oxc-resolver/binding-android-arm-eabi@11.16.4':
     resolution: {integrity: sha512-6XUHilmj8D6Ggus+sTBp64x/DUQ7LgC/dvTDdUOt4iMQnDdSep6N1mnvVLIiG+qM5tRnNHravNzBJnUlYwRQoA==}
@@ -15320,6 +15345,58 @@ snapshots:
       - '@swc-node/register'
       - '@swc/core'
       - debug
+
+  '@okam/logger@1.1.0': {}
+
+  '@okam/next-component@2.1.0(@react-stately/selection@3.20.7(react@19.2.3))(next@16.1.7(@babel/core@7.28.6)(babel-plugin-macros@3.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3))(nuqs@2.8.6(next@16.1.7(@babel/core@7.28.6)(babel-plugin-macros@3.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-stately@3.43.0(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)(tailwindcss@4.1.18)':
+    dependencies:
+      '@okam/react-utils': 0.0.1(react@19.2.3)
+      '@okam/stack-ui': 2.0.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
+      '@react-stately/selection': 3.20.7(react@19.2.3)
+      next: 16.1.7(@babel/core@7.28.6)(babel-plugin-macros@3.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3)
+      nuqs: 2.8.6(next@16.1.7(@babel/core@7.28.6)(babel-plugin-macros@3.1.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.97.3))(react@19.2.3)
+      radashi: 12.7.1
+      react: 19.2.3
+      react-aria: 3.45.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-stately: 3.43.0(react@19.2.3)
+      react-use: 17.6.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      tailwind-variants: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
+    transitivePeerDependencies:
+      - react-dom
+      - tailwind-merge
+      - tailwindcss
+
+  '@okam/react-utils@0.0.1(react@19.2.3)':
+    dependencies:
+      dequal: 2.0.3
+      react: 19.2.3
+
+  '@okam/stack-ui@2.0.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tailwind-merge@3.4.0)(tailwindcss@4.1.18)':
+    dependencies:
+      '@internationalized/date': 3.10.1
+      '@okam/logger': 1.1.0
+      '@okam/react-utils': 0.0.1(react@19.2.3)
+      '@react-aria/selection': 3.27.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@react-aria/utils': 3.32.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@react-spring/web': 10.0.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@react-stately/collections': 3.12.8(react@19.2.3)
+      '@react-types/radio': 3.9.2(react@19.2.3)
+      '@react-types/shared': 3.32.1(react@19.2.3)
+      radashi: 12.7.1
+      react: 19.2.3
+      react-aria: 3.45.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-div-100vh: 0.7.0(react@19.2.3)
+      react-hook-form: 7.71.1(react@19.2.3)
+      react-stately: 3.43.0(react@19.2.3)
+      react-use: 17.6.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      sanitize-html: 2.17.0
+      swiper: 12.1.2
+      tailwind-variants: 3.2.2(tailwind-merge@3.4.0)(tailwindcss@4.1.18)
+      usehooks-ts: 3.1.1(react@19.2.3)
+    transitivePeerDependencies:
+      - react-dom
+      - tailwind-merge
+      - tailwindcss
 
   '@oxc-resolver/binding-android-arm-eabi@11.16.4':
     optional: true
