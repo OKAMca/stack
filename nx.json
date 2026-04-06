@@ -109,5 +109,6 @@
       }
     }
   },
-  "useInferencePlugins": false
+  "useInferencePlugins": false,
+  "analytics": false
 }
