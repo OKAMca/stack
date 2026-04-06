@@ -1,3 +1,27 @@
+## 2.2.0 (2026-04-06)
+
+### 🚀 Features
+
+- **next-component:** allow formatting Link locale via i18n config ([#460](https://github.com/OKAMca/stack/pull/460))
+- **directus-next:** getPageSettings props accepts gql client ([a6d983fa](https://github.com/OKAMca/stack/commit/a6d983fa))
+
+### 🩹 Fixes
+
+- **directus-next:** getPageSettings also allows custom query fn ([c76c5163](https://github.com/OKAMca/stack/commit/c76c5163))
+- **directus-next:** remove props client memoization to match config arg ([fb169f6a](https://github.com/OKAMca/stack/commit/fb169f6a))
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 2.1.0
+- Updated next-component to 2.1.0
+- Updated directus-node to 1.1.0
+- Updated directus-query to 2.1.0
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 2.1.1 (2026-03-26)
 
 ### 🚀 Features

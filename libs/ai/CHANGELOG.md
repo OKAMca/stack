@@ -1,3 +1,7 @@
+## 1.1.0 (2026-04-06)
+
+This was a version bump only for ai to align it with other projects, there were no code changes.
+
 # 1.0.0 (2026-02-05)
 
 This was a version bump only for ai to align it with other projects, there were no code changes.
