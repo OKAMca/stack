@@ -27,7 +27,7 @@ export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchPara
 
     if (!isNullish(searchParams)) {
       for (const [key, value] of Object.entries(searchParams)) {
-        if (value != null && value !== '')
+        if (!isEmpty(value))
           url.searchParams.set(key, value)
       }
     }
