@@ -16,7 +16,7 @@ export { logger as DirectusNextComponent } from './logger'
 
 export type * from './types'
 
-export { getDirectusFile, useDirectusFile } from './utils/getDirectusFile'
+export { getDirectusFile, getDirectusUrl, useDirectusFile } from './utils/getDirectusFile'
 export { getDirectusLink, useDirectusLink } from './utils/getDirectusLink'
 export { getMetadata, useMetadata } from './utils/getDirectusMetadata'
 export { getDirectusSearchParams } from './utils/getDirectusSearchParams'
