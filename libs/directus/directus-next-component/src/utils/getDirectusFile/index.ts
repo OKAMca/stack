@@ -10,7 +10,7 @@ const IMG_PROTOCOL = process.env.NEXT_PUBLIC_IMG_PROTOCOL ?? 'https'
 export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Record<string, Nullable<string>>) {
   const { id, filename_download, filenameDownload } = file ?? {}
 
-  const protocol = !isNullish(baseUrl) ? baseUrl.protocol.replace(/:$/, '') : IMG_PROTOCOL
+  const protocol = (baseUrl?.protocol ?? IMG_PROTOCOL).replace(/:$/, '')
   const hostname = baseUrl?.hostname ?? IMG_DOMAIN
   const port = baseUrl?.port ?? IMG_PORT
 
