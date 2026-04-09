@@ -1,3 +1,14 @@
+## 2.0.4 (2026-04-09)
+
+### 🩹 Fixes
+
+- resolve dependabot security alerts and clean up published package dependencies ([#441](https://github.com/OKAMca/stack/pull/441))
+
+### ❤️ Thank You
+
+- Claude Opus 4.6 (1M context)
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.0.3 (2026-03-20)
 
 ### 🩹 Fixes
