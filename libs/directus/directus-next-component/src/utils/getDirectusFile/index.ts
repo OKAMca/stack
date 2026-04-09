@@ -14,8 +14,10 @@ export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchPara
   const hostname = baseUrl?.hostname ?? IMG_DOMAIN
   const port = baseUrl?.port ?? IMG_PORT
 
-  if (isEmpty(hostname) || isEmpty(id))
+  if (isEmpty(hostname) || isEmpty(id)) {
+    logger.log('Invalid props or environment variables', 'warn', { hostname, props: file })
     return null
+  }
 
   try {
     const url = new URL(`/assets/${id}/${filename_download ?? filenameDownload ?? ''}`, `${protocol}://${hostname}`)
