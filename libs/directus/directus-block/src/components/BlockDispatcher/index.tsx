@@ -5,12 +5,12 @@ import { mergeConfigs } from '../../utils'
 import BlockSerializer from '../BlockSerializer'
 import baseConfig from './config'
 
-async function BlockDispatcher(props: TBlockDispatcherProps) {
+function BlockDispatcher(props: TBlockDispatcherProps) {
   const { children, config, ...rest } = props
 
   const finalConfig = mergeConfigs(baseConfig, config)
 
-  const renderBlock = async (blockProps: Nullable<TBlockSerializerProps>) => {
+  const renderBlock = (blockProps: Nullable<TBlockSerializerProps>) => {
     return children != null
       ? (
           children({ ...rest, ...blockProps, config: finalConfig })
