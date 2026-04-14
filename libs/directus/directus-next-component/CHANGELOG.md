@@ -1,3 +1,9 @@
+## 2.1.3 (2026-04-14)
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 2.2.2
+
 ## 2.1.2 (2026-04-09)
 
 ### 🩹 Fixes

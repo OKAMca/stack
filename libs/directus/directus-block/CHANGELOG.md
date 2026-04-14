@@ -1,3 +1,13 @@
+## 2.1.2 (2026-04-14)
+
+### 🩹 Fixes
+
+- **directus-block:** BlockDispatcher is a synchronous function ([#477](https://github.com/OKAMca/stack/pull/477))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.1.0 (2026-04-06)
 
 ### 🧱 Updated Dependencies
