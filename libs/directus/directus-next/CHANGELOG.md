@@ -1,3 +1,13 @@
+## 2.2.2 (2026-04-14)
+
+### 🩹 Fixes
+
+- issue with setvar not correctly being applied preventing cache ([#480](https://github.com/OKAMca/stack/pull/480))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.2.0 (2026-04-06)
 
 ### 🚀 Features
