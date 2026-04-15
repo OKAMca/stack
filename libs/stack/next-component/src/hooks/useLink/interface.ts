@@ -63,7 +63,7 @@ export type TLinkI18nConfig
     localePrefix?: `${LocalePrefix.Always}` | undefined
   })
 
-export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'hre'> {
+export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
   href: string | UrlObject
   /**
    * @default true
