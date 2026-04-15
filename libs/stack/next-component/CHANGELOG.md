@@ -1,3 +1,13 @@
+## 2.1.2 (2026-04-15)
+
+### 🩹 Fixes
+
+- typo ([#483](https://github.com/OKAMca/stack/pull/483))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.1.0 (2026-03-26)
 
 ### 🚀 Features
