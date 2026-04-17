@@ -214,6 +214,18 @@ export const Anchor: Story = {
   },
 }
 
+export const WithAnchor: Story = {
+  args: {
+    href: '/products/2#details',
+  },
+}
+
+export const WithSearchParams: Story = {
+  args: {
+    href: '/products/2?ref=homepage',
+  },
+}
+
 export const LocalePrefixAlways: Story = {
   args: {
     href: '/products/2',
