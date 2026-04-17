@@ -12,6 +12,7 @@ import { LocalePrefix } from './interface'
 type Params = Record<string, string | string[] | undefined>
 
 const EXTERNAL_URL_RE = /^[a-z]+:\/\//i
+const DUMMY_BASE = 'http://x'
 
 function scrollToTop(behavior: ScrollBehavior) {
   window?.scrollTo?.({ top: 0, behavior })
@@ -22,6 +23,36 @@ function getParamsLocale(params: Params | undefined): string | undefined {
   if (Array.isArray(locale))
     return locale[0]
   return locale
+}
+
+/**
+ * Ensures the pathname portion of a URL ends with a trailing slash,
+ * preserving any search params and hash.
+ */
+function addTrailingSlashToPathname(hrefString: string): string {
+  const isProtocolRelative = hrefString.startsWith('//')
+  const isExternal = EXTERNAL_URL_RE.test(hrefString)
+
+  try {
+    const url = new URL(
+      isProtocolRelative ? `http:${hrefString}` : hrefString,
+      DUMMY_BASE,
+    )
+
+    if (!url.pathname.endsWith('/'))
+      url.pathname += '/'
+
+    if (isExternal)
+      return url.toString()
+
+    if (isProtocolRelative)
+      return `//${url.host}${url.pathname}${url.search}${url.hash}`
+
+    return `${url.pathname}${url.search}${url.hash}`
+  }
+  catch {
+    return hrefString.endsWith('/') ? hrefString : `${hrefString}/`
+  }
 }
 
 /**
@@ -51,19 +82,18 @@ export function useLinkLocale(props: TLink) {
 
 export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale']): string {
   const hrefString = href.toString()
-  const hasTrailingSlash = hrefString.endsWith('/')
 
   const isAnchor = hrefString.startsWith('#')
-  const isExternal = EXTERNAL_URL_RE.test(hrefString) || hrefString.startsWith('//')
-  let finalHref: string
-  if (locale != null && locale !== false && !isExternal && !isAnchor) {
-    finalHref = `/${locale}${hrefString}`
-  }
-  else {
-    finalHref = hrefString
-  }
+  if (isAnchor)
+    return hrefString
 
-  return (hasTrailingSlash || isAnchor) ? finalHref : `${finalHref}/`
+  const isExternal = EXTERNAL_URL_RE.test(hrefString) || hrefString.startsWith('//')
+
+  const withLocale = (locale != null && locale !== false && !isExternal)
+    ? `/${locale}${hrefString}`
+    : hrefString
+
+  return addTrailingSlashToPathname(withLocale)
 }
 
 /**
