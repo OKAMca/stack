@@ -57,19 +57,26 @@ export default function imgixImageLoader({ src, width, quality }: ImageLoaderPro
     return directusImageLoader({ src, width, quality })
   }
 
-  // Match Directus asset URL: /assets/<uuid>/<filename>.<ext>
+  // Match Directus asset URL: /assets/<uuid> or /assets/<uuid>/<filename>.<ext>
+  // The filename segment is optional — getDirectusUrl omits it when filename_download is null.
   // The filename part may contain percent-encoded characters.
-  const matches = src.match(/\/assets\/([\w-]+)\/[\w%.-]+\.(\w+)/)
+  const matches = src.match(/\/assets\/([\w-]+)(?:\/[\w%.-]+\.(\w+))?/)
   if (matches === null) {
     return directusImageLoader({ src, width, quality })
   }
 
   const [, assetId, extension] = matches
-  const directusParams = new URL(src).searchParams
 
-  const imgixUrl = new URL(
-    `https://${subdomain}.imgix.net/${assetId}.${extension}`,
-  )
+  let directusParams: URLSearchParams
+  try {
+    directusParams = new URL(src).searchParams
+  }
+  catch {
+    return directusImageLoader({ src, width, quality })
+  }
+
+  const imgixPath = extension != null ? `${assetId}.${extension}` : assetId
+  const imgixUrl = new URL(`https://${subdomain}.imgix.net/${imgixPath}`)
   const params = imgixUrl.searchParams
 
   params.set('auto', 'format,compress')
