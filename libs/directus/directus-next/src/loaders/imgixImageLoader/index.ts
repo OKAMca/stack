@@ -1,6 +1,6 @@
 import type { ImageLoaderProps } from 'next/image'
 import { isEmpty } from 'radashi'
-import z from 'zod'
+import { z } from 'zod'
 import directusImageLoader from '../directusImageLoader'
 
 /**
@@ -39,7 +39,7 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
   const fpYPx = Number(directusParams.get('focal_point_y'))
   const height = Number(directusParams.get('height'))
 
-  if (fpXPx <= 0 || fpYPx <= 0 || width <= 0 || height <= 0) {
+  if ([fpXPx, fpYPx, width, height].some(value => !Number.isFinite(value))) {
     params.set('crop', 'entropy')
     return
   }
@@ -82,13 +82,15 @@ export default function imgixImageLoader({ src, width, quality }: ImageLoaderPro
     return directusImageLoader({ src, width, quality })
   }
 
-  let directusParams: URLSearchParams
+  let directusUrl: URL
   try {
-    directusParams = new URL(src).searchParams
+    directusUrl = new URL(src)
   }
   catch {
     return directusImageLoader({ src, width, quality })
   }
+
+  const directusParams = directusUrl.searchParams
 
   // Match Directus asset URL: /assets/<uuid> or /assets/<uuid>/<filename>.<ext>
   // The filename segment is optional — getDirectusUrl omits it when filename_download is null.
