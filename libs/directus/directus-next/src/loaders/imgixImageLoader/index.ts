@@ -95,7 +95,7 @@ export default function imgixImageLoader({ src, width, quality }: ImageLoaderPro
   // Match Directus asset URL: /assets/<uuid> or /assets/<uuid>/<filename>.<ext>
   // The filename segment is optional — getDirectusUrl omits it when filename_download is null.
   // The filename part may contain percent-encoded characters.
-  const matches = src.match(/\/assets\/([\w-]+)(?:\/[\w%.-]+\.(\w+))?/)
+  const matches = directusUrl.pathname.match(/\/assets\/([\w-]+)(?:\/[\w%.-]+\.(\w+))?/)
   if (matches === null) {
     return directusImageLoader({ src, width, quality })
   }
