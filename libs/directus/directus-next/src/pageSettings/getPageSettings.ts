@@ -94,7 +94,7 @@ export async function getPageSettings<
 
   log('Caching new page settings', { path: currentPath })
   setPageSettingsContext(currentItem)
-  setVariables(variables)
+  setVariables(directusVariables)
 
   return currentItem
 }

@@ -2,6 +2,67 @@ import type { LinkProps as NextLinkProps } from 'next/link'
 import type { ReadonlyURLSearchParams } from 'next/navigation'
 import type { UrlObject } from 'node:url'
 
+export enum LocalePrefix {
+  /**
+   * The pathname will be prefixed with the locale only when it is not the default locale
+   *
+   * @example
+   * ```ts
+   * const linkI18nConfig = {
+   *   localePrefix: 'as-needed',
+   *   defaultLocale: 'en',
+   * }
+   *
+   * // <Link locale="en" href="/products/1" />
+   * // output: /products/1
+   *
+   * // <Link href="/products/1" />
+   * // output: /products/1
+   *
+   * // <Link locale="fr" href="/produits/1" />
+   * // output: /fr/produits/1
+   * ```
+   */
+  AsNeeded = 'as-needed',
+  /**
+   * The pathname will always be prefixed by the locale
+   *
+   * @example
+   * ```ts
+   * const linkI18nConfig = {
+   *   localePrefix: 'always',
+   *   defaultLocale: 'en',
+   * }
+   *
+   * // <Link locale="en" href="/products/1" />
+   * // output: /en/products/1
+   *
+   * // <Link href="/products/1" />
+   * // output: /en/products/1
+   *
+   * // <Link locale="fr" href="/produits/1" />
+   * // output: /fr/produits/1
+   * ```
+   */
+  Always = 'always',
+}
+
+export type TLinkI18nConfig
+  = ({
+    defaultLocale: string
+    /**
+     * {@link LocalePrefix}
+     */
+    localePrefix: `${LocalePrefix.AsNeeded}`
+  }
+  | {
+    defaultLocale?: string
+    /**
+     * {@link LocalePrefix}
+     */
+    localePrefix?: `${LocalePrefix.Always}` | undefined
+  })
+
 export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
   href: string | UrlObject
   /**
@@ -23,6 +84,7 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
   onPathnameChange?: (_pathname: string) => void
   onSearchParamsChange?: (_searchParams: ReadonlyURLSearchParams) => void
   onHashChange?: (_hash: string) => void
+  i18n?: TLinkI18nConfig
 }
 
 export interface TUseLinkReturn extends Omit<NextLinkProps, 'href' | 'locale'> {

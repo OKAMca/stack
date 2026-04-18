@@ -46,13 +46,13 @@ export default defineConfig({
         {
           format: 'es',
           entryFileNames: '[name].mjs',
-          preserveModules: false,
+          preserveModules: true,
           banner: chunk => chunk.name === 'server' ? "import 'server-only';" : '',
         },
         {
           format: 'cjs',
           entryFileNames: '[name].js',
-          preserveModules: false,
+          preserveModules: true,
           banner: chunk => chunk.name === 'server' ? "require('server-only');" : '',
         },
       ],

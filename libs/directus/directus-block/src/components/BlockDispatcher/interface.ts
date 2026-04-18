@@ -10,7 +10,7 @@ interface TBaseBlockDispatcherProps<AdditionalProps extends TAdditionalProps = T
   config?: TBlockSerializerConfig
   defaultVariant?: string
   additionalProps?: AdditionalProps
-  children?: (_props: TBlockSerializerProps) => ReactNode
+  children?: (_props: TBlockSerializerProps) => Awaited<ReactNode>
 }
 
 export type TBlockDispatcherProps<AdditionalProps extends TAdditionalProps = TAdditionalProps>

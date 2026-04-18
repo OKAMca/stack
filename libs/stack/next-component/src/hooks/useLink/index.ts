@@ -6,11 +6,13 @@ import { useParams, usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useRef } from 'react'
 import { useLocale } from 'react-aria'
 import { useHash } from '../useHash'
+import { LocalePrefix } from './interface'
 
 // Define Params type locally to avoid Next.js internal import path changes
 type Params = Record<string, string | string[] | undefined>
 
 const EXTERNAL_URL_RE = /^[a-z]+:\/\//i
+const DUMMY_BASE = 'http://x'
 
 function scrollToTop(behavior: ScrollBehavior) {
   window?.scrollTo?.({ top: 0, behavior })
@@ -24,6 +26,36 @@ function getParamsLocale(params: Params | undefined): string | undefined {
 }
 
 /**
+ * Ensures the pathname portion of a URL ends with a trailing slash,
+ * preserving any search params and hash.
+ */
+function addTrailingSlashToPathname(hrefString: string): string {
+  const isProtocolRelative = hrefString.startsWith('//')
+  const isExternal = EXTERNAL_URL_RE.test(hrefString)
+
+  try {
+    const url = new URL(
+      isProtocolRelative ? `http:${hrefString}` : hrefString,
+      DUMMY_BASE,
+    )
+
+    if (!url.pathname.endsWith('/'))
+      url.pathname += '/'
+
+    if (isExternal)
+      return url.toString()
+
+    if (isProtocolRelative)
+      return `//${url.host}${url.pathname}${url.search}${url.hash}`
+
+    return `${url.pathname}${url.search}${url.hash}`
+  }
+  catch {
+    return hrefString.endsWith('/') ? hrefString : `${hrefString}/`
+  }
+}
+
+/**
  * Tries to get the locale, in order of priority:
  * 1. The locale prop. Still has priority even when set to `false`
  * 2. The locale from react-aria `useLocale`
@@ -31,27 +63,37 @@ function getParamsLocale(params: Params | undefined): string | undefined {
  * @returns The best matched locale
  */
 export function useLinkLocale(props: TLink) {
-  const { locale } = props
+  const { locale, i18n } = props
+  const { defaultLocale, localePrefix = 'always' } = i18n ?? {}
   const params = useParams()
   const paramsLocale = getParamsLocale(params)
   const { locale: ctxLocale } = useLocale()
+  const finalLocale = locale ?? ctxLocale ?? paramsLocale ?? false
 
-  return locale ?? ctxLocale ?? paramsLocale ?? false
+  const shouldDisplayLocale = {
+    [LocalePrefix.Always]: true,
+    [LocalePrefix.AsNeeded]: finalLocale !== defaultLocale,
+  }[localePrefix]
+
+  const displayLocale = shouldDisplayLocale ? finalLocale : false
+
+  return displayLocale
 }
 
 export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale']): string {
   const hrefString = href.toString()
 
   const isAnchor = hrefString.startsWith('#')
-  const isExternal = EXTERNAL_URL_RE.test(hrefString) || hrefString.startsWith('//')
-  if (isExternal || isAnchor)
+  if (isAnchor)
     return hrefString
 
-  if (locale != null && locale !== false) {
-    return `/${locale}${hrefString}`
-  }
+  const isExternal = EXTERNAL_URL_RE.test(hrefString) || hrefString.startsWith('//')
 
-  return hrefString
+  const withLocale = (locale != null && locale !== false && !isExternal)
+    ? `/${locale}${hrefString}`
+    : hrefString
+
+  return addTrailingSlashToPathname(withLocale)
 }
 
 /**

@@ -1,7 +1,7 @@
 import type { TToken } from '@okam/stack-ui'
 import type { TAdminBarProps } from './interface'
-import { Box } from '@okam/stack-ui'
 import { draftMode } from 'next/headers'
+import { AdminBarContent } from './AdminBarContent'
 
 async function AdminBar<T extends TToken>({
   children,
@@ -12,11 +12,9 @@ async function AdminBar<T extends TToken>({
   const { isEnabled } = await draftMode()
   return (
     isEnabled && (
-      <Box themeName={`${themeName}.container`} tokens={tokens} customTheme={customTheme}>
-        <Box themeName={`${themeName}.content`} tokens={tokens}>
-          {children}
-        </Box>
-      </Box>
+      <AdminBarContent themeName={themeName} tokens={tokens} customTheme={customTheme}>
+        {children}
+      </AdminBarContent>
     )
   )
 }

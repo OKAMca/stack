@@ -19,7 +19,7 @@ import popoverTheme from './Popover'
 import { printButton, printButtonIcon } from './PrintButton'
 import { radio, radioLabel, selectedMark } from './Radio'
 import { radioGroup, radioGroupItemsGroup } from './RadioGroup'
-import { searchIcon, searchInput } from './Search'
+import { searchButton, searchIcon, searchInput } from './Search'
 import {
   shareButton,
   shareButtonContainer,
@@ -124,6 +124,7 @@ const BaseTheme = makeTheme({
     label: () => 'text-gray-3',
     input: props => searchInput(props),
     icon: props => searchIcon(props),
+    button: props => searchButton(props),
     errorMessage: props => typography({ ...props, size: 'footnotes', isError: true }),
   },
   menu: {

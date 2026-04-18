@@ -1,12 +1,10 @@
-// Blocks
 export { default as BlockWysiwyg } from './blocks/BlockWysiwyg'
-
-// Configs
 export { default as blockWysiwygConfig } from './blocks/BlockWysiwyg/config'
-
+export { default as BlockDispatcher } from './components/BlockDispatcher'
 export { default as baseConfig } from './components/BlockDispatcher/config'
-// Types
 export type { TBlockDispatcherProps } from './components/BlockDispatcher/interface'
+
+export { default as BlockSerializer } from './components/BlockSerializer'
 export type {
   TBlock,
   TBlockSerializerConfig,

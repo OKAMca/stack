@@ -1,3 +1,17 @@
+## 1.1.0 (2026-04-06)
+
+### 🩹 Fixes
+
+- replace use server by server-only in server chunks ([#437](https://github.com/OKAMca/stack/pull/437))
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 2.1.0
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 # 1.0.0 (2026-02-05)
 
 ### 🧱 Updated Dependencies

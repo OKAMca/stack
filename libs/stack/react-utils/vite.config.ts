@@ -1,3 +1,4 @@
+import preserveDirectives from 'rollup-plugin-preserve-directives'
 import * as path from 'node:path'
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
@@ -45,8 +46,18 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
+      output: {
+        banner: chunk => chunk.isEntry && chunk.name === 'index' ? '"use client";' : '',
+      },
       // External packages that should not be bundled into your library.
-      external: isExternal,
+      external: id => isExternal(id) || id.startsWith('@okam/'),
+      onwarn(warning, warn) {
+        if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
+          return
+        }
+        warn(warning)
+      },
+      plugins: [preserveDirectives()],
     },
   },
 })
