@@ -1,3 +1,16 @@
+## 2.1.4 (2026-04-15)
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 2.1.2
+- Updated directus-next to 2.2.3
+
+## 2.1.3 (2026-04-14)
+
+### 🧱 Updated Dependencies
+
+- Updated directus-next to 2.2.2
+
 ## 2.1.2 (2026-04-09)
 
 ### 🩹 Fixes
