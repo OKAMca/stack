@@ -11,7 +11,7 @@ function DirectusVideo({ baseUrl, ...rest }: TDirectusVideoProps) {
 
   const { type } = fileProps
 
-  return <Video {...omit(fileProps, ['filenameDownload', 'duration', 'caption', 'embed', 'filenameDownload', 'filename_disk', 'filename_download', 'focal_point_divider', 'focal_point_x', 'focal_point_y', 'location', 'storage', 'tags', 'thumbhash'])} type={type ?? undefined} />
+  return <Video {...omit(fileProps, ['filenameDownload', 'duration', 'caption', 'embed', 'filename_disk', 'filename_download', 'focal_point_divider', 'focal_point_x', 'focal_point_y', 'location', 'storage', 'tags', 'thumbhash'])} type={type ?? undefined} />
 }
 
 export default DirectusVideo
