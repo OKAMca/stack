@@ -5,7 +5,7 @@ export default async function Page({ params}: { params: Promise<{ id: string }> 
 
   return (
     <div>
-      <div className="relative">
+      <div className="relative w-125 h-125">
         <span>Default image</span>
         <DirectusImg id={id} filename_download="Ligue-Frisbee.png" width={1000} height={1000} />
       </div>

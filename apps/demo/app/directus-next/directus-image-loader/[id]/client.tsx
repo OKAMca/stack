@@ -6,7 +6,7 @@ import { DirectusImg } from '@okam/directus-next-component'
 export default function ClientPage({ id}: { id: string }) {
   return (
     <div>
-      <div className="relative">
+      <div className="relative w-125 h-125">
         <span>Default image</span>
         <DirectusImg loader={directusImageLoader} id={id} filename_download="Ligue-Frisbee.png" width={1000} height={1000} />
       </div>
