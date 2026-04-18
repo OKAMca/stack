@@ -39,7 +39,7 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
   const fpYPx = Number(directusParams.get('focal_point_y'))
   const height = Number(directusParams.get('height'))
 
-  if ([fpXPx, fpYPx, width, height].some(value => !Number.isFinite(value))) {
+  if ([fpXPx, fpYPx, width, height].some(value => !Number.isFinite(value) || value <= 0)) {
     params.set('crop', 'entropy')
     return
   }
