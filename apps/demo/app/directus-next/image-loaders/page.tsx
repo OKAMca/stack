@@ -1,5 +1,6 @@
 'use client'
 
+import { directusImageLoader } from '@okam/directus-next'
 import { DirectusImg } from '@okam/directus-next-component'
 
 export default function Page() {
@@ -13,7 +14,7 @@ export default function Page() {
       <div>
         <span>Directus image</span>
         {/* Set this to a local directus image id for testing */}
-        <DirectusImg id="3ac9a176-fb77-4951-b7a7-0624ac1bd2e9" width={300} height={1000} fit="cover" customTheme="w-[300px] h-[1000px]" />
+        <DirectusImg id="3ac9a176-fb77-4951-b7a7-0624ac1bd2e9" width={300} height={1000} fit="cover" customTheme="w-[300px] h-[1000px]" loader={directusImageLoader} />
       </div>
     </div>
   )
