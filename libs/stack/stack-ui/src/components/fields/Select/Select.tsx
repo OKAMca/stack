@@ -76,7 +76,7 @@ export function Select<T extends TToken>(props: TSelectProps<T>) {
   return (
     <Box themeName={`${themeName}.wrapper`}>
       {label != null && (
-        <Typography {...labelProps} as="label" themeName={`${themeName}.label`}>
+        <Typography {...labelProps} as="label" themeName={`${themeName}.label`} tokens={tokens}>
           {label}
         </Typography>
       )}
