@@ -29,6 +29,7 @@ export { default as CarouselPaginationFraction } from './components/Carousel/pag
 export { useCarouselPagination } from './components/Carousel/pagination/useCarouselPagination'
 export { useCarouselPaginationBullet } from './components/Carousel/pagination/useCarouselPaginationBullet'
 export { useCarouselPaginationFraction } from './components/Carousel/pagination/useCarouselPaginationFraction'
+export { default as CarouselSlide } from './components/Carousel/swiper/CarouselSlide'
 export { default as CarouselSwiper } from './components/Carousel/swiper/CarouselSwiper'
 export { useCarouselSlide } from './components/Carousel/swiper/useCarouselSlide'
 export { useCarouselSwiper } from './components/Carousel/swiper/useCarouselSwiper'
