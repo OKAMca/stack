@@ -1,3 +1,21 @@
+## 2.1.4 (2026-04-23)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.1.2
+
+## 2.1.3 (2026-04-17)
+
+### 🩹 Fixes
+
+- **next-component:** useLink applies trailing slash at the end of pathname ([#486](https://github.com/OKAMca/stack/pull/486))
+- typo ([#483](https://github.com/OKAMca/stack/pull/483))
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.1.2 (2026-04-15)
 
 ### 🩹 Fixes
