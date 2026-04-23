@@ -1,3 +1,14 @@
+## 2.1.3 (2026-04-23)
+
+### 🩹 Fixes
+
+- add missing export for CarouselSlide ([#492](https://github.com/OKAMca/stack/pull/492))
+
+### ❤️ Thank You
+
+- Hugo Levacher @hugolevacher
+- hugolevacher-okam
+
 ## 2.1.2 (2026-04-23)
 
 ### 🩹 Fixes
