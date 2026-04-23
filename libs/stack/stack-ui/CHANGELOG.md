@@ -1,3 +1,14 @@
+## 2.1.2 (2026-04-23)
+
+### 🩹 Fixes
+
+- Pass tokens to the label in Select form field ([#489](https://github.com/OKAMca/stack/pull/489))
+
+### ❤️ Thank You
+
+- Hugo Levacher @hugolevacher
+- hugolevacher-okam
+
 ## 2.1.0 (2026-04-06)
 
 ### 🩹 Fixes
