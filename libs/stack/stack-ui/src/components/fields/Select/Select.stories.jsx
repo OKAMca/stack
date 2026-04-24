@@ -1,4 +1,5 @@
-import { Select } from './Select'
+import { FormProvider, useForm } from 'react-hook-form'
+import { Select, ReactHookFormSelect } from './Select'
 
 export default {
   title: 'Form/Fields/Select',
@@ -90,4 +91,37 @@ export const MixedContent = {
       { key: '6', value: 'Option 6' },
     ],
   },
+}
+
+const ReactHookFormAutofocusTemplate = () => {
+  const methods = useForm({ mode: 'onTouched', defaultValues: { testSelect: null } })
+
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(() => {})} style={{ maxWidth: '300px' }}>
+        <p style={{ fontSize: '12px', color: '#666', marginBottom: '12px' }}>
+          Submit without selecting to test autofocus on validation error
+        </p>
+        <ReactHookFormSelect
+          name="testSelect"
+          label="Season (Required)"
+          options={defaultOptions}
+          placeholderLabel="Select a season"
+          rules={{ required: true }}
+          required
+        />
+        <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+          <button type="submit">Submit</button>
+          <button type="button" onClick={() => methods.reset({ testSelect: null })}>
+            Reset
+          </button>
+        </div>
+      </form>
+    </FormProvider>
+  )
+}
+
+export const ReactHookFormAutofocus = {
+  render: ReactHookFormAutofocusTemplate,
+  name: 'React Hook Form Autofocus',
 }
