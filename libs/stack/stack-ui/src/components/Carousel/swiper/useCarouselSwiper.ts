@@ -45,7 +45,7 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
     'role': 'group',
     'onSwiper': setController,
     'onSlideChange': (swiper) => {
-      setActiveIndex(swiper.activeIndex)
+      setActiveIndex(swiper.realIndex)
     },
     'modules': importedModules,
     'keyboard': {
