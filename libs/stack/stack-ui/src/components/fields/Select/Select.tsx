@@ -82,7 +82,9 @@ export function Select<T extends TToken>(props: TSelectProps<T>) {
           }}
           ref={(el) => {
             buttonRef.current = el as HTMLButtonElement & HTMLAnchorElement
-            hookFormRef?.(el as any)
+            if (el != null) {
+              hookFormRef?.(el)
+            }
           }}
           disabled={disabled}
           themeName={`${themeName}.button`}
