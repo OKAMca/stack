@@ -1,6 +1,6 @@
 'use client'
 
-import type { CSSProperties, RefObject } from 'react'
+import type { CSSProperties } from 'react'
 import type { RegisterOptions } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TSelectProps } from './Select.interface'
@@ -41,15 +41,7 @@ export function Select<T extends TToken>(props: TSelectProps<T>) {
     ...rest
   } = props
 
-  const inputRef = useRef<HTMLElement>(null)
   const buttonRef = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
-
-  const mergeRefs = (ref: HTMLElement | null) => {
-    if (ref != null) {
-      hookFormRef?.(ref)
-      inputRef.current = ref
-    }
-  }
 
   const filteredOptions = options?.filter(option => !(option.key?.includes('header-') ?? false))
 
@@ -68,7 +60,7 @@ export function Select<T extends TToken>(props: TSelectProps<T>) {
   const { triggerProps, menuProps, labelProps, valueProps } = useSelect(
     { ...rest, label, isDisabled: disabled, isRequired: required, isInvalid },
     state,
-    mergeRefs as unknown as RefObject<HTMLElement | null>,
+    buttonRef,
   )
 
   const { onPress, onPressStart, ...restofTriggerProps } = triggerProps
@@ -88,7 +80,12 @@ export function Select<T extends TToken>(props: TSelectProps<T>) {
             onPress?.(event)
             onPressStart?.(event)
           }}
-          ref={buttonRef}
+          ref={(el) => {
+            buttonRef.current = el as HTMLButtonElement & HTMLAnchorElement
+            if (el != null) {
+              hookFormRef?.(el)
+            }
+          }}
           disabled={disabled}
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, intent: isError ? 'error' : 'default' }}
