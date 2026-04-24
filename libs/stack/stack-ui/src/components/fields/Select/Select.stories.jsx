@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { Select, ReactHookFormSelect } from './Select'
+import { ReactHookFormSelect, Select } from './Select'
 
 export default {
   title: 'Form/Fields/Select',
@@ -93,7 +93,7 @@ export const MixedContent = {
   },
 }
 
-const ReactHookFormAutofocusTemplate = () => {
+function ReactHookFormAutofocusTemplate() {
   const methods = useForm({ mode: 'onTouched', defaultValues: { testSelect: null } })
 
   return (
