@@ -22,9 +22,9 @@ function CarouselSwiper(props: TCarouselSwiperProps) {
   return (
     <Swiper {...rest} className={swiperTheme} wrapperClass={swiperWrapperTheme} ref={ref}>
       {typeof children === 'function'
-        ? slides.map(slide => (
+        ? slides.map((slide, index) => (
             <SwiperSlide key={`slide-${slide.id}`} className={slideTheme}>
-              {children({ themeName: `${themeName}.slide`, tokens, ...slide })}
+              {children({ themeName: `${themeName}.slide`, tokens, swiperSlideIndex: index, ...slide })}
             </SwiperSlide>
           ))
         : children}

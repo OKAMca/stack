@@ -1,21 +1,10 @@
 'use client'
 
-import type { RefObject } from 'react'
-import type { Swiper } from 'swiper/types'
 import type { TCarouselSlide, TCarouselSlideProps } from './interface'
-import { isEmpty } from 'radashi'
-import { useMemo, useRef } from 'react'
+import { isEmpty, isNullish } from 'radashi'
+import { useRef } from 'react'
 import { mergeProps } from 'react-aria'
-
-function getClasses(swiper: Swiper | undefined, ref: RefObject<HTMLElement | null>) {
-  if (ref.current == null || swiper == null)
-    return []
-  const { slideClass = 'swiper-slide' } = swiper.params
-  const classes = ref.current?.className.split(' ').filter((className) => {
-    return className.indexOf('swiper-slide') === 0 || className.indexOf(slideClass) === 0
-  })
-  return classes
-}
+import { useCarousel } from '../../../providers/Carousel'
 
 export function useCarouselSlide(props: TCarouselSlideProps): TCarouselSlide {
   const {
@@ -31,18 +20,15 @@ export function useCarouselSlide(props: TCarouselSlideProps): TCarouselSlide {
   const a11yParams = typeof swiper?.params?.a11y === 'object' ? swiper.params.a11y : undefined
   const { itemRoleDescriptionMessage = 'slide', slideRole = 'group' } = a11yParams ?? {}
   const hasTitle = !isEmpty(title)
+  const { activeIndex, controller } = useCarousel()
+  const slidesPerView = typeof controller?.params?.slidesPerView === 'number' ? controller.params.slidesPerView : 1
   const ref = useRef<HTMLElement>(null)
 
-  const swiperSlide = useMemo(() => {
-    const classes = getClasses(swiper, ref)
-    return {
-      isActive: classes?.includes('swiper-slide-active'),
-      isVisible: classes?.includes('swiper-slide-visible'),
-      isPrev: classes?.includes('swiper-slide-prev'),
-      isNext: classes?.includes('swiper-slide-next'),
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- ref.current triggers recalc when DOM element attaches; ref object is stable
-  }, [ref.current])
+  const hasIndex = !isNullish(swiperSlideIndex)
+  const isActive = swiperSlideIndex === activeIndex
+  const isVisible = hasIndex && swiperSlideIndex >= activeIndex && swiperSlideIndex < activeIndex + slidesPerView
+  const isPrev = hasIndex && swiperSlideIndex === activeIndex - 1
+  const isNext = hasIndex && swiperSlideIndex === activeIndex + slidesPerView
 
   return {
     ref,
@@ -50,9 +36,12 @@ export function useCarouselSlide(props: TCarouselSlideProps): TCarouselSlide {
       ...(hasTitle ? { 'aria-labelledby': id } : { 'aria-label': legacyAriaLabel ?? ariaLabel }),
       'aria-roledescription': itemRoleDescriptionMessage ?? undefined,
       'role': slideRole,
-      'inert': `!${swiperSlide.isVisible}`,
+      'inert': !isVisible,
     }),
     titleProps: {},
-    ...swiperSlide,
+    isActive,
+    isVisible,
+    isPrev,
+    isNext,
   }
 }
