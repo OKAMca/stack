@@ -1,3 +1,22 @@
+## 2.1.4 (2026-04-27)
+
+### 🚀 Features
+
+- story for select field autofocus ([52375d24](https://github.com/OKAMca/stack/commit/52375d24))
+
+### 🩹 Fixes
+
+- carousel condition logic ([fc9b501c](https://github.com/OKAMca/stack/commit/fc9b501c))
+- use realindex for active index ([3e8355ba](https://github.com/OKAMca/stack/commit/3e8355ba))
+- inert tag on slides ([ad0afba4](https://github.com/OKAMca/stack/commit/ad0afba4))
+- forward ref to React Hook Form for autofocus on select field ([9b81bdd6](https://github.com/OKAMca/stack/commit/9b81bdd6))
+- add missing export for CarouselSlide ([#492](https://github.com/OKAMca/stack/pull/492))
+
+### ❤️ Thank You
+
+- Hugo Levacher @hugolevacher
+- hugolevacher-okam
+
 ## 2.1.3 (2026-04-23)
 
 ### 🩹 Fixes
