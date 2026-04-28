@@ -104,30 +104,36 @@ export default meta
 
 type Story = StoryObj<typeof Carousel>
 
-const Nav = () => (
-  <>
-    <CarouselPrevNavigation aria-label="Previous slide">
-      <Icon icon="ArrowLeft" />
-    </CarouselPrevNavigation>
-    <CarouselNextNavigation aria-label="Next slide">
-      <Icon icon="ArrowRight" />
-    </CarouselNextNavigation>
-  </>
-)
+function Nav() {
+  return (
+    <>
+      <CarouselPrevNavigation aria-label="Previous slide">
+        <Icon icon="ArrowLeft" />
+      </CarouselPrevNavigation>
+      <CarouselNextNavigation aria-label="Next slide">
+        <Icon icon="ArrowRight" />
+      </CarouselNextNavigation>
+    </>
+  )
+}
 
-const BulletPagination = () => (
-  <CarouselPagination>
-    {swiper =>
+function BulletPagination() {
+  return (
+    <CarouselPagination>
+      {swiper =>
       // eslint-disable-next-line react/no-array-index-key -- pagination bullets map 1:1 with slide positions; index is the correct identifier
-      swiper?.slides?.map((_slide, index) => <CarouselPaginationBullet key={`bullet-${index}`} index={index} />)}
-  </CarouselPagination>
-)
+        swiper?.slides?.map((_slide, index) => <CarouselPaginationBullet key={`bullet-${index}`} index={index} />)}
+    </CarouselPagination>
+  )
+}
 
-const FractionPagination = () => (
-  <CarouselPagination>
-    <CarouselPaginationFraction />
-  </CarouselPagination>
-)
+function FractionPagination() {
+  return (
+    <CarouselPagination>
+      <CarouselPaginationFraction />
+    </CarouselPagination>
+  )
+}
 
 export const MultipleSlidesPerView: Story = {
   name: 'Multiple slides per view',
