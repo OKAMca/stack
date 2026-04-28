@@ -10,8 +10,6 @@ import { useCarousel } from '../../../providers/Carousel'
 
 const defaultModules: TSwiperModule[] = ['A11y', 'Controller']
 
-const paginationModule: TSwiperModule = 'Pagination'
-
 export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper {
   const { children, ...rest } = props
   const {
@@ -20,26 +18,23 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
     modules,
     slides,
     id,
-    nextNavigationRef,
-    prevNavigationRef,
     swiperProps: contextSwiperProps,
     swiperRef,
     setActiveIndex,
   } = useCarousel()
   const a11y = typeof controller?.params?.a11y === 'object' ? controller.params.a11y : undefined
+  const { slidesPerView, slidesPerGroup } = contextSwiperProps
 
-  const importedModules = [...(modules?.filter(module => module !== paginationModule) ?? []), ...defaultModules].map(
+  const importedModules = [...(modules ?? []), ...defaultModules].map(
     module => swiperModules[module],
   )
 
   const { containerRoleDescriptionMessage = 'carousel' } = a11y ?? {}
 
   const swiperProps: TCarouselSwiper['swiperProps'] = {
-    'navigation': {
-      nextEl: nextNavigationRef.current,
-      prevEl: prevNavigationRef.current,
-      enabled: modules?.includes('Navigation'),
-    },
+    'navigation': false,
+    'pagination': modules?.includes('Pagination') ? { el: null } : false,
+    'slidesPerGroup': slidesPerGroup ?? (typeof slidesPerView === 'number' ? slidesPerView : 1),
     id,
     'watchSlidesProgress': true,
     'role': 'group',
