@@ -36,9 +36,11 @@ function InnerListBox(props: InnerListBoxProps) {
   const { children, listBoxRef, themeName, ...domSafeProps } = props
   return (
     <FocusScope autoFocus restoreFocus contain>
-      <BoxWithForwardRef {...domSafeProps} ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
-        {children}
-      </BoxWithForwardRef>
+      <div tabIndex={-1}>
+        <BoxWithForwardRef {...domSafeProps} ref={listBoxRef} as="ul" themeName={`${themeName}.ul`}>
+          {children}
+        </BoxWithForwardRef>
+      </div>
     </FocusScope>
   )
 }
