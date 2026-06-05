@@ -11,7 +11,9 @@ function ModalDialog(props: TModalDialogProps) {
     <Dialog themeName={`${themeName}.dialog`} tokens={tokens} customTheme={customTheme} title={title} {...rest}>
       <FocusRing focusRingClass="has-focus-ring" within autoFocus>
         <FocusScope contain restoreFocus autoFocus>
-          {children}
+          <div tabIndex={-1}>
+            {children}
+          </div>
         </FocusScope>
       </FocusRing>
     </Dialog>
