@@ -66,7 +66,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.0.1",
-    "@babel/core": "^7.28.6",
+    "@babel/core": "^7.29.6",
     "@commitlint/cli": "^20.3.1",
     "@commitlint/config-conventional": "^20.3.1",
     "@eslint-react/eslint-plugin": "^2.6.4",
