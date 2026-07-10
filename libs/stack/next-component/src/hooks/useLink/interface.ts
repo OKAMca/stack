@@ -77,7 +77,6 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
    * @default instant
    */
   behavior?: ScrollBehavior
-  onHashChange?: (_hash: string) => void
   i18n?: TLinkI18nConfig
 }
 
