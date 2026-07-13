@@ -1,3 +1,9 @@
+## 2.2.5 (2026-04-27)
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 2.1.5
+
 ## 2.2.3 (2026-04-15)
 
 ### 🧱 Updated Dependencies
