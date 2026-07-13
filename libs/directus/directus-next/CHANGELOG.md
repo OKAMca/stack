@@ -1,3 +1,7 @@
+## 2.2.6 (2026-07-13)
+
+This was a version bump only for directus-next to align it with other projects, there were no code changes.
+
 ## 2.2.5 (2026-04-27)
 
 ### 🧱 Updated Dependencies
