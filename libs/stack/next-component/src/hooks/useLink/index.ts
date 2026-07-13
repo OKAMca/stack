@@ -2,27 +2,15 @@
 
 import type { LinkProps } from 'next/link'
 import type { TLink, TUseLinkReturn } from './interface'
-import { useParams, usePathname, useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback } from 'react'
 import { useLocale } from 'react-aria'
-import { useHash } from '../useHash'
 import { LocalePrefix } from './interface'
-
-// Define Params type locally to avoid Next.js internal import path changes
-type Params = Record<string, string | string[] | undefined>
 
 const EXTERNAL_URL_RE = /^[a-z]+:\/\//i
 const DUMMY_BASE = 'http://x'
 
 function scrollToTop(behavior: ScrollBehavior) {
   window?.scrollTo?.({ top: 0, behavior })
-}
-
-function getParamsLocale(params: Params | undefined): string | undefined {
-  const { locale } = params ?? {}
-  if (Array.isArray(locale))
-    return locale[0]
-  return locale
 }
 
 /**
@@ -65,10 +53,8 @@ function addTrailingSlashToPathname(hrefString: string): string {
 export function useLinkLocale(props: TLink) {
   const { locale, i18n } = props
   const { defaultLocale, localePrefix = 'always' } = i18n ?? {}
-  const params = useParams()
-  const paramsLocale = getParamsLocale(params)
   const { locale: ctxLocale } = useLocale()
-  const finalLocale = locale ?? ctxLocale ?? paramsLocale ?? false
+  const finalLocale = locale ?? ctxLocale ?? false
 
   const shouldDisplayLocale = {
     [LocalePrefix.Always]: true,
@@ -106,9 +92,6 @@ export function useLink(props: TLink): TUseLinkReturn {
     onTouchStart,
     onClick,
     onNavigate,
-    onPathnameChange,
-    onHashChange,
-    onSearchParamsChange,
     href,
     urlDecorator,
     replace,
@@ -121,10 +104,6 @@ export function useLink(props: TLink): TUseLinkReturn {
 
   const locale = useLinkLocale(props)
   const localizedHref = localizeHref(href, locale)
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const hash = useHash()
-  const hasWarnedOnPathnameChangeRef = useRef(false)
 
   const isNextScroll = typeof scroll === 'boolean'
   const nextScroll = isNextScroll ? scroll : false
@@ -145,26 +124,6 @@ export function useLink(props: TLink): TUseLinkReturn {
     onTouchStart?.(event)
     handleScroll()
   }
-
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'production' || onPathnameChange == null || hasWarnedOnPathnameChangeRef.current)
-      return
-
-    console.warn('[next-component/Link] `onPathnameChange` is deprecated and will be removed in the next major version. Use `onNavigate` from next/link instead.')
-    hasWarnedOnPathnameChangeRef.current = true
-  }, [onPathnameChange])
-
-  useEffect(() => {
-    onPathnameChange?.(pathname)
-  }, [onPathnameChange, pathname])
-
-  useEffect(() => {
-    onSearchParamsChange?.(searchParams)
-  }, [onSearchParamsChange, searchParams])
-
-  useEffect(() => {
-    onHashChange?.(hash)
-  }, [onHashChange, hash])
 
   return {
     href: localizedHref.toString(),

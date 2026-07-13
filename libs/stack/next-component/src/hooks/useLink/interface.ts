@@ -1,5 +1,4 @@
 import type { LinkProps as NextLinkProps } from 'next/link'
-import type { ReadonlyURLSearchParams } from 'next/navigation'
 import type { UrlObject } from 'node:url'
 
 export enum LocalePrefix {
@@ -78,12 +77,6 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
    * @default instant
    */
   behavior?: ScrollBehavior
-  /**
-   * @deprecated Use `onNavigate` from next/link instead.
-   */
-  onPathnameChange?: (_pathname: string) => void
-  onSearchParamsChange?: (_searchParams: ReadonlyURLSearchParams) => void
-  onHashChange?: (_hash: string) => void
   i18n?: TLinkI18nConfig
 }
 
