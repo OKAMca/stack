@@ -1,3 +1,7 @@
+## 2.1.7 (2026-07-13)
+
+This was a version bump only for directus-next-component to align it with other projects, there were no code changes.
+
 ## 2.1.6 (2026-04-23)
 
 ### 🧱 Updated Dependencies
