@@ -1,3 +1,13 @@
+## 2.1.8 (2026-07-14)
+
+### 🚀 Features
+
+- **directus-next:** imgix & directus image loaders ([#463](https://github.com/OKAMca/stack/pull/463))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.1.7 (2026-07-13)
 
 This was a version bump only for directus-next-component to align it with other projects, there were no code changes.
