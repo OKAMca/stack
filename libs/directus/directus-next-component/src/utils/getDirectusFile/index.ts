@@ -14,8 +14,10 @@ const IMG_PROTOCOL = process.env.NEXT_PUBLIC_IMG_PROTOCOL ?? 'https'
  * @param searchParams Additional search params to append to the URL
  * @returns Directus asset URL
  */
-export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: Record<string, Nullable<string>>) {
-  const { id, filename_download, filenameDownload } = file ?? {}
+export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchParams?: URLSearchParams) {
+  const { id, filename_download, filenameDownload, focal_point_x: focalPointX, focal_point_y: focalPointY, width, height } = file ?? {}
+  const defaultSearchParams = new URLSearchParams(([['focal_point_x', focalPointX], ['focal_point_y', focalPointY], ['width', width], ['height', height]] as const).flatMap(([key, value]) => (value != null ? [[key, value.toString()]] : [])))
+  const allSearchParams = new URLSearchParams([...defaultSearchParams, ...(searchParams ?? [])])
 
   const protocol = (baseUrl?.protocol ?? IMG_PROTOCOL).replace(/:$/, '')
   const hostname = baseUrl?.hostname ?? IMG_DOMAIN
@@ -31,13 +33,8 @@ export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchPara
 
     if (!isEmpty(port))
       url.port = port
-
-    if (!isNullish(searchParams)) {
-      for (const [key, value] of Object.entries(searchParams)) {
-        if (!isEmpty(value))
-          url.searchParams.set(key, value)
-      }
-    }
+    if (!isEmpty(allSearchParams))
+      url.search = allSearchParams.toString()
 
     return url
   }
@@ -57,7 +54,7 @@ export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchPara
 export function getDirectusFile(
   file: Nullable<TFiles>,
   baseUrl?: URL,
-  searchParams?: Record<string, Nullable<string>>,
+  searchParams?: URLSearchParams,
 ) {
   const { description, width, height, title, id, ...rest } = file ?? {}
 
