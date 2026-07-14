@@ -21,6 +21,7 @@ export function useCarouselPaginationBullet(props: TCarouselPaginationBulletProp
   const { controller, slides, swiperProps, activeIndex } = useCarousel()
   const { direction = 'horizontal' } = swiperProps
   const { index, handlePress } = props
+  const { loop } = controller?.params ?? {}
 
   const focusManager = useFocusManager()
 
@@ -40,7 +41,7 @@ export function useCarouselPaginationBullet(props: TCarouselPaginationBulletProp
 
   const { pressProps } = usePress({
     onPress: (e) => {
-      controller?.slideTo(index)
+      loop === true ? controller?.slideToLoop(index) : controller?.slideTo(index)
       handlePress?.(e)
       focusManager?.focusNext({ wrap: true })
     },

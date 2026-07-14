@@ -1,3 +1,21 @@
+## 2.1.5 (2026-07-13)
+
+This was a version bump only for directus-flexible-content to align it with other projects, there were no code changes.
+
+## 2.1.4 (2026-04-23)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.1.3
+- Updated directus-block to 2.1.4
+
+## 2.1.3 (2026-04-23)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.1.2
+- Updated directus-block to 2.1.3
+
 ## 2.1.2 (2026-04-14)
 
 ### 🧱 Updated Dependencies

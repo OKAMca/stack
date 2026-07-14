@@ -141,7 +141,7 @@ export function ShareButton(props: TShareButtonProps) {
 
   return (
     <FocusScope autoFocus restoreFocus contain={isOpen}>
-      <div className={containerTheme} onKeyDown={handleKeyDown}>
+      <div tabIndex={-1} className={containerTheme} onKeyDown={handleKeyDown}>
         <ButtonWithForwardRef
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, isOpen }}

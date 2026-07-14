@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import type { ComponentProps, ComponentType } from 'react'
 import Carousel from '.'
 import { Icon, Typography } from '../..'
+import LegacyCarousel from './components/LegacyCarousel'
 import CarouselNextNavigation from './navigation/CarouselNextNavigation'
 import CarouselPrevNavigation from './navigation/CarouselPrevNavigation'
 import CarouselPagination from './pagination/CarouselPagination'
@@ -14,6 +15,7 @@ import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
 
 type CarouselArgs = ComponentProps<typeof Carousel>
+type LegacyCarouselArgs = ComponentProps<typeof LegacyCarousel>
 
 const meta: Meta<typeof Carousel> = {
   title: 'Base Components/Carousel',
@@ -72,6 +74,22 @@ const meta: Meta<typeof Carousel> = {
         title: 'Slide 4 title',
         children: <Typography>Slide 4</Typography>,
       },
+      {
+        id: '5',
+        children: <Typography>Slide 5</Typography>,
+      },
+      {
+        id: '6',
+        children: <Typography>Slide 6</Typography>,
+      },
+      {
+        id: '7',
+        children: <Typography>Slide 7</Typography>,
+      },
+      {
+        id: '8',
+        children: <Typography>Slide 8</Typography>,
+      },
     ],
     onSwiper: () => {
       console.log('Swiper initialized')
@@ -80,22 +98,42 @@ const meta: Meta<typeof Carousel> = {
       console.log('Slide changed')
     },
   },
-  render: (args: CarouselArgs) => (
-    <Carousel {...args}>
-      <CarouselPrevNavigation aria-label="Previous slide">
-        <Icon icon="ArrowLeft" />
-      </CarouselPrevNavigation>
-      <CarouselSwiper />
-      <CarouselNextNavigation aria-label="Next slide">
-        <Icon icon="ArrowRight" />
-      </CarouselNextNavigation>
-    </Carousel>
-  ),
 }
 
 export default meta
 
 type Story = StoryObj<typeof Carousel>
+
+function Nav() {
+  return (
+    <>
+      <CarouselPrevNavigation aria-label="Previous slide">
+        <Icon icon="ArrowLeft" />
+      </CarouselPrevNavigation>
+      <CarouselNextNavigation aria-label="Next slide">
+        <Icon icon="ArrowRight" />
+      </CarouselNextNavigation>
+    </>
+  )
+}
+
+function BulletPagination() {
+  return (
+    <CarouselPagination>
+      {swiper =>
+      // eslint-disable-next-line react/no-array-index-key -- pagination bullets map 1:1 with slide positions; index is the correct identifier
+        swiper?.slides?.map((_slide, index) => <CarouselPaginationBullet key={`bullet-${index}`} index={index} />)}
+    </CarouselPagination>
+  )
+}
+
+function FractionPagination() {
+  return (
+    <CarouselPagination>
+      <CarouselPaginationFraction />
+    </CarouselPagination>
+  )
+}
 
 export const MultipleSlidesPerView: Story = {
   name: 'Multiple slides per view',
@@ -103,6 +141,12 @@ export const MultipleSlidesPerView: Story = {
     slidesPerView: 2,
     modules: ['Navigation'],
   },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <Nav />
+      <CarouselSwiper />
+    </Carousel>
+  ),
 }
 
 export const Autoplay: Story = {
@@ -111,6 +155,13 @@ export const Autoplay: Story = {
     modules: ['Autoplay', 'Navigation', 'Pagination'],
     autoplay: true,
   },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <Nav />
+      <CarouselSwiper />
+      <BulletPagination />
+    </Carousel>
+  ),
 }
 
 export const FocusableContent: Story = {
@@ -158,16 +209,27 @@ export const FocusableContent: Story = {
       },
     ],
   },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <Nav />
+      <CarouselSwiper />
+    </Carousel>
+  ),
 }
 
 export const InfiniteLooping: Story = {
   name: 'Infinite looping',
-
   args: {
     id: '4',
     loop: true,
     modules: ['Navigation'],
   },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <Nav />
+      <CarouselSwiper />
+    </Carousel>
+  ),
 }
 
 export const PaginationBullets: Story = {
@@ -178,11 +240,36 @@ export const PaginationBullets: Story = {
   render: (args: CarouselArgs) => (
     <Carousel {...args}>
       <CarouselSwiper />
-      <CarouselPagination>
-        {swiper =>
-          // eslint-disable-next-line react/no-array-index-key -- pagination bullets map 1:1 with slide positions; index is the correct identifier
-          swiper?.slides?.map((slide, index) => <CarouselPaginationBullet key={`bullet-${index}`} index={index} />)}
-      </CarouselPagination>
+      <BulletPagination />
+    </Carousel>
+  ),
+}
+
+export const NavigationWithPaginationBullets: Story = {
+  name: 'Navigation with pagination bullets',
+  args: {
+    modules: ['Navigation', 'Pagination'],
+  },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <Nav />
+      <CarouselSwiper />
+      <BulletPagination />
+    </Carousel>
+  ),
+}
+
+export const NavigationWithPaginationBulletsLooping: Story = {
+  name: 'Navigation with pagination bullets (looping)',
+  args: {
+    loop: true,
+    modules: ['Navigation', 'Pagination'],
+  },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <Nav />
+      <CarouselSwiper />
+      <BulletPagination />
     </Carousel>
   ),
 }
@@ -194,16 +281,9 @@ export const PaginationFraction: Story = {
   },
   render: (args: CarouselArgs) => (
     <Carousel {...args}>
-      <CarouselPrevNavigation aria-label="Previous slide">
-        <Icon icon="ArrowLeft" />
-      </CarouselPrevNavigation>
-      <CarouselNextNavigation aria-label="Next slide">
-        <Icon icon="ArrowRight" />
-      </CarouselNextNavigation>
-      <CarouselPagination>
-        <CarouselPaginationFraction />
-      </CarouselPagination>
+      <Nav />
       <CarouselSwiper />
+      <FractionPagination />
     </Carousel>
   ),
 }
@@ -213,4 +293,9 @@ export const Legacy: Story = {
   args: {
     modules: ['Navigation'],
   },
+  render: (args: LegacyCarouselArgs) => (
+    <LegacyCarousel {...args}>
+      {slide => <>{slide.children}</>}
+    </LegacyCarousel>
+  ),
 }

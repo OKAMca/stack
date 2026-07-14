@@ -68,22 +68,24 @@ export function Popover(props: TPopoverProps) {
     <Overlay>
       <Box themeName={`${themeName}.underlay`} tokens={popoverTokens} {...underlayProps} />
       <FocusScope autoFocus={autoFocus} restoreFocus={restoreFocus} contain={contain}>
-        <BoxWithForwardRef
-          themeName={`${themeName}.popover`}
-          customTheme={customTheme}
-          tokens={popoverTokens}
-          ref={popoverRef}
-          {...popoverProps}
-          tabIndex={scrollableRegionTabIndex}
-          style={style}
-        >
-          {arrow != null && cloneElement(arrow, { ...arrowProps, themeName: `${themeName}.arrow`, tokens: popoverTokens })}
-          <DismissButton onDismiss={state.close} />
-          {Children.map(children, child => (
-            <FocusRing focusRingClass="has-focus-ring">{child}</FocusRing>
-          ))}
-          <DismissButton onDismiss={state.close} />
-        </BoxWithForwardRef>
+        <div tabIndex={-1}>
+          <BoxWithForwardRef
+            themeName={`${themeName}.popover`}
+            customTheme={customTheme}
+            tokens={popoverTokens}
+            ref={popoverRef}
+            {...popoverProps}
+            tabIndex={scrollableRegionTabIndex}
+            style={style}
+          >
+            {arrow != null && cloneElement(arrow, { ...arrowProps, themeName: `${themeName}.arrow`, tokens: popoverTokens })}
+            <DismissButton onDismiss={state.close} />
+            {Children.map(children, child => (
+              <FocusRing focusRingClass="has-focus-ring">{child}</FocusRing>
+            ))}
+            <DismissButton onDismiss={state.close} />
+          </BoxWithForwardRef>
+        </div>
       </FocusScope>
     </Overlay>
   )
