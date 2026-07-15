@@ -1,7 +1,7 @@
 import type { LinkProps as NextLinkProps } from 'next/link'
 import type { UrlObject } from 'node:url'
 
-export enum LocalePrefix {
+export const LocalePrefix = {
   /**
    * The pathname will be prefixed with the locale only when it is not the default locale
    *
@@ -22,7 +22,7 @@ export enum LocalePrefix {
    * // output: /fr/produits/1
    * ```
    */
-  AsNeeded = 'as-needed',
+  AsNeeded: 'as-needed',
   /**
    * The pathname will always be prefixed by the locale
    *
@@ -43,8 +43,8 @@ export enum LocalePrefix {
    * // output: /fr/produits/1
    * ```
    */
-  Always = 'always',
-}
+  Always: 'always',
+} as const
 
 export type TLinkI18nConfig
   = ({
@@ -52,14 +52,14 @@ export type TLinkI18nConfig
     /**
      * {@link LocalePrefix}
      */
-    localePrefix: `${LocalePrefix.AsNeeded}`
+    localePrefix: `${typeof LocalePrefix.AsNeeded}`
   }
   | {
     defaultLocale?: string
     /**
      * {@link LocalePrefix}
      */
-    localePrefix?: `${LocalePrefix.Always}` | undefined
+    localePrefix?: `${typeof LocalePrefix.Always}` | undefined
   })
 
 export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
