@@ -1,3 +1,17 @@
+## 2.3.1 (2026-07-15)
+
+### 🚀 Features
+
+- **directus-next:** imgix & directus image loaders ([#463](https://github.com/OKAMca/stack/pull/463))
+
+### 🩹 Fixes
+
+- **next-component:** only export localeprefix from index.ts barrel ([#522](https://github.com/OKAMca/stack/pull/522))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.3.0 (2026-07-14)
 
 ### 🚀 Features
