@@ -40,7 +40,7 @@
     "react": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@okam/directus-next": "2.2.5",
+    "@okam/directus-next": "2.3.1",
     "@okam/logger": "1.1.0",
     "@okam/next-component": "2.1.7",
     "@okam/stack-ui": "2.1.5",
