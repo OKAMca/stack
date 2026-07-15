@@ -9,8 +9,8 @@ const localeMap = {
 
 export const directusConfig: TDirectusRouteConfig<keyof typeof localeMap> = {
   localeMap,
-  localePrefix: 'as-needed',
-  defaultLocale: 'fr-CA',
+  localePrefix: 'always',
+  defaultLocale: 'en-CA',
   collectionSettings: {
     default: {
       idField: 'id',
