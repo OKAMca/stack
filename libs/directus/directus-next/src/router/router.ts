@@ -1,7 +1,7 @@
 import type { NextRequest, NextResponse as NextResponseType } from 'next/server'
 import type { TPageSettingsTranslation } from '../types'
 import type { TDirectusRouteConfig } from '../types/directusRouteConfig'
-import { LocalePrefix } from '@okam/next-component/server'
+import { LocalePrefix } from '@okam/next-component'
 import { NextResponse as NextResponseClass } from 'next/server'
 import { isEmpty } from 'radashi'
 import { log } from '../logger'
