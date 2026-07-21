@@ -1,4 +1,4 @@
-import type { LocalePrefix } from '@okam/next-component/server'
+import type { LocalePrefix } from '@okam/next-component'
 
 export interface TDirectusRouteRedirectsModule {
   /**
@@ -75,11 +75,11 @@ export enum DirectusRouteLocalePrefix {
 export type TDirectusRouteI18n<Locales extends string>
   = | {
     defaultLocale: Locales
-    localePrefix: `${LocalePrefix.AsNeeded}`
+    localePrefix: `${typeof LocalePrefix.AsNeeded}`
   }
   | {
     defaultLocale?: Locales
-    localePrefix?: `${LocalePrefix.Always}` | undefined
+    localePrefix?: `${typeof LocalePrefix.Always}` | undefined
   }
 
 export type TDirectusRouteConfig<Locales extends string = string> = {

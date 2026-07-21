@@ -1,3 +1,24 @@
+## 2.1.7 (2026-07-15)
+
+### 🩹 Fixes
+
+- **next-component:** only export localeprefix from index.ts barrel ([#522](https://github.com/OKAMca/stack/pull/522))
+- **next-component:** remove all dynamic APIs use in useLink ([#515](https://github.com/OKAMca/stack/pull/515))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
+## 2.1.6 (2026-07-13)
+
+### 🩹 Fixes
+
+- **next-component:** remove all dynamic APIs use in useLink ([#515](https://github.com/OKAMca/stack/pull/515))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.1.5 (2026-04-23)
 
 ### 🧱 Updated Dependencies

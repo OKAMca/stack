@@ -1,0 +1,32 @@
+{
+  "name": "<%= appName %>",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "next start"
+  },
+  "dependencies": {
+    <% if (includeDirectus === 'true') { %>"@okam/directus-block": "catalog:",
+    "@okam/directus-next": "catalog:",
+    <% } %>"@okam/next-component": "catalog:",
+    "@okam/stack-ui": "catalog:",
+    "<%= scope %>/brand-ui": "workspace:*",
+    "<%= scope %>/i18n": "workspace:*",
+    "@t3-oss/env-nextjs": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    <% if (includeDirectus === 'true') { %>"graphql": "catalog:",
+    "graphql-request": "catalog:",
+    <% } %>"i18next": "catalog:",
+    "i18next-resources-to-backend": "catalog:",
+    "next": "catalog:",
+    "react": "catalog:",
+    "react-aria": "catalog:",
+    "react-dom": "catalog:",
+    "react-i18next": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "catalog:"
+  }
+}

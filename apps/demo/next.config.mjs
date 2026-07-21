@@ -19,6 +19,8 @@ const pattern = { protocol, hostname: process.env.NEXT_PUBLIC_IMG_DOMAIN ?? 'loc
 const nextConfig = {
   images: {
     remotePatterns: [pattern],
+    loader: 'custom',
+    loaderFile: './image-loader.ts',
   },
   // Set outputFileTracingRoot to monorepo root for proper file tracing in NX monorepo
   // This resolves the warning about multiple lockfiles preventing workspace root inference

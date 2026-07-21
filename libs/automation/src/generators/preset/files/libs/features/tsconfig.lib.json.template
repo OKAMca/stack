@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "../../dist/libs/features"
+  },
+  "references": [
+    { "path": "../brand-ui/tsconfig.lib.json" },
+    { "path": "../i18n/tsconfig.lib.json" }<% if (includeDirectus === 'true') { %>,
+    { "path": "../queries/tsconfig.lib.json" }<% } %>
+  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
+    "src/**/*.stories.ts",
+    "src/**/*.stories.tsx"
+  ]
+}

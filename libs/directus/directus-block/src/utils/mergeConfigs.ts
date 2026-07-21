@@ -7,15 +7,15 @@ import type { TBlockSerializerConfig } from '../components/BlockSerializer/inter
  * @param configs Array of block dispatcher serializers to merge. Later elements will always be prioritized over first elements
  * @returns Merged config
  */
-export default function mergeConfigs(
-  baseConfig: TBlockSerializerConfig,
-  ...configs: Nullable<TBlockSerializerConfig>[]
-): TBlockSerializerConfig {
-  const finalConfig = configs.reduce<TBlockSerializerConfig>((mergedConfig, config) => {
+export default function mergeConfigs<BaseConfig extends TBlockSerializerConfig = TBlockSerializerConfig, Config extends TBlockSerializerConfig = BaseConfig>(
+  baseConfig: BaseConfig,
+  ...configs: Nullable<Config>[]
+): BaseConfig {
+  const finalConfig = configs.reduce<BaseConfig>((mergedConfig, config) => {
     if (config == null)
       return mergedConfig
 
-    return { components: { ...mergedConfig.components, ...config.components } }
+    return { ...mergedConfig, components: { ...mergedConfig.components, ...config.components } }
   }, baseConfig)
 
   return finalConfig

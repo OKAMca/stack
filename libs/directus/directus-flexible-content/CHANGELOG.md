@@ -1,3 +1,7 @@
+## 2.1.5 (2026-07-13)
+
+This was a version bump only for directus-flexible-content to align it with other projects, there were no code changes.
+
 ## 2.1.4 (2026-04-23)
 
 ### 🧱 Updated Dependencies

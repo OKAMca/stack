@@ -43,7 +43,7 @@ export {
   ReactHookFormCheckboxItem,
 } from './components/fields/CheckboxGroup/components/CheckboxGroupItem'
 export { default as ComboBox } from './components/fields/ComboBox'
-export { default as ReactHookFormComboBox } from './components/fields/ComboBox'
+export { ReactHookFormComboBox } from './components/fields/ComboBox'
 export { useComboBoxFiltering } from './components/fields/ComboBox/hooks/useComboBoxFiltering'
 export { default as DatePicker } from './components/fields/DatePicker'
 export { CalendarPopover } from './components/fields/DatePicker/components/CalendarPopover'

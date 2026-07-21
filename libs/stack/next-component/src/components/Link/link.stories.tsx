@@ -30,8 +30,6 @@ const meta: Meta<typeof Link> = {
     onNavigate: e => console.log('Navigate', e),
     onMouseEnter: e => console.log('Mouse enter', e),
     onTouchStart: e => console.log('Touch start', e),
-    onSearchParamsChange: searchParams => console.log('Search params change', searchParams),
-    onHashChange: hash => console.log('Hash change', hash),
     tokens: { buttonStyle: 'default' },
   },
   argTypes: {
@@ -56,19 +54,11 @@ const meta: Meta<typeof Link> = {
         type: { summary: 'ReactNode' },
       },
     },
-    onSearchParamsChange: {
-      control: false,
-      description: 'Callback function that is called when the search params change. Relies on `useSearchParams` hook.',
-    },
     onNavigate: {
       control: false,
       table: {
         category: 'next/link',
       },
-    },
-    onHashChange: {
-      control: false,
-      description: 'Callback function that is called when the hash changes. Relies on `useHash` hook.',
     },
     href: {
       table: {

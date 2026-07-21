@@ -1,8 +1,7 @@
 import type { LinkProps as NextLinkProps } from 'next/link'
-import type { ReadonlyURLSearchParams } from 'next/navigation'
 import type { UrlObject } from 'node:url'
 
-export enum LocalePrefix {
+export const LocalePrefix = {
   /**
    * The pathname will be prefixed with the locale only when it is not the default locale
    *
@@ -23,7 +22,7 @@ export enum LocalePrefix {
    * // output: /fr/produits/1
    * ```
    */
-  AsNeeded = 'as-needed',
+  AsNeeded: 'as-needed',
   /**
    * The pathname will always be prefixed by the locale
    *
@@ -44,8 +43,8 @@ export enum LocalePrefix {
    * // output: /fr/produits/1
    * ```
    */
-  Always = 'always',
-}
+  Always: 'always',
+} as const
 
 export type TLinkI18nConfig
   = ({
@@ -53,14 +52,14 @@ export type TLinkI18nConfig
     /**
      * {@link LocalePrefix}
      */
-    localePrefix: `${LocalePrefix.AsNeeded}`
+    localePrefix: `${typeof LocalePrefix.AsNeeded}`
   }
   | {
     defaultLocale?: string
     /**
      * {@link LocalePrefix}
      */
-    localePrefix?: `${LocalePrefix.Always}` | undefined
+    localePrefix?: `${typeof LocalePrefix.Always}` | undefined
   })
 
 export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
@@ -78,12 +77,6 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
    * @default instant
    */
   behavior?: ScrollBehavior
-  /**
-   * @deprecated Use `onNavigate` from next/link instead.
-   */
-  onPathnameChange?: (_pathname: string) => void
-  onSearchParamsChange?: (_searchParams: ReadonlyURLSearchParams) => void
-  onHashChange?: (_hash: string) => void
   i18n?: TLinkI18nConfig
 }
 
