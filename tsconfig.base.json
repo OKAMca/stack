@@ -38,12 +38,7 @@
       "@okam/stack-ui/static/*": ["./libs/stack/stack-ui/static/*"],
       "@okam/ai": ["./libs/ai/src/index.ts"],
       "@okam/react-utils": ["./libs/stack/react-utils/src/index.ts"]
-    },
-    "strict": false,
-    "noUncheckedSideEffectImports": false,
-    "types": ["*"],
-    "esModuleInterop": false,
-    "ignoreDeprecations": "6.0"
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
