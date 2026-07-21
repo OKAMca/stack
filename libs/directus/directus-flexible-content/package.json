@@ -29,19 +29,19 @@
     "react": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@okam/directus-block": "2.1.4",
-    "@okam/stack-ui": "2.1.5",
-    "@tiptap/core": "^3.15.3",
-    "@tiptap/extension-subscript": "^3.15.3",
-    "@tiptap/extension-superscript": "^3.15.3",
-    "@tiptap/extension-table": "^3.15.3",
-    "@tiptap/extension-table-cell": "^3.15.3",
-    "@tiptap/extension-table-header": "^3.15.3",
-    "@tiptap/extension-table-row": "^3.15.3",
-    "@tiptap/extension-text-align": "^3.15.3",
-    "@tiptap/starter-kit": "^3.15.3"
+    "@okam/directus-block": "workspace:*",
+    "@okam/stack-ui": "workspace:*",
+    "@tiptap/core": "^3.28.0",
+    "@tiptap/extension-subscript": "^3.28.0",
+    "@tiptap/extension-superscript": "^3.28.0",
+    "@tiptap/extension-table": "^3.28.0",
+    "@tiptap/extension-table-cell": "^3.28.0",
+    "@tiptap/extension-table-header": "^3.28.0",
+    "@tiptap/extension-table-row": "^3.28.0",
+    "@tiptap/extension-text-align": "^3.28.0",
+    "@tiptap/starter-kit": "^3.28.0"
   },
   "devDependencies": {
-    "react": "^19.0.0"
+    "react": "^19.2.8"
   }
 }

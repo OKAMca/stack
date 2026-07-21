@@ -8,7 +8,8 @@
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
     "importHelpers": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "ignoreDeprecations": "6.0"
   },
   "references": [
     {
