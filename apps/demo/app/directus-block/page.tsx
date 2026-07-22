@@ -1,7 +1,7 @@
+import { BlockWysiwygsDocument } from '@demo/directus-data-query'
 import { blockWysiwygConfig } from '@okam/directus-block'
 import { BlockDispatcher, BlockSerializer } from '@okam/directus-block/server'
 import { Box } from '@okam/stack-ui'
-import { BlockWysiwygsDocument } from 'apps/directus-data-query/src'
 
 export default function Index() {
   return (

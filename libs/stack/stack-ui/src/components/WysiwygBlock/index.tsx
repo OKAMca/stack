@@ -29,7 +29,7 @@ function WysiwygBlock<Tags extends string = string, T extends TToken = TToken>({
   useSanitizerDefaultAllowedTags = true,
   useSanitizerDefaultAllowedAttributes = true,
   allowedTags = defaultAllowedTags as Tags[],
-  allowedAttributes = defaultAllowedAttributes as Partial<Record<Tags, string[]>>,
+  allowedAttributes = defaultAllowedAttributes,
   ...rest
 }: TWysiwygBlockProps<Tags, T>) {
   const sanitizedContent = sanitizeHtml(content, {

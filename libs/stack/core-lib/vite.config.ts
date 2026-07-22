@@ -38,7 +38,7 @@ export default defineConfig({
       name: 'core-lib',
       fileName: 'index',
     },
-    rollupOptions: {
+    rolldownOptions: {
       // External packages that should not be bundled into your library.
       external: isExternal,
       output: [

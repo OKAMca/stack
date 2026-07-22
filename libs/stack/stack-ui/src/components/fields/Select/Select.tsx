@@ -1,6 +1,5 @@
 'use client'
 
-import type { CSSProperties } from 'react'
 import type { RegisterOptions } from 'react-hook-form'
 import type { TToken } from '../../../providers/Theme/interface'
 import type { TSelectProps } from './Select.interface'
@@ -100,7 +99,7 @@ export function Select<T extends TToken>(props: TSelectProps<T>) {
             triggerRef={buttonRef}
             placement="bottom"
             themeName={`${themeName}.popover`}
-            style={{ [`--${themeName}-container-width`]: `${buttonRef.current?.offsetWidth}px` } as CSSProperties}
+            style={{ [`--${themeName}-container-width`]: `${buttonRef.current?.offsetWidth}px` }}
           >
             <ListBox {...menuProps} themeName={themeName} state={state} optionsWithHeaders={options ?? []} />
           </Popover>

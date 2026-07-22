@@ -1,7 +1,6 @@
-import type { TFiles, TPageSettings } from '@okam/directus-next'
+import type { TPageSettings } from '@okam/directus-next'
 import type { TMetadataOptions } from '@okam/directus-next-component'
 import type { Nullable } from '@okam/stack-ui'
-import type { OpenGraphType } from 'next/dist/lib/metadata/types/opengraph-types'
 import { getMetadata } from '@okam/directus-next-component'
 import Link from 'next/link'
 
@@ -20,7 +19,7 @@ const mockPageSettings: TPageSettings = {
         id: 'mock-image-id',
         title: 'Demo Image',
         description: 'A demo image for metadata',
-      } as TFiles,
+      },
       languages_code: { code: 'en' },
       slug: 'metadata-demo',
       path: '/metadata-demo',
@@ -81,7 +80,7 @@ const metadataOptions: TMetadataOptions = {
     pages: 'website',
     articles: 'article',
     products: 'website', // Changed to a valid OpenGraphType
-  } as Record<string, OpenGraphType>,
+  },
   getHostname: () => 'https://example.com',
 }
 

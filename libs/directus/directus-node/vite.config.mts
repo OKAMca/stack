@@ -5,8 +5,8 @@ import react from '@vitejs/plugin-react'
 import preserveDirectives from 'rollup-plugin-preserve-directives'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
-import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
-import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
+import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
 import externalDeps from '../../../config/external-deps'
 
 export default defineConfig({
@@ -42,19 +42,19 @@ export default defineConfig({
       // Removed 'fileName' because multiple entry points are specified
       // Note: formats not needed - rollupOptions.output array takes precedence
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: [
         {
           format: 'es',
           entryFileNames: '[name].mjs',
           preserveModules: false,
-          banner: chunk => chunk.name === 'server' ? "import 'server-only';" : '',
+          banner: (chunk) => (chunk.name === 'server' ? "import 'server-only';" : ''),
         },
         {
           format: 'cjs',
           entryFileNames: '[name].js',
           preserveModules: false,
-          banner: chunk => chunk.name === 'server' ? "require('server-only');" : '',
+          banner: (chunk) => (chunk.name === 'server' ? "require('server-only');" : ''),
         },
       ],
       // External packages that should not be bundled into your library.

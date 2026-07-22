@@ -9,7 +9,8 @@ import { BoxWithForwardRef } from '../../Box'
 
 function Tab<I extends TDefaultItemComponent>({ item, state, ...props }: TTabProps<I>) {
   const { key, rendered } = item
-  const { themeName = 'tabList.tab', tokens, ...rest } = mergeDefaultComponentProps(props, item.props)
+  // strip `key` so it is never forwarded through the spread below
+  const { themeName = 'tabList.tab', tokens, key: _key, ...rest } = mergeDefaultComponentProps(props, item.props)
 
   const ref = useRef(null)
   const { tabProps } = useTab({ key }, state, ref)

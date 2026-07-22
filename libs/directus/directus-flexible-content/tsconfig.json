@@ -5,7 +5,8 @@
     "allowJs": false,
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": false
+    "esModuleInterop": false,
+    "ignoreDeprecations": "6.0"
   },
   "references": [
     {
