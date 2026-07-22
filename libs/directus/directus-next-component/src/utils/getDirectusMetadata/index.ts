@@ -7,6 +7,7 @@ import type { TDirectusFileProps } from '../../components/DirectusFile/interface
 import type { TMetadataOptions } from '../../types/metadata'
 import { min } from 'radashi'
 import { getDirectusFile } from '../getDirectusFile'
+import { getDirectusImg } from '../getDirectusImg'
 
 function withFallbacks<TPageProps extends { pageSettings: TPageSettings }>(
   pageProps: TPageProps,
@@ -45,7 +46,7 @@ export function getOpenGraphImage(
   image: Nullable<TDirectusFileProps>,
   options: TMetadataOptions,
 ): Nullable<Exclude<OpenGraph['images'], OpenGraph['images'][]>> {
-  const directusImage = getDirectusFile(image)
+  const directusImage = getDirectusImg(image)
   const { src, alt } = directusImage ?? {}
   const { width: limitedWidth, height: limitedHeight }
     = (directusImage?.width != null && directusImage.width !== 0 && directusImage?.height != null && directusImage.height !== 0
