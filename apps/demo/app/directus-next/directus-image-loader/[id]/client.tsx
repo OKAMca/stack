@@ -8,7 +8,7 @@ const protocol = process.env.NEXT_PUBLIC_IMG_PROTOCOL ?? 'http'
 const domain = process.env.NEXT_PUBLIC_IMG_DOMAIN
 const port = !isEmpty(process.env.NEXT_PUBLIC_IMG_PORT) ? `:${process.env.NEXT_PUBLIC_IMG_PORT}` : ''
 
-export default function ClientPage({ id}: { id: string }) {
+export default function ClientPage({ id }: { id: string }) {
   const baseUrl = new URL(`${protocol}://${domain}${port}`)
   return (
     <div>

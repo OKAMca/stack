@@ -44,12 +44,12 @@ export default defineConfig({
       // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       // External packages that should not be bundled into your library.
       output: {
         preserveModules: true,
       },
-      external: id => isExternal(id) || id.startsWith('@okam/'),
+      external: (id) => isExternal(id) || id.startsWith('@okam/'),
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
           return

@@ -54,7 +54,7 @@ export function ControlledListBox({ ref: listBoxRef, ...props }: TControlledList
         listBoxRef(newRef)
       }
       else if (typeof listBoxRef === 'object') {
-        (listBoxRef as React.MutableRefObject<HTMLElement | null>).current = newRef
+        (listBoxRef).current = newRef
       }
     }
   }

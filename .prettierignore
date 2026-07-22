@@ -8,3 +8,4 @@
 **/tmp/**
 **/node_modules/**
 /.nx/workspace-data
+.nx/self-healing

@@ -7,9 +7,9 @@ import { useCarouselSlide } from './useCarouselSlide'
 
 function CarouselSlide(props: TCarouselSlideProps) {
   const { themeName = 'carousel.slide', title, tokens, children, customTheme } = props
-  const { slideProps, titleProps, isActive, isVisible, isPrev, isNext } = useCarouselSlide(props)
+  const { slideProps, titleProps, isActive, isVisible, isFullyVisible, isPrev, isNext } = useCarouselSlide(props)
 
-  const carouselSlideTokens = { ...tokens, isActive, isVisible, isPrev, isNext }
+  const carouselSlideTokens = { ...tokens, isActive, isVisible, isFullyVisible, isPrev, isNext }
 
   return (
     <Box {...slideProps} themeName={`${themeName}.container`} tokens={carouselSlideTokens} customTheme={customTheme}>
@@ -18,7 +18,7 @@ function CarouselSlide(props: TCarouselSlideProps) {
           {title}
         </Typography>
       )}
-      {typeof children === 'function' ? children({ themeName, tokens, isActive, isVisible, isPrev, isNext }) : children}
+      {typeof children === 'function' ? children({ themeName, tokens, isActive, isVisible, isFullyVisible, isPrev, isNext }) : children}
     </Box>
   )
 }

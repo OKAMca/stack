@@ -31,6 +31,8 @@ function Option<I extends object = object, T extends TToken = TToken>({
     as = 'li',
     customTheme,
     linkElementType: LinkElement = Anchor,
+    // strip `key` so it is never forwarded through the spread below
+    key: _key,
     ...rest
   } = mergeDefaultComponentProps(props, item.props)
 

@@ -18,9 +18,7 @@
         "development": {
           "outputPath": "apps/demo"
         },
-        "production": {
-          "webpack": true
-        }
+        "production": {}
       }
     },
     "serve": {

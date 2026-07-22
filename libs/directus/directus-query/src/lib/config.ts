@@ -1,4 +1,6 @@
-import type { RequestConfig } from 'node_modules/graphql-request/build/legacy/helpers/types'
+import type { GraphQLClient } from 'graphql-request'
+
+export type RequestConfig = NonNullable<ConstructorParameters<typeof GraphQLClient>[1]>
 
 export const GRAPHQL_ENDPOINT = process.env.NEXT_PUBLIC_GRAPHQL_URL as string
 export const AUTH_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN as string
