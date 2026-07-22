@@ -24,7 +24,7 @@
     "postinstall": "is-ci || husky"
   },
   "dependencies": {
-    "@nx/devkit": "23.1.0",
+    "@nx/devkit": "22.7.7",
     "@nx/next": "23.1.0",
     "@nx/plugin": "23.1.0",
     "@react-spring/web": "^10.1.2",
@@ -128,7 +128,7 @@
     "postcss": "8.5.21",
     "prettier": "^3.9.6",
     "rollup-plugin-preserve-directives": "^0.4.0",
-    "slugify": "1.6.8",
+    "slugify": "1.6.9",
     "swc-loader": "0.2.7",
     "tailwindcss": "^4.3.3",
     "tailwindcss-logical": "^4.2.0",
