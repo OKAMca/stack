@@ -40,8 +40,14 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
   if (imgixFit !== 'crop')
     return
 
-  const fpXPx = Number(directusParams.get('focal_point_x'))
-  const fpYPx = Number(directusParams.get('focal_point_y'))
+  // Read the raw params before coercion: `Number(null)` is `0`, which would
+  // otherwise make a missing focal point indistinguishable from an explicit
+  // top/left edge (`0`) and wrongly pin the crop instead of falling back to
+  // entropy.
+  const fpXRaw = directusParams.get('focal_point_x')
+  const fpYRaw = directusParams.get('focal_point_y')
+  const fpXPx = Number(fpXRaw)
+  const fpYPx = Number(fpYRaw)
   const intrinsicWidth = Number(directusParams.get('width'))
   const intrinsicHeight = Number(directusParams.get('height'))
 
@@ -56,8 +62,10 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
 
   // `fp-x`/`fp-y` are 0..1 fractions of the source, so they divide by the
   // intrinsic width/height — never the responsive render width. `0` is a valid
-  // top/left edge; only the dimensions must be strictly positive.
-  const hasValidFocalPoint = [fpXPx, fpYPx].every(value => Number.isFinite(value) && value >= 0)
+  // top/left edge, but a focal point beyond the source bounds is not.
+  const hasValidFocalPoint = fpXRaw != null && fpYRaw != null
+    && [fpXPx, fpYPx].every(value => Number.isFinite(value) && value >= 0)
+    && fpXPx <= intrinsicWidth && fpYPx <= intrinsicHeight
 
   if (!hasValidDimensions || !hasValidFocalPoint) {
     params.set('crop', 'entropy')
