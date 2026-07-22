@@ -29,7 +29,7 @@ const DIRECTUS_ASSET_PATH_REGEX = /\/assets\/([\w-]+)(?:\/[\w%.-]+\.(\w+))?/
  * Translates `fit` and focal-point params from a Directus URL to imgix equivalents.
  * Extracted to keep the main loader flat — early returns replace nested conditionals.
  */
-function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams, width: number): void {
+function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams): void {
   const directusFit = directusParams.get('fit')
   if (isEmpty(directusFit))
     return
@@ -40,18 +40,41 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
   if (imgixFit !== 'crop')
     return
 
-  const fpXPx = Number(directusParams.get('focal_point_x'))
-  const fpYPx = Number(directusParams.get('focal_point_y'))
-  const height = Number(directusParams.get('height'))
+  // Read the raw params before coercion: `Number(null)` is `0`, which would
+  // otherwise make a missing focal point indistinguishable from an explicit
+  // top/left edge (`0`) and wrongly pin the crop instead of falling back to
+  // entropy.
+  const fpXRaw = directusParams.get('focal_point_x')
+  const fpYRaw = directusParams.get('focal_point_y')
+  const fpXPx = Number(fpXRaw)
+  const fpYPx = Number(fpYRaw)
+  const intrinsicWidth = Number(directusParams.get('width'))
+  const intrinsicHeight = Number(directusParams.get('height'))
 
-  if ([fpXPx, fpYPx, width, height].some(value => !Number.isFinite(value) || value <= 0)) {
+  // Both dimensions are needed to normalise focal points and to build `ar`.
+  const hasValidDimensions = [intrinsicWidth, intrinsicHeight].every(value => Number.isFinite(value) && value > 0)
+
+  // Derive the crop aspect ratio from the intrinsic dimensions and let imgix
+  // compute the height from the responsive `w`. Setting a fixed intrinsic `h`
+  // alongside a per-srcset `w` would change the crop ratio at every width.
+  if (hasValidDimensions)
+    params.set('ar', `${intrinsicWidth}:${intrinsicHeight}`)
+
+  // `fp-x`/`fp-y` are 0..1 fractions of the source, so they divide by the
+  // intrinsic width/height — never the responsive render width. `0` is a valid
+  // top/left edge, but a focal point beyond the source bounds is not.
+  const hasValidFocalPoint = fpXRaw != null && fpYRaw != null
+    && [fpXPx, fpYPx].every(value => Number.isFinite(value) && value >= 0)
+    && fpXPx <= intrinsicWidth && fpYPx <= intrinsicHeight
+
+  if (!hasValidDimensions || !hasValidFocalPoint) {
     params.set('crop', 'entropy')
     return
   }
 
   params.set('crop', 'focalpoint')
-  params.set('fp-x', (fpXPx / width).toString())
-  params.set('fp-y', (fpYPx / height).toString())
+  params.set('fp-x', (fpXPx / intrinsicWidth).toString())
+  params.set('fp-y', (fpYPx / intrinsicHeight).toString())
 }
 
 /**
@@ -59,21 +82,21 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
  *
  * When `NEXT_PUBLIC_IMGIX_SUBDOMAIN` is set, the loader:
  * 1. Extracts the asset ID and extension from the Directus asset URL.
- * 2. Translates `fit`, `height`, `withoutEnlargement`, and focal-point params to their imgix equivalents.
+ * 2. Translates `fit`, intrinsic dimensions, `withoutEnlargement`, and focal-point params to their imgix equivalents.
  * 3. Applies `width` and `quality` from Next.js loader props.
  *
  * Falls back to `directusImageLoader` when the env var is absent, the URL does
  * not match the expected Directus asset pattern, or URL parsing fails.
  *
- * Static transformation params (`fit`, `height`, `withoutEnlargement`, focal point)
- * must already be set on the `src` URL before the loader runs (e.g. via `getDirectusFile`).
+ * Static transformation params (`fit`, intrinsic `width`/`height`, `withoutEnlargement`, focal point)
+ * must already be set on the `src` URL before the loader runs (e.g. via `getDirectusImg`).
  *
  * @param {string} props.src Image source. The following imgix parameters will be set:
  * - `auto`: `'format,compress'`
  * - `w`: `width` prop (Next.js breakpoint)
- * - `h`: `height` URL parameter
  * - `q`: `quality` prop
  * - `fit`: `fit` URL parameter, translated from Directus to imgix values
+ * - `ar`: only when `fit=cover` — intrinsic `width:height` ratio, so imgix derives the crop height from the responsive `w`
  * - `crop` / `fp-x` / `fp-y`: only when `fit=cover` — `focalpoint` + normalised coords when focal-point data is present, otherwise `entropy`
  * - `upscale`: `false` when `withoutEnlargement=true` is in the URL
  */
@@ -112,14 +135,10 @@ export default function imgixImageLoader({ src, width, quality }: ImageLoaderPro
   if (!isEmpty(width))
     params.set('w', width.toString())
 
-  const height = directusParams.get('height')
-  if (!isEmpty(height))
-    params.set('h', height)
-
   if (!isEmpty(quality))
     params.set('q', quality.toString())
 
-  applyFitParams(params, directusParams, width)
+  applyFitParams(params, directusParams)
 
   if (directusParams.get('withoutEnlargement') === 'true')
     params.set('upscale', 'false')

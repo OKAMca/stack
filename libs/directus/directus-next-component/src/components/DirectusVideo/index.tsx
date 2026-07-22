@@ -1,10 +1,10 @@
 import type { TDirectusVideoProps } from './interface'
 import { Video } from '@okam/stack-ui'
 import { isNullish, omit } from 'radashi'
-import { getDirectusFile } from '../../utils/getDirectusFile'
+import { getDirectusVideo } from '../../utils/getDirectusVideo'
 
-function DirectusVideo({ baseUrl, ...rest }: TDirectusVideoProps) {
-  const fileProps = getDirectusFile(rest, baseUrl)
+function DirectusVideo(props: TDirectusVideoProps) {
+  const fileProps = getDirectusVideo(props)
 
   if (isNullish(fileProps))
     return null

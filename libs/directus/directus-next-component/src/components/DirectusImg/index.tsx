@@ -2,17 +2,16 @@ import type { TDirectusImgProps } from './interface'
 import { Img } from '@okam/next-component'
 import { isNullish, omit } from 'radashi'
 import { createPngDataUri } from 'unlazy/thumbhash'
-import { getDirectusFile } from '../../utils/getDirectusFile'
+import { getDirectusImg } from '../../utils/getDirectusImg'
 
 /**
  * On error, will try to load the image directly from the `src` prop by setting `unoptimized` to `true`, bypassing any image loaders.
  */
-function DirectusImg({ baseUrl, fit = 'cover', thumbhash, tokens, ...rest }: TDirectusImgProps) {
-  const fileProps = getDirectusFile(rest, baseUrl, new URLSearchParams([['fit', fit]]))
-  if (isNullish(fileProps))
-    return null
+function DirectusImg(props: TDirectusImgProps) {
+  const { fit = 'cover', thumbhash, tokens } = props
 
-  if (fileProps == null)
+  const fileProps = getDirectusImg(props)
+  if (isNullish(fileProps))
     return null
 
   return (

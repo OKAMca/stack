@@ -8,6 +8,8 @@ export { default as withDirectus } from './lib/withDirectus'
 export { logger as DirectusNextComponent } from './logger'
 
 export { getDirectusFile, useDirectusFile } from './utils/getDirectusFile'
+export { getDirectusImg } from './utils/getDirectusImg'
 export { getDirectusLink, useDirectusLink } from './utils/getDirectusLink'
 export { getMetadata, useMetadata } from './utils/getDirectusMetadata'
+export { getDirectusVideo } from './utils/getDirectusVideo'
 export { getNavigationItems, useNavigationItems } from './utils/getNavigationItems'
