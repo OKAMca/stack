@@ -9,4 +9,10 @@ export interface TDirectusFileProps extends TFiles, TDefaultComponent {
    * - protocol: `NEXT_PUBLIC_IMG_PROTOCOL`
    */
   baseUrl?: URL
+  /**
+   * Additional search params appended to the asset URL, in Directus transform
+   * format. Loaders (e.g. `imgixImageLoader`) read these back off the `src` URL
+   * and map them to their own format.
+   */
+  searchParams?: URLSearchParams
 }

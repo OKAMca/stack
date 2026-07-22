@@ -17,9 +17,11 @@ export { logger as DirectusNextComponent } from './logger'
 export type * from './types'
 
 export { getDirectusFile, getDirectusUrl, useDirectusFile } from './utils/getDirectusFile'
+export { getDirectusImg } from './utils/getDirectusImg'
 export { getDirectusLink, useDirectusLink } from './utils/getDirectusLink'
 export { getMetadata, useMetadata } from './utils/getDirectusMetadata'
 export { getDirectusSearchParams } from './utils/getDirectusSearchParams'
+export { getDirectusVideo } from './utils/getDirectusVideo'
 export { getNavigationItems, useNavigationItems } from './utils/getNavigationItems'
 
 export type {
