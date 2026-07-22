@@ -84,7 +84,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 
       <Section
         title="2. Focal-point crop"
-        description="Square 1000×1000 crop target from the landscape source, so imgix must crop horizontally. focal_point_x moves the crop; fp fractions divide by the declared width/height (fp-x = focal_point_x / 1000). Watch the crop follow the focal point across each entry."
+        description="Square 1000×1000 asset fixture (declared width/height, independent of section 1's landscape asset). focal_point_x moves the crop; fp fractions divide by the declared width/height (fp-x = focal_point_x / 1000). Watch the crop follow the focal point across each entry — including the edge cases: an explicit 0,0 focal point must still pin the crop (not fall back to entropy), while a missing or out-of-bounds focal point must fall back to entropy."
       >
         <Case title="Focal left" note="crop=focalpoint, fp-x=0.1, fp-y=0.5">
           <DirectusImg {...file} width={1000} height={1000} focal_point_x={100} focal_point_y={500} fit="cover" className="h-full w-full object-cover" />
@@ -95,8 +95,14 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
         <Case title="Focal right" note="crop=focalpoint, fp-x=1, fp-y=0.5">
           <DirectusImg {...file} width={1000} height={1000} focal_point_x={1000} focal_point_y={500} fit="cover" className="h-full w-full object-cover" />
         </Case>
-        <Case title="No focal → entropy" note="crop=entropy (no focal-point data)">
+        <Case title="Explicit zero focal point" note="crop=focalpoint, fp-x=0, fp-y=0 (not entropy)">
+          <DirectusImg {...file} width={1000} height={1000} focal_point_x={0} focal_point_y={0} fit="cover" className="h-full w-full object-cover" />
+        </Case>
+        <Case title="No focal → entropy" note="crop=entropy (missing focal-point data)">
           <DirectusImg {...file} width={1000} height={1000} fit="cover" className="h-full w-full object-cover" />
+        </Case>
+        <Case title="Out-of-bounds focal → entropy" note="crop=entropy (focal_point_x > declared width)">
+          <DirectusImg {...file} width={1000} height={1000} focal_point_x={5000} focal_point_y={500} fit="cover" className="h-full w-full object-cover" />
         </Case>
       </Section>
 
