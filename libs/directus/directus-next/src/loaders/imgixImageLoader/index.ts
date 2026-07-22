@@ -24,7 +24,7 @@ const DIRECTUS_FIT_TO_IMGIX: Record<string, string> = {
  * Translates `fit` and focal-point params from a Directus URL to imgix equivalents.
  * Extracted to keep the main loader flat — early returns replace nested conditionals.
  */
-function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams, width: number): void {
+function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams): void {
   const directusFit = directusParams.get('fit')
   if (isEmpty(directusFit))
     return
@@ -38,22 +38,30 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
   const fpXPx = Number(directusParams.get('focal_point_x'))
   const fpYPx = Number(directusParams.get('focal_point_y'))
   const intrinsicWidth = Number(directusParams.get('width'))
-  const height = Number(directusParams.get('height'))
+  const intrinsicHeight = Number(directusParams.get('height'))
+
+  // Both dimensions are needed to normalise focal points and to build `ar`.
+  const hasValidDimensions = [intrinsicWidth, intrinsicHeight].every(value => Number.isFinite(value) && value > 0)
 
   // Derive the crop aspect ratio from the intrinsic dimensions and let imgix
   // compute the height from the responsive `w`. Setting a fixed intrinsic `h`
   // alongside a per-srcset `w` would change the crop ratio at every width.
-  if ([intrinsicWidth, height].every(value => Number.isFinite(value) && value > 0))
-    params.set('ar', `${intrinsicWidth}:${height}`)
+  if (hasValidDimensions)
+    params.set('ar', `${intrinsicWidth}:${intrinsicHeight}`)
 
-  if ([fpXPx, fpYPx, width, height].some(value => !Number.isFinite(value) || value <= 0)) {
+  // `fp-x`/`fp-y` are 0..1 fractions of the source, so they divide by the
+  // intrinsic width/height — never the responsive render width. `0` is a valid
+  // top/left edge; only the dimensions must be strictly positive.
+  const hasValidFocalPoint = [fpXPx, fpYPx].every(value => Number.isFinite(value) && value >= 0)
+
+  if (!hasValidDimensions || !hasValidFocalPoint) {
     params.set('crop', 'entropy')
     return
   }
 
   params.set('crop', 'focalpoint')
-  params.set('fp-x', (fpXPx / width).toString())
-  params.set('fp-y', (fpYPx / height).toString())
+  params.set('fp-x', (fpXPx / intrinsicWidth).toString())
+  params.set('fp-y', (fpYPx / intrinsicHeight).toString())
 }
 
 /**
@@ -120,7 +128,7 @@ export default function imgixImageLoader({ src, width, quality }: ImageLoaderPro
   if (!isEmpty(quality))
     params.set('q', quality.toString())
 
-  applyFitParams(params, directusParams, width)
+  applyFitParams(params, directusParams)
 
   if (directusParams.get('withoutEnlargement') === 'true')
     params.set('upscale', 'false')
