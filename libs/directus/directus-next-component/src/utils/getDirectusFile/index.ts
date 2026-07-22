@@ -6,6 +6,7 @@ import { logger } from '../../logger'
 const IMG_DOMAIN = process.env.NEXT_PUBLIC_IMG_DOMAIN
 const IMG_PORT = process.env.NEXT_PUBLIC_IMG_PORT
 const IMG_PROTOCOL = process.env.NEXT_PUBLIC_IMG_PROTOCOL ?? 'https'
+const TRAILING_COLON_REGEX = /:$/
 
 /**
  * Creates a Directus asset URL from a Directus file.
@@ -22,7 +23,7 @@ export function getDirectusUrl(file: Nullable<TFiles>, baseUrl?: URL, searchPara
   const { id, filename_download, filenameDownload } = file ?? {}
   const allSearchParams = new URLSearchParams([...(searchParams ?? [])])
 
-  const protocol = (baseUrl?.protocol ?? IMG_PROTOCOL).replace(/:$/, '')
+  const protocol = (baseUrl?.protocol ?? IMG_PROTOCOL).replace(TRAILING_COLON_REGEX, '')
   const hostname = baseUrl?.hostname ?? IMG_DOMAIN
   const port = baseUrl?.port ?? IMG_PORT
 

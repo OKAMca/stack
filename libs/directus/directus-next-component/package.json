@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-next-component",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -40,16 +40,16 @@
     "react": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@okam/directus-next": "2.3.0",
+    "@okam/directus-next": "2.3.1",
     "@okam/logger": "1.1.0",
-    "@okam/next-component": "2.1.6",
+    "@okam/next-component": "2.1.7",
     "@okam/stack-ui": "2.1.5",
-    "@react-spring/web": "^10.0.3",
-    "radashi": "^12.3.0",
-    "unlazy": "^1.0.0",
-    "zod": "^4.2.1"
+    "@react-spring/web": "^10.1.2",
+    "radashi": "^12.9.1",
+    "unlazy": "^1.1.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
-    "react": "^19.0.0"
+    "react": "^19.2.8"
   }
 }

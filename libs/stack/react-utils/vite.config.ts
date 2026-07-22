@@ -45,12 +45,12 @@ export default defineConfig({
       // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        banner: chunk => chunk.isEntry && chunk.name === 'index' ? '"use client";' : '',
+        banner: (chunk) => (chunk.isEntry && chunk.name === 'index' ? '"use client";' : ''),
       },
       // External packages that should not be bundled into your library.
-      external: id => isExternal(id) || id.startsWith('@okam/'),
+      external: (id) => isExternal(id) || id.startsWith('@okam/'),
       onwarn(warning, warn) {
         if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
           return

@@ -20,6 +20,11 @@ const DIRECTUS_FIT_TO_IMGIX: Record<string, string> = {
   outside: 'min',
 }
 
+// Match Directus asset URL: /assets/<uuid> or /assets/<uuid>/<filename>.<ext>
+// The filename segment is optional — getDirectusUrl omits it when filename_download is null.
+// The filename part may contain percent-encoded characters.
+const DIRECTUS_ASSET_PATH_REGEX = /\/assets\/([\w-]+)(?:\/[\w%.-]+\.(\w+))?/
+
 /**
  * Translates `fit` and focal-point params from a Directus URL to imgix equivalents.
  * Extracted to keep the main loader flat — early returns replace nested conditionals.
@@ -107,10 +112,7 @@ export default function imgixImageLoader({ src, width, quality }: ImageLoaderPro
 
   const directusParams = directusUrl.searchParams
 
-  // Match Directus asset URL: /assets/<uuid> or /assets/<uuid>/<filename>.<ext>
-  // The filename segment is optional — getDirectusUrl omits it when filename_download is null.
-  // The filename part may contain percent-encoded characters.
-  const matches = directusUrl.pathname.match(/\/assets\/([\w-]+)(?:\/[\w%.-]+\.(\w+))?/)
+  const matches = directusUrl.pathname.match(DIRECTUS_ASSET_PATH_REGEX)
   if (matches === null) {
     return directusImageLoader({ src, width, quality })
   }

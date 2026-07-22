@@ -20,7 +20,7 @@ import {
   WysiwygBlock,
 } from '@okam/stack-ui'
 
-import image from 'libs/stack/stack-ui/static/images/image.png'
+import image from '@okam/stack-ui/static/images/image.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import SidePanelControl from './components/SidePanelControl'

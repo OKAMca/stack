@@ -11,7 +11,7 @@ export async function blockGenerator(tree: Tree, options: BlockGeneratorSchema) 
       return `Block${capitalizeFirstLetter(options.name)}`
     }
 
-    return `Block${capitalizeFirstLetter(options.name.toLocaleLowerCase().split('block')[1])}`
+    return `Block${capitalizeFirstLetter(options.name.toLocaleLowerCase().split('block')[1] ?? '')}`
   }
 
   const name = getName()

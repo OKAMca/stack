@@ -3,7 +3,7 @@
 import { directusImageLoader } from '@okam/directus-next'
 import { DirectusImg } from '@okam/directus-next-component'
 
-export default function ClientPage({ id}: { id: string }) {
+export default function ClientPage({ id }: { id: string }) {
   return (
     <div>
       <div className="relative w-125 h-125">

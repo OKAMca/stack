@@ -30,6 +30,6 @@
     "repositoryUrl": "https://github.com/OKAMca/stack.git"
   },
   "dependencies": {
-    "@tsed/exceptions": "^8.3.1"
+    "@tsed/exceptions": "^8.37.0"
   }
 }

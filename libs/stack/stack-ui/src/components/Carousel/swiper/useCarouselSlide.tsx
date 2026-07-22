@@ -27,6 +27,8 @@ export function useCarouselSlide(props: TCarouselSlideProps): TCarouselSlide {
   const hasIndex = !isNullish(swiperSlideIndex)
   const isActive = swiperSlideIndex === activeIndex
   const isVisible = hasIndex && swiperSlideIndex >= activeIndex && swiperSlideIndex < activeIndex + slidesPerView
+  // with a fractional slidesPerView (e.g. 1.5) the last visible slide is only partially in view
+  const isFullyVisible = hasIndex && swiperSlideIndex >= activeIndex && swiperSlideIndex < activeIndex + Math.floor(slidesPerView)
   const isPrev = hasIndex && swiperSlideIndex === activeIndex - 1
   const isNext = hasIndex && swiperSlideIndex === activeIndex + slidesPerView
 
@@ -41,6 +43,7 @@ export function useCarouselSlide(props: TCarouselSlideProps): TCarouselSlide {
     titleProps: {},
     isActive,
     isVisible,
+    isFullyVisible,
     isPrev,
     isNext,
   }

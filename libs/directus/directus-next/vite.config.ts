@@ -40,24 +40,24 @@ export default defineConfig({
       // Removed 'fileName' because multiple entry points are specified
       // Note: formats not needed - rollupOptions.output array takes precedence
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: [
         {
           format: 'es',
           entryFileNames: '[name].mjs',
           preserveModules: false,
-          banner: chunk => chunk.name === 'server' ? "import 'server-only';" : '',
+          banner: (chunk) => (chunk.name === 'server' ? "import 'server-only';" : ''),
         },
         {
           format: 'cjs',
           entryFileNames: '[name].js',
           preserveModules: false,
-          banner: chunk => chunk.name === 'server' ? "require('server-only');" : '',
+          banner: (chunk) => (chunk.name === 'server' ? "require('server-only');" : ''),
         },
       ],
 
       // External packages that should not be bundled into your library.
-      external: id => isExternal(id) || id.startsWith('@okam/'),
+      external: (id) => isExternal(id) || id.startsWith('@okam/'),
     },
     ssr: true,
   },

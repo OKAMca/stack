@@ -112,7 +112,7 @@ export function MenuFactory({
     >
       <>
         {openBtn}
-        <MenuComponent id={id} TransitionAnimation={RenderWithSlide as (_props: unknown) => JSX.Element}>
+        <MenuComponent id={id} TransitionAnimation={RenderWithSlide}>
           <MenuItems menuLinkComponent="a" menuItems={menuItems} />
         </MenuComponent>
       </>
