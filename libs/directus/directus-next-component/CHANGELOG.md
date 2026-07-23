@@ -1,3 +1,20 @@
+## 2.1.10 (2026-07-23)
+
+### 🚀 Features
+
+- **directus-next:** imgix & directus image loaders ([#463](https://github.com/OKAMca/stack/pull/463))
+
+### 🩹 Fixes
+
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Claude Opus 4.8 (1M context)
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.1.9 (2026-07-15)
 
 ### 🚀 Features
