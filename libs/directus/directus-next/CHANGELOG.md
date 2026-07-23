@@ -1,3 +1,30 @@
+## 2.3.2 (2026-07-23)
+
+### 🚀 Features
+
+- **directus-next:** imgix & directus image loaders ([#463](https://github.com/OKAMca/stack/pull/463))
+- **directus-next:** imgix & directus image loaders ([683da9f8](https://github.com/OKAMca/stack/commit/683da9f8))
+
+### 🩹 Fixes
+
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+- **next-component:** only export localeprefix from index.ts barrel ([#522](https://github.com/OKAMca/stack/pull/522))
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+- **next-component:** only export localeprefix from index.ts barrel ([#522](https://github.com/OKAMca/stack/pull/522))
+- **directus-next:** match directus url parts against pathname ([e20e312c](https://github.com/OKAMca/stack/commit/e20e312c))
+- **directus-next:** check focal point values greater than 0 ([dc2b3371](https://github.com/OKAMca/stack/commit/dc2b3371))
+- **directus-next:** coderabbit corrections ([4c858852](https://github.com/OKAMca/stack/commit/4c858852))
+- **directus-next:** standardize loaders ([f96fd632](https://github.com/OKAMca/stack/commit/f96fd632))
+- **directus-next:** safer parsing ([771d27d0](https://github.com/OKAMca/stack/commit/771d27d0))
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Claude Opus 4.8 (1M context)
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+- poclerson
+
 ## 2.3.1 (2026-07-15)
 
 ### 🚀 Features
