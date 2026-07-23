@@ -1,3 +1,21 @@
+## 2.3.2 (2026-07-23)
+
+### 🚀 Features
+
+- **directus-next:** imgix & directus image loaders ([#463](https://github.com/OKAMca/stack/pull/463))
+
+### 🩹 Fixes
+
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+- **next-component:** only export localeprefix from index.ts barrel ([#522](https://github.com/OKAMca/stack/pull/522))
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Claude Opus 4.8 (1M context)
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.3.1 (2026-07-15)
 
 ### 🚀 Features
