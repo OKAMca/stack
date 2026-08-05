@@ -6,7 +6,7 @@
   "private": true,
   "main": "./src/index.js",
   "dependencies": {
-    "@nx/devkit": "22.6.1",
+    "@nx/devkit": "22.7.7",
     "@okam/core-lib": "2.2.0",
     "radashi": "^12.9.1",
     "tslib": "^2.8.1"
