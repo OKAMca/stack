@@ -32,6 +32,13 @@
         }
       }
     },
+    "test": {
+      "executor": "@nx/vitest:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "reportsDirectory": "{projectRoot}/../../../coverage/libs/directus/directus-next"
+      }
+    },
     "nx-release-publish": {
       "options": {
         "packageRoot": "dist/libs/directus/directus-next"
