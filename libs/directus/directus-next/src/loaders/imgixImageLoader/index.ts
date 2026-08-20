@@ -26,6 +26,21 @@ const DIRECTUS_FIT_TO_IMGIX: Record<string, string> = {
 const DIRECTUS_ASSET_PATH_REGEX = /\/assets\/([\w-]+)(?:\/[\w%.-]+\.(\w+))?/
 
 /**
+ * Parses a `crop_ar` value (e.g. `'16:9'`) into its imgix `ar` form, or `null` when
+ * absent or malformed. Kept separate from intrinsic `width`/`height`: it expresses the
+ * slot's target shape, not the asset's own.
+ */
+function parseCropAspectRatio(value: string | null): string | null {
+  if (value == null)
+    return null
+
+  const parts = value.split(':').map(Number)
+  const isValid = parts.length === 2 && parts.every(part => Number.isFinite(part) && part > 0)
+
+  return isValid ? value : null
+}
+
+/**
  * Translates `fit` and focal-point params from a Directus URL to imgix equivalents.
  * Extracted to keep the main loader flat — early returns replace nested conditionals.
  */
@@ -54,10 +69,17 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
   // Both dimensions are needed to normalise focal points and to build `ar`.
   const hasValidDimensions = [intrinsicWidth, intrinsicHeight].every(value => Number.isFinite(value) && value > 0)
 
-  // Derive the crop aspect ratio from the intrinsic dimensions and let imgix
-  // compute the height from the responsive `w`. Setting a fixed intrinsic `h`
-  // alongside a per-srcset `w` would change the crop ratio at every width.
-  if (hasValidDimensions)
+  // Prefer the slot's own target shape (`crop_ar`) over the asset's intrinsic
+  // dimensions: cropping to the asset's own shape is a no-op that hands the real
+  // crop to CSS `object-fit`, which ignores the focal point. Fall back to intrinsic
+  // dimensions when no crop shape was given, to stay compatible with existing callers.
+  // Either way, let imgix compute the height from the responsive `w` — setting a
+  // fixed intrinsic `h` alongside a per-srcset `w` would change the crop ratio at
+  // every width.
+  const cropAspectRatio = parseCropAspectRatio(directusParams.get('crop_ar'))
+  if (cropAspectRatio != null)
+    params.set('ar', cropAspectRatio)
+  else if (hasValidDimensions)
     params.set('ar', `${intrinsicWidth}:${intrinsicHeight}`)
 
   // `fp-x`/`fp-y` are 0..1 fractions of the source, so they divide by the
@@ -88,15 +110,16 @@ function applyFitParams(params: URLSearchParams, directusParams: URLSearchParams
  * Falls back to `directusImageLoader` when the env var is absent, the URL does
  * not match the expected Directus asset pattern, or URL parsing fails.
  *
- * Static transformation params (`fit`, intrinsic `width`/`height`, `withoutEnlargement`, focal point)
- * must already be set on the `src` URL before the loader runs (e.g. via `getDirectusImg`).
+ * Static transformation params (`fit`, intrinsic `width`/`height`, `withoutEnlargement`, focal point,
+ * crop aspect ratio) must already be set on the `src` URL before the loader runs (e.g. via `getDirectusImg`).
  *
  * @param {string} props.src Image source. The following imgix parameters will be set:
  * - `auto`: `'format,compress'`
  * - `w`: `width` prop (Next.js breakpoint)
  * - `q`: `quality` prop
  * - `fit`: `fit` URL parameter, translated from Directus to imgix values
- * - `ar`: only when `fit=cover` — intrinsic `width:height` ratio, so imgix derives the crop height from the responsive `w`
+ * - `ar`: only when `fit=cover` — the `crop_ar` slot shape when given, else the intrinsic `width:height`
+ *   ratio, so imgix derives the crop height from the responsive `w`
  * - `crop` / `fp-x` / `fp-y`: only when `fit=cover` — `focalpoint` + normalised coords when focal-point data is present, otherwise `entropy`
  * - `upscale`: `false` when `withoutEnlargement=true` is in the URL
  */
