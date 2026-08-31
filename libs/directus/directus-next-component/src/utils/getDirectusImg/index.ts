@@ -4,15 +4,15 @@ import { getDirectusFile } from '../getDirectusFile'
 
 /**
  * Builds the image-only Directus transform params — focal point, intrinsic
- * dimensions and `fit` — that image loaders (e.g. `imgixImageLoader`) read back
- * off the `src` URL.
+ * dimensions, `fit` and crop aspect ratio — that image loaders (e.g.
+ * `imgixImageLoader`) read back off the `src` URL.
  *
  * Params are kept in Directus format; mapping them to a CDN's own format (imgix,
  * etc.) is the loader's responsibility. Any `searchParams` passed on the props
  * are merged in after the derived ones.
  */
 function getDirectusImgSearchParams(props: TDirectusImgProps): URLSearchParams {
-  const { focal_point_x: focalPointX, focal_point_y: focalPointY, width, height, fit = 'cover', searchParams } = props
+  const { focal_point_x: focalPointX, focal_point_y: focalPointY, width, height, fit = 'cover', cropAspectRatio, searchParams } = props
 
   const imgSearchParams = ([
     ['focal_point_x', focalPointX],
@@ -20,6 +20,7 @@ function getDirectusImgSearchParams(props: TDirectusImgProps): URLSearchParams {
     ['width', width],
     ['height', height],
     ['fit', fit],
+    ['crop_ar', cropAspectRatio],
   ] as const).flatMap(([key, value]) => (value != null ? [[key, value.toString()]] : []))
 
   return new URLSearchParams([...imgSearchParams, ...(searchParams ?? [])])
