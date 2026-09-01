@@ -1,3 +1,24 @@
+## 2.1.11 (2026-09-01)
+
+### 🚀 Features
+
+- **directus-next:** imgix & directus image loaders ([#463](https://github.com/OKAMca/stack/pull/463))
+
+### 🩹 Fixes
+
+- **directus-next:** decouple imgix crop shape from intrinsic dimensions ([#541](https://github.com/OKAMca/stack/pull/541), [#1495](https://github.com/OKAMca/stack/issues/1495))
+- **directus-next-component:** prevent directus img props from leaking to html ([#479](https://github.com/OKAMca/stack/pull/479), [#519](https://github.com/OKAMca/stack/issues/519), [#522](https://github.com/OKAMca/stack/issues/522), [#523](https://github.com/OKAMca/stack/issues/523), [#524](https://github.com/OKAMca/stack/issues/524), [#525](https://github.com/OKAMca/stack/issues/525), [#526](https://github.com/OKAMca/stack/issues/526), [#527](https://github.com/OKAMca/stack/issues/527))
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Claude Opus 4.8 (1M context)
+- Claude Opus 5 (1M context)
+- Claude Sonnet 5
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.1.10 (2026-07-23)
 
 ### 🚀 Features
