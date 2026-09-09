@@ -38,6 +38,15 @@
         }
       }
     },
+    "test": {
+      "executor": "@nx/vitest:test",
+      "outputs": [
+        "{options.reportsDirectory}"
+      ],
+      "options": {
+        "reportsDirectory": "{projectRoot}/../../../coverage/libs/stack/next-component"
+      }
+    },
     "storybook": {
       "executor": "@nx/storybook:storybook",
       "options": {

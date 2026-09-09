@@ -6,7 +6,7 @@ import { useCallback } from 'react'
 import { useLocale } from 'react-aria'
 import { LocalePrefix } from './interface'
 
-const EXTERNAL_URL_RE = /^[a-z]+:\/\//i
+const ABSOLUTE_SCHEME_RE = /^[a-z][a-z0-9+.-]*:/i
 const DUMMY_BASE = 'http://x'
 
 function scrollToTop(behavior: ScrollBehavior) {
@@ -14,27 +14,23 @@ function scrollToTop(behavior: ScrollBehavior) {
 }
 
 /**
- * Ensures the pathname portion of a URL ends with a trailing slash,
- * preserving any search params and hash.
+ * An href points outside the app when it carries its own scheme (`https:`,
+ * `mailto:`, `tel:`, ...) or is protocol-relative (`//cdn.example.com/a.js`).
+ */
+function isExternalHref(hrefString: string): boolean {
+  return ABSOLUTE_SCHEME_RE.test(hrefString) || hrefString.startsWith('//')
+}
+
+/**
+ * Ensures the pathname portion of an app-internal href ends with a trailing
+ * slash, preserving any search params and hash.
  */
 function addTrailingSlashToPathname(hrefString: string): string {
-  const isProtocolRelative = hrefString.startsWith('//')
-  const isExternal = EXTERNAL_URL_RE.test(hrefString)
-
   try {
-    const url = new URL(
-      isProtocolRelative ? `http:${hrefString}` : hrefString,
-      DUMMY_BASE,
-    )
+    const url = new URL(hrefString, DUMMY_BASE)
 
     if (!url.pathname.endsWith('/'))
       url.pathname += '/'
-
-    if (isExternal)
-      return url.toString()
-
-    if (isProtocolRelative)
-      return `//${url.host}${url.pathname}${url.search}${url.hash}`
 
     return `${url.pathname}${url.search}${url.hash}`
   }
@@ -66,20 +62,28 @@ export function useLinkLocale(props: TLink) {
   return displayLocale
 }
 
-export function localizeHref(href: LinkProps['href'], locale: LinkProps['locale']): string {
+export function localizeHref(
+  href: LinkProps['href'],
+  locale: LinkProps['locale'],
+  trailingSlash: boolean = true,
+): string {
   const hrefString = href.toString()
 
   const isAnchor = hrefString.startsWith('#')
   if (isAnchor)
     return hrefString
 
-  const isExternal = EXTERNAL_URL_RE.test(hrefString) || hrefString.startsWith('//')
+  // External hrefs are rendered verbatim: their canonical form belongs to a host
+  // we don't control, and scheme-only hrefs such as `mailto:` or `tel:` have no
+  // pathname to localize.
+  if (isExternalHref(hrefString))
+    return hrefString
 
-  const withLocale = (locale != null && locale !== false && !isExternal)
+  const withLocale = (locale != null && locale !== false)
     ? `/${locale}${hrefString}`
     : hrefString
 
-  return addTrailingSlashToPathname(withLocale)
+  return trailingSlash ? addTrailingSlashToPathname(withLocale) : withLocale
 }
 
 /**
@@ -100,10 +104,11 @@ export function useLink(props: TLink): TUseLinkReturn {
     passHref,
     legacyBehavior,
     behavior = 'instant',
+    trailingSlash = true,
   } = props
 
   const locale = useLinkLocale(props)
-  const localizedHref = localizeHref(href, locale)
+  const localizedHref = localizeHref(href, locale, trailingSlash)
 
   const isNextScroll = typeof scroll === 'boolean'
   const nextScroll = isNextScroll ? scroll : false
