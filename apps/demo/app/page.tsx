@@ -59,6 +59,14 @@ export default function Index() {
                 - Demonstrates the appending of directus search params via link.params fielddocs to the link
               </span>
             </li>
+            <li className="mb-2">
+              <Link href="/fr/next-component/link/trailing-slash" className="text-blue-600 hover:underline">
+                Link Trailing Slash Demo
+              </Link>
+              <span className="ml-2 text-sm text-gray-600">
+                - Demonstrates which hrefs get a trailing slash, and the `trailingSlash` opt-out
+              </span>
+            </li>
           </ul>
         </div>
         <Select

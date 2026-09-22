@@ -78,6 +78,27 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
    */
   behavior?: ScrollBehavior
   i18n?: TLinkI18nConfig
+  /**
+   * Whether a trailing slash is appended to the pathname of **internal** hrefs.
+   * Set it to `false` when the app is not served with Next's `trailingSlash: true`.
+   *
+   * External hrefs are always left verbatim, whatever this is set to.
+   *
+   * @default true
+   *
+   * @example
+   * ```ts
+   * // <Link href="/products/1" locale="fr" />
+   * // output: /fr/products/1/
+   *
+   * // <Link href="/products/1" locale="fr" trailingSlash={false} />
+   * // output: /fr/products/1
+   *
+   * // <Link href="https://example.com/page" trailingSlash />
+   * // output: https://example.com/page
+   * ```
+   */
+  trailingSlash?: boolean
 }
 
 export interface TUseLinkReturn extends Omit<NextLinkProps, 'href' | 'locale'> {

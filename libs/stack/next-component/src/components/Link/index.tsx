@@ -18,6 +18,7 @@ function Link({ ref, ...props }: TLinkProps & { ref?: Ref<HTMLElement> }) {
     behavior,
     urlDecorator: urlDecoratorProp,
     href: hrefProp,
+    trailingSlash,
     ...rest
   } = props
 

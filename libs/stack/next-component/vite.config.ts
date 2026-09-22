@@ -1,4 +1,4 @@
-/// <reference types="vitest" />
+/// <reference types="vitest/config" />
 import * as path from 'node:path'
 import react from '@vitejs/plugin-react'
 import preserveDirectives from 'rollup-plugin-preserve-directives'
@@ -67,5 +67,16 @@ export default defineConfig({
       plugins: [preserveDirectives()],
     },
     ssr: true,
+  },
+
+  test: {
+    globals: true,
+    environment: 'node',
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../../coverage/libs/stack/next-component',
+      provider: 'v8',
+    },
   },
 })
