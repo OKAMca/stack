@@ -1,0 +1,157 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices", ":separateMultipleMajorReleases", "group:pnpm"],
+  "timezone": "America/Edmonton",
+  "schedule": ["before 6am every weekday"],
+  "labels": ["dependencies"],
+  "dependencyDashboardLabels": ["dependencies"],
+  "dependencyDashboardOSVVulnerabilitySummary": "all",
+  "osvVulnerabilityAlerts": true,
+  "prConcurrentLimit": 6,
+  "prHourlyLimit": 3,
+  "platformAutomerge": false,
+  "ignoreTests": false,
+  "automergeStrategy": "squash",
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["dependencies"],
+    "schedule": [],
+    "minimumReleaseAge": null,
+    "dependencyDashboardApproval": false,
+    "prCreation": "immediate",
+    "rangeStrategy": "bump",
+    "vulnerabilityFixStrategy": "lowest",
+    "automerge": false
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": false
+  },
+  "packageRules": [
+    {
+      "description": "Label JavaScript dependency updates",
+      "matchManagers": ["npm"],
+      "addLabels": ["javascript"]
+    },
+    {
+      "description": "Label GitHub Actions dependency updates",
+      "matchManagers": ["github-actions"],
+      "addLabels": ["github_actions"]
+    },
+    {
+      "description": "Show production dependencies together on the dashboard",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies", "optionalDependencies", "peerDependencies"],
+      "dependencyDashboardCategory": ":package: Production dependencies"
+    },
+    {
+      "description": "Show development dependencies together on the dashboard",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "dependencyDashboardCategory": ":hammer_and_wrench: Development dependencies"
+    },
+    {
+      "description": "Show CI dependencies together on the dashboard",
+      "matchManagers": ["github-actions"],
+      "dependencyDashboardCategory": ":construction_worker: CI"
+    },
+    {
+      "description": "Show container and runtime dependencies together on the dashboard",
+      "matchManagers": ["docker-compose", "dockerfile", "devcontainer"],
+      "dependencyDashboardCategory": ":whale: Containers and runtimes"
+    },
+    {
+      "description": "Show custom-managed runtime dependencies with the containers",
+      "matchManagers": ["custom.regex"],
+      "matchDepTypes": ["dockerfile-github-release", "dockerfile-npm", "node-runtime"],
+      "dependencyDashboardCategory": ":whale: Containers and runtimes"
+    },
+    {
+      "description": "Keep OKAM packages aligned and move them as soon as they are published",
+      "matchPackageNames": ["@okam/**"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "OKAM packages",
+      "minimumReleaseAge": null,
+      "automerge": true
+    },
+    {
+      "description": "Keep compatible Directus runtime updates together",
+      "matchPackageNames": [
+        "@directus-labs/**",
+        "directus/directus",
+        "directus-extension-*",
+        "OKAMca/directus-extension-*"
+      ],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "Directus runtime"
+    },
+    {
+      "description": "Automerge mature non-major development dependency updates after CI passes",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "minimumReleaseAge": "14 days",
+      "automerge": true
+    },
+    {
+      "description": "Automerge mature GitHub Actions digest updates after CI passes",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["digest", "pinDigest"],
+      "minimumReleaseAge": "14 days",
+      "automerge": true
+    },
+    {
+      "description": "Require an explicit dashboard decision for breaking upgrades",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "automerge": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update Node.js versions used by GitHub Actions",
+      "managerFilePatterns": ["/^\\.github/workflows/[^/]+\\.ya?ml$/"],
+      "matchStrings": ["node-version:\\s*['\\\"]?(?<currentValue>\\d+(?:\\.\\d+){0,2})['\\\"]?"],
+      "depNameTemplate": "node",
+      "depTypeTemplate": "node-runtime",
+      "datasourceTemplate": "node-version",
+      "versioningTemplate": "node"
+    },
+    {
+      "customType": "regex",
+      "description": "Update pinned npm packages installed in the Directus image",
+      "managerFilePatterns": ["/^apps/directus/Dockerfile$/"],
+      "matchStrings": [
+        "(?<depName>(?:@[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+|[A-Za-z0-9_.-]+))@(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?)"
+      ],
+      "depTypeTemplate": "dockerfile-npm",
+      "datasourceTemplate": "npm",
+      "versioningTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "description": "Update Directus extensions installed from GitHub release archives",
+      "managerFilePatterns": ["/^apps/directus/Dockerfile$/"],
+      "matchStrings": [
+        "https://github\\.com/(?<depName>OKAMca/[^/\\s]+)/releases/download/v(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?)/(?<artifactName>[^/\\s]+?)-\\d+\\.\\d+\\.\\d+(?:-[0-9A-Za-z.-]+)?\\.tgz"
+      ],
+      "autoReplaceStringTemplate": "https://github.com/{{{depName}}}/releases/download/v{{{newValue}}}/{{{artifactName}}}-{{{newValue}}}.tgz",
+      "depTypeTemplate": "dockerfile-github-release",
+      "datasourceTemplate": "github-releases",
+      "extractVersionTemplate": "^v(?<version>.*)$",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "description": "Update the dependency catalog emitted by the workspace generator",
+      "managerFilePatterns": ["/^libs/automation/src/generators/preset/files/root/pnpm-workspace\\.yaml\\.template$/"],
+      "matchStrings": [
+        "(?:^|\\n)\\s{2}(?:<%[^\\n]*?%>)?'?(?<depName>@?[^'\\s:]+)'?\\s*:\\s*'(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-[^']+)?)'"
+      ],
+      "depTypeTemplate": "generator-catalog",
+      "datasourceTemplate": "npm",
+      "versioningTemplate": "npm"
+    }
+  ]
+}
