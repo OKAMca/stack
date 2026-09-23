@@ -494,7 +494,7 @@ importers:
         specifier: 1.1.0
         version: link:../../stack/logger
       '@okam/next-component':
-        specifier: 2.1.7
+        specifier: 2.1.8
         version: link:../../stack/next-component
       graphql-request:
         specifier: ^7.4.0
@@ -515,13 +515,13 @@ importers:
   libs/directus/directus-next-component:
     dependencies:
       '@okam/directus-next':
-        specifier: 2.3.3
+        specifier: 2.3.6
         version: link:../directus-next
       '@okam/logger':
         specifier: 1.1.0
         version: link:../../stack/logger
       '@okam/next-component':
-        specifier: 2.1.7
+        specifier: 2.1.8
         version: link:../../stack/next-component
       '@okam/stack-ui':
         specifier: 2.1.5
