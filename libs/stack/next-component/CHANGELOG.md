@@ -1,3 +1,20 @@
+## 2.1.8 (2026-09-23)
+
+### 🩹 Fixes
+
+- **next-component:** never add a trailing slash to external hrefs ([#547](https://github.com/OKAMca/stack/pull/547), [#486](https://github.com/OKAMca/stack/issues/486))
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+- **next-component:** only export localeprefix from index.ts barrel ([#522](https://github.com/OKAMca/stack/pull/522))
+- **next-component:** remove all dynamic APIs use in useLink ([#515](https://github.com/OKAMca/stack/pull/515))
+
+### ❤️ Thank You
+
+- Claude Fable 5
+- Claude Opus 4.8 (1M context)
+- Claude Opus 5 (1M context)
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.1.7 (2026-07-15)
 
 ### 🩹 Fixes
