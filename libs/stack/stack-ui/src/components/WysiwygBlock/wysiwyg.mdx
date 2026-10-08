@@ -9,6 +9,10 @@ import * as WysiwygStories from './wysiwyg.stories'
 
 #### Wysiwyg Block. Can be used in CMS to insert HTML elements as text with certain attributes (h1, h2, h3, link with target, etc.)
 
+`WysiwygBlock` has no `'use client'` directive: render it from a Server Component and the HTML is
+sanitized on the server, so `sanitize-html` never reaches the browser bundle. Importing it from a
+client module still works, but then the sanitizer ships to the client.
+
 ## Props
 
 <ArgTypes of={WysiwygStories} />

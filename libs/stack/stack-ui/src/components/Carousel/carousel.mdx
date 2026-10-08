@@ -30,6 +30,17 @@ import 'swiper/css/mousewheel'
 import 'swiper/css/keyboard'
 ```
 
+### Modules
+
+`modules` resolves these names: `A11y`, `Autoplay`, `Controller`, `Keyboard`, `Mousewheel`, `Navigation`, `Pagination`
+(`A11y` and `Controller` are always on). Only these are bundled. For any other Swiper module, pass the module itself:
+
+```tsx
+import { EffectFade } from 'swiper/modules'
+
+<Carousel modules={[EffectFade, 'Navigation']} effect="fade" />
+```
+
 ## Props
 
 <ArgTypes />
