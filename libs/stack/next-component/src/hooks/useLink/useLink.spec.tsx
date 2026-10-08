@@ -64,6 +64,16 @@ describe('useLink prefetch', () => {
       expect(result.current.prefetch).toBeNull()
     })
 
+    it('resets when the href changes', () => {
+      const { result, rerender } = renderHook(
+        ({ href }) => useLink({ href, locale: false, prefetch: 'intent' }),
+        { initialProps: { href: '/about' } },
+      )
+      act(() => result.current.onPointerEnter?.(pointerEvent))
+      rerender({ href: '/contact' })
+      expect(result.current.prefetch).toBe(false)
+    })
+
     it('still calls the user-supplied handlers', () => {
       const onPointerEnter = vi.fn()
       const onFocus = vi.fn()

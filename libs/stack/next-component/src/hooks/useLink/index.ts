@@ -89,21 +89,22 @@ export function localizeHref(
 /**
  * Resolves the `prefetch` handed to next/link. `'intent'` keeps prefetching off until
  * `markIntent` is called (pointerenter, touchstart or focus), then defers to Next's default.
+ * Intent belongs to one destination: a new `href` waits for intent again.
  * Any other value is passed through unchanged.
  */
-function useIntentPrefetch(prefetch: TLink['prefetch']) {
-  const [hasIntent, setHasIntent] = useState(false)
+function useIntentPrefetch(prefetch: TLink['prefetch'], href: string) {
+  const [intentHref, setIntentHref] = useState<string | null>(null)
   const isIntent = prefetch === 'intent'
 
   const markIntent = useCallback(() => {
     if (isIntent)
-      setHasIntent(true)
-  }, [isIntent])
+      setIntentHref(href)
+  }, [isIntent, href])
 
   if (!isIntent)
     return { prefetch, markIntent }
 
-  return { prefetch: hasIntent ? null : false, markIntent }
+  return { prefetch: intentHref === href ? null : false, markIntent }
 }
 
 /**
@@ -130,8 +131,8 @@ export function useLink(props: TLink): TUseLinkReturn {
   } = props
 
   const locale = useLinkLocale(props)
-  const { prefetch: nextPrefetch, markIntent } = useIntentPrefetch(prefetch)
   const localizedHref = localizeHref(href, locale, trailingSlash)
+  const { prefetch: nextPrefetch, markIntent } = useIntentPrefetch(prefetch, localizedHref)
 
   const isNextScroll = typeof scroll === 'boolean'
   const nextScroll = isNextScroll ? scroll : false
