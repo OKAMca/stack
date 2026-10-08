@@ -74,7 +74,6 @@ It also add a few more features to the next/link component
 
 <Canvas of={LinkStories.ScrollTop} />
 
-
 ### Prefetch on intent
 
 next/link has no hover-only prefetch: `prefetch={false}` turns off the hover prefetch along with the viewport one.
@@ -91,5 +90,6 @@ Links that only mount after a user action (the items of a menu that has just ope
 ```
 
 Prefetching only runs in production builds, so check it with `next build && next start`.
+`"intent"` does nothing with `legacyBehavior`: next/link then doesn't forward the intent handlers, so the link is never prefetched.
 
 <Canvas of={LinkStories.PrefetchIntent} />

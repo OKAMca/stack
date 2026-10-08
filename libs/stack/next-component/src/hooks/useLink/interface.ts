@@ -71,7 +71,8 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href' | 'p
    * - `'intent'`: renders next/link with `prefetch={false}` until the user shows intent on the link
    *   (`pointerenter`, `touchstart` or `focus`), then switches to `prefetch={null}` (the Next default)
    *   so Next prefetches it. next/link has no hover-only mode: `prefetch={false}` disables
-   *   both the viewport and the hover prefetch.
+   *   both the viewport and the hover prefetch. Has no effect with `legacyBehavior`, where next/link
+   *   does not forward the intent handlers.
    *
    * @default null
    */
