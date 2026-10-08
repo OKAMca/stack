@@ -2,7 +2,7 @@
 
 import type { LinkProps } from 'next/link'
 import type { TLink, TUseLinkReturn } from './interface'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useLocale } from 'react-aria'
 import { LocalePrefix } from './interface'
 
@@ -87,6 +87,26 @@ export function localizeHref(
 }
 
 /**
+ * Resolves the `prefetch` handed to next/link. `'intent'` keeps prefetching off until
+ * `markIntent` is called (pointerenter, touchstart or focus), then defers to Next's default.
+ * Any other value is passed through unchanged.
+ */
+function useIntentPrefetch(prefetch: TLink['prefetch']) {
+  const [hasIntent, setHasIntent] = useState(false)
+  const isIntent = prefetch === 'intent'
+
+  const markIntent = useCallback(() => {
+    if (isIntent)
+      setHasIntent(true)
+  }, [isIntent])
+
+  if (!isIntent)
+    return { prefetch, markIntent }
+
+  return { prefetch: hasIntent ? null : false, markIntent }
+}
+
+/**
  * @params {props.locale} - The direct locale prop always gets priority. If no `locale` prop is provided, the prop will try to fall back to react-aria `useLocale` and then next/navigation `useParams`. If a locale is found, it will be automatically prepended to the href. Otherwise, href will be returned as is.
  */
 export function useLink(props: TLink): TUseLinkReturn {
@@ -94,6 +114,8 @@ export function useLink(props: TLink): TUseLinkReturn {
     scroll = true,
     onMouseEnter,
     onTouchStart,
+    onPointerEnter,
+    onFocus,
     onClick,
     onNavigate,
     href,
@@ -108,6 +130,7 @@ export function useLink(props: TLink): TUseLinkReturn {
   } = props
 
   const locale = useLinkLocale(props)
+  const { prefetch: nextPrefetch, markIntent } = useIntentPrefetch(prefetch)
   const localizedHref = localizeHref(href, locale, trailingSlash)
 
   const isNextScroll = typeof scroll === 'boolean'
@@ -127,19 +150,32 @@ export function useLink(props: TLink): TUseLinkReturn {
 
   const handleTouchStart: typeof onTouchStart = (event) => {
     onTouchStart?.(event)
+    markIntent()
     handleScroll()
+  }
+
+  const handlePointerEnter: typeof onPointerEnter = (event) => {
+    onPointerEnter?.(event)
+    markIntent()
+  }
+
+  const handleFocus: typeof onFocus = (event) => {
+    onFocus?.(event)
+    markIntent()
   }
 
   return {
     href: localizedHref.toString(),
     as: urlDecorator,
     replace,
-    prefetch,
+    prefetch: nextPrefetch,
     shallow,
     onClick: handleClick,
     onNavigate,
     onTouchStart: handleTouchStart,
     onMouseEnter,
+    onPointerEnter: handlePointerEnter,
+    onFocus: handleFocus,
     scroll: nextScroll,
     passHref,
     legacyBehavior,
