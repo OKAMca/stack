@@ -19,6 +19,11 @@ function Link({ ref, ...props }: TLinkProps & { ref?: Ref<HTMLElement> }) {
     urlDecorator: urlDecoratorProp,
     href: hrefProp,
     trailingSlash,
+    // Resolved by useLink: left in `rest`, they would override `nextLinkProps` in Anchor
+    prefetch,
+    onPointerEnter,
+    onFocus,
+    onTouchStart,
     ...rest
   } = props
 

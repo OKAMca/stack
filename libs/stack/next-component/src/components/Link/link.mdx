@@ -14,6 +14,7 @@ It also add a few more features to the next/link component
 - Option to scroll to the top of the page when the link is clicked
 - Automatic prepending of the locale to the href using either the `locale` prop or the next/navigation `useParams` hook (with the `locale` route parameter).
 - Callback functions for any changes to the href (pathname, searchParams, hash)
+- `prefetch="intent"`: prefetch a link only once the user shows intent on it
 
 ## Props
 
@@ -73,3 +74,22 @@ It also add a few more features to the next/link component
 
 <Canvas of={LinkStories.ScrollTop} />
 
+### Prefetch on intent
+
+next/link has no hover-only prefetch: `prefetch={false}` turns off the hover prefetch along with the viewport one.
+`prefetch="intent"` fills that gap. The link renders with `prefetch={false}` until the user shows intent on it (`pointerenter`, `touchstart` or `focus`),
+then switches to `prefetch={null}`, Next's default, so Next prefetches it. Your own `onPointerEnter`, `onTouchStart` and `onFocus` handlers are still called.
+
+Use it on pages with many links in the viewport, where viewport prefetching fires a request for each one.
+Links that only mount after a user action (the items of a menu that has just opened) can keep the default.
+
+```tsx
+<Link href="/products/2" prefetch="intent">Product 2</Link>
+// Before intent: <NextLink prefetch={false} />
+// After pointerenter, touchstart or focus: <NextLink prefetch={null} />
+```
+
+Prefetching only runs in production builds, so check it with `next build && next start`.
+`"intent"` does nothing with `legacyBehavior`: next/link then doesn't forward the intent handlers, so the link is never prefetched.
+
+<Canvas of={LinkStories.PrefetchIntent} />
