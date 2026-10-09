@@ -29,7 +29,8 @@ function FocusFirstOnOpen({ isOpen, buttonRef }: { isOpen: boolean, buttonRef: R
 }
 
 function AriaAccordionItem(props: TAriaAccordionItemProps) {
-  const { item, tokens, customTheme, keepMounted = false, autoFocusPanel = !keepMounted, headingLevel } = props
+  // keepMounted / autoFocusPanel defaults are resolved by Accordion
+  const { item, tokens, customTheme, keepMounted = false, autoFocusPanel = true, headingLevel } = props
   const { props: itemProps, rendered, key } = item
   const { icon, title, onOpenChange, tokens: itemTokens, themeName: itemThemeName } = itemProps ?? {}
   const { themeName = itemThemeName } = props
@@ -83,6 +84,7 @@ function AriaAccordionItem(props: TAriaAccordionItemProps) {
   const { buttonProps, panelProps } = useDisclosure({ isDisabled }, disclosureState, panelRef)
   const { onPress, ...restButtonProps } = buttonProps
 
+  // keepMounted is only added in that mode so default-mode tokens stay exactly as before
   const accordionItemTokens = { ...tokens, isOpen, ...(keepMounted ? { keepMounted } : {}), ...itemTokens }
 
   const handlePress: TButtonProps['handlePress'] = (e) => {

@@ -16,7 +16,8 @@ import { useDisclosureGroupState, useTreeState } from 'react-stately'
 
 /**
  * Collects the keys of the accordion items, as react-stately's collection builder assigns them:
- * the element's own `key`, or `$.<index>` for items without one.
+ * the element's own `key`, or `$.<index>` for items without one (CollectionBuilder.getKey, react-stately 3.48;
+ * covered by the accordion tests if that scheme changes).
  *
  * `Children.toArray` cannot be used here: it prefixes keys (`.$item-1`), so they would never match
  * the collection keys and `defaultOpen` would silently do nothing.
