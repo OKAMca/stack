@@ -86,13 +86,16 @@ The stack theme reacts to the `keepMounted` token:
 
 - `content`: `h-[var(--disclosure-panel-height)] transition-[height] motion-reduce:transition-none`
 - `region`: padding transition, `py-4` when open
+- `content` also prints closed panels in full (`print:h-auto print:[content-visibility:visible]`)
 
 A custom theme must add equivalent classes on `content` to animate; without them the panel opens and
 closes instantly, which still works. Keep `overflow: hidden` on `content`, and don't force
 `display: none` on `[hidden="until-found"]` (Tailwind v4's preflight already excludes it), or find-in-page
 can't search the closed panel.
 
-`autoFocusPanel` defaults to `false` in this mode.
+`autoFocusPanel` defaults to `false` in this mode. When set to `true`, focus only moves into the panel if the
+header button had focus, so opening an item through find-in-page never steals focus. Find-in-page can only
+open items after hydration.
 
 <Canvas>
   <Story of={AccordionStories.KeepMounted} />

@@ -109,9 +109,9 @@ export const accordionContent = tv({
       left: '',
     },
     // react-aria's useDisclosure sets --disclosure-panel-height (0px, then the measured height, then auto)
-    // and waits for this transition before applying hidden="until-found"
+    // and waits for this transition before applying hidden="until-found". Closed panels are printed in full.
     keepMounted: {
-      true: 'h-[var(--disclosure-panel-height)] transition-[height] duration-300 ease-out motion-reduce:transition-none',
+      true: 'h-[var(--disclosure-panel-height)] transition-[height] duration-300 ease-out motion-reduce:transition-none print:h-auto print:[content-visibility:visible]',
     },
   },
 })

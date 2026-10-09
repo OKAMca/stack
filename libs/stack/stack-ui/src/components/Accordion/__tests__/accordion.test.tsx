@@ -198,6 +198,24 @@ describe('accordion', () => {
       expect(button.getAttribute('aria-expanded')).toBe('true')
     })
 
+    it('closes the other item in single selection mode when beforematch opens one', () => {
+      render(withTheme(
+        <Accordion id="acc" keepMounted>
+          <AccordionItem key="a" title="Title A" defaultOpen>Content A</AccordionItem>
+          <AccordionItem key="b" title="Title B">Content B</AccordionItem>
+        </Accordion>,
+      ))
+
+      const panelB = getPanel(getButton('Title B'))
+      act(() => {
+        panelB?.dispatchEvent(new Event('beforematch'))
+      })
+
+      expect(getButton('Title B').getAttribute('aria-expanded')).toBe('true')
+      expect(getButton('Title A').getAttribute('aria-expanded')).toBe('false')
+      expect(getPanel(getButton('Title A'))?.getAttribute('hidden')).toBe('until-found')
+    })
+
     it('does not move focus into the panel by default', async () => {
       const user = userEvent.setup()
       render(withTheme(
