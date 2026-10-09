@@ -4,7 +4,7 @@ import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin'
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin'
 import react from '@vitejs/plugin-react'
 import preserveDirectives from 'rollup-plugin-preserve-directives'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import dts from 'vite-plugin-dts'
 import { isExternal } from '../../../config/external-deps'
 
@@ -21,6 +21,18 @@ export default defineConfig({
       aliasesExclude: [/^@okam\//],
     }),
   ],
+
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./vitest.setup.ts'],
+    include: ['src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    reporters: ['default'],
+    coverage: {
+      reportsDirectory: '../../../coverage/libs/stack/stack-ui',
+      provider: 'v8',
+    },
+  },
 
   // Uncomment this if you are using workers.
   // worker: {

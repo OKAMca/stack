@@ -60,6 +60,11 @@ export const accordionIcon = tv({
   },
 })
 
+export const accordionHeading = tv({
+  // The heading only carries semantics: it must not restyle the button inside it
+  base: 'm-0 [font:inherit]',
+})
+
 export const accordionRegion = tv({
   base: `
     font-body 
@@ -75,7 +80,22 @@ export const accordionRegion = tv({
       center: 'grid-cols-[3rem_1fr_3rem] px-6 text-center',
       left: 'grid-cols-[1fr_3rem] text-left',
     },
+    // Only set when the Accordion uses `keepMounted` (the default mode animates with react-spring)
+    keepMounted: {
+      true: 'transition-[padding] duration-300 ease-out motion-reduce:transition-none',
+    },
+    isOpen: {
+      true: '',
+      false: '',
+    },
   },
+  compoundVariants: [
+    {
+      keepMounted: true,
+      isOpen: true,
+      class: 'py-4',
+    },
+  ],
 })
 
 export const accordionContent = tv({
@@ -88,12 +108,18 @@ export const accordionContent = tv({
       center: 'col-start-2',
       left: '',
     },
+    // react-aria's useDisclosure sets --disclosure-panel-height (0px, then the measured height, then auto)
+    // and waits for this transition before applying hidden="until-found"
+    keepMounted: {
+      true: 'h-[var(--disclosure-panel-height)] transition-[height] duration-300 ease-out motion-reduce:transition-none',
+    },
   },
 })
 
 export const accordionTheme = {
   container: (props: TToken) => accordionContainer(props),
   button: (props: TToken) => accordionButton(props),
+  heading: (props: TToken) => accordionHeading(props),
   title: (props: TToken) => accordionTitle(props),
   icon: (props: TToken) => accordionIcon(props),
   region: (props: TToken) => accordionRegion(props),
