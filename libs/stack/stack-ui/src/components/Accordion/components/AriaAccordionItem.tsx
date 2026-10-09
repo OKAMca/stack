@@ -1,9 +1,10 @@
 'use client'
 
+import type { ReactNode, RefObject } from 'react'
 import type { TButtonProps } from '../../Button/interface'
 import type { TAriaAccordionItemProps } from '../interface'
 import { useRef } from 'react'
-import { FocusRing, FocusScope, useDisclosure } from 'react-aria'
+import { FocusRing, FocusScope, useDisclosure, useFocusManager } from 'react-aria'
 import { useUpdateEffect } from 'react-use'
 import { useAccordionCtx } from '../../../providers/Accordion'
 import AccordionTransition from '../../../transitions/AccordionTransition'
@@ -11,8 +12,25 @@ import { Box, BoxWithForwardRef } from '../../Box'
 import { ButtonWithForwardRef } from '../../Button'
 import Icon from '../../Icon'
 
+/**
+ * Focuses the first tabbable element of a kept-mounted panel when it opens.
+ * Must render inside a `FocusScope`. Only acts when the open was triggered from the header button,
+ * so a find-in-page (`beforematch`) open never steals focus.
+ */
+function FocusFirstOnOpen({ isOpen, buttonRef }: { isOpen: boolean, buttonRef: RefObject<HTMLElement | null> }) {
+  const focusManager = useFocusManager()
+
+  useUpdateEffect(() => {
+    if (isOpen && buttonRef.current != null && document.activeElement === buttonRef.current)
+      focusManager?.focusFirst({ tabbable: true })
+  }, [isOpen])
+
+  return null
+}
+
 function AriaAccordionItem(props: TAriaAccordionItemProps) {
-  const { item, tokens, customTheme } = props
+  // keepMounted / autoFocusPanel defaults are resolved by Accordion
+  const { item, tokens, customTheme, keepMounted = false, autoFocusPanel = true, headingLevel } = props
   const { props: itemProps, rendered, key } = item
   const { icon, title, onOpenChange, tokens: itemTokens, themeName: itemThemeName } = itemProps ?? {}
   const { themeName = itemThemeName } = props
@@ -66,7 +84,8 @@ function AriaAccordionItem(props: TAriaAccordionItemProps) {
   const { buttonProps, panelProps } = useDisclosure({ isDisabled }, disclosureState, panelRef)
   const { onPress, ...restButtonProps } = buttonProps
 
-  const accordionItemTokens = { ...tokens, isOpen, ...itemTokens }
+  // keepMounted is only added in that mode so default-mode tokens stay exactly as before
+  const accordionItemTokens = { ...tokens, isOpen, ...(keepMounted ? { keepMounted } : {}), ...itemTokens }
 
   const handlePress: TButtonProps['handlePress'] = (e) => {
     e.continuePropagation()
@@ -77,26 +96,61 @@ function AriaAccordionItem(props: TAriaAccordionItemProps) {
     onOpenChange?.(isOpen)
   }, [isOpen])
 
-  return (
-    <Box themeName={`${themeName}.container`} tokens={accordionItemTokens} customTheme={customTheme}>
-      <FocusRing focusRingClass="has-focus-ring">
-        <ButtonWithForwardRef
-          {...restButtonProps}
-          handlePress={handlePress}
-          ref={buttonRef}
-          themeName={`${themeName}.button`}
+  const button = (
+    <FocusRing focusRingClass="has-focus-ring">
+      <ButtonWithForwardRef
+        {...restButtonProps}
+        handlePress={handlePress}
+        ref={buttonRef}
+        themeName={`${themeName}.button`}
+        tokens={accordionItemTokens}
+      >
+        <Box themeName={`${themeName}.title`} tokens={accordionItemTokens}>
+          {title}
+        </Box>
+        {icon && (
+          <Box themeName={`${themeName}.icon`} tokens={accordionItemTokens}>
+            <Icon icon={icon} />
+          </Box>
+        )}
+      </ButtonWithForwardRef>
+    </FocusRing>
+  )
+
+  const header = headingLevel != null
+    ? (
+        <Box as={`h${headingLevel}`} themeName={`${themeName}.heading`} tokens={accordionItemTokens}>
+          {button}
+        </Box>
+      )
+    : button
+
+  let panel: ReactNode
+  if (keepMounted) {
+    // The panel stays mounted: useDisclosure toggles `hidden="until-found"` on it, listens to
+    // `beforematch` and exposes --disclosure-panel-height for a CSS height transition.
+    panel = (
+      <Box themeName={`${themeName}.region`} tokens={accordionItemTokens}>
+        <BoxWithForwardRef
+          {...panelProps}
+          ref={panelRef}
+          themeName={`${themeName}.content`}
           tokens={accordionItemTokens}
         >
-          <Box themeName={`${themeName}.title`} tokens={accordionItemTokens}>
-            {title}
-          </Box>
-          {icon && (
-            <Box themeName={`${themeName}.icon`} tokens={accordionItemTokens}>
-              <Icon icon={icon} />
-            </Box>
-          )}
-        </ButtonWithForwardRef>
-      </FocusRing>
+          {autoFocusPanel
+            ? (
+                <FocusScope>
+                  <FocusFirstOnOpen isOpen={isOpen} buttonRef={buttonRef} />
+                  {rendered}
+                </FocusScope>
+              )
+            : rendered}
+        </BoxWithForwardRef>
+      </Box>
+    )
+  }
+  else {
+    panel = (
       <TransitionAnimation
         isVisible={isOpen}
         themeName={`${themeName}.region`}
@@ -108,9 +162,16 @@ function AriaAccordionItem(props: TAriaAccordionItemProps) {
           themeName={`${themeName}.content`}
           tokens={accordionItemTokens}
         >
-          <FocusScope autoFocus>{rendered}</FocusScope>
+          <FocusScope autoFocus={autoFocusPanel}>{rendered}</FocusScope>
         </BoxWithForwardRef>
       </TransitionAnimation>
+    )
+  }
+
+  return (
+    <Box themeName={`${themeName}.container`} tokens={accordionItemTokens} customTheme={customTheme}>
+      {header}
+      {panel}
     </Box>
   )
 }
