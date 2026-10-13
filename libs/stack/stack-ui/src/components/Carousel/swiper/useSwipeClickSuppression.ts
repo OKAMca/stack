@@ -16,14 +16,14 @@ export function useSwipeClickSuppression(controller: SwiperClass | undefined): v
     const onSwipe = () => {
       suppressSwipeClick = true
     }
-    const onInput = () => {
+    const resetSuppression = () => {
       clearTimeout(resetTimer)
       suppressSwipeClick = false
     }
     const onTouchEnd = () => {
       if (suppressSwipeClick) {
         clearTimeout(resetTimer)
-        resetTimer = setTimeout(onInput, SWIPE_CLICK_WINDOW_MS)
+        resetTimer = setTimeout(resetSuppression, SWIPE_CLICK_WINDOW_MS)
       }
     }
     const onClick = (event: MouseEvent) => {
@@ -31,7 +31,7 @@ export function useSwipeClickSuppression(controller: SwiperClass | undefined): v
       // Bound suppression so a gesture without a click cannot swallow a later
       // virtual activation that has no preceding pointerdown or keydown.
       if (suppressSwipeClick && controller.params.preventClicks) {
-        onInput()
+        resetSuppression()
         event.preventDefault()
         event.stopImmediatePropagation()
       }
@@ -39,19 +39,19 @@ export function useSwipeClickSuppression(controller: SwiperClass | undefined): v
     const element = controller.el
     controller.on('sliderFirstMove', onSwipe)
     controller.on('touchEnd', onTouchEnd)
-    element.addEventListener('pointerdown', onInput, true)
-    element.addEventListener('keydown', onInput, true)
-    element.addEventListener('pointercancel', onInput, true)
-    element.addEventListener('touchcancel', onInput, true)
+    element.addEventListener('pointerdown', resetSuppression, true)
+    element.addEventListener('keydown', resetSuppression, true)
+    element.addEventListener('pointercancel', resetSuppression, true)
+    element.addEventListener('touchcancel', resetSuppression, true)
     element.addEventListener('click', onClick, true)
     return () => {
       clearTimeout(resetTimer)
       controller.off('sliderFirstMove', onSwipe)
       controller.off('touchEnd', onTouchEnd)
-      element.removeEventListener('pointerdown', onInput, true)
-      element.removeEventListener('keydown', onInput, true)
-      element.removeEventListener('pointercancel', onInput, true)
-      element.removeEventListener('touchcancel', onInput, true)
+      element.removeEventListener('pointerdown', resetSuppression, true)
+      element.removeEventListener('keydown', resetSuppression, true)
+      element.removeEventListener('pointercancel', resetSuppression, true)
+      element.removeEventListener('touchcancel', resetSuppression, true)
       element.removeEventListener('click', onClick, true)
     }
   }, [controller])
