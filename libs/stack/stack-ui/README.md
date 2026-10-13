@@ -21,7 +21,9 @@ To use a different port, run either script in `tools/browser/` directly and pass
 the Storybook base URL as its first argument. CI builds and serves static Storybook, then runs this target in the carousel
 browser regression job. Coverage includes touch and mouse dragging, keyboard and
 tap activation, virtual activation after a canceled or completed gesture,
-fractional-slide navigation, and final-card alignment after resizing.
+fractional-slide navigation, final-card alignment after resizing, desktop
+paging with the default options, and touch-ratio prop updates while swipe limiting
+is enabled.
 
 ## Carousel layout options
 
@@ -48,4 +50,5 @@ Empty and single-card rails retain their native behavior.
 
 Use the supplied responsive predicates for layout selection. The swipe limiter
 owns `touchRatio` and `longSwipesRatio` while enabled; configure their base values
-on the carousel rather than overriding them inside breakpoints.
+on the carousel rather than overriding them inside breakpoints. Changing either
+prop after mount sets a new base value, which the limiter keeps.
