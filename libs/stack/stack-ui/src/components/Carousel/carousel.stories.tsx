@@ -300,20 +300,24 @@ export const Legacy: Story = {
   ),
 }
 
+function linkedSlides(labels: string[]): CarouselArgs['slides'] {
+  return labels.map((label, index) => ({
+    id: String(index),
+    children: (
+      <Anchor href={`#slide-${index}`} themeName={null} customTheme="flex min-h-64 w-full items-center justify-center">
+        <Typography>{label}</Typography>
+      </Anchor>
+    ),
+  }))
+}
+
 /** Touch regression: dragging a linked card must not activate its React Aria link. */
 export const LinkedSlides: Story = {
   args: {
     id: 'linked-slides',
     slidesPerView: 1.15,
     slidesPerGroup: 1,
-    slides: ['First', 'Second', 'Third', 'Fourth'].map((label, index) => ({
-      id: String(index),
-      children: (
-        <Anchor href={`#slide-${index}`} themeName={null} customTheme="flex min-h-64 w-full items-center justify-center">
-          <Typography>{label}</Typography>
-        </Anchor>
-      ),
-    })),
+    slides: linkedSlides(['First', 'Second', 'Third', 'Fourth']),
   },
   render: (args: CarouselArgs) => (
     <Carousel {...args}>
@@ -337,5 +341,15 @@ export const LinkedSlidesSingleSwipe: Story = {
     ...LinkedSlidesStartAligned.args,
     slidesPerView: 1.5,
     limitSwipeToOneSlide: true,
+  },
+}
+
+/** Desktop regression: default paging (slidesPerGroup = slidesPerView) without opt-in options. */
+export const LinkedSlidesMultiplePerView: Story = {
+  ...LinkedSlides,
+  args: {
+    id: 'linked-slides',
+    slidesPerView: 2,
+    slides: linkedSlides(['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth']),
   },
 }

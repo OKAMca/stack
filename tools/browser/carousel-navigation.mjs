@@ -1,44 +1,43 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { chromium } from 'playwright'
+import { clearHash, drag, hash, phone, withCarouselStory } from './carousel-harness.mjs'
 
-const baseURL = process.argv[2] || 'http://localhost:4400'
+// Run against Storybook: node tools/browser/carousel-navigation.mjs [baseURL]
+function arrows(page) {
+  return {
+    next: page.getByRole('button', { name: 'Next slide', exact: true }),
+    prev: page.getByRole('button', { name: 'Previous slide', exact: true }),
+  }
+}
+
+async function isFullyVisible(page, name) {
+  const card = await page.getByRole('link', { name, exact: true }).boundingBox()
+  const rail = await page.locator('#linked-slides').boundingBox()
+  return card != null && rail != null && card.x >= rail.x - 1 && card.x + card.width <= rail.x + rail.width + 1
+}
+
 test('fractional peek keeps next enabled until every card is reachable', async () => {
-  const browser = await chromium.launch()
-  try {
-    const page = await browser.newPage({ viewport: { width: 402, height: 874 } })
-    await page.goto(`${baseURL}/iframe.html?id=base-components-carousel--linked-slides&viewMode=story`)
-    await page.waitForFunction(() => document.querySelector('#linked-slides')?.swiper?.initialized)
-    const next = page.getByRole('button', { name: 'Next slide', exact: true })
-    const prev = page.getByRole('button', { name: 'Previous slide', exact: true })
+  await withCarouselStory('linked-slides', phone, async (page) => {
+    const { next, prev } = arrows(page)
     assert.equal(await prev.getAttribute('aria-disabled'), 'true')
     for (const name of ['Second', 'Third', 'Fourth']) {
       assert.equal(await next.getAttribute('aria-disabled'), 'false', `Next must reach ${name}`)
       await next.click()
       await page.waitForTimeout(400)
-      const card = await page.getByRole('link', { name, exact: true }).boundingBox()
-      const rail = await page.locator('#linked-slides').boundingBox()
-      assert.ok(card && rail && card.x >= rail.x - 1 && card.x + card.width <= rail.x + rail.width + 1, `${name} must be fully visible`)
+      assert.ok(await isFullyVisible(page, name), `${name} must be fully visible`)
     }
     assert.equal(await next.getAttribute('aria-disabled'), 'true')
     await prev.click()
     await page.waitForTimeout(400)
     assert.equal(await next.getAttribute('aria-disabled'), 'false')
-  }
-  finally {
-    await browser.close()
-  }
+  })
 })
 
 test('opt-in final card starts at the same position after resizing', async () => {
-  const browser = await chromium.launch()
-  try {
-    const page = await browser.newPage({ viewport: { width: 402, height: 874 } })
-    await page.goto(`${baseURL}/iframe.html?id=base-components-carousel--linked-slides-start-aligned&viewMode=story`)
-    await page.waitForFunction(() => document.querySelector('#linked-slides')?.swiper?.initialized)
+  await withCarouselStory('linked-slides-start-aligned', phone, async (page) => {
     const first = await page.getByRole('link', { name: 'First', exact: true }).boundingBox()
     assert.ok(first)
-    const next = page.getByRole('button', { name: 'Next slide', exact: true })
+    const { next } = arrows(page)
     for (let step = 0; step < 3; step++) {
       await next.click()
       await page.waitForTimeout(400)
@@ -54,8 +53,47 @@ test('opt-in final card starts at the same position after resizing', async () =>
     const resizedBounds = await last.boundingBox()
     assert.ok(resizedBounds && Math.abs(resizedBounds.x - first.x) < 1, 'Resize must preserve the final start position')
     assert.ok(Math.abs(resizedBounds.width - first.width) < 1, 'Resize must preserve the fractional card width')
-  }
-  finally {
-    await browser.close()
-  }
+  })
+})
+
+test('desktop multi-slide carousel keeps default arrows, drags and clicks', async () => {
+  await withCarouselStory('linked-slides-multiple-per-view', { viewport: { width: 1440, height: 900 } }, async (page) => {
+    const { next, prev } = arrows(page)
+    // Default slidesPerGroup follows slidesPerView: each press moves a page of two.
+    const pages = [['First', 'Second'], ['Third', 'Fourth'], ['Fifth', 'Sixth']]
+    for (const [index, names] of pages.entries()) {
+      if (index > 0) {
+        await next.click()
+        await page.waitForTimeout(400)
+      }
+      for (const name of names)
+        assert.ok(await isFullyVisible(page, name), `${name} must be visible on page ${index + 1}`)
+      assert.equal(await prev.getAttribute('aria-disabled'), String(index === 0), `Previous state on page ${index + 1}`)
+      assert.equal(await next.getAttribute('aria-disabled'), String(index === pages.length - 1), `Next state on page ${index + 1}`)
+    }
+    for (let step = 0; step < 2; step++) {
+      await prev.click()
+      await page.waitForTimeout(400)
+    }
+    assert.equal(await prev.getAttribute('aria-disabled'), 'true')
+    assert.equal(await next.getAttribute('aria-disabled'), 'false')
+
+    const first = await page.getByRole('link', { name: 'First', exact: true }).boundingBox()
+    const second = await page.getByRole('link', { name: 'Second', exact: true }).boundingBox()
+    assert.ok(first && second)
+    // A long swipe must cross half of the two-slide group to page forward.
+    await drag(page, {
+      pointer: 'mouse',
+      startX: second.x + second.width * 0.9,
+      endX: first.x + first.width * 0.1,
+      y: second.y + second.height / 2,
+    })
+    await page.waitForTimeout(500)
+    assert.equal(hash(page), '', 'A mouse drag must not activate the card link')
+    assert.ok(await isFullyVisible(page, 'Third'), 'The mouse drag must move the carousel')
+    assert.equal(await prev.getAttribute('aria-disabled'), 'false')
+    await clearHash(page)
+    await page.getByRole('link', { name: 'Third', exact: true }).click()
+    assert.equal(hash(page), '#slide-2', 'A plain click must activate the card link')
+  })
 })
