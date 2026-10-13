@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import type { ComponentProps, ComponentType } from 'react'
 import Carousel from '.'
-import { Icon, Typography } from '../..'
+import { Anchor, Icon, Typography } from '../..'
 import LegacyCarousel from './components/LegacyCarousel'
 import CarouselNextNavigation from './navigation/CarouselNextNavigation'
 import CarouselPrevNavigation from './navigation/CarouselPrevNavigation'
@@ -13,6 +13,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
+import './carousel-touch.css'
 
 type CarouselArgs = ComponentProps<typeof Carousel>
 type LegacyCarouselArgs = ComponentProps<typeof LegacyCarousel>
@@ -297,5 +298,28 @@ export const Legacy: Story = {
     <LegacyCarousel {...args}>
       {slide => <>{slide.children}</>}
     </LegacyCarousel>
+  ),
+}
+
+/** Touch regression: dragging a linked card must not activate its React Aria link. */
+export const LinkedSlides: Story = {
+  args: {
+    id: 'linked-slides',
+    slidesPerView: 1.15,
+    slidesPerGroup: 1,
+    slides: ['First', 'Second', 'Third', 'Fourth'].map((label, index) => ({
+      id: String(index),
+      children: (
+        <Anchor href={`#slide-${index}`} themeName="carouselTouchLink" customTheme="carousel-touch-link">
+          <Typography>{label}</Typography>
+        </Anchor>
+      ),
+    })),
+  },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <CarouselSwiper />
+      <Nav />
+    </Carousel>
   ),
 }

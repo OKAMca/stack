@@ -4,6 +4,7 @@ import type { DOMProps } from '@react-types/shared'
 import type { TSwiperModule } from '../interface'
 import type { TCarouselSwiper, TCarouselSwiperProps } from './interface'
 import { filterDOMProps } from '@react-aria/utils'
+import { useEffect } from 'react'
 import { mergeProps } from 'react-aria'
 import * as swiperModules from 'swiper/modules'
 import { useCarousel } from '../../../providers/Carousel'
@@ -22,6 +23,39 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
     swiperRef,
     setActiveIndex,
   } = useCarousel()
+  useEffect(() => {
+    if (controller == null)
+      return
+
+    let suppressSwipeClick = false
+    const onSwipe = () => {
+      suppressSwipeClick = true
+    }
+    const onInput = () => {
+      suppressSwipeClick = false
+    }
+    const onClick = (event: MouseEvent) => {
+      // React Aria can synthesize a click after Swiper has reset allowClick.
+      // Keep the gesture decision until that click or the next deliberate input.
+      if (suppressSwipeClick && controller.params.preventClicks) {
+        suppressSwipeClick = false
+        event.preventDefault()
+        event.stopImmediatePropagation()
+      }
+    }
+    const element = controller.el
+    controller.on('sliderFirstMove', onSwipe)
+    element.addEventListener('pointerdown', onInput, true)
+    element.addEventListener('keydown', onInput, true)
+    element.addEventListener('click', onClick, true)
+    return () => {
+      controller.off('sliderFirstMove', onSwipe)
+      element.removeEventListener('pointerdown', onInput, true)
+      element.removeEventListener('keydown', onInput, true)
+      element.removeEventListener('click', onClick, true)
+    }
+  }, [controller])
+
   const a11y = typeof controller?.params?.a11y === 'object' ? controller.params.a11y : undefined
   const { slidesPerView, slidesPerGroup } = contextSwiperProps
 

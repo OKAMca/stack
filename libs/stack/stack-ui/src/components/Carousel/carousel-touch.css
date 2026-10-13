@@ -1,0 +1,7 @@
+.carousel-touch-link {
+  display: flex;
+  width: 100%;
+  min-height: 256px;
+  align-items: center;
+  justify-content: center;
+}
