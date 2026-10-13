@@ -13,7 +13,6 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
-import './carousel-touch.css'
 
 type CarouselArgs = ComponentProps<typeof Carousel>
 type LegacyCarouselArgs = ComponentProps<typeof LegacyCarousel>
@@ -310,7 +309,7 @@ export const LinkedSlides: Story = {
     slides: ['First', 'Second', 'Third', 'Fourth'].map((label, index) => ({
       id: String(index),
       children: (
-        <Anchor href={`#slide-${index}`} themeName="carouselTouchLink" customTheme="carousel-touch-link">
+        <Anchor href={`#slide-${index}`} themeName={null} customTheme="flex min-h-64 w-full items-center justify-center">
           <Typography>{label}</Typography>
         </Anchor>
       ),
@@ -322,4 +321,12 @@ export const LinkedSlides: Story = {
       <Nav />
     </Carousel>
   ),
+}
+
+export const LinkedSlidesStartAligned: Story = {
+  ...LinkedSlides,
+  args: {
+    ...LinkedSlides.args,
+    alignLastSlideToStart: true,
+  },
 }

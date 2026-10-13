@@ -7,18 +7,18 @@ This library was generated with [Nx](https://nx.dev).
 
 Run `nx test stack-ui` to execute the unit tests via [Vitest](https://vitest.dev/).
 
-
 ## Carousel browser regression
 
-With `pnpm storybook` running, use a real Chromium touch session to check linked
-slides. DOM-only events cannot reproduce React Aria's delayed click after a drag.
+Run these commands from the repository root with `pnpm storybook` running.
+The tests use a real Chromium touch session to check linked slides. DOM-only events cannot reproduce React Aria's delayed click after a drag.
 
 ```sh
 pnpm exec playwright install chromium
-node tools/browser/carousel-touch.mjs
-node tools/browser/carousel-navigation.mjs
+pnpm exec nx run stack-ui:test-carousel
 ```
 
-Pass a different Storybook base URL as the first argument if needed. The test
-checks touch and mouse dragging, then keyboard and tap activation. The navigation
-regression checks that every card is reachable with fractional slides per view.
+To use a different port, run either script in `tools/browser/` directly and pass
+the Storybook base URL as its first argument. CI runs this target in the carousel
+browser regression job. Coverage includes touch and mouse dragging, keyboard and
+tap activation, virtual activation after a canceled or completed gesture,
+fractional-slide navigation, and final-card alignment after resizing.

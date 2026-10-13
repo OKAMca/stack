@@ -1,3 +1,14 @@
+## Unreleased
+
+### Fixes
+
+- Carousel links no longer activate from delayed clicks after a drag. Suppression expires after the compatibility-click window, and new pointer or keyboard input restores activation immediately.
+- Carousel navigation buttons use actual scroll boundaries, keeping the final card reachable with fractional slides per view.
+
+### Features
+
+- Add opt-in `alignLastSlideToStart` for numeric, single-row carousels with one slide per group. The final card can align to the start while partially visible cards retain their link and accessibility behavior.
+
 ## 2.1.5 (2026-06-08)
 
 ### 🚀 Features
