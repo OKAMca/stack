@@ -113,7 +113,7 @@ jobs:
 
       - name: Cache Playwright browsers
         id: playwright-cache
-        uses: actions/cache@v4
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.cache/ms-playwright
           key: playwright-chromium-${{ runner.os }}-${{ steps.playwright.outputs.version }}
@@ -130,8 +130,6 @@ jobs:
         run: pnpm exec nx run stack-ui:build-storybook
 
       - name: Run carousel browser regression
-        env:
-          NX_DAEMON: false
         run: |
           pnpm exec http-server dist/storybook/stack-ui --port 4400 -a 127.0.0.1 --silent &
           storybook_pid=$!
