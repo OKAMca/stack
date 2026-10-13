@@ -118,6 +118,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
     "file-loader": "^6.2.0",
+    "http-server": "^14.1.1",
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
     "jiti": "^2.7.0",

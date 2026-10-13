@@ -102,3 +102,37 @@ for (const release of ['outside', 'cancel']) {
     }
   })
 }
+
+for (const delay of [10, 40]) {
+  test(`full-viewport swipe moves one card in either direction with ${delay}ms steps`, async () => {
+    const browser = await chromium.launch()
+    try {
+      const page = await browser.newPage({ viewport: { width: 402, height: 874 }, isMobile: true, hasTouch: true })
+      await page.goto(`${baseURL}/iframe.html?id=base-components-carousel--linked-slides-single-swipe&viewMode=story`)
+      await page.waitForFunction(() => document.querySelector('#linked-slides')?.swiper?.initialized)
+      const rail = await page.locator('#linked-slides').boundingBox()
+      const first = await page.getByRole('link', { name: 'First', exact: true }).boundingBox()
+      assert.ok(rail && first)
+      const cdp = await page.context().newCDPSession(page)
+      for (const [name, startX, endX] of [['Second', rail.x + rail.width - 1, 1], ['First', rail.x + 1, 401]]) {
+        const y = first.y + first.height / 2
+        await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: startX, y }] })
+        for (let step = 1; step <= 10; step++) {
+          const x = startX + (endX - startX) * step / 10
+          await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x, y }] })
+          await page.waitForTimeout(delay)
+        }
+        await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] })
+        await page.waitForTimeout(500)
+        assert.equal(new URL(page.url()).hash, '', 'Swiping must not activate a link')
+        const active = await page.getByRole('link', { name, exact: true }).boundingBox()
+        assert.ok(active && Math.abs(active.x - first.x) < 1, `Gesture must land on ${name}`)
+      }
+      await page.getByRole('link', { name: 'First', exact: true }).tap()
+      assert.equal(new URL(page.url()).hash, '#slide-0', 'A tap must still activate the link')
+    }
+    finally {
+      await browser.close()
+    }
+  })
+}

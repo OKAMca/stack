@@ -330,3 +330,12 @@ export const LinkedSlidesStartAligned: Story = {
     alignLastSlideToStart: true,
   },
 }
+
+export const LinkedSlidesSingleSwipe: Story = {
+  ...LinkedSlidesStartAligned,
+  args: {
+    ...LinkedSlidesStartAligned.args,
+    slidesPerView: 1.5,
+    limitSwipeToOneSlide: true,
+  },
+}

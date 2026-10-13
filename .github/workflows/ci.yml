@@ -104,28 +104,43 @@ jobs:
           node-version: 24
           cache: 'pnpm'
 
-      - name: Install dependencies and Chromium
-        run: |
-          pnpm install --frozen-lockfile
-          pnpm exec playwright install --with-deps chromium
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Resolve Playwright version
+        id: playwright
+        run: echo "version=$(pnpm exec playwright --version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+
+      - name: Install Chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Install Chromium system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps chromium
+
+      - name: Build Storybook
+        run: pnpm exec nx run stack-ui:build-storybook
 
       - name: Run carousel browser regression
         env:
           NX_DAEMON: false
         run: |
-          pnpm exec nx run stack-ui:storybook --ci > /tmp/stack-storybook.log 2>&1 &
+          pnpm exec http-server dist/storybook/stack-ui --port 4400 -a 127.0.0.1 --silent &
           storybook_pid=$!
           trap 'kill "$storybook_pid" 2>/dev/null || true' EXIT
-          for attempt in $(seq 1 60); do
-            if curl --fail --silent http://localhost:4400/index.json > /dev/null; then
+          for attempt in $(seq 1 10); do
+            if curl --fail --silent http://127.0.0.1:4400/index.json > /dev/null; then
               pnpm exec nx run stack-ui:test-carousel
               exit $?
             fi
-            if ! kill -0 "$storybook_pid" 2>/dev/null; then
-              cat /tmp/stack-storybook.log
-              exit 1
-            fi
-            sleep 2
+            sleep 1
           done
-          cat /tmp/stack-storybook.log
           exit 1

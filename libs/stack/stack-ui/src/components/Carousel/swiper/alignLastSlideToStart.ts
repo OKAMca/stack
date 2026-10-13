@@ -1,13 +1,16 @@
 import type { SwiperClass } from 'swiper/react'
-import type { TLastSlideAlignment } from '../interface'
+import type { TCarouselLayoutOption } from '../interface'
 
 /** Run after every Swiper layout pass, before it positions the active slide. */
-export function alignLastSlideToStart(swiper: SwiperClass, enabled?: TLastSlideAlignment): void {
+export function alignLastSlideToStart(swiper: SwiperClass, enabled?: TCarouselLayoutOption): void {
   const { params, slidesGrid } = swiper
   if (!(typeof enabled === 'function' ? enabled(swiper) : enabled)
     || typeof params.slidesPerView !== 'number'
     || params.slidesPerGroup !== 1
     || params.loop || params.centeredSlides || params.cssMode
+    || params.centerInsufficientSlides || params.roundLengths
+    || params.freeMode === true
+    || (typeof params.freeMode === 'object' && params.freeMode.enabled)
     || (params.grid?.rows ?? 1) > 1
     || (typeof params.virtual === 'object' && params.virtual.enabled)) {
     return

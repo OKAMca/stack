@@ -327,6 +327,9 @@ importers:
       file-loader:
         specifier: ^6.2.0
         version: 6.2.0(webpack@5.105.2(@swc/core@1.15.46(@swc/helpers@0.5.23))(esbuild@0.28.1)(postcss@8.5.21))
+      http-server:
+        specifier: ^14.1.1
+        version: 14.1.1
       husky:
         specifier: ^9.1.7
         version: 9.1.7
