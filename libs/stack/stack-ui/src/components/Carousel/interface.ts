@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type * as SwiperModules from 'swiper/modules'
 import type { SwiperProps } from 'swiper/react'
+import type { SwiperModule } from 'swiper/types'
 import type { TDefaultComponent } from '../../types/components'
 import type { TCustomA11yOptions } from './a11y/interface'
 import type { TCarouselNavigationButtonComponent } from './navigation/interface'
@@ -12,6 +13,13 @@ export interface TSwiperProps extends Omit<SwiperProps, 'a11y'> {
 }
 
 export type TSwiperModule = keyof typeof SwiperModules
+
+/**
+ * A Swiper module, by name or as the module itself.
+ * Names are resolved for A11y, Autoplay, Controller, Keyboard, Mousewheel, Navigation and Pagination
+ * (see `supportedSwiperModules`); pass any other module directly, e.g. `import { EffectFade } from 'swiper/modules'`.
+ */
+export type TCarouselModule = TSwiperModule | SwiperModule
 
 export interface TLegacyCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps> extends Omit<
   TCarouselProps,
@@ -31,6 +39,6 @@ export interface TLegacyCarouselProps<TSlideProps extends TCarouselSlideProps = 
 export interface TCarouselProps<TSlideProps extends TCarouselSlideProps = TCarouselSlideProps>
   extends Omit<TSwiperProps, 'children' | 'modules' | 'controller'>, Omit<TDefaultComponent, 'children'> {
   children: ReactNode
-  modules?: TSwiperModule[]
+  modules?: TCarouselModule[]
   slides: TSlideProps[]
 }

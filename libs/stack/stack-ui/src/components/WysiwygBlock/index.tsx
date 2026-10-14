@@ -1,47 +1,25 @@
-'use client'
-
+// No 'use client': this module renders as a Server Component so sanitize-html
+// (and its postcss dependency) stays on the server. Only <Typography>, a client
+// component, receives the already-sanitized HTML string.
 import type { TToken } from '../../providers/Theme/interface'
 import type TWysiwygBlockProps from './interface'
-import sanitizeHtml from 'sanitize-html'
 import { Typography } from '../Typography'
-import { ariaAttributes, booleanAttributes } from './attributes'
-
-const defaultAllowedTags = ['iframe', 'img']
-const defaultAllowedAttributes = {
-  iframe: [
-    'src',
-    'allow',
-    'allowfullscreen',
-    'frameborder',
-    'scrolling',
-    'target',
-    'title',
-    'height',
-    'width',
-    'referrerpolicy',
-  ],
-  img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
-}
+import { sanitizeWysiwygContent } from './sanitize'
 
 function WysiwygBlock<Tags extends string = string, T extends TToken = TToken>({
   content,
   themeName = 'wysiwyg',
-  useSanitizerDefaultAllowedTags = true,
-  useSanitizerDefaultAllowedAttributes = true,
-  allowedTags = defaultAllowedTags as Tags[],
-  allowedAttributes = defaultAllowedAttributes,
+  useSanitizerDefaultAllowedTags,
+  useSanitizerDefaultAllowedAttributes,
+  allowedTags,
+  allowedAttributes,
   ...rest
 }: TWysiwygBlockProps<Tags, T>) {
-  const sanitizedContent = sanitizeHtml(content, {
-    allowedTags: useSanitizerDefaultAllowedTags ? sanitizeHtml.defaults.allowedTags.concat(allowedTags) : allowedTags,
-    nonBooleanAttributes: [],
-    allowedAttributes: useSanitizerDefaultAllowedAttributes
-      ? {
-          ...sanitizeHtml.defaults.allowedAttributes,
-          '*': [...sanitizeHtml.defaults.nonBooleanAttributes, ...ariaAttributes, ...booleanAttributes],
-          ...allowedAttributes,
-        }
-      : (allowedAttributes as Record<string, string[]>),
+  const sanitizedContent = sanitizeWysiwygContent(content, {
+    useSanitizerDefaultAllowedTags,
+    useSanitizerDefaultAllowedAttributes,
+    allowedTags,
+    allowedAttributes,
   })
 
   return (

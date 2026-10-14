@@ -1,5 +1,6 @@
 import type { LinkProps as NextLinkProps } from 'next/link'
 import type { UrlObject } from 'node:url'
+import type { FocusEventHandler, PointerEventHandler } from 'react'
 
 export const LocalePrefix = {
   /**
@@ -62,8 +63,22 @@ export type TLinkI18nConfig
     localePrefix?: `${typeof LocalePrefix.Always}` | undefined
   })
 
-export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
+export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href' | 'prefetch'> {
   href: string | UrlObject
+  /**
+   * Every next/link `prefetch` value is passed through unchanged, plus `'intent'`.
+   *
+   * - `'intent'`: renders next/link with `prefetch={false}` until the user shows intent on the link
+   *   (`pointerenter`, `touchstart` or `focus`), then switches to `prefetch={null}` (the Next default)
+   *   so Next prefetches it. next/link has no hover-only mode: `prefetch={false}` disables
+   *   both the viewport and the hover prefetch. Has no effect with `legacyBehavior`, where next/link
+   *   does not forward the intent handlers.
+   *
+   * @default null
+   */
+  prefetch?: NextLinkProps['prefetch'] | 'intent'
+  onPointerEnter?: PointerEventHandler<HTMLAnchorElement>
+  onFocus?: FocusEventHandler<HTMLAnchorElement>
   /**
    * @default true
    * - `true`: Scrolls to the top of the clicked anchor (default Next.js behavior)
@@ -103,4 +118,6 @@ export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href'> {
 
 export interface TUseLinkReturn extends Omit<NextLinkProps, 'href' | 'locale'> {
   href: string
+  onPointerEnter?: PointerEventHandler<HTMLAnchorElement>
+  onFocus?: FocusEventHandler<HTMLAnchorElement>
 }

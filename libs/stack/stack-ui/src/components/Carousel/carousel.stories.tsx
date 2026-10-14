@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import type { ComponentProps, ComponentType } from 'react'
+import { EffectFade } from 'swiper/modules'
 import Carousel from '.'
 import { Icon, Typography } from '../..'
 import LegacyCarousel from './components/LegacyCarousel'
@@ -13,6 +14,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/autoplay'
+import 'swiper/css/effect-fade'
 
 type CarouselArgs = ComponentProps<typeof Carousel>
 type LegacyCarouselArgs = ComponentProps<typeof LegacyCarousel>
@@ -39,14 +41,15 @@ const meta: Meta<typeof Carousel> = {
     modules: {
       table: {
         defaultValue: {
-          summary: '[\'A11y\', \'Keyboard\']',
+          summary: '[\'A11y\', \'Controller\'] (always added)',
         },
         type: {
           summary:
-            'Array<A11y | Autoplay | Controller | EffectCoverflow | EffectCube | EffectFade | EffectFlip | EffectCreative | EffectCards | HashNavigation | History | Keyboard | Lazy | Mousewheel | Navigation | Pagination | Parallax | Scrollbar | Thumbs | Virtual | Zoom | FreeMode | Grid | Manipulation>',
+            'Array<\'A11y\' | \'Autoplay\' | \'Controller\' | \'Keyboard\' | \'Mousewheel\' | \'Navigation\' | \'Pagination\' | SwiperModule>',
         },
       },
-      description: 'String list of modules the swiper will automatically import',
+      description:
+        'Swiper modules to enable. Supported module names are resolved automatically; for any other module, pass the module itself (e.g. `import { EffectFade } from \'swiper/modules\'`). Unsupported names are skipped with a warning.',
     },
   },
   parameters: {
@@ -160,6 +163,20 @@ export const Autoplay: Story = {
       <Nav />
       <CarouselSwiper />
       <BulletPagination />
+    </Carousel>
+  ),
+}
+
+export const ModuleObject: Story = {
+  name: 'Module outside the named set',
+  args: {
+    modules: [EffectFade, 'Navigation'],
+    effect: 'fade',
+  },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <Nav />
+      <CarouselSwiper />
     </Carousel>
   ),
 }

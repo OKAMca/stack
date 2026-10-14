@@ -67,8 +67,18 @@ const meta: Meta<typeof Link> = {
       },
     },
     prefetch: {
+      description: 'Every next/link value is passed through unchanged, plus `"intent"`.',
+      control: { type: 'radio' },
+      options: [null, true, false, 'auto', 'intent'],
       table: {
         category: 'next/link',
+        type: {
+          summary: 'boolean | "auto" | null | "intent"',
+          detail: `
+- \`"intent"\` renders next/link with \`prefetch={false}\` until the user shows intent on the link (pointerenter, touchstart or focus), then with \`prefetch={null}\` so Next prefetches it.
+- Any other value is handed to next/link as is.
+          `,
+        },
       },
     },
     replace: {
@@ -233,5 +243,14 @@ export const LocalePrefixAsNeeded: Story = {
       defaultLocale: 'en',
       localePrefix: 'as-needed',
     },
+  },
+}
+
+export const PrefetchIntent: Story = {
+  args: {
+    href: '/products/2',
+    prefetch: 'intent',
+    onPointerEnter: e => console.log('Pointer enter', e),
+    onFocus: e => console.log('Focus', e),
   },
 }
