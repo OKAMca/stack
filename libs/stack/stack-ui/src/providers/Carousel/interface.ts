@@ -1,7 +1,7 @@
 import type { Dispatch, ReactNode, RefObject, SetStateAction } from 'react'
 import type { SwiperClass, SwiperRef } from 'swiper/react'
 import type { Swiper } from 'swiper/types'
-import type { TSwiperModule, TSwiperProps } from '../../components/Carousel/interface'
+import type { TCarouselModule, TSwiperProps } from '../../components/Carousel/interface'
 import type { TCarouselSlideProps } from '../../components/Carousel/swiper/interface'
 
 export interface TCarouselProviderProps extends Omit<TSwiperProps, 'children' | 'modules' | 'controller'> {
@@ -11,13 +11,13 @@ export interface TCarouselProviderProps extends Omit<TSwiperProps, 'children' | 
    */
   controller?: SwiperClass
   id: string
-  modules?: TSwiperModule[]
+  modules?: TCarouselModule[]
   slides: TCarouselSlideProps[]
 }
 
 export interface TCarouselContext {
   slides: TCarouselSlideProps[]
-  modules: TSwiperModule[] | undefined
+  modules: TCarouselModule[] | undefined
   controller: SwiperClass | undefined
   setController: Dispatch<SetStateAction<SwiperClass | undefined>>
   activeIndex: number
