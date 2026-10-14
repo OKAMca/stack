@@ -77,6 +77,36 @@ export default {
     onSelectionChange: {
       description: 'Function called every time selected keys change. Passes an array containing all the open keys',
     },
+
+    keepMounted: {
+      description:
+        'Keep closed panels in the DOM (and in the server-rendered HTML) with `hidden="until-found"`. Find-in-page and `#:~:text=` links open the matching item. Animated with CSS; `TransitionAnimation` is ignored.',
+      defaultValue: {
+        summary: 'false',
+      },
+      control: {
+        type: 'boolean',
+      },
+    },
+
+    autoFocusPanel: {
+      description:
+        'Move keyboard focus to the first focusable element of a panel when it opens. `false` follows the WAI-ARIA disclosure pattern (focus stays on the header button).',
+      defaultValue: {
+        summary: 'true (false when keepMounted)',
+      },
+      control: {
+        type: 'boolean',
+      },
+    },
+
+    headingLevel: {
+      description: 'Wrap each header button in a heading element of this level (WAI-ARIA accordion pattern). No heading when omitted.',
+      options: [undefined, 1, 2, 3, 4, 5, 6],
+      control: {
+        type: 'select',
+      },
+    },
   },
 
   args: {
@@ -238,6 +268,75 @@ export const ControlledState = {
         onOpenChange={isOpen => console.log(`Open state was change to: ${isOpen}`)}
       >
         Item 2
+      </AccordionItem>,
+    ],
+  },
+}
+
+const sourcesItems = [
+  <AccordionItem key="sources" title="Sources" icon="Plus">
+    <p>
+      Hidden-until-found text: search this page for “apprenticeship” with the browser’s find-in-page while the item is
+      closed, and the item opens on the match.
+    </p>
+    <p>
+      BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship? That which shall
+      prove to be the blending of a firm conception of, “useful precedent” and the progressive tendencies of an able
+      mind.
+    </p>
+  </AccordionItem>,
+  <AccordionItem key="links" title="Links" icon="Plus">
+    <Button>Focusable item</Button>
+  </AccordionItem>,
+]
+
+export const KeepMounted = {
+  render: Template.bind({}),
+  name: 'Keep mounted (hidden until found)',
+
+  args: {
+    id: 'accordion-keep-mounted',
+    keepMounted: true,
+    selectionMode: 'multiple',
+    tokens: {
+      textAlign: 'left',
+    },
+    children: sourcesItems,
+  },
+}
+
+export const WithHeading = {
+  render: Template.bind({}),
+  name: 'With heading level',
+
+  args: {
+    id: 'accordion-heading',
+    headingLevel: 3,
+    tokens: {
+      textAlign: 'left',
+    },
+    children: [
+      <AccordionItem key="item-1" title="This header button is wrapped in an h3" icon="Plus">
+        BODY TEXT: Is not the best kind of originality that which comes after a sound apprenticeship?
+      </AccordionItem>,
+    ],
+  },
+}
+
+export const FocusStaysOnHeader = {
+  render: Template.bind({}),
+  name: 'Focus stays on header (autoFocusPanel false)',
+
+  args: {
+    id: 'accordion-no-autofocus',
+    autoFocusPanel: false,
+    tokens: {
+      textAlign: 'left',
+    },
+    children: [
+      <AccordionItem key="item-1" title="Open me with the keyboard" icon="Plus">
+        <Button>Focusable item 1</Button>
+        <Button>Focusable item 2</Button>
       </AccordionItem>,
     ],
   },

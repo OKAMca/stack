@@ -67,6 +67,7 @@ This pattern enables:
 | TagItem | `components/TagGroup/components/TagItem.tsx` | `Children.count`, `Children.forEach` |
 | Option | `components/fields/Option/index.tsx` | `Children.count`, `Children.toArray` |
 | Node | `components/Node/index.tsx` | `Children.count`, `Children.forEach` |
+| useAccordionState | `components/Accordion/hooks/useAccordionState.ts` | `Children.forEach` (item keys / `defaultOpen`) |
 
 ### Why React.cloneElement is Required
 

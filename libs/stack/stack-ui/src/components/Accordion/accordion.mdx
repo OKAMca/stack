@@ -70,3 +70,59 @@ export const TemplateControlledState = (args) => {
 <Canvas>
   <Story of={AccordionStories.ControlledState} />
 </Canvas>
+
+### Keep closed panels mounted (`keepMounted`)
+
+By default a closed panel is unmounted, so its content is missing from the server-rendered HTML:
+search engines, browser find-in-page and print never see it.
+
+With `keepMounted`, closed panels stay in the DOM. react-aria's `useDisclosure` marks them
+`hidden="until-found"` (plain `hidden` in the server HTML, until hydration), so find-in-page and
+`#:~:text=` links open the item that contains the match.
+
+The open/close animation is CSS, not react-spring: `useDisclosure` sets `--disclosure-panel-height`
+on the panel and waits for its transitions before hiding it. `TransitionAnimation` is ignored in this mode.
+The stack theme reacts to the `keepMounted` token:
+
+- `content`: `h-[var(--disclosure-panel-height)] transition-[height] motion-reduce:transition-none`
+- `region`: padding transition, `py-4` when open
+- `content` also prints closed panels in full (`print:h-auto print:[content-visibility:visible]`)
+
+A custom theme must add equivalent classes on `content` to animate; without them the panel opens and
+closes instantly, which still works. Keep `overflow: hidden` on `content`, and don't force
+`display: none` on `[hidden="until-found"]` (Tailwind v4's preflight already excludes it), or find-in-page
+can't search the closed panel.
+
+`autoFocusPanel` defaults to `false` in this mode. When set to `true`, focus only moves into the panel if the
+header button had focus, so opening an item through find-in-page never steals focus. Find-in-page can only
+open items after hydration.
+
+<Canvas>
+  <Story of={AccordionStories.KeepMounted} />
+</Canvas>
+
+### Heading structure (`headingLevel`)
+
+The [WAI-ARIA accordion pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) wraps each header
+button in a heading. Pass `headingLevel` (1 to 6) to render `<hN>` around the button, styled by the theme's
+`heading` key (the stack theme resets margin and font so the button looks the same). No heading is rendered
+when it is omitted.
+
+<Canvas>
+  <Story of={AccordionStories.WithHeading} />
+</Canvas>
+
+### Focus on open (`autoFocusPanel`)
+
+In the default mode, opening a panel moves keyboard focus to its first focusable element. The WAI-ARIA
+disclosure pattern keeps focus on the header button instead; pass `autoFocusPanel={false}` for that.
+The default stays `true` so existing accordions behave the same; it is `false` when `keepMounted` is set.
+
+<Canvas>
+  <Story of={AccordionStories.FocusStaysOnHeader} />
+</Canvas>
+
+### Opening items by default
+
+Set `defaultOpen` on an `AccordionItem`, or pass `defaultSelectedKeys` (or `"all"`) to the `Accordion`.
+`defaultSelectedKeys` wins when both are set.
