@@ -82,9 +82,12 @@ const draftParamsSchema = zod.discriminatedUnion(
         languages: languagesSchema,
       })
       .extend(commonSchema.shape),
+    // No type (e.g. `enable=false` to leave draft mode): the key is absent from the search params.
+    // zod 4 only treats a key as optional when its schema is optional, so `zod.undefined()` alone
+    // rejects the missing key with "expected nonoptional".
     zod
       .object({
-        type: zod.undefined(),
+        type: zod.undefined().optional(),
         languages: languagesSchema.optional(),
       })
       .extend(commonSchema.shape),
