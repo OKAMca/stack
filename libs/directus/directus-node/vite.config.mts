@@ -11,14 +11,18 @@ import externalDeps from '../../../config/external-deps'
 
 export default defineConfig({
   cacheDir: '../../../node_modules/.vite/directus-node',
-  root: __dirname,
+  root: import.meta.dirname,
+  test: {
+    environment: 'node',
+    include: ['src/**/*.spec.ts'],
+  },
   plugins: [
     react(),
     nxViteTsPaths(),
     nxCopyAssetsPlugin(['*.md']),
     dts({
       entryRoot: 'src',
-      tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
+      tsconfigPath: path.join(import.meta.dirname, 'tsconfig.lib.json'),
       aliasesExclude: [/^@okam\//],
     }),
   ],
