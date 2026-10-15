@@ -20,7 +20,7 @@
   "main": "./index.js",
   "types": "./index.d.ts",
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=22.15.0"
   },
   "publishConfig": {
     "access": "public"
@@ -29,7 +29,7 @@
     "react": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
-    "@graphql-codegen/cli": "^6.3.1",
+    "@graphql-codegen/cli": "^7.4.5",
     "@graphql-typed-document-node/core": "3.2.0",
     "@okam/logger": "1.1.0",
     "@okam/react-utils": "1.0.0",

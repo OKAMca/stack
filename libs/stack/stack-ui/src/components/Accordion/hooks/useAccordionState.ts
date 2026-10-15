@@ -1,18 +1,45 @@
 /**
  * useAccordionState - Custom hook wrapping react-stately's useTreeState
  *
- * Uses React.Children.toArray to safely iterate over accordion item children
+ * Uses React.Children.forEach to iterate over accordion item children
  * to extract keys and default expanded states.
  *
  * @see https://react-spectrum.adobe.com/react-stately/useTreeState.html
  * @see docs/ADR/005_react-stately-eslint-exceptions.md
  */
 
-import type { ReactElement } from 'react'
-import type { Selection } from 'react-stately'
+import type { ReactNode } from 'react'
+import type { Key, Selection } from 'react-stately'
 import type { AccordionProps, TAccordionItemProps, TAccordionState } from '../interface'
 import { Children, isValidElement } from 'react'
 import { useDisclosureGroupState, useTreeState } from 'react-stately'
+
+/**
+ * Collects the keys of the accordion items, as react-stately's collection builder assigns them:
+ * the element's own `key`, or `$.<index>` for items without one (CollectionBuilder.getKey, react-stately 3.48;
+ * covered by the accordion tests if that scheme changes).
+ *
+ * `Children.toArray` cannot be used here: it prefixes keys (`.$item-1`), so they would never match
+ * the collection keys and `defaultOpen` would silently do nothing.
+ */
+function getItemKeys(children: ReactNode) {
+  const allKeys: Key[] = []
+  const defaultOpenKeys: Key[] = []
+  let index = 0
+
+  Children.forEach(children, (child) => {
+    // Mirror CollectionBuilder: falsy children are skipped and do not consume an index
+    if (child == null || child === false || child === '' || child === 0)
+      return
+    const key = isValidElement(child) && child.key != null ? child.key : `$.${index}`
+    index++
+    allKeys.push(key)
+    if (isValidElement<TAccordionItemProps>(child) && child.props.defaultOpen === true)
+      defaultOpenKeys.push(key)
+  })
+
+  return { allKeys, defaultOpenKeys }
+}
 
 /**
  * Wraps react stately's `useTreeState` hook while automatically setting expanded keys props
@@ -32,19 +59,7 @@ export default function useAccordionState(params: AccordionProps): TAccordionSta
     ...rest
   } = params
 
-  const childrenArray = Children.toArray(children).filter(isValidElement) as Array<ReactElement<TAccordionItemProps>>
-  const allKeys = childrenArray
-    .map(child => child.key)
-    .filter((key): key is NonNullable<typeof key> => key != null)
-
-  const fallbackDefaultOpenKeys = childrenArray.reduce<NonNullable<typeof allKeys>>((openKeys, item) => {
-    const { props: itemProps, key } = item
-    const { defaultOpen } = itemProps ?? {}
-    if (!defaultOpen || key == null)
-      return openKeys
-    openKeys.push(key)
-    return openKeys
-  }, [])
+  const { allKeys, defaultOpenKeys: fallbackDefaultOpenKeys } = getItemKeys(children)
 
   const resolvedExpandedKeys = selectedKeys === 'all' ? allKeys : selectedKeys
   const resolvedDefaultExpandedKeys = propDefaultSelectedKeys === 'all'

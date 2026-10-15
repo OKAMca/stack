@@ -11,7 +11,16 @@ import AriaAccordionItem from './components/AriaAccordionItem'
 import useAccordionState from './hooks/useAccordionState'
 
 function Accordion<T extends TToken>(props: TAccordionProps<T>) {
-  const { id, themeName = 'accordion', tokens, customTheme, TransitionAnimation } = props
+  const {
+    id,
+    themeName = 'accordion',
+    tokens,
+    customTheme,
+    TransitionAnimation,
+    keepMounted = false,
+    autoFocusPanel = !keepMounted,
+    headingLevel,
+  } = props
 
   const accordionRef = useRef<HTMLDivElement | null>(null)
 
@@ -38,7 +47,15 @@ function Accordion<T extends TToken>(props: TAccordionProps<T>) {
         {...accordionProps}
       >
         {Array.from(state.collection, (item: Node<TAccordionItemProps>) => (
-          <AriaAccordionItem key={item.key} item={item} themeName={themeName} tokens={tokens} />
+          <AriaAccordionItem
+            key={item.key}
+            item={item}
+            themeName={themeName}
+            tokens={tokens}
+            keepMounted={keepMounted}
+            autoFocusPanel={autoFocusPanel}
+            headingLevel={headingLevel}
+          />
         ))}
       </BoxWithForwardRef>
     </AccordionContextProvider>

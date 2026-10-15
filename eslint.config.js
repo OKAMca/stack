@@ -610,7 +610,7 @@ export default antfu(
       '**/TagItem.tsx',
       '**/Option/index.tsx',
       '**/Node/index.tsx',
-      // Accordion state management uses Children.toArray for react-stately integration
+      // Accordion state uses Children.forEach to read item keys the way react-stately's CollectionBuilder does
       '**/useAccordionState.ts',
       // Components using cloneElement for prop injection (react-aria pattern)
       '**/AlertsItem.tsx',

@@ -5,6 +5,9 @@
   "projectType": "library",
   "tags": ["publishable"],
   "targets": {
+    "test": {
+      "executor": "@nx/vitest:test"
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
