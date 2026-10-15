@@ -3,6 +3,7 @@
 import type { DOMProps } from '@react-types/shared'
 import type { TCarouselSwiper, TCarouselSwiperProps } from './interface'
 import { filterDOMProps } from '@react-aria/utils'
+import { useEffect } from 'react'
 import { mergeProps } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
 import { alignLastSlideToStart } from './alignLastSlideToStart'
@@ -26,7 +27,12 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
 
   const { alignLastSlideToStart: lastSlideAlignment, limitSwipeToOneSlide: singleSlideSwipe, ...nativeSwiperProps } = contextSwiperProps
   const a11y = typeof controller?.params?.a11y === 'object' ? controller.params.a11y : undefined
-  const { slidesPerView, slidesPerGroup } = contextSwiperProps
+  const { slidesPerView, slidesPerGroup, touchRatio, longSwipesRatio } = contextSwiperProps
+
+  useEffect(() => {
+    if (controller != null && !controller.destroyed)
+      controller.update()
+  }, [controller, lastSlideAlignment, singleSlideSwipe, touchRatio, longSwipesRatio])
 
   const importedModules = resolveSwiperModules(modules)
 
@@ -42,7 +48,7 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
     'onSwiper': setController,
     'onSlidesUpdated': (swiper) => {
       alignLastSlideToStart(swiper, lastSlideAlignment)
-      limitSwipeToOneSlide(swiper, singleSlideSwipe)
+      limitSwipeToOneSlide(swiper, singleSlideSwipe, { touchRatio, longSwipesRatio })
     },
     'onSlideChange': (swiper) => {
       setActiveIndex(swiper.realIndex)

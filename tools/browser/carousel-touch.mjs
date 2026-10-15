@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { clearHash, drag, hash, touch, touchPhone, withCarouselStory } from './carousel-harness.mjs'
+import { clearHash, drag, hash, touch, touchPhone, updateCarouselArgs, withCarouselStory } from './carousel-harness.mjs'
 
 // Run against Storybook: node tools/browser/carousel-touch.mjs [baseURL]
 for (const pointer of ['touch', 'mouse']) {
@@ -81,25 +81,39 @@ for (const delay of [10, 40]) {
 
 test('single-slide swipe keeps touch ratios the consumer updates after mount', async () => {
   await withCarouselStory('linked-slides-single-swipe', touchPhone, async (page) => {
-    // swiper/react writes changed props to params, then calls update().
-    const ratios = await page.evaluate(() => {
+    const read = () => page.evaluate(() => {
       const swiper = document.querySelector('#linked-slides').swiper
-      const read = () => ({ touchRatio: swiper.params.touchRatio, longSwipesRatio: swiper.params.longSwipesRatio })
       const limit = (swiper.slidesGrid[1] - swiper.slidesGrid[0]) / window.innerWidth
-      swiper.params.touchRatio = 0.5
-      swiper.params.longSwipesRatio = 0.25
-      swiper.update()
-      const lowered = read()
-      swiper.update()
-      const repeated = read()
-      swiper.params.touchRatio = 2
-      swiper.update()
-      return { limit, lowered, repeated, raised: read() }
+      return { limit, touchRatio: swiper.params.touchRatio, longSwipesRatio: swiper.params.longSwipesRatio }
     })
-    assert.ok(ratios.limit > 0.5 && ratios.limit < 1, 'The story stride must sit between the tested ratios')
-    assert.deepEqual(ratios.lowered, { touchRatio: 0.5, longSwipesRatio: 0.25 }, 'A lower consumer ratio must win')
-    assert.deepEqual(ratios.repeated, ratios.lowered, 'Repeated layout passes must not compound the override')
-    assert.ok(Math.abs(ratios.raised.touchRatio - ratios.limit) < 1e-9, 'A higher consumer ratio is still bounded')
-    assert.ok(Math.abs(ratios.raised.longSwipesRatio - 0.25 * ratios.limit / 2) < 1e-9, 'The physical threshold follows the new base')
+    const initial = await read()
+    assert.ok(initial.limit > 0.5 && initial.limit < 1, 'The story stride must sit between the tested ratios')
+    await updateCarouselArgs(page, { touchRatio: 0.5, longSwipesRatio: 0.25 })
+    const lowered = await read()
+    assert.equal(lowered.touchRatio, 0.5, 'A lower consumer ratio must win')
+    assert.equal(lowered.longSwipesRatio, 0.25)
+    await page.setViewportSize({ width: 700, height: 874 })
+    await page.setViewportSize({ width: 402, height: 874 })
+    await page.waitForTimeout(400)
+    assert.deepEqual(await read(), lowered, 'Resize must preserve the new base ratios')
+    await updateCarouselArgs(page, { touchRatio: 2 })
+    const raised = await read()
+    assert.ok(Math.abs(raised.touchRatio - raised.limit) < 1e-9, 'A higher consumer ratio is still bounded')
+    assert.ok(Math.abs(raised.longSwipesRatio - 0.25 * raised.limit / 2) < 1e-9, 'The physical threshold follows the new base')
+    await updateCarouselArgs(page, { longSwipesRatio: 0.75 })
+    const threshold = await read()
+    assert.ok(Math.abs(threshold.longSwipesRatio - 0.75 * threshold.limit / 2) < 1e-9, 'Threshold-only prop changes must apply')
+    await updateCarouselArgs(page, { limitSwipeToOneSlide: false })
+    const disabled = await read()
+    assert.equal(disabled.touchRatio, 2, 'Disabling the limiter must restore the latest base')
+    assert.equal(disabled.longSwipesRatio, 0.75)
+    await updateCarouselArgs(page, { limitSwipeToOneSlide: true })
+    assert.deepEqual(await read(), threshold, 'Re-enabling must apply the limit to the latest base')
+    await updateCarouselArgs(page, { touchRatio: undefined, longSwipesRatio: undefined })
+    assert.deepEqual(await read(), initial, 'Removing ratio props must restore the defaults')
+    await updateCarouselArgs(page, { limitSwipeToOneSlide: undefined })
+    const removed = await read()
+    assert.equal(removed.touchRatio, 1, 'Removing the option must restore the default ratios')
+    assert.equal(removed.longSwipesRatio, 0.5)
   })
 })

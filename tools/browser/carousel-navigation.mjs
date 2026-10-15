@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { clearHash, drag, hash, phone, withCarouselStory } from './carousel-harness.mjs'
+import { clearHash, drag, hash, phone, updateCarouselArgs, withCarouselStory } from './carousel-harness.mjs'
 
 // Run against Storybook: node tools/browser/carousel-navigation.mjs [baseURL]
 function arrows(page) {
@@ -53,6 +53,31 @@ test('opt-in final card starts at the same position after resizing', async () =>
     const resizedBounds = await last.boundingBox()
     assert.ok(resizedBounds && Math.abs(resizedBounds.x - first.x) < 1, 'Resize must preserve the final start position')
     assert.ok(Math.abs(resizedBounds.width - first.width) < 1, 'Resize must preserve the fractional card width')
+  })
+})
+
+test('final-card alignment updates when its React prop changes', async () => {
+  await withCarouselStory('linked-slides', phone, async (page) => {
+    const first = await page.getByRole('link', { name: 'First', exact: true }).boundingBox()
+    assert.ok(first)
+    const { next } = arrows(page)
+    for (let step = 0; step < 3; step++) {
+      await next.click()
+      await page.waitForTimeout(400)
+    }
+    const last = page.getByRole('link', { name: 'Fourth', exact: true })
+    const native = await last.boundingBox()
+    assert.ok(native && native.x > first.x + 1, 'The final card initially uses native end alignment')
+    await updateCarouselArgs(page, { alignLastSlideToStart: true })
+    const aligned = await last.boundingBox()
+    assert.ok(aligned && Math.abs(aligned.x - first.x) < 1, 'Enabling the prop must align the final card to the start')
+    await updateCarouselArgs(page, { alignLastSlideToStart: false })
+    const disabled = await last.boundingBox()
+    assert.ok(disabled && Math.abs(disabled.x - native.x) < 1, 'Disabling the prop must restore native snapping')
+    await updateCarouselArgs(page, { alignLastSlideToStart: true })
+    await updateCarouselArgs(page, { alignLastSlideToStart: undefined })
+    const removed = await last.boundingBox()
+    assert.ok(removed && Math.abs(removed.x - native.x) < 1, 'Removing the prop must restore native snapping')
   })
 })
 

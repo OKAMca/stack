@@ -31,6 +31,8 @@ Both options default to off. Pass `true` or a predicate receiving the current
 Swiper instance to select layouts, for example
 `limitSwipeToOneSlide={swiper => swiper.params.slidesPerView === 1.15}`.
 Predicates run after layout, including breakpoint and resize updates.
+Changing either option after mount recalculates the layout. Disabling or removing
+an option restores native snapping or the configured base swipe ratios.
 
 - `alignLastSlideToStart` extends the snap positions to the last card's start.
   Slide widths and the actual `slidesPerView` remain unchanged, so visible peeks

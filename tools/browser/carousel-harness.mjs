@@ -20,6 +20,22 @@ export async function withCarouselStory(story, pageOptions, run) {
   }
 }
 
+/** Update Storybook args through React without remounting the carousel. */
+export async function updateCarouselArgs(page, updatedArgs) {
+  await page.evaluate(async (args) => {
+    const channel = window.__STORYBOOK_ADDONS_CHANNEL__
+    const storyId = new URLSearchParams(location.search).get('id')
+    const swiper = document.querySelector('#linked-slides').swiper
+    await new Promise((resolve) => {
+      channel.once('storyArgsUpdated', resolve)
+      channel.emit('updateStoryArgs', { storyId, updatedArgs: args })
+    })
+    await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    if (document.querySelector('#linked-slides').swiper !== swiper)
+      throw new Error('Updating carousel props must preserve the mounted Swiper instance')
+  }, updatedArgs)
+}
+
 const cdpSessions = new WeakMap()
 
 /** Send a raw CDP touch event, so Swiper and React Aria see real touch input. */
