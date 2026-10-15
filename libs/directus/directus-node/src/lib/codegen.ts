@@ -135,7 +135,7 @@ function graphqlCodegenConfig(options: CodegenOptions): CodegenConfig {
       documents: [path.resolve(projectRoot, documentsGlob)],
       ignoreNoDocuments: true, // for better experience with the watcher
       generates: {
-        [path.resolve(projectRoot, outputPath)]: {
+        [`${path.resolve(projectRoot, outputPath)}/`]: {
           preset: 'client',
         },
       },

@@ -12,6 +12,10 @@ import externalDeps from '../../../config/external-deps'
 export default defineConfig({
   cacheDir: '../../../node_modules/.vite/directus-node',
   root: __dirname,
+  test: {
+    environment: 'node',
+    include: ['src/**/*.spec.ts'],
+  },
   plugins: [
     react(),
     nxViteTsPaths(),
