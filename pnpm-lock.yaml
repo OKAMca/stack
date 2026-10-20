@@ -520,6 +520,9 @@ importers:
       next:
         specifier: 16.3.8
         version: 16.3.8(@babel/core@7.29.7)(@types/node@25.9.5)(babel-plugin-macros@3.1.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.101.3)
+      path-to-regexp:
+        specifier: ^6.3.0
+        version: 6.3.0
       radashi:
         specifier: ^12.9.1
         version: 12.9.1
