@@ -55,7 +55,8 @@ A source is either an exact path or a pattern using the same syntax as Next.js [
 | `/news/:year/:slug` | `/articles/:slug` | `/news/2024/hello` | `/articles/hello` |
 
 * `:param` matches one segment, `:param*` zero or more (including the bare prefix), `:param+` one or more, `:param?` zero or one.
+* In a destination, `?` always starts the query string, so the `:param?` modifier only works in sources. Use `:param*` for an optional destination segment.
 * An exact source wins over a pattern. Among patterns, the first match in the Directus sort order wins.
 * A redirect wins over a rewrite.
 * External destinations (`https://…`) are used as is, unless their path contains params.
-* An invalid source, or a destination using a param the source does not capture, is skipped.
+* An invalid source, or a destination using a param the source does not capture, is skipped and the next matching rule is used.

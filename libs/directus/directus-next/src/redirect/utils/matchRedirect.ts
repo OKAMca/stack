@@ -38,25 +38,6 @@ function matchSource(source: string, pathname: string) {
   return result.params
 }
 
-/**
- * Finds the redirect matching `pathname`. Sources accept the Next.js `redirects()` path syntax (`/blog/:slug*`).
- * An exact source wins over a pattern. Among patterns, the first match in `redirects` order wins.
- * @returns `params` is only set for a pattern match
- */
-export function matchRedirect(redirects: TRedirectData[], pathname: string) {
-  const exact = redirects.find(({ source }) => source === pathname)
-  if (!isNullish(exact)) {
-    return { redirect: exact }
-  }
-
-  const redirect = redirects.find(({ source }) => !isNullish(matchSource(source, pathname)))
-  if (isNullish(redirect)) {
-    return null
-  }
-
-  return { redirect, params: matchSource(redirect.source, pathname) ?? {} }
-}
-
 function compilePath(path: string, params: TRedirectParams) {
   return compile<TRedirectParams>(path)(params)
 }
@@ -66,7 +47,7 @@ function compilePath(path: string, params: TRedirectParams) {
  * Only the pathname is compiled, so external destinations keep their origin and query.
  * @returns `null` if the destination cannot be compiled with `params`
  */
-export function compileDestination(destination: string, params: TRedirectParams) {
+function compileDestination(destination: string, params: TRedirectParams) {
   try {
     if (URL.canParse(destination)) {
       const url = new URL(destination)
@@ -81,4 +62,34 @@ export function compileDestination(destination: string, params: TRedirectParams)
     log('Could not compile redirect destination. Skipping', { destination, params, error }, 'warn')
     return null
   }
+}
+
+interface TRedirectMatch {
+  redirect: TRedirectData
+  destination: string
+}
+
+/**
+ * Finds the redirect matching `pathname` and resolves its destination.
+ * Sources accept the Next.js `redirects()` path syntax (`/blog/:slug*`), and captured params fill the destination.
+ * An exact source wins over a pattern, and keeps its destination verbatim.
+ * Among patterns, the first match in `redirects` order with a valid destination wins.
+ */
+export function matchRedirect(redirects: TRedirectData[], pathname: string) {
+  const exact = redirects.find(({ source }) => source === pathname)
+  if (!isNullish(exact)) {
+    return { redirect: exact, destination: exact.destination }
+  }
+
+  return redirects.reduce<TRedirectMatch | null>((found, redirect) => {
+    if (!isNullish(found)) {
+      return found
+    }
+    const params = matchSource(redirect.source, pathname)
+    if (isNullish(params)) {
+      return null
+    }
+    const destination = compileDestination(redirect.destination, params)
+    return isNullish(destination) ? null : { redirect, destination }
+  }, null)
 }

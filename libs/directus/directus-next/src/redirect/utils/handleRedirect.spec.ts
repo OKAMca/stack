@@ -110,6 +110,19 @@ describe('handleRedirect', () => {
     expect(await request('/news/hello')).toBeNull()
   })
 
+  it('falls through to the next matching redirect when a destination is invalid', async () => {
+    mockRedirects({ redirects: [redirect('/news/:slug', '/articles/:id'), redirect('/news/:slug*', '/archive/:slug*')] })
+    expect(location(await request('/news/hello'))).toBe(`${ORIGIN}/archive/hello`)
+  })
+
+  it('falls through to a rewrite when the matching redirect destination is invalid', async () => {
+    mockRedirects({
+      redirects: [redirect('/docs/:slug', '/manual/:id')],
+      rewrites: [redirect('/docs/:slug*', '/content/docs/:slug*')],
+    })
+    expect(rewriteLocation(await request('/docs/install'))).toBe(`${ORIGIN}/content/docs/install`)
+  })
+
   it('rewrites a pattern source', async () => {
     mockRedirects({ rewrites: [redirect('/docs/:slug*', '/content/docs/:slug*')] })
     const response = await request('/docs/getting-started/install')

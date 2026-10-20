@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 import { capitalize, isEmpty, isNullish } from 'radashi'
 import { log } from '../../logger'
 import { getRedirectsRoute } from './getRedirectsRoute'
-import { compileDestination, matchRedirect } from './matchRedirect'
+import { matchRedirect } from './matchRedirect'
 
 function splitDestination(destination: string) {
   const [pathname = '', search] = destination.split('?')
@@ -40,13 +40,7 @@ export async function handleRedirect(request: NextRequest, options: TDirectusRou
     return null
   }
 
-  const { redirect: reroute, params } = match
-  const destination = isNullish(params) ? reroute.destination : compileDestination(reroute.destination, params)
-
-  if (isNullish(destination)) {
-    return null
-  }
-
+  const { redirect: reroute, destination } = match
   const { permanent } = reroute
   const status = permanent ? 308 : 307
 
