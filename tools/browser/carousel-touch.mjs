@@ -49,7 +49,6 @@ for (const release of ['outside', 'cancel']) {
       }
       else {
         await touch(page, 'touchCancel')
-        // Cancellation must release suppression without waiting for the grace period.
         await page.evaluate(() => new Promise(requestAnimationFrame))
       }
       assert.equal(hash(page), '')
@@ -136,27 +135,19 @@ test('an inactive swipe limiter leaves ratios set by breakpoints untouched', asy
   })
 })
 
-test('a swipe does not swallow a virtual click on another card', async () => {
-  await withCarouselStory('linked-slides', touchPhone, async (page) => {
-    const bounds = await page.getByRole('link', { name: 'First', exact: true }).boundingBox()
-    assert.ok(bounds)
-    const transitionEnd = page.evaluate(() => new Promise((resolve) => {
-      document.querySelector('#linked-slides').swiper.once('transitionEnd', () => resolve(performance.now()))
-    }))
-    const endX = bounds.x + bounds.width * 0.1
-    await drag(page, { startX: bounds.x + bounds.width * 0.9, endX, y: bounds.y + bounds.height / 2, release: false })
-    // Release outside the card: React Aria cancels its press, so no delayed click clears suppression.
-    await touch(page, 'touchMove', { x: endX, y: bounds.y + bounds.height + 40 })
-    await touch(page, 'touchEnd')
-    const releasedAt = await page.evaluate(() => performance.now())
-    await transitionEnd
-    // Swiper blocks clicks while animating; click another card inside the suppression window.
-    const clickedAt = await page.getByRole('link', { name: 'Third', exact: true }).evaluate((link) => {
-      link.click()
-      return performance.now()
+for (const name of ['First', 'Third']) {
+  test(`a virtual click on ${name === 'First' ? 'the dragged' : 'another'} card works right after a swipe`, async () => {
+    await withCarouselStory('linked-slides', touchPhone, async (page) => {
+      const bounds = await page.getByRole('link', { name: 'First', exact: true }).boundingBox()
+      assert.ok(bounds)
+      const transitionEnd = page.evaluate(() => new Promise((resolve) => {
+        document.querySelector('#linked-slides').swiper.once('transitionEnd', resolve)
+      }))
+      await drag(page, { startX: bounds.x + bounds.width * 0.9, endX: bounds.x + bounds.width * 0.1, y: bounds.y + bounds.height / 2 })
+      // Swiper blocks clicks while animating; activate as soon as it allows clicks again.
+      await transitionEnd
+      await page.getByRole('link', { name, exact: true }).evaluate(link => link.click())
+      assert.equal(hash(page), name === 'First' ? '#slide-0' : '#slide-2', 'Screen reader activation must not depend on swipe timing')
     })
-    assert.ok(clickedAt - releasedAt < 350, 'The click must land inside the suppression window')
-    await page.waitForTimeout(500)
-    assert.equal(hash(page), '#slide-2', 'Only the dragged card click may be suppressed')
   })
-})
+}

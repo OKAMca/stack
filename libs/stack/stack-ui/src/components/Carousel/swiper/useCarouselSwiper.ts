@@ -10,7 +10,7 @@ import { useCarousel } from '../../../providers/Carousel'
 import { alignLastSlideToStart } from './alignLastSlideToStart'
 import { limitSwipeToOneSlide } from './limitSwipeToOneSlide'
 import { resolveSwiperModules } from './resolveSwiperModules'
-import { useSwipeClickSuppression } from './useSwipeClickSuppression'
+import { useSwipePointerCapture } from './useSwipePointerCapture'
 
 export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper {
   const { children, ...rest } = props
@@ -24,7 +24,7 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
     swiperRef,
     setActiveIndex,
   } = useCarousel()
-  useSwipeClickSuppression(controller)
+  useSwipePointerCapture(controller)
 
   const { alignLastSlideToStart: lastSlideAlignment, limitSwipeToOneSlide: singleSlideSwipe, ...nativeSwiperProps } = contextSwiperProps
   const a11y = typeof controller?.params?.a11y === 'object' ? controller.params.a11y : undefined
