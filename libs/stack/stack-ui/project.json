@@ -76,6 +76,16 @@
         }
       }
     },
+    "test-carousel": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "node tools/browser/carousel-touch.mjs",
+          "node tools/browser/carousel-navigation.mjs"
+        ],
+        "parallel": false
+      }
+    },
     "nx-release-publish": {
       "options": {
         "packageRoot": "dist/libs/stack/stack-ui"

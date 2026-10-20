@@ -4,24 +4,18 @@ import type { TButtonProps } from '../../Button/interface'
 import type { TCarouselNavigation } from './interface'
 import { mergeProps, usePress } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
+import { useCarouselEdge } from './useCarouselEdge'
 
 export function useCarouselNextNavigation(props: TButtonProps): TCarouselNavigation {
   const { isDisabled: isDisabledProp, handlePress, ...rest } = props
-  const { controller, nextNavigationRef, id, activeIndex } = useCarousel()
-  const { params, slides } = controller ?? {}
-  const { slidesPerView, loop } = params ?? {}
+  const { controller, nextNavigationRef, id } = useCarousel()
+  const { params } = controller ?? {}
+  const { loop, rewind } = params ?? {}
   const a11y = typeof params?.a11y === 'object' ? params.a11y : undefined
 
-  const slidesGroupIndex = Math.round(
-    typeof slidesPerView === 'number' ? (activeIndex + 1) / slidesPerView : activeIndex,
-  )
-  const slidesGroupLength = Math.round(
-    slides != null && typeof slidesPerView === 'number' ? slides.length / slidesPerView : (slides?.length ?? 1),
-  )
-
-  const allowNavigateNext = slidesGroupIndex < slidesGroupLength
+  const isEnd = useCarouselEdge('isEnd')
   // eslint-disable-next-line ts/prefer-nullish-coalescing -- boolean OR for disabled state logic
-  const isDisabled = isDisabledProp || (!loop && !allowNavigateNext)
+  const isDisabled = isDisabledProp || (!loop && !rewind && isEnd)
 
   const { pressProps } = usePress({
     onPress: (e) => {

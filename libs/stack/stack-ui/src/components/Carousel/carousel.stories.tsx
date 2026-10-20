@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-webpack5'
 import type { ComponentProps, ComponentType } from 'react'
 import { EffectFade } from 'swiper/modules'
 import Carousel from '.'
-import { Icon, Typography } from '../..'
+import { Anchor, Icon, Typography } from '../..'
 import LegacyCarousel from './components/LegacyCarousel'
 import CarouselNextNavigation from './navigation/CarouselNextNavigation'
 import CarouselPrevNavigation from './navigation/CarouselPrevNavigation'
@@ -315,4 +315,77 @@ export const Legacy: Story = {
       {slide => <>{slide.children}</>}
     </LegacyCarousel>
   ),
+}
+
+function linkedSlides(labels: string[]): CarouselArgs['slides'] {
+  return labels.map((label, index) => ({
+    id: String(index),
+    children: (
+      <Anchor href={`#slide-${index}`} themeName={null} customTheme="flex min-h-64 w-full items-center justify-center">
+        <Typography>{label}</Typography>
+      </Anchor>
+    ),
+  }))
+}
+
+/** Touch regression: dragging a linked card must not activate its React Aria link. */
+export const LinkedSlides: Story = {
+  args: {
+    id: 'linked-slides',
+    slidesPerView: 1.15,
+    slidesPerGroup: 1,
+    slides: linkedSlides(['First', 'Second', 'Third', 'Fourth']),
+  },
+  render: (args: CarouselArgs) => (
+    <Carousel {...args}>
+      <CarouselSwiper />
+      <Nav />
+    </Carousel>
+  ),
+}
+
+export const LinkedSlidesStartAligned: Story = {
+  ...LinkedSlides,
+  args: {
+    ...LinkedSlides.args,
+    alignLastSlideToStart: true,
+  },
+}
+
+export const LinkedSlidesRewind: Story = {
+  ...LinkedSlides,
+  args: {
+    ...LinkedSlides.args,
+    rewind: true,
+  },
+}
+
+/** Regression: an inline predicate gets a new identity on each render. */
+export const LinkedSlidesInlineAlignment: Story = {
+  ...LinkedSlides,
+  render: (args: CarouselArgs) => (
+    <Carousel {...args} alignLastSlideToStart={swiper => swiper.params.slidesPerView === 1.15}>
+      <CarouselSwiper />
+      <Nav />
+    </Carousel>
+  ),
+}
+
+export const LinkedSlidesSingleSwipe: Story = {
+  ...LinkedSlidesStartAligned,
+  args: {
+    ...LinkedSlidesStartAligned.args,
+    slidesPerView: 1.5,
+    limitSwipeToOneSlide: true,
+  },
+}
+
+/** Desktop regression: default paging (slidesPerGroup = slidesPerView) without opt-in options. */
+export const LinkedSlidesMultiplePerView: Story = {
+  ...LinkedSlides,
+  args: {
+    id: 'linked-slides',
+    slidesPerView: 2,
+    slides: linkedSlides(['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth']),
+  },
 }
