@@ -12,11 +12,11 @@ export function useCarouselPrevNavigation(props: TButtonProps): TCarouselNavigat
 
   const { params } = controller ?? {}
   const a11y = typeof controller?.params?.a11y === 'object' ? controller.params.a11y : undefined
-  const { loop } = params ?? {}
+  const { loop, rewind } = params ?? {}
 
   const isBeginning = useCarouselEdge('isBeginning')
   // eslint-disable-next-line ts/prefer-nullish-coalescing -- boolean OR for disabled state logic
-  const isDisabled = isDisabledProp || (!loop && isBeginning)
+  const isDisabled = isDisabledProp || (!loop && !rewind && isBeginning)
 
   const { pressProps } = usePress({
     onPress: (e) => {

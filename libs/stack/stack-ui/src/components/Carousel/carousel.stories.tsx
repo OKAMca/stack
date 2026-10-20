@@ -352,6 +352,14 @@ export const LinkedSlidesStartAligned: Story = {
   },
 }
 
+export const LinkedSlidesRewind: Story = {
+  ...LinkedSlides,
+  args: {
+    ...LinkedSlides.args,
+    rewind: true,
+  },
+}
+
 /** Regression: an inline predicate gets a new identity on each render. */
 export const LinkedSlidesInlineAlignment: Story = {
   ...LinkedSlides,

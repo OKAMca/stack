@@ -33,6 +33,20 @@ test('fractional peek keeps next enabled until every card is reachable', async (
   })
 })
 
+test('rewind keeps both arrows enabled at the edges', async () => {
+  await withCarouselStory('linked-slides-rewind', phone, async (page) => {
+    const { next, prev } = arrows(page)
+    assert.equal(await prev.getAttribute('aria-disabled'), 'false', 'Previous must rewind from the first card')
+    await prev.click()
+    await page.waitForTimeout(400)
+    assert.ok(await isFullyVisible(page, 'Fourth'), 'Previous must rewind to the last card')
+    assert.equal(await next.getAttribute('aria-disabled'), 'false', 'Next must rewind from the last card')
+    await next.click()
+    await page.waitForTimeout(400)
+    assert.ok(await isFullyVisible(page, 'First'), 'Next must rewind to the first card')
+  })
+})
+
 test('opt-in final card starts at the same position after resizing', async () => {
   await withCarouselStory('linked-slides-start-aligned', phone, async (page) => {
     const first = await page.getByRole('link', { name: 'First', exact: true }).boundingBox()
