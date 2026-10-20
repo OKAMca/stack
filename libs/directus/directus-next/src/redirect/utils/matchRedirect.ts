@@ -1,6 +1,7 @@
 import type { TRedirectData } from '@okam/directus-node/edge'
 import type { MatchFunction } from 'path-to-regexp'
 import { compile, match } from 'path-to-regexp'
+import { isNullish } from 'radashi'
 import { log } from '../../logger'
 
 type TRedirectParams = Partial<Record<string, string | string[]>>
@@ -31,7 +32,7 @@ function getMatcher(source: string) {
 
 function matchSource(source: string, pathname: string) {
   const result = getMatcher(source)?.(pathname)
-  if (result == null || result === false) {
+  if (isNullish(result) || result === false) {
     return null
   }
   return result.params
@@ -44,12 +45,12 @@ function matchSource(source: string, pathname: string) {
  */
 export function matchRedirect(redirects: TRedirectData[], pathname: string) {
   const exact = redirects.find(({ source }) => source === pathname)
-  if (exact != null) {
+  if (!isNullish(exact)) {
     return { redirect: exact }
   }
 
-  const redirect = redirects.find(({ source }) => matchSource(source, pathname) != null)
-  if (redirect == null) {
+  const redirect = redirects.find(({ source }) => !isNullish(matchSource(source, pathname)))
+  if (isNullish(redirect)) {
     return null
   }
 
