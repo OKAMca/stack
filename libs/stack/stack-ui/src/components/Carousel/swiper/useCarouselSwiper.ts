@@ -1,9 +1,10 @@
 'use client'
 
 import type { DOMProps } from '@react-types/shared'
+import type { SwiperClass } from 'swiper/react'
 import type { TCarouselSwiper, TCarouselSwiperProps } from './interface'
 import { filterDOMProps } from '@react-aria/utils'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { mergeProps } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
 import { alignLastSlideToStart } from './alignLastSlideToStart'
@@ -29,9 +30,14 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
   const a11y = typeof controller?.params?.a11y === 'object' ? controller.params.a11y : undefined
   const { slidesPerView, slidesPerGroup, touchRatio, longSwipesRatio } = contextSwiperProps
 
+  // Swiper's initial layout already applies the options; update only on later changes.
+  const layoutControllerRef = useRef<SwiperClass>(undefined)
   useEffect(() => {
-    if (controller != null && !controller.destroyed)
+    if (controller == null || controller.destroyed)
+      return
+    if (layoutControllerRef.current === controller)
       controller.update()
+    layoutControllerRef.current = controller
   }, [controller, lastSlideAlignment, singleSlideSwipe, touchRatio, longSwipesRatio])
 
   const importedModules = resolveSwiperModules(modules)

@@ -134,11 +134,12 @@ jobs:
           pnpm exec http-server dist/storybook/stack-ui --port 4400 -a 127.0.0.1 --silent &
           storybook_pid=$!
           trap 'kill "$storybook_pid" 2>/dev/null || true' EXIT
-          for attempt in $(seq 1 10); do
+          for attempt in $(seq 1 30); do
             if curl --fail --silent http://127.0.0.1:4400/index.json > /dev/null; then
               pnpm exec nx run stack-ui:test-carousel
               exit $?
             fi
             sleep 1
           done
+          echo "::error::Static Storybook was not served at http://127.0.0.1:4400/index.json after 30s"
           exit 1

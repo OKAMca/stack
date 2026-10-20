@@ -11,12 +11,12 @@ export function limitSwipeToOneSlide(
   { touchRatio = 1, longSwipesRatio = 0.5 }: Pick<TSwiperProps, 'touchRatio' | 'longSwipesRatio'>,
 ): void {
   const { params, slidesGrid } = swiper
-  if (enabled == null && !overrides.has(swiper))
-    return
-
-  params.touchRatio = touchRatio
-  params.longSwipesRatio = longSwipesRatio
-  overrides.delete(swiper)
+  // Leave ratios alone until the limiter has written them, so inactive
+  // layouts keep breakpoint and native values.
+  if (overrides.delete(swiper)) {
+    params.touchRatio = touchRatio
+    params.longSwipesRatio = longSwipesRatio
+  }
 
   if (!isLayoutOptionActive(swiper, enabled) || !swiper.isHorizontal() || touchRatio <= 0)
     return

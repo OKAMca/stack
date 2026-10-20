@@ -21,9 +21,10 @@ To use a different port, run either script in `tools/browser/` directly and pass
 the Storybook base URL as its first argument. CI builds and serves static Storybook, then runs this target in the carousel
 browser regression job. Coverage includes touch and mouse dragging, keyboard and
 tap activation, virtual activation after a canceled or completed gesture,
-fractional-slide navigation, final-card alignment after resizing, desktop
-paging with the default options, and touch-ratio prop updates while swipe limiting
-is enabled.
+fractional-slide navigation, final-card alignment after resizing, underfilled
+rails staying locked, desktop paging with the default options, touch-ratio prop
+updates while swipe limiting is enabled, ratios left untouched by an inactive
+limiter, clicks on other cards after a swipe, and no extra layout update on mount.
 
 ## Carousel layout options
 
@@ -40,15 +41,21 @@ an option restores native snapping or the configured base swipe ratios.
 - `limitSwipeToOneSlide` limits a horizontal viewport-wide gesture to one measured
   slide stride. It scales `longSwipesRatio` with `touchRatio`, preserving the
   physical distance needed for a slow swipe. A false predicate restores the
-  configured base ratios, so mobile-only policies leave desktop behavior alone.
+  configured base ratios once the limiter has applied, and otherwise leaves
+  `touchRatio` and `longSwipesRatio` untouched, so mobile-only policies leave
+  desktop behavior alone.
 
 These options support numeric `slidesPerView`, `slidesPerGroup={1}`, and one row.
+Pass `slidesPerGroup={1}` explicitly, because the carousel otherwise defaults it to
+`slidesPerView`.
 They leave native snapping in place for loop, centered, auto-width, virtual,
 CSS-mode, and multi-row carousels. Free mode is excluded because it has no discrete
 end snap. `centerInsufficientSlides` is excluded because it moves slide positions
 when the rail is underfilled. `roundLengths` is excluded to retain Swiper's own
-pixel-rounded end-snap rules. Swipe limiting also excludes vertical carousels.
-Empty and single-card rails retain their native behavior.
+pixel-rounded end-snap rules. `slidesOffsetBefore` and `slidesOffsetAfter` are
+excluded because Swiper's native end snap accounts for them. Swipe limiting also
+excludes vertical carousels. Empty and single-card rails, and rails whose cards all
+fit, retain their native behavior.
 
 Use the supplied responsive predicates for layout selection. The swipe limiter
 owns `touchRatio` and `longSwipesRatio` while enabled; configure their base values

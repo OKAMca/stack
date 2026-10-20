@@ -16,9 +16,11 @@ export interface TSwiperProps extends Omit<SwiperProps, 'a11y'> {
    * Extend the final snap to the last slide's start without changing slide sizes.
    * A predicate can select responsive layouts from the current Swiper params.
    * Supports numeric slidesPerView, slidesPerGroup=1 and a single row in the
-   * standard transform-based slider. Loop, centered, auto-width, virtual and
+   * standard transform-based slider. Pass slidesPerGroup={1} explicitly: it
+   * otherwise defaults to slidesPerView. Loop, centered, auto-width, virtual and
    * CSS-mode sliders retain their native snapping when this option is set.
-   * Free mode, centerInsufficientSlides and roundLengths are also excluded.
+   * Free mode, centerInsufficientSlides, roundLengths and slide offsets are also
+   * excluded, as are rails whose cards all fit.
    */
   alignLastSlideToStart?: TCarouselLayoutOption
   /**

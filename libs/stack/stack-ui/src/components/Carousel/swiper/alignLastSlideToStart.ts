@@ -5,7 +5,8 @@ import { isLayoutOptionActive } from './isLayoutOptionActive'
 /** Run after every Swiper layout pass, before it positions the active slide. */
 export function alignLastSlideToStart(swiper: SwiperClass, enabled?: TCarouselLayoutOption): void {
   const { slidesGrid } = swiper
-  if (!isLayoutOptionActive(swiper, enabled) || slidesGrid.length < 2)
+  // A single native snap means every card already fits: keep the rail locked.
+  if (!isLayoutOptionActive(swiper, enabled) || slidesGrid.length < 2 || swiper.snapGrid.length < 2)
     return
 
   // Native Swiper trims trailing starts to keep the final card end-aligned.

@@ -46,9 +46,13 @@ test('opt-in final card starts at the same position after resizing', async () =>
     const finalBounds = await last.boundingBox()
     assert.ok(finalBounds && Math.abs(finalBounds.x - first.x) < 1, 'Last card must align with the first card start')
     assert.equal(await next.getAttribute('aria-disabled'), 'true')
+    // Wait for Swiper to measure each size; back-to-back resizes can coalesce into no layout pass.
+    const phoneWidth = await page.evaluate(() => document.querySelector('#linked-slides').swiper.width)
     await page.setViewportSize({ width: 700, height: 874 })
-    await page.waitForTimeout(400)
+    await page.waitForFunction(width => document.querySelector('#linked-slides').swiper.width !== width, phoneWidth)
     await page.setViewportSize({ width: 402, height: 874 })
+    await page.waitForFunction(width => document.querySelector('#linked-slides').swiper.width === width, phoneWidth)
+    // Let Swiper finish repositioning the active slide after the final layout pass.
     await page.waitForTimeout(400)
     const resizedBounds = await last.boundingBox()
     assert.ok(resizedBounds && Math.abs(resizedBounds.x - first.x) < 1, 'Resize must preserve the final start position')
@@ -121,4 +125,50 @@ test('desktop multi-slide carousel keeps default arrows, drags and clicks', asyn
     await page.getByRole('link', { name: 'Third', exact: true }).click()
     assert.equal(hash(page), '#slide-2', 'A plain click must activate the card link')
   })
+})
+
+test('final-card alignment keeps a rail whose cards all fit locked', async () => {
+  await withCarouselStory('linked-slides-start-aligned', phone, async (page) => {
+    await updateCarouselArgs(page, { slidesPerView: 5 })
+    const state = await page.evaluate(() => {
+      const { swiper } = document.querySelector('#linked-slides')
+      return { snaps: swiper.snapGrid.length, isLocked: swiper.isLocked, isEnd: swiper.isEnd }
+    })
+    assert.deepEqual(state, { snaps: 1, isLocked: true, isEnd: true }, 'An underfilled rail must keep its single native snap')
+    assert.equal(await arrows(page).next.getAttribute('aria-disabled'), 'true')
+  })
+})
+
+test('mounting a carousel runs no extra Swiper update', async () => {
+  const browser = await import('playwright').then(({ chromium }) => chromium.launch())
+  try {
+    const page = await browser.newPage(phone)
+    // Count update() calls from the moment Swiper attaches itself to its element.
+    await page.addInitScript(() => {
+      window.__carouselUpdates = 0
+      Object.defineProperty(HTMLElement.prototype, 'swiper', {
+        configurable: true,
+        get() {
+          return undefined
+        },
+        set(swiper) {
+          const update = swiper.update
+          swiper.update = function (...args) {
+            window.__carouselUpdates++
+            return update.apply(this, args)
+          }
+          Object.defineProperty(this, 'swiper', { value: swiper, configurable: true, writable: true })
+        },
+      })
+    })
+    await page.goto(`${process.argv[2] || 'http://localhost:4400'}/iframe.html?id=base-components-carousel--linked-slides-start-aligned&viewMode=story`)
+    await page.waitForFunction(() => document.querySelector('#linked-slides')?.swiper?.initialized)
+    await page.waitForTimeout(300)
+    assert.equal(await page.evaluate(() => window.__carouselUpdates), 0, 'Initialization already applies the layout options')
+    await updateCarouselArgs(page, { alignLastSlideToStart: false })
+    assert.equal(await page.evaluate(() => window.__carouselUpdates), 1, 'Changing an option must update the layout once')
+  }
+  finally {
+    await browser.close()
+  }
 })

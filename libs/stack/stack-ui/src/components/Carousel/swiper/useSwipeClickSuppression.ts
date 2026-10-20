@@ -12,7 +12,11 @@ export function useSwipeClickSuppression(controller: SwiperClass | undefined): v
       return
 
     let suppressSwipeClick = false
+    let gestureTarget: EventTarget | null = null
     let resetTimer: ReturnType<typeof setTimeout> | undefined
+    const onGestureStart = (_swiper: SwiperClass, event: Event) => {
+      gestureTarget = event.target
+    }
     const onSwipe = () => {
       suppressSwipeClick = true
     }
@@ -20,6 +24,10 @@ export function useSwipeClickSuppression(controller: SwiperClass | undefined): v
       clearTimeout(resetTimer)
       suppressSwipeClick = false
     }
+    // The delayed click targets the pressed element; unrelated controls stay clickable.
+    const isGestureClick = ({ target }: MouseEvent) =>
+      gestureTarget instanceof Node && target instanceof Node
+      && (target.contains(gestureTarget) || gestureTarget.contains(target))
     const onTouchEnd = () => {
       if (suppressSwipeClick) {
         clearTimeout(resetTimer)
@@ -30,13 +38,14 @@ export function useSwipeClickSuppression(controller: SwiperClass | undefined): v
       // React Aria can synthesize a click after Swiper has reset allowClick.
       // Bound suppression so a gesture without a click cannot swallow a later
       // virtual activation that has no preceding pointerdown or keydown.
-      if (suppressSwipeClick && controller.params.preventClicks) {
+      if (suppressSwipeClick && controller.params.preventClicks && isGestureClick(event)) {
         resetSuppression()
         event.preventDefault()
         event.stopImmediatePropagation()
       }
     }
     const element = controller.el
+    controller.on('touchStart', onGestureStart)
     controller.on('sliderFirstMove', onSwipe)
     controller.on('touchEnd', onTouchEnd)
     element.addEventListener('pointerdown', resetSuppression, true)
@@ -46,6 +55,7 @@ export function useSwipeClickSuppression(controller: SwiperClass | undefined): v
     element.addEventListener('click', onClick, true)
     return () => {
       clearTimeout(resetTimer)
+      controller.off('touchStart', onGestureStart)
       controller.off('sliderFirstMove', onSwipe)
       controller.off('touchEnd', onTouchEnd)
       element.removeEventListener('pointerdown', resetSuppression, true)

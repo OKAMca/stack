@@ -92,9 +92,12 @@ test('single-slide swipe keeps touch ratios the consumer updates after mount', a
     const lowered = await read()
     assert.equal(lowered.touchRatio, 0.5, 'A lower consumer ratio must win')
     assert.equal(lowered.longSwipesRatio, 0.25)
+    // Wait for Swiper to measure each size; back-to-back resizes can coalesce into no layout pass.
+    const phoneWidth = await page.evaluate(() => document.querySelector('#linked-slides').swiper.width)
     await page.setViewportSize({ width: 700, height: 874 })
+    await page.waitForFunction(width => document.querySelector('#linked-slides').swiper.width !== width, phoneWidth)
     await page.setViewportSize({ width: 402, height: 874 })
-    await page.waitForTimeout(400)
+    await page.waitForFunction(width => document.querySelector('#linked-slides').swiper.width === width, phoneWidth)
     assert.deepEqual(await read(), lowered, 'Resize must preserve the new base ratios')
     await updateCarouselArgs(page, { touchRatio: 2 })
     const raised = await read()
@@ -115,5 +118,45 @@ test('single-slide swipe keeps touch ratios the consumer updates after mount', a
     const removed = await read()
     assert.equal(removed.touchRatio, 1, 'Removing the option must restore the default ratios')
     assert.equal(removed.longSwipesRatio, 0.5)
+  })
+})
+
+test('an inactive swipe limiter leaves ratios set by breakpoints untouched', async () => {
+  await withCarouselStory('linked-slides', touchPhone, async (page) => {
+    await updateCarouselArgs(page, { limitSwipeToOneSlide: false })
+    const ratios = await page.evaluate(() => {
+      const { swiper } = document.querySelector('#linked-slides')
+      // Swiper's setBreakpoint writes breakpoint params before the layout pass.
+      swiper.params.touchRatio = 0.8
+      swiper.params.longSwipesRatio = 0.3
+      swiper.update()
+      return { touchRatio: swiper.params.touchRatio, longSwipesRatio: swiper.params.longSwipesRatio }
+    })
+    assert.deepEqual(ratios, { touchRatio: 0.8, longSwipesRatio: 0.3 })
+  })
+})
+
+test('a swipe does not swallow a virtual click on another card', async () => {
+  await withCarouselStory('linked-slides', touchPhone, async (page) => {
+    const bounds = await page.getByRole('link', { name: 'First', exact: true }).boundingBox()
+    assert.ok(bounds)
+    const transitionEnd = page.evaluate(() => new Promise((resolve) => {
+      document.querySelector('#linked-slides').swiper.once('transitionEnd', () => resolve(performance.now()))
+    }))
+    const endX = bounds.x + bounds.width * 0.1
+    await drag(page, { startX: bounds.x + bounds.width * 0.9, endX, y: bounds.y + bounds.height / 2, release: false })
+    // Release outside the card: React Aria cancels its press, so no delayed click clears suppression.
+    await touch(page, 'touchMove', { x: endX, y: bounds.y + bounds.height + 40 })
+    await touch(page, 'touchEnd')
+    const releasedAt = await page.evaluate(() => performance.now())
+    await transitionEnd
+    // Swiper blocks clicks while animating; click another card inside the suppression window.
+    const clickedAt = await page.getByRole('link', { name: 'Third', exact: true }).evaluate((link) => {
+      link.click()
+      return performance.now()
+    })
+    assert.ok(clickedAt - releasedAt < 350, 'The click must land inside the suppression window')
+    await page.waitForTimeout(500)
+    assert.equal(hash(page), '#slide-2', 'Only the dragged card click may be suppressed')
   })
 })
