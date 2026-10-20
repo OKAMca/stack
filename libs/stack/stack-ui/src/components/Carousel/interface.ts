@@ -24,10 +24,10 @@ export interface TSwiperProps extends Omit<SwiperProps, 'a11y'> {
    */
   alignLastSlideToStart?: TCarouselLayoutOption
   /**
-   * Limit a viewport-wide horizontal drag to one measured slide stride.
-   * Scales longSwipesRatio with touchRatio to preserve the physical threshold.
+   * Stop a horizontal drag just before the next slide and at the previous one,
+   * so a release moves at most one slide. Swiper's swipe params are unchanged.
    * Supports the same snapped layouts as alignLastSlideToStart; a predicate can
-   * enable it only on mobile. False restores the configured base ratios.
+   * enable it only on mobile.
    */
   limitSwipeToOneSlide?: TCarouselLayoutOption
 }

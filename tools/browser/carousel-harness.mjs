@@ -6,11 +6,15 @@ const baseURL = process.argv[2] || 'http://localhost:4400'
 export const phone = { viewport: { width: 402, height: 874 } }
 export const touchPhone = { ...phone, isMobile: true, hasTouch: true }
 
-/** Open a carousel story, wait for Swiper to initialize, and always close the browser. */
-export async function withCarouselStory(story, pageOptions, run) {
+/**
+ * Open a carousel story, wait for Swiper to initialize, and always close the browser.
+ * `beforeLoad` runs before navigation, for init scripts.
+ */
+export async function withCarouselStory(story, pageOptions, run, beforeLoad) {
   const browser = await chromium.launch()
   try {
     const page = await browser.newPage(pageOptions)
+    await beforeLoad?.(page)
     await page.goto(`${baseURL}/iframe.html?id=base-components-carousel--${story}&viewMode=story`)
     await page.waitForFunction(() => document.querySelector('#linked-slides')?.swiper?.initialized)
     return await run(page)
@@ -34,6 +38,31 @@ export async function updateCarouselArgs(page, updatedArgs) {
     if (document.querySelector('#linked-slides').swiper !== swiper)
       throw new Error('Updating carousel props must preserve the mounted Swiper instance')
   }, updatedArgs)
+}
+
+/** Pass as `beforeLoad`: count update() calls from the moment Swiper attaches to its element. */
+export async function countSwiperUpdates(page) {
+  await page.addInitScript(() => {
+    window.__carouselUpdates = 0
+    Object.defineProperty(HTMLElement.prototype, 'swiper', {
+      configurable: true,
+      get() {
+        return undefined
+      },
+      set(swiper) {
+        const update = swiper.update
+        swiper.update = function (...args) {
+          window.__carouselUpdates++
+          return update.apply(this, args)
+        }
+        Object.defineProperty(this, 'swiper', { value: swiper, configurable: true, writable: true })
+      },
+    })
+  })
+}
+
+export function swiperUpdates(page) {
+  return page.evaluate(() => window.__carouselUpdates)
 }
 
 const cdpSessions = new WeakMap()

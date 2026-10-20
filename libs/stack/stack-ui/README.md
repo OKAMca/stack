@@ -22,28 +22,28 @@ the Storybook base URL as its first argument. CI builds and serves static Storyb
 browser regression job. Coverage includes touch and mouse dragging, keyboard and
 tap activation, virtual activation after a canceled or completed gesture,
 fractional-slide navigation, final-card alignment after resizing, underfilled
-rails staying locked, desktop paging with the default options, touch-ratio prop
-updates while swipe limiting is enabled, ratios left untouched by an inactive
-limiter, clicks on other cards after a swipe, and no extra layout update on mount.
+rails staying locked, desktop paging with the default options, swipe limiting
+stopping the rail at the next card, native swipes after disabling it, programmatic
+slides after a canceled drag, clicks right after a swipe, and no extra layout
+update on mount or when an inline predicate re-renders.
 
 ## Carousel layout options
 
 Both options default to off. Pass `true` or a predicate receiving the current
 Swiper instance to select layouts, for example
 `limitSwipeToOneSlide={swiper => swiper.params.slidesPerView === 1.15}`.
-Predicates run after layout, including breakpoint and resize updates.
-Changing either option after mount recalculates the layout. Disabling or removing
-an option restores native snapping or the configured base swipe ratios.
+Alignment predicates run after layout, including breakpoint and resize updates;
+changing the option after mount recalculates the layout. Swipe-limit predicates run
+on each drag move. Disabling or removing an option restores native behavior.
 
 - `alignLastSlideToStart` extends the snap positions to the last card's start.
   Slide widths and the actual `slidesPerView` remain unchanged, so visible peeks
   retain their link and keyboard behavior.
-- `limitSwipeToOneSlide` limits a horizontal viewport-wide gesture to one measured
-  slide stride. It scales `longSwipesRatio` with `touchRatio`, preserving the
-  physical distance needed for a slow swipe. A false predicate restores the
-  configured base ratios once the limiter has applied, and otherwise leaves
-  `touchRatio` and `longSwipesRatio` untouched, so mobile-only policies leave
-  desktop behavior alone.
+- `limitSwipeToOneSlide` stops a dragged rail just before the next card and at the
+  previous one, so a release moves at most one card. Swiper has no native option
+  for this: it picks the target from how far the rail was dragged. The rail follows
+  the finger normally, and Swiper's own `touchRatio`, `longSwipesRatio`, edge
+  resistance and release logic stay unchanged.
 
 These options support numeric `slidesPerView`, `slidesPerGroup={1}`, and one row.
 Pass `slidesPerGroup={1}` explicitly, because the carousel otherwise defaults it to
@@ -57,7 +57,3 @@ excluded because Swiper's native end snap accounts for them. Swipe limiting also
 excludes vertical carousels. Empty and single-card rails, and rails whose cards all
 fit, retain their native behavior.
 
-Use the supplied responsive predicates for layout selection. The swipe limiter
-owns `touchRatio` and `longSwipesRatio` while enabled; configure their base values
-on the carousel rather than overriding them inside breakpoints. Changing either
-prop after mount sets a new base value, which the limiter keeps.

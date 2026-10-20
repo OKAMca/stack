@@ -8,8 +8,9 @@ import { useEffect, useRef } from 'react'
 import { mergeProps } from 'react-aria'
 import { useCarousel } from '../../../providers/Carousel'
 import { alignLastSlideToStart } from './alignLastSlideToStart'
-import { limitSwipeToOneSlide } from './limitSwipeToOneSlide'
+import { isLayoutOptionActive } from './isLayoutOptionActive'
 import { resolveSwiperModules } from './resolveSwiperModules'
+import { useSwipeLimit } from './useSwipeLimit'
 import { useSwipePointerCapture } from './useSwipePointerCapture'
 
 export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper {
@@ -26,19 +27,24 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
   } = useCarousel()
   useSwipePointerCapture(controller)
 
-  const { alignLastSlideToStart: lastSlideAlignment, limitSwipeToOneSlide: singleSlideSwipe, ...nativeSwiperProps } = contextSwiperProps
+  const { alignLastSlideToStart: alignLastSlideToStartOption, limitSwipeToOneSlide: limitSwipeToOneSlideOption, ...nativeSwiperProps } = contextSwiperProps
   const a11y = typeof controller?.params?.a11y === 'object' ? controller.params.a11y : undefined
-  const { slidesPerView, slidesPerGroup, touchRatio, longSwipesRatio } = contextSwiperProps
+  const { slidesPerView, slidesPerGroup } = contextSwiperProps
 
-  // Swiper's initial layout already applies the options; update only on later changes.
-  const layoutControllerRef = useRef<SwiperClass>(undefined)
+  useSwipeLimit(controller, limitSwipeToOneSlideOption)
+
+  // Depend on the resolved value, so an inline predicate does not re-layout
+  // (and cut off a transition) on every render.
+  const isAlignmentActive = controller != null && !controller.destroyed && isLayoutOptionActive(controller, alignLastSlideToStartOption)
+  // Swiper's initial layout already applies the alignment; update only on later changes.
+  const initializedControllerRef = useRef<SwiperClass>(undefined)
   useEffect(() => {
     if (controller == null || controller.destroyed)
       return
-    if (layoutControllerRef.current === controller)
+    if (initializedControllerRef.current === controller)
       controller.update()
-    layoutControllerRef.current = controller
-  }, [controller, lastSlideAlignment, singleSlideSwipe, touchRatio, longSwipesRatio])
+    initializedControllerRef.current = controller
+  }, [controller, isAlignmentActive])
 
   const importedModules = resolveSwiperModules(modules)
 
@@ -53,8 +59,7 @@ export function useCarouselSwiper(props: TCarouselSwiperProps): TCarouselSwiper 
     'role': 'group',
     'onSwiper': setController,
     'onSlidesUpdated': (swiper) => {
-      alignLastSlideToStart(swiper, lastSlideAlignment)
-      limitSwipeToOneSlide(swiper, singleSlideSwipe, { touchRatio, longSwipesRatio })
+      alignLastSlideToStart(swiper, alignLastSlideToStartOption)
     },
     'onSlideChange': (swiper) => {
       setActiveIndex(swiper.realIndex)

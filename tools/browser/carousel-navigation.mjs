@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { clearHash, drag, hash, phone, updateCarouselArgs, withCarouselStory } from './carousel-harness.mjs'
+import { clearHash, countSwiperUpdates, drag, hash, phone, swiperUpdates, updateCarouselArgs, withCarouselStory } from './carousel-harness.mjs'
 
 // Run against Storybook: node tools/browser/carousel-navigation.mjs [baseURL]
 function arrows(page) {
@@ -140,35 +140,20 @@ test('final-card alignment keeps a rail whose cards all fit locked', async () =>
 })
 
 test('mounting a carousel runs no extra Swiper update', async () => {
-  const browser = await import('playwright').then(({ chromium }) => chromium.launch())
-  try {
-    const page = await browser.newPage(phone)
-    // Count update() calls from the moment Swiper attaches itself to its element.
-    await page.addInitScript(() => {
-      window.__carouselUpdates = 0
-      Object.defineProperty(HTMLElement.prototype, 'swiper', {
-        configurable: true,
-        get() {
-          return undefined
-        },
-        set(swiper) {
-          const update = swiper.update
-          swiper.update = function (...args) {
-            window.__carouselUpdates++
-            return update.apply(this, args)
-          }
-          Object.defineProperty(this, 'swiper', { value: swiper, configurable: true, writable: true })
-        },
-      })
-    })
-    await page.goto(`${process.argv[2] || 'http://localhost:4400'}/iframe.html?id=base-components-carousel--linked-slides-start-aligned&viewMode=story`)
-    await page.waitForFunction(() => document.querySelector('#linked-slides')?.swiper?.initialized)
+  await withCarouselStory('linked-slides-start-aligned', phone, async (page) => {
     await page.waitForTimeout(300)
-    assert.equal(await page.evaluate(() => window.__carouselUpdates), 0, 'Initialization already applies the layout options')
+    assert.equal(await swiperUpdates(page), 0, 'Initialization already applies the layout options')
     await updateCarouselArgs(page, { alignLastSlideToStart: false })
-    assert.equal(await page.evaluate(() => window.__carouselUpdates), 1, 'Changing an option must update the layout once')
-  }
-  finally {
-    await browser.close()
-  }
+    assert.equal(await swiperUpdates(page), 1, 'Changing an option must update the layout once')
+  }, countSwiperUpdates)
+})
+
+test('an inline alignment predicate does not update the layout on each render', async () => {
+  await withCarouselStory('linked-slides-inline-alignment', phone, async (page) => {
+    await page.waitForTimeout(300)
+    // Re-render the carousel without changing any Swiper param or option result.
+    await updateCarouselArgs(page, { 'aria-label': 'Projects' })
+    await updateCarouselArgs(page, { 'aria-label': 'Featured projects' })
+    assert.equal(await swiperUpdates(page), 0, 'A new predicate with the same result must not re-layout')
+  }, countSwiperUpdates)
 })

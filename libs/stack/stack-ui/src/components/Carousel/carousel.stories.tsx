@@ -352,6 +352,17 @@ export const LinkedSlidesStartAligned: Story = {
   },
 }
 
+/** Regression: an inline predicate gets a new identity on each render. */
+export const LinkedSlidesInlineAlignment: Story = {
+  ...LinkedSlides,
+  render: (args: CarouselArgs) => (
+    <Carousel {...args} alignLastSlideToStart={swiper => swiper.params.slidesPerView === 1.15}>
+      <CarouselSwiper />
+      <Nav />
+    </Carousel>
+  ),
+}
+
 export const LinkedSlidesSingleSwipe: Story = {
   ...LinkedSlidesStartAligned,
   args: {
