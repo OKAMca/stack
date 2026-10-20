@@ -1,3 +1,24 @@
+## 1.2.1 (2026-10-20)
+
+### 🩹 Fixes
+
+- ⚠️  **deps:** resolve all open Dependabot alerts ([#565](https://github.com/OKAMca/stack/pull/565))
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+
+### ⚠️  Breaking Changes
+
+- **deps:** resolve all open Dependabot alerts  ([#565](https://github.com/OKAMca/stack/pull/565))
+  Directus libraries require Node >=22.15.0.
+  Stack UI and Next Component require Node >=22.12.0.
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 2.2.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 1.1.0 (2026-04-06)
 
 ### 🩹 Fixes

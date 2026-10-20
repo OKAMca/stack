@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-node",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@graphql-codegen/cli": "^7.4.5",
-    "@okam/core-lib": "2.2.0",
+    "@okam/core-lib": "2.2.1",
     "@okam/logger": "1.1.0",
     "dotenv": "^16.6.1"
   }

@@ -417,7 +417,7 @@ importers:
         specifier: 23.2.1
         version: 23.2.1(nx@23.2.1(@swc-node/register@1.12.1(@swc/core@1.15.46(@swc/helpers@0.5.23))(@swc/types@0.1.27)(typescript@6.0.3))(@swc/core@1.15.46(@swc/helpers@0.5.23)))
       '@okam/core-lib':
-        specifier: 2.2.0
+        specifier: 2.2.1
         version: link:../stack/core-lib
       radashi:
         specifier: ^12.9.1
@@ -432,10 +432,10 @@ importers:
         specifier: 3.2.0
         version: 3.2.0(graphql@16.14.2)
       '@okam/directus-query':
-        specifier: 2.1.1
+        specifier: 2.1.2
         version: link:../directus-query
       '@okam/stack-ui':
-        specifier: 2.1.5
+        specifier: 2.2.0
         version: link:../../stack/stack-ui
       graphql:
         specifier: ^16.14.2
@@ -454,10 +454,10 @@ importers:
   libs/directus/directus-flexible-content:
     dependencies:
       '@okam/directus-block':
-        specifier: 2.1.5
+        specifier: 2.2.0
         version: link:../directus-block
       '@okam/stack-ui':
-        specifier: 2.1.5
+        specifier: 2.2.0
         version: link:../../stack/stack-ui
       '@tiptap/core':
         specifier: ^3.30.5
@@ -497,19 +497,19 @@ importers:
         specifier: 3.2.0
         version: 3.2.0(graphql@16.14.2)
       '@okam/core-lib':
-        specifier: 2.2.0
+        specifier: 2.2.1
         version: link:../../stack/core-lib
       '@okam/directus-node':
-        specifier: 1.2.0
+        specifier: 1.2.1
         version: link:../directus-node
       '@okam/directus-query':
-        specifier: 2.1.1
+        specifier: 2.1.2
         version: link:../directus-query
       '@okam/logger':
         specifier: 1.1.0
         version: link:../../stack/logger
       '@okam/next-component':
-        specifier: 2.1.8
+        specifier: 2.2.0
         version: link:../../stack/next-component
       graphql-request:
         specifier: ^7.4.0
@@ -530,16 +530,16 @@ importers:
   libs/directus/directus-next-component:
     dependencies:
       '@okam/directus-next':
-        specifier: 2.3.6
+        specifier: 2.3.7
         version: link:../directus-next
       '@okam/logger':
         specifier: 1.1.0
         version: link:../../stack/logger
       '@okam/next-component':
-        specifier: 2.1.8
+        specifier: 2.2.0
         version: link:../../stack/next-component
       '@okam/stack-ui':
-        specifier: 2.1.5
+        specifier: 2.2.0
         version: link:../../stack/stack-ui
       '@react-spring/web':
         specifier: ^10.1.2
@@ -567,7 +567,7 @@ importers:
         specifier: ^7.4.5
         version: 7.4.6(@parcel/watcher@2.6.0)(@types/node@26.1.1)(graphql@16.14.2)(typescript@6.0.3)
       '@okam/core-lib':
-        specifier: 2.2.0
+        specifier: 2.2.1
         version: link:../../stack/core-lib
       '@okam/logger':
         specifier: 1.1.0
@@ -588,7 +588,7 @@ importers:
         specifier: 1.1.0
         version: link:../../stack/logger
       '@okam/react-utils':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../../stack/react-utils
       '@tanstack/react-query':
         specifier: ^5.101.4
@@ -615,10 +615,10 @@ importers:
   libs/stack/next-component:
     dependencies:
       '@okam/react-utils':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../react-utils
       '@okam/stack-ui':
-        specifier: 2.1.5
+        specifier: 2.2.0
         version: link:../stack-ui
       '@react-stately/selection':
         specifier: ^3.20.0
@@ -668,7 +668,7 @@ importers:
         specifier: 1.1.0
         version: link:../logger
       '@okam/react-utils':
-        specifier: 1.0.0
+        specifier: 1.0.1
         version: link:../react-utils
       '@react-aria/selection':
         specifier: ^3.28.1

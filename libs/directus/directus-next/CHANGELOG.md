@@ -1,3 +1,27 @@
+## 2.3.7 (2026-10-20)
+
+### 🩹 Fixes
+
+- ⚠️  **deps:** resolve all open Dependabot alerts ([#565](https://github.com/OKAMca/stack/pull/565))
+- **directus-next:** accept draft requests without a type ([c1cd8b82](https://github.com/OKAMca/stack/commit/c1cd8b82))
+
+### ⚠️  Breaking Changes
+
+- **deps:** resolve all open Dependabot alerts  ([#565](https://github.com/OKAMca/stack/pull/565))
+  Directus libraries require Node >=22.15.0.
+  Stack UI and Next Component require Node >=22.12.0.
+
+### 🧱 Updated Dependencies
+
+- Updated core-lib to 2.2.1
+- Updated next-component to 2.2.0
+- Updated directus-node to 1.2.1
+- Updated directus-query to 2.1.2
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.3.6 (2026-09-23)
 
 ### 🧱 Updated Dependencies
