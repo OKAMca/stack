@@ -123,6 +123,25 @@ describe('handleRedirect', () => {
     expect(rewriteLocation(await request('/docs/install'))).toBe(`${ORIGIN}/content/docs/install`)
   })
 
+  it('follows a source edited after its matcher was cached', async () => {
+    mockRedirects({ redirects: [redirect('/edited/:slug', '/target/:slug')] })
+    expect(location(await request('/edited/a'))).toBe(`${ORIGIN}/target/a`)
+
+    mockRedirects({ redirects: [redirect('/renamed/:slug', '/target/:slug')] })
+    expect(await request('/edited/a')).toBeNull()
+    expect(location(await request('/renamed/a'))).toBe(`${ORIGIN}/target/a`)
+  })
+
+  it('follows a destination edited after its source matcher was cached', async () => {
+    mockRedirects({ redirects: [redirect('/kept/:slug', '/before/:slug')] })
+    expect(location(await request('/kept/a'))).toBe(`${ORIGIN}/before/a`)
+
+    mockRedirects({ redirects: [redirect('/kept/:slug', '/after/:slug', true)] })
+    const response = await request('/kept/a')
+    expect(response?.status).toBe(308)
+    expect(location(response)).toBe(`${ORIGIN}/after/a`)
+  })
+
   it('rewrites a pattern source', async () => {
     mockRedirects({ rewrites: [redirect('/docs/:slug*', '/content/docs/:slug*')] })
     const response = await request('/docs/getting-started/install')
