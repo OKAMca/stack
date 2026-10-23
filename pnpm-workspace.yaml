@@ -55,3 +55,5 @@ overrides:
   proxy-addr: ">=2.0.8 <3"
   "postcss-selector-parser@7": ">=7.1.6 <8"
   "@graphql-tools/url-loader>@graphql-tools/wrap": ">=11.2.1 <12"
+  undici: ">=7.29.1 <8"
+  follow-redirects: ">=1.16.1 <2"
