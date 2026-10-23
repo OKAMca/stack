@@ -15,6 +15,7 @@ const exactPackages = [
   'graphql',
   'graphql-request',
   'lodash.isequal',
+  'path-to-regexp',
   'radashi',
   'react-div-100vh',
   'react-hook-form',
