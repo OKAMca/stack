@@ -126,3 +126,4 @@ qa-ralph.sh
 vitest.config.*.timestamp*
 .claude/worktrees
 .claude/settings.local.json
+.vitest

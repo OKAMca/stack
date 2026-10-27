@@ -1,3 +1,29 @@
+## 2.2.0 (2026-10-20)
+
+### 🚀 Features
+
+- **next-component:** add prefetch intent option to link ([2173fe64](https://github.com/OKAMca/stack/commit/2173fe64))
+
+### 🩹 Fixes
+
+- ⚠️  **deps:** resolve all open Dependabot alerts ([#565](https://github.com/OKAMca/stack/pull/565))
+- **next-component:** reset prefetch intent when the link href changes ([db0f82f2](https://github.com/OKAMca/stack/commit/db0f82f2))
+
+### ⚠️  Breaking Changes
+
+- **deps:** resolve all open Dependabot alerts  ([#565](https://github.com/OKAMca/stack/pull/565))
+  Directus libraries require Node >=22.15.0.
+  Stack UI and Next Component require Node >=22.12.0.
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.2.0
+- Updated react-utils to 1.0.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.1.8 (2026-09-23)
 
 ### 🩹 Fixes

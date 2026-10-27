@@ -1,3 +1,25 @@
+## 2.2.0 (2026-10-20)
+
+### 🩹 Fixes
+
+- ⚠️  **deps:** resolve all open Dependabot alerts ([#565](https://github.com/OKAMca/stack/pull/565))
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+
+### ⚠️  Breaking Changes
+
+- **deps:** resolve all open Dependabot alerts  ([#565](https://github.com/OKAMca/stack/pull/565))
+  Directus libraries require Node >=22.15.0.
+  Stack UI and Next Component require Node >=22.12.0.
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.2.0
+- Updated directus-block to 2.2.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.1.5 (2026-07-13)
 
 This was a version bump only for directus-flexible-content to align it with other projects, there were no code changes.

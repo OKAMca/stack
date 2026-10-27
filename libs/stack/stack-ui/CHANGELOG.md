@@ -1,3 +1,45 @@
+## 2.2.0 (2026-10-20)
+
+### 🚀 Features
+
+- **stack-ui:** print closed keep-mounted accordion panels ([f4fff116](https://github.com/OKAMca/stack/commit/f4fff116))
+- **stack-ui:** accordion keepMounted, headingLevel and autoFocusPanel ([e46a66b6](https://github.com/OKAMca/stack/commit/e46a66b6))
+- **directus-next:** imgix & directus image loaders ([#463](https://github.com/OKAMca/stack/pull/463))
+
+### 🩹 Fixes
+
+- **stack-ui:** keep carousel arrows enabled with rewind ([2ab71c23](https://github.com/OKAMca/stack/commit/2ab71c23))
+- **stack-ui:** cancel carousel link press with pointer capture ([2bd51ac2](https://github.com/OKAMca/stack/commit/2bd51ac2))
+- **stack-ui:** address carousel review findings ([e67ba194](https://github.com/OKAMca/stack/commit/e67ba194))
+- **stack-ui:** apply carousel option and ratio updates ([710dfda8](https://github.com/OKAMca/stack/commit/710dfda8))
+- ⚠️  **deps:** resolve all open Dependabot alerts ([#565](https://github.com/OKAMca/stack/pull/565))
+- **stack-ui:** keep next arrow enabled before carousel init ([41ea82b9](https://github.com/OKAMca/stack/commit/41ea82b9))
+- **stack-ui:** keep consumer touch ratios while limiting swipes ([2e240726](https://github.com/OKAMca/stack/commit/2e240726))
+- **stack-ui:** expose bounded single-slide gestures ([62b57f07](https://github.com/OKAMca/stack/commit/62b57f07))
+- **stack-ui:** bound swipe suppression and support final slide alignment ([67fc30c4](https://github.com/OKAMca/stack/commit/67fc30c4))
+- **stack-ui:** preserve carousel gestures and navigation boundaries ([40d6ab2d](https://github.com/OKAMca/stack/commit/40d6ab2d))
+- **deps:** resolve all Dependabot alerts and audit findings via Nx 23 upgrade ([#527](https://github.com/OKAMca/stack/pull/527))
+
+### 🔥 Performance
+
+- **stack-ui:** import only supported swiper modules in the carousel ([636c9388](https://github.com/OKAMca/stack/commit/636c9388))
+- **stack-ui:** sanitize WysiwygBlock content on the server ([6395fa8c](https://github.com/OKAMca/stack/commit/6395fa8c))
+
+### ⚠️  Breaking Changes
+
+- **deps:** resolve all open Dependabot alerts  ([#565](https://github.com/OKAMca/stack/pull/565))
+  Directus libraries require Node >=22.15.0.
+  Stack UI and Next Component require Node >=22.12.0.
+
+### 🧱 Updated Dependencies
+
+- Updated react-utils to 1.0.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay @marie-maxime
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.1.5 (2026-06-08)
 
 ### 🚀 Features
