@@ -83,6 +83,38 @@ describe('handleRedirect', () => {
     expect(location(await request('/blog/hello'))).toBe('https://blog.example.org/')
   })
 
+  it('uses an external destination without params verbatim, even with pattern characters', async () => {
+    mockRedirects({ redirects: [redirect('/band/:slug*', 'https://en.wikipedia.org/wiki/AC_(band)')] })
+    expect(location(await request('/band/members'))).toBe('https://en.wikipedia.org/wiki/AC_(band)')
+  })
+
+  it('uses a relative destination without params verbatim, even with pattern characters', async () => {
+    mockRedirects({ redirects: [redirect('/band/:slug*', '/wiki/AC_(band)')] })
+    expect(location(await request('/band/members'))).toBe(`${ORIGIN}/wiki/AC_(band)`)
+  })
+
+  it('fills params in destination query values', async () => {
+    mockRedirects({ redirects: [redirect('/news/:slug', '/search?q=:slug&from=news')] })
+    expect(location(await request('/news/hello'))).toBe(`${ORIGIN}/search?q=hello&from=news`)
+  })
+
+  it('fills params in external destination query values', async () => {
+    mockRedirects({ redirects: [redirect('/blog/:slug*', 'https://example.org/search?q=:slug*&ref=stack')] })
+    expect(location(await request('/blog/2024/hello'))).toBe('https://example.org/search?q=2024%2Fhello&ref=stack')
+  })
+
+  it('encodes params once in destination query values', async () => {
+    mockRedirects({ redirects: [redirect('/news/:slug', '/search?q=:slug')] })
+    expect(location(await request('/news/caf%C3%A9'))).toBe(`${ORIGIN}/search?q=caf%C3%A9`)
+    expect(location(await request('/news/a&b=c'))).toBe(`${ORIGIN}/search?q=a%26b%3Dc`)
+  })
+
+  it('keeps exact sources case-sensitive', async () => {
+    mockRedirects({ redirects: [redirect('/About', '/about-us')] })
+    expect(location(await request('/About'))).toBe(`${ORIGIN}/about-us`)
+    expect(await request('/about')).toBeNull()
+  })
+
   it('prefers an exact source over a pattern listed before it', async () => {
     mockRedirects({
       redirects: [redirect('/news/:slug', '/articles/:slug'), redirect('/news/featured', '/featured')],
