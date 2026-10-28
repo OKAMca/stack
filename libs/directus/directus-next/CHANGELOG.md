@@ -1,3 +1,13 @@
+## 2.4.0 (2026-10-28)
+
+### 🚀 Features
+
+- **directus-next:** support pattern sources in directus redirects ([#569](https://github.com/OKAMca/stack/pull/569), [#567](https://github.com/OKAMca/stack/issues/567))
+
+### ❤️ Thank You
+
+- Pierre-Olivier Clerson @poclerson
+
 ## 2.3.7 (2026-10-20)
 
 ### 🩹 Fixes

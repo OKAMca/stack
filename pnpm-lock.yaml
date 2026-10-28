@@ -538,7 +538,7 @@ importers:
   libs/directus/directus-next-component:
     dependencies:
       '@okam/directus-next':
-        specifier: 2.3.7
+        specifier: 2.4.0
         version: link:../directus-next
       '@okam/logger':
         specifier: 1.1.0
