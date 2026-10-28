@@ -1,25 +1,25 @@
-import type { TRedirectData } from '@okam/directus-node/edge'
 import type { NextRequest } from 'next/server'
 import type { TDirectusRouteRedirectsModule } from '../../types/directusRouteConfig'
 import { normalizePath } from '@okam/core-lib'
 import { NextResponse } from 'next/server'
-import { capitalize } from 'radashi'
+import { capitalize, isEmpty, isNullish } from 'radashi'
 import { log } from '../../logger'
 import { getRedirectsRoute } from './getRedirectsRoute'
+import { matchRedirect } from './matchRedirect'
 
 function splitDestination(destination: string) {
   const [pathname = '', search] = destination.split('?')
-  if (search == null || search === '') {
+  if (isEmpty(search)) {
     return [pathname] as const
   }
   return [pathname, `?${search}`] as const
 }
 
-function validateExternalRedirect(redirect: TRedirectData) {
-  if (!URL.canParse(redirect.destination)) {
+function validateExternalRedirect(destination: string) {
+  if (!URL.canParse(destination)) {
     return null
   }
-  return redirect.destination
+  return destination
 }
 
 /**
@@ -31,29 +31,29 @@ export async function handleRedirect(request: NextRequest, options: TDirectusRou
   const normalizedPathname = normalizePath(pathname)
 
   const { redirects, rewrites } = await getRedirectsRoute(options)
-  const redirect = redirects.find(({ source }) => source === normalizedPathname)
-  const rewrite = rewrites.find(({ source }) => source === normalizedPathname)
-  const type = redirect != null ? 'redirect' : 'rewrite'
-  const reroute = redirect ?? rewrite
+  const redirectMatch = matchRedirect(redirects, normalizedPathname)
+  const rewriteMatch = matchRedirect(rewrites, normalizedPathname)
+  const type = !isNullish(redirectMatch) ? 'redirect' : 'rewrite'
+  const match = redirectMatch ?? rewriteMatch
 
-  if (reroute == null) {
+  if (isNullish(match)) {
     return null
   }
 
+  const { redirect: reroute, destination } = match
   const { permanent } = reroute
   const status = permanent ? 308 : 307
 
-  const externalRedirect = validateExternalRedirect(reroute)
-  if (externalRedirect != null && externalRedirect !== '') {
+  const externalRedirect = validateExternalRedirect(destination)
+  if (!isEmpty(externalRedirect)) {
     log(`External ${type} found`, { [type]: externalRedirect, permanent })
     return NextResponse.redirect(externalRedirect, { status })
   }
 
   log(`${capitalize(type)} found`, { [type]: reroute, permanent })
 
-  const { destination } = reroute
   const [destinationPathname, search] = splitDestination(destination)
-  if (search != null)
+  if (!isNullish(search))
     url.search = search
   url.pathname = destinationPathname
 

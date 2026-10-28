@@ -133,6 +133,9 @@ importers:
       nuqs:
         specifier: ^2.9.1
         version: 2.10.2(next@16.4.3(@babel/core@7.29.7)(@types/node@25.9.9)(babel-plugin-macros@3.1.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.101.3))(react@19.3.1)
+      path-to-regexp:
+        specifier: ^6.3.0
+        version: 6.3.0
       radashi:
         specifier: ^12.9.1
         version: 12.9.6
@@ -519,6 +522,9 @@ importers:
       next:
         specifier: 16.4.3
         version: 16.4.3(@babel/core@7.29.7)(@types/node@25.9.9)(babel-plugin-macros@3.1.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.101.3)
+      path-to-regexp:
+        specifier: ^6.3.0
+        version: 6.3.0
       radashi:
         specifier: ^12.9.1
         version: 12.9.6
@@ -8925,6 +8931,9 @@ packages:
 
   path-to-regexp@0.1.13:
     resolution: {integrity: sha512-A/AGNMFN3c8bOlvV9RreMdrv7jsmF9XIfDeCd87+I8RNg6s78BhJxMu69NEMHBSJFxKidViTEdruRwEk/WIKqA==}
+
+  path-to-regexp@6.3.0:
+    resolution: {integrity: sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ==}
 
   path-type@4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
@@ -20488,6 +20497,8 @@ snapshots:
 
   path-to-regexp@0.1.13:
     optional: true
+
+  path-to-regexp@6.3.0: {}
 
   path-type@4.0.0: {}
 
