@@ -33,6 +33,7 @@ export { default as CarouselSlide } from './components/Carousel/swiper/CarouselS
 export { default as CarouselSwiper } from './components/Carousel/swiper/CarouselSwiper'
 export { useCarouselSlide } from './components/Carousel/swiper/useCarouselSlide'
 export { useCarouselSwiper } from './components/Carousel/swiper/useCarouselSwiper'
+export { useCarouselSwiperWithoutModules } from './components/Carousel/swiper/useCarouselSwiperWithoutModules'
 export { default as Date } from './components/Date'
 export type { TDateProps } from './components/Date/interface'
 export { Checkbox, ReactHookFormCheckBox } from './components/fields/Checkbox'

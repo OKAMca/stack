@@ -15,6 +15,16 @@
         "types": "./index.d.ts",
         "default": "./index.js"
       }
+    },
+    "./carousel": {
+      "import": {
+        "types": "./carousel.d.ts",
+        "default": "./carousel.mjs"
+      },
+      "require": {
+        "types": "./carousel.d.ts",
+        "default": "./carousel.js"
+      }
     }
   },
   "main": "./index.js",

@@ -48,9 +48,10 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: { index: 'src/index.ts', carousel: 'src/carousel.ts' },
       name: 'stack-ui',
-      fileName: 'index',
+      // Every preserved module is named `index<n>`, as before; the `carousel` entry keeps its own name.
+      fileName: (format, entryName) => `${entryName === 'carousel' ? 'carousel' : 'index'}.${format === 'es' ? 'mjs' : 'js'}`,
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],
