@@ -61,3 +61,26 @@ describe('imgixImageLoader crop aspect ratio', () => {
     expect(params.get('ar')).toBeNull()
   })
 })
+
+describe('imgixImageLoader subdomain', () => {
+  afterEach(() => {
+    delete process.env.NEXT_PUBLIC_IMGIX_SUBDOMAIN
+  })
+
+  it.each([
+    ['unset', undefined],
+    ['empty', ''],
+  ])('falls back to the Directus URL when the subdomain is %s', (_description, subdomain) => {
+    if (subdomain !== undefined)
+      process.env.NEXT_PUBLIC_IMGIX_SUBDOMAIN = subdomain
+    const result = new URL(imgixImageLoader({ src: SRC, width: 640, quality: 75 }))
+    expect(result.origin).toBe('https://cms.example.com')
+    expect(result.searchParams.get('width')).toBe('640')
+  })
+
+  it('serves through imgix when the subdomain is set', () => {
+    process.env.NEXT_PUBLIC_IMGIX_SUBDOMAIN = 'test-subdomain'
+    const result = new URL(imgixImageLoader({ src: SRC, width: 640, quality: 75 }))
+    expect(result.href).toBe('https://test-subdomain.imgix.net/abc-123.jpg?auto=format%2Ccompress&w=640&q=75')
+  })
+})

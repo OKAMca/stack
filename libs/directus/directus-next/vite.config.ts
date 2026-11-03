@@ -35,7 +35,7 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
     lib: {
-      entry: ['src/index.ts', 'src/server.ts'],
+      entry: ['src/index.ts', 'src/server.ts', 'src/image.ts'],
       name: 'directus-next',
       // Removed 'fileName' because multiple entry points are specified
       // Note: formats not needed - rollupOptions.output array takes precedence
