@@ -76,10 +76,17 @@ function getCollection(props: TGetDirectusLink) {
   }
 }
 
+/**
+ * A single leading slash means a path on the current site (`/about`), not a protocol-relative URL (`//host`)
+ */
+function isSitePath(href: Nullable<string>) {
+  return href?.startsWith('/') === true && !href.startsWith('//')
+}
+
 function getExternalLink(props: TGetDirectusLink) {
   const { external_link: externalLink, target, params } = props
 
-  const href = getCompleteHref(externalLink, params, 'absolute')
+  const href = getCompleteHref(externalLink, params, isSitePath(externalLink) ? 'relative' : 'absolute')
 
   return {
     href: href ?? undefined,
