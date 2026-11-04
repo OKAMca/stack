@@ -1,3 +1,22 @@
+## 2.5.0 (2026-11-04)
+
+### 🚀 Features
+
+- **directus-next:** bound the redirect lookup with a timeout ([3bb4b87d](https://github.com/OKAMca/stack/commit/3bb4b87d))
+- **directus-next:** browser-safe image entry ([cce9b6c0](https://github.com/OKAMca/stack/commit/cce9b6c0))
+
+### 🩹 Fixes
+
+- **directus-next:** combine redirect signals without AbortSignal.any ([111283b5](https://github.com/OKAMca/stack/commit/111283b5))
+
+### 🧱 Updated Dependencies
+
+- Updated next-component to 2.2.1
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+
 ## 2.4.0 (2026-10-28)
 
 ### 🚀 Features

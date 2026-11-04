@@ -1,3 +1,25 @@
+## 2.1.15 (2026-11-04)
+
+### 🩹 Fixes
+
+- **directus-next-component:** trim hrefs before parsing them ([2d9cb5be](https://github.com/OKAMca/stack/commit/2d9cb5be))
+- **directus-next-component:** load Vitest config types for build ([ea4d5f5a](https://github.com/OKAMca/stack/commit/ea4d5f5a))
+- **directus-next-component:** keep site-relative external links relative ([45f3174b](https://github.com/OKAMca/stack/commit/45f3174b))
+
+### 🔥 Performance
+
+- **directus-next-component:** validate link hrefs without zod ([42a48f30](https://github.com/OKAMca/stack/commit/42a48f30))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.3.0
+- Updated next-component to 2.2.1
+- Updated directus-next to 2.5.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+
 ## 2.1.14 (2026-10-28)
 
 ### 🧱 Updated Dependencies

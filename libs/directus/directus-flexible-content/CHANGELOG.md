@@ -1,3 +1,10 @@
+## 2.2.1 (2026-11-04)
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.3.0
+- Updated directus-block to 2.2.1
+
 ## 2.2.0 (2026-10-20)
 
 ### 🩹 Fixes

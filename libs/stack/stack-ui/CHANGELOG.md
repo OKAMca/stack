@@ -1,3 +1,21 @@
+## 2.3.0 (2026-11-04)
+
+### 🚀 Features
+
+- **stack-ui:** add server-sanitized Wysiwyg entries ([24781378](https://github.com/OKAMca/stack/commit/24781378))
+- **stack-ui:** carousel entry without Swiper modules ([4ba50199](https://github.com/OKAMca/stack/commit/4ba50199))
+
+### 🩹 Fixes
+
+- **stack-ui:** expose the share menu as a named group of links ([e7edb6d5](https://github.com/OKAMca/stack/commit/e7edb6d5))
+- **stack-ui:** export the carousel provider from the carousel entry ([78617c2d](https://github.com/OKAMca/stack/commit/78617c2d))
+- **stack-ui:** tighten the WysiwygBlock attribute allowlist ([#578](https://github.com/OKAMca/stack/pull/578))
+
+### ❤️ Thank You
+
+- Gabriel Auclair
+- Marie-Maxime Tanguay @marie-maxime
+
 ## 2.2.0 (2026-10-20)
 
 ### 🚀 Features
