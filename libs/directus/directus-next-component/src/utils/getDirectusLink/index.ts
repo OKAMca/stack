@@ -11,7 +11,9 @@ const RELATIVE_HREF = /^[/#?]/
 /**
  * Parses an href that is either an absolute http(s), mailto or tel URL, or relative (starting with `/`, `#` or `?`).
  */
-function parseHref(href: string): URL {
+function parseHref(rawHref: string): URL {
+  // Like zod's z.url(), which trimmed first: CMS values pasted from documents can carry NBSPs.
+  const href = rawHref.trim()
   if (RELATIVE_HREF.test(href))
     return new URL(href, 'http://localhost')
   const url = URL.canParse(href) ? new URL(href) : null
@@ -79,7 +81,8 @@ function getCollection(props: TGetDirectusLink) {
 /**
  * A single leading slash means a path on the current site (`/about`), not a protocol-relative URL (`//host`)
  */
-function isSitePath(href: Nullable<string>) {
+function isSitePath(rawHref: Nullable<string>) {
+  const href = rawHref?.trim()
   return href?.startsWith('/') === true && !href.startsWith('//')
 }
 

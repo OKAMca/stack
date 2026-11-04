@@ -39,6 +39,16 @@ describe('getDirectusLink href', () => {
     expect(() => externalHref(href)).toThrow('Invalid href')
   })
 
+  it.each([
+    ['\u00A0https://example.com', 'https://example.com/'],
+    ['https://example.com\u00A0', 'https://example.com/'],
+    ['\uFEFFhttps://example.com', 'https://example.com/'],
+    ['https://example.com/\u2028', 'https://example.com/'],
+    ['\u00A0/fr/page\u00A0', '/fr/page'],
+  ])('trims Unicode whitespace around %j', (href, expected) => {
+    expect(externalHref(href)).toBe(expected)
+  })
+
   it('returns no link for an empty href', () => {
     expect(externalHref('')).toBeUndefined()
   })
