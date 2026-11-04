@@ -61,7 +61,6 @@ export default defineConfig({
     },
     ssr: true,
   },
-
   test: {
     globals: true,
     environment: 'node',

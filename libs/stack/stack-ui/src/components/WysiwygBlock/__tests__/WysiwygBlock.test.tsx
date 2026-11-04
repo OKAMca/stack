@@ -20,8 +20,48 @@ describe('sanitizeWysiwygContent', () => {
   })
 
   it('allows aria and boolean attributes on every tag', () => {
-    const html = sanitizeWysiwygContent('<a href="#" aria-label="label" disabled>Link</a>')
-    expect(html).toBe('<a href="#" aria-label="label" disabled>Link</a>')
+    const html = sanitizeWysiwygContent('<a href="#" aria-label="label" aria-description="d" disabled>Link</a>')
+    expect(html).toBe('<a href="#" aria-label="label" aria-description="d" disabled>Link</a>')
+  })
+
+  it('strips event handler attributes from img, a and p', () => {
+    const html = sanitizeWysiwygContent(
+      '<img src="/a.png" onerror="alert(1)" /><a href="#" onclick="alert(1)" onMouseOver="alert(1)">Link</a><p onfocus="alert(1)">Text</p>',
+    )
+    expect(html).toBe('<img src="/a.png" /><a href="#">Link</a><p>Text</p>')
+  })
+
+  it('strips srcdoc from iframes', () => {
+    const html = sanitizeWysiwygContent(
+      '<iframe src="https://example.com" srcdoc="&lt;script&gt;alert(1)&lt;/script&gt;"></iframe>',
+    )
+    expect(html).toBe('<iframe src="https://example.com"></iframe>')
+  })
+
+  it.each([
+    ['tag lists', { allowedTags: ['img', 'iframe'], allowedAttributes: { img: ['src', 'onerror'], iframe: ['src', 'srcdoc'] } }],
+    ['a * glob', { allowedTags: ['img', 'iframe'], allowedAttributes: { '*': ['*'] } }],
+    [
+      'the defaults off',
+      {
+        useSanitizerDefaultAllowedTags: false,
+        useSanitizerDefaultAllowedAttributes: false,
+        allowedTags: ['img', 'iframe'],
+        allowedAttributes: { img: ['src', 'onerror', 'onClick'], iframe: ['src', 'srcdoc'] },
+      },
+    ],
+  ])('strips executable attributes when the caller allows them with %s', (_description, options) => {
+    const html = sanitizeWysiwygContent(
+      '<img src="/a.png" onerror="alert(1)" onClick="alert(1)" /><iframe src="https://example.com" srcdoc="&lt;script&gt;alert(1)&lt;/script&gt;"></iframe>',
+      options,
+    )
+    expect(html).not.toMatch(/\son[a-z]+=|srcdoc/i)
+    expect(html).toContain('src="/a.png"')
+  })
+
+  it('keeps the other global attributes', () => {
+    const html = sanitizeWysiwygContent('<p class="lead" id="intro" lang="fr" title="t" style="color:red">Texte</p>')
+    expect(html).toBe('<p class="lead" id="intro" lang="fr" title="t" style="color:red">Texte</p>')
   })
 
   it('extends the defaults with custom tags and attributes', () => {
