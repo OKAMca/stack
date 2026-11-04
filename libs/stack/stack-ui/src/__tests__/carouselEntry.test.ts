@@ -65,4 +65,10 @@ describe('@okam/stack-ui/carousel', () => {
     const imports = collectImports(path.join(__dirname, '../carousel.ts'))
     expect([...imports].filter(name => name.startsWith('swiper'))).toEqual([])
   })
+
+  it('exports the provider the hook needs', async () => {
+    const entry = await import('../carousel')
+    expect(typeof entry.CarouselContextProvider).toBe('function')
+    expect(typeof entry.useCarousel).toBe('function')
+  })
 })

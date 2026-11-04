@@ -15,9 +15,12 @@ import { useSwipePointerCapture } from './useSwipePointerCapture'
 /**
  * `useCarouselSwiper` without Swiper modules: the returned `swiperProps` have no `modules`. Nothing here imports
  * `swiper/modules`, so a consumer can render the carousel markup with it and load Swiper and the modules it needs
- * later, e.g. near the viewport (see the `@okam/stack-ui/carousel` entry). It still reads the module names from the
- * carousel context for one setting: with `'Pagination'` among them it sets `pagination: { el: null }`, so the
- * consumer must load Swiper's Pagination module when it lists it.
+ * later, e.g. near the viewport (see the `@okam/stack-ui/carousel` entry).
+ *
+ * The consumer passes the modules to Swiper and must include `A11y` and `Controller`, which `useCarouselSwiper` always
+ * adds: without `A11y`, Swiper ignores the returned `a11y` settings (no live region, no slide labels).
+ * It still reads the module names from the carousel context for one setting: with `'Pagination'` among them it sets
+ * `pagination: { el: null }`, so the consumer must load Swiper's Pagination module when it lists it.
  */
 export function useCarouselSwiperWithoutModules(props: TCarouselSwiperProps): TCarouselSwiper {
   const { children, ...rest } = props
