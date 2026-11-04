@@ -2,23 +2,23 @@ import type { Nullable, TAnchorProps } from '@okam/stack-ui'
 import type { TDirectusLinkPropsConfig, TGetDirectusLink } from '../../components/DirectusLink/interface'
 import type { TSearchParams } from '../../types/links'
 import Link from 'next/link'
-import { z } from 'zod'
 import { getDirectusFile } from '../getDirectusFile'
 import { getDirectusSearchParams } from '../getDirectusSearchParams'
 
-const absoluteUrlSchema = z.url({ protocol: /^(https?|mailto|tel)$/ })
-const relativeUrlSchema = z.string().regex(/^[/#?]/, {
-  error: error => `Invalid href ${error.input}. Must be a valid absolute URL or start with /, # or ?`,
-})
+const ABSOLUTE_PROTOCOLS = new Set(['http:', 'https:', 'mailto:', 'tel:'])
+const RELATIVE_HREF = /^[/#?]/
 
-const hrefSchema = z.union([absoluteUrlSchema, relativeUrlSchema]).transform((value) => {
-  try {
-    return new URL(value)
-  }
-  catch {
-    return new URL(value, 'http://localhost')
-  }
-})
+/**
+ * Parses an href that is either an absolute http(s), mailto or tel URL, or relative (starting with `/`, `#` or `?`).
+ */
+function parseHref(href: string): URL {
+  if (RELATIVE_HREF.test(href))
+    return new URL(href, 'http://localhost')
+  const url = URL.canParse(href) ? new URL(href) : null
+  if (url == null || !ABSOLUTE_PROTOCOLS.has(url.protocol))
+    throw new TypeError(`Invalid href ${href}. Must be a valid absolute URL or start with /, # or ?`)
+  return url
+}
 
 function withSearchParams(url: URL, searchParams: URLSearchParams) {
   searchParams.forEach((value, name) => {
@@ -37,7 +37,7 @@ function getCompleteHref(
 
   const searchParams = getDirectusSearchParams(params)
 
-  const url = hrefSchema.parse(href)
+  const url = parseHref(href)
 
   const completeUrl = withSearchParams(url, searchParams)
 

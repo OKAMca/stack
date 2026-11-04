@@ -46,8 +46,7 @@
     "@okam/stack-ui": "2.2.0",
     "@react-spring/web": "^10.1.2",
     "radashi": "^12.9.1",
-    "unlazy": "^1.1.0",
-    "zod": "^4.4.3"
+    "unlazy": "^1.1.0"
   },
   "devDependencies": {
     "react": "^19.2.8"
