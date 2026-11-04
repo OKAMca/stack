@@ -1,9 +1,7 @@
-// No 'use client': this module renders as a Server Component so sanitize-html
-// (and its postcss dependency) stays on the server. Only <Typography>, a client
-// component, receives the already-sanitized HTML string.
+// Compatibility entry: sanitizes raw strings in the environment of its caller.
 import type { TToken } from '../../providers/Theme/interface'
 import type TWysiwygBlockProps from './interface'
-import { Typography } from '../Typography'
+import { WysiwygBlock as SanitizedWysiwygBlock } from '../../wysiwyg'
 import { sanitizeWysiwygContent } from './sanitize'
 
 function WysiwygBlock<Tags extends string = string, T extends TToken = TToken>({
@@ -22,15 +20,7 @@ function WysiwygBlock<Tags extends string = string, T extends TToken = TToken>({
     allowedAttributes,
   })
 
-  return (
-    <Typography
-      {...rest}
-      themeName={themeName}
-      dangerouslySetInnerHTML={{
-        __html: sanitizedContent,
-      }}
-    />
-  )
+  return <SanitizedWysiwygBlock {...rest} themeName={themeName} content={sanitizedContent} />
 }
 
 export default WysiwygBlock
