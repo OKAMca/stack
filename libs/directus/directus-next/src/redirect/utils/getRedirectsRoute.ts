@@ -17,6 +17,22 @@ const responseSchema = z.object({
   rewrites: z.array(redirectSchema),
 })
 
+/** Combines abort signals; falls back to manual wiring where `AbortSignal.any` is missing (Next edge runtime). */
+export function anySignal(signals: AbortSignal[]): AbortSignal {
+  if (typeof AbortSignal.any === 'function')
+    return AbortSignal.any(signals)
+  const controller = new AbortController()
+  const onAbort = (source: AbortSignal) => () => controller.abort(source.reason)
+  for (const source of signals) {
+    if (source.aborted) {
+      controller.abort(source.reason)
+      break
+    }
+    source.addEventListener('abort', onAbort(source), { once: true, signal: controller.signal })
+  }
+  return controller.signal
+}
+
 /** Gets redirect data without retaining a failed lookup; the optional deadline covers its body too. */
 export async function getRedirectsRoute({
   apiRoute = defaultApiRoute,
@@ -26,7 +42,7 @@ export async function getRedirectsRoute({
   signal: callerSignal,
 }: TDirectusRouteRedirectsModule = {}): Promise<TFetchRedirectsResponse> {
   const deadline = new AbortController()
-  const signal = callerSignal !== undefined ? AbortSignal.any([deadline.signal, callerSignal]) : deadline.signal
+  const signal = callerSignal !== undefined ? anySignal([deadline.signal, callerSignal]) : deadline.signal
   let timer: ReturnType<typeof setTimeout> | undefined
   let reader: ReadableStreamDefaultReader<Uint8Array> | undefined
   let onAbort = () => {}
