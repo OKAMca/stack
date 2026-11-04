@@ -30,7 +30,10 @@ export async function handleRedirect(request: NextRequest, options: TDirectusRou
   const { pathname } = request.nextUrl
   const normalizedPathname = normalizePath(pathname)
 
-  const { redirects, rewrites } = await getRedirectsRoute(options)
+  const { redirects, rewrites } = await getRedirectsRoute({
+    ...options,
+    signal: options.signal !== undefined ? AbortSignal.any([request.signal, options.signal]) : request.signal,
+  })
   const redirectMatch = matchRedirect(redirects, normalizedPathname)
   const rewriteMatch = matchRedirect(rewrites, normalizedPathname)
   const type = !isNullish(redirectMatch) ? 'redirect' : 'rewrite'

@@ -13,6 +13,13 @@ export interface TDirectusRouteRedirectsModule {
    * @default /api/redirects
    */
   apiRoute?: string
+  /**
+   * Deadline in positive integer milliseconds for one lookup, including the response body.
+   * Omitted by default, preserving the existing lookup without a deadline.
+   */
+  timeoutMs?: number
+  /** Cancels the lookup in addition to the incoming request signal used by handleRedirect. */
+  signal?: AbortSignal
 }
 
 /**
