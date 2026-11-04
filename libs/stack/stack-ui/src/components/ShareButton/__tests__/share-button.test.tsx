@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { ShareButton } from '..'
 import ThemeProvider from '../../../theme'
@@ -86,7 +86,7 @@ describe('shareButton', () => {
   it('reports which link was pressed', async () => {
     const onShare = vi.fn()
     const onClick = vi.fn()
-    renderShareButton({ onShare, sharingLinksList: [{ ...sharingLinksList[0], onClick }] })
+    renderShareButton({ onShare, sharingLinksList: [{ ariaLabel: 'Share on X', key: 'x', href: 'https://x.test/intent', onClick }] })
     fireEvent.click(getTrigger())
 
     fireEvent.click(await screen.findByRole('link', { name: 'Share on X' }))
@@ -114,11 +114,11 @@ describe('shareButton', () => {
     fireEvent.keyDown(screen.getByRole('link', { name: 'Share on LinkedIn' }), { key: 'ArrowUp' })
     expectFocused(screen.getByRole('link', { name: 'Share on X' }))
 
-    getTrigger().focus()
+    act(() => getTrigger().focus())
     fireEvent.keyDown(getTrigger(), { key: 'ArrowUp' })
     expectFocused(screen.getByRole('link', { name: 'Share on Facebook' }))
 
-    getTrigger().focus()
+    act(() => getTrigger().focus())
     fireEvent.keyDown(getTrigger(), { key: 'ArrowDown' })
     expectFocused(screen.getByRole('link', { name: 'Share on X' }))
   })
