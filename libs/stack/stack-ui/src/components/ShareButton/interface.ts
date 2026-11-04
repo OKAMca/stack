@@ -14,7 +14,7 @@ interface TShareButtonTokens extends TToken {
   listDirection: 'row' | 'column'
 }
 
-export interface TIconsContainerProps<T = TToken> extends Omit<TShareButtonProps<T>, 'ariaLabel' | 'icon'> {
+export interface TIconsContainerProps<T = TToken> extends Omit<TShareButtonProps<T>, 'icon'> {
   isOpen: boolean
   setIsOpen: (_isOpen: boolean) => void
 }

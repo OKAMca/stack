@@ -11,7 +11,7 @@ import { Button, ButtonWithForwardRef } from '../Button'
 import Icon from '../Icon'
 
 export function IconsContainer<T extends TToken>(props: TIconsContainerProps<T>) {
-  const { sharingLinksList, id, isOpen, setIsOpen, onShare, themeName = 'shareButton', tokens, customTheme } = props
+  const { sharingLinksList, id, ariaLabel, isOpen, setIsOpen, onShare, themeName = 'shareButton', tokens, customTheme } = props
 
   const linksListTheme = useThemeContext(`${themeName}.linksList`, { ...tokens, isOpen }, customTheme)
 
@@ -46,9 +46,9 @@ export function IconsContainer<T extends TToken>(props: TIconsContainerProps<T>)
   }
 
   return (
-    <div className={linksListTheme} id={id} role="listbox" tabIndex={-1} onKeyDown={handleKeyDown}>
+    <div className={linksListTheme} id={id} role="group" aria-label={ariaLabel} tabIndex={-1} onKeyDown={handleKeyDown}>
       {sharingLinksList?.map((link) => {
-        const { ariaLabel, onClick, href, icon, key } = link
+        const { ariaLabel: linkLabel, onClick, href, icon, key } = link
 
         return (
           <Button
@@ -59,9 +59,8 @@ export function IconsContainer<T extends TToken>(props: TIconsContainerProps<T>)
               onShare?.(key)
               onClick?.(key)
             }}
-            aria-label={ariaLabel}
+            aria-label={linkLabel}
             {...((href != null && href !== '') ? { href, rel: 'noopener noreferrer', target: '_blank', as: 'a' } : {})}
-            role="option"
           >
             <Icon themeName={`${themeName}.linkIcons`} icon={icon} />
           </Button>
@@ -146,7 +145,6 @@ export function ShareButton(props: TShareButtonProps) {
           themeName={`${themeName}.button`}
           tokens={{ ...tokens, isOpen }}
           aria-label={ariaLabel}
-          aria-haspopup="listbox"
           aria-expanded={isOpen}
           {...(isOpen && { 'aria-controls': id })}
           handlePress={handleClick}
@@ -157,6 +155,7 @@ export function ShareButton(props: TShareButtonProps) {
         {isOpen && (
           <IconsContainer
             id={id}
+            ariaLabel={ariaLabel}
             sharingLinksList={sharingLinksList}
             onShare={onShare}
             isOpen={isOpen}
