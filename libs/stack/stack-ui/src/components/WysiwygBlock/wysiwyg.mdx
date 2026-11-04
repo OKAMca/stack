@@ -20,3 +20,32 @@ client module still works, but then the sanitizer ships to the client.
 ## All Stories
 
 <Stories />
+
+## Sanitizing before caching and serialization
+
+For server applications, sanitize HTML where data enters the application. Store and
+serialize the returned `SanitizedHtml` string. Import the rendering component from
+`@okam/stack-ui/wysiwyg` in server or client components:
+
+```tsx
+// Server data loader
+import { sanitizeWysiwygContent } from '@okam/stack-ui/wysiwyg/server'
+const content = sanitizeWysiwygContent(cms.content)
+
+// Server or client view
+import { WysiwygBlock } from '@okam/stack-ui/wysiwyg'
+<WysiwygBlock content={content} />
+```
+
+The server entry requires a server environment supporting `server-only`. Its defaults
+omit inline styles and embedded frames. Supply `allowedStyles` and
+`allowedIframeHostnames` for the content your application accepts. Tag and attribute
+options belong at the data boundary. Keep application field mappings and cache
+invalidation alongside that policy. The brand records sanitization in TypeScript;
+validate external data before assigning it the generated result type.
+
+The root `@okam/stack-ui` export remains compatible with raw strings and existing
+options, including client-only applications. It sanitizes at render time. When
+imported by a client component, it includes the sanitizer in the browser bundle.
+The `wysiwyg` entry renders only and has no sanitizer dependency. Both entries use
+the same Typography rendering implementation.

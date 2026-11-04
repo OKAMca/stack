@@ -1,52 +1,34 @@
-export const ariaAttributes = [
-  'aria-activedescendant',
-  'aria-atomic',
-  'aria-autocomplete',
-  'aria-busy',
-  'aria-checked',
-  'aria-colcount',
-  'aria-colindex',
-  'aria-colspan',
-  'aria-controls',
-  'aria-current',
-  'aria-describedby',
-  'aria-details',
-  'aria-disabled',
-  'aria-dropeffect',
-  'aria-errormessage',
-  'aria-expanded',
-  'aria-flowto',
-  'aria-grabbed',
-  'aria-haspopup',
-  'aria-hidden',
-  'aria-invalid',
-  'aria-keyshortcuts',
-  'aria-label',
-  'aria-labelledby',
-  'aria-level',
-  'aria-live',
-  'aria-modal',
-  'aria-multiline',
-  'aria-multiselectable',
-  'aria-orientation',
-  'aria-owns',
-  'aria-placeholder',
-  'aria-posinset',
-  'aria-pressed',
-  'aria-readonly',
-  'aria-relevant',
-  'aria-required',
-  'aria-roledescription',
-  'aria-rowcount',
-  'aria-rowindex',
-  'aria-rowspan',
-  'aria-selected',
-  'aria-setsize',
-  'aria-sort',
-  'aria-valuemax',
-  'aria-valuemin',
-  'aria-valuenow',
-  'aria-valuetext',
-]
+import type sanitizeHtml from 'sanitize-html'
 
 export const booleanAttributes = ['disabled', 'checked', 'selected', 'required']
+
+export const defaultAllowedTags = ['iframe', 'img']
+export const defaultAllowedAttributes = {
+  iframe: [
+    'src',
+    'allow',
+    'allowfullscreen',
+    'frameborder',
+    'scrolling',
+    'target',
+    'title',
+    'height',
+    'width',
+    'referrerpolicy',
+  ],
+  img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
+}
+
+// `nonBooleanAttributes` lists every non-boolean HTML attribute, not the safe ones: it includes the
+// `on*` event handlers, and `srcdoc`, whose HTML runs in the embedding page's origin. Neither may
+// reach the page from CMS content. `removeExecutableAttributes` below guarantees it; the predicate
+// also keeps these attributes out of the allowlist.
+const executableAttribute = /^(?:on.*|srcdoc)$/i
+export const isExecutableAttribute = (name: string): boolean => executableAttribute.test(name)
+
+// Runs on every tag before the allowlist, so no `allowedAttributes` a caller passes, glob or not,
+// can let an executable attribute back in.
+export const removeExecutableAttributes: sanitizeHtml.Transformer = (tagName, attribs) => ({
+  tagName,
+  attribs: Object.fromEntries(Object.entries(attribs).filter(([name]) => !isExecutableAttribute(name))),
+})

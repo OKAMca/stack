@@ -1,6 +1,5 @@
 import type { ImageLoaderProps } from 'next/image'
 import { isEmpty } from 'radashi'
-import { z } from 'zod'
 import directusImageLoader from '../directusImageLoader'
 
 /**
@@ -128,8 +127,8 @@ export default function imgixImageLoader({ src, width, quality }: ImageLoaderPro
     return src
   }
 
-  const { success: hasValidImgixSubdomain, data: subdomain } = z.string().min(1).safeParse(process.env.NEXT_PUBLIC_IMGIX_SUBDOMAIN)
-  if (!hasValidImgixSubdomain) {
+  const subdomain = process.env.NEXT_PUBLIC_IMGIX_SUBDOMAIN
+  if (isEmpty(subdomain)) {
     return directusImageLoader({ src, width, quality })
   }
 

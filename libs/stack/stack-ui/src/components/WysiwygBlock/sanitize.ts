@@ -1,23 +1,13 @@
+import type { SanitizedHtml } from '../../wysiwyg/types'
 import type TWysiwygBlockProps from './interface'
 import sanitizeHtml from 'sanitize-html'
-import { ariaAttributes, booleanAttributes } from './attributes'
+import { booleanAttributes, defaultAllowedAttributes, defaultAllowedTags, isExecutableAttribute, removeExecutableAttributes } from './attributes'
 
-const defaultAllowedTags = ['iframe', 'img']
-const defaultAllowedAttributes = {
-  iframe: [
-    'src',
-    'allow',
-    'allowfullscreen',
-    'frameborder',
-    'scrolling',
-    'target',
-    'title',
-    'height',
-    'width',
-    'referrerpolicy',
-  ],
-  img: ['src', 'srcset', 'alt', 'title', 'width', 'height', 'loading'],
-}
+const globalAllowedAttributes = [
+  ...sanitizeHtml.defaults.nonBooleanAttributes.filter(name => !isExecutableAttribute(name)),
+  'aria-*',
+  ...booleanAttributes,
+]
 
 export type TWysiwygSanitizeOptions<Tags extends string = string> = Pick<
   TWysiwygBlockProps<Tags>,
@@ -32,16 +22,17 @@ export function sanitizeWysiwygContent<Tags extends string = string>(
     allowedTags = defaultAllowedTags as Tags[],
     allowedAttributes = defaultAllowedAttributes,
   }: TWysiwygSanitizeOptions<Tags> = {},
-): string {
+): SanitizedHtml {
   return sanitizeHtml(content, {
     allowedTags: useSanitizerDefaultAllowedTags ? sanitizeHtml.defaults.allowedTags.concat(allowedTags) : allowedTags,
     nonBooleanAttributes: [],
+    transformTags: { '*': removeExecutableAttributes },
     allowedAttributes: useSanitizerDefaultAllowedAttributes
       ? {
           ...sanitizeHtml.defaults.allowedAttributes,
-          '*': [...sanitizeHtml.defaults.nonBooleanAttributes, ...ariaAttributes, ...booleanAttributes],
+          '*': globalAllowedAttributes,
           ...allowedAttributes,
         }
       : (allowedAttributes as Record<string, string[]>),
-  })
+  }) as SanitizedHtml
 }

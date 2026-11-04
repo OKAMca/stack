@@ -22,6 +22,11 @@ export default defineConfig({
   ],
 
   test: {
+    typecheck: {
+      enabled: true,
+      tsconfig: './tsconfig.spec.json',
+      include: ['src/wysiwyg/__tests__/renderer.test.tsx'],
+    },
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
@@ -48,10 +53,18 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: { index: 'src/index.ts', carousel: 'src/carousel.ts' },
+      entry: {
+        index: 'src/index.ts',
+        carousel: 'src/carousel.ts',
+        'wysiwyg/index': 'src/wysiwyg/index.tsx',
+        'wysiwyg/server': 'src/wysiwyg/server.ts',
+      },
       name: 'stack-ui',
-      // Every preserved module is named `index<n>`, as before; the `carousel` entry keeps its own name.
-      fileName: (format, entryName) => `${entryName === 'carousel' ? 'carousel' : 'index'}.${format === 'es' ? 'mjs' : 'js'}`,
+      // Every preserved module is named `index<n>`, as before; the named entries keep their own names.
+      fileName: (format, entryName) => {
+        const name = entryName === 'carousel' || entryName.startsWith('wysiwyg/') ? entryName : 'index'
+        return `${name}.${format === 'es' ? 'mjs' : 'js'}`
+      },
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],

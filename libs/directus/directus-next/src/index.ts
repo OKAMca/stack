@@ -1,7 +1,6 @@
 export * from './draft'
 export type { TFiles } from './files/interface'
-export { default as directusImageLoader } from './loaders/directusImageLoader'
-export { default as imgixImageLoader } from './loaders/imgixImageLoader'
+export * from './image'
 export { logger as DirectusNextLogger } from './logger'
 export * from './redirect'
 export { getJsonErrorResponse } from './response'
