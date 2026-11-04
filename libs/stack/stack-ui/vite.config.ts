@@ -22,6 +22,11 @@ export default defineConfig({
   ],
 
   test: {
+    typecheck: {
+      enabled: true,
+      tsconfig: './tsconfig.spec.json',
+      include: ['src/wysiwyg/__tests__/renderer.test.tsx'],
+    },
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
@@ -48,9 +53,9 @@ export default defineConfig({
     emptyOutDir: false,
     lib: {
       // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
+      entry: { index: 'src/index.ts', 'wysiwyg/index': 'src/wysiwyg/index.tsx', 'wysiwyg/server': 'src/wysiwyg/server.ts' },
       name: 'stack-ui',
-      fileName: 'index',
+      fileName: (format, entryName) => `${entryName.startsWith('wysiwyg/') ? entryName : 'index'}.${format === 'es' ? 'mjs' : 'js'}`,
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
       formats: ['es', 'cjs'],

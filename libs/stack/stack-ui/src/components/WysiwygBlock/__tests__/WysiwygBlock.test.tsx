@@ -90,8 +90,7 @@ describe('wysiwygBlock', () => {
     expect(markup).not.toContain('<script')
   })
 
-  // The sanitizer (sanitize-html + postcss) must stay on the server. A 'use client'
-  // directive here would ship it to the browser for every page with rich text.
+  // The sanitizer must stay on the server for server-owned callers; client imports ship it to the browser.
   it('is not a client module', () => {
     const source = readFileSync(join(__dirname, '..', 'index.tsx'), 'utf8')
     const sanitizer = readFileSync(join(__dirname, '..', 'sanitize.ts'), 'utf8')
