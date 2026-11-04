@@ -70,3 +70,11 @@ describe('link prefetch', () => {
     expect(lastPrefetch()).toBe(prefetch)
   })
 })
+
+describe('link attributes', () => {
+  it('does not forward i18n to the anchor', () => {
+    render(<Link as={SpyNextLink} href="/services" locale="fr" i18n={{ locales: ['en', 'fr'] }}>Services</Link>)
+    expect(screen.getByRole('link').hasAttribute('i18n')).toBe(false)
+    expect(screen.getByRole('link').getAttribute('href')).toBe('/fr/services/')
+  })
+})

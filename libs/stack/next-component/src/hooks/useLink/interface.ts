@@ -61,9 +61,13 @@ export type TLinkI18nConfig
      * {@link LocalePrefix}
      */
     localePrefix?: `${typeof LocalePrefix.Always}` | undefined
-  })
+  }) & {
+    /** Locales recognized as explicit href prefixes, matched by exact segment and case. */
+    locales?: readonly string[]
+  }
 
 export interface TLink extends Omit<NextLinkProps, 'scroll' | 'as' | 'href' | 'prefetch'> {
+  /** Locale-relative href. An explicit prefix from i18n.locales takes priority. */
   href: string | UrlObject
   /**
    * Every next/link `prefetch` value is passed through unchanged, plus `'intent'`.

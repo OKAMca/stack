@@ -66,6 +66,7 @@ export function localizeHref(
   href: LinkProps['href'],
   locale: LinkProps['locale'],
   trailingSlash: boolean = true,
+  locales: readonly string[] = [],
 ): string {
   const hrefString = href.toString()
 
@@ -79,7 +80,15 @@ export function localizeHref(
   if (isExternalHref(hrefString))
     return hrefString
 
-  const withLocale = (locale != null && locale !== false)
+  // The selected locale always counts, even when the configured list omits it.
+  const knownLocales = typeof locale === 'string' ? [...locales, locale] : locales
+  const hasLocalePrefix = knownLocales.some(configuredLocale =>
+    hrefString === `/${configuredLocale}`
+    || hrefString.startsWith(`/${configuredLocale}/`)
+    || hrefString.startsWith(`/${configuredLocale}?`)
+    || hrefString.startsWith(`/${configuredLocale}#`),
+  )
+  const withLocale = (locale != null && locale !== false && !hasLocalePrefix)
     ? `/${locale}${hrefString}`
     : hrefString
 
@@ -108,7 +117,7 @@ function useIntentPrefetch(prefetch: TLink['prefetch'], href: string) {
 }
 
 /**
- * @params {props.locale} - The direct locale prop always gets priority. If no `locale` prop is provided, the prop will try to fall back to react-aria `useLocale` and then next/navigation `useParams`. If a locale is found, it will be automatically prepended to the href. Otherwise, href will be returned as is.
+ * @params {props.locale} - The direct locale prop always gets priority. If no `locale` prop is provided, the prop will try to fall back to react-aria `useLocale` and then next/navigation `useParams`. If a locale is found, it will be prepended unless the href already starts with a configured locale. Otherwise, href will be returned as is.
  */
 export function useLink(props: TLink): TUseLinkReturn {
   const {
@@ -131,7 +140,7 @@ export function useLink(props: TLink): TUseLinkReturn {
   } = props
 
   const locale = useLinkLocale(props)
-  const localizedHref = localizeHref(href, locale, trailingSlash)
+  const localizedHref = localizeHref(href, locale, trailingSlash, props.i18n?.locales)
   const { prefetch: nextPrefetch, markIntent } = useIntentPrefetch(prefetch, localizedHref)
 
   const isNextScroll = typeof scroll === 'boolean'
