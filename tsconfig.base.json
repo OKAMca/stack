@@ -38,6 +38,7 @@
       "@okam/stack-ui/wysiwyg": ["./libs/stack/stack-ui/src/wysiwyg/index.tsx"],
       "@okam/stack-ui/wysiwyg/server": ["./libs/stack/stack-ui/src/wysiwyg/server.ts"],
       "@okam/stack-ui": ["./libs/stack/stack-ui/src/index.ts"],
+      "@okam/stack-ui/carousel": ["./libs/stack/stack-ui/src/carousel.ts"],
       "@okam/stack-ui/static/*": ["./libs/stack/stack-ui/static/*"],
       "@okam/ai": ["./libs/ai/src/index.ts"],
       "@okam/react-utils": ["./libs/stack/react-utils/src/index.ts"]
