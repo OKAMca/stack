@@ -1,6 +1,6 @@
 import type TWysiwygBlockProps from './interface'
 import sanitizeHtml from 'sanitize-html'
-import { ariaAttributes, booleanAttributes } from './attributes'
+import { booleanAttributes } from './attributes'
 
 const defaultAllowedTags = ['iframe', 'img']
 const defaultAllowedAttributes = {
@@ -27,7 +27,7 @@ const eventHandlerAttribute = /^on/i
 const isExecutableAttribute = (name: string) => eventHandlerAttribute.test(name) || name === 'srcdoc'
 const globalAllowedAttributes = [
   ...sanitizeHtml.defaults.nonBooleanAttributes.filter(name => !isExecutableAttribute(name)),
-  ...ariaAttributes,
+  'aria-*',
   ...booleanAttributes,
 ]
 

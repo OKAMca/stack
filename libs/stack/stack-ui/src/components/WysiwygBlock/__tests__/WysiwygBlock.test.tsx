@@ -20,8 +20,8 @@ describe('sanitizeWysiwygContent', () => {
   })
 
   it('allows aria and boolean attributes on every tag', () => {
-    const html = sanitizeWysiwygContent('<a href="#" aria-label="label" disabled>Link</a>')
-    expect(html).toBe('<a href="#" aria-label="label" disabled>Link</a>')
+    const html = sanitizeWysiwygContent('<a href="#" aria-label="label" aria-description="d" disabled>Link</a>')
+    expect(html).toBe('<a href="#" aria-label="label" aria-description="d" disabled>Link</a>')
   })
 
   it('strips event handler attributes from img, a and p', () => {
