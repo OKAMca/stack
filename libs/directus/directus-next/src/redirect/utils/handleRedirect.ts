@@ -4,7 +4,7 @@ import { normalizePath } from '@okam/core-lib'
 import { NextResponse } from 'next/server'
 import { capitalize, isEmpty, isNullish } from 'radashi'
 import { log } from '../../logger'
-import { getRedirectsRoute } from './getRedirectsRoute'
+import { anySignal, getRedirectsRoute } from './getRedirectsRoute'
 import { matchRedirect } from './matchRedirect'
 
 function splitDestination(destination: string) {
@@ -30,7 +30,10 @@ export async function handleRedirect(request: NextRequest, options: TDirectusRou
   const { pathname } = request.nextUrl
   const normalizedPathname = normalizePath(pathname)
 
-  const { redirects, rewrites } = await getRedirectsRoute(options)
+  const { redirects, rewrites } = await getRedirectsRoute({
+    ...options,
+    signal: options.signal !== undefined ? anySignal([request.signal, options.signal]) : request.signal,
+  })
   const redirectMatch = matchRedirect(redirects, normalizedPathname)
   const rewriteMatch = matchRedirect(rewrites, normalizedPathname)
   const type = !isNullish(redirectMatch) ? 'redirect' : 'rewrite'

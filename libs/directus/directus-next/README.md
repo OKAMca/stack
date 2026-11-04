@@ -61,3 +61,19 @@ A source is either an exact path or a pattern using the same syntax as Next.js [
 * A redirect wins over a rewrite.
 * Params are filled in the destination path and query values (`/search?q=:slug`). A destination without params, external or not, is used as is.
 * An invalid source, or a destination using a param the source does not capture, is skipped and the next matching rule is used.
+
+### Lookup timeout and cancellation
+
+`handleRedirect(request, options)` and `getRedirectsRoute(options)` accept an optional `timeoutMs` and `signal`. `timeoutMs` is a positive integer in milliseconds, up to 2147483647, covering the app route fetch and its response body. The default remains no timeout. An invalid timeout fails open without fetching. `handleRedirect` also forwards the incoming request's signal and combines it with an explicitly supplied signal.
+
+```ts
+const response = await handleRedirect(request, { timeoutMs: 3000 })
+```
+
+With `directusRouteRouter`, set it under `modules.redirects`:
+
+```ts
+directusRouteRouter(request, { modules: { redirects: { timeoutMs: 3000 } } })
+```
+
+Timeout, cancellation, non-OK responses and invalid response data produce no redirect or rewrite for that lookup, so middleware can continue normal page routing. The fetch keeps its default cache policy, and a failed lookup is not retried; the next request fetches again. Timeout and cancellation abort the fetch and cancel an active body reader. There are no automatic retries. Source matching and destination substitution are unchanged.
