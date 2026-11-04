@@ -58,6 +58,11 @@ describe('localizeHref', () => {
       expect(localizeHref('/fr/services', 'fr')).toBe('/fr/services/')
     })
 
+    it('still recognizes the selected locale when it is missing from the list', () => {
+      expect(localizeHref('/fr/services', 'fr', true, ['en'])).toBe('/fr/services/')
+      expect(localizeHref('/fr/services', 'fr', true, [])).toBe('/fr/services/')
+    })
+
     it('keeps an anchor href', () => {
       expect(localizeHref('#x', 'fr')).toBe('#x')
       expect(localizeHref('#x', 'en', false, ['en', 'fr'])).toBe('#x')

@@ -66,7 +66,7 @@ export function localizeHref(
   href: LinkProps['href'],
   locale: LinkProps['locale'],
   trailingSlash: boolean = true,
-  locales: readonly string[] = typeof locale === 'string' ? [locale] : [],
+  locales: readonly string[] = [],
 ): string {
   const hrefString = href.toString()
 
@@ -80,7 +80,9 @@ export function localizeHref(
   if (isExternalHref(hrefString))
     return hrefString
 
-  const hasLocalePrefix = locales.some(configuredLocale =>
+  // The selected locale always counts, even when the configured list omits it.
+  const knownLocales = typeof locale === 'string' ? [...locales, locale] : locales
+  const hasLocalePrefix = knownLocales.some(configuredLocale =>
     hrefString === `/${configuredLocale}`
     || hrefString.startsWith(`/${configuredLocale}/`)
     || hrefString.startsWith(`/${configuredLocale}?`)

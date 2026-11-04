@@ -14,6 +14,8 @@ function Link({ ref, ...props }: TLinkProps & { ref?: Ref<HTMLElement> }) {
     as = NextLink,
     children,
     locale,
+    // Read by useLink from props; not an anchor attribute
+    i18n,
     scroll,
     behavior,
     urlDecorator: urlDecoratorProp,
