@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 import type { FocusEvent, PointerEvent, TouchEvent } from 'react'
-import type { TLink } from './interface'
+import type { TLink, TLinkI18nConfig } from './interface'
 import { act, renderHook } from '@testing-library/react'
+import { I18nProvider } from 'react-aria'
 import { describe, expect, it, vi } from 'vitest'
 import { useLink } from '.'
 
@@ -100,5 +101,53 @@ describe('useLink prefetch', () => {
 
     expect(onPointerEnter).toHaveBeenCalledWith(pointerEvent)
     expect(onFocus).toHaveBeenCalledWith(focusEvent)
+  })
+})
+
+describe('useLink locale prefixes', () => {
+  const configs: TLinkI18nConfig[] = [
+    { defaultLocale: 'en', localePrefix: 'always', locales: ['en', 'fr'] },
+    { defaultLocale: 'en', localePrefix: 'as-needed', locales: ['en', 'fr'] },
+  ]
+
+  describe.each(configs)('$localePrefix', (i18n) => {
+    it.each([
+      ['en', '/services', '/services/'],
+      ['en', '/services/', '/services/'],
+      ['en', '/', '/'],
+      ['fr', '/services', '/services/'],
+      ['fr', '/services/', '/services/'],
+      ['fr', '/', '/'],
+    ])('localizes unprefixed href for %s: %s', (locale, href, path) => {
+      const prefix = locale === 'en' && i18n.localePrefix === 'as-needed' ? '' : `/${locale}`
+      const { result } = renderUseLink({ href, locale, i18n })
+      expect(result.current.href).toBe(`${prefix}${path}`)
+    })
+
+    it.each([
+      ['en', '/en'],
+      ['en', '/fr'],
+      ['en', '/en/services'],
+      ['en', '/fr/services'],
+      ['fr', '/en'],
+      ['fr', '/fr'],
+      ['fr', '/en/services'],
+      ['fr', '/fr/services'],
+    ])('keeps explicit locale for %s: %s', (locale, href) => {
+      const { result } = renderUseLink({ href, locale, i18n })
+      expect(result.current.href).toBe(`${href}/`)
+    })
+
+    it('keeps an explicit locale when automatic prefixing is disabled', () => {
+      const { result } = renderUseLink({ href: '/fr/services', locale: false, i18n })
+      expect(result.current.href).toBe('/fr/services/')
+    })
+
+    it('keeps a different explicit locale with the locale from context', () => {
+      const { result } = renderHook(() => useLink({ href: '/en/services', i18n }), {
+        wrapper: ({ children }) => <I18nProvider locale="fr">{children}</I18nProvider>,
+      })
+      expect(result.current.href).toBe('/en/services/')
+    })
   })
 })
