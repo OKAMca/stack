@@ -1,6 +1,6 @@
 {
   "name": "@okam/directus-next",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "repository": {
     "url": "https://github.com/OKAMca/stack.git"
   },
@@ -56,7 +56,7 @@
     "@okam/directus-node": "1.2.1",
     "@okam/directus-query": "2.1.2",
     "@okam/logger": "1.1.0",
-    "@okam/next-component": "2.2.0",
+    "@okam/next-component": "2.2.1",
     "graphql-request": "^7.4.0",
     "path-to-regexp": "^6.3.0",
     "radashi": "^12.9.1",

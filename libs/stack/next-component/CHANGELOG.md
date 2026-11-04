@@ -1,3 +1,18 @@
+## 2.2.1 (2026-11-04)
+
+### 🩹 Fixes
+
+- **next-component:** always recognize the selected locale prefix ([f9f29132](https://github.com/OKAMca/stack/commit/f9f29132))
+- **next-component:** keep hrefs that already start with a locale ([0e103a94](https://github.com/OKAMca/stack/commit/0e103a94))
+
+### 🧱 Updated Dependencies
+
+- Updated stack-ui to 2.3.0
+
+### ❤️ Thank You
+
+- Marie-Maxime Tanguay
+
 ## 2.2.0 (2026-10-20)
 
 ### 🚀 Features
