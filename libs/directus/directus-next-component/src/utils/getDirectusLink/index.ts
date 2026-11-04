@@ -79,7 +79,12 @@ function getCollection(props: TGetDirectusLink) {
 function getExternalLink(props: TGetDirectusLink) {
   const { external_link: externalLink, target, params } = props
 
-  const href = getCompleteHref(externalLink, params, 'absolute')
+  const trimmedLink = externalLink?.trim()
+  // Network-path references retain the absolute URL produced by parseHref.
+  const isSitePath = trimmedLink?.startsWith('/')
+    && !trimmedLink.startsWith('//')
+    && !trimmedLink.startsWith('/\\')
+  const href = getCompleteHref(trimmedLink, params, isSitePath ? 'relative' : 'absolute')
 
   return {
     href: href ?? undefined,
