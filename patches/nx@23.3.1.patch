@@ -57,6 +57,3 @@ index b4438447ac6918372b60502006795ef061519d83..042538c3be51dbb972e03abb436ffbb4
                  patternCache.set(item, entry);
              }
              return entry;
-diff --git a/readme-template.md b/readme-template.md
-deleted file mode 100644
-index 457b3fb494ffcea2646b64a264ebec2451768d99..0000000000000000000000000000000000000000
