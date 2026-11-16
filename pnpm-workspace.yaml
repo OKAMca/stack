@@ -10,9 +10,13 @@ overrides:
   flatted: ">=3.4.0"
   immutable: ">=5.1.5"
   koa: ">=3.1.2"
-  minimatch: ">=10.2.3"
+  minimatch: ">=11.0.1 <12"
+  # glob 8 (via @rollup/plugin-commonjs 25) crashes with minimatch 11; minimatch 5.1.9 is outside the advisory range.
+  # Drop when nothing depends on glob 8.
+  "glob@8>minimatch": ">=5.1.9 <6"
+  "minimatch@5>brace-expansion": ">=2.1.7 <3"
   rollup: ">=4.60.0"
-  serialize-javascript: ">=7.0.5 <8"
+  serialize-javascript: ">=7.1.3 <8"
   "svgo@3": ">=3.3.5 <4"
   tar: ">=7.5.16 <8"
   picomatch: ">=4.0.4"
@@ -56,4 +60,13 @@ overrides:
   "postcss-selector-parser@7": ">=7.1.6 <8"
   "@graphql-tools/url-loader>@graphql-tools/wrap": ">=11.2.1 <12"
   undici: ">=7.29.1 <8"
-  follow-redirects: ">=1.16.1 <2"
+  follow-redirects: ">=1.16.2 <2"
+  "glob@>=9": ">=14.0.2 <15"
+  "body-parser@1": ">=1.20.9 <2"
+  # deepmerge has no upstream fix for GHSA-gcqx-w48m-w2h4; this fork is upstream 4.3.1 + a __proto__ guard.
+  # Drop once deepmerge publishes a patched release.
+  deepmerge: "npm:@shivammathur/deepmerge@4.3.2"
+
+# minimatch 11 removed makeRe(); nx 23.3.1 still calls it. Drop when nx stops using minimatch.makeRe.
+patchedDependencies:
+  nx@23.3.1: patches/nx@23.3.1.patch
