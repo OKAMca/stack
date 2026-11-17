@@ -8,10 +8,14 @@ import { useEffect } from 'react'
  * React Aria's usePress then sees pointerup outside the pressed card and
  * cancels the press, so a drag cannot activate a link through its delayed
  * click fallback. Taps, keyboard and virtual activation are untouched.
+ *
+ * A destroyed instance has no element. The carousel context can still hold
+ * one when React re-runs effects on a revealed subtree (a page Next.js kept
+ * mounted and hidden after a navigation away), before the new instance exists.
  */
 export function useSwipePointerCapture(controller: SwiperClass | undefined): void {
   useEffect(() => {
-    if (controller == null)
+    if (controller == null || controller.destroyed)
       return
 
     const element = controller.el
