@@ -1,5 +1,5 @@
 # building extensions
-FROM node:22-alpine AS builder-ext
+FROM node:22.23.5-alpine AS builder-ext
 
 # since we are using a volume for extensions, we need to do a copy into the volume
 # see ./update-extensions.sh
