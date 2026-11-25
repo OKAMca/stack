@@ -4,6 +4,10 @@ packages:
   - 'libs/stack/*'
   - 'libs/directus/*'
 
+minimumReleaseAge: 4320
+trustPolicy: no-downgrade
+blockExoticSubdeps: true
+
 overrides:
   dotenv: ^16.4.7
   axios: ">=1.20.0 <2"

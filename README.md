@@ -13,6 +13,12 @@ This project uses [pnpm](https://pnpm.io/) as the package manager. Install depen
 pnpm install
 ```
 
+### Urgent dependency updates
+
+pnpm and npm wait three days before resolving a newly published version. If a security fix cannot wait, exempt the exact version in `pnpm-workspace.yaml`, for example `minimumReleaseAgeExclude: ['example-package@1.2.3']`. See the [pnpm settings](https://pnpm.io/10.x/settings#minimumreleaseageexclude).
+
+If you use npm 11.17.0 or later, add `min-release-age-exclude[]=example-package` to `.npmrc` for the urgent update. npm applies the exception to every version of that package. Remove the exception after the version is three days old. See the [npm configuration reference](https://docs.npmjs.com/cli/v11/using-npm/config/#min-release-age-exclude).
+
 ## Start the app
 
 To start the development server run `pnpm nx serve demo`. Open your browser and navigate to http://localhost:4200/. Happy coding!
