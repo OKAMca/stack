@@ -7,8 +7,10 @@ packages:
 minimumReleaseAge: 4320
 trustPolicy: no-downgrade
 trustPolicyExclude:
+  # Releases since 2026-01 have no provenance. Remove once publishing attests again
+  # and the lockfile has no unattested @okam versions left.
   - '@okam/*'
-  - semver # 6.3.1 has no provenance attestation, unlike earlier releases.
+  - semver # 6.3.1 and 5.7.2 have no provenance; earlier-published 7.x releases do.
 blockExoticSubdeps: true
 
 overrides:
