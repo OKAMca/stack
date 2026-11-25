@@ -6,6 +6,9 @@ packages:
 
 minimumReleaseAge: 4320
 trustPolicy: no-downgrade
+trustPolicyExclude:
+  - '@okam/*'
+  - semver # 6.3.1 has no provenance attestation, unlike earlier releases.
 blockExoticSubdeps: true
 
 overrides:

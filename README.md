@@ -17,6 +17,8 @@ pnpm install
 
 pnpm and npm wait three days before resolving a newly published version. If a security fix cannot wait, exempt the exact version in `pnpm-workspace.yaml`, for example `minimumReleaseAgeExclude: ['example-package@1.2.3']`. See the [pnpm settings](https://pnpm.io/10.x/settings#minimumreleaseageexclude).
 
+If pnpm reports a trust downgrade, verify how the release was published before adding an exception. To allow a specific version, append an entry such as `- 'example-package@1.2.3'` under `trustPolicyExclude` in `pnpm-workspace.yaml`. See the [pnpm trust policy settings](https://pnpm.io/10.x/settings#trustpolicyexclude).
+
 If you use npm 11.17.0 or later, add `min-release-age-exclude[]=example-package` to `.npmrc` for the urgent update. npm applies the exception to every version of that package. Remove the exception after the version is three days old. See the [npm configuration reference](https://docs.npmjs.com/cli/v11/using-npm/config/#min-release-age-exclude).
 
 ## Start the app
