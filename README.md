@@ -15,7 +15,7 @@ pnpm install
 
 ### Urgent dependency updates
 
-pnpm and npm (11.10.0 or later) wait three days before resolving a newly published version. If a security fix cannot wait, exempt the exact version in `pnpm-workspace.yaml`, for example `minimumReleaseAgeExclude: ['example-package@1.2.3']`. See the [pnpm settings](https://pnpm.io/10.x/settings#minimumreleaseageexclude).
+pnpm and npm (11.10.0 or later) wait three days before resolving a newly published version. Our own `@okam/*` packages skip the wait. If a security fix cannot wait, add the exact version under `minimumReleaseAgeExclude` in `pnpm-workspace.yaml`, for example `- 'example-package@1.2.3'`. See the [pnpm settings](https://pnpm.io/10.x/settings#minimumreleaseageexclude).
 
 If pnpm reports a trust downgrade, verify how the release was published before adding an exception. To allow a specific version, append an entry such as `- 'example-package@1.2.3'` under `trustPolicyExclude` in `pnpm-workspace.yaml`. See the [pnpm trust policy settings](https://pnpm.io/10.x/settings#trustpolicyexclude).
 

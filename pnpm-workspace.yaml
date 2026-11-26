@@ -5,6 +5,9 @@ packages:
   - 'libs/directus/*'
 
 minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+  # Our own packages: a new @okam release can be used right away.
+  - '@okam/*'
 trustPolicy: no-downgrade
 trustPolicyExclude:
   # Releases since 2026-01 have no provenance. Remove once publishing attests again
