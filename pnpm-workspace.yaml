@@ -4,6 +4,18 @@ packages:
   - 'libs/stack/*'
   - 'libs/directus/*'
 
+minimumReleaseAge: 4320
+minimumReleaseAgeExclude:
+  # Our own packages: a new @okam release can be used right away.
+  - '@okam/*'
+trustPolicy: no-downgrade
+trustPolicyExclude:
+  # Releases since 2026-01 have no provenance. Remove once publishing attests again
+  # and the lockfile has no unattested @okam versions left.
+  - '@okam/*'
+  - semver # 6.3.1 and 5.7.2 have no provenance; earlier-published 7.x releases do.
+blockExoticSubdeps: true
+
 overrides:
   dotenv: ^16.4.7
   axios: ">=1.20.0 <2"
